@@ -29,7 +29,7 @@ spec:
   - kind: ConfigMap
     name: gardener-values
     valuesKey: gardener-values.yaml
-    optional: true
+    optional: false
   - kind: Secret
     name: gardener-base-secret-values
     valuesKey: gardener-base-secret-values.yaml
