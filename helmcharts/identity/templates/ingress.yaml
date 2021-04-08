@@ -1,0 +1,33 @@
+# SPDX-FileCopyrightText: 2021 SAP SE or an SAP affiliate company and Gardener contributors
+#
+# SPDX-License-Identifier: Apache-2.0
+
+apiVersion: {{ include "ingressversion" . }}
+kind: Ingress
+metadata:
+  name: identity-ingress
+  namespace: {{ .Release.Namespace }}
+  labels:
+    app: identity
+    chart: "{{ .Chart.Name }}-{{ .Chart.Version }}"
+    release: "{{ .Release.Name }}"
+    heritage: "{{ .Release.Service }}"
+  {{- with .Values.ingress.annotations }}
+  annotations:
+{{ toYaml . | indent 4 }}
+  {{- end }}
+{{- $hostname := regexReplaceAll "https://([^/]*).*" $.Values.issuerUrl "${1}" }}
+{{- $pathname := regexReplaceAll "https://[^/]*(?:/(.+))?" $.Values.issuerUrl "/${1}" }}
+spec:
+  tls:
+    - secretName: {{ .Values.tlsSecretName | default "identity-tls" }}
+      hosts:
+        - {{ $hostname }}
+  rules:
+    - host: {{ $hostname }}
+      http:
+        paths:
+          - backend:
+              serviceName: identity-service
+              servicePort: {{ $.Values.servicePort }}
+            path: "{{ $pathname }}"

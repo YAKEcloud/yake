@@ -1,0 +1,43 @@
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: gardener-application
+  namespace: garden
+spec:
+ # kubeConfig:
+ #   secretRef:
+ #     name: vgarden
+  interval: 1m
+  dependsOn:
+    - name: gardener-base-secret-values
+  chart:
+    spec:
+      chart: ./helmcharts/gardener-controlplane/charts/application/
+      sourceRef:
+        kind: GitRepository
+        name: 23ke
+        namespace: flux-system
+      interval: 1m
+  install:
+    remediation:
+      retries: 3
+  upgrade:
+    remediation:
+      remediateLastFailure: false
+  valuesFrom:
+  - kind: ConfigMap
+    name: gardener-base-values
+    valuesKey: gardener-base-values.yaml
+    optional: false
+  - kind: ConfigMap
+    name: gardener-values
+    valuesKey: gardener-values.yaml
+    optional: true
+  - kind: Secret
+    name: gardener-base-secret-values
+    valuesKey: gardener-base-secret-values.yaml
+    optional: false
+  - kind: Secret
+    name: gardener-secret-values
+    valuesKey: gardener-secret-values.yaml
+    optional: true

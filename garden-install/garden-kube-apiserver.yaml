@@ -1,0 +1,28 @@
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: garden-kube-apiserver
+  namespace: garden
+spec:
+  interval: 1m
+  chart:
+    spec:
+      chart: ./helmcharts/kube-apiserver/
+      sourceRef:
+        kind: GitRepository
+        name: 23ke
+        namespace: flux-system
+      interval: 1m
+  install:
+    remediation:
+      retries: 3
+  valuesFrom:
+  - kind: ConfigMap
+    name: garden-kube-apiserver-base-values
+    optional: true
+  - kind: ConfigMap
+    name: garden-kube-apiserver-values
+    optional: true
+  - kind: Secret
+    name: garden-kube-apiserver-base-secret-values
+    optional: false
