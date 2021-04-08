@@ -1,0 +1,28 @@
+#!/usr/bin/env bash
+if [ ! -e hack/mc-config ]; then
+    echo "not in root directory, aborting"
+    exit 1
+fi
+
+TARGET=$(kubectl get svc minio -o json | jq -r .status.loadBalancer.ingress[0].ip)
+
+while getopts ":c" opt; do
+  case ${opt} in
+    c ) # clear old bucket
+        mc --config-dir hack/mc-config rm --recursive --force gardener/23ke
+      ;;
+    \? ) 
+        echo "Usage: upload-flux [-c]"
+        echo "-c      clear bucket before upload"
+        exit 0
+      ;;
+  esac
+done
+
+mc --config-dir hack/mc-config cp --recursive . gardener/23ke
+# we now upload packet versions which use a bucket instead of the GitRepository
+for file in $(grep -lr GitRepository); do
+    echo $file
+    cat $file | sed s/GitRepository/Bucket/ | mc --config-dir hack/mc-config pipe gardener/23ke/$file
+done
+flux reconcile source bucket 23ke
