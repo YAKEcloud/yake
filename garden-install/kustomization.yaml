@@ -3,7 +3,8 @@ kind: Kustomization
 resources:
 - garden-etcd.yaml
 - garden-kube-apiserver.yaml
-- gardener-runtime.yaml
-- gardener-application.yaml
+- gardener.yaml
+#- gardener-runtime.yaml
+#- gardener-application.yaml
 - garden-identity.yaml
 - gardener-dashboard.yaml

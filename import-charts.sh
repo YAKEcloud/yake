@@ -20,6 +20,7 @@ REPO=$(mktemp -d)
 git clone --branch "v${VERSION}" --depth 1 https://github.com/gardener/gardener.git $REPO/gardener
 git clone --depth 1 https://github.com/gardener/garden-setup $REPO/garden-setup
 
+rsync -vLr --delete $REPO/gardener/charts/gardener/ $FOLDER/gardener/
 rsync -vLr --delete $REPO/gardener/charts/gardener/controlplane/ $FOLDER/gardener-controlplane/
 rsync -vLr --delete $REPO/gardener/charts/gardener/gardenlet/ $FOLDER/gardenlet/
 rsync -vLr --delete $REPO/garden-setup/components/etcd/cluster/chart/ $FOLDER/garden-etcd/
