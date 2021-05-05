@@ -3,7 +3,7 @@ kind: PersistentVolumeClaim
 metadata:
   name: minio-storage
   labels:
-    app: wordpress
+    app: minio
 spec:
   accessModes:
     - ReadWriteOnce
