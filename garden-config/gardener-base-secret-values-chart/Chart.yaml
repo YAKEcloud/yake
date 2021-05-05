@@ -1,7 +1,0 @@
-apiVersion: v2
-name: gardener-secret-values-chart
-description: A Helm chart to provide certificates for the gardener controlplane
-type: application
-# Be careful when changing the version number, this will deploy a new CA/certs to gardener
-version: 0.1.18
-appVersion: "1.16.0"
