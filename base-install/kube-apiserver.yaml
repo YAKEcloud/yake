@@ -1,0 +1,90 @@
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: kube-apiserver
+  namespace: flux-system
+spec:
+  targetNamespace: garden
+  dependsOn:
+    - name: etcd
+    - name: identity
+  interval: 1m
+  chart:
+    spec:
+      chart: ./helmcharts/kube-apiserver/
+      sourceRef:
+        kind: GitRepository
+        name: 23ke
+        namespace: flux-system
+      interval: 1m
+  install:
+    remediation:
+      retries: 3
+  valuesFrom:
+  - kind: ConfigMap
+    name: kube-apiserver-base-values
+    optional: false
+  - kind: Secret
+    name: kube-apiserver-values
+    optional: false
+  # All of below maps cert-manager secrets to the expected helm values
+  - kind: Secret
+    name: etcd-client-tls
+    valuesKey: tls.crt
+    targetPath: tls.client.crt
+  - kind: Secret
+    name: etcd-client-tls
+    valuesKey: tls.key
+    targetPath: tls.client.key
+  - kind: Secret
+    name: gardener-ca-keypair
+    valuesKey: tls.crt
+    targetPath: tls.kubeAPIServer.ca.crt
+  - kind: Secret
+    name: gardener-ca-keypair
+    valuesKey: tls.key
+    targetPath: tls.kubeAPIServer.ca.key
+  - kind: Secret
+    name: kube-apiserver-tls
+    valuesKey: tls.crt
+    targetPath: tls.kubeAPIServer.server.crt
+  - kind: Secret
+    name: kube-apiserver-tls
+    valuesKey: tls.key
+    targetPath: tls.kubeAPIServer.server.key
+  - kind: Secret
+    name: kube-controllermanager-tls
+    valuesKey: tls.crt
+    targetPath: tls.kubeControllerManager.crt
+  - kind: Secret
+    name: kube-controllermanager-tls
+    valuesKey: tls.key
+    targetPath: tls.kubeControllerManager.key
+  - kind: Secret
+    name: gardener-ca-keypair
+    valuesKey: tls.crt
+    targetPath: tls.kubeAggregator.ca.crt
+  - kind: Secret
+    name: gardener-ca-keypair
+    valuesKey: tls.key
+    targetPath: tls.kubeAggregator.ca.key
+  - kind: Secret
+    name: kube-aggregator-tls
+    valuesKey: tls.crt
+    targetPath: tls.kubeAggregator.client.crt
+  - kind: Secret
+    name: kube-aggregator-tls
+    valuesKey: tls.key
+    targetPath: tls.kubeAggregator.client.key
+  - kind: Secret
+    name: kube-serviceaccount-tls
+    valuesKey: tls.key
+    targetPath: tls.serviceAccountKey
+  - kind: Secret
+    name: kube-admin-tls
+    valuesKey: tls.crt
+    targetPath: tls.admin.crt
+  - kind: Secret
+    name: kube-admin-tls
+    valuesKey: tls.key
+    targetPath: tls.admin.key

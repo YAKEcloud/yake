@@ -1,0 +1,38 @@
+---
+apiVersion: source.toolkit.fluxcd.io/v1beta1
+kind: Bucket
+metadata:
+  name: config
+  namespace: flux-system
+spec:
+  bucketName: config
+  endpoint: minio.default:9000
+  insecure: true
+  interval: 1m0s
+  provider: generic
+  secretRef:
+    name: minio-local
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: minio-local
+  namespace: flux-system
+type: Opaque
+data:
+  accesskey: bWluaW8=
+  secretkey: bWluaW8xMjM=
+---
+apiVersion: kustomize.toolkit.fluxcd.io/v1beta1
+kind: Kustomization
+metadata:
+  name: config
+  namespace: flux-system
+spec:
+  interval: 1m0s
+  path: ./development
+  prune: false
+  sourceRef:
+    kind: Bucket
+    name: config
+

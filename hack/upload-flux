@@ -25,4 +25,4 @@ for file in $(grep -lr GitRepository); do
     echo $file
     cat $file | sed s/GitRepository/Bucket/ | mc --config-dir hack/mc-config pipe gardener/23ke/$file
 done
-flux reconcile source bucket 23ke
+flux reconcile source bucket 23ke-config

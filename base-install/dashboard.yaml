@@ -1,0 +1,36 @@
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: dashboard
+  namespace: flux-system
+spec:
+  targetNamespace: garden
+  dependsOn:
+    - name: gardener-application
+    - name: gardener-runtime
+  interval: 1m
+  chart:
+    spec:
+      chart: ./helmcharts/gardener-dashboard/
+      sourceRef:
+        kind: GitRepository
+        name: 23ke
+        namespace: flux-system
+      interval: 1m
+  install:
+    remediation:
+      retries: -1
+  upgrade:
+    remediation:
+      remediateLastFailure: false
+  valuesFrom:
+  - kind: ConfigMap
+    name: dashboard-base-values
+    optional: false
+  - kind: Secret
+    name: dashboard-values
+    optional: true
+  - kind: Secret
+    name: gardener-internal-kubeconfig
+    valuesKey: kubeconfig
+    targetPath: kubeconfig

@@ -1,0 +1,48 @@
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: etcd
+  namespace: flux-system
+spec:
+  targetNamespace: garden
+  interval: 1m
+  chart:
+    spec:
+      chart: ./helmcharts/garden-etcd/
+      sourceRef:
+        kind: GitRepository
+        name: 23ke
+        namespace: flux-system
+      interval: 1m
+  install:
+    remediation:
+      retries: 3
+  upgrade:
+    remediation:
+      remediateLastFailure: true
+  valuesFrom:
+  # All of below maps cert-manager secrets to the expected helm values
+  - kind: Secret
+    name: gardener-ca-keypair
+    valuesKey: tls.crt
+    targetPath: tls.ca.crt
+  - kind: Secret
+    name: gardener-ca-keypair
+    valuesKey: tls.key
+    targetPath: tls.ca.key
+  - kind: Secret
+    name: etcd-tls
+    valuesKey: tls.crt
+    targetPath: tls.server.crt
+  - kind: Secret
+    name: etcd-tls
+    valuesKey: tls.key
+    targetPath: tls.server.key
+  - kind: Secret
+    name: etcd-client-tls
+    valuesKey: tls.crt
+    targetPath: tls.client.crt
+  - kind: Secret
+    name: etcd-client-tls
+    valuesKey: tls.key
+    targetPath: tls.client.key
