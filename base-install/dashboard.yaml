@@ -32,5 +32,5 @@ spec:
     optional: true
   - kind: Secret
     name: gardener-internal-kubeconfig
-    valuesKey: kubeconfig
+    valuesKey: value
     targetPath: kubeconfig

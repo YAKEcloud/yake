@@ -6,7 +6,7 @@ metadata:
 spec:
   kubeConfig:
     secretRef:
-      name: vgarden
+      name: gardener-internal-kubeconfig
   interval: 1m
   targetNamespace: flux-system
   dependsOn:
@@ -68,19 +68,19 @@ spec:
     targetPath: global.admission.config.server.https.tls.crt
   - kind: Secret
     name: gardener-internal-kubeconfig
-    valuesKey: kubeconfig
+    valuesKey: value
     targetPath: global.apiserver.kubeconfig
   - kind: Secret
     name: gardener-internal-kubeconfig
-    valuesKey: kubeconfig
+    valuesKey: value
     targetPath: global.admission.kubeconfig
   - kind: Secret
     name: gardener-internal-kubeconfig
-    valuesKey: kubeconfig
+    valuesKey: value
     targetPath: global.controller.kubeconfig
   - kind: Secret
     name: gardener-internal-kubeconfig
-    valuesKey: kubeconfig
+    valuesKey: value
     targetPath: global.scheduler.kubeconfig
 ---
 apiVersion: helm.toolkit.fluxcd.io/v2beta1
@@ -153,17 +153,17 @@ spec:
     targetPath: global.admission.config.server.https.tls.key
   - kind: Secret
     name: gardener-internal-kubeconfig
-    valuesKey: kubeconfig
+    valuesKey: value
     targetPath: global.apiserver.kubeconfig
   - kind: Secret
     name: gardener-internal-kubeconfig
-    valuesKey: kubeconfig
+    valuesKey: value
     targetPath: global.admission.kubeconfig
   - kind: Secret
     name: gardener-internal-kubeconfig
-    valuesKey: kubeconfig
+    valuesKey: value
     targetPath: global.controller.kubeconfig
   - kind: Secret
     name: gardener-internal-kubeconfig
-    valuesKey: kubeconfig
+    valuesKey: value
     targetPath: global.scheduler.kubeconfig
