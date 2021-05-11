@@ -88,28 +88,28 @@ let
 in pkgs.mkShell {
   # NIX_TERRAFORM_PLUGIN_DIR = "${terraform-kubectl}/bin";
   nativeBuildInputs = with pkgs; [
-    coreutils
-    clusterctl
-    charts-syncer
+    # terraform-kubectl
     cert-manager-cli
+    clusterctl
+    coreutils
     docker
     fluxcd
     git
     gnumake
     gnused
+    ipcalc
     iproute
     k9s
     kind
     kubectl
     kubernetes-helm
-    kustomize
     kubeval
+    kustomize
     minikube
     minio-client
     openssh
     screen
     sops
-    # terraform-kubectl
     yaml2json
   ];
   shellHook = ''
