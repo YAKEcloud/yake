@@ -1,0 +1,19 @@
+apiVersion: kustomize.toolkit.fluxcd.io/v1beta1
+kind: Kustomization
+metadata:
+  name: 23ke-env-config
+  namespace: flux-system
+spec:
+  interval: 1m0s
+  sourceRef:
+    kind: Bucket
+    name: 23ke-config
+  path: ./dev-env/config/
+  prune: true
+  validation: client
+  postBuild:
+    substituteFrom:
+      - kind: ConfigMap
+        name: 23ke-base-substitutions
+      - kind: Secret
+        name: 23ke-env-substitutions

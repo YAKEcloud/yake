@@ -16,4 +16,4 @@ hack/metallb/setup-lb.sh
 ./hack/wait-for-service.sh minio default
 
 flux install
-kubectl apply -f hack/23ke-flux-bucket.yaml
+# kubectl apply -f hack/23ke-flux-bucket.yaml

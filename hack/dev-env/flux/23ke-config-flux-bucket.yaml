@@ -2,7 +2,7 @@
 apiVersion: source.toolkit.fluxcd.io/v1beta1
 kind: Bucket
 metadata:
-  name: config
+  name: 23ke-config
   namespace: flux-system
 spec:
   bucketName: config
@@ -30,9 +30,8 @@ metadata:
   namespace: flux-system
 spec:
   interval: 1m0s
-  path: ./development
+  path: ./dev-env
   prune: false
   sourceRef:
     kind: Bucket
-    name: config
-
+    name: 23ke-config
