@@ -1,0 +1,47 @@
+apiVersion: core.gardener.cloud/v1beta1
+kind: CloudProfile
+metadata:
+  name: azure
+spec:
+  type: azure
+  kubernetes:
+    versions:
+    - version: 1.19.6
+    - version: 1.19.7
+  machineImages:
+    - name: gardenlinux
+      versions:
+      - version: 184.0.0
+  machineTypes:
+    - cpu: "2"
+      gpu: "0"
+      memory: 8Gi
+      name: Standard_D2s_v3
+      usable: true
+  volumeTypes:
+    - class: standard
+      name: standard
+      usable: true
+    - class: premium
+      name: premium
+      usable: true
+  regions:
+  - name: westeurope
+    zones:
+    - name: "1"
+    - name: "2"
+    - name: "3"
+  providerConfig:
+    apiVersion: azure.provider.extensions.gardener.cloud/v1alpha1
+    kind: CloudProfileConfig
+    machineImages:
+    - name: gardenlinux
+      versions:
+      - urn: sap:gardenlinux:greatest:184.0.0
+        version: 184.0.0
+    countFaultDomains:
+    - region: westeurope
+      count: 3
+    countUpdateDomains:
+    - region: westeurope
+      count: 5

@@ -1,0 +1,10 @@
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: garden-dev
+  labels:
+    gardener.cloud/role: project
+    project.gardener.cloud/name: dev
+  annotations:
+    namespace.gardener.cloud/keep-after-project-deletion: "true"

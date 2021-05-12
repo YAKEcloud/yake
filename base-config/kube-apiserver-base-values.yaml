@@ -1,0 +1,24 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: kube-apiserver-base-values
+  namespace: flux-system
+data:
+  values.yaml: |-
+    namespace: garden
+    serviceName: garden-kube-apiserver
+    images:
+      hyperkube: k8s.gcr.io/hyperkube:v1.18.3
+    replicas: 1
+    apiServer:
+      hostname: api.${ENV}.${BASE_DOMAIN}
+      serviceName: garden-kube-apiserver
+      oidcIssuerURL: https://identity.${ENV}.${BASE_DOMAIN}/oidc
+    etcd:
+      main:
+        endpoints: https://etcd:2379
+      secretNames:
+        ca: etcd-ca
+        client: etcd-client
+      events:
+        endpoints: https://etcd:2379

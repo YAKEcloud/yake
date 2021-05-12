@@ -1,0 +1,35 @@
+# SPDX-FileCopyrightText: 2021 SAP SE or an SAP affiliate company and Gardener contributors
+#
+# SPDX-License-Identifier: Apache-2.0
+
+apiVersion: {{ include "ingressversion" . }}
+kind: Ingress
+metadata:
+  name: gardener-dashboard-ingress
+  namespace: {{ .Release.Namespace }}
+  labels:
+    app: gardener-dashboard
+    chart: "{{ .Chart.Name }}-{{ .Chart.Version }}"
+    release: "{{ .Release.Name }}"
+    heritage: "{{ .Release.Service }}"
+  {{- with .Values.ingress.annotations }}
+  annotations:
+{{ toYaml . | indent 4 }}
+  {{- end }}
+spec:
+  tls:
+  - secretName: {{ .Values.tlsSecretName | default "gardener-dashboard-tls" }}
+    hosts:
+    {{- range .Values.hosts }}
+    - {{ . }}
+    {{- end }}
+  rules:
+  {{- range .Values.hosts }}
+  - host: {{ . }}
+    http:
+      paths:
+      - backend:
+          serviceName: gardener-dashboard-service
+          servicePort: {{ $.Values.servicePort }}
+        path: /
+  {{- end }}

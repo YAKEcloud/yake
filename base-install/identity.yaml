@@ -1,0 +1,29 @@
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: identity
+  namespace: flux-system
+spec:
+  targetNamespace: garden
+  interval: 1m
+  chart:
+    spec:
+      chart: ./helmcharts/identity/
+      sourceRef:
+        kind: GitRepository
+        name: 23ke
+        namespace: flux-system
+      interval: 1m
+  install:
+    remediation:
+      retries: -1
+  upgrade:
+    remediation:
+      remediateLastFailure: false
+  valuesFrom:
+  - kind: ConfigMap
+    name: identity-base-values
+    optional: false
+  - kind: Secret
+    name: identity-values
+    optional: true

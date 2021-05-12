@@ -1,0 +1,31 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  creationTimestamp: null
+  name: gardenlet-base-values
+  namespace: flux-system
+data:
+  values.yaml: |-
+    global:
+      gardenlet:
+        config:
+          gardenClientConnection:
+            bootstrapKubeconfig:
+              name: gardenlet-kubeconfig-bootstrap
+              namespace: garden
+            kubeconfigSecret:
+              name: gardenlet-kubeconfig
+              namespace: garden
+          seedConfig:
+            spec:
+              settings:
+                excessCapacityReservation:
+                  enabled: false
+          deployment:
+            virtualGarden:
+              enabled: false
+          featureGates:
+            Logging: false
+        image:
+          tag: ${GARDENER_VERSION}
+        vpa: false

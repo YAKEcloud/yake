@@ -1,0 +1,19 @@
+{
+	"version": "10",
+	"aliases": {
+		"gardener": {
+			"url": "http://20.61.225.218:9000",
+			"accessKey": "minio",
+			"secretKey": "minio123",
+			"api": "S3v4",
+                "path": "auto"
+		},
+		"kind": {
+			"url": "http://172.18.128.1:9000",
+			"accessKey": "minio",
+			"secretKey": "minio123",
+			"api": "S3v4",
+                "path": "auto"
+		}
+    }
+}

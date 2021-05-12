@@ -1,0 +1,55 @@
+#!/usr/bin/env bash
+
+MC_ALIAS=${MC_ALIAS:-kind}
+MC_CONFIG=${MC_CONFIG:-hack/mc-config}
+BUCKET=${BUCKET:-23ke}
+CONFIG_BUCKET=${CONFIG_BUCKET:-config}
+KE23_UPLOAD_DEV_CONFIG=${KE23_UPLOAD_DEV_CONFIG:-0}
+
+if [ ! -e hack/mc-config ]; then
+    echo "not in root directory, aborting"
+    exit 1
+fi
+
+TARGET=$(kubectl get svc minio -o json | jq -r .status.loadBalancer.ingress[0].ip)
+
+(mc --config-dir hack/mc-config ls kind/$BUCKET > /dev/null) || mc --config-dir hack/mc-config mb $MC_ALIAS/$BUCKET
+(mc --config-dir hack/mc-config ls kind/$CONFIG_BUCKET > /dev/null)  || mc --config-dir hack/mc-config mb $MC_ALIAS/$CONFIG_BUCKET
+
+while getopts ":c" opt; do
+  case ${opt} in
+    c ) # clear old bucket
+        mc --config-dir $MC_CONFIG rm --recursive --force $MC_ALIAS/$BUCKET
+      ;;
+    \? ) 
+        echo "Usage: upload-flux [-c]"
+        echo "-c      clear bucket before upload"
+        exit 0
+      ;;
+  esac
+done
+
+mc --config-dir $MC_CONFIG cp --recursive . $MC_ALIAS/$BUCKET
+# we now upload packet versions which use a bucket instead of the GitRepository
+for file in $(grep --exclude-dir=hack --exclude-dir=env-template/ -lr GitRepository); do
+    echo $file
+    cat $file | sed s/GitRepository/Bucket/ | mc --config-dir $MC_CONFIG pipe $MC_ALIAS/$BUCKET/$file
+done
+
+if [ "x$KE23_UPLOAD_DEV_CONFIG" != "x0" ]; then
+  echo "upload dev config"
+
+  mc --config-dir $MC_CONFIG cp --recursive hack/dev-env $MC_ALIAS/$CONFIG_BUCKET
+  # kubectl apply -f hack/dev-env/config
+  kubectl apply -f hack/dev-env/flux
+  #kubectl apply -f hack/dev-env/config/23ke-env-substitutions.yaml
+fi
+
+# we now upload packet versions which use a bucket instead of the GitRepository
+# for file in $(grep --exclude-dir=hack --exclude-dir=env-template/ -lr GitRepository); do
+#     echo $file
+#     cat $file | sed s/GitRepository/Bucket/ | mc --config-dir $MC_CONFIG pipe $MC_ALIAS/$BUCKET/$file
+# done
+
+flux reconcile source bucket 23ke-config
+flux reconcile source bucket 23ke

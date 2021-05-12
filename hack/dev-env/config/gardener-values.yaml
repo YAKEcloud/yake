@@ -1,0 +1,26 @@
+apiVersion: v1
+kind: Secret
+metadata:
+  name: gardener-values
+  namespace: flux-system
+type: Opaque
+stringData:
+  values.yaml: |
+    global:
+      deployment:
+        virtualGarden:
+          clusterIP: 10.96.1.1
+      # internalDomain:
+      #   provider: InMemory
+      #   domain: ${ENV}-int.${BASE_DOMAIN}
+      # defaultDomains:
+      # - domain: ${ENV}.${BASE_DOMAIN}
+      #   provider: InMemory
+      apiserver:
+        vpa: true
+      scheduler:
+        vpa: true
+      admission:
+        vpa: true
+      controller:
+        vpa: true
