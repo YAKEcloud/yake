@@ -13,7 +13,10 @@ kubectl apply -f hack/minio.yaml
 
 hack/metallb/setup-lb.sh
 
-./hack/wait-for-service.sh minio default
+echo "Waiting for end point..."
+minio_ip="$(./hack/wait-for-service.sh minio default)"
+echo "Minio ready at ${minio_ip}"
+mc --config-dir hack/mc-config config host add kind http://"${minio_ip}":9000 minio minio123
 
 flux install
 # kubectl apply -f hack/23ke-flux-bucket.yaml

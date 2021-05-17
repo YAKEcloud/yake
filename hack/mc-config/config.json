@@ -1,19 +1,40 @@
 {
 	"version": "10",
 	"aliases": {
-		"gardener": {
-			"url": "http://20.61.225.218:9000",
-			"accessKey": "minio",
-			"secretKey": "minio123",
-			"api": "S3v4",
-                "path": "auto"
+		"gcs": {
+			"url": "https://storage.googleapis.com",
+			"accessKey": "YOUR-ACCESS-KEY-HERE",
+			"secretKey": "YOUR-SECRET-KEY-HERE",
+			"api": "S3v2",
+			"path": "dns"
 		},
 		"kind": {
-			"url": "http://172.18.128.1:9000",
+			"url": "http://172.19.128.1:9000",
 			"accessKey": "minio",
 			"secretKey": "minio123",
+			"api": "s3v4",
+			"path": "auto"
+		},
+		"local": {
+			"url": "http://localhost:9000",
+			"accessKey": "",
+			"secretKey": "",
 			"api": "S3v4",
-                "path": "auto"
+			"path": "auto"
+		},
+		"play": {
+			"url": "https://play.min.io",
+			"accessKey": "Q3AM3UQ867SPQQA43P2F",
+			"secretKey": "zuf+tfteSlswRu7BJ86wekitnifILbZam1KYY3TG",
+			"api": "S3v4",
+			"path": "auto"
+		},
+		"s3": {
+			"url": "https://s3.amazonaws.com",
+			"accessKey": "YOUR-ACCESS-KEY-HERE",
+			"secretKey": "YOUR-SECRET-KEY-HERE",
+			"api": "S3v4",
+			"path": "dns"
 		}
-    }
+	}
 }
