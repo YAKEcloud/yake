@@ -8,23 +8,10 @@ jobs:
     steps:
     - uses: actions/checkout@v2.3.4
     - name: Set ENV
-      run: |
-        # GITHUB_BASE_REF is set only when triggered by a pull request
-        # it refers to the branch where the PR should be merged to.
-          if [[ -z "${GITHUB_BASE_REF}" ]]; then
-            export BRANCH_NAME="$(echo "${GITHUB_REF}" | sed 's/refs\/heads\///' | tr '[:lower:]-' '[:upper:]_')"
-          else
-            export BRANCH_NAME="$(echo "${GITHUB_BASE_REF}" | tr '[:lower:]-' '[:upper:]_')"
-          fi
-          if [[ -z "${GITHUB_BASE_REF}" ]]; then
-            export BRANCH_NAME_BASE="$(echo "${GITHUB_REF}" | sed 's/refs\/heads\///')"
-          else
-            export BRANCH_NAME_BASE="${GITHUB_BASE_REF}"
-          fi
-        echo "BRANCH_NAME=${BRANCH_NAME}" >> $GITHUB_ENV
+      run: ./hack/ci/github-setup-env.sh >> $GITHUB_ENV
     - uses: cachix/install-nix-action@v13
       with:
         nix_path: nixpkgs=channel:nixos-20.09
-    - run: nix-shell --command "kind cluster delete --name ci-test-${BRANCH_NAME_BASE}"
-    - run: nix-shell --command "hack/setup-kind.sh ci-test-${BRANCH_NAME_BASE}"
-    - run: nix-shell --command "hack/ci/check-ci.sh ci-test-${BRANCH_NAME_BASE}"
+    - run: nix-shell --command "kind cluster delete --name ci-test-${BRANCH_NAME}"
+    - run: nix-shell --command "hack/ci/setup-ci.sh ci-test-${BRANCH_NAME}"
+    - run: nix-shell --command "hack/ci/test-ci.sh ci-test-${BRANCH_NAME}"
