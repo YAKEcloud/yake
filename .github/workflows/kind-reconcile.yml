@@ -12,5 +12,5 @@ jobs:
     - uses: cachix/install-nix-action@v13
       with:
         nix_path: nixpkgs=channel:nixos-20.09
-    - run: nix-shell --command "hack/ci/setup-ci.sh ci-test-${BRANCH_NAME}"
-    - run: nix-shell --command "hack/ci/test-ci.sh ci-test-${BRANCH_NAME}"
+    - run: nix-shell --command "hack/ci/setup-ci.sh ci-${BRANCH_NAME}"
+    - run: nix-shell --command "hack/ci/test-ci.sh ci-${BRANCH_NAME}"
