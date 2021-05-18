@@ -2,7 +2,13 @@
 
 set +xe
 
-./hack/setup-kind.sh
+# use argv as context if supplied
+[ ! -z "$1" ] && CONTEXT="$1"
+
+CONTEXT="${CONTEXT:-23ke}"
+
+export KUBECONTEXT=kind-$CONTEXT
+
 ./hack/upload-flux
 
 kubectl wait kustomization -A --all --for=condition=ready --timeout=10m
