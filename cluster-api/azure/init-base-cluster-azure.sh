@@ -23,8 +23,8 @@ kind create cluster --name kind-${CLUSTER_NAME} --kubeconfig access/kind-${CLUST
 
 export KUBECONFIG=access/kind-${CLUSTER_NAME}.kubeconfig
 
-clusterctl --config clusterctl-azure.yaml init --infrastructure azure
-clusterctl --config clusterctl-azure.yaml config cluster ${CLUSTER_NAME} --kubernetes-version ${KUBERNETES_VERSION} --from azure-cluster-template.yaml > ${CLUSTER_NAME}-capi.yaml
+#clusterctl --config clusterctl-azure.yaml init --infrastructure azure
+#clusterctl --config clusterctl-azure.yaml config cluster ${CLUSTER_NAME} --kubernetes-version ${KUBERNETES_VERSION} --from azure-cluster-template.yaml > ${CLUSTER_NAME}-capi.yaml
 #kubectl apply -f cluster.yaml
 
 

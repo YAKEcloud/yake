@@ -99,6 +99,7 @@ in pkgs.mkShell {
     gnused
     ipcalc
     iproute
+    jq
     k9s
     kind
     kubectl

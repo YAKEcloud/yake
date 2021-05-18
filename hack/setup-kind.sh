@@ -1,5 +1,8 @@
 #!/usr/bin/env bash
 
+# use argv as context if supplied
+[ ! -z "$1" ] && CONTEXT="$1"
+
 CONTEXT="${CONTEXT:-23ke}"
 
 kind create cluster --config hack/kind-config.yaml --name $CONTEXT
