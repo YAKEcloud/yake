@@ -1,0 +1,29 @@
+apiVersion: v1
+kind: Secret
+metadata:
+  name: dashboard-values
+  namespace: flux-system
+type: Opaque
+stringData:
+  values.yaml: |
+    oidc:
+      ca: |
+        -----BEGIN CERTIFICATE-----
+        MIIC9zCCAd+gAwIBAgIRAKzP9tf0FSv5V5DZB+reCHEwDQYJKoZIhvcNAQELBQAw
+        FTETMBEGA1UEAxMKZGV2LXN5c3RlbTAeFw0yMTA1MTkxMTU0MzFaFw0yMTA4MTcx
+        MTU0MzFaMBUxEzARBgNVBAMTCmRldi1zeXN0ZW0wggEiMA0GCSqGSIb3DQEBAQUA
+        A4IBDwAwggEKAoIBAQCqNTFni2LX2AaabZCYW07EIz5F1UQlZYYPkWXsQHxMd5/x
+        exlyt94wQEVuCu0HESGyCPAu3yyEQGwmKrmaHwP+41qeADeS4oFzsr5YBnMZeIGK
+        ODdiOHhoQ0SnQNz6+BAmlRaF0lWN+naLpgXglGodkiRoX4b2ITeDFl1HfmWe0Aqg
+        yE20zcCaP1IMSn6Oj+YBuTNiTNbQ1Q38apVI/fzvAeCPPe+JCPEDzGgmZx/kJWDX
+        A6DDZcjPPlK/E+MEttVncZIIksnMdFAjG0ozHWgBplDz8sOfX7LXzZB6YwgIOaS2
+        B9rN4EkGWCuKgxPk4aJQf51v6jiMo7AMOse5oqrvAgMBAAGjQjBAMA4GA1UdDwEB
+        /wQEAwICpDAPBgNVHRMBAf8EBTADAQH/MB0GA1UdDgQWBBTnbH0Yo9fxHKPNvL1W
+        kjwwB1x2KTANBgkqhkiG9w0BAQsFAAOCAQEAZ2u4s5OvvUKbCN8cZHqhBFS1BaPI
+        2cib4VV93YsKZmOu/WJ68PTOyHRJgfGh8DBFE0ux4UO9PEyNpbPcotFb8lzWw5TD
+        spKSMgwo6MjBpveIY2NspJYi9zb4Fk9CartjML285JDv7xn3DWV9ifyAaQ6lVe7Y
+        6/lJkf10SaZ3sQuEh0UNEFfkjjXscVHR0OXgB4KxyNzOyRwTiwfDblmD88mTVo7R
+        0+ZcNy0FNjTy/rkHJDlLkQ8ncBTB+GAA3LIsVNgc6FyIJ+V3o5Lt7ucMcFw5kzMG
+        dIAwXhRC1dSK4iNzLc8STScqDwXCUz0lL8js2f9c5nK/3Dmw9bJOYnFadg==
+        -----END CERTIFICATE-----
+

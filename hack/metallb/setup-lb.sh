@@ -9,15 +9,33 @@ kubectl apply -f $DIR/metallb.yaml
 # calculate ip rango for metallb
 
 SUBNET=$(docker network inspect kind | jq -r .[0].IPAM.Config[0].Subnet)
-echo subnet $SUBNET
 
-LBNET=$(ipcalc $SUBNET -s 256 | tail -n 1)
-echo "using $LBNET for loadbalancing"
+MIN=$(ipcalc -n -b $SUBNET | grep HostMin | sed "s/.*:\s*//")
+MAX=$(ipcalc -n -b $SUBNET | grep HostMax | sed "s/.*:\s*//")
 
-FIRSTIP=$(ipcalc -n -b $LBNET | grep HostMin | sed "s/.*:\s*//")
-LASTIP=$(ipcalc -n -b $LBNET | grep HostMax | sed "s/.*:\s*//")
+# split at dot into array
+IFS='.'
+read -a MIN_A <<< "$MIN"
+read -a MAX_A <<< "$MAX"
+unset IFS
+O=()
 
-echo "use range: $FIRSTIP - $LASTIP"
+# select a random ip between min and max
+for i in 0 1 2 3; do
+  n=${MIN_A[$i]}
+  x=${MAX_A[$i]}
+  d=$(($x - $n))
+  if [ $d -eq 0 ]; then
+    O+=( $n )
+  else
+    O+=( $(($n + $RANDOM % $d)) )
+  fi
+done
+
+ip="$(echo "${O[@]}" | tr [:blank:] .)"
+subnet=$(ipcalc -n -b "$ip/28" | grep Network | sed "s/.*:\s*//")
+
+echo "MetalLB subnet: $subnet"
 cat <<EOF | kubectl apply -f -
 apiVersion: v1
 kind: ConfigMap
@@ -30,5 +48,5 @@ data:
     - name: default
       protocol: layer2
       addresses:
-      - ${FIRSTIP}-${LASTIP}
+      - ${subnet}
 EOF

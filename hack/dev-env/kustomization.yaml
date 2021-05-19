@@ -4,4 +4,3 @@ resources:
 # - flux/23ke-env-config.yaml
 #- flux/capi-seeds.yaml
 - flux/23ke-garden-content.yaml
-- config/23ke-env-substitutions.yaml

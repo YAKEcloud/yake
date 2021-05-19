@@ -7,12 +7,15 @@ set +e
 
 CONTEXT="${CONTEXT:-23ke}"
 
-kind export kubeconfig --name $CONTEXT
+kind export kubeconfig --name $CONTEXT --kubeconfig hack/access/kind-"${CONTEXT}".kubeconfig
 
 if [ $? -ne 0 ]; then
   echo "No kind $CONTEXT found, exiting"
   exit 1
 fi
+
+export KUBECONFIG=hack/access/kind-$CONTEXT.kubeconfig
+echo "using kubectl config: $KUBECONFIG"
 
 kubectl get -n flux-system secrets dev-ca --output='go-template={{index .data "ca.crt"}}' | base64 -d  > /tmp/kind-ca
 
