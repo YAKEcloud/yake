@@ -3,6 +3,7 @@ kind: Kustomization
 namespace: flux-system
 resources:
 - clusterissuer-ca.yaml
+- dashboard-values.yaml
 - gardener-values.yaml
 - identity-values.yaml
 - kube-apiserver-values.yaml
