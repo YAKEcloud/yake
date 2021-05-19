@@ -47,6 +47,12 @@ spec:
           - key: config.yaml
             path: config.yaml
           defaultMode: 420
+      {{- if .Values.frontendConfig.assets }}
+      - name: assets
+        configMap:
+          name: dashboard-assets
+          defaultMode: 0444
+      {{- end }}
       {{- if .Values.kubeconfig }}
       - name: gardener-dashboard-secret-kubeconfig
         secret:
@@ -105,13 +111,15 @@ spec:
               secretKeyRef:
                 name: gardener-dashboard-oidc
                 key: client_secret
-          {{- end }}
-          {{- if .Values.gitHub }}
-          - name: GITHUB_AUTHENTICATION_USERNAME
+          {{- if .Values.oidc.caSecretKeyRef }}
+          - name: OIDC_CA
             valueFrom:
               secretKeyRef:
-                name: gardener-dashboard-github
-                key: authentication.username
+                name: {{  required ".Values.oidc.caSecretKeyRef.name is required" .Values.oidc.caSecretKeyRef.name }}
+                key: {{ .Values.oidc.caSecretKeyRef.key | default "ca.crt" }}
+          {{- end }}
+          {{- end }}
+          {{- if .Values.gitHub }}
           - name: GITHUB_AUTHENTICATION_TOKEN
             valueFrom:
               secretKeyRef:
@@ -132,6 +140,10 @@ spec:
           volumeMounts:
           - name: gardener-dashboard-config
             mountPath: /etc/gardener-dashboard
+          {{- if .Values.frontendConfig.assets }}
+          - name: assets
+            mountPath: /usr/src/app/public/static/assets
+          {{- end }}
           {{- if .Values.kubeconfig }}
           - name: gardener-dashboard-secret-kubeconfig
             mountPath: /etc/gardener-dashboard/secrets/kubeconfig
