@@ -10,6 +10,12 @@ kind create cluster --config hack/kind-config.yaml --name $CONTEXT --kubeconfig 
 export KUBECONFIG=hack/access/kind-$CONTEXT.kubeconfig
 echo "using kubectl config: $KUBECONFIG"
 
+for i in $(cat hack/ci/images-preload); do
+  echo "Preloading kind with image $i"
+  docker pull $i
+  kind load docker-image $i --name $CONTEXT
+done
+
 echo "install minio"
 kubectl apply -f hack/minio.yaml
 
