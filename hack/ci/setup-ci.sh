@@ -7,12 +7,15 @@ set +xe
 
 CONTEXT="${CONTEXT:-23ke}"
 
-kind export kubeconfig --name $CONTEXT
+kind export kubeconfig --name $CONTEXT --kubeconfig hack/access/kind-"${CONTEXT}".kubeconfig
 
 if [ $? -ne 0 ]; then
   echo "No kind $CONTEXT found, recreating kind cluster"
   ./hack/setup-kind.sh $CONTEXT
 fi
+
+export KUBECONFIG=hack/access/kind-$CONTEXT.kubeconfig
+echo "using kubectl config: $KUBECONFIG"
 
 ./hack/upload-flux
 
