@@ -96,7 +96,51 @@ webhooks:
 - name: seed-restriction.gardener.cloud
   admissionReviewVersions: ["v1", "v1beta1"]
   timeoutSeconds: 10
-  rules: []
+  rules:
+  - apiGroups:
+    - coordination.k8s.io
+    apiVersions:
+    - "*"
+    operations:
+    - CREATE
+    resources:
+    - leases
+  - apiGroups:
+    - certificates.k8s.io
+    apiVersions:
+    - "*"
+    operations:
+    - CREATE
+    resources:
+    - certificatesigningrequests
+  - apiGroups:
+    - core.gardener.cloud
+    apiVersions:
+    - "*"
+    operations:
+    - CREATE
+    resources:
+    - backupbuckets
+    - backupentries
+    - shootstates
+  - apiGroups:
+    - operations.gardener.cloud
+    apiVersions:
+    - "*"
+    operations:
+    - CREATE
+    resources:
+    - bastions
+  - apiGroups:
+    - core.gardener.cloud
+    apiVersions:
+    - "*"
+    operations:
+    - CREATE
+    - UPDATE
+    - DELETE
+    resources:
+    - seeds
   failurePolicy: Fail
   clientConfig:
     {{- if .Values.global.deployment.virtualGarden.enabled }}

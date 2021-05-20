@@ -12,7 +12,10 @@ echo "using kubectl config: $KUBECONFIG"
 
 for i in $(cat hack/ci/images-preload); do
   echo "Preloading kind with image $i"
-  docker pull $i
+  if ! docker inspect $i > /dev/null; then
+    echo "Pulling image $i to host docker"
+    docker pull $i
+  fi
   kind load docker-image $i --name $CONTEXT
 done
 

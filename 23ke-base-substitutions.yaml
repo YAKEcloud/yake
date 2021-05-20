@@ -6,5 +6,5 @@ metadata:
   name: 23ke-base-substitutions
   namespace: flux-system
 data:
-  GARDENER_VERSION: v1.20.4 # gardener components image tag, needs to match with helmcharts import
+  GARDENER_VERSION: v1.23.0 # gardener components image tag, needs to match with helmcharts import
   KUBEAPISERVER_URL: https://garden-kube-apiserver.garden.svc:443 # cluster-internal service url

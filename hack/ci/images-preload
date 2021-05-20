@@ -2,12 +2,12 @@ docker.io/jettech/kube-webhook-certgen:v1.5.1
 docker.io/kindest/kindnetd:v20210119-d5ef916d
 docker.io/minio/minio:latest
 docker.io/rancher/local-path-provisioner:v0.0.14
-eu.gcr.io/gardener-project/gardener/admission-controller:v1.20.4
-eu.gcr.io/gardener-project/gardener/apiserver:v1.20.4
-eu.gcr.io/gardener-project/gardener/controller-manager:v1.20.4
+eu.gcr.io/gardener-project/gardener/admission-controller:v1.23.0
+eu.gcr.io/gardener-project/gardener/apiserver:v1.23.0
+eu.gcr.io/gardener-project/gardener/controller-manager:v1.23.0
 eu.gcr.io/gardener-project/gardener/dashboard:latest
 eu.gcr.io/gardener-project/gardener/etcdbrctl:0.4.1
-eu.gcr.io/gardener-project/gardener/scheduler:v1.20.4
+eu.gcr.io/gardener-project/gardener/scheduler:v1.23.0
 ghcr.io/dexidp/dex:v2.27.0
 ghcr.io/fluxcd/helm-controller:v0.10.0
 ghcr.io/fluxcd/kustomize-controller:v0.12.0
@@ -20,6 +20,7 @@ k8s.gcr.io/build-image/debian-base:v2.1.0
 k8s.gcr.io/coredns:1.7.0
 k8s.gcr.io/etcd:3.4.13-0
 k8s.gcr.io/hyperkube:v1.18.3
+k8s.gcr.io/ingress-nginx/controller:v0.46.0
 k8s.gcr.io/kube-apiserver:v1.20.2
 k8s.gcr.io/kube-controller-manager:v1.20.2
 k8s.gcr.io/kube-proxy:v1.20.2
