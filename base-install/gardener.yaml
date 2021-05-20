@@ -91,7 +91,7 @@ metadata:
 spec:
   targetNamespace: garden
   dependsOn:
-    - name: gardener-application
+    - name: kube-apiserver
   interval: 1m
   chart:
     spec:

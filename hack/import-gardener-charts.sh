@@ -1,7 +1,7 @@
 #!/bin/bash
 FOLDER=$1
 
-GARDENER_VERSION="1.20.0"
+GARDENER_VERSION="1.23.0"
 GARDEN_SETUP_VERSION="3.9.0"
 DASHBOARD_VERSION="1.50.0"
 
@@ -24,7 +24,8 @@ git clone --depth 1 --branch "$DASHBOARD_VERSION" https://github.com/gardener/da
 rsync -vLr --delete $REPO/gardener/charts/gardener/controlplane/ $FOLDER/gardener-controlplane/
 rsync -vLr --delete $REPO/gardener/charts/gardener/gardenlet/ $FOLDER/gardenlet/
 rsync -vLr --delete $REPO/garden-setup/components/etcd/cluster/chart/ $FOLDER/garden-etcd/
-rsync -vLr --delete $REPO/garden-setup/components/kube-apiserver/chart/ $FOLDER/kube-apiserver/
+# FIXME this chart was modified after importing
+#rsync -vLr --delete $REPO/garden-setup/components/kube-apiserver/chart/ $FOLDER/kube-apiserver/
 rsync -vLr --delete $REPO/gardener-dashboard/charts/gardener-dashboard/ $FOLDER/gardener-dashboard/
 rsync -vLr --delete $REPO/gardener-dashboard/charts/identity/ $FOLDER/identity/
 

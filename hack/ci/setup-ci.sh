@@ -40,5 +40,8 @@ EOF
 kubectl wait kustomization -A --all --for=condition=ready --timeout=10m
 kubectl wait helmrelease -A --all --for=condition=ready --timeout=20m
 
-./hack/wait-for-clusterip.sh garden-kube-apiserver garden
-./hack/wait-for-clusterip.sh gardener-dashboard-service garden
+./hack/wait-for-clusterip.sh garden-kube-apiserver garden > /dev/null
+./hack/wait-for-clusterip.sh gardener-dashboard-service garden > /dev/null
+
+echo "Gardener Dashboard URL: https://dashboard.${CONTEXT}.${nginx_ip}.nip.io"
+echo "kubeconfig: export KUBECONFIG=${KUBECONFIG}"
