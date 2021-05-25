@@ -17,9 +17,13 @@ fi
 export KUBECONFIG=hack/access/kind-$CONTEXT.kubeconfig
 echo "using kubectl config: $KUBECONFIG"
 
+# use kind cluster as gardencluster
+kubectl -n flux-system create secret generic target-gardencluster-kubeconfig --from-literal=value="$(cat $KUBECONFIG | sed 's&server:.*&server: https://kubernetes.default.svc/&g')"
+
+
 ./hack/upload-flux
 
-nginx_ip=$(./hack/wait-for-service.sh ingress-nginx-controller kube-system)
+nginx_ip=$(./hack/wait-for-service.sh kube-system-ingress-nginx-controller kube-system)
 
 cat <<EOF | kubectl apply -f -
 apiVersion: v1
@@ -30,7 +34,6 @@ metadata:
 type: Opaque
 stringData:
   ENV: ${CONTEXT}
-  ENV_FOLDER: dev-env
   BASE_DOMAIN: ${nginx_ip}.nip.io
   DASHBOARD_CLIENTSECRET: no1EiH6eicee6iegaiji6nu
   DASHBOARD_SESSIONSECRET: 6E0368EB-410B-48AB-B13A-FE528ED87E69
