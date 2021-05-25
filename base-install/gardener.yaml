@@ -89,6 +89,9 @@ metadata:
   name: gardener-runtime
   namespace: flux-system
 spec:
+  kubeConfig:
+    secretRef:
+      name: target-gardencluster-kubeconfig
   targetNamespace: garden
   dependsOn:
     - name: kube-apiserver

@@ -4,6 +4,9 @@ metadata:
   name: dashboard
   namespace: flux-system
 spec:
+  kubeConfig:
+    secretRef:
+      name: target-gardencluster-kubeconfig
   targetNamespace: garden
   dependsOn:
     - name: gardener-application
