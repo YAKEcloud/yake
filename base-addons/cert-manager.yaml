@@ -4,6 +4,7 @@ metadata:
   name: cert-manager
   namespace: flux-system
 spec:
+  targetNamespace: kube-system
   interval: 5m
   chart:
     spec:
