@@ -17,7 +17,7 @@ fi
 export KUBECONFIG=hack/access/kind-$CONTEXT.kubeconfig
 echo "using kubectl config: $KUBECONFIG"
 
-kubectl get -n flux-system secrets dev-ca --output='go-template={{index .data "ca.crt"}}' | base64 -d  > /tmp/kind-ca
+kubectl get -n kube-system secrets dev-ca --output='go-template={{index .data "ca.crt"}}' | base64 -d  > /tmp/kind-ca
 
 dashboard_url=$(kubectl get ingress gardener-dashboard-ingress -n garden -o json | jq -r .spec.rules[0].host)
 
