@@ -36,7 +36,7 @@ spec:
     targetPath: global.apiserver.etcd.caBundle
   - kind: Secret
     name: etcd-client-tls
-    valuesKey: tls.key
+    valuesKey: tls.crt
     targetPath: global.apiserver.etcd.tls.crt
   - kind: Secret
     name: etcd-client-tls

@@ -21,7 +21,7 @@ echo "using kubectl config: $KUBECONFIG"
 kubectl -n flux-system create secret generic target-gardencluster-kubeconfig --from-literal=value="$(cat $KUBECONFIG | sed 's&server:.*&server: https://kubernetes.default.svc/&g')"
 
 
-./hack/upload-flux
+./hack/upload-flux -c
 
 nginx_ip=$(./hack/wait-for-service.sh kube-system-ingress-nginx-controller kube-system)
 

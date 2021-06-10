@@ -31,6 +31,11 @@ data:
       kubeconfig: /etc/gardener-controller-manager/kubeconfig/kubeconfig
       {{- end }}
     controllers:
+      {{- if .Values.global.controller.config.controllers.bastion }}
+      bastion:
+        concurrentSyncs: {{ required ".Values.global.controller.config.controllers.bastion.concurrentSyncs is required" .Values.global.controller.config.controllers.bastion.concurrentSyncs }}
+        maxLifetime: {{ required ".Values.global.controller.config.controllers.bastion.maxLifetime is required" .Values.global.controller.config.controllers.bastion.maxLifetime }}
+      {{- end }}
       {{- if .Values.global.controller.config.controllers.cloudProfile }}
       cloudProfile:
         concurrentSyncs: {{ required ".Values.global.controller.config.controllers.cloudProfile.concurrentSyncs is required" .Values.global.controller.config.controllers.cloudProfile.concurrentSyncs }}
@@ -121,6 +126,10 @@ data:
         maxShootRetries: {{ .Values.global.controller.config.controllers.managedSeedSet.maxShootRetries }}
         {{- end }}
         syncPeriod: {{ required ".Values.global.controller.config.controllers.managedSeedSet.syncPeriod is required" .Values.global.controller.config.controllers.managedSeedSet.syncPeriod }}
+      {{- if .Values.global.controller.config.controllers.exposureClass }}
+      exposureClass:
+        concurrentSyncs: {{ required ".Values.global.controller.config.controllers.exposureClass.concurrentSyncs is required" .Values.global.controller.config.controllers.exposureClass.concurrentSyncs }}
+      {{- end }}
     leaderElection:
       leaderElect: {{ required ".Values.global.controller.config.leaderElection.leaderElect is required" .Values.global.controller.config.leaderElection.leaderElect }}
       leaseDuration: {{ required ".Values.global.controller.config.leaderElection.leaseDuration is required" .Values.global.controller.config.leaderElection.leaseDuration }}
