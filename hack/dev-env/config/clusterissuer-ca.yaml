@@ -15,7 +15,7 @@ metadata:
     cert-manager.io/issuer-name: selfsigned-issuer
     cert-manager.io/uri-sans: ""
   name: dev-ca
-  namespace: flux-system
+  namespace: kube-system
 type: kubernetes.io/tls
 ---
 apiVersion: cert-manager.io/v1
