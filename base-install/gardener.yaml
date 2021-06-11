@@ -48,7 +48,7 @@ spec:
     targetPath: global.apiserver.caBundle
   - kind: Secret
     name: gardener-apiserver-tls
-    valuesKey: tls.key
+    valuesKey: tls.crt
     targetPath: global.apiserver.tls.crt
   - kind: Secret
     name: gardener-apiserver-tls
@@ -60,11 +60,11 @@ spec:
     targetPath: global.admission.config.server.https.tls.caBundle
   - kind: Secret
     name: gardener-admission-controller-tls
-    valuesKey: tls.key
+    valuesKey: tls.crt
     targetPath: global.admission.config.server.https.tls.crt
   - kind: Secret
     name: gardener-admission-controller-tls
-    valuesKey: tls.key
+    valuesKey: tls.crt
     targetPath: global.admission.config.server.https.tls.crt
   - kind: Secret
     name: gardener-internal-kubeconfig
