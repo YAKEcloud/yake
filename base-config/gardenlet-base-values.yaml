@@ -3,7 +3,7 @@ kind: ConfigMap
 metadata:
   creationTimestamp: null
   name: gardenlet-base-values
-  namespace: capi
+  namespace: flux-system
 data:
   values.yaml: |-
     global:
