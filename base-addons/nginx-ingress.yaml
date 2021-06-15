@@ -32,3 +32,6 @@ spec:
     controller:
       extraArgs:
         enable-ssl-passthrough: ""
+      podLabels:
+        app: nginx-ingress
+        component: controller
