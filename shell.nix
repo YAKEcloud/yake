@@ -81,6 +81,31 @@ let
     };
   };
 
+  gardenctl = buildGoModule rec {
+    pname = "gardenctl";
+    version = "0.24.2";
+
+    src = fetchFromGitHub {
+      owner = "gardener";
+      repo = "gardenctl";
+      rev = "v${version}";
+      sha256 = "16klf2l4kffy15171dk198plia4blkxkm0nn971sy72a2akyd5dd";
+    };
+
+    vendorSha256 = null; #"1igmmwgn4mbbhrnc02f3pjdpx10c07a043x8qgqc950ra3cjcp7g";
+
+    doCheck = false;
+
+    # subPackages = [ "cmd/ctl" ];
+
+    meta = with lib; {
+      inherit (src.meta) homepage;
+      description =
+        "Command-line client for the Gardener.";
+      license = licenses.asl20;
+    };
+  };
+
   # myTerraform = pkgs.terraform_0_13 {
   #       plugins = [terraform-kubectl];
   #     };
@@ -94,6 +119,7 @@ in pkgs.mkShell {
     coreutils
     docker
     fluxcd
+    gardenctl
     git
     gnumake
     gnused
