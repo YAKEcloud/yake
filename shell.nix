@@ -1,11 +1,18 @@
 { sources ? import ./nix/sources.nix { },
   # should be false on derived configs
   uploadDevConfig ? true}:
-let 
+let
   pkgs = import sources.nixpkgs {};
+
+  fluxVersion = "0.15.3";
+  fluxManifests = pkgs.fetchzip {
+    url = "https://github.com/fluxcd/flux2/releases/download/v${fluxVersion}/manifests.tar.gz";
+    sha256 = "sha256-/uD0hxtTJSr+2tZcwzOIQcEbikHOshWukEBSaK3FiP4=";
+    stripRoot = false;
+  };
 in
 let
-  inherit (pkgs) lib buildGoPackage buildGoModule fetchFromGitHub;
+  inherit (pkgs) lib buildGoPackage buildGoModule fetchFromGitHub installShellFiles;
 
   clusterctl = buildGoModule rec {
     pname = "clusterctl";
@@ -103,6 +110,57 @@ let
     };
   };
 
+  flux2 = buildGoModule rec {
+    version = fluxVersion;
+    pname = "fluxcd";
+
+    src = fetchFromGitHub {
+      owner = "fluxcd";
+      repo = "flux2";
+      rev = "v${version}";
+      sha256 = "sha256-Pyt5BaOawBwyBz7ULzOZr0Fc6bqM5dKn775AylUjDVE=";
+    };
+
+    vendorSha256 = "sha256-17Kbun6Mrip4/XHN5eMHxgnSoX1KuGHwtb8yLTf/Mks=";
+
+    nativeBuildInputs = [ installShellFiles ];
+
+    doCheck = false;
+
+    subPackages = [ "cmd/flux" ];
+
+    buildFlagsArray = [ "-ldflags=-s -w -X main.VERSION=${version}" ];
+
+    postUnpack = ''
+      cp -r ${fluxManifests} source/cmd/flux/manifests
+    '';
+
+    doInstallCheck = true;
+    installCheckPhase = ''
+      $out/bin/flux --version | grep ${version} > /dev/null
+    '';
+
+    postInstall = ''
+      for shell in bash fish zsh; do
+        $out/bin/flux completion $shell > flux.$shell
+        installShellCompletion flux.$shell
+      done
+    '';
+
+    meta = with lib; {
+      description = "Open and extensible continuous delivery solution for Kubernetes";
+      longDescription = ''
+        Flux is a tool for keeping Kubernetes clusters in sync
+        with sources of configuration (like Git repositories), and automating
+        updates to configuration when there is new code to deploy.
+      '';
+      homepage = "https://fluxcd.io";
+      license = licenses.asl20;
+      maintainers = with maintainers; [ jlesquembre ];
+      platforms = platforms.unix;
+    };
+  };
+
 in pkgs.mkShell {
   # NIX_TERRAFORM_PLUGIN_DIR = "${terraform-kubectl}/bin";
   nativeBuildInputs = with pkgs; [
@@ -111,7 +169,7 @@ in pkgs.mkShell {
     clusterctl
     coreutils
     docker
-    fluxcd
+    flux2
     gardenctl
     git
     gnumake
