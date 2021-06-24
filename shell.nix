@@ -9,16 +9,16 @@ let
 
   clusterctl = buildGoModule rec {
     pname = "clusterctl";
-    version = "0.3.16";
+    version = "0.3.19";
 
     src = fetchFromGitHub {
       owner = "kubernetes-sigs";
       repo = "cluster-api";
       rev = "v${version}";
-      sha256 = "0snjwj6jqsvpi497a2fvqipim63k6vm219xwf3x574isz54xy8y3";
+      sha256 = "0k3mkjiymcqk3gn5mk2pf0jpgwg40hf4piipd0dwzsr970jgi23x";
     };
 
-    vendorSha256 = "0ywzw3razhapqbacd6hbq785aimph4m77wsd89wxw3vnxrfqgj4b";
+    vendorSha256 = "122i08mnshqp619pf90bvn82ar38z5907j16qp064yjm740yak6g";
 
     doCheck = false;
 
@@ -29,7 +29,6 @@ let
       description =
         "Home for the Cluster Management API work, a subproject of sig-cluster-lifecycle";
       license = licenses.asl20;
-      #maintainers = with maintainers; [ mupdt ];
     };
   };
 
@@ -57,17 +56,17 @@ let
   };
 
   cert-manager-cli = buildGoModule rec {
-    pname = "charts-syncer";
-    version = "1.3.1";
+    pname = "cert-manager-cli";
+    version = "1.4.0";
 
     src = fetchFromGitHub {
       owner = "jetstack";
       repo = "cert-manager";
       rev = "v${version}";
-      sha256 = "0gcshqhzmc6dyw448npir9i7b2dqlpzlaaffq3smi569clz7dmns";
+      sha256 = "03v64zdrdn68p7ami6m7rqfnhkkz8mpnmmd2fc9g0m20a8b2ijqs";
     };
 
-    vendorSha256 = "1igmmwgn4mbbhrnc02f3pjdpx10c06a043x8qgqc950ra3cjcp7g";
+    vendorSha256 = "14rx786mff0a651y33vq8pjy0bxbhzqrqlqfyslkg8vn99lx4575";
 
     doCheck = false;
 
@@ -96,8 +95,6 @@ let
 
     doCheck = false;
 
-    # subPackages = [ "cmd/ctl" ];
-
     meta = with lib; {
       inherit (src.meta) homepage;
       description =
@@ -105,10 +102,6 @@ let
       license = licenses.asl20;
     };
   };
-
-  # myTerraform = pkgs.terraform_0_13 {
-  #       plugins = [terraform-kubectl];
-  #     };
 
 in pkgs.mkShell {
   # NIX_TERRAFORM_PLUGIN_DIR = "${terraform-kubectl}/bin";
