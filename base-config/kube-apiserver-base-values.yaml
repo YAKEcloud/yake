@@ -8,8 +8,8 @@ data:
     namespace: garden
     serviceName: garden-kube-apiserver
     images:
-      hyperkube: k8s.gcr.io/hyperkube:v1.18.3
-    replicas: 1
+      hyperkube: k8s.gcr.io/hyperkube:v1.18.20
+    replicas: 2
     apiServer:
       hostname: api.${ENV}.${BASE_DOMAIN}
       serviceName: garden-kube-apiserver

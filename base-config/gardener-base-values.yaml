@@ -15,21 +15,21 @@ data:
         domain: nip.io
         provider: unmanaged # depends on the DNS extension of your choice
       apiserver:
-        replicaCount: 1
+        replicaCount: 2
         clusterIdentity: garden-cluster-identity
         image:
           tag: ${GARDENER_VERSION}
         etcd:
           servers: https://etcd:2379
       admission:
-        replicaCount: 1
+        replicaCount: 2
         image:
           tag: ${GARDENER_VERSION}
       controller:
-        replicaCount: 1
+        replicaCount: 2
         image:
           tag: ${GARDENER_VERSION}
       scheduler:
-        replicaCount: 1
+        replicaCount: 2
         image:
           tag: ${GARDENER_VERSION}
