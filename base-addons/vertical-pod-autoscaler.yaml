@@ -20,3 +20,6 @@ spec:
   install:
     remediation:
       retries: -1
+  values:
+    extraArgs:
+      webhook-timeout-seconds: 15
