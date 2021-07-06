@@ -1,24 +1,31 @@
 { sources ? import ./nix/sources.nix { },
   # should be false on derived configs
   uploadDevConfig ? true}:
-let 
+let
   pkgs = import sources.nixpkgs {};
+
+  fluxVersion = "0.15.3";
+  fluxManifests = pkgs.fetchzip {
+    url = "https://github.com/fluxcd/flux2/releases/download/v${fluxVersion}/manifests.tar.gz";
+    sha256 = "sha256-/uD0hxtTJSr+2tZcwzOIQcEbikHOshWukEBSaK3FiP4=";
+    stripRoot = false;
+  };
 in
 let
-  inherit (pkgs) lib buildGoPackage buildGoModule fetchFromGitHub;
+  inherit (pkgs) lib buildGoPackage buildGoModule fetchFromGitHub installShellFiles;
 
   clusterctl = buildGoModule rec {
     pname = "clusterctl";
-    version = "0.3.16";
+    version = "0.3.19";
 
     src = fetchFromGitHub {
       owner = "kubernetes-sigs";
       repo = "cluster-api";
       rev = "v${version}";
-      sha256 = "0snjwj6jqsvpi497a2fvqipim63k6vm219xwf3x574isz54xy8y3";
+      sha256 = "0k3mkjiymcqk3gn5mk2pf0jpgwg40hf4piipd0dwzsr970jgi23x";
     };
 
-    vendorSha256 = "0ywzw3razhapqbacd6hbq785aimph4m77wsd89wxw3vnxrfqgj4b";
+    vendorSha256 = "122i08mnshqp619pf90bvn82ar38z5907j16qp064yjm740yak6g";
 
     doCheck = false;
 
@@ -29,7 +36,6 @@ let
       description =
         "Home for the Cluster Management API work, a subproject of sig-cluster-lifecycle";
       license = licenses.asl20;
-      #maintainers = with maintainers; [ mupdt ];
     };
   };
 
@@ -57,17 +63,17 @@ let
   };
 
   cert-manager-cli = buildGoModule rec {
-    pname = "charts-syncer";
-    version = "1.3.1";
+    pname = "cert-manager-cli";
+    version = "1.4.0";
 
     src = fetchFromGitHub {
       owner = "jetstack";
       repo = "cert-manager";
       rev = "v${version}";
-      sha256 = "0gcshqhzmc6dyw448npir9i7b2dqlpzlaaffq3smi569clz7dmns";
+      sha256 = "03v64zdrdn68p7ami6m7rqfnhkkz8mpnmmd2fc9g0m20a8b2ijqs";
     };
 
-    vendorSha256 = "1igmmwgn4mbbhrnc02f3pjdpx10c06a043x8qgqc950ra3cjcp7g";
+    vendorSha256 = "14rx786mff0a651y33vq8pjy0bxbhzqrqlqfyslkg8vn99lx4575";
 
     doCheck = false;
 
@@ -96,8 +102,6 @@ let
 
     doCheck = false;
 
-    # subPackages = [ "cmd/ctl" ];
-
     meta = with lib; {
       inherit (src.meta) homepage;
       description =
@@ -106,9 +110,56 @@ let
     };
   };
 
-  # myTerraform = pkgs.terraform_0_13 {
-  #       plugins = [terraform-kubectl];
-  #     };
+  flux2 = buildGoModule rec {
+    version = fluxVersion;
+    pname = "fluxcd";
+
+    src = fetchFromGitHub {
+      owner = "fluxcd";
+      repo = "flux2";
+      rev = "v${version}";
+      sha256 = "sha256-Pyt5BaOawBwyBz7ULzOZr0Fc6bqM5dKn775AylUjDVE=";
+    };
+
+    vendorSha256 = "sha256-17Kbun6Mrip4/XHN5eMHxgnSoX1KuGHwtb8yLTf/Mks=";
+
+    nativeBuildInputs = [ installShellFiles ];
+
+    doCheck = false;
+
+    subPackages = [ "cmd/flux" ];
+
+    buildFlagsArray = [ "-ldflags=-s -w -X main.VERSION=${version}" ];
+
+    postUnpack = ''
+      cp -r ${fluxManifests} source/cmd/flux/manifests
+    '';
+
+    doInstallCheck = true;
+    installCheckPhase = ''
+      $out/bin/flux --version | grep ${version} > /dev/null
+    '';
+
+    postInstall = ''
+      for shell in bash fish zsh; do
+        $out/bin/flux completion $shell > flux.$shell
+        installShellCompletion flux.$shell
+      done
+    '';
+
+    meta = with lib; {
+      description = "Open and extensible continuous delivery solution for Kubernetes";
+      longDescription = ''
+        Flux is a tool for keeping Kubernetes clusters in sync
+        with sources of configuration (like Git repositories), and automating
+        updates to configuration when there is new code to deploy.
+      '';
+      homepage = "https://fluxcd.io";
+      license = licenses.asl20;
+      maintainers = with maintainers; [ jlesquembre ];
+      platforms = platforms.unix;
+    };
+  };
 
 in pkgs.mkShell {
   # NIX_TERRAFORM_PLUGIN_DIR = "${terraform-kubectl}/bin";
@@ -118,7 +169,7 @@ in pkgs.mkShell {
     clusterctl
     coreutils
     docker
-    fluxcd
+    flux2
     gardenctl
     git
     gnumake
