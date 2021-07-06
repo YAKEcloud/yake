@@ -17,10 +17,10 @@ stringData:
       # - domain: ${ENV}.${BASE_DOMAIN}
       #   provider: InMemory
       apiserver:
-        vpa: true
+        replicaCount: 1
       scheduler:
-        vpa: true
+        replicaCount: 1
       admission:
-        vpa: true
+        replicaCount: 1
       controller:
-        vpa: true
+        replicaCount: 1
