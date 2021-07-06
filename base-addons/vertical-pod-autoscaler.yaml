@@ -21,5 +21,6 @@ spec:
     remediation:
       retries: -1
   values:
-    extraArgs:
-      webhook-timeout-seconds: 15
+    admissionController:
+      extraArgs:
+        webhook-timeout-seconds: 15
