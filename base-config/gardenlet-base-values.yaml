@@ -26,6 +26,7 @@ data:
               enabled: false
           featureGates:
             Logging: false
+            ManagedIstio: true
         image:
           tag: ${GARDENER_VERSION}
         vpa: false
