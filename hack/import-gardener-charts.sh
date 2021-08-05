@@ -3,7 +3,7 @@ FOLDER=$1
 
 GARDENER_VERSION="1.28.2"
 GARDEN_SETUP_VERSION="3.12.0"
-DASHBOARD_VERSION="1.50.2"
+DASHBOARD_VERSION="1.51.0"
 
 if [ "$#" -ne  "1" ]; then
      echo "Usage: import-charts.sh <target-folder>"
