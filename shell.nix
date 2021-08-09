@@ -161,10 +161,36 @@ let
     };
   };
 
+  calicoctl = buildGoModule rec {
+    pname = "calicoctl";
+    version = "3.19.2";
+
+    src = fetchFromGitHub {
+      owner = "projectcalico";
+      repo = "calicoctl";
+      rev = "v${version}";
+      sha256 = "007dig2n9fiq7lk2hz38v1m4f95di79jlmp026bqcgw2s2bs7wxh";
+    };
+
+    vendorSha256 = "1ff294xj2gc6qbzkdm35hxms38222pabjfvrzkm22s2q5g9js8sn";
+
+    doCheck = false;
+
+    # subPackages = [ "cmd/ctl" ];
+
+    meta = with lib; {
+      inherit (src.meta) homepage;
+      description =
+        "Command-line client for the Gardener.";
+      license = licenses.asl20;
+    };
+  };
+
 in pkgs.mkShell {
   # NIX_TERRAFORM_PLUGIN_DIR = "${terraform-kubectl}/bin";
   nativeBuildInputs = with pkgs; [
     # terraform-kubectl
+    calicoctl
     cert-manager-cli
     clusterctl
     coreutils
