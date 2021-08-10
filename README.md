@@ -18,6 +18,7 @@
 
 # Initialize new environment
 
+```
 export $MYNAME=foo
 export $MYENV=development
 export $23KEVERSION
@@ -28,6 +29,7 @@ mkdir $MYENV && cd $MYENV
 ../23ke/init-new-env.sh  # copies and symlinks templates
 
 ./bin/
+```
 
 
 # Bootstrap Garden Cluster
