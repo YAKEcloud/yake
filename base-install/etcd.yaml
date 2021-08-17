@@ -24,28 +24,28 @@ spec:
     remediation:
       remediateLastFailure: true
   valuesFrom:
-  # All of below maps cert-manager secrets to the expected helm values
-  - kind: Secret
-    name: gardener-ca-keypair
-    valuesKey: tls.crt
-    targetPath: tls.ca.crt
-  - kind: Secret
-    name: gardener-ca-keypair
-    valuesKey: tls.key
-    targetPath: tls.ca.key
-  - kind: Secret
-    name: etcd-tls
-    valuesKey: tls.crt
-    targetPath: tls.server.crt
-  - kind: Secret
-    name: etcd-tls
-    valuesKey: tls.key
-    targetPath: tls.server.key
-  - kind: Secret
-    name: etcd-client-tls
-    valuesKey: tls.crt
-    targetPath: tls.client.crt
-  - kind: Secret
-    name: etcd-client-tls
-    valuesKey: tls.key
-    targetPath: tls.client.key
+    # All of below maps cert-manager secrets to the expected helm values
+    - kind: Secret
+      name: gardener-ca-keypair
+      valuesKey: tls.crt
+      targetPath: tls.ca.crt
+    - kind: Secret
+      name: gardener-ca-keypair
+      valuesKey: tls.key
+      targetPath: tls.ca.key
+    - kind: Secret
+      name: etcd-tls
+      valuesKey: tls.crt
+      targetPath: tls.server.crt
+    - kind: Secret
+      name: etcd-tls
+      valuesKey: tls.key
+      targetPath: tls.server.key
+    - kind: Secret
+      name: etcd-client-tls
+      valuesKey: tls.crt
+      targetPath: tls.client.crt
+    - kind: Secret
+      name: etcd-client-tls
+      valuesKey: tls.key
+      targetPath: tls.client.key

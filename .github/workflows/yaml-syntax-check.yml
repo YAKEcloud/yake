@@ -1,0 +1,19 @@
+name: Check yaml syntax
+
+on:
+  pull_request:
+    paths:
+      - '**.yml'
+      - '**.yaml'
+      - .github/workflows/check-yaml-syntax.yml
+
+jobs:
+  check-yaml-syntax:
+    runs-on: self-hosted
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-python@v2
+        with:
+          python-version: '3.x'
+      - run: pip3 install yamllint
+      - run: yamllint --config-file .github/yamllint.yaml .

@@ -6,15 +6,15 @@ spec:
   type: openstack
   kubernetes:
     versions:
-    - version: 1.19.7
-    - version: 1.19.9
-    - version: 1.20.4
-    - version: 1.20.5
+      - version: 1.19.7
+      - version: 1.19.9
+      - version: 1.20.4
+      - version: 1.20.5
   machineImages:
     - name: ubuntu
       versions:
-      - version: 20.4.20200423
-      - version: 18.4.20190724
+        - version: 20.4.20200423
+        - version: 18.4.20190724
   machineTypes:
     - cpu: "2"
       gpu: "0"
@@ -29,35 +29,35 @@ spec:
       memory: 16Gi
       name: 8C-16GB-50GB
   regions:
-  - name: Fra1
-    zones:
-    - name: nova
-  - name: Kna1
-    zones:
-    - name: nova
-  - name: Sto2
-    zones:
-    - name: nova
+    - name: Fra1
+      zones:
+        - name: nova
+    - name: Kna1
+      zones:
+        - name: nova
+    - name: Sto2
+      zones:
+        - name: nova
   providerConfig:
     apiVersion: openstack.provider.extensions.gardener.cloud/v1alpha1
     kind: CloudProfileConfig
     machineImages:
-    - name: ubuntu
-      versions:
-      - version: 20.4.20200423
-        image: "Ubuntu 20.04 Focal Fossa 20200423"
-      - version: 18.4.20190724
-        image: "Ubuntu 18.04 Bionic Beaver 20190724.1"
+      - name: ubuntu
+        versions:
+          - version: 20.4.20200423
+            image: "Ubuntu 20.04 Focal Fossa 20200423"
+          - version: 18.4.20190724
+            image: "Ubuntu 18.04 Bionic Beaver 20190724.1"
     useOctavia: true
     keystoneURLs:
-    - region: Fra1
-      url: https://fra1.citycloud.com:5000/v3/
-    - region: Kna1
-      url: https://kna1.citycloud.com:5000/v3/
-    - region: Sto2
-      url: https://sto2.citycloud.com:5000/v3/
+      - region: Fra1
+        url: https://fra1.citycloud.com:5000/v3/
+      - region: Kna1
+        url: https://kna1.citycloud.com:5000/v3/
+      - region: Sto2
+        url: https://sto2.citycloud.com:5000/v3/
     constraints:
       floatingPools:
-      - name: ext-net
+        - name: ext-net
       loadBalancerProviders:
-      - name: amphora
+        - name: amphora

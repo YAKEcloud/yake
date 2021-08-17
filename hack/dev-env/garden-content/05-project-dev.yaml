@@ -11,19 +11,19 @@ spec:
     kind: User
     name: gesslein@23technologies.cloud
   members:
-  - apiGroup: rbac.authorization.k8s.io
-    kind: User
-    name: alice.doe@example.com
-    role: admin
-  # roles: # Additional roles go here
-  # - viewer
-  # - uam # User access manager
-  - apiGroup: rbac.authorization.k8s.io
-    kind: User
-    name: bob.doe@example.com
-    role: viewer
-  # roles: # Additional roles go here
-  # - extension:myrole
+    - apiGroup: rbac.authorization.k8s.io
+      kind: User
+      name: alice.doe@example.com
+      role: admin
+    # roles: # Additional roles go here
+    # - viewer
+    # - uam # User access manager
+    - apiGroup: rbac.authorization.k8s.io
+      kind: User
+      name: bob.doe@example.com
+      role: viewer
+    # roles: # Additional roles go here
+    # - extension:myrole
 # description: "This is my first project"
 # purpose: "Experimenting with Gardener"
   # The `spec.namespace` field is optional and will be initialized if unset - the resulting

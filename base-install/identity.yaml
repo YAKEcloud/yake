@@ -24,9 +24,9 @@ spec:
     remediation:
       remediateLastFailure: false
   valuesFrom:
-  - kind: ConfigMap
-    name: identity-base-values
-    optional: false
-  - kind: Secret
-    name: identity-values
-    optional: true
+    - kind: ConfigMap
+      name: identity-base-values
+      optional: false
+    - kind: Secret
+      name: identity-values
+      optional: true
