@@ -30,30 +30,30 @@ spec:
     spec:
       # Refer to the PVC created earlier
       volumes:
-      - name: minio-storage
-        persistentVolumeClaim:
-          # directory location on host
-          claimName: minio-storage
+        - name: minio-storage
+          persistentVolumeClaim:
+            # directory location on host
+            claimName: minio-storage
       containers:
-      - name: minio
-        # Pulls the default Minio image from Docker Hub
-        image: minio/minio:latest
-        args:
-        - server
-        - /storage
-        env:
-        # Minio access key and secret key
-        - name: MINIO_ACCESS_KEY
-          value: "minio"
-        - name: MINIO_SECRET_KEY
-          value: "minio123"
-        ports:
-        - containerPort: 9000
-          hostPort: 9000
-        # Mount the volume into the pod
-        volumeMounts:
-        - name: minio-storage # must match the volume name, above
-          mountPath: "/storage"
+        - name: minio
+          # Pulls the default Minio image from Docker Hub
+          image: minio/minio:latest
+          args:
+            - server
+            - /storage
+          env:
+          # Minio access key and secret key
+            - name: MINIO_ACCESS_KEY
+              value: "minio"
+            - name: MINIO_SECRET_KEY
+              value: "minio123"
+          ports:
+            - containerPort: 9000
+              hostPort: 9000
+          # Mount the volume into the pod
+          volumeMounts:
+            - name: minio-storage # must match the volume name, above
+              mountPath: "/storage"
 ---
 apiVersion: v1
 kind: Service

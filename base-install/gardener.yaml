@@ -24,64 +24,64 @@ spec:
       retries: 300
     createNamespace: true
   valuesFrom:
-  - kind: ConfigMap
-    name: gardener-base-values
-    optional: false
-  - kind: Secret
-    name: gardener-values
-    optional: true
-  - kind: Secret
-    name: etcd-client-tls
-    valuesKey: ca.crt
-    targetPath: global.apiserver.etcd.caBundle
-  - kind: Secret
-    name: etcd-client-tls
-    valuesKey: tls.crt
-    targetPath: global.apiserver.etcd.tls.crt
-  - kind: Secret
-    name: etcd-client-tls
-    valuesKey: tls.key
-    targetPath: global.apiserver.etcd.tls.key
-  - kind: Secret
-    name: gardener-apiserver-tls
-    valuesKey: ca.crt
-    targetPath: global.apiserver.caBundle
-  - kind: Secret
-    name: gardener-apiserver-tls
-    valuesKey: tls.crt
-    targetPath: global.apiserver.tls.crt
-  - kind: Secret
-    name: gardener-apiserver-tls
-    valuesKey: tls.key
-    targetPath: global.apiserver.tls.key
-  - kind: Secret
-    name: gardener-admission-controller-tls
-    valuesKey: ca.crt
-    targetPath: global.admission.config.server.https.tls.caBundle
-  - kind: Secret
-    name: gardener-admission-controller-tls
-    valuesKey: tls.crt
-    targetPath: global.admission.config.server.https.tls.crt
-  - kind: Secret
-    name: gardener-admission-controller-tls
-    valuesKey: tls.crt
-    targetPath: global.admission.config.server.https.tls.crt
-  - kind: Secret
-    name: gardener-internal-kubeconfig
-    valuesKey: value
-    targetPath: global.apiserver.kubeconfig
-  - kind: Secret
-    name: gardener-internal-kubeconfig
-    valuesKey: value
-    targetPath: global.admission.kubeconfig
-  - kind: Secret
-    name: gardener-internal-kubeconfig
-    valuesKey: value
-    targetPath: global.controller.kubeconfig
-  - kind: Secret
-    name: gardener-internal-kubeconfig
-    valuesKey: value
-    targetPath: global.scheduler.kubeconfig
+    - kind: ConfigMap
+      name: gardener-base-values
+      optional: false
+    - kind: Secret
+      name: gardener-values
+      optional: true
+    - kind: Secret
+      name: etcd-client-tls
+      valuesKey: ca.crt
+      targetPath: global.apiserver.etcd.caBundle
+    - kind: Secret
+      name: etcd-client-tls
+      valuesKey: tls.crt
+      targetPath: global.apiserver.etcd.tls.crt
+    - kind: Secret
+      name: etcd-client-tls
+      valuesKey: tls.key
+      targetPath: global.apiserver.etcd.tls.key
+    - kind: Secret
+      name: gardener-apiserver-tls
+      valuesKey: ca.crt
+      targetPath: global.apiserver.caBundle
+    - kind: Secret
+      name: gardener-apiserver-tls
+      valuesKey: tls.crt
+      targetPath: global.apiserver.tls.crt
+    - kind: Secret
+      name: gardener-apiserver-tls
+      valuesKey: tls.key
+      targetPath: global.apiserver.tls.key
+    - kind: Secret
+      name: gardener-admission-controller-tls
+      valuesKey: ca.crt
+      targetPath: global.admission.config.server.https.tls.caBundle
+    - kind: Secret
+      name: gardener-admission-controller-tls
+      valuesKey: tls.crt
+      targetPath: global.admission.config.server.https.tls.crt
+    - kind: Secret
+      name: gardener-admission-controller-tls
+      valuesKey: tls.crt
+      targetPath: global.admission.config.server.https.tls.crt
+    - kind: Secret
+      name: gardener-internal-kubeconfig
+      valuesKey: value
+      targetPath: global.apiserver.kubeconfig
+    - kind: Secret
+      name: gardener-internal-kubeconfig
+      valuesKey: value
+      targetPath: global.admission.kubeconfig
+    - kind: Secret
+      name: gardener-internal-kubeconfig
+      valuesKey: value
+      targetPath: global.controller.kubeconfig
+    - kind: Secret
+      name: gardener-internal-kubeconfig
+      valuesKey: value
+      targetPath: global.scheduler.kubeconfig
 ---
 apiVersion: helm.toolkit.fluxcd.io/v2beta1
 kind: HelmRelease
@@ -111,62 +111,62 @@ spec:
     remediation:
       remediateLastFailure: false
   valuesFrom:
-  - kind: ConfigMap
-    name: gardener-base-values
-    optional: false
-  - kind: Secret
-    name: gardener-values
-    optional: true
-  # All of below maps cert-manager secrets to the expected helm values
-  - kind: Secret
-    name: etcd-client-tls
-    valuesKey: ca.crt
-    targetPath: global.apiserver.etcd.caBundle
-  - kind: Secret
-    name: etcd-client-tls
-    valuesKey: tls.crt
-    targetPath: global.apiserver.etcd.tls.crt
-  - kind: Secret
-    name: etcd-client-tls
-    valuesKey: tls.key
-    targetPath: global.apiserver.etcd.tls.key
-  - kind: Secret
-    name: gardener-apiserver-tls
-    valuesKey: ca.crt
-    targetPath: global.apiserver.caBundle
-  - kind: Secret
-    name: gardener-apiserver-tls
-    valuesKey: tls.crt
-    targetPath: global.apiserver.tls.crt
-  - kind: Secret
-    name: gardener-apiserver-tls
-    valuesKey: tls.key
-    targetPath: global.apiserver.tls.key
-  - kind: Secret
-    name: gardener-admission-controller-tls
-    valuesKey: ca.crt
-    targetPath: global.admission.config.server.https.tls.caBundle
-  - kind: Secret
-    name: gardener-admission-controller-tls
-    valuesKey: tls.crt
-    targetPath: global.admission.config.server.https.tls.crt
-  - kind: Secret
-    name: gardener-admission-controller-tls
-    valuesKey: tls.key
-    targetPath: global.admission.config.server.https.tls.key
-  - kind: Secret
-    name: gardener-internal-kubeconfig
-    valuesKey: value
-    targetPath: global.apiserver.kubeconfig
-  - kind: Secret
-    name: gardener-internal-kubeconfig
-    valuesKey: value
-    targetPath: global.admission.kubeconfig
-  - kind: Secret
-    name: gardener-internal-kubeconfig
-    valuesKey: value
-    targetPath: global.controller.kubeconfig
-  - kind: Secret
-    name: gardener-internal-kubeconfig
-    valuesKey: value
-    targetPath: global.scheduler.kubeconfig
+    - kind: ConfigMap
+      name: gardener-base-values
+      optional: false
+    - kind: Secret
+      name: gardener-values
+      optional: true
+    # All of below maps cert-manager secrets to the expected helm values
+    - kind: Secret
+      name: etcd-client-tls
+      valuesKey: ca.crt
+      targetPath: global.apiserver.etcd.caBundle
+    - kind: Secret
+      name: etcd-client-tls
+      valuesKey: tls.crt
+      targetPath: global.apiserver.etcd.tls.crt
+    - kind: Secret
+      name: etcd-client-tls
+      valuesKey: tls.key
+      targetPath: global.apiserver.etcd.tls.key
+    - kind: Secret
+      name: gardener-apiserver-tls
+      valuesKey: ca.crt
+      targetPath: global.apiserver.caBundle
+    - kind: Secret
+      name: gardener-apiserver-tls
+      valuesKey: tls.crt
+      targetPath: global.apiserver.tls.crt
+    - kind: Secret
+      name: gardener-apiserver-tls
+      valuesKey: tls.key
+      targetPath: global.apiserver.tls.key
+    - kind: Secret
+      name: gardener-admission-controller-tls
+      valuesKey: ca.crt
+      targetPath: global.admission.config.server.https.tls.caBundle
+    - kind: Secret
+      name: gardener-admission-controller-tls
+      valuesKey: tls.crt
+      targetPath: global.admission.config.server.https.tls.crt
+    - kind: Secret
+      name: gardener-admission-controller-tls
+      valuesKey: tls.key
+      targetPath: global.admission.config.server.https.tls.key
+    - kind: Secret
+      name: gardener-internal-kubeconfig
+      valuesKey: value
+      targetPath: global.apiserver.kubeconfig
+    - kind: Secret
+      name: gardener-internal-kubeconfig
+      valuesKey: value
+      targetPath: global.admission.kubeconfig
+    - kind: Secret
+      name: gardener-internal-kubeconfig
+      valuesKey: value
+      targetPath: global.controller.kubeconfig
+    - kind: Secret
+      name: gardener-internal-kubeconfig
+      valuesKey: value
+      targetPath: global.scheduler.kubeconfig

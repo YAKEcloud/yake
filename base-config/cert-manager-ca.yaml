@@ -1,32 +1,32 @@
 apiVersion: cert-manager.io/v1
 kind: Issuer
 metadata:
- name: gardener-ca-selfsigned
- namespace: flux-system
+  name: gardener-ca-selfsigned
+  namespace: flux-system
 spec:
- selfSigned: {}
+  selfSigned: {}
 ---
 apiVersion: cert-manager.io/v1
 kind: Certificate
 metadata:
- name: gardener-ca
- namespace: flux-system
+  name: gardener-ca
+  namespace: flux-system
 spec:
- secretName: gardener-ca-keypair
- isCA: true
- issuerRef:
-   name: gardener-ca-selfsigned
-   kind: Issuer
- commonName: "Gardener CA"
+  secretName: gardener-ca-keypair
+  isCA: true
+  issuerRef:
+    name: gardener-ca-selfsigned
+    kind: Issuer
+  commonName: "Gardener CA"
 ---
 apiVersion: cert-manager.io/v1
 kind: Issuer
 metadata:
- name: gardener-ca
- namespace: flux-system
+  name: gardener-ca
+  namespace: flux-system
 spec:
- ca:
-   secretName: gardener-ca-keypair
+  ca:
+    secretName: gardener-ca-keypair
 ---
 apiVersion: cert-manager.io/v1
 kind: Certificate
@@ -39,9 +39,9 @@ spec:
   usages:
     - server auth
   dnsNames:
-  - etcd
-  - etcd.garden
-  - etcd.garden.svc
+    - etcd
+    - etcd.garden
+    - etcd.garden.svc
   issuerRef:
     name: gardener-ca
 ---
@@ -70,13 +70,13 @@ spec:
   usages:
     - server auth
   dnsNames:
-  - localhost
-  - kubernetes.default
-  - garden-kube-apiserver
-  - garden-kube-apiserver.garden
-  - garden-kube-apiserver.garden.svc
-  - api.${ENV}.${BASE_DOMAIN}
-  - api.${BASE_DOMAIN}
+    - localhost
+    - kubernetes.default
+    - garden-kube-apiserver
+    - garden-kube-apiserver.garden
+    - garden-kube-apiserver.garden.svc
+    - api.${ENV}.${BASE_DOMAIN}
+    - api.${BASE_DOMAIN}
   issuerRef:
     name: gardener-ca
 ---
@@ -107,9 +107,9 @@ spec:
     - client auth
   subject:
     organizations:
-    - garden:aggregator-client:kube-aggregator
+      - garden:aggregator-client:kube-aggregator
   dnsNames:
-  - localhost
+    - localhost
   issuerRef:
     name: gardener-ca
 ---
@@ -125,7 +125,7 @@ spec:
     - server auth
     - client auth
   dnsNames:
-  - localhost
+    - localhost
   issuerRef:
     name: gardener-ca
 ---
@@ -141,7 +141,7 @@ spec:
     - client auth
   subject:
     organizations:
-    - system:masters
+      - system:masters
   commonName: garden:client:admin
   issuerRef:
     name: gardener-ca
@@ -157,10 +157,10 @@ spec:
   usages:
     - server auth
   dnsNames:
-  - localhost
-  - gardener-apiserver
-  - gardener-apiserver.garden
-  - gardener-apiserver.garden.svc
+    - localhost
+    - gardener-apiserver
+    - gardener-apiserver.garden
+    - gardener-apiserver.garden.svc
   issuerRef:
     name: gardener-ca
 ---
@@ -175,10 +175,9 @@ spec:
   usages:
     - server auth
   dnsNames:
-  - localhost
-  - gardener-admission-controller
-  - gardener-admission-controller.garden
-  - gardener-admission-controller.garden.svc
+    - localhost
+    - gardener-admission-controller
+    - gardener-admission-controller.garden
+    - gardener-admission-controller.garden.svc
   issuerRef:
     name: gardener-ca
-
