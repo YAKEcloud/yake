@@ -213,6 +213,7 @@ in pkgs.mkShell {
     minikube
     minio-client
     openssh
+    openssl
     screen
     sops
     yaml2json
