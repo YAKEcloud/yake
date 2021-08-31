@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
-export SHOOT=23ke-run-$($GITHUB_SHA|head -c 4)
+echo "GITHUB_SHA: $GITHUB_SHA"
+export SHOOT=23ke-run-$(echo $GITHUB_SHA|head -c 4)
+echo "SHOOT: $SHOOT"
 export KUBECONFIG=.github/gardener-kubeconfig.yaml
 
 # Alter shoot template
