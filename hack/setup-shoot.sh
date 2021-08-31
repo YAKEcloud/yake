@@ -10,7 +10,7 @@ yq eval '.metadata.name = env(SHOOT)' -i hack/shoot-template.yaml
 kubectl apply -f hack/shoot-template.yaml || ( echo "kubectl apply unsuccessful, exiting..." && exit 1 )
 
 # Restore shoot template
-yq eval '.metadata.name = 23ke-test' -i hack/shoot-template.yaml
+git checkout hack/shoot-template.yaml
 
 # Wait for shoot to become available
 while [ ! "$(kubectl get shoot $SHOOT -n garden-23t-test -o jsonpath="{.status.lastOperation.state}")" == "Succeeded" ]
@@ -24,5 +24,20 @@ kubectl get secret -n garden-23t-test $SHOOT.kubeconfig -o go-template='{{.data.
 
 export KUBECONFIG=hack/shoot-kubeconfig.yaml
 
+
+MINIO_RAND=$(openssl rand -hex 20)
+MINIO_HOSTNAME="minio.$SHOOT.23t-test-okeanos.dev"
+
+# Alter minio template
+yq eval 'select(documentIndex == 1) .spec.template.spec.containers[0].env[1].value = env(MINIO_RAND)' -i hack/minio.yaml
+yq eval 'select(documentIndex == 2) .metadata.annotations."dns.gardener.cloud/class" = "garden"' -i hack/minio.yaml
+yq eval 'select(documentIndex == 2) .metadata.annotations."dns.gardener.cloud/dnsnames" = env(MINIO_HOSTNAME)' -i hack/minio.yaml
+
 # Install minio
 kubectl apply -f hack/minio.yaml
+
+# Restore minio template
+git checkout hack/minio.yaml
+
+# Wait for minio deployment to become ready
+kubectl wait --for=condition=available --timeout=1m  deployment minio -n default
