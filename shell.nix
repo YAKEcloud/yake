@@ -203,7 +203,7 @@ in pkgs.mkShell {
     ipcalc
     iproute
     jq
-    yq
+    yq-go
     k9s
     kind
     kubectl
