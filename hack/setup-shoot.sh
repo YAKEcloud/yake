@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-RANDOM=$(openssl rand -hex 2)
+RANDOM=$(openssl rand -hex 2|head -c 4)
 echo got random name $RANDOM
 export SHOOT=23ke-run-$RANDOM
 export KUBECONFIG=.github/gardener-kubeconfig.yaml
