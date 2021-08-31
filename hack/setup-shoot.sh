@@ -25,8 +25,8 @@ kubectl get secret -n garden-23t-test $SHOOT.kubeconfig -o go-template='{{.data.
 export KUBECONFIG=hack/shoot-kubeconfig.yaml
 
 
-MINIO_RAND=$(openssl rand -hex 20)
-MINIO_HOSTNAME="minio.$SHOOT.23t-test-okeanos.dev"
+export MINIO_RAND=$(openssl rand -hex 20)
+export MINIO_HOSTNAME="minio.$SHOOT.23t-test-okeanos.dev"
 
 # Alter minio template
 yq eval 'select(documentIndex == 1) .spec.template.spec.containers[0].env[1].value = env(MINIO_RAND)' -i hack/minio.yaml
