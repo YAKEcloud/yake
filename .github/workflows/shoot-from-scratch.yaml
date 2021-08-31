@@ -5,7 +5,7 @@ on:
       - feat/testing-on-shoot
 jobs:
   ci:
-    runs-on: ubuntu-latest
+    runs-on: self-hosted
     name: "23ke setup-shoot & check-ci"
     steps:
       - name: Checkout source
