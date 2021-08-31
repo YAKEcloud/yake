@@ -14,9 +14,15 @@ git checkout hack/shoot-template.yaml
 
 # Wait for shoot to become available
 while [ ! "$(kubectl get shoot $SHOOT -n garden-23t-test -o jsonpath="{.status.lastOperation.state}")" == "Succeeded" ]
+OLD_PERCENTAGE=0
 do
-	echo waiting for Shoot...
-	sleep 20
+    PERCENTAGE=$(kubectl get shoot -n garden-23t-test 23ke-run-f0d2 -o jsonpath="{.status.lastOperation.progress}")
+    if [ $OLD_PERCENTAGE -lt $PERCENTAGE ]
+    then
+        echo "waiting for Shoot... $PERCENTAGE %"
+        OLD_PERCENTAGE=$PERCENTAGE
+    fi
+	sleep 1
 done
 
 # Get shoot kubeconfig
