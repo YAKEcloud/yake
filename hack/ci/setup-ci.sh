@@ -1,25 +1,9 @@
 #!/usr/bin/env bash
-
-set +xe
-
-# use argv as context if supplied
-[ ! -z "$1" ] && CONTEXT="$1"
-
-CONTEXT="${CONTEXT:-23ke}"
-
-kind export kubeconfig --name $CONTEXT --kubeconfig hack/access/kind-"${CONTEXT}".kubeconfig
-
-if [ $? -ne 0 ]; then
-  echo "No kind $CONTEXT found, recreating kind cluster"
-  ./hack/setup-kind.sh $CONTEXT
-fi
-
-export KUBECONFIG=hack/access/kind-$CONTEXT.kubeconfig
+export KUBECONFIG=.github/shoot-kubeconfig.yaml
 echo "using kubectl config: $KUBECONFIG"
 
-# use kind cluster as gardencluster
-kubectl -n flux-system create secret generic target-gardencluster-kubeconfig --from-literal=value="$(cat $KUBECONFIG | sed 's&server:.*&server: https://kubernetes.default.svc/&g')"
-
+# use shoot cluster as gardencluster
+kubectl -n flux-system create secret generic target-gardencluster-kubeconfig --from-literal=value="$(cat $KUBECONFIG)
 
 ./hack/upload-flux -c
 
