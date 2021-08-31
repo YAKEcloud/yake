@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-RANDOM=$(/usr/bin/env cat /dev/urandom | /usr/bin/env strings -e s -n 1 | /usr/bin/env tr -d -c 'cbdefghijklnrtuvCBDEFGHIJKLNRTUV0123456789' | /bin/dd bs=1 count=4 status=none)
+RANDOM=$(/usr/bin/env cat /dev/urandom | /usr/bin/env strings -e s -n 1 | /usr/bin/env tr -d -c 'cbdefghijklnrtuvCBDEFGHIJKLNRTUV0123456789' | /usr/bin/env dd bs=1 count=4 status=none)
 export SHOOT=23ke-run-$RANDOM
 export KUBECONFIG=.github/gardener-kubeconfig.yaml
 
