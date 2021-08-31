@@ -19,7 +19,7 @@ export KUBECONFIG=.github/shoot-kubeconfig.yaml
 kubectl get nodes
 
 export KUBECONFIG=.github/gardener-kubeconfig.yaml
-# Delete Shoot
-kubectl annotate shoot -n garden-23t-test 23ke-test confirmation.gardener.cloud/deletion: 'true'
-
-
+# Annotate Shoot for deletion
+kubectl annotate shoot -n garden-23t-test 23ke-test confirmation.gardener.cloud/deletion=true
+# Delete shoot
+kubectl delete shoot -n garden-23t-test 23ke-test
