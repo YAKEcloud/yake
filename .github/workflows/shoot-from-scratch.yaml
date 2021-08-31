@@ -1,0 +1,21 @@
+name: "Shoot from Scratch"
+on:
+  push:
+    branches:
+      - feat/testing-on-shoot
+jobs:
+  ci:
+    name: "23ke setup-shoot & check-ci"
+    runs-on: self-hosted
+    steps:
+      - uses: actions/checkout@v2.3.4
+      - name: Set ENV
+        run: ./hack/ci/github-setup-env.sh >> $GITHUB_ENV
+      - uses: cachix/install-nix-action@v13
+        with:
+          nix_path: nixpkgs=channel:nixos-20.09
+      - run: nix-shell --command "echo $KUBECONFIG_CONTENT > .kube/config; kubectl apply -f .github/shoot-template.yaml"
+        env:
+          KUBECONFIG_CONTENT: ${{ secrets.GARDENER_APISERVER_KUBECONFIG }}
+            #- run: nix-shell --command "hack/ci/setup-ci.sh ci-${BRANCH_NAME}"
+            #- run: nix-shell --command "hack/ci/test-ci.sh ci-${BRANCH_NAME}"
