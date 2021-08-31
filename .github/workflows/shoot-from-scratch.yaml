@@ -14,6 +14,6 @@ jobs:
       - uses: cachix/install-nix-action@v13
         with:
           nix_path: nixpkgs=channel:nixos-20.09
-      - run: nix-shell --command 'echo "$KUBECONFIG_CONTENT" > .github/gardener-kubeconfig; bash .github/deploy-in-shoot.sh'
+      - run: nix-shell --command 'echo "$KUBECONFIG_CONTENT" > .github/gardener-kubeconfig.yaml; bash .github/deploy-in-shoot.sh'
         env:
           KUBECONFIG_CONTENT: ${{ secrets.GARDENER_APISERVER_KUBECONFIG }}

@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 export KUBECONFIG=.github/gardener-kubeconfig.yaml
 # Create Shoot
-kubectl apply -f .github/shoot-template.yaml
+kubectl apply -f .github/shoot-template.yaml || ( echo "kubectl apply unsuccessful, exiting..." && exit 1 )
 
 # Wait for shoot to become available
 while [ ! "$(kubectl get shoot 23ke-test -n garden-23t-test -o jsonpath="{.status.lastOperation.state}")" == "Succeeded" ]
