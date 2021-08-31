@@ -1,9 +1,13 @@
 #!/usr/bin/env bash
-sleep 10
+sleep 20
 export SHOOT=23ke-run-$(echo $GITHUB_SHA|head -c 4)
 export KUBECONFIG=.github/gardener-kubeconfig.yaml
 
 # Alter shoot template
+yq -v 
+yq --version
+yq version
+yq -V
 yq w -i .github/shoot-template.yaml .metadata.name $SHOOT
 
 # Create Shoot
