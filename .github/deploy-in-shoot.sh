@@ -1,14 +1,9 @@
 #!/usr/bin/env bash
-sleep 20
 export SHOOT=23ke-run-$(echo $GITHUB_SHA|head -c 4)
 export KUBECONFIG=.github/gardener-kubeconfig.yaml
 
 # Alter shoot template
-yq -v 
-yq --version
-yq version
-yq -V
-yq w -i .github/shoot-template.yaml .metadata.name $SHOOT
+yq eval '.metadata.name = env(SHOOT)' -i .github/shoot-template.yaml
 
 # Create Shoot
 kubectl apply -f .github/shoot-template.yaml || ( echo "kubectl apply unsuccessful, exiting..." && exit 1 )
