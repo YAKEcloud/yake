@@ -9,6 +9,9 @@ yq eval '.metadata.name = env(SHOOT)' -i hack/shoot-template.yaml
 # Create Shoot
 kubectl apply -f hack/shoot-template.yaml || ( echo "kubectl apply unsuccessful, exiting..." && exit 1 )
 
+# Restore shoot template
+yq eval '.metadata.name = 23ke-test' -i hack/shoot-template.yaml
+
 # Wait for shoot to become available
 while [ ! "$(kubectl get shoot $SHOOT -n garden-23t-test -o jsonpath="{.status.lastOperation.state}")" == "Succeeded" ]
 do
@@ -21,7 +24,5 @@ kubectl get secret -n garden-23t-test $SHOOT.kubeconfig -o go-template='{{.data.
 
 export KUBECONFIG=hack/shoot-kubeconfig.yaml
 
-# Talk to the new Shoot
-kubectl get nodes
-#hack/ci/setup-ci.sh ci-${BRANCH_NAME}"
-#hack/ci/test-ci.sh ci-${BRANCH_NAME}"
+# Install minio
+kubectl apply -f hack/minio.yaml
