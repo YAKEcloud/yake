@@ -17,4 +17,5 @@ do
     fi
 	sleep 1
 done
+rm hack/shoot-kubeconfig.yaml
 echo  -e "\rshoot deleted 🗑       "

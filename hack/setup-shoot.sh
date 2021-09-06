@@ -1,10 +1,23 @@
 #!/usr/bin/env bash
 RAND=$(openssl rand -hex 2)
-export MINIO_RAND=$(openssl rand -hex 20)
 export SHOOT="23ke-run-$RAND"
 export MINIO_HOSTNAME="minio.$SHOOT.23t-test-okeanos.dev"
+export MINIO_PW=$(openssl rand -hex 20)
 
 export KUBECONFIG=.github/gardener-kubeconfig.yaml
+
+echo "The script will now setup your development / testing environment."
+echo
+echo "Your shoot-name will be: $SHOOT"
+echo "Your S3-URL will be: $MINIO_HOSTNAME"
+echo "S3-User: minio"
+if [[ $CI == "true" ]]
+then
+    echo "S3-Password: <omitted in Github Action run>"
+else
+    echo "S3-Password: $MINIO_PW"
+fi
+echo
 
 # Alter shoot template
 yq eval '.metadata.name = env(SHOOT)' -i hack/shoot-template.yaml
@@ -37,7 +50,7 @@ export KUBECONFIG=hack/shoot-kubeconfig.yaml
 
 
 # Alter minio template
-yq eval 'select(documentIndex == 1) .spec.template.spec.containers[0].env[1].value = env(MINIO_RAND)' -i hack/minio.yaml
+yq eval 'select(documentIndex == 1) .spec.template.spec.containers[0].env[1].value = env(MINIO_PW)' -i hack/minio.yaml
 yq eval 'select(documentIndex == 2) .metadata.annotations."dns.gardener.cloud/class" = "garden"' -i hack/minio.yaml
 yq eval 'select(documentIndex == 2) .metadata.annotations."dns.gardener.cloud/dnsnames" = env(MINIO_HOSTNAME)' -i hack/minio.yaml
 
