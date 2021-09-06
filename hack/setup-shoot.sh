@@ -1,21 +1,25 @@
 #!/usr/bin/env bash
 RAND=$(openssl rand -hex 2)
 export SHOOT="23ke-run-$RAND"
-export MINIO_HOSTNAME="minio.$SHOOT.23t-test-okeanos.dev"
+export MINIO_HOSTNAME="minio.$SHOOT.23t-test.okeanos.dev"
+export MINIO_URL="https://$MINIO_HOSTNAME"
 export MINIO_PW=$(openssl rand -hex 20)
+
+BUCKET=${BUCKET:-23ke}
+CONFIG_BUCKET=${CONFIG_BUCKET:-config}
 
 export KUBECONFIG=.github/gardener-kubeconfig.yaml
 
 echo "The script will now setup your development / testing environment."
 echo
-echo "Your shoot-name will be: $SHOOT"
-echo "Your S3-URL will be: $MINIO_HOSTNAME"
-echo "S3-User: minio"
+echo "shoot-name:   $SHOOT"
+echo "S3-URL:       $MINIO_URL"
+echo "S3-User:      minio"
 if [[ $CI == "true" ]]
 then
-    echo "S3-Password: <omitted in Github Action run>"
+    echo "S3-Password:  <omitted in Github Action run>"
 else
-    echo "S3-Password: $MINIO_PW"
+    echo "S3-Password:  $MINIO_PW"
 fi
 echo
 
@@ -48,11 +52,18 @@ kubectl get secret -n garden-23t-test $SHOOT.kubeconfig -o go-template='{{.data.
 
 export KUBECONFIG=hack/shoot-kubeconfig.yaml
 
+echo -n "Deploying Letsencrypt...%"
+# Install and configure cert-manger
+kubectl apply -f https://github.com/jetstack/cert-manager/releases/download/v1.5.3/cert-manager.yaml > /dev/null || ( echo "Error while deploying cert-manager ❌\nexiting..." && exit 1 )
+kubectl apply -f hack/letsencrypt-prod.yaml > /dev/null || ( echo "Error while deploying cluster-issuer crd ❌\nexiting..." && exit 1 )
+echo  -e "\rLetsencrypt ready ✅                       "
 
 # Alter minio template
 yq eval 'select(documentIndex == 1) .spec.template.spec.containers[0].env[1].value = env(MINIO_PW)' -i hack/minio.yaml
-yq eval 'select(documentIndex == 2) .metadata.annotations."dns.gardener.cloud/class" = "garden"' -i hack/minio.yaml
-yq eval 'select(documentIndex == 2) .metadata.annotations."dns.gardener.cloud/dnsnames" = env(MINIO_HOSTNAME)' -i hack/minio.yaml
+yq eval 'select(documentIndex == 3) .metadata.annotations."dns.gardener.cloud/class" = "garden"' -i hack/minio.yaml
+yq eval 'select(documentIndex == 3) .metadata.annotations."dns.gardener.cloud/dnsnames" = env(MINIO_HOSTNAME)' -i hack/minio.yaml
+yq eval 'select(documentIndex == 3) .spec.rules[0].host = env(MINIO_HOSTNAME)' -i hack/minio.yaml
+yq eval 'select(documentIndex == 3) .spec.tls[0].hosts[0] = env(MINIO_HOSTNAME)' -i hack/minio.yaml
 
 # Install minio
 kubectl apply -f hack/minio.yaml > /dev/null || ( echo "Minio deployment unsuccessful❌\nexiting..." && exit 1 )
