@@ -1,5 +1,6 @@
 #!/usr/bin/env bash
 export SHOOT=$(yq eval '.clusters[0].name' hack/shoot-kubeconfig.yaml|sed 's/shoot--23t-test--//')
+rm hack/shoot-kubeconfig.yaml
 export KUBECONFIG=.github/gardener-kubeconfig.yaml
 # Annotate Shoot for deletion
 kubectl annotate shoot -n garden-23t-test $SHOOT confirmation.gardener.cloud/deletion=true > /dev/null 2>&1
@@ -17,5 +18,4 @@ do
     fi
 	sleep 1
 done
-rm hack/shoot-kubeconfig.yaml
 echo  -e "\rshoot deleted 🗑       "
