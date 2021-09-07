@@ -67,7 +67,7 @@ echo -n "."
 kubectl wait -n cert-manager deploy cert-manager --for=condition=Available > /dev/null
 echo -n "."
 kubectl wait -n cert-manager deploy cert-manager-cainjector --for=condition=Available > /dev/null
-kubectl apply -f hack/letsencrypt-prod.yaml > /dev/null || { echo "Error while deploying cluster-issuer crd ❌"; exit 1; }
+kubectl apply -f hack/letsencrypt.yaml > /dev/null || { echo "Error while deploying cluster-issuer crd ❌"; exit 1; }
 echo  -e "\rLetsencrypt ready ✅                       "
 
 # Install flux
@@ -95,6 +95,9 @@ kubectl wait --for=condition=ready --timeout=3m  certificate minio-tls -n defaul
 echo  -e "\rMinio ready ✅       "
 
 # 23KE Bucket
+# Let's Encrypt Staging CA needed.
+mkdir -p ~/.mc/certs/CAs/
+wget https://letsencrypt.org/certs/staging/letsencrypt-stg-root-x1.pem -O ~/.mc/certs/CAs/le-staging.pem
 echo  -n -e "\r23KE Bucket creating"
 (mc ls $MC_ALIAS/$BUCKET > /dev/null 2>&1 ) || mc mb $MC_ALIAS/$BUCKET > /dev/null 2>&1 || { echo "23KE Bucket did not exist. error while creating a new one ❌" ; exit 1; }
 echo -n "."
@@ -102,7 +105,7 @@ echo -n "."
 mc cp --recursive . $MC_ALIAS/$BUCKET > /dev/null &2>&1 || { echo "Error while uploading 23KE to Bucket ❌" ; exit 1; }
 echo -n "."
 # we now upload packet versions which use a bucket instead of the GitRepository
-for file in $(grep --exclude-dir=hack --exclude-dir=env-template/ -lr GitRepository . ); do
+for file in $(grep --exclude-dir=hack --exclude-dir=env-template/ -lr GitRepository ); do
     cat $file | sed s/GitRepository/Bucket/ | mc pipe $MC_ALIAS/$BUCKET/$file > /dev/null 2>&1 || { echo "Error while uploading to 23KE Bucket ❌" ; exit 1; }
 done
 echo -n "."
