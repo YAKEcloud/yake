@@ -97,7 +97,7 @@ echo  -n -e "\r23KE Bucket creating"
 (mc ls $MC_ALIAS/$BUCKET > /dev/null 2>&1 ) || mc mb $MC_ALIAS/$BUCKET > /dev/null 2>&1 || { echo "23KE Bucket did not exist. error while creating a new one ❌" ; exit 1; }
 echo -n "."
 # TODO: Upload only the necessary parts of the repository
-mc cp --recursive . $MC_ALIAS/$BUCKET > /dev/null &2>&1 || { echo "Error while uploading 23KE to Bucket ❌" ; exit 1; }
+mc cp --recursive . $MC_ALIAS/$BUCKET > /dev/null 2>&1 || { echo "Error while uploading 23KE to Bucket ❌" ; exit 1; }
 echo -n "."
 # we now upload packet versions which use a bucket instead of the GitRepository
 for file in $(grep --exclude-dir=hack --exclude-dir=env-template/ -lr GitRepository ); do
@@ -111,7 +111,7 @@ echo  -e "\r23KE Bucket ready ✅       "
 echo  -n -e "\rConfig Bucket creating"
 (mc ls $MC_ALIAS/$CONFIG_BUCKET > /dev/null 2>&1 ) || mc mb $MC_ALIAS/$CONFIG_BUCKET > /dev/null 2>&1 || { echo "Config Bucket did not exist. error while creating a new one ❌" ; exit 1; }
 echo -n "."
-mc cp --recursive hack/dev-env $MC_ALIAS/$CONFIG_BUCKET > /dev/null &2>&1 || { echo "Error while uploading Config to Bucket ❌" ; exit 1; }
+mc cp --recursive hack/dev-env $MC_ALIAS/$CONFIG_BUCKET > /dev/null 2>&1 || { echo "Error while uploading Config to Bucket ❌" ; exit 1; }
 echo -n "."
 echo  -e "\rConfig Bucket ready ✅       "
 
@@ -120,19 +120,23 @@ echo -n "Installing Flux"
 flux install > /dev/null 2>&1 || { echo "Error while installing Flux ❌" ; exit 1; }
 echo -n "."
 # We are using letsencrypt staging for testing purposes
-kubectl  create configmap le-staging -n flux-system --from-file=le-staging=hack/le-staging.pem > /dev/null &2>&1 || { echo "Error while creating le-staging.pem configmap ❌" ; exit 1; }
+kubectl  create configmap le-staging -n flux-system --from-file=le-staging.pem=hack/le-staging.pem > /dev/null 2>&1 || { echo "Error while creating le-staging.pem configmap ❌" ; exit 1; }
 echo -n "."
-kubectl patch -n flux-system deployment source-controller --patch-file hack/flux-source-controller.patch > /dev/null &2>&1 || { echo "Error while adding le-staging cert to source-controller deployment. ❌" ; exit 1; }
+kubectl patch -n flux-system deployment source-controller --patch-file hack/flux-source-controller.patch > /dev/null 2>&1 || { echo "Error while adding le-staging cert to source-controller deployment. ❌" ; exit 1; }
 echo -n "."
-kubectl create secret generic -n flux-system minio-local --from-literal=accesskey=minio --from-literal=secretkey=$MINIO_PW
+kubectl create secret generic -n flux-system minio-local --from-literal=accesskey=minio --from-literal=secretkey=$MINIO_PW > /dev/null 2>&1 || { echo "Error while Creating secret. ❌" ; exit 1; }
 echo -n "."
-/tmp/flux create source bucket 23ke --endpoint=$MINIO_HOSTNAME --bucket-name=23ke --secret-ref=minio-local > /dev/null &2>&1 || { echo "Error while creating flux 23ke bucket source ❌" ; exit 1; }
+/tmp/flux create source bucket 23ke --endpoint=$MINIO_HOSTNAME --bucket-name=23ke --secret-ref=minio-local > /dev/null 2>&1 || { echo "Error while creating flux 23ke bucket source ❌" ; exit 1; }
 echo -n "."
-flux create kustomization 23ke --source=Bucket/23ke > /dev/null &2>&1 || { echo "Error while creating flux 23ke kustomization ❌" ; exit 1; }
+flux create kustomization 23ke --source=Bucket/23ke > /dev/null 2>&1 || { echo "Error while creating flux 23ke kustomization ❌" ; exit 1; }
 echo -n "."
-/tmp/flux create source bucket 23ke-config --endpoint=$MINIO_HOSTNAME --bucket-name=23ke-config --secret-ref=minio-local > /dev/null &2>&1 || { echo "Error while creating flux 23ke-config bucket source ❌" ; exit 1; }
+/tmp/flux create source bucket 23ke-config --endpoint=$MINIO_HOSTNAME --bucket-name=config --secret-ref=minio-local > /dev/null 2>&1 || { echo "Error while creating flux 23ke-config bucket source ❌" ; exit 1; }
 echo -n "."
-flux create kustomization config --source=Bucket/23ke-config --path=./dev-env > /dev/null &2>&1 || { echo "Error while creating flux 23ke-config kustomization ❌" ; exit 1; }
+flux create kustomization config --source=Bucket/23ke-config --path=./dev-env > /dev/null 2>&1 || { echo "Error while creating flux 23ke-config kustomization ❌" ; exit 1; }
+echo -n "."
+flux create kustomization 23ke-base-addons --source=Bucket/23ke-config --path=./base-addons > /dev/null 2>&1 || { echo "Error while creating flux 23ke-base-addons kustomization ❌" ; exit 1; }
+echo -n "."
+flux create kustomization 23ke-env --source=Bucket/23ke-config --path=./dev-env > /dev/null 2>&1 || { echo "Error while creating flux 23ke-env kustomization ❌" ; exit 1; }
 echo -n "."
 echo -e "\rFlux installed ✅                  "
 
