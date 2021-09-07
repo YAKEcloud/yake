@@ -96,14 +96,14 @@ echo  -e "\rMinio ready ✅       "
 
 # 23KE Bucket
 echo  -n -e "\r23KE Bucket creating"
-(mcli ls $MC_ALIAS/$BUCKET > /dev/null 2>&1 ) || mcli mb $MC_ALIAS/$BUCKET > /dev/null 2>&1 || { echo "23KE Bucket did not exist. error while creating a new one ❌" ; exit 1; }
+(mc ls $MC_ALIAS/$BUCKET > /dev/null 2>&1 ) || mc mb $MC_ALIAS/$BUCKET > /dev/null 2>&1 || { echo "23KE Bucket did not exist. error while creating a new one ❌" ; exit 1; }
 echo -n "."
 # TODO: Upload only the necessary parts of the repository
-mcli cp --recursive . $MC_ALIAS/$BUCKET > /dev/null &2>&1 || { echo "Error while uploading 23KE to Bucket ❌" ; exit 1; }
+mc cp --recursive . $MC_ALIAS/$BUCKET > /dev/null &2>&1 || { echo "Error while uploading 23KE to Bucket ❌" ; exit 1; }
 echo -n "."
 # we now upload packet versions which use a bucket instead of the GitRepository
 for file in $(grep --exclude-dir=hack --exclude-dir=env-template/ -lr GitRepository); do
-    cat $file | sed s/GitRepository/Bucket/ | mcli pipe $MC_ALIAS/$BUCKET/$file > /dev/null 2>&1 || { echo "Error while uploading to 23KE Bucket ❌" ; exit 1; }
+    cat $file | sed s/GitRepository/Bucket/ | mc pipe $MC_ALIAS/$BUCKET/$file > /dev/null 2>&1 || { echo "Error while uploading to 23KE Bucket ❌" ; exit 1; }
 done
 echo -n "."
 echo  -e "\r23KE Bucket ready ✅       "
@@ -111,9 +111,9 @@ echo  -e "\r23KE Bucket ready ✅       "
 
 # 23KE Config-Bucket
 echo  -n -e "\rConfig Bucket creating"
-(mcli ls $MC_ALIAS/$CONFIG_BUCKET > /dev/null 2>&1 ) || mcli mb $MC_ALIAS/$CONFIG_BUCKET > /dev/null 2>&1 || { echo "Config Bucket did not exist. error while creating a new one ❌" ; exit 1; }
+(mc ls $MC_ALIAS/$CONFIG_BUCKET > /dev/null 2>&1 ) || mc mb $MC_ALIAS/$CONFIG_BUCKET > /dev/null 2>&1 || { echo "Config Bucket did not exist. error while creating a new one ❌" ; exit 1; }
 echo -n "."
-mcli cp --recursive hack/dev-env $MC_ALIAS/$CONFIG_BUCKET > /dev/null &2>&1 || { echo "Error while uploading Config to Bucket ❌" ; exit 1; }
+mc cp --recursive hack/dev-env $MC_ALIAS/$CONFIG_BUCKET > /dev/null &2>&1 || { echo "Error while uploading Config to Bucket ❌" ; exit 1; }
 echo -n "."
 echo  -e "\rConfig Bucket ready ✅       "
 
