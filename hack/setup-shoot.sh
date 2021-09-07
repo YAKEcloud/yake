@@ -70,11 +70,6 @@ kubectl wait -n cert-manager deploy cert-manager-cainjector --for=condition=Avai
 kubectl apply -f hack/letsencrypt.yaml > /dev/null || { echo "Error while deploying cluster-issuer crd ❌"; exit 1; }
 echo  -e "\rLetsencrypt ready ✅                       "
 
-# Install flux
-echo -n "Installing Flux..."
-flux install > /dev/null 2>&1 || { echo "Error while installing Flux ❌" ; exit 1; }
-echo -e "\rFlux installed ✅                  "
-
 # Alter minio template
 yq eval 'select(documentIndex == 1) .spec.template.spec.containers[0].env[1].value = env(MINIO_PW)' -i hack/minio.yaml
 yq eval 'select(documentIndex == 3) .metadata.annotations."dns.gardener.cloud/class" = "garden"' -i hack/minio.yaml
@@ -119,4 +114,22 @@ echo -n "."
 mc cp --recursive hack/dev-env $MC_ALIAS/$CONFIG_BUCKET > /dev/null &2>&1 || { echo "Error while uploading Config to Bucket ❌" ; exit 1; }
 echo -n "."
 echo  -e "\rConfig Bucket ready ✅       "
+
+# Install flux
+echo -n "Installing Flux"
+flux install > /dev/null 2>&1 || { echo "Error while installing Flux ❌" ; exit 1; }
+echo -n "."
+# We are using letsencrypt staging for testing purposes
+kubectl  create configmap le-staging -n flux-system --from-file=le-staging=hack/le-staging.pem > /dev/null &2>&1 || { echo "Error while creating le-staging.pem configmap ❌" ; exit 1; }
+echo -n "."
+kubectl patch -n flux-system deployment source-controller --patch-file hack/flux-source-controller.patch > /dev/null &2>&1 || { echo "Error while adding le-staging cert to source-controller deployment. ❌" ; exit 1; }
+echo -n "."
+kubectl create secret generic -n flux-system minio-local --from-literal=accesskey=minio --from-literal=secretkey=$MINIO_PW
+echo -n "."
+/tmp/flux create source bucket 23ke --endpoint=$MINIO_HOSTNAME --bucket-name=23ke --secret-ref=minio-local > /dev/null &2>&1 || { echo "Error while creating flux 23ke bucket source ❌" ; exit 1; }
+echo -n "."
+
+#flux create kustomization
+echo -n "."
+echo -e "\rFlux installed ✅                  "
 
