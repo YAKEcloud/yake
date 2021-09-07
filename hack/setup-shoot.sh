@@ -92,7 +92,7 @@ echo  -e "\rMinio ready ✅       "
 # 23KE Bucket
 # Let's Encrypt Staging CA needed.
 mkdir -p ~/.mc/certs/CAs/
-wget https://letsencrypt.org/certs/staging/letsencrypt-stg-root-x1.pem -O ~/.mc/certs/CAs/le-staging.pem
+cp hack/le-staging.pem ~/.mc/certs/CAs/le-staging.pem
 echo  -n -e "\r23KE Bucket creating"
 (mc ls $MC_ALIAS/$BUCKET > /dev/null 2>&1 ) || mc mb $MC_ALIAS/$BUCKET > /dev/null 2>&1 || { echo "23KE Bucket did not exist. error while creating a new one ❌" ; exit 1; }
 echo -n "."
@@ -128,8 +128,11 @@ kubectl create secret generic -n flux-system minio-local --from-literal=accesske
 echo -n "."
 /tmp/flux create source bucket 23ke --endpoint=$MINIO_HOSTNAME --bucket-name=23ke --secret-ref=minio-local > /dev/null &2>&1 || { echo "Error while creating flux 23ke bucket source ❌" ; exit 1; }
 echo -n "."
-
-#flux create kustomization
+flux create kustomization 23ke --source=Bucket/23ke > /dev/null &2>&1 || { echo "Error while creating flux 23ke kustomization ❌" ; exit 1; }
+echo -n "."
+/tmp/flux create source bucket 23ke-config --endpoint=$MINIO_HOSTNAME --bucket-name=23ke-config --secret-ref=minio-local > /dev/null &2>&1 || { echo "Error while creating flux 23ke-config bucket source ❌" ; exit 1; }
+echo -n "."
+flux create kustomization config --source=Bucket/23ke-config --path=./dev-env > /dev/null &2>&1 || { echo "Error while creating flux 23ke-config kustomization ❌" ; exit 1; }
 echo -n "."
 echo -e "\rFlux installed ✅                  "
 
