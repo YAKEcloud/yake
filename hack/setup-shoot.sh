@@ -25,7 +25,8 @@ else
 fi
 echo
 echo "This line might be handy:"
-echo "export MC_HOST_$MC_ALIAS=https://minio:$MINIO_PW@$MINIO_HOSTNAME"
+echo ". hack/handy.sh"
+echo "export MC_HOST_$MC_ALIAS=https://minio:$MINIO_PW@$MINIO_HOSTNAME" > hack/handy.sh
 echo
 
 # Alter shoot template
@@ -134,7 +135,7 @@ echo -n "."
 echo -n "."
 flux create kustomization config --source=Bucket/23ke-config --path=./dev-env > /dev/null 2>&1 || { echo "Error while creating flux 23ke-config kustomization ❌" ; exit 1; }
 echo -n "."
-flux create kustomization 23ke-base-addons --source=Bucket/23ke-config --path=./base-addons > /dev/null 2>&1 || { echo "Error while creating flux 23ke-base-addons kustomization ❌" ; exit 1; }
+flux create kustomization 23ke-base-addons --source=Bucket/23ke --path=./base-addons > /dev/null 2>&1 || { echo "Error while creating flux 23ke-base-addons kustomization ❌" ; exit 1; }
 echo -n "."
 flux create kustomization 23ke-env --source=Bucket/23ke-config --path=./dev-env > /dev/null 2>&1 || { echo "Error while creating flux 23ke-env kustomization ❌" ; exit 1; }
 echo -n "."

@@ -1,2 +1,3 @@
 .github/gardener-kubeconfig.yaml
 hack/shoot-kubeconfig.yaml
+hack/handy.sh
