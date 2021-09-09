@@ -5,6 +5,9 @@ export SHOOT="23ke-run-$RAND"
 export MINIO_HOSTNAME="minio.$SHOOT.23t-test.okeanos.dev"
 export MINIO_URL="https://$MINIO_HOSTNAME"
 export MINIO_PW=$(openssl rand -hex 20)
+export DASHBOARD_CLIENTSECRET=$(openssl rand -hex 20)
+export DASHBOARD_SESSIONSECRET=$(openssl rand -hex 20)
+export KUBEAPISERVER_BASICAUTHPASSWORD=$(openssl rand -hex 20)
 export MC_HOST_$MC_ALIAS=https://minio:$MINIO_PW@$MINIO_HOSTNAME
 
 BUCKET=${BUCKET:-23ke}
@@ -70,6 +73,14 @@ echo -n "."
 kubectl wait -n cert-manager deploy cert-manager-cainjector --for=condition=Available > /dev/null
 kubectl apply -f hack/letsencrypt.yaml > /dev/null || { echo "Error while deploying cluster-issuer crd ❌"; exit 1; }
 echo  -e "\rLetsencrypt ready ✅                       "
+
+# Templating 23ke-env-substitutions.yaml
+yq eval '.stringData.BASE_DOMAIN = env(SHOOT) + "23t-test.okeanos.dev"' -i 23ke-env-substitutions.yaml
+yq eval '.stringData.DASHBOARD_CLIENTSECRET = env(DASHBOARD_CLIENTSECRET)' -i 23ke-env-substitutions.yaml
+yq eval '.stringData.DASHBOARD_SESSIONSECRET = env(DASHBOARD_SESSIONSECRET)' -i 23ke-env-substitutions.yaml
+yq eval '.stringData.KUBEAPISERVER_BASICAUTHPASSWORD = env(KUBEAPISERVER_BASICAUTHPASSWORD)' -i 23ke-env-substitutions.yaml
+kubectl apply -f 23ke-env-substitutions.yaml > /dev/null || { echo "Error while applying 23ke-env-substitutions secret ❌"; exit 1; }
+git checkout -q 23ke-env-substitutions.yaml
 
 # Alter minio template
 yq eval 'select(documentIndex == 1) .spec.template.spec.containers[0].env[1].value = env(MINIO_PW)' -i hack/minio.yaml

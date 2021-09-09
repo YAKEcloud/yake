@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: Secret
+metadata:
+  name: 23ke-env-substitutions # only supports single line strings!
+  namespace: flux-system
+type: Opaque
+stringData:
+  ENV: 23ke
+  BASE_DOMAIN:
+  DASHBOARD_CLIENTSECRET:
+  DASHBOARD_SESSIONSECRET:
+  KUBEAPISERVER_BASICAUTHPASSWORD:
