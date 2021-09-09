@@ -30,6 +30,7 @@ echo
 echo "This line might be handy:"
 echo ". hack/handy.sh"
 echo "export MC_HOST_$MC_ALIAS=https://minio:$MINIO_PW@$MINIO_HOSTNAME" > hack/handy.sh
+echo "export KUBECONFIG=hack/shoot-kubeconfig.yaml" >> hack/handy.sh
 echo
 
 # Alter shoot template
@@ -74,14 +75,6 @@ kubectl wait -n cert-manager deploy cert-manager-cainjector --for=condition=Avai
 kubectl apply -f hack/letsencrypt.yaml > /dev/null || { echo "Error while deploying cluster-issuer crd ❌"; exit 1; }
 echo  -e "\rLetsencrypt ready ✅                       "
 
-# Templating 23ke-env-substitutions.yaml
-yq eval '.stringData.BASE_DOMAIN = env(SHOOT) + "23t-test.okeanos.dev"' -i 23ke-env-substitutions.yaml
-yq eval '.stringData.DASHBOARD_CLIENTSECRET = env(DASHBOARD_CLIENTSECRET)' -i 23ke-env-substitutions.yaml
-yq eval '.stringData.DASHBOARD_SESSIONSECRET = env(DASHBOARD_SESSIONSECRET)' -i 23ke-env-substitutions.yaml
-yq eval '.stringData.KUBEAPISERVER_BASICAUTHPASSWORD = env(KUBEAPISERVER_BASICAUTHPASSWORD)' -i 23ke-env-substitutions.yaml
-kubectl apply -f 23ke-env-substitutions.yaml > /dev/null || { echo "Error while applying 23ke-env-substitutions secret ❌"; exit 1; }
-git checkout -q 23ke-env-substitutions.yaml
-
 # Alter minio template
 yq eval 'select(documentIndex == 1) .spec.template.spec.containers[0].env[1].value = env(MINIO_PW)' -i hack/minio.yaml
 yq eval 'select(documentIndex == 3) .metadata.annotations."dns.gardener.cloud/class" = "garden"' -i hack/minio.yaml
@@ -116,8 +109,13 @@ for file in $(grep --exclude-dir=hack --exclude-dir=env-template/ -lr GitReposit
     cat $file | sed s/GitRepository/Bucket/ | mc pipe $MC_ALIAS/$BUCKET/$file > /dev/null 2>&1 || { echo "Error while uploading to 23KE Bucket ❌" ; exit 1; }
 done
 echo -n "."
+# Deleting additional cert-manager installation, we already deployed one for minio
+mc rm shoot/23ke/base-addons/cert-manager.yaml > /dev/null 2>&1 || { echo "Error while deleting cert-manager helmrelease ❌" ; exit 1; }
+echo -n "."
+# Deleting additional nginx-ingress installation, we already deployed one for minio
+mc rm shoot/23ke/base-addons/nginx-ingress.yaml > /dev/null 2>&1 || { echo "Error while deleting nginx-ingress helmrelease ❌" ; exit 1; }
+echo -n "."
 echo  -e "\r23KE Bucket ready ✅       "
-
 
 # 23KE Config-Bucket
 echo  -n -e "\rConfig Bucket creating"
@@ -125,15 +123,34 @@ echo  -n -e "\rConfig Bucket creating"
 echo -n "."
 mc cp --recursive hack/dev-env $MC_ALIAS/$CONFIG_BUCKET > /dev/null 2>&1 || { echo "Error while uploading Config to Bucket ❌" ; exit 1; }
 echo -n "."
+yq eval '.stringData."values.yaml"' hack/dev-env/config/gardener-values.yaml > /tmp/values.yaml
+yq eval '.global.deployment.virtualGarden.clusterIP = "100.88.1.1"' -i /tmp/values.yaml
+yq eval '.stringData."values.yaml" = "'"$(< /tmp/values.yaml)"'"' -i hack/dev-env/config/gardener-values.yaml
+mc cp hack/dev-env/config/gardener-values.yaml $MC_ALIAS/$CONFIG_BUCKET/dev-env/config/ > /dev/null 2>&1 || { echo "Error while uploading gardener-values.yaml to Bucket ❌" ; exit 1; }
+echo -n "."
+git checkout -q hack/dev-env/config/gardener-values.yaml
 echo  -e "\rConfig Bucket ready ✅       "
+
+
 
 # Install flux
 echo -n "Installing Flux"
 flux install > /dev/null 2>&1 || { echo "Error while installing Flux ❌" ; exit 1; }
 echo -n "."
+
+kubectl -n flux-system create secret generic target-gardencluster-kubeconfig --from-literal=value="$(cat $KUBECONFIG)" > /dev/null 2>&1 || { echo "Error while creating target-gardencluster-kubeconfig secret ❌" ; exit 1; }
+
+# Templating 23ke-env-substitutions.yaml
+yq eval '.stringData.BASE_DOMAIN = env(SHOOT) + ".23t-test.okeanos.dev"' -i 23ke-env-substitutions.yaml
+yq eval '.stringData.DASHBOARD_CLIENTSECRET = env(DASHBOARD_CLIENTSECRET)' -i 23ke-env-substitutions.yaml
+yq eval '.stringData.DASHBOARD_SESSIONSECRET = env(DASHBOARD_SESSIONSECRET)' -i 23ke-env-substitutions.yaml
+yq eval '.stringData.KUBEAPISERVER_BASICAUTHPASSWORD = env(KUBEAPISERVER_BASICAUTHPASSWORD)' -i 23ke-env-substitutions.yaml
+kubectl apply -f 23ke-env-substitutions.yaml > /dev/null || { echo "Error while applying 23ke-env-substitutions secret ❌"; exit 1; }
+git checkout -q 23ke-env-substitutions.yaml
 # We are using letsencrypt staging for testing purposes
 kubectl  create configmap le-staging -n flux-system --from-file=le-staging.pem=hack/le-staging.pem > /dev/null 2>&1 || { echo "Error while creating le-staging.pem configmap ❌" ; exit 1; }
 echo -n "."
+
 kubectl patch -n flux-system deployment source-controller --patch-file hack/flux-source-controller.patch > /dev/null 2>&1 || { echo "Error while adding le-staging cert to source-controller deployment. ❌" ; exit 1; }
 echo -n "."
 kubectl create secret generic -n flux-system minio-local --from-literal=accesskey=minio --from-literal=secretkey=$MINIO_PW > /dev/null 2>&1 || { echo "Error while Creating secret. ❌" ; exit 1; }
