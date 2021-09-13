@@ -6,14 +6,12 @@ on:
 jobs:
   ci:
     runs-on: self-hosted
-    name: "23ke setup-shoot & check-ci"
+    name: "23KE shoot testrun"
     steps:
       - name: Checkout source
         uses: actions/checkout@v2.3.4
-        with: 
+        with:
           fetch-depth: 0
-      - name: Set ENV
-        run: ./hack/ci/github-setup-env.sh >> $GITHUB_ENV
       - name: Install nix packages
         uses: cachix/install-nix-action@v13
         with:
