@@ -105,7 +105,7 @@ echo -n "."
 mc cp --recursive . $MC_ALIAS/$BUCKET > /dev/null 2>&1 || { echo "Error while uploading 23KE to Bucket ❌" ; exit 1; }
 echo -n "."
 # we now upload packet versions which use a bucket instead of the GitRepository
-for file in $(grep --exclude-dir=hack --exclude-dir=env-template/ -lr GitRepository ); do
+for file in $(grep --exclude-dir=hack --exclude-dir=env-template -lr GitRepository .); do
     cat $file | sed s/GitRepository/Bucket/ | mc pipe $MC_ALIAS/$BUCKET/$file > /dev/null 2>&1 || { echo "Error while uploading to 23KE Bucket ❌" ; exit 1; }
 done
 echo -n "."
