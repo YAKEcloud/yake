@@ -4,7 +4,7 @@
 let
   pkgs = import sources.nixpkgs {};
 
-  fluxVersion = "0.15.3";
+  fluxVersion = "0.17.1";
   fluxManifests = pkgs.fetchzip {
     url = "https://github.com/fluxcd/flux2/releases/download/v${fluxVersion}/manifests.tar.gz";
     sha256 = "sha256-/uD0hxtTJSr+2tZcwzOIQcEbikHOshWukEBSaK3FiP4=";
