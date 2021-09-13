@@ -21,7 +21,7 @@ yq eval '.stringData.KUBEAPISERVER_BASICAUTHPASSWORD = env(KUBEAPISERVER_BASICAU
 kubectl apply -f 23ke-env-substitutions.yaml > /dev/null || { echo "Error while applying 23ke-env-substitutions secret ❌"; exit 1; }
 git checkout -q 23ke-env-substitutions.yaml
 # We are using letsencrypt staging for testing purposes
-if ! kubectl -n flux-sytem get configmap le-staging > /dev/null 2>&1
+if ! kubectl -n flux-system get configmap le-staging > /dev/null 2>&1
 then
 	kubectl create configmap le-staging -n flux-system --from-file=le-staging.pem=hack/le-staging.pem > /dev/null 2>&1 || { echo "Error while creating le-staging.pem configmap ❌" ; exit 1; }
 fi
