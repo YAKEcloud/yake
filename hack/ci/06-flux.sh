@@ -34,6 +34,7 @@ then
 	kubectl create secret generic -n flux-system minio-local --from-literal=accesskey=minio --from-literal=secretkey=$MINIO_PW > /dev/null 2>&1 || { echo "Error while Creating secret. ❌" ; exit 1; }
 fi
 echo -n "."
+flux --version
 flux create source bucket $BUCKET --endpoint=$MINIO_HOSTNAME --bucket-name=$BUCKET --secret-ref=minio-local > /dev/null 2>&1 || { echo "Error while creating flux 23ke bucket source ❌" ; exit 1; }
 echo -n "."
 flux create kustomization $BUCKET --source=Bucket/$BUCKET > /dev/null 2>&1 || { echo "Error while creating flux 23ke kustomization ❌" ; exit 1; }
