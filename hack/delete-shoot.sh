@@ -1,4 +1,9 @@
 #!/usr/bin/env bash
+if [ ! -f hack/shoot-kubeconfig.yaml ]
+then
+    echo "No shoot-kubeconfig.yaml found. Nothing to do."
+    exit 1
+fi
 export SHOOT=$(yq eval '.clusters[0].name' hack/shoot-kubeconfig.yaml|sed 's/shoot--23t-test--//')
 rm hack/shoot-kubeconfig.yaml
 export KUBECONFIG=.github/gardener-kubeconfig.yaml
