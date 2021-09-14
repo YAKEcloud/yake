@@ -5,6 +5,7 @@ metadata:
   namespace: flux-system
 spec:
   selfSigned: {}
+  duration: 87600h #10y
 ---
 apiVersion: cert-manager.io/v1
 kind: Certificate
@@ -13,6 +14,7 @@ metadata:
   namespace: flux-system
 spec:
   secretName: gardener-ca-keypair
+  duration: 87600h #10y
   isCA: true
   issuerRef:
     name: gardener-ca-selfsigned
