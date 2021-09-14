@@ -7,7 +7,7 @@ let
   fluxVersion = "0.17.1";
   fluxManifests = pkgs.fetchzip {
     url = "https://github.com/fluxcd/flux2/releases/download/v${fluxVersion}/manifests.tar.gz";
-    sha256 = "sha256-/UD0hxtTJSr+2tZcwzOIQcEbikHOshWukEBSaK3FiP4=";
+    sha256 = "sha256-/uD0hxtTJSr+2tZcwzOIQcEbikHOshWukEBSaK3FiP4=";
     stripRoot = false;
   };
 in
