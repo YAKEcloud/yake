@@ -5,8 +5,6 @@ DESIRED_PRESPAWNED_SHOOTS=3
 LABEL=23technologies.cloud/free-to-use
 ACTUAL_PRESPAWNED_SHOOTS=$(kubectl get shoots --namespace garden-23t-test --selector=23technologies.cloud/free-to-use='true' --no-headers=true | wc -l)
 NEEDED_PRESPAWNED_SHOOTS=$(( $DESIRED_PRESPAWNED_SHOOTS - ACTUAL_PRESPAWNED_SHOOTS ))
-echo "needed: $NEEDED_PRESPAWNED_SHOOTS"
-echo "actual: $ACTUAL_PRESPAWNED_SHOOTS"
 while [ $NEEDED_PRESPAWNED_SHOOTS -gt 0 ]
 do
     RAND=$(openssl rand -hex 2)

@@ -31,5 +31,4 @@ progress_step
 # Install flux
 bash hack/ci/06-flux.sh || exit 1
 progress_step
-
 progress_end
