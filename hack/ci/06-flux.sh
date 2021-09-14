@@ -46,11 +46,6 @@ then
 	flux create kustomization config --source=Bucket/23ke-config --path=./dev-env > /dev/null 2>&1 || { echo "Error while creating flux 23ke-config kustomization ❌" ; exit 1; }
 fi
 echo -n "."
-if ! kubectl -n flux-system get ks 23ke-base-addons > /dev/null 2>&1
-then
-	flux create kustomization 23ke-base-addons --source=Bucket/23ke --path=./base-addons > /dev/null 2>&1 || { echo "Error while creating flux 23ke-base-addons kustomization ❌" ; exit 1; }
-fi
-echo -n "."
 if ! kubectl -n flux-system get ks 23ke-env > /dev/null 2>&1
 then
 	flux create kustomization 23ke-env --source=Bucket/23ke-config --path=./dev-env > /dev/null 2>&1 || { echo "Error while creating flux 23ke-env kustomization ❌" ; exit 1; }

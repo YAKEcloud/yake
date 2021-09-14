@@ -17,10 +17,4 @@ for file in $(grep --exclude-dir=hack --exclude-dir=env-template -lr GitReposito
     cat $file | sed s/GitRepository/Bucket/ | mc pipe $MC_ALIAS/$BUCKET/$file > /dev/null 2>&1 || { echo "Error while uploading to 23KE Bucket ❌" ; exit 1; }
 done
 echo -n "."
-# Deleting additional cert-manager installation, we already deployed one for minio
-mc rm $MC_ALIAS/$BUCKET/base-addons/cert-manager.yaml > /dev/null 2>&1 || { echo "Error while deleting cert-manager helmrelease ❌" ; exit 1; }
-echo -n "."
-# Deleting additional nginx-ingress installation, we already deployed one for minio
-mc rm $MC_ALIAS/$BUCKET/base-addons/nginx-ingress.yaml > /dev/null 2>&1 || { echo "Error while deleting nginx-ingress helmrelease ❌" ; exit 1; }
-echo -n "."
 echo  -e "\r23KE Bucket ready ✅       "
