@@ -1,6 +1,7 @@
 #/usr/bin/env bash
 
 source hack/handy.sh
+export KUBECONFIG=.github/gardener-kubeconfig.yaml
 # Wait for shoot to become available
 echo -n "Creating shoot: 0%"
 OLD_PERCENTAGE=0

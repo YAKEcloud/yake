@@ -5,8 +5,9 @@ DESIRED_PRESPAWNED_SHOOTS=3
 LABEL=23technologies.cloud/free-to-use
 ACTUAL_PRESPAWNED_SHOOTS=$(kubectl get shoots --namespace garden-23t-test --selector=23technologies.cloud/free-to-use='true' --no-headers=true | wc -l)
 NEEDED_PRESPAWNED_SHOOTS=$(( $DESIRED_PRESPAWNED_SHOOTS - ACTUAL_PRESPAWNED_SHOOTS ))
-
-while [ NEED_PRESPAWNED_SHOOTS -gt 0 ]
+echo "needed: $NEEDED_PRESPAWNED_SHOOTS"
+echo "actual: $ACTUAL_PRESPAWNED_SHOOTS"
+while [ $NEEDED_PRESPAWNED_SHOOTS -gt 0 ]
 do
     RAND=$(openssl rand -hex 2)
     export SHOOT="23ke-run-$RAND"
@@ -26,7 +27,8 @@ git checkout -q hack/shoot-template.yaml
 export SHOOT=$(kubectl get shoot -n garden-23t-test -o custom-columns=NAME:.metadata.name --sort-by=.status.lastOperation.progress --no-headers=true --selector=23technologies.cloud/free-to-use='true'|tail -n 1)
 
 # Mark as in use
-kubectl label shoot -n garden-23t-test $SHOOT 23technologies.cloud/free-to-use=false
+kubectl label shoot -n garden-23t-test $SHOOT 23technologies.cloud/free-to-use=false --overwrite=true > /dev/null 2>&1 || { echo "Shoot labelling unsuccessful❌"; exit 1; }
+
 
 export MC_ALIAS=${MC_ALIAS:-shoot}
 export MINIO_HOSTNAME="minio.$SHOOT.23t-test.okeanos.dev"
