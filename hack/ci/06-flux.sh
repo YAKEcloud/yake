@@ -35,7 +35,8 @@ then
 fi
 echo -n "."
 flux --version
-flux create source bucket $BUCKET --endpoint=$MINIO_HOSTNAME --bucket-name=$BUCKET --secret-ref=minio-local  || { echo "Error while creating flux 23ke bucket source ❌" ; exit 1; }
+flux create source bucket $BUCKET --endpoint=$MINIO_HOSTNAME --bucket-name=$BUCKET --secret-ref=minio-local  --export
+flux create source bucket $BUCKET --endpoint=$MINIO_HOSTNAME --bucket-name=$BUCKET --secret-ref=minio-local  --debug || { echo "Error while creating flux 23ke bucket source ❌" ; exit 1; }
 echo -n "."
 flux create kustomization $BUCKET --source=Bucket/$BUCKET > /dev/null 2>&1 || { echo "Error while creating flux 23ke kustomization ❌" ; exit 1; }
 echo -n "."
