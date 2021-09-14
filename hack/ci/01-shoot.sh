@@ -1,17 +1,6 @@
 #/usr/bin/env bash
 
 source hack/handy.sh
-
-export KUBECONFIG=.github/gardener-kubeconfig.yaml
-# Alter shoot template
-yq eval '.metadata.name = env(SHOOT)' -i hack/shoot-template.yaml
-
-# Create Shoot
-kubectl apply -f hack/shoot-template.yaml > /dev/null || { echo "Shoot creation unsuccessful❌"; exit 1; }
-
-# Restore shoot template
-git checkout -q hack/shoot-template.yaml
-
 # Wait for shoot to become available
 echo -n "Creating shoot: 0%"
 OLD_PERCENTAGE=0

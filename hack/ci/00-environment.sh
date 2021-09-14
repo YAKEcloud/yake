@@ -1,8 +1,34 @@
 #!/usr/bin/env bash
 
-RAND=$(openssl rand -hex 2)
+export KUBECONFIG=.github/gardener-kubeconfig.yaml
+DESIRED_PRESPAWNED_SHOOTS=3
+LABEL=23technologies.cloud/free-to-use
+ACTUAL_PRESPAWNED_SHOOTS=$(kubectl get shoots --namespace garden-23t-test --selector=23technologies.cloud/free-to-use='true' --no-headers=true | wc -l)
+NEEDED_PRESPAWNED_SHOOTS=$(( $DESIRED_PRESPAWNED_SHOOTS - ACTUAL_PRESPAWNED_SHOOTS ))
+
+while [ NEED_PRESPAWNED_SHOOTS -gt 0 ]
+do
+    RAND=$(openssl rand -hex 2)
+    export SHOOT="23ke-run-$RAND"
+    # Alter shoot template
+    yq eval '.metadata.name = env(SHOOT)' -i hack/shoot-template.yaml
+
+    # Create Shoot
+    kubectl apply -f hack/shoot-template.yaml > /dev/null || { echo "Shoot creation unsuccessful❌"; exit 1; }
+    ACTUAL_PRESPAWNED_SHOOTS=$(kubectl get shoots --namespace garden-23t-test --selector=23technologies.cloud/free-to-use='true' --no-headers=true | wc -l)
+    NEEDED_PRESPAWNED_SHOOTS=$(( $DESIRED_PRESPAWNED_SHOOTS - ACTUAL_PRESPAWNED_SHOOTS ))
+done
+
+# Restore shoot template
+git checkout -q hack/shoot-template.yaml
+
+# Choose our shoot (free to use and the one with highest progress)
+export SHOOT=$(kubectl get shoot -n garden-23t-test -o custom-columns=NAME:.metadata.name --sort-by=.status.lastOperation.progress --no-headers=true --selector=23technologies.cloud/free-to-use='true'|tail -n 1)
+
+# Mark as in use
+kubectl label shoot -n garden-23t-test $SHOOT 23technologies.cloud/free-to-use=false
+
 export MC_ALIAS=${MC_ALIAS:-shoot}
-export SHOOT="23ke-run-$RAND"
 export MINIO_HOSTNAME="minio.$SHOOT.23t-test.okeanos.dev"
 export MINIO_URL="https://$MINIO_HOSTNAME"
 export MINIO_PW=$(openssl rand -hex 20)

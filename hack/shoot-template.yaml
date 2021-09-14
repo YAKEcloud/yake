@@ -3,6 +3,8 @@ apiVersion: core.gardener.cloud/v1beta1
 metadata:
   namespace: garden-23t-test
   name: 23ke-test
+  labels:
+    23technologies.cloud/free-to-use: "true"
 spec:
   provider:
     type: hcloud
