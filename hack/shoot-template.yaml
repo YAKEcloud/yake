@@ -52,8 +52,8 @@ spec:
       begin: 020000+0200
       end: 030000+0200
     autoUpdate:
-      kubernetesVersion: false
-      machineImageVersion: false
+      kubernetesVersion: true
+      machineImageVersion: true
   hibernation:
     schedules:
     - start: '00 19 * * 1,2,3,4,5'
