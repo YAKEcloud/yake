@@ -2,7 +2,7 @@
 
 source hack/handy.sh
 wget -q https://github.com/fluxcd/flux2/releases/download/v0.17.1/flux_0.17.1_linux_amd64.tar.gz
-tar xfvz flux_0.17.1_linux_amd64.tar.gz --directory /tmp
+tar xfvz flux_0.17.1_linux_amd64.tar.gz --directory /tmp > /dev/null
 # Install flux
 echo -n "Installing Flux"
 flux install > /dev/null 2>&1 || { echo "Error while installing Flux ❌" ; exit 1; }
