@@ -34,4 +34,3 @@ spec:
   tls:
   - hosts:
     - {{ .Values.apiServer.hostname }}
-

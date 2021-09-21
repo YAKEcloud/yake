@@ -6,6 +6,12 @@ metadata:
 type: Opaque
 stringData:
   values.yaml: |
+    ingress:
+      annotations:
+        dns.gardener.cloud/dnsnames: api.23ke.23ke-run-ac29.23t-test.okeanos.dev
+        dns.gardener.cloud/ttl: "500"
+        dns.gardener.cloud/class: garden
+
     tls:
       identity:
         # this is the selfsigned dev-ca

@@ -1,0 +1,36 @@
+name: "23KE on shoot"
+on:
+  push:
+    branches:
+      - feat/testing-on-shoot
+jobs:
+  ci:
+    runs-on: self-hosted
+    name: "23KE shoot testrun"
+    steps:
+      - name: Checkout source
+        uses: actions/checkout@v2.3.4
+        with:
+          fetch-depth: 0
+      - name: Install nix packages
+        uses: cachix/install-nix-action@v13
+        with:
+          nix_path: nixpkgs=channel:nixos-20.09
+      - name: Setup Environment
+        run: nix-shell --command 'echo "$KUBECONFIG_CONTENT" > .github/gardener-kubeconfig.yaml; bash hack/ci/00-environment.sh'
+        env:
+          KUBECONFIG_CONTENT: ${{ secrets.GARDENER_APISERVER_KUBECONFIG }}
+      - name: Setup shoot
+        run: nix-shell --command 'bash hack/ci/01-shoot.sh'
+      - name: Install cert-manager
+        run: nix-shell --command 'bash hack/ci/02-letsencrypt.sh'
+      - name: Install minio
+        run: nix-shell --command 'bash hack/ci/03-minio.sh'
+      - name: Upload 23ke bucket
+        run: nix-shell --command 'bash hack/ci/04-23ke-bucket.sh'
+      - name: Upload 23ke-config bucket
+        run: nix-shell --command 'bash hack/ci/05-config-bucket.sh'
+      - name: Install flux
+        run: nix-shell --command 'bash hack/ci/06-flux.sh'
+      - name: Delete shoot
+        run: nix-shell --command 'bash hack/ci/delete-shoot.sh'

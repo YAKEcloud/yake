@@ -1,0 +1,12 @@
+spec:
+  template:
+    spec:
+      containers:
+      - name: manager
+        volumeMounts:
+        - mountPath: /usr/local/share/ca-certificates
+          name: le-staging
+      volumes:
+      - configMap:
+          name: le-staging
+        name: le-staging
