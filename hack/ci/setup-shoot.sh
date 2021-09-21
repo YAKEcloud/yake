@@ -1,11 +1,12 @@
 #!/usr/bin/env bash
-
-export PROGRESS_WIDTH=80
+clear
+export PROGRESS_WIDTH=70
 export PROGRESS_NUMBER_OF_STEPS=7
 
 # Setup Environment
 bash hack/ci/00-environment.sh || exit 1
 source hack/progress.sh
+echo "env (handy.sh) ready ✅ "
 progress_step
 
 # Create Shoot
@@ -31,4 +32,3 @@ progress_step
 # Install flux
 bash hack/ci/06-flux.sh || exit 1
 progress_step
-progress_end

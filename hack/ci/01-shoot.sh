@@ -18,4 +18,4 @@ do
 done
 # Get shoot kubeconfig
 kubectl get secret -n garden-23t-test $SHOOT.kubeconfig -o go-template='{{.data.kubeconfig|base64decode}}' > hack/shoot-kubeconfig.yaml
-echo  -e "\rshoot ready ✅               "
+echo -e "\rshoot ready          ✅               "

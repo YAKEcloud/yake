@@ -13,7 +13,7 @@ do
     yq eval '.metadata.name = env(SHOOT)' hack/shoot-template.yaml.tmpl > hack/shoot-template.yaml
 
     # Create Shoot
-    kubectl apply -f hack/shoot-template.yaml > /dev/null || { echo "Shoot creation unsuccessful❌"; exit 1; }
+    kubectl apply -f hack/shoot-template.yaml > /dev/null || { echo -e "\rShoot creation unsuccessful ❌"; exit 1; }
     ACTUAL_PRESPAWNED_SHOOTS=$(kubectl get shoots --namespace garden-23t-test --selector=23technologies.cloud/free-to-use='true' --no-headers=true | wc -l)
     NEEDED_PRESPAWNED_SHOOTS=$(( $DESIRED_PRESPAWNED_SHOOTS - ACTUAL_PRESPAWNED_SHOOTS ))
 done
@@ -25,7 +25,7 @@ rm hack/shoot-template.yaml
 export SHOOT=$(kubectl get shoot -n garden-23t-test -o custom-columns=NAME:.metadata.name --sort-by=.status.lastOperation.progress --no-headers=true --selector=23technologies.cloud/free-to-use='true'|tail -n 1)
 
 # Mark as in use
-kubectl label shoot -n garden-23t-test $SHOOT 23technologies.cloud/free-to-use=false --overwrite=true > /dev/null 2>&1 || { echo "Shoot labelling unsuccessful❌"; exit 1; }
+kubectl label shoot -n garden-23t-test $SHOOT 23technologies.cloud/free-to-use=false --overwrite=true > /dev/null 2>&1 || { echo -e "\rShoot labelling unsuccessful ❌"; exit 1; }
 
 
 export MC_ALIAS=${MC_ALIAS:-shoot}

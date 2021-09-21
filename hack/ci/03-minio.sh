@@ -11,12 +11,12 @@ yq eval 'select(documentIndex == 3) .spec.rules[0].host = env(MINIO_HOSTNAME)' -
 yq eval 'select(documentIndex == 3) .spec.tls[0].hosts[0] = env(MINIO_HOSTNAME)' -i hack/minio.yaml
 
 # Install minio
-kubectl apply -f hack/minio.yaml > /dev/null || { echo "Minio deployment unsuccessful❌"; exit 1; }
+kubectl apply -f hack/minio.yaml > /dev/null || { echo -e "\rMinio deployment unsuccessful❌"; exit 1; }
 
 # Remove minio defitnition
 rm hack/minio.yaml
 
 # Wait for minio deployment to become ready
-kubectl wait --for=condition=available --timeout=1m  deployment minio -n default > /dev/null || { echo "Minio deployment unsuccessful❌" ; exit 1; }
-kubectl wait --for=condition=ready --timeout=3m  certificate minio-tls -n default > /dev/null || { echo "Minio deployment unsuccessful, Certificate error ❌"; exit 1; }
-echo  -e "\rMinio ready ✅       "
+kubectl wait --for=condition=available --timeout=1m  deployment minio -n default > /dev/null || { echo -e "\rMinio deployment unsuccessful ❌" ; exit 1; }
+kubectl wait --for=condition=ready --timeout=3m  certificate minio-tls -n default > /dev/null || { echo -e "\rMinio deployment unsuccessful, Certificate error ❌"; exit 1; }
+echo -e "\rMinio ready          ✅       "
