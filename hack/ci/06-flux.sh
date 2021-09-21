@@ -15,12 +15,12 @@ fi
 echo -n "."
 
 # Templating 23ke-env-substitutions.yaml
-yq eval '.stringData.BASE_DOMAIN = env(SHOOT) + ".23t-test.okeanos.dev"' 23ke-env-substitutions.yaml.tmpl > 23ke-env-substitutions.yaml
-yq eval '.stringData.DASHBOARD_CLIENTSECRET = env(DASHBOARD_CLIENTSECRET)' -i 23ke-env-substitutions.yaml
-yq eval '.stringData.DASHBOARD_SESSIONSECRET = env(DASHBOARD_SESSIONSECRET)' -i 23ke-env-substitutions.yaml
-yq eval '.stringData.KUBEAPISERVER_BASICAUTHPASSWORD = env(KUBEAPISERVER_BASICAUTHPASSWORD)' -i 23ke-env-substitutions.yaml
-kubectl apply -f 23ke-env-substitutions.yaml > /dev/null || { echo -e "\rError while applying 23ke-env-substitutions secret ❌"; exit 1; }
-rm 23ke-env-substitutions.yaml
+yq eval '.stringData.BASE_DOMAIN = env(SHOOT) + ".23t-test.okeanos.dev"' env-template/config/23ke-env-substitutions.yaml > hack/23ke-env-substitutions.yaml
+yq eval '.stringData.DASHBOARD_CLIENTSECRET = env(DASHBOARD_CLIENTSECRET)' -i hack/23ke-env-substitutions.yaml
+yq eval '.stringData.DASHBOARD_SESSIONSECRET = env(DASHBOARD_SESSIONSECRET)' -i hack/23ke-env-substitutions.yaml
+yq eval '.stringData.KUBEAPISERVER_BASICAUTHPASSWORD = env(KUBEAPISERVER_BASICAUTHPASSWORD)' -i hack/23ke-env-substitutions.yaml
+kubectl apply -f hack/23ke-env-substitutions.yaml > /dev/null || { echo -e "\rError while applying 23ke-env-substitutions secret ❌"; exit 1; }
+rm hack/23ke-env-substitutions.yaml
 # We are using letsencrypt staging for testing purposes
 if ! kubectl -n flux-system get configmap le-staging > /dev/null 2>&1
 then
