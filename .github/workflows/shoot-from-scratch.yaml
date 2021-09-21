@@ -30,5 +30,7 @@ jobs:
         run: nix-shell --command 'bash hack/ci/05-config-bucket.sh'
       - name: Install flux
         run: nix-shell --command 'bash hack/ci/06-flux.sh'
+      - name: Run tests
+        run: nix-shell --command 'bash hack/ci/07-tests.sh'
       - name: Delete shoot
         run: nix-shell --command 'bash hack/ci/delete-shoot.sh'
