@@ -13,6 +13,7 @@ metadata:
   namespace: flux-system
 spec:
   secretName: gardener-ca-keypair
+  duration: 87600h #10y
   isCA: true
   issuerRef:
     name: gardener-ca-selfsigned
