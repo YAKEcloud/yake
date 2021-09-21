@@ -1,8 +1,6 @@
 name: "23KE on shoot"
 on:
-  push:
-    branches:
-      - feat/testing-on-shoot
+  pull_request:
 jobs:
   ci:
     runs-on: self-hosted
