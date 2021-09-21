@@ -37,18 +37,8 @@ fi
 echo -n "."
 /tmp/flux create source bucket $BUCKET --endpoint=$MINIO_HOSTNAME --bucket-name=$BUCKET --secret-ref=minio-local > /dev/null 2>&1 || { echo "Error while creating flux 23ke bucket source ❌" ; exit 1; }
 echo -n "."
-flux create kustomization $BUCKET --source=Bucket/$BUCKET > /dev/null 2>&1 || { echo "Error while creating flux 23ke kustomization ❌" ; exit 1; }
-echo -n "."
 /tmp/flux create source bucket 23ke-config --endpoint=$MINIO_HOSTNAME --bucket-name=config --secret-ref=minio-local > /dev/null 2>&1 || { echo "Error while creating flux 23ke-config bucket source ❌" ; exit 1; }
 echo -n "."
-if ! kubectl -n flux-system get ks config > /dev/null 2>&1
-then
-	flux create kustomization config --source=Bucket/23ke-config --path=./dev-env > /dev/null 2>&1 || { echo "Error while creating flux 23ke-config kustomization ❌" ; exit 1; }
-fi
-echo -n "."
-if ! kubectl -n flux-system get ks 23ke-env > /dev/null 2>&1
-then
-	flux create kustomization 23ke-env --source=Bucket/23ke-config --path=./dev-env > /dev/null 2>&1 || { echo "Error while creating flux 23ke-env kustomization ❌" ; exit 1; }
-fi
+kubectl apply -f hack/kustomizations > /dev/null || { echo "Error while applying flux-kustomizations  ❌"; exit 1; }
 echo -n "."
 echo -e "\rFlux installed ✅                  "

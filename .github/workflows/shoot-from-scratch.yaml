@@ -1,4 +1,4 @@
-name: "Shoot from Scratch"
+name: "23KE on shoot"
 on:
   push:
     branches:
@@ -20,17 +20,17 @@ jobs:
         run: nix-shell --command 'echo "$KUBECONFIG_CONTENT" > .github/gardener-kubeconfig.yaml; bash hack/ci/00-environment.sh'
         env:
           KUBECONFIG_CONTENT: ${{ secrets.GARDENER_APISERVER_KUBECONFIG }}
-      - name: Setup Shoot
+      - name: Setup shoot
         run: nix-shell --command 'bash hack/ci/01-shoot.sh'
-      - name: Letsencrypt
+      - name: Install cert-manager
         run: nix-shell --command 'bash hack/ci/02-letsencrypt.sh'
-      - name: Install Minio
+      - name: Install minio
         run: nix-shell --command 'bash hack/ci/03-minio.sh'
-      - name: Upload 23ke Bucket
+      - name: Upload 23ke bucket
         run: nix-shell --command 'bash hack/ci/04-23ke-bucket.sh'
-      - name: Upload 23ke-config Bucket
+      - name: Upload 23ke-config bucket
         run: nix-shell --command 'bash hack/ci/05-config-bucket.sh'
-      - name: Install FLux Components
+      - name: Install flux
         run: nix-shell --command 'bash hack/ci/06-flux.sh'
-      - name: Delete Shoot
+      - name: Delete shoot
         run: nix-shell --command 'bash hack/ci/delete-shoot.sh'

@@ -2,10 +2,10 @@
 
 export PROGRESS_WIDTH=80
 export PROGRESS_NUMBER_OF_STEPS=7
-source hack/progress.sh
 
 # Setup Environment
 bash hack/ci/00-environment.sh || exit 1
+source hack/progress.sh
 progress_step
 
 # Create Shoot
