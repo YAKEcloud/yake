@@ -10,8 +10,8 @@ mc cp --recursive hack/dev-env $MC_ALIAS/$CONFIG_BUCKET > /dev/null 2>&1 || { ec
 echo -n "."
 yq eval '.stringData."values.yaml"' hack/dev-env/config/gardener-values.yaml > /tmp/values.yaml
 yq eval '.global.deployment.virtualGarden.clusterIP = "100.88.1.1"' -i /tmp/values.yaml
-yq eval '.stringData."values.yaml" = "'"$(< /tmp/values.yaml)"'"' -i hack/dev-env/config/gardener-values.yaml
+yq eval '.stringData."values.yaml" = "'"$(< /tmp/values.yaml)"'"' hack/dev-env/config/gardener-values.yaml.tmpl > hack/dev-env/config/gardener-values.yaml
 mc cp hack/dev-env/config/gardener-values.yaml $MC_ALIAS/$CONFIG_BUCKET/dev-env/config/ > /dev/null 2>&1 || { echo "Error while uploading gardener-values.yaml to Bucket ❌" ; exit 1; }
 echo -n "."
-git checkout -q hack/dev-env/config/gardener-values.yaml
+rm hack/dev-env/config/gardener-values.yaml
 echo  -e "\rConfig Bucket ready ✅       "

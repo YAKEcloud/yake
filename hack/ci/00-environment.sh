@@ -10,7 +10,7 @@ do
     RAND=$(openssl rand -hex 2)
     export SHOOT="23ke-run-$RAND"
     # Alter shoot template
-    yq eval '.metadata.name = env(SHOOT)' -i hack/shoot-template.yaml
+    yq eval '.metadata.name = env(SHOOT)' hack/shoot-template.yaml.tmpl > hack/shoot-template.yaml
 
     # Create Shoot
     kubectl apply -f hack/shoot-template.yaml > /dev/null || { echo "Shoot creation unsuccessful❌"; exit 1; }
@@ -18,8 +18,8 @@ do
     NEEDED_PRESPAWNED_SHOOTS=$(( $DESIRED_PRESPAWNED_SHOOTS - ACTUAL_PRESPAWNED_SHOOTS ))
 done
 
-# Restore shoot template
-git checkout -q hack/shoot-template.yaml
+# remove templated shoot definition
+rm hack/shoot-template.yaml
 
 # Choose our shoot (free to use and the one with highest progress)
 export SHOOT=$(kubectl get shoot -n garden-23t-test -o custom-columns=NAME:.metadata.name --sort-by=.status.lastOperation.progress --no-headers=true --selector=23technologies.cloud/free-to-use='true'|tail -n 1)
