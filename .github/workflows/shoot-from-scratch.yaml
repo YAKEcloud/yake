@@ -21,16 +21,25 @@ jobs:
       - name: Setup shoot
         run: nix-shell --command 'bash hack/ci/01-shoot.sh'
       - name: Install cert-manager
+        id: installCertManager
         run: nix-shell --command 'bash hack/ci/02-letsencrypt.sh'
       - name: Install minio
+        id: installMinio
         run: nix-shell --command 'bash hack/ci/03-minio.sh'
       - name: Upload 23ke bucket
+        id: upload23KE
         run: nix-shell --command 'bash hack/ci/04-23ke-bucket.sh'
       - name: Upload 23ke-config bucket
+        id: upload23KEConfig
         run: nix-shell --command 'bash hack/ci/05-config-bucket.sh'
       - name: Install flux
+        id: installFlux
         run: nix-shell --command 'bash hack/ci/06-flux.sh'
       - name: Run tests
+        id: runTests
         run: nix-shell --command 'bash hack/ci/07-tests.sh'
       - name: Delete shoot
+        run: nix-shell --command 'bash hack/ci/delete-shoot.sh'
+      - name: Delete shoot after failure
+        if: failure() && ( steps.installCertManager.outcome == 'failure' || steps.installMinio.outcome == 'failure' || steps.upload23KE.outcome == 'failure' || steps.upload23KEConfig.outcome == 'failure' || steps.installFlux.outcome == 'failure' || steps.runTests.outcome == 'failure' )
         run: nix-shell --command 'bash hack/ci/delete-shoot.sh'
