@@ -6,6 +6,12 @@ metadata:
 type: Opaque
 stringData:
   values.yaml: |
+    ingress:
+      annotations:
+        dns.gardener.cloud/dnsnames: dashboard.${ENV}.${BASE_DOMAIN}
+        dns.gardener.cloud/ttl: "500"
+        dns.gardener.cloud/class: garden
+        cert-manager.io/cluster-issuer: letsencrypt-staging
     oidc:
       ca: |
         -----BEGIN CERTIFICATE-----
