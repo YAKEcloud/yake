@@ -34,3 +34,9 @@ jobs:
         run: nix-shell --command 'bash hack/ci/07-tests.sh'
       - name: Delete shoot
         run: nix-shell --command 'bash hack/ci/delete-shoot.sh'
+  run-if-fail:
+    if: ${{ always() && needs.ci.result=='failure' }}
+    needs: [ci]
+    steps:
+      - name: Delete shoot
+        run: nix-shell --command 'bash hack/ci/delete-shoot.sh'
