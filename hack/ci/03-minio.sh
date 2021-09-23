@@ -1,5 +1,7 @@
 #/usr/bin/env bash
 
+exit 1
+
 source hack/handy.sh
 
 echo -n "Deploying minio..."
