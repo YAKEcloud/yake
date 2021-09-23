@@ -4,7 +4,7 @@ spec:
       containers:
       - name: manager
         volumeMounts:
-        - mountPath: /usr/local/share/ca-certificates
+        - mountPath: /etc/ssl/certs
           name: le-staging
       volumes:
       - configMap:
