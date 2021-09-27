@@ -1,0 +1,50 @@
+global:
+  # Gardenlet configuration values
+  gardenlet:
+    config:
+      gardenClientConnection:
+        bootstrapKubeconfig:
+          name: bootstrap-kubeconfig-test
+          namespace: garden
+          kubeconfig: |
+            apiVersion: v1
+            kind: Config
+            current-context: gardenlet-bootstrap@default
+            clusters:
+            - cluster:
+                certificate-authority-data: LS0tLS1CRUdJTiBDRVJUSUZJQ0FURS0tLS0tCk1JSUM5ekNDQWQrZ0F3SUJBZ0lSQU1DbnFld0lvN3YwRmcwN21Ed1phVXd3RFFZSktvWklodmNOQVFFTEJRQXcKRlRFVE1CRUdBMVVFQXhNS2EzVmlaWEp1WlhSbGN6QWVGdzB5TVRBNU1qY3dPVE00TkRKYUZ3MHpNVEE1TWpjdwpPVE00TkRKYU1CVXhFekFSQmdOVkJBTVRDbXQxWW1WeWJtVjBaWE13Z2dFaU1BMEdDU3FHU0liM0RRRUJBUVVBCkE0SUJEd0F3Z2dFS0FvSUJBUURYbmNpNlJKVWJwNXByS0JrYjd4dGV0eFR2M0owTmVVbUFtaklLNzI3S3lXWjkKbDEyLzlCTnlZVDlBWkZ6NEFxUjRxOWpmM0Q2S1A3UkZCQmt1Mks4SlBJOFlNS3VvaFdIbUJ1VUdEbFdPRFZLawpmUWxNRDBmdE9hbnBQKzVUbENNRUdJcEVIN3p5a2VKUzhJZmhia1F1ZkkyRWRVTTBEWmY2ekc4YWtGU2x6K3RGCmhaZkhWSE9XVEJGVlF3UEZNdEhiYVJncCtXWDRXTDZseVVWUXMyZFFsUmtxVnNhTGV6Z2JEaUIwWG1FbjhNV1EKMG9NVEY5YVl5dnAyd240UThSb0ZQcCtYTzIyb1JLeUl3L2pvZUV0dzFYUzlCTXNoWnFYMEIyN0tya1ljcVF1RQp4SGNSaXVwcnRjVjNQNjZuZEJiTmllaExZVVZOQm9tWWpuY1VXVCt2QWdNQkFBR2pRakJBTUE0R0ExVWREd0VCCi93UUVBd0lCcGpBUEJnTlZIUk1CQWY4RUJUQURBUUgvTUIwR0ExVWREZ1FXQkJRRzNsSnE1cEovRDM5ZzZhTWYKY0wwd0UveERTREFOQmdrcWhraUc5dzBCQVFzRkFBT0NBUUVBVmFFOHVkdHQ4Y0hqams1TVh2US82NnViZ25yLwpzRUhBWEo0MjdRL05heGFGM2ZYYjFjR3cwR3ZpQmpUaHNYUjAxbnp4MDArV1lteDZWV2FORGhhQU9nckdlQ2tNCktUOTkzelJscjFNcEZkTnNTbFhHK2JsVWdIUVhtMFJjWWxUQlNpbWtaZkpsRndGTDBxY1dKSmd0eEhFdk9kSkIKanNHVmhKREZXZXBZYmFLejl3SWpnaU5oTFNXK0NjdXpOTzIzczhoZlMwQ1R5OTNSblZDSllDMHNvU2NiSFNVMgpoVHhBbE4xdFdjc0NHV0JqTDdNVTJwNUsvK2RJQ3YxMitMdzg2R3dTa2ZoOUNobXNReTRrZUE1a0pTTUQ0VDJJCm9jWUdNTjB4aHpQQnFCRjB4Q0FuKzVjRHZYcThXOUNqdHJ5bGhkYnJlZmcxVlovcWlDcjZvSE9tdlE9PQotLS0tLUVORCBDRVJUSUZJQ0FURS0tLS0tCg==
+                server: https://api.23ke-run-0fa5.23t-test.okeanos.dev
+              name: default
+            contexts:
+            - context:
+                cluster: default
+                user: gardenlet-bootstrap
+              name: gardenlet-bootstrap@default
+            users:
+            - name: gardenlet-bootstrap
+              user:
+                token: "08400c.f495accd246ae51e"
+      featureGates:
+        ReversedVPN: false
+        HVPA: true
+        HVPAForShootedSeed: true
+        Logging: true
+      seedConfig:
+        metadata:
+          name: internal
+        taints:
+          seed.gardener.cloud/protected
+        spec:
+          dns:
+            ingressDomain: ingress.dev.23ke-run-0fa5.23t-test.okeanos.dev # see prerequisites
+          networks: # see prerequisites
+            nodes: 10.240.0.0/16
+            pods: 10.244.0.0/16
+            services: 10.0.0.0/16
+          provider:
+            type: hcloud
+          settings:
+            scheduling:
+              visible: false
+            excessCapacityReservation:
+              enabled: false
