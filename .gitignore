@@ -3,3 +3,5 @@ hack/shoot-kubeconfig.yaml
 hack/handy.sh
 flux_*
 *.DS_STORE*
+hack/dev-env/gardenlet/garden-content/token.yaml
+hack/dev-env/gardenlet/config/internal-gardenlet-values.yaml
