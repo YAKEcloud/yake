@@ -23,7 +23,7 @@ spec:
       name: target-gardencluster-kubeconfig
   targetNamespace: garden
   valuesFrom:
-  - kind: ConfigMap
-    name: gardenlet-base-values
-  - kind: ConfigMap
-    name: internal-gardenlet-values
+    - kind: ConfigMap
+      name: gardenlet-base-values
+    - kind: ConfigMap
+      name: internal-gardenlet-values
