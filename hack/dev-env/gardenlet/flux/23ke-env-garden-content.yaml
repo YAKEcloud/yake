@@ -1,0 +1,16 @@
+apiVersion: kustomize.toolkit.fluxcd.io/v1beta1
+kind: Kustomization
+metadata:
+  name: 23ke-env-gardenlet-garden-content
+  namespace: flux-system
+spec:
+  kubeConfig:
+    secretRef:
+      name: gardener-internal-kubeconfig
+  interval: 1m0s
+  sourceRef:
+    kind: Bucket
+    name: 23ke-config
+  path: ./dev-env/gardenlet/garden-content/
+  prune: false
+  validation: client

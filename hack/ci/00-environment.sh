@@ -39,6 +39,10 @@ export MC_HOST_$MC_ALIAS=https://minio:$MINIO_PW@$MINIO_HOSTNAME
 export BUCKET=${BUCKET:-23ke}
 export CONFIG_BUCKET=${CONFIG_BUCKET:-config}
 
+#Only for testing
+export TOKEN_ID=$(openssl rand -hex 3)
+export TOKEN_ID_SECRET=$(openssl rand -hex 8)
+
 echo "The script will now setup your development / testing environment."
 echo
 echo "shoot-name:   $SHOOT"
@@ -65,4 +69,6 @@ echo "export KUBEAPISERVER_BASICAUTHPASSWORD=$KUBEAPISERVER_BASICAUTHPASSWORD" >
 echo "export MC_HOST_$MC_ALIAS=https://minio:$MINIO_PW@$MINIO_HOSTNAME" >> hack/handy.sh
 echo "export BUCKET=$BUCKET" >> hack/handy.sh
 echo "export CONFIG_BUCKET=$CONFIG_BUCKET" >> hack/handy.sh
+echo "export TOKEN_ID=$(openssl rand -hex 3)" >> hack/handy.sh
+echo "export TOKEN_ID_SECRET=$(openssl rand -hex 8)" >> hack/handy.sh
 echo

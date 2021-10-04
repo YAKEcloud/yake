@@ -38,8 +38,11 @@ jobs:
       - name: Run tests
         id: runTests
         run: nix-shell --command 'bash hack/ci/07-tests.sh'
+      - name: Install Gardenlet
+        id: installGardenlet
+        run: nix-shell --command 'bash hack/ci/08-gardenlet.sh'
       - name: Delete shoot
         run: nix-shell --command 'bash hack/ci/delete-shoot.sh'
       - name: Delete shoot after failure
-        if: failure() && ( steps.installCertManager.outcome == 'failure' || steps.installMinio.outcome == 'failure' || steps.upload23KE.outcome == 'failure' || steps.upload23KEConfig.outcome == 'failure' || steps.installFlux.outcome == 'failure' || steps.runTests.outcome == 'failure' )
+        if: failure() && ( steps.installCertManager.outcome == 'failure' || steps.installMinio.outcome == 'failure' || steps.upload23KE.outcome == 'failure' || steps.upload23KEConfig.outcome == 'failure' || steps.installFlux.outcome == 'failure' || steps.runTests.outcome == 'failure' || steps.installGardenlet.outcome == 'failure' )
         run: nix-shell --command 'bash hack/ci/delete-shoot.sh'
