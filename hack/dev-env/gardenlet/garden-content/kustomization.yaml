@@ -2,3 +2,7 @@ apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 resources:
   - token.yaml
+  - cpfl.yaml
+  - project.yaml
+  - cloud_secret.yaml
+  - secret_binding.yaml
