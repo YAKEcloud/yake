@@ -15,7 +15,7 @@ jobs:
         with:
           nix_path: nixpkgs=channel:nixos-20.09
       - name: Setup Environment
-        run: nix-shell --command 'echo "$KUBECONFIG_CONTENT" > .github/gardener-kubeconfig.yaml; bash hack/ci/00-environment.sh'
+        run: nix-shell --command 'echo "$KUBECONFIG_CONTENT" > hack/secrets/gardener-kubeconfig.yaml; bash hack/ci/00-environment.sh'
         env:
           KUBECONFIG_CONTENT: ${{ secrets.GARDENER_APISERVER_KUBECONFIG }}
       - name: Setup shoot
