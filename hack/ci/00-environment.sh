@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-export KUBECONFIG=.github/gardener-kubeconfig.yaml
+export KUBECONFIG=hack/secrets/gardener-kubeconfig.yaml
 DESIRED_PRESPAWNED_SHOOTS=3
 LABEL=23technologies.cloud/free-to-use
 ACTUAL_PRESPAWNED_SHOOTS=$(kubectl get shoots --namespace garden-23t-test --selector=23technologies.cloud/free-to-use='true' --no-headers=true | wc -l)
@@ -57,7 +57,7 @@ fi
 echo
 echo "This line might be handy:"
 echo ". hack/handy.sh"
-echo "export KUBECONFIG='hack/shoot-kubeconfig.yaml'" > hack/handy.sh
+echo "export KUBECONFIG='hack/secrets/shoot-kubeconfig.yaml'" > hack/handy.sh
 echo "export MC_ALIAS=$MC_ALIAS" >> hack/handy.sh
 echo "export SHOOT=$SHOOT" >> hack/handy.sh
 echo "export MINIO_HOSTNAME=$MINIO_HOSTNAME" >> hack/handy.sh
