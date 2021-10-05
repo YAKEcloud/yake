@@ -17,5 +17,5 @@ do
 	sleep 1
 done
 # Get shoot kubeconfig
-kubectl get secret -n garden-23t-test $SHOOT.kubeconfig -o go-template='{{.data.kubeconfig|base64decode}}' > hack/shoot-kubeconfig.yaml
+kubectl get secret -n garden-23t-test $SHOOT.kubeconfig -o go-template='{{.data.kubeconfig|base64decode}}' > hack/shoot-kubeconfig.yaml 2> /tmp/stderr || { echo -e "\rshoot creation unsuccessful            ❌               "; echo "STDERR:"; cat /tmp/stderr; exit 1; }
 echo -e "\rshoot ready          ✅               "

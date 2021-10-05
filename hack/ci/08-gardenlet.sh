@@ -20,11 +20,9 @@ yq eval '.stringData.token-id = env(TOKEN_ID)' hack/dev-env/gardenlet/garden-con
 yq eval '.metadata.name = "bootstrap-token-" + env(TOKEN_ID)' -i hack/dev-env/gardenlet/garden-content/token.yaml
 yq eval '.stringData.token-secret = env(TOKEN_ID_SECRET)' -i hack/dev-env/gardenlet/garden-content/token.yaml
 
-bash hack/ci/05-config-bucket.sh
-
-flux create ks 23ke-env-gardenlet --source=Bucket/23ke-config --path=./dev-env/gardenlet
-
-
+bash hack/ci/05-config-bucket.sh > /dev/null
 
 rm hack/dev-env/gardenlet/garden-content/token.yaml
 rm hack/dev-env/gardenlet/config/internal-gardenlet-values.yaml
+
+flux create ks 23ke-env-gardenlet --source=Bucket/23ke-config --path=./dev-env/gardenlet > /tmp/stdout 2> /tmp/stderr || { echo -e "\rError while creating gardenlet kustomization ❌"; echo "STDOUT":; cat /tmp/stdout; echo "STDERR:"; cat /tmp/stderr; exit 1; }
