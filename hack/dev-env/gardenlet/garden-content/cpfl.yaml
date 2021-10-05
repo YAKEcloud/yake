@@ -11,9 +11,9 @@ spec:
   machineImages:
     - name: ubuntu
       versions:
-      - version: 20.4.20210616
-        cri:
-        - name: containerd
+        - version: 20.4.20210616
+          cri:
+            - name: containerd
   machineTypes:
     - name: cx21
       cpu: "2"
@@ -105,10 +105,10 @@ spec:
     apiVersion: hcloud.provider.extensions.gardener.cloud/v1alpha1
     kind: CloudProfileConfig
     machineImages:
-    - name: ubuntu
-      versions:
-      - version: 20.4.20210616
-        imageName: ubuntu-20.04
+      - name: ubuntu
+        versions:
+          - version: 20.4.20210616
+            imageName: ubuntu-20.04
     regions:
       - name: hel1
       - name: fsn1
