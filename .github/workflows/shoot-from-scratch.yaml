@@ -40,7 +40,9 @@ jobs:
         run: nix-shell --command 'bash hack/ci/07-tests.sh'
       - name: Install Gardenlet
         id: installGardenlet
-        run: nix-shell --command 'bash hack/ci/08-gardenlet.sh'
+        run: nix-shell --command 'echo "$CLOUD_SECRET" > hack/scerets/hcloud_token ; bash hack/ci/08-gardenlet.sh'
+        env:
+          CLOUD_SECRET: ${{ secrets.HCLOUD_TESTING_TOKEN }}
       - name: Delete shoot
         run: nix-shell --command 'bash hack/ci/delete-shoot.sh'
       - name: Delete shoot after failure

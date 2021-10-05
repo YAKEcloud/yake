@@ -1,0 +1,115 @@
+apiVersion: core.gardener.cloud/v1beta1
+kind: CloudProfile
+metadata:
+  name: hcloud
+spec:
+  type: hcloud
+  kubernetes:
+    versions:
+      - version: 1.20.11
+        classification: supported
+  machineImages:
+    - name: ubuntu
+      versions:
+        - version: 20.4.20210616
+          cri:
+            - name: containerd
+  machineTypes:
+    - name: cx21
+      cpu: "2"
+      memory: 4Gi
+      gpu: "0"
+    - name: cpx21
+      cpu: "3"
+      memory: 4Gi
+      gpu: "0"
+    - name: cx31
+      cpu: "2"
+      memory: 8Gi
+      gpu: "0"
+    - name: cpx31
+      cpu: "4"
+      memory: 8Gi
+      gpu: "0"
+    - name: cx41
+      cpu: "4"
+      memory: 16Gi
+      gpu: "0"
+    - name: cpx41
+      cpu: "8"
+      memory: 16Gi
+      gpu: "0"
+    - name: cx51
+      cpu: "8"
+      memory: 32Gi
+      gpu: "0"
+    - name: cpx51
+      cpu: "16"
+      memory: 32Gi
+      gpu: "0"
+    - name: ccx11
+      cpu: "2"
+      memory: 8Gi
+      gpu: "0"
+    - name: ccx12
+      cpu: "2"
+      memory: 8Gi
+      gpu: "0"
+    - name: ccx21
+      cpu: "4"
+      memory: 16Gi
+      gpu: "0"
+    - name: ccx22
+      cpu: "4"
+      memory: 16Gi
+      gpu: "0"
+    - name: ccx31
+      cpu: "8"
+      memory: 32Gi
+      gpu: "0"
+    - name: ccx32
+      cpu: "8"
+      memory: 32Gi
+      gpu: "0"
+    - name: ccx41
+      cpu: "16"
+      memory: 64Gi
+      gpu: "0"
+    - name: ccx42
+      cpu: "16"
+      memory: 64Gi
+      gpu: "0"
+    - name: ccx51
+      cpu: "32"
+      memory: 128Gi
+      gpu: "0"
+    - name: ccx52
+      cpu: "32"
+      memory: 128Gi
+      gpu: "0"
+    - name: ccx62
+      cpu: "48"
+      memory: 192Gi
+      gpu: "0"
+  regions:
+    - name: hel1
+      zones:
+        - name: hel1-dc2
+    - name: fsn1
+      zones:
+        - name: fsn1-dc14
+    - name: nbg1
+      zones:
+        - name: nbg1-dc3
+  providerConfig:
+    apiVersion: hcloud.provider.extensions.gardener.cloud/v1alpha1
+    kind: CloudProfileConfig
+    machineImages:
+      - name: ubuntu
+        versions:
+          - version: 20.4.20210616
+            imageName: ubuntu-20.04
+    regions:
+      - name: hel1
+      - name: fsn1
+      - name: nbg1

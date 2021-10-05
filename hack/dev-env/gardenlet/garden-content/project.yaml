@@ -1,0 +1,19 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: garden-testing
+  labels:
+    gardener.cloud/role: project
+    project.gardener.cloud/name: testing
+---
+apiVersion: core.gardener.cloud/v1beta1
+kind: Project
+metadata:
+  name: testing
+spec:
+  owner:
+    apiGroup: rbac.authorization.k8s.io
+    kind: User
+    name: admin@localhost
+  members: []
+  namespace: garden-testing
