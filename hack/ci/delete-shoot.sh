@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 source hack/handy.sh
-rm hack/shoot-kubeconfig.yaml
-export KUBECONFIG=.github/gardener-kubeconfig.yaml
+rm hack/secrets/shoot-kubeconfig.yaml
+export KUBECONFIG=hack/secrets/gardener-kubeconfig.yaml
 # Annotate Shoot for deletion
 kubectl annotate shoot -n garden-23t-test $SHOOT confirmation.gardener.cloud/deletion=true > /dev/null 2>&1
 # Delete shoot
