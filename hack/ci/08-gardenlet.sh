@@ -11,7 +11,7 @@ yq eval '.global.gardenlet.config.seedConfig.spec.dns.ingressDomain = "ingress."
 
 yq eval '.global.gardenlet.config.gardenClientConnection.bootstrapKubeconfig.kubeconfig' /tmp/values.yaml > /tmp/kubeconfig.yaml
 yq eval '.clusters[0].cluster.certificate-authority-data = env(CA_GARDENER_APISERVER)' -i /tmp/kubeconfig.yaml
-yq eval '.users[0].user.token = env(TOKEN_ID) + "." + env(TOKEN_ID_SECRET)' -i /tmp/kubeconfig.yaml
+yq eval '.users[0].user.token = strenv(TOKEN_ID) + "." + strenv(TOKEN_ID_SECRET)' -i /tmp/kubeconfig.yaml
 
 export KUBECONFIG_VALUES=$(cat /tmp/kubeconfig.yaml)
 yq eval '.global.gardenlet.config.gardenClientConnection.bootstrapKubeconfig.kubeconfig = strenv(KUBECONFIG_VALUES)' -i /tmp/values.yaml
