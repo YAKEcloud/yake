@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 clear
-export PROGRESS_WIDTH=70
-export PROGRESS_NUMBER_OF_STEPS=7
+export PROGRESS_WIDTH=80
+export PROGRESS_NUMBER_OF_STEPS=8
 
 # Setup Environment
 bash hack/ci/00-environment.sh || exit 1
@@ -31,4 +31,8 @@ progress_step
 
 # Install flux
 bash hack/ci/06-flux.sh || exit 1
+progress_step
+
+# Install 23KE
+bash hack/ci/07-23ke.sh || exit 1
 progress_step
