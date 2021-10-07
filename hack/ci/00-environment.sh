@@ -57,7 +57,7 @@ fi
 echo
 echo "This line might be handy:"
 echo ". hack/handy.sh"
-echo "export KUBECONFIG='hack/secrets/shoot-kubeconfig.yaml'" > hack/handy.sh
+echo "export KUBECONFIG='hack/secrets/shoot-kubeconfig.yaml:hack/secrets/apiserver-in-shoot-kubeconfig.yaml'" > hack/handy.sh
 echo "export MC_ALIAS=$MC_ALIAS" >> hack/handy.sh
 echo "export SHOOT=$SHOOT" >> hack/handy.sh
 echo "export MINIO_HOSTNAME=$MINIO_HOSTNAME" >> hack/handy.sh

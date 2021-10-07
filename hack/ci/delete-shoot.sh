@@ -2,9 +2,15 @@
 source hack/handy.sh
 if rm hack/secrets/shoot-kubeconfig.yaml 2> /dev/null
 then
-    echo "Deleted shoot-kubeconfig     ✅"
+    echo "Deleted shoot-kubeconfig                  ✅"
 else
-    echo "shoot-kubeconfig absent      ✅"
+    echo "shoot-kubeconfig absent                   ✅"
+fi
+if rm hack/secrets/apiserver-in-shoot-kubeconfig.yaml 2> /dev/null
+then
+    echo "Deleted apiserver-in-shoot-kubeconfig     ✅"
+else
+    echo "apiserver-in-shoot-kubeconfig absent      ✅"
 fi
 export KUBECONFIG=hack/secrets/gardener-kubeconfig.yaml
 # Annotate Shoot for deletion
@@ -12,4 +18,4 @@ kubectl annotate shoot -n garden-23t-test $SHOOT confirmation.gardener.cloud/del
 
 # Delete shoot
 kubectl delete shoot -n garden-23t-test $SHOOT --wait=false > /tmp/stdout 2> /tmp/stderr || { echo -e "Shoot deletion unsuccessful ❌"; exit 1; }
-echo "shoot annotated for deletion ✅       "
+echo "shoot annotated for deletion              ✅       "
