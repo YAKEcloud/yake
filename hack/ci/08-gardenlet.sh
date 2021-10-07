@@ -42,5 +42,10 @@ echo -e -n "\rWaiting for gardenlet"
 kubectl rollout status deployment -n garden gardenlet > /tmp/stdout 2> /tmp/stderr || { echo -e "\rError while waiting for deployment gardenlet ❌"; echo "STDOUT":; cat /tmp/stdout; echo "STDERR:"; cat /tmp/stderr; exit 1; }
 echo -e -n "\r                                  "
 echo -e -n "\rWaiting for seed"
+until kubectl get seed hcloud-fsn1-0 --context garden > /tmp/stdout 2> /tmp/stderr
+do
+    sleep 1
+    echo -n "."
+done
 kubectl wait seed hcloud-fsn1-0 --for=condition=Bootstrapped --timeout=20m --context garden > /tmp/stdout 2> /tmp/stderr || { echo -e "\rError while waiting for seed hcloud ❌"; echo "STDOUT":; cat /tmp/stdout; echo "STDERR:"; cat /tmp/stderr; exit 1; }
 echo -e "\rgardenlet Ready       ✅                  "
