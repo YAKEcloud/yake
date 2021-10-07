@@ -18,4 +18,4 @@ kubectl annotate shoot -n garden-23t-test $SHOOT confirmation.gardener.cloud/del
 
 # Delete shoot
 kubectl delete shoot -n garden-23t-test $SHOOT --wait=false > /tmp/stdout 2> /tmp/stderr || { echo -e "Shoot deletion unsuccessful ❌"; exit 1; }
-echo "shoot annotated for deletion                  ✅       "
+echo "shoot annotated for deletion              ✅       "
