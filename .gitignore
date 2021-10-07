@@ -7,4 +7,5 @@ hack/dev-env/gardenlet/garden-content/token.yaml
 hack/dev-env/gardenlet/config/internal-gardenlet-values.yaml
 hack/secrets/hcloud_token
 hack/secrets/gardener-kubeconfig.yaml
+hack/secrets/shoot-kubeconfig.yaml
 hack/dev-env/gardenlet/garden-content/cloud_secret.yaml
