@@ -39,7 +39,7 @@ echo -e -n "\rWaiting for hr gardenlet"
 kubectl wait helmrelease -n flux-system internal-gardenlet --for=condition=ready --timeout=20m > /tmp/stdout 2> /tmp/stderr || { echo -e "\rError while waiting for helmrelease internal-gardenlet ❌"; echo "STDOUT":; cat /tmp/stdout; echo "STDERR:"; cat /tmp/stderr; exit 1; }
 echo -e -n "\r                                  "
 echo -e -n "\rWaiting for gardenlet"
-kubectl rollout status -n garden gardenlet > /tmp/stdout 2> /tmp/stderr || { echo -e "\rError while waiting for deployment gardenlet ❌"; echo "STDOUT":; cat /tmp/stdout; echo "STDERR:"; cat /tmp/stderr; exit 1; }
+kubectl rollout status deployment -n garden gardenlet > /tmp/stdout 2> /tmp/stderr || { echo -e "\rError while waiting for deployment gardenlet ❌"; echo "STDOUT":; cat /tmp/stdout; echo "STDERR:"; cat /tmp/stderr; exit 1; }
 echo -e -n "\r                                  "
 echo -e -n "\rWaiting for seed"
 kubectl wait seed hcloud-fsn1-0 --for=condition=Bootstrapped --timeout=20m --context garden > /tmp/stdout 2> /tmp/stderr || { echo -e "\rError while waiting for seed hcloud ❌"; echo "STDOUT":; cat /tmp/stdout; echo "STDERR:"; cat /tmp/stderr; exit 1; }
