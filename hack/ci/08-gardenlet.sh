@@ -22,12 +22,12 @@ yq eval '.stringData.token-id = env(TOKEN_ID)' hack/dev-env/gardenlet/garden-con
 yq eval '.metadata.name = "bootstrap-token-" + env(TOKEN_ID)' -i hack/dev-env/gardenlet/garden-content/token.yaml
 yq eval '.stringData.token-secret = env(TOKEN_ID_SECRET)' -i hack/dev-env/gardenlet/garden-content/token.yaml
 
-export CLOUD_TOKEN=$(cat hack/secrets/hcloud_token)
-yq eval '.data.hcloudToken = env(CLOUD_TOKEN)' hack/dev-env/gardenlet/garden-content/cloud_secret.yaml.tmpl > hack/dev-env/gardenlet/garden-content/cloud_secret.yaml
+kubectl create secret generic cloud-secret -n garden-testing  --from-file=hcloudToken=hack/secrets/hcloud_token -oyaml --dry-run=client > hack/dev-env/gardenlet/garden-content/cloud_secret.yaml
 
 bash hack/ci/05-config-bucket.sh > /dev/null
 echo -n "."
 
+rm hack/dev-env/gardenlet/garden-content/cloud_secret.yaml
 rm hack/dev-env/gardenlet/garden-content/token.yaml
 rm hack/dev-env/gardenlet/config/internal-gardenlet-values.yaml
 
