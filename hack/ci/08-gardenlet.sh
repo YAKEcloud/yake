@@ -35,6 +35,7 @@ flux create ks 23ke-env-gardenlet --source=Bucket/23ke-config --path=./dev-env/g
 
 echo -e -n "\rWaiting for ks 23ke-env-gardenlet"
 kubectl wait kustomization -n flux-system 23ke-env-gardenlet --for=condition=ready --timeout=10m > /tmp/stdout 2> /tmp/stderr || { echo -e "\rError while waiting for ks 23ke-env-gardenlet ❌"; echo "STDOUT":; cat /tmp/stdout; echo "STDERR:"; cat /tmp/stderr; exit 1; }
+echo -e -n "\r                                  "
 echo -e -n "\rWaiting for hr gardenlet"
 kubectl wait helmrelease -n flux-system internal-gardenlet --for=condition=ready --timeout=20m > /tmp/stdout 2> /tmp/stderr || { echo -e "\rError while waiting for helmrelease internal-gardenlet ❌"; echo "STDOUT":; cat /tmp/stdout; echo "STDERR:"; cat /tmp/stderr; exit 1; }
 echo -e -n "\r                                  "
@@ -48,4 +49,4 @@ do
     echo -n "."
 done
 kubectl wait seed hcloud-fsn1-0 --for=condition=Bootstrapped --timeout=20m --context garden > /tmp/stdout 2> /tmp/stderr || { echo -e "\rError while waiting for seed hcloud ❌"; echo "STDOUT":; cat /tmp/stdout; echo "STDERR:"; cat /tmp/stderr; exit 1; }
-echo -e "\rgardenlet Ready       ✅                  "
+echo -e "\rgardenlet Ready      ✅                  "
