@@ -7,6 +7,10 @@ data:
   values.yaml: |-
     global:
       gardenlet:
+        image:
+          repository: docker.io/fynnsp/gardenlet
+          tag: v1.28.2
+          pullPolicy: Always
         config:
           gardenClientConnection:
             bootstrapKubeconfig:
@@ -33,6 +37,8 @@ data:
             HVPA: true
             HVPAForShootedSeed: true
             Logging: true
+            APIServerSNI: false
+            ManagedIstio: false
           seedConfig:
             metadata:
               name: hcloud-fsn1-0
@@ -50,6 +56,8 @@ data:
                 region: fsn1
                 type: hcloud
               settings:
+                shootDNS:
+                  enabled: false
                 excessCapacityReservation:
                   enabled: false
                 loadBalancerServices:
