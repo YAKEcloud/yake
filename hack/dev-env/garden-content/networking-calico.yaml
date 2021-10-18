@@ -17,7 +17,7 @@ metadata:
 spec:
   deployment:
     deploymentRefs:
-    - name: networking-calico
+      - name: networking-calico
   resources:
-  - kind: Network
-    type: calico
+    - kind: Network
+      type: calico

@@ -17,12 +17,11 @@ metadata:
 spec:
   deployment:
     deploymentRefs:
-    - name: provider-hcloud
+      - name: provider-hcloud
   resources:
-  - kind: ControlPlane
-    type: hcloud
-  - kind: Infrastructure
-    type: hcloud
-  - kind: Worker
-    type: hcloud
-
+    - kind: ControlPlane
+      type: hcloud
+    - kind: Infrastructure
+      type: hcloud
+    - kind: Worker
+      type: hcloud

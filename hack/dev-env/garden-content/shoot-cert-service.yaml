@@ -22,9 +22,8 @@ metadata:
 spec:
   deployment:
     deploymentRefs:
-    - name: extension-shoot-cert-service
+      - name: extension-shoot-cert-service
   resources:
-  - kind: Extension
-    type: shoot-cert-service
-    globallyEnabled: true
-
+    - kind: Extension
+      type: shoot-cert-service
+      globallyEnabled: true

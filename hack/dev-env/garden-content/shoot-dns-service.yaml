@@ -17,9 +17,8 @@ metadata:
 spec:
   deployment:
     deploymentRefs:
-    - name: extension-shoot-dns-service
+      - name: extension-shoot-dns-service
   resources:
-  - kind: Extension
-    type: shoot-dns-service
-    globallyEnabled: true
-
+    - kind: Extension
+      type: shoot-dns-service
+      globallyEnabled: true

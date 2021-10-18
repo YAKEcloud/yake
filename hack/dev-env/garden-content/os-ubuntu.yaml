@@ -17,9 +17,9 @@ metadata:
 spec:
   deployment:
     deploymentRefs:
-    - name: os-ubuntu
+      - name: os-ubuntu
   resources:
-  - kind: OperatingSystemConfig
-    type: ubuntu
-  - kind: OperatingSystemConfig
-    type: ubuntu-pro
+    - kind: OperatingSystemConfig
+      type: ubuntu
+    - kind: OperatingSystemConfig
+      type: ubuntu-pro
