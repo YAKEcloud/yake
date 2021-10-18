@@ -12,7 +12,7 @@ spec:
       apiVersion: hcloud.provider.extensions.gardener.cloud/v1alpha1
       kind: InfrastructureConfig
       networks:
-        workers: 10.250.0.0/16
+        workers: 10.11.0.0/16
     controlPlaneConfig:
       apiVersion: hcloud.provider.extensions.gardener.cloud/v1alpha1
       kind: ControlPlaneConfig
@@ -20,7 +20,7 @@ spec:
     workers:
       - name: worker-cx41
         minimum: 1
-        maximum: 2
+        maximum: 10
         maxSurge: 1
         machine:
           type: cx41
@@ -34,7 +34,9 @@ spec:
         volume:
           size: 50Gi
   networking:
-    nodes: 10.250.0.0/16
+    nodes: 10.11.0.0/16
+    pods: 10.10.0.0/16
+    services: 10.16.0.0/13
     type: calico
   cloudProfileName: hcloud
   region: fsn1

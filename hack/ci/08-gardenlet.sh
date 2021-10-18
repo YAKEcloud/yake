@@ -22,12 +22,12 @@ yq eval '.stringData.token-id = env(TOKEN_ID)' hack/dev-env/gardenlet/garden-con
 yq eval '.metadata.name = "bootstrap-token-" + env(TOKEN_ID)' -i hack/dev-env/gardenlet/garden-content/token.yaml
 yq eval '.stringData.token-secret = env(TOKEN_ID_SECRET)' -i hack/dev-env/gardenlet/garden-content/token.yaml
 
-export CLOUD_TOKEN=$(cat hack/secrets/hcloud_token)
-yq eval '.data.hcloudToken = env(CLOUD_TOKEN)' hack/dev-env/gardenlet/garden-content/cloud_secret.yaml.tmpl > hack/dev-env/gardenlet/garden-content/cloud_secret.yaml
+kubectl create secret generic cloud-secret -n garden-testing  --from-file=hcloudToken=hack/secrets/hcloud_token -oyaml --dry-run=client > hack/dev-env/gardenlet/garden-content/cloud_secret.yaml
 
 bash hack/ci/05-config-bucket.sh > /dev/null
 echo -n "."
 
+rm hack/dev-env/gardenlet/garden-content/cloud_secret.yaml
 rm hack/dev-env/gardenlet/garden-content/token.yaml
 rm hack/dev-env/gardenlet/config/internal-gardenlet-values.yaml
 
@@ -35,6 +35,7 @@ flux create ks 23ke-env-gardenlet --source=Bucket/23ke-config --path=./dev-env/g
 
 echo -e -n "\rWaiting for ks 23ke-env-gardenlet"
 kubectl wait kustomization -n flux-system 23ke-env-gardenlet --for=condition=ready --timeout=10m > /tmp/stdout 2> /tmp/stderr || { echo -e "\rError while waiting for ks 23ke-env-gardenlet ❌"; echo "STDOUT":; cat /tmp/stdout; echo "STDERR:"; cat /tmp/stderr; exit 1; }
+echo -e -n "\r                                  "
 echo -e -n "\rWaiting for hr gardenlet"
 kubectl wait helmrelease -n flux-system internal-gardenlet --for=condition=ready --timeout=20m > /tmp/stdout 2> /tmp/stderr || { echo -e "\rError while waiting for helmrelease internal-gardenlet ❌"; echo "STDOUT":; cat /tmp/stdout; echo "STDERR:"; cat /tmp/stderr; exit 1; }
 echo -e -n "\r                                  "
@@ -48,4 +49,4 @@ do
     echo -n "."
 done
 kubectl wait seed hcloud-fsn1-0 --for=condition=Bootstrapped --timeout=20m --context garden > /tmp/stdout 2> /tmp/stderr || { echo -e "\rError while waiting for seed hcloud ❌"; echo "STDOUT":; cat /tmp/stdout; echo "STDERR:"; cat /tmp/stderr; exit 1; }
-echo -e "\rgardenlet Ready       ✅                  "
+echo -e "\rgardenlet Ready      ✅                  "
