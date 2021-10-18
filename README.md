@@ -39,3 +39,11 @@ mkdir $MYENV && cd $MYENV
 
 # Install on running cluster
 After creating and commiting the environment to the config repository you need to bootstrap flux into the cluster and give it read access to the config repository. T
+
+# Prevent nix-shell garbage collection
+Nix by default collects unused packages. Using nix-shell does not automatically root it's dependencies,
+which causes nix to rebuild missing packages after garbage collection ran. You can prevent this with:
+```
+nix-instantiate shell.nix --indirect --add-root /nix/var/nix/gcroots/per-user/$USER/23ke.drv
+```
+More information on [Nix Wiki on Pinning](https://nixos.wiki/wiki/Storage_optimization#Pinning) and [Nix Pills](https://nixos.org/guides/nix-pills/garbage-collector.html)
