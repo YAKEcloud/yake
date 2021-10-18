@@ -31,7 +31,9 @@ jobs:
         run: nix-shell --command 'bash hack/ci/04-23ke-bucket.sh'
       - name: Upload 23ke-config bucket
         id: upload23KEConfig
-        run: nix-shell --command 'bash hack/ci/05-config-bucket.sh'
+        run: nix-shell --command 'echo "$AZURE_DNS" > hack/secrets/azure_dns ; bash hack/ci/05-config-bucket.sh'
+        env:
+          AZURE_DNS: ${{ secrets.AZURE_DNS_SECRET }}
       - name: Install flux
         id: installFlux
         run: nix-shell --command 'bash hack/ci/06-flux.sh'
