@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 export KUBECONFIG=hack/secrets/gardener-kubeconfig.yaml
-DESIRED_PRESPAWNED_SHOOTS=3
+DESIRED_PRESPAWNED_SHOOTS=2
 LABEL=23technologies.cloud/free-to-use
 ACTUAL_PRESPAWNED_SHOOTS=$(kubectl get shoots --namespace garden-23t-test --selector=23technologies.cloud/free-to-use='true' --no-headers=true | wc -l)
 NEEDED_PRESPAWNED_SHOOTS=$(( $DESIRED_PRESPAWNED_SHOOTS - ACTUAL_PRESPAWNED_SHOOTS ))
