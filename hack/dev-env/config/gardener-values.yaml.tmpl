@@ -9,10 +9,23 @@ stringData:
     global:
       internalDomain:
         domain: internal.23ke-run-5c61.23t-test.okeanos.dev
-        provider: unmanaged
+        provider: azure-dns
+        credentials:
+          tenantID:
+          subscriptionID:
+          clientID:
+          clientSecret:
+      defaultDomains:
+      - domain: internal.23ke-run-5c61.23t-test.okeanos.dev
+        provider: azure-dns
+        credentials:
+          tenantID:
+          subscriptionID:
+          clientID:
+          clientSecret:
       deployment:
         virtualGarden:
-          clusterIP: 100.88.1.1
+          clusterIP: 10.16.1.1
       apiserver:
         replicaCount: 1
       scheduler:
