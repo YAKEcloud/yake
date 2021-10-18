@@ -1,13 +1,13 @@
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 resources:
-- https://raw.githubusercontent.com/gardener/gardener-extension-networking-calico/v1.15.0/example/controller-registration.yaml
-- https://raw.githubusercontent.com/gardener/external-dns-management/v0.8.0/examples/controller-registration.yaml
-- https://raw.githubusercontent.com/gardener/gardener-extension-shoot-dns-service/v1.9.0/example/controller-registration.yaml
-- https://raw.githubusercontent.com/gardener/gardener-extension-shoot-cert-service/v1.11.0/example/controller-registration.yaml
-- https://github.com/23technologies/gardener-extension-provider-hcloud/releases/download/v0.3.10/controller-registration.yaml
-- https://raw.githubusercontent.com/gardener/gardener-extension-os-ubuntu/v1.13.0/example/controller-registration.yaml
 - admin-clusterrolebinding.yaml
--  rbac.yaml
+- rbac.yaml
 - 00-namespace-garden-dev.yaml
 - 05-project-dev.yaml
+- networking-calico.yaml
+- os-ubuntu.yaml
+- provider-hcloud.yaml
+- shoot-dns-service.yaml
+- shoot-cert-service.yaml
+- external-dns-management.yaml
