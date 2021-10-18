@@ -8,9 +8,9 @@ data:
     global:
       gardenlet:
         image:
-          repository: docker.io/fynnsp/gardenlet
-          tag: v1.28.2
-          pullPolicy: Always
+         # repository: docker.io/fynnsp/gardenlet
+         # tag: v1.28.2
+         # pullPolicy: Always
         config:
           gardenClientConnection:
             bootstrapKubeconfig:
@@ -33,12 +33,12 @@ data:
                   user:
                     token: "08400c.f495accd246ae51e"
           featureGates:
-            ReversedVPN: false
+            ReversedVPN: true
             HVPA: true
             HVPAForShootedSeed: true
             Logging: true
-            APIServerSNI: false
-            ManagedIstio: false
+            APIServerSNI: true
+            ManagedIstio: true
           seedConfig:
             metadata:
               name: hcloud-fsn1-0
@@ -46,9 +46,9 @@ data:
               dns:
                 ingressDomain: ingress.23ke-run-5c61.23t-test.okeanos.dev
               networks:
-                nodes: 10.120.0.0/16
-                pods: 100.72.0.0/16
-                services: 100.80.0.0/13
+                nodes: 10.11.0.0/16
+                pods: 10.10.0.0/16
+                services: 10.16.0.0/13
                 shootDefaults:
                   pods: 100.73.0.0/16
                   services: 100.88.0.0/13
@@ -57,7 +57,7 @@ data:
                 type: hcloud
               settings:
                 shootDNS:
-                  enabled: false
+                  enabled: true
                 excessCapacityReservation:
                   enabled: false
                 loadBalancerServices:
