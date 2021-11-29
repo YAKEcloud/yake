@@ -25,7 +25,8 @@ rsync -vLr --delete $REPO/gardener/charts/gardener/controlplane/ $FOLDER/gardene
 rsync -vLr --delete $REPO/gardener/charts/gardener/gardenlet/ $FOLDER/gardenlet/
 rsync -vLr --delete $REPO/garden-setup/components/etcd/cluster/chart/ $FOLDER/garden-etcd/
 # FIXME this chart was modified after importing
-#rsync -vLr --delete $REPO/garden-setup/components/kube-apiserver/chart/ $FOLDER/kube-apiserver/
+rsync -vLr --delete $REPO/garden-setup/components/kube-apiserver/chart/ $FOLDER/kube-apiserver/
+git apply hack/kube-apiserver-ingress.patch
 rsync -vLr --delete $REPO/gardener-dashboard/charts/gardener-dashboard/ $FOLDER/gardener-dashboard/
 rsync -vLr --delete $REPO/gardener-dashboard/charts/identity/ $FOLDER/identity/
 
