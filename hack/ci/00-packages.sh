@@ -22,3 +22,7 @@ tar xfvz helm-v3.7.1-linux-amd64.tar.gz
 sudo mv linux-amd64/helm /usr/local/bin/helm
 sudo chmod +x /usr/local/bin/helm
 
+# mc
+wget https://dl.min.io/client/mc/release/linux-amd64/mc
+sudo mv mc /usr/local/bin/
+sudo chmod +x /usr/local/bin/mc
