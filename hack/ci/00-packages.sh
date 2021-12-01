@@ -6,6 +6,7 @@ sudo mv kubectl /usr/local/bin/
 sudo chmod +x /usr/local/bin/kubectl
 
 # flux
+cd /tmp
 wget https://github.com/fluxcd/flux2/releases/download/v0.17.2/flux_0.17.2_linux_amd64.tar.gz
 sudo tar xfvz flux_0.17.2_linux_amd64.tar.gz -C /usr/local/bin
 sudo chmod +x /usr/local/bin/flux
