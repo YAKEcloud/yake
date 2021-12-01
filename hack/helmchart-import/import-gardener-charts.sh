@@ -28,6 +28,7 @@ rsync -vLr --delete $REPO/garden-setup/components/etcd/cluster/chart/ $FOLDER/ga
 rsync -vLr --delete $REPO/garden-setup/components/kube-apiserver/chart/ $FOLDER/kube-apiserver/
 sed -i '/\ \ \ \ kubernetes.io\/ingress.class:\ \"nginx\"/a{{- with\ .Values.ingress.annotations\ }}\n{{ toYaml . | indent 4 }}\n{{- end }}' $FOLDER/kube-apiserver/templates/service-kube-apiserver-ingress.yaml 
 cp secret-kubeconfig-for-gardener.yaml $FOLDER/kube-apiserver/templates/
+cat append-kube-apiserver-helpers.tpl >> $FOLDER/kube-apiserver/templates/_helpers.tpl 
 rsync -vLr --delete $REPO/gardener-dashboard/charts/gardener-dashboard/ $FOLDER/gardener-dashboard/
 rsync -vLr --delete $REPO/gardener-dashboard/charts/identity/ $FOLDER/identity/
 
