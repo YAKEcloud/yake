@@ -7,7 +7,7 @@ DASHBOARD_VERSION="1.52.2"
 
 if [ "$#" -ne  "1" ]; then
      echo "Usage: import-charts.sh <target-folder>"
-     echo "Example: import-charts.sh helmcharts"
+     echo "Example: ./import-charts.sh ../../helmcharts"
      exit 1
 elif [ ! -d $FOLDER ]; then
       echo "<target-folder> needs to exist"
@@ -26,7 +26,8 @@ rsync -vLr --delete $REPO/gardener/charts/gardener/gardenlet/ $FOLDER/gardenlet/
 rsync -vLr --delete $REPO/garden-setup/components/etcd/cluster/chart/ $FOLDER/garden-etcd/
 # FIXME this chart was modified after importing
 rsync -vLr --delete $REPO/garden-setup/components/kube-apiserver/chart/ $FOLDER/kube-apiserver/
-git apply hack/kube-apiserver-ingress.patch
+sed '/\ \ \ \ kubernetes.io\/ingress.class:\ \"nginx\"/a{{- with\ .Values.ingress.annotations\ }}\n{{ toYaml . | indent 4 }}\n{{- end }}' $FOLDER/kube-apiserver/templates/service-kube-apiserver-ingress.yaml 
+cp secret-kubeconfig-for-gardener.yaml $FOLDER/kube-apiserver/templates/
 rsync -vLr --delete $REPO/gardener-dashboard/charts/gardener-dashboard/ $FOLDER/gardener-dashboard/
 rsync -vLr --delete $REPO/gardener-dashboard/charts/identity/ $FOLDER/identity/
 
@@ -34,4 +35,5 @@ rsync -vLr --delete $REPO/gardener-dashboard/charts/identity/ $FOLDER/identity/
 find $FOLDER -name Chart.yaml -type f -exec sed -i "s/version: 0.1.0/version: $GARDENER_VERSION/g" {} +
 
 rm -fr $REPO
+
 
