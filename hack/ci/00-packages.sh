@@ -23,6 +23,9 @@ sudo mv linux-amd64/helm /usr/local/bin/helm
 sudo chmod +x /usr/local/bin/helm
 
 # mc
-wget https://dl.min.io/client/mc/release/linux-amd64/mc
-sudo mv mc /usr/local/bin/
+wget https://asia.mirror.pkgbuild.com/community/os/x86_64/minio-client-2021.11.05-1-x86_64.pkg.tar.zst
+sudo apt install -y zstd
+tar --use-compress-program=unzstd -xvf minio-client-2021.11.05-1-x86_64.pkg.tar.zst
+# wget https://dl.min.io/client/mc/release/linux-amd64/mc
+sudo mv usr/bin/mcli /usr/local/bin/mc
 sudo chmod +x /usr/local/bin/mc
