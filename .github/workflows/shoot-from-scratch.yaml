@@ -44,7 +44,7 @@ jobs:
         env:
           CLOUD_SECRET: ${{ secrets.HCLOUD_TESTING_TOKEN }}
       - name: Delete shoot
-        run: bash hack/ci/delete-shoot.sh'
+        run: bash hack/ci/delete-shoot.sh
       - name: Delete shoot after failure
         if: failure() && ( steps.installCertManager.outcome == 'failure' || steps.installMinio.outcome == 'failure' || steps.upload23KE.outcome == 'failure' || steps.upload23KEConfig.outcome == 'failure' || steps.installFlux.outcome == 'failure' || steps.install23ke.outcome == 'failure' || steps.installGardenlet.outcome == 'failure' )
         run: bash hack/ci/delete-shoot.sh
