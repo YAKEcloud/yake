@@ -75,7 +75,6 @@ users:
     client-key-data: {{ .Values.tls.admin.key | b64enc }}
 {{- end -}}
 
-
 {{- define "garden.kubeconfig-internal-gardener" -}}
 apiVersion: v1
 kind: Config

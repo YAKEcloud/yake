@@ -17,6 +17,7 @@ spec:
       apiVersion: hcloud.provider.extensions.gardener.cloud/v1alpha1
       kind: ControlPlaneConfig
       loadBalancerProvider: provider
+      zone: fsn1-dc14
     workers:
       - name: worker-cx41
         minimum: 1
@@ -42,7 +43,7 @@ spec:
   region: fsn1
   secretBindingName: gardener-test1
   kubernetes:
-    version: 1.20.11
+    version: 1.21.7
     verticalPodAutoscaler:
       enabled: true
   purpose: testing

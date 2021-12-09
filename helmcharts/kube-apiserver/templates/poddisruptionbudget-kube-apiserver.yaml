@@ -18,7 +18,7 @@ metadata:
   name: garden-kube-apiserver
   namespace: {{ .Release.Namespace }}
 spec:
-  maxUnavailable: 1
+  minAvailable: 2
   selector:
     matchLabels:
       app: garden

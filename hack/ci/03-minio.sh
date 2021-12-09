@@ -17,6 +17,6 @@ kubectl apply -f hack/minio.yaml > /tmp/stdout 2> /tmp/stderr || { echo -e "\rMi
 rm hack/minio.yaml
 
 # Wait for minio deployment to become ready
-kubectl wait --for=condition=available --timeout=1m deployment minio -n minio > /tmp/stdout 2> /tmp/stderr || { echo -e "\rMinio deployment unsuccessful ❌"; echo "STDOUT":; cat /tmp/stdout; echo "STDERR:"; cat /tmp/stderr; exit 1; }
-kubectl wait --for=condition=ready --timeout=3m certificate minio-tls -n minio > /tmp/stdout 2> /tmp/stderr || { echo -e "\rMinio deployment unsuccessful, Certificate error ❌"; echo "STDOUT":; cat /tmp/stdout; echo "STDERR:"; cat /tmp/stderr; exit 1; }
+kubectl wait --for=condition=available --timeout=5m deployment minio -n minio > /tmp/stdout 2> /tmp/stderr || { echo -e "\rMinio deployment unsuccessful ❌"; echo "STDOUT":; cat /tmp/stdout; echo "STDERR:"; cat /tmp/stderr; exit 1; }
+kubectl wait --for=condition=ready --timeout=5m certificate minio-tls -n minio > /tmp/stdout 2> /tmp/stderr || { echo -e "\rMinio deployment unsuccessful, Certificate error ❌"; echo "STDOUT":; cat /tmp/stdout; echo "STDERR:"; cat /tmp/stderr; exit 1; }
 echo -e "\rMinio ready          ✅       "
