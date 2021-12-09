@@ -1,3 +1,4 @@
+
 {{- define "garden.kubeconfig-internal-gardener" -}}
 apiVersion: v1
 kind: Config
