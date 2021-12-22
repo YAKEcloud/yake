@@ -12,15 +12,12 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-apiVersion: extensions/v1beta1
+apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   annotations:
     nginx.ingress.kubernetes.io/ssl-passthrough: "true"
     kubernetes.io/ingress.class: "nginx"
-{{- with .Values.ingress.annotations }}
-{{ toYaml . | indent 4 }}
-{{- end }}
   name: apiserver-ingress
   namespace: {{ .Release.Namespace }}
 spec:
@@ -29,8 +26,11 @@ spec:
     http:
       paths:
       - backend:
-          serviceName: {{ .Values.serviceName }}
-          servicePort: 443
+          service:
+            name: {{ .Values.serviceName }}
+            port:
+              number: 443
+        pathType: ImplementationSpecific
   tls:
   - hosts:
     - {{ .Values.apiServer.hostname }}

@@ -260,7 +260,7 @@ global:
   # Gardener admission controller configuration values
   admission:
     enabled: true
-    replicaCount: 1
+    replicaCount: 3
     serviceAccountName: gardener-admission-controller
     image:
       repository: eu.gcr.io/gardener-project/gardener/admission-controller
@@ -383,7 +383,7 @@ global:
         shootMaintenance:
           concurrentSyncs: 5
           enableShootControlPlaneRestarter: true
-          enableShootCoreAddonRestarter: true
+          enableShootCoreAddonRestarter: false
         shootQuota:
           concurrentSyncs: 5
           syncPeriod: 60m
@@ -407,6 +407,8 @@ global:
         renewDeadline: 10s
         retryPeriod: 2s
         resourceLock: leases
+    #   resourceName: gardener-controller-manager-leader-election
+    #   resourceNamespace: garden
       logLevel: info
       kubernetesLogLevel: 0
       server:
@@ -461,8 +463,8 @@ global:
         renewDeadline: 10s
         retryPeriod: 2s
         resourceLock: leases
-        resourceNamespace: garden
-        resourceName: gardener-scheduler-leader-election
+      # resourceNamespace: garden
+      # resourceName: gardener-scheduler-leader-election
       logLevel: info
       server:
         healthProbes:

@@ -1,9 +1,9 @@
 #!/bin/bash
 FOLDER=$1
 
-GARDENER_VERSION="1.35.1"
-GARDEN_SETUP_VERSION="3.18.0"
-DASHBOARD_VERSION="1.52.2"
+GARDENER_VERSION="1.36.0"
+GARDEN_SETUP_VERSION="3.19.0"
+DASHBOARD_VERSION="1.52.3"
 
 if [ "$#" -ne  "1" ]; then
      echo "Usage: import-charts.sh <target-folder>"
