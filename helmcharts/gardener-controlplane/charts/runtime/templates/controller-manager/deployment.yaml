@@ -47,18 +47,20 @@ spec:
       {{- if gt (int .Values.global.controller.replicaCount) 1 }}
       affinity:
         podAntiAffinity:
-          requiredDuringSchedulingIgnoredDuringExecution:
-          - labelSelector:
-              matchExpressions:
-              - key: app
-                operator: In
-                values:
-                - gardener
-              - key: role
-                operator: In
-                values:
-                - controller-manager
-            topologyKey: kubernetes.io/hostname
+          preferredDuringSchedulingIgnoredDuringExecution:
+          - podAffinityTerm:
+              labelSelector:
+                matchExpressions:
+                - key: app
+                  operator: In
+                  values:
+                  - gardener
+                - key: role
+                  operator: In
+                  values:
+                  - controller-manager
+              topologyKey: kubernetes.io/hostname
+            weight: 1
       {{- end }}
       containers:
       - name: gardener-controller-manager
