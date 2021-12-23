@@ -18,6 +18,9 @@ metadata:
   annotations:
     nginx.ingress.kubernetes.io/ssl-passthrough: "true"
     kubernetes.io/ingress.class: "nginx"
+{{- with .Values.ingress.annotations }}
+{{ toYaml . | indent 4 }}
+{{- end }}
   name: apiserver-ingress
   namespace: {{ .Release.Namespace }}
 spec:
