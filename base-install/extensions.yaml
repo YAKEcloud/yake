@@ -19,3 +19,10 @@ spec:
         name: 23ke
         namespace: flux-system
       interval: 1m
+  valuesFrom:
+    - kind: ConfigMap
+      name: extensions-base-values
+      optional: false
+    - kind: Secret
+      name: extensions-values
+      optional: true
