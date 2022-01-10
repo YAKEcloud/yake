@@ -1,9 +1,9 @@
 os:
-  ubuntu: true
+  ubuntu: false
   gardenlinux: false
 provider:
   openstack: false
-  hetzner: true
+  hetzner: false
   aws: false
   azure: false
   gcp: false
