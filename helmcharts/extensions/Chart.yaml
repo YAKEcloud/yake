@@ -1,0 +1,6 @@
+apiVersion: v2
+name: extensions
+description: A Helm chart for managing gardener extensions
+
+# This is the chart version. in our case its equal to the 23KE version
+version: 1.0.0
