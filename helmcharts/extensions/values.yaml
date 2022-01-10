@@ -1,9 +1,14 @@
 os:
   ubuntu: false
-  gardenlinux: false
+
 provider:
-  openstack: false
-  hetzner: false
-  aws: false
-  azure: false
-  gcp: false
+  hcloud: false
+
+networking:
+  calico: false
+
+shoot:
+  certService: false
+  dnsService: false
+
+dnsManagement: false

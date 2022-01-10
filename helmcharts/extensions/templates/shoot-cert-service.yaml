@@ -1,3 +1,4 @@
+{{- if .Values.shoot.certService }}
 ---
 apiVersion: core.gardener.cloud/v1beta1
 kind: ControllerDeployment
@@ -27,3 +28,4 @@ spec:
     - kind: Extension
       type: shoot-cert-service
       globallyEnabled: true
+{{- end }}

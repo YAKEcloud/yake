@@ -1,3 +1,4 @@
+{{- if .Values.shoot.dnsService }}
 ---
 apiVersion: core.gardener.cloud/v1beta1
 kind: ControllerDeployment
@@ -22,3 +23,4 @@ spec:
     - kind: Extension
       type: shoot-dns-service
       globallyEnabled: true
+{{- end }}

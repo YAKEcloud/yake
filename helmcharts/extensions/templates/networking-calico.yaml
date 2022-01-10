@@ -1,3 +1,4 @@
+{{- if .Values.networking.calico }}
 ---
 apiVersion: core.gardener.cloud/v1beta1
 kind: ControllerDeployment
@@ -21,3 +22,4 @@ spec:
   resources:
     - kind: Network
       type: calico
+{{- end }}

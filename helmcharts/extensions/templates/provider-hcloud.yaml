@@ -1,3 +1,4 @@
+{{- if .Values.provider.hcloud }}
 ---
 apiVersion: core.gardener.cloud/v1beta1
 kind: ControllerDeployment
@@ -25,3 +26,4 @@ spec:
       type: hcloud
     - kind: Worker
       type: hcloud
+{{- end }}

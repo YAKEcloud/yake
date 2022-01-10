@@ -1,3 +1,4 @@
+{{- if .Values.dnsManagement }}
 ---
 apiVersion: core.gardener.cloud/v1beta1
 kind: ControllerDeployment
@@ -31,3 +32,4 @@ spec:
       type: openstack-designate
     - kind: DNSProvider
       type: cloudflare-dns
+{{- end }}

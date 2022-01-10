@@ -8,10 +8,11 @@ data:
   values.yaml: |-
     os:
       ubuntu: true
-      gardenlinux: false
     provider:
-      openstack: false
-      hetzner: true
-      aws: false
-      azure: false
-      gcp: false
+      hcloud: true
+    networking:
+      calico: true
+    shoot:
+      certService: true
+      dnsService: true
+    dnsManagement: true
