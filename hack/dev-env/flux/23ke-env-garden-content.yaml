@@ -6,7 +6,7 @@ metadata:
 spec:
   kubeConfig:
     secretRef:
-      name: kubeconfig-spezial
+      name: gardener-internal-kubeconfig
   interval: 1m0s
   dependsOn:
     - name: 23ke-base-install
