@@ -11,4 +11,27 @@ shoot:
   certService: false
   dnsService: false
 
-dnsManagement: false
+dnsManagement:
+  enabled: true
+  values:
+    image:
+      tag: 0.11.4
+  resources:
+    - kind: DNSProvider
+      type: aws-route53
+    - kind: DNSProvider
+      type: alicloud-dns
+    - kind: DNSProvider
+      type: azure-dns
+    - kind: DNSProvider
+      type: azure-private-dns
+    - kind: DNSProvider
+      type: google-clouddns
+    - kind: DNSProvider
+      type: openstack-designate
+    - kind: DNSProvider
+      type: cloudflare-dns
+    - kind: DNSProvider
+      type: netlify-dns
+    - kind: DNSProvider
+      type: infoblox-dns
