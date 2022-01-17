@@ -19,5 +19,5 @@ spec:
     deploymentRefs:
     - name: os-ubuntu
   resources:
-{{- toYaml .Values.os.ubuntu.resources | nindent 6 }}
+{{- toYaml .Values.os.ubuntu.resources | nindent 4 }}
 {{- end }}

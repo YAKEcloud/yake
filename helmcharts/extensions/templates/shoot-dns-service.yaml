@@ -1,4 +1,4 @@
-{{- if .Values.shoot.dnsService.enabled }}
+{{- if .Values.shoot.dnsService.enabled  -}}
 ---
 apiVersion: core.gardener.cloud/v1beta1
 kind: ControllerDeployment
@@ -19,5 +19,5 @@ spec:
     deploymentRefs:
       - name: extension-shoot-dns-service
   resources:
-{{- toYaml .Values.shoot.dnsService.resources | nindent 6 }}
+{{- toYaml .Values.shoot.dnsService.resources | nindent 4 }}
 {{- end }}

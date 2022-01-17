@@ -18,6 +18,6 @@ spec:
   deployment:
     deploymentRefs:
       - name: dns-external
-    resources:
-{{- toYaml .Values.dnsManagement.resources | nindent 6 }}
+  resources:
+{{- toYaml .Values.dnsManagement.resources | nindent 4 }}
 {{- end }}

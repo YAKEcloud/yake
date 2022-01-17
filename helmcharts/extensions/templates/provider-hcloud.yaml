@@ -19,5 +19,5 @@ spec:
     deploymentRefs:
       - name: provider-hcloud
   resources:
-{{- toYaml .Values.provider.hcloud.resources | nindent 6 }}
+{{- toYaml .Values.provider.hcloud.resources | nindent 4 }}
 {{- end }}

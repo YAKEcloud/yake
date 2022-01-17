@@ -6,13 +6,3 @@ metadata:
   namespace: flux-system
 data:
   values.yaml: |-
-    os:
-      ubuntu: true
-    provider:
-      hcloud: true
-    networking:
-      calico: true
-    shoot:
-      certService: true
-      dnsService: true
-    dnsManagement: true

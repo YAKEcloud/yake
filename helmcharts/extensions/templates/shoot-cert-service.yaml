@@ -1,4 +1,4 @@
-{{- if .Values.shoot.certService.enabled }}
+{{- if .Values.shoot.certService.enabled -}}
 ---
 apiVersion: core.gardener.cloud/v1beta1
 kind: ControllerDeployment
@@ -19,5 +19,5 @@ spec:
     deploymentRefs:
       - name: extension-shoot-cert-service
   resources:
-{{- toYaml .Values.shoot.certService.values | nindent 6 }}
+{{- toYaml .Values.shoot.certService.resources | nindent 4 }}
 {{- end }}

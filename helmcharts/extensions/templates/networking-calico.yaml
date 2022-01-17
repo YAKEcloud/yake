@@ -19,5 +19,5 @@ spec:
     deploymentRefs:
       - name: networking-calico
   resources:
-{{- toYaml .Values.networking.calico.resources | nindent 6 }}
+{{- toYaml .Values.networking.calico.resources | nindent 4 }}
 {{- end }}
