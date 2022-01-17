@@ -4,5 +4,4 @@ resources:
   - token.yaml
   - cpfl.yaml
   - project.yaml
-  - cloud_secret.yaml
   - secret_binding.yaml

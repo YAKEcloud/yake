@@ -6,3 +6,4 @@ resources:
 - gardener-values.yaml
 - identity-values.yaml
 - kube-apiserver-values.yaml
+- extensions-values.yaml

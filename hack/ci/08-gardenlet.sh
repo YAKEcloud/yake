@@ -22,12 +22,12 @@ yq eval '.stringData.token-id = env(TOKEN_ID)' hack/dev-env/gardenlet/garden-con
 yq eval '.metadata.name = "bootstrap-token-" + env(TOKEN_ID)' -i hack/dev-env/gardenlet/garden-content/token.yaml
 yq eval '.stringData.token-secret = env(TOKEN_ID_SECRET)' -i hack/dev-env/gardenlet/garden-content/token.yaml
 
-kubectl create secret generic cloud-secret -n garden-testing  --from-file=hcloudToken=hack/secrets/hcloud_token -oyaml --dry-run=client > hack/dev-env/gardenlet/garden-content/cloud_secret.yaml
+kubectl create ns garden-testing --dry-run=client -oyaml| kubectl apply -f - --context garden > /tmp/stdout 2> /tmp/stderr || { echo -e "\rError while creating ns gardenlet-testing ❌"; echo "STDOUT":; cat /tmp/stdout; echo "STDERR:"; cat /tmp/stderr; exit 1; }
+kubectl create secret generic cloud-secret -n garden-testing  --from-file=hcloudToken=hack/secrets/hcloud_token --dry-run=client -oyaml | kubectl apply -f - --context garden > /tmp/stdout 2> /tmp/stderr || { echo -e "\rError while creating secret cloud-secret ❌"; echo "STDOUT":; cat /tmp/stdout; echo "STDERR:"; cat /tmp/stderr; exit 1; }
 
 bash hack/ci/05-config-bucket.sh > /dev/null
 echo -n "."
 
-rm hack/dev-env/gardenlet/garden-content/cloud_secret.yaml
 rm hack/dev-env/gardenlet/garden-content/token.yaml
 rm hack/dev-env/gardenlet/config/internal-gardenlet-values.yaml
 
