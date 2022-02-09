@@ -5,9 +5,3 @@ resources:
 - rbac.yaml
 - 00-namespace-garden-dev.yaml
 - 05-project-dev.yaml
-- networking-calico.yaml
-- os-ubuntu.yaml
-- provider-hcloud.yaml
-- shoot-dns-service.yaml
-- shoot-cert-service.yaml
-- external-dns-management.yaml

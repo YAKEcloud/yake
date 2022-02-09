@@ -1,0 +1,85 @@
+os:
+  ubuntu:
+    enabled: false
+    values:
+      image:
+        tag: v1.13.0
+    resources:
+      - kind: OperatingSystemConfig
+        type: ubuntu
+      - kind: OperatingSystemConfig
+        type: ubuntu-pro
+
+provider:
+  hcloud:
+    enabled: false
+    values:
+      image:
+        tag: v0.4.8
+    resources:
+      - kind: ControlPlane
+        type: hcloud
+      - kind: Infrastructure
+        type: hcloud
+      - kind: Worker
+        type: hcloud
+
+networking:
+  calico:
+    enabled: false
+    values:
+      image:
+        tag: v1.19.0
+    resources:
+      - kind: Network
+        type: calico
+
+shoot:
+  certService:
+    enabled: false
+    values:
+      image:
+        tag: v1.18.0
+      certificateConfig:
+        defaultIssuer:
+          acme:
+            email: operations@23technologies.cloud
+          name: garden
+    resources:
+      - kind: Extension
+        type: shoot-cert-service
+        globallyEnabled: true
+  dnsService:
+    enabled: false
+    values:
+      image:
+        tag: v1.14.0
+    resources:
+      - kind: Extension
+        type: shoot-dns-service
+        globallyEnabled: true
+
+dnsManagement:
+  enabled: false
+  values:
+    image:
+      tag: v0.11.4
+  resources:
+    - kind: DNSProvider
+      type: aws-route53
+    - kind: DNSProvider
+      type: alicloud-dns
+    - kind: DNSProvider
+      type: azure-dns
+    - kind: DNSProvider
+      type: azure-private-dns
+    - kind: DNSProvider
+      type: google-clouddns
+    - kind: DNSProvider
+      type: openstack-designate
+    - kind: DNSProvider
+      type: cloudflare-dns
+    - kind: DNSProvider
+      type: netlify-dns
+    - kind: DNSProvider
+      type: infoblox-dns

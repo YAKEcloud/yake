@@ -6,3 +6,4 @@ resources:
 - gardener.yaml
 - identity.yaml
 - kube-apiserver.yaml
+- extensions.yaml

@@ -12,7 +12,7 @@ spec:
     name: 23ke-github
   url: ssh://git@github.com/23technologies/23ke.git
 ---
-apiVersion: kustomize.toolkit.fluxcd.io/v1beta1
+apiVersion: kustomize.toolkit.fluxcd.io/v1beta2
 kind: Kustomization
 metadata:
   name: 23ke-base
