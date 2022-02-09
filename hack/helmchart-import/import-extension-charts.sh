@@ -23,7 +23,6 @@ do
     FILE_NAME=$TARGET_DIR/$(echo $EXT | sed 's/\//-/').yaml
 
     # fetch the file
-
     wget $FILE_URL -O $FILE_NAME > /tmp/stdout 2> /tmp/stderr || { echo -e "\r Error during fetching extension $EXT ❌"; echo "STDOUT":; cat /tmp/stdout; echo "STDERR:"; cat /tmp/stderr;}
 
 done
