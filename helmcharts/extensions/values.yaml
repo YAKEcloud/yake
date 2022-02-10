@@ -157,6 +157,12 @@ gardener-gardener-extension-provider-gcp:
       # renovate: depName=23technologies/gardener-extension-provider-hcloud
       tag: v0.4.8
   resources:
+  - kind: ControlPlane
+    type: hcloud
+  - kind: Infrastructure
+    type: hcloud
+  - kind: Worker
+    type: hcloud
 
 gardener-gardener-extension-provider-openstack:
   enable: false
