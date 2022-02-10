@@ -38,15 +38,15 @@ do
     # replace values in the deploymnent
     $YQ eval '.providerConfig.values="replaceMe"' -i /tmp/deployment.yaml
     sed -i 's/ replaceMe//' /tmp/deployment.yaml
-    echo "{{- toYaml .Values.$EXT_NAME.values | nindent 4 }}" >> /tmp/deployment.yaml
+    echo "{{- toYaml (index .Values \"$EXT_NAME\").values | nindent 4 }}" >> /tmp/deployment.yaml
 
     # replace resources in the controller registration
     $YQ eval '.spec.resources="replaceMe"' -i /tmp/registration.yaml
     sed -i 's/ replaceMe//' /tmp/registration.yaml
-    echo "{{- toYaml .Values.$EXT_NAME.resources | nindent 4 }}" >> /tmp/registration.yaml
+    echo "{{- toYaml (index .Values \"$EXT_NAME\").resources | nindent 4 }}" >> /tmp/registration.yaml
 
     # merge the two separate files and
-    echo "{{- if .Values.$EXT_NAME.enabled }}" > $FILE_NAME
+    echo "{{- if (index .Values \"$EXT_NAME\").enable }}" > $FILE_NAME
     cat /tmp/deployment.yaml >> $FILE_NAME
     echo "---" >> $FILE_NAME
     cat /tmp/registration.yaml >> $FILE_NAME
