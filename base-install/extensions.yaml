@@ -1,0 +1,28 @@
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: extensions
+  namespace: flux-system
+spec:
+  interval: 5m
+  kubeConfig:
+    secretRef:
+      name: gardener-internal-kubeconfig
+  dependsOn:
+    - name: gardener-application
+    - name: gardener-runtime
+  chart:
+    spec:
+      chart: ./helmcharts/extensions
+      sourceRef:
+        kind: GitRepository
+        name: 23ke
+        namespace: flux-system
+      interval: 1m
+  valuesFrom:
+    - kind: ConfigMap
+      name: extensions-base-values
+      optional: false
+    - kind: Secret
+      name: extensions-values
+      optional: true

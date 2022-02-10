@@ -3,9 +3,7 @@
 source hack/handy.sh
 if [[ $CI == "true" ]]
 then
-    wget -q https://github.com/fluxcd/flux2/releases/download/v0.17.1/flux_0.17.1_linux_amd64.tar.gz
-    tar xfvz flux_0.17.1_linux_amd64.tar.gz --directory /tmp > /dev/null
-    FLUX=/tmp/flux
+    FLUX=/usr/local/bin/flux
 else
     FLUX=$(which flux)
 fi
