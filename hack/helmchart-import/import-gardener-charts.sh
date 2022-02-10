@@ -31,6 +31,8 @@ cp secret-kubeconfig-for-gardener.yaml $FOLDER/kube-apiserver/templates/
 cat append-kube-apiserver-helpers.tpl >> $FOLDER/kube-apiserver/templates/_helpers.tpl 
 rsync -vLr --delete $REPO/gardener-dashboard/charts/gardener-dashboard/ $FOLDER/gardener-dashboard/
 rsync -vLr --delete $REPO/gardener-dashboard/charts/identity/ $FOLDER/identity/
+cp dashboard_versions.tpl $FOLDER/gardener-dashboard/templates/_versions.tpl
+cp dashboard_versions.tpl $FOLDER/identity/templates/_versions.tpl
 
 # modify unmaintained Chart.yaml version to allow flux to detect upgrades
 find $FOLDER -name Chart.yaml -type f -exec sed -i "s/version: 0.1.0/version: $GARDENER_VERSION/g" {} +
