@@ -41,9 +41,8 @@ echo "      # renovate: depName=$DEP_NAME"
 echo "      tag: $TAG"
 echo "  resources:"
 
-if ! wget -q https://raw.githubusercontent.com/$DEP_NAME/$TAG/example/controller-registration.yaml -O /tmp/controller-registration.yaml
-then
-     wget -q https://raw.githubusercontent.com/$DEP_NAME/$TAG/examples/controller-registration.yaml -O /tmp/controller-registration.yaml
-fi
+wget -q https://raw.githubusercontent.com/$DEP_NAME/$TAG/example/controller-registration.yaml -O /tmp/controller-registration.yaml || \
+wget -q https://raw.githubusercontent.com/$DEP_NAME/$TAG/examples/controller-registration.yaml -O /tmp/controller-registration.yaml || \
+wget -q https://github.com/$DEP_NAME/releases/download/$TAG/controller-registration.yaml -O /tmp/controller-registration.yaml
 
 $YQ eval 'select(documentIndex == 1).spec.resources' /tmp/controller-registration.yaml | sed 's/^/    /'
