@@ -3,7 +3,7 @@
 source hack/handy.sh
 if [[ $CI == "true" ]]
 then
-    FLUX=/tmp/flux
+    FLUX=/usr/local/bin/flux
 else
     FLUX=$(which flux)
 fi
