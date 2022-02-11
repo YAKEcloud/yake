@@ -1,5 +1,19 @@
 #!/usr/bin/env bash
 
+# This scripts allows to import the extensions'
+# controller-registration.yaml hosted in various repositories on github
+#
+# The basic idea of the script is the following:
+# - parse the file 23ke/helmcharts/extensions/values.yaml and search for renovate comments,
+#   which hold the dependency (i.e. the extension) name followed by a version of the corresponding dependency
+# - download the controller-registration.yaml for the corresponding extension from github
+# - split it into two separate files (deployment.yaml and registration.yaml) for easy processing
+# - fill these two files with the templating needed for helm
+# - merge both files and copy the result to 23ke/helmcharts/extensions/templates/
+#
+# if a new version of an extension is released, renovate will inform us and we can decide to pull in the latest version of the corresponding helmchart using this script.
+
+
 YQ=/tmp/yq
 if ! [ -x $YQ ]
 then

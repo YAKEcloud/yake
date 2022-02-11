@@ -1,4 +1,32 @@
 #!/usr/bin/env bash
+
+# This script is just a helper to create a starting point for
+# 23ke/helmcharts/extesions/values.yaml
+#
+# Generally, 23ke/helmcharts/extesions/values.yaml is defined by us,
+# and after running this script you might want to modify it.
+# It should definitely contain renovate comments, so that rennovate can
+# inform us, when there is a new release for an extension.
+#
+# Example usage:
+# Write an initial values.yaml including some extensions:
+#
+#     DEP_NAMES="gardener/external-dns-management
+#     gardener/gardener-extension-networking-calico
+#     gardener/gardener-extension-networking-cilium
+#     gardener/gardener-extension-os-gardenlinux
+#     gardener/gardener-extension-os-ubuntu
+#     gardener/gardener-extension-provider-alicloud
+#     gardener/gardener-extension-provider-aws
+#     gardener/gardener-extension-provider-azure
+#     gardener/gardener-extension-provider-gcp
+#     23technologies/gardener-extension-provider-hcloud
+#     gardener/gardener-extension-provider-openstack
+#     gardener/gardener-extension-shoot-cert-service
+#     gardener/gardener-extension-shoot-dns-service"
+#
+#     for dep in $DEP_NAMES ; do ./generate-values-yaml.sh $dep ; echo ""; done > values.yaml
+
 if [[ $1 == "" ]]
 then
    echo "usage: ./generate-values-yaml.sh <extension_name> [tag]"
