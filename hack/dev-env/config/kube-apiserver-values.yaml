@@ -6,12 +6,6 @@ metadata:
 type: Opaque
 stringData:
   values.yaml: |
-    ingress:
-      annotations:
-        dns.gardener.cloud/dnsnames: api.${ENV}.${BASE_DOMAIN}
-        dns.gardener.cloud/ttl: "500"
-        dns.gardener.cloud/class: garden
-
     tls:
       identity:
         # this is the selfsigned dev-ca
@@ -50,3 +44,5 @@ stringData:
           -----END CERTIFICATE-----
       kubeAPIServer:
         basicAuthPassword: ${KUBEAPISERVER_BASICAUTHPASSWORD}
+    ingress:
+      annotations: {}
