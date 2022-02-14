@@ -6,27 +6,34 @@ metadata:
 type: Opaque
 stringData:
   values.yaml: |
-    os:
-      ubuntu:
-        enabled: true
-    provider:
-      hcloud:
-        enabled: true
-        values:
-          test:
-            test: hi
-          image:
-            nap: hallo
+    gardener-gardener-extension-os-ubuntu:
+      enable: true
 
-    networking:
-      calico:
-        enabled: true
+    23technologies-gardener-extension-provider-hcloud:
+      enable: true
 
-    shoot:
-      certService:
-        enabled: true
-      dnsService:
-        enabled: true
+    gardener-gardener-extension-networking-calico:
+      enable: true
 
-    dnsManagement:
-      enabled: true
+    gardener-gardener-extension-shoot-cert-service:
+      enable: true
+      values:
+        certificateConfig:
+            defaultIssuer:
+              acme:
+                email: operations@23technologies.cloud
+              name: garden
+      resources:
+        - kind: Extension
+          type: shoot-cert-service
+          globallyEnabled: true
+
+    gardener-gardener-extension-shoot-dns-service:
+      enable: true
+      resources:
+          - kind: Extension
+            type: shoot-dns-service
+            globallyEnabled: true
+
+    gardener-external-dns-management:
+      enable: true
