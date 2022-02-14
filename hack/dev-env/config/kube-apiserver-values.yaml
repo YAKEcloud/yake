@@ -8,7 +8,7 @@ stringData:
   values.yaml: |
     ingress:
       annotations:
-        dns.gardener.cloud/dnsnames: api.23ke.23ke-run-ac29.23t-test.okeanos.dev
+        dns.gardener.cloud/dnsnames: api.${ENV}.${BASE_DOMAIN}
         dns.gardener.cloud/ttl: "500"
         dns.gardener.cloud/class: garden
 
