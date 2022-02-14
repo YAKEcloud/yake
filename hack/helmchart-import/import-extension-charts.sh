@@ -50,13 +50,12 @@ do
     $YQ eval 'select(documentIndex == 1)' /tmp/controller-registration.yaml > /tmp/registration.yaml
 
     # replace values in the deploymnent
-    $YQ eval '.providerConfig.values="replaceMe"' -i /tmp/deployment.yaml
-    sed -i 's/ replaceMe//' /tmp/deployment.yaml
+    # see also https://stackoverflow.com/questions/67068224/is-it-possible-to-output-an-empty-value-using-yqy
+    $YQ eval -i '.providerConfig.values = "" | .providerConfig.values tag = "!!null"' /tmp/deployment.yaml
     echo "{{- toYaml (index .Values \"$EXT_NAME\").values | nindent 4 }}" >> /tmp/deployment.yaml
 
     # replace resources in the controller registration
-    $YQ eval '.spec.resources="replaceMe"' -i /tmp/registration.yaml
-    sed -i 's/ replaceMe//' /tmp/registration.yaml
+    $YQ eval -i '.spec.resources= "" | .spec.resources tag = "!!null"' /tmp/registration.yaml
     echo "{{- toYaml (index .Values \"$EXT_NAME\").resources | nindent 4 }}" >> /tmp/registration.yaml
 
     # merge the two separate files and
