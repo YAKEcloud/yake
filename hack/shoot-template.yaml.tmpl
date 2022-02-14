@@ -5,6 +5,9 @@ metadata:
   name: 23ke-test
   labels:
     23technologies.cloud/free-to-use: "true"
+  annotations:
+    shoot.gardener.cloud/cleanup-webhooks-finalize-grace-period-seconds: "0"
+    shoot.gardener.cloud/cleanup-extended-apis-finalize-grace-period-seconds: "0"
 spec:
   provider:
     type: hcloud
@@ -43,7 +46,7 @@ spec:
   region: fsn1
   secretBindingName: gardener-test1
   kubernetes:
-    version: 1.21.7
+    version: 1.21.9
     verticalPodAutoscaler:
       enabled: true
   purpose: testing
