@@ -60,7 +60,10 @@ else
     TAG=$2
 fi
 
+# the extension name is the same as the dependency name but with a - instead of a /
 EXT_NAME=$(echo $DEP_NAME | sed 's/\//-/')
+
+# print the scaffold of our target yaml-file
 echo $EXT_NAME:
 echo "  enable: false"
 echo "  values:"
@@ -69,8 +72,10 @@ echo "      # renovate: depName=$DEP_NAME"
 echo "      tag: $TAG"
 echo "  resources:"
 
+# fetch the controller-registration.yaml of the current extension from upstream
 wget -q https://raw.githubusercontent.com/$DEP_NAME/$TAG/example/controller-registration.yaml -O /tmp/controller-registration.yaml || \
 wget -q https://raw.githubusercontent.com/$DEP_NAME/$TAG/examples/controller-registration.yaml -O /tmp/controller-registration.yaml || \
 wget -q https://github.com/$DEP_NAME/releases/download/$TAG/controller-registration.yaml -O /tmp/controller-registration.yaml
 
+# print the .spec.resources and indent it with sed, so that it appears on the right level of our target yaml-file
 $YQ eval 'select(documentIndex == 1).spec.resources' /tmp/controller-registration.yaml | sed 's/^/    /'
