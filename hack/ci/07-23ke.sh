@@ -1,6 +1,7 @@
 #/usr/bin/env bash
 
 source hack/handy.sh
+source hack/secrets/azure_dns
 if [[ $CI == "true" ]]
 then
     FLUX=/usr/local/bin/flux
@@ -16,12 +17,26 @@ fi
 echo -n "."
 
 # Templating 23ke-env-substitutions.yaml
-yq eval '.stringData.BASE_DOMAIN = env(SHOOT) + ".23t-test.okeanos.dev"' env-template/config/23ke-env-substitutions.yaml > hack/23ke-env-substitutions.yaml
-yq eval '.stringData.DASHBOARD_CLIENTSECRET = env(DASHBOARD_CLIENTSECRET)' -i hack/23ke-env-substitutions.yaml
-yq eval '.stringData.DASHBOARD_SESSIONSECRET = env(DASHBOARD_SESSIONSECRET)' -i hack/23ke-env-substitutions.yaml
-yq eval '.stringData.KUBEAPISERVER_BASICAUTHPASSWORD = env(KUBEAPISERVER_BASICAUTHPASSWORD)' -i hack/23ke-env-substitutions.yaml
-kubectl apply -f hack/23ke-env-substitutions.yaml > /tmp/stdout 2> /tmp/stderr || { echo -e "\rError while applying 23ke-env-substitutions secret ❌"; echo "STDOUT":; cat /tmp/stdout; echo "STDERR:"; cat /tmp/stderr; exit 1; }
-rm hack/23ke-env-substitutions.yaml
+cat << EOF | kubectl apply -f - > /tmp/stdout 2> /tmp/stderr || { echo -e "\rError while applying 23ke-env-substitutions secret ❌"; echo "STDOUT":; cat /tmp/stdout; echo "STDERR:"; cat /tmp/stderr; exit 1; }
+apiVersion: v1
+kind: Secret
+metadata:
+  name: 23ke-env-substitutions # only supports single line strings!
+  namespace: flux-system
+type: Opaque
+stringData:
+  ENV: dev
+  BASE_DOMAIN: ${SHOOT}.23t-test.okeanos.dev
+  DASHBOARD_CLIENTSECRET: ${DASHBOARD_CLIENTSECRET}
+  DASHBOARD_SESSIONSECRET: ${DASHBOARD_SESSIONSECRET}
+  KUBEAPISERVER_BASICAUTHPASSWORD: ${KUBEAPISERVER_BASICAUTHPASSWORD}
+  AZURE_DOMAIN: internal.${SHOOT}.23ke-testbed.23t.dev
+  AZURE_TENANT_ID: ${AZURE_TENANT_ID}
+  AZURE_SUBSCRIPTION_ID: ${AZURE_SUBSCRIPTION_ID}
+  AZURE_SECRET_ID: ${AZURE_SECRET_ID}
+  AZURE_SECRET_VALUE: ${AZURE_SECRET_VALUE}
+EOF
+
 if ! kubectl -n flux-system get secret minio-local > /tmp/stdout 2> /tmp/stderr
 then
 	kubectl create secret generic -n flux-system minio-local --from-literal=accesskey=minio --from-literal=secretkey=$MINIO_PW > /tmp/stdout 2> /tmp/stderr || { echo -e "\rError while Creating secret. ❌" ; echo "STDOUT":; cat /tmp/stdout; echo "STDERR:"; cat /tmp/stderr; exit 1; }

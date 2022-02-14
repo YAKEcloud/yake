@@ -8,21 +8,21 @@ stringData:
   values.yaml: |
     global:
       internalDomain:
-        domain: internal.23ke-run-5c61.23t-test.okeanos.dev
+        domain: ${AZURE_DOMAIN}
         provider: azure-dns
         credentials:
-          tenantID:
-          subscriptionID:
-          clientID:
-          clientSecret:
+          tenantID: ${AZURE_TENANT_ID}
+          subscriptionID: ${AZURE_SUBSCRIPTION_ID}
+          clientID: ${AZURE_SECRET_ID}
+          clientSecret: ${AZURE_SECRET_VALUE}
       defaultDomains:
-      - domain: internal.23ke-run-5c61.23t-test.okeanos.dev
+      - domain: ${AZURE_DOMAIN}
         provider: azure-dns
         credentials:
-          tenantID:
-          subscriptionID:
-          clientID:
-          clientSecret:
+          tenantID: ${AZURE_TENANT_ID}
+          subscriptionID: ${AZURE_SUBSCRIPTION_ID}
+          clientID: ${AZURE_SECRET_ID}
+          clientSecret: ${AZURE_SECRET_VALUE}
       deployment:
         virtualGarden:
           clusterIP: 10.16.1.1
