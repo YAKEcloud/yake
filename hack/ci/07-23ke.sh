@@ -1,7 +1,7 @@
 #/usr/bin/env bash
 
 source hack/handy.sh
-source hack/secrets/azure_dns
+source hack/ci/secrets/azure_dns
 if [[ $CI == "true" ]]
 then
     FLUX=/usr/local/bin/flux
@@ -12,7 +12,7 @@ fi
 echo -e -n "\rInstalling 23KE"
 if ! kubectl -n flux-system get secret target-gardencluster-kubeconfig > /tmp/stdout 2> /tmp/stderr
 then
-	kubectl -n flux-system create secret generic target-gardencluster-kubeconfig --from-literal=value="$(cat hack/secrets/shoot-kubeconfig.yaml)" > /tmp/stdout 2> /tmp/stderr || { echo -e "\rError while creating target-gardencluster-kubeconfig secret ❌"; echo "STDOUT":; cat /tmp/stdout; echo "STDERR:"; cat /tmp/stderr; exit 1; }
+	kubectl -n flux-system create secret generic target-gardencluster-kubeconfig --from-literal=value="$(cat hack/ci/secrets/shoot-kubeconfig.yaml)" > /tmp/stdout 2> /tmp/stderr || { echo -e "\rError while creating target-gardencluster-kubeconfig secret ❌"; echo "STDOUT":; cat /tmp/stdout; echo "STDERR:"; cat /tmp/stderr; exit 1; }
 fi
 echo -n "."
 
@@ -46,7 +46,7 @@ $FLUX create source bucket $BUCKET --endpoint=$MINIO_HOSTNAME --bucket-name=$BUC
 echo -n "."
 $FLUX create source bucket 23ke-config --endpoint=$MINIO_HOSTNAME --bucket-name=config --secret-ref=minio-local > /tmp/stdout 2> /tmp/stderr || { echo -e "\rError while creating flux 23ke-config bucket source ❌"; echo "STDOUT":; cat /tmp/stdout; echo "STDERR:"; cat /tmp/stderr; exit 1; }
 echo -n "."
-kubectl apply -f hack/kustomizations > /tmp/stdout 2> /tmp/stderr || { echo -e "\rError while applying flux-kustomizations  ❌"; echo "STDOUT":; cat /tmp/stdout; echo "STDERR:"; cat /tmp/stderr; exit 1; }
+kubectl apply -f hack/ci/flux > /tmp/stdout 2> /tmp/stderr || { echo -e "\rError while applying flux-kustomizations  ❌"; echo "STDOUT":; cat /tmp/stdout; echo "STDERR:"; cat /tmp/stderr; exit 1; }
 echo -n "."
 
 echo -e -n "\r                          "
@@ -59,6 +59,6 @@ kubectl wait kustomization -A --all --for=condition=ready --timeout=10m > /tmp/s
 echo -e -n "\rWaiting for helmreleases"
 kubectl wait helmrelease -A --all --for=condition=ready --timeout=20m > /tmp/stdout 2> /tmp/stderr || { echo -e "\rError while waiting for helmreleases ❌"; echo "STDOUT":; cat /tmp/stdout; echo "STDERR:"; cat /tmp/stderr; exit 1; }
 # Extract apiserver-in-shoot-kubeconfig.yaml
-kubectl get secrets -n garden garden-kubeconfig-for-admin -o go-template='{{.data.kubeconfig | base64decode }}' > hack/secrets/apiserver-in-shoot-kubeconfig.yaml 2> /tmp/stderr || { echo -e "\rError while extracting apiserver-in-shoot-kubeconfig ❌"; echo "STDERR:"; cat /tmp/stderr; exit 1; }
+kubectl get secrets -n garden garden-kubeconfig-for-admin -o go-template='{{.data.kubeconfig | base64decode }}' > hack/ci/secrets/apiserver-in-shoot-kubeconfig.yaml 2> /tmp/stderr || { echo -e "\rError while extracting apiserver-in-shoot-kubeconfig ❌"; echo "STDERR:"; cat /tmp/stderr; exit 1; }
 echo -n "."
 echo -e "\r23KE Ready           ✅                  "

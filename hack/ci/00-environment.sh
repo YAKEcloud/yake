@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-export KUBECONFIG=hack/secrets/gardener-kubeconfig.yaml
+export KUBECONFIG=hack/ci/secrets/gardener-kubeconfig.yaml
 DESIRED_PRESPAWNED_SHOOTS=2
 LABEL=23technologies.cloud/free-to-use
 ACTUAL_PRESPAWNED_SHOOTS=$(kubectl get shoots --namespace garden-23t-test --selector=23technologies.cloud/free-to-use='true' --no-headers=true | wc -l)
@@ -10,16 +10,10 @@ do
     RAND=$(openssl rand -hex 2)
     export SHOOT="23ke-run-$RAND"
     # Alter shoot template
-    yq eval '.metadata.name = env(SHOOT)' hack/shoot-template.yaml.tmpl > hack/shoot-template.yaml
-
-    # Create Shoot
-    kubectl apply -f hack/shoot-template.yaml > /tmp/stdout 2> /tmp/stderr || { echo -e "\rShoot creation unsuccessful ❌"; echo "STDOUT:"; cat /tmp/stdout; echo "STDERR:"; cat /tmp/stderr; exit 1; }
+    yq eval '.metadata.name = env(SHOOT)' hack/ci/misc/shoot-template.yaml.tmpl | kubectl apply -f - > /tmp/stdout 2> /tmp/stderr || { echo -e "\rShoot creation unsuccessful ❌"; echo "STDOUT:"; cat /tmp/stdout; echo "STDERR:"; cat /tmp/stderr; exit 1; }
     ACTUAL_PRESPAWNED_SHOOTS=$(kubectl get shoots --namespace garden-23t-test --selector=23technologies.cloud/free-to-use='true' --no-headers=true | wc -l)
     NEEDED_PRESPAWNED_SHOOTS=$(( $DESIRED_PRESPAWNED_SHOOTS - ACTUAL_PRESPAWNED_SHOOTS ))
 done
-
-# remove templated shoot definition
-rm hack/shoot-template.yaml
 
 # Choose our shoot (free to use and the one with highest progress)
 export SHOOT=$(kubectl get shoot -n garden-23t-test -o custom-columns=NAME:.metadata.name --sort-by=.status.lastOperation.progress --no-headers=true --selector=23technologies.cloud/free-to-use='true'|tail -n 1)
@@ -58,7 +52,7 @@ echo
 echo "This line might be handy:"
 echo ". hack/handy.sh"
 
-echo "export KUBECONFIG='hack/secrets/shoot-kubeconfig.yaml:hack/secrets/apiserver-in-shoot-kubeconfig.yaml'" > hack/handy.sh
+echo "export KUBECONFIG='hack/ci/secrets/shoot-kubeconfig.yaml:hack/ci/secrets/apiserver-in-shoot-kubeconfig.yaml'" > hack/handy.sh
 echo "export MC_ALIAS=$MC_ALIAS" >> hack/handy.sh
 echo "export SHOOT=$SHOOT" >> hack/handy.sh
 echo "export MINIO_HOSTNAME=$MINIO_HOSTNAME" >> hack/handy.sh

@@ -5,7 +5,7 @@ export PROGRESS_NUMBER_OF_STEPS=8
 
 # Setup Environment
 bash hack/ci/00-environment.sh || exit 1
-source hack/progress.sh
+source hack/ci/misc/progress.sh
 echo "env (handy.sh) ready ✅ "
 progress_step
 
