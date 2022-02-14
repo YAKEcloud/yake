@@ -8,9 +8,6 @@ stringData:
   values.yaml: |
     ingress:
       annotations:
-        dns.gardener.cloud/dnsnames: identity.${ENV}.${BASE_DOMAIN}
-        dns.gardener.cloud/ttl: "500"
-        dns.gardener.cloud/class: garden
         cert-manager.io/cluster-issuer: letsencrypt-staging
     staticPasswords:
     - email: "admin@localhost"

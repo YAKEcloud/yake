@@ -29,7 +29,7 @@ kubectl label shoot -n garden-23t-test $SHOOT 23technologies.cloud/free-to-use=f
 
 
 export MC_ALIAS=${MC_ALIAS:-shoot}
-export MINIO_HOSTNAME="minio.$SHOOT.23t-test.okeanos.dev"
+export MINIO_HOSTNAME="minio.ingress.$SHOOT.23t-test.okeanos.dev"
 export MINIO_URL="https://$MINIO_HOSTNAME"
 export MINIO_PW=$(openssl rand -hex 20)
 export DASHBOARD_CLIENTSECRET=$(openssl rand -hex 20)
@@ -57,6 +57,7 @@ fi
 echo
 echo "This line might be handy:"
 echo ". hack/handy.sh"
+
 echo "export KUBECONFIG='hack/secrets/shoot-kubeconfig.yaml:hack/secrets/apiserver-in-shoot-kubeconfig.yaml'" > hack/handy.sh
 echo "export MC_ALIAS=$MC_ALIAS" >> hack/handy.sh
 echo "export SHOOT=$SHOOT" >> hack/handy.sh

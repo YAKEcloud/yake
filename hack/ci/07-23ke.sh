@@ -25,7 +25,7 @@ metadata:
   namespace: flux-system
 type: Opaque
 stringData:
-  ENV: dev
+  ENV: ingress
   BASE_DOMAIN: ${SHOOT}.23t-test.okeanos.dev
   DASHBOARD_CLIENTSECRET: ${DASHBOARD_CLIENTSECRET}
   DASHBOARD_SESSIONSECRET: ${DASHBOARD_SESSIONSECRET}
