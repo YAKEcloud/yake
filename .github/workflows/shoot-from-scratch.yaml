@@ -14,7 +14,7 @@ jobs:
       - name: Install packages
         run: bash hack/ci/00-packages.sh
       - name: Setup Environment
-        run: echo "$KUBECONFIG_CONTENT" > hack/secrets/gardener-kubeconfig.yaml; bash hack/ci/00-environment.sh
+        run: echo "$KUBECONFIG_CONTENT" > hack/ci/secrets/gardener-kubeconfig.yaml; bash hack/ci/00-environment.sh
         env:
           KUBECONFIG_CONTENT: ${{ secrets.GARDENER_APISERVER_KUBECONFIG }}
       - name: Setup shoot
@@ -30,7 +30,7 @@ jobs:
         run: bash hack/ci/04-23ke-bucket.sh
       - name: Upload 23ke-config bucket
         id: upload23KEConfig
-        run: echo "$AZURE_DNS" > hack/secrets/azure_dns ; bash hack/ci/05-config-bucket.sh
+        run: echo "$AZURE_DNS" > hack/ci/secrets/azure_dns ; bash hack/ci/05-config-bucket.sh
         env:
           AZURE_DNS: ${{ secrets.AZURE_DNS_SECRET }}
       - name: Install flux
@@ -41,7 +41,7 @@ jobs:
         run: bash hack/ci/07-23ke.sh
       - name: Install Gardenlet
         id: installGardenlet
-        run: echo "$CLOUD_SECRET" > hack/secrets/hcloud_token ; bash hack/ci/08-gardenlet.sh
+        run: echo "$CLOUD_SECRET" > hack/ci/secrets/hcloud_token ; bash hack/ci/08-gardenlet.sh
         env:
           CLOUD_SECRET: ${{ secrets.HCLOUD_TESTING_TOKEN }}
       - name: Delete shoot
