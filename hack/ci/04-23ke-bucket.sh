@@ -1,11 +1,11 @@
 #/usr/bin/env bash
 
-source hack/handy.sh
+source hack/ci/handy.sh
 
 # 23KE Bucket
 # Let's Encrypt Staging CA needed.
 mkdir -p ~/.mc/certs/CAs/
-cp hack/le-staging.pem ~/.mc/certs/CAs/le-staging.pem
+cp hack/ci/misc/le-staging.pem ~/.mc/certs/CAs/le-staging.pem
 echo  -n -e "\r23KE Bucket creating"
 (mc ls $MC_ALIAS/$BUCKET > /tmp/stdout 2> /tmp/stderr ) || mc mb $MC_ALIAS/$BUCKET > /dev/null 2>&1 || { echo -e "\r23KE Bucket did not exist. error while creating a new one ❌"; echo "STDOUT":; cat /tmp/stdout; echo "STDERR:"; cat /tmp/stderr; exit 1; }
 echo -n "."

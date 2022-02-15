@@ -10,5 +10,5 @@ ignore: |
   /helmcharts/
   kustomization.*
   /hack/helmchart-import/secret-kubeconfig-for-gardener.yaml
-  /hack/secrets/apiserver-in-shoot-kubeconfig.yaml
-  /hack/secrets/shoot-kubeconfig.yaml
+  /hack/ci/secrets/apiserver-in-shoot-kubeconfig.yaml
+  /hack/ci/secrets/shoot-kubeconfig.yaml

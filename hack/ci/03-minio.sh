@@ -1,10 +1,10 @@
 #/usr/bin/env bash
 
-source hack/handy.sh
+source hack/ci/handy.sh
 
 echo -n "Deploying minio..."
 # Alter minio template
-yq eval 'select(documentIndex == 2) .spec.template.spec.containers[0].env[1].value = env(MINIO_PW)' hack/minio.yaml.tmpl > hack/minio.yaml
+yq eval 'select(documentIndex == 2) .spec.template.spec.containers[0].env[1].value = env(MINIO_PW)' hack/ci/misc/minio.yaml.tmpl > hack/minio.yaml
 yq eval 'select(documentIndex == 4) .spec.rules[0].host = env(MINIO_HOSTNAME)' -i hack/minio.yaml
 yq eval 'select(documentIndex == 4) .spec.tls[0].hosts[0] = env(MINIO_HOSTNAME)' -i hack/minio.yaml
 
