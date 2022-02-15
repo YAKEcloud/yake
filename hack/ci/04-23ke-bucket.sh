@@ -1,6 +1,6 @@
 #/usr/bin/env bash
 
-source hack/handy.sh
+source hack/ci/handy.sh
 
 # 23KE Bucket
 # Let's Encrypt Staging CA needed.

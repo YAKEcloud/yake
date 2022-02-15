@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-source hack/handy.sh
+source hack/ci/handy.sh
 if rm hack/ci/secrets/shoot-kubeconfig.yaml 2> /dev/null
 then
     echo "Deleted shoot-kubeconfig                  ✅"

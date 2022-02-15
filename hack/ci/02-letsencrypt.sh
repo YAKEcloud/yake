@@ -1,6 +1,6 @@
 #/usr/bin/env bash
 
-source hack/handy.sh
+source hack/ci/handy.sh
 
 echo -n "Deploying Letsencrypt"
 # Install and configure cert-manger

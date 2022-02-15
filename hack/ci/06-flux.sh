@@ -1,6 +1,6 @@
 #/usr/bin/env bash
 
-source hack/handy.sh
+source hack/ci/handy.sh
 if [[ $CI == "true" ]]
 then
     FLUX=/usr/local/bin/flux

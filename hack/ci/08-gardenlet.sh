@@ -1,6 +1,6 @@
 #/usr/bin/env bash
 
-source hack/handy.sh
+source hack/ci/handy.sh
 
 echo -e -n "\rDeploying gardenlet"
 export CA_GARDENER_APISERVER=$(kubectl get secret -n garden garden-kube-apiserver-ca -ogo-template='{{index .data "ca.crt" }}')

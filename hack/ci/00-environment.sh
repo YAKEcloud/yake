@@ -50,20 +50,21 @@ else
 fi
 echo
 echo "This line might be handy:"
-echo ". hack/handy.sh"
+echo ". hack/ci/handy.sh"
 
-echo "export KUBECONFIG='hack/ci/secrets/shoot-kubeconfig.yaml:hack/ci/secrets/apiserver-in-shoot-kubeconfig.yaml'" > hack/handy.sh
-echo "export MC_ALIAS=$MC_ALIAS" >> hack/handy.sh
-echo "export SHOOT=$SHOOT" >> hack/handy.sh
-echo "export MINIO_HOSTNAME=$MINIO_HOSTNAME" >> hack/handy.sh
-echo "export MINIO_URL=$MINIO_URL" >> hack/handy.sh
-echo "export MINIO_PW=$MINIO_PW" >> hack/handy.sh
-echo "export DASHBOARD_CLIENTSECRET=$DASHBOARD_CLIENTSECRET" >> hack/handy.sh
-echo "export DASHBOARD_SESSIONSECRET=$DASHBOARD_SESSIONSECRET" >> hack/handy.sh
-echo "export KUBEAPISERVER_BASICAUTHPASSWORD=$KUBEAPISERVER_BASICAUTHPASSWORD" >> hack/handy.sh
-echo "export MC_HOST_$MC_ALIAS=https://minio:$MINIO_PW@$MINIO_HOSTNAME" >> hack/handy.sh
-echo "export BUCKET=$BUCKET" >> hack/handy.sh
-echo "export CONFIG_BUCKET=$CONFIG_BUCKET" >> hack/handy.sh
-echo "export TOKEN_ID=$(openssl rand -hex 3)" >> hack/handy.sh
-echo "export TOKEN_ID_SECRET=$(openssl rand -hex 8)" >> hack/handy.sh
-echo
+cat << EOF > hack/ci/handy.sh
+export KUBECONFIG='hack/ci/secrets/shoot-kubeconfig.yaml:hack/ci/secrets/apiserver-in-shoot-kubeconfig.yaml'
+export MC_ALIAS=$MC_ALIAS
+export SHOOT=$SHOOT
+export MINIO_HOSTNAME=$MINIO_HOSTNAME
+export MINIO_URL=$MINIO_URL
+export MINIO_PW=$MINIO_PW
+export DASHBOARD_CLIENTSECRET=$DASHBOARD_CLIENTSECRET
+export DASHBOARD_SESSIONSECRET=$DASHBOARD_SESSIONSECRET
+export KUBEAPISERVER_BASICAUTHPASSWORD=$KUBEAPISERVER_BASICAUTHPASSWORD
+export MC_HOST_$MC_ALIAS=https://minio:$MINIO_PW@$MINIO_HOSTNAME
+export BUCKET=$BUCKET
+export CONFIG_BUCKET=$CONFIG_BUCKET
+export TOKEN_ID=$(openssl rand -hex 3)
+export TOKEN_ID_SECRET=$(openssl rand -hex 8)
+EOF
