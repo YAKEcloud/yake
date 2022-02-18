@@ -4,9 +4,10 @@ spec:
       containers:
       - name: manager
         volumeMounts:
-        - mountPath: /etc/ssl/certs
+        - mountPath: /etc/ssl/certs/le-staging.pem
           name: le-staging
+          subPath: le-staging.pem
       volumes:
-      - configMap:
+      - name: le-staging
+        configMap:
           name: le-staging
-        name: le-staging
