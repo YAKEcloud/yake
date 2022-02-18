@@ -6,16 +6,16 @@ metadata:
 type: Opaque
 stringData:
   values.yaml: |
-    gardener-gardener-extension-os-ubuntu:
+    os-ubuntu:
       enable: true
 
-    23technologies-gardener-extension-provider-hcloud:
+    provider-hcloud:
       enable: true
 
-    gardener-gardener-extension-networking-calico:
+    networking-calico:
       enable: true
 
-    gardener-gardener-extension-shoot-cert-service:
+    shoot-cert-service:
       enable: true
       values:
         certificateConfig:
@@ -28,12 +28,12 @@ stringData:
           type: shoot-cert-service
           globallyEnabled: true
 
-    gardener-gardener-extension-shoot-dns-service:
+    shoot-dns-service:
       enable: true
       resources:
           - kind: Extension
             type: shoot-dns-service
             globallyEnabled: true
 
-    gardener-external-dns-management:
+    external-dns-management:
       enable: true
