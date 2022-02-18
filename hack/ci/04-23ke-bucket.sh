@@ -19,8 +19,6 @@ mc cp --recursive base-install $MC_ALIAS/$BUCKET > /tmp/stdout 2> /tmp/stderr ||
 echo -n "."
 mc cp --recursive base-config $MC_ALIAS/$BUCKET > /tmp/stdout 2> /tmp/stderr || { echo -e "\rError while uploading 23KE/base-config to Bucket ❌"; echo "STDOUT":; cat /tmp/stdout; echo "STDERR:"; cat /tmp/stderr; exit 1; }
 echo -n "."
-mc cp --recursive helmcharts $MC_ALIAS/$BUCKET > /tmp/stdout 2> /tmp/stderr || { echo -e "\rError while uploading 23KE/helmcharts to Bucket ❌"; echo "STDOUT":; cat /tmp/stdout; echo "STDERR:"; cat /tmp/stderr; exit 1; }
-echo -n "."
 # we now upload packet versions which use a bucket instead of the GitRepository
 for file in $(grep --exclude-dir=hack --exclude-dir=env-template -lr GitRepository . | sed 's/^\.\///'); do
     cat $file | sed s/GitRepository/Bucket/ | mc pipe $MC_ALIAS/$BUCKET/$file > /tmp/stdout 2> /tmp/stderr || { echo -e "\rError while uploading to 23KE Bucket ❌"; echo "STDOUT":; cat /tmp/stdout; echo "STDERR:"; cat /tmp/stderr; exit 1; }
