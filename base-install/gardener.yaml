@@ -13,10 +13,11 @@ spec:
     - name: kube-apiserver
   chart:
     spec:
-      chart: ./helmcharts/gardener-controlplane/charts/application/
+      chart: gardener-controlplane-application
+      version: 1.38.2
       sourceRef:
-        kind: GitRepository
-        name: 23ke
+        kind: HelmRepository
+        name: 23ke-charts
         namespace: flux-system
       interval: 1m
   install:
@@ -98,10 +99,11 @@ spec:
   interval: 1m
   chart:
     spec:
-      chart: ./helmcharts/gardener-controlplane/charts/runtime/
+      chart: gardener-controlplane-runtime
+      version: 1.38.2
       sourceRef:
-        kind: GitRepository
-        name: 23ke
+        kind: HelmRepository
+        name: 23ke-charts
         namespace: flux-system
       interval: 1m
   install:
