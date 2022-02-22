@@ -1,4 +1,0 @@
-apiVersion: v1
-description: A Helm chart to deploy the Gardener controlplane (API server, controller-manager, scheduler, admission-controller)
-name: controlplane
-version: 1.38.2

@@ -13,10 +13,11 @@ spec:
     - name: gardener-runtime
   chart:
     spec:
-      chart: ./helmcharts/extensions
+      chart: extensions
+      version: 1.0.0
       sourceRef:
-        kind: GitRepository
-        name: 23ke
+        kind: HelmRepository
+        name: 23ke-charts
         namespace: flux-system
       interval: 1m
   valuesFrom:

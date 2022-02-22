@@ -6,13 +6,13 @@ metadata:
 spec:
   chart:
     spec:
-      chart: ./helmcharts/gardenlet/
+      chart: gardenlet
       interval: 1m0s
+      version: 1.38.2
       sourceRef:
-        kind: Bucket
-        name: 23ke
+        kind: HelmRepository
+        name: 23ke-charts
         namespace: flux-system
-      version: '*'
   install:
     createNamespace: true
     remediation:

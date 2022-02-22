@@ -14,10 +14,11 @@ spec:
   interval: 1m
   chart:
     spec:
-      chart: ./helmcharts/kube-apiserver/
+      chart: garden-kube-apiserver
+      version: 3.19.0
       sourceRef:
-        kind: GitRepository
-        name: 23ke
+        kind: HelmRepository
+        name: 23ke-charts
         namespace: flux-system
       interval: 1m
   install:

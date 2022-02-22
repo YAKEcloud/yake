@@ -14,10 +14,11 @@ spec:
   interval: 1m
   chart:
     spec:
-      chart: ./helmcharts/gardener-dashboard/
+      chart: gardener-dashboard
+      version: 1.52.3
       sourceRef:
-        kind: GitRepository
-        name: 23ke
+        kind: HelmRepository
+        name: 23ke-charts
         namespace: flux-system
       interval: 1m
   install:
