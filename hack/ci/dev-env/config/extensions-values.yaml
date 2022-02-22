@@ -7,33 +7,27 @@ type: Opaque
 stringData:
   values.yaml: |
     os-ubuntu:
-      enable: true
+      enabled: true
 
     provider-hcloud:
-      enable: true
+      enabled: true
 
     networking-calico:
-      enable: true
+      enabled: true
 
     shoot-cert-service:
-      enable: true
+      enabled: true
+      globallyEnabled: true
       values:
         certificateConfig:
             defaultIssuer:
               acme:
                 email: operations@23technologies.cloud
               name: garden
-      resources:
-        - kind: Extension
-          type: shoot-cert-service
-          globallyEnabled: true
 
     shoot-dns-service:
-      enable: true
-      resources:
-          - kind: Extension
-            type: shoot-dns-service
-            globallyEnabled: true
+      enabled: true
+      globallyEnabled: true
 
     external-dns-management:
-      enable: true
+      enabled: true
