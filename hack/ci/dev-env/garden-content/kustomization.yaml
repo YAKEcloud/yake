@@ -3,5 +3,6 @@ kind: Kustomization
 resources:
 - admin-clusterrolebinding.yaml
 - rbac.yaml
-- 00-namespace-garden-dev.yaml
-- 05-project-dev.yaml
+- cpfl-hetzner.yaml
+- project-dev.yaml
+- project-garden-testing.yaml
