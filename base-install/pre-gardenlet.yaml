@@ -12,7 +12,7 @@ spec:
   dependsOn:
     - name: gardener-application
     - name: gardener-runtime
-chart:
+  chart:
     spec:
       chart: pre-gardenlet
       version: 1.38.2
