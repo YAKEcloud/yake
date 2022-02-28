@@ -1,5 +1,13 @@
-# Project objects logically group team members, secrets, and Shoot clusters. They result in Kubernetes namespaces
-# prefixed with "garden-".
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: garden-dev
+  labels:
+    gardener.cloud/role: project
+    project.gardener.cloud/name: dev
+  annotations:
+    namespace.gardener.cloud/keep-after-project-deletion: "true"
 ---
 apiVersion: core.gardener.cloud/v1beta1
 kind: Project
@@ -13,10 +21,10 @@ spec:
   members:
     - apiGroup: rbac.authorization.k8s.io
       kind: User
-      name: alice.doe@example.com
+      name: muench@23technologies.cloud
       role: admin
     - apiGroup: rbac.authorization.k8s.io
       kind: User
-      name: bob.doe@example.com
-      role: viewer
+      name: spaeker@23technologies.cloud
+      role: admin
   namespace: garden-dev

@@ -1,0 +1,37 @@
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: internal-gardenlet
+  namespace: flux-system
+spec:
+  kubeConfig:
+    secretRef:
+      name: target-gardencluster-kubeconfig
+  interval: 1m
+  targetNamespace: flux-system
+  dependsOn:
+    - name: pre-gardenlet
+  chart:
+    spec:
+      chart: gardenlet
+      version: 1.38.3
+      sourceRef:
+        kind: HelmRepository
+        name: 23ke-charts
+        namespace: flux-system
+      interval: 1m
+  install:
+    remediation:
+      retries: 300
+    createNamespace: true
+  valuesFrom:
+    - kind: ConfigMap
+      name: gardenlet-base-values
+      optional: false
+    - kind: Secret
+      name: gardenlet-values
+      optional: true
+    - kind: Secret
+      name: gardener-apiserver-tls
+      valuesKey: ca.crt
+      targetPath: global.token.ca

@@ -7,12 +7,17 @@ metadata:
 data:
   values.yaml: |-
     global:
+      token:
+        id: ${TOKEN_ID}
+        secret: ${TOKEN_SECRET}
+        ca: test
       gardenlet:
         config:
           gardenClientConnection:
             bootstrapKubeconfig:
-              name: gardenlet-kubeconfig-bootstrap
-              namespace: garden
+              secretRef:
+                name: gardenlet-kubeconfig-bootstrap
+                namespace: flux-system
             kubeconfigSecret:
               name: gardenlet-kubeconfig
               namespace: garden
