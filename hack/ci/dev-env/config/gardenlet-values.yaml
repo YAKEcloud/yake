@@ -8,8 +8,6 @@ stringData:
   values.yaml: |-
     global:
       gardenlet:
-        image:
-          tag: v1.38.1
         config:
           seedConfig:
             metadata:
