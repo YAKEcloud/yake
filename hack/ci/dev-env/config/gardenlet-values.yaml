@@ -1,0 +1,40 @@
+apiVersion: v1
+kind: Secret
+metadata:
+  name: gardenlet-values
+  namespace: flux-system
+type: Opaque
+stringData:
+  values.yaml: |-
+    global:
+      gardenlet:
+        image:
+          tag: v1.38.1
+        config:
+          seedConfig:
+            metadata:
+              name: hcloud-fsn1-0
+            spec:
+              dns:
+                ingressDomain: ingress.${AZURE_DOMAIN}
+              networks:
+                nodes: 10.11.0.0/16
+                pods: 10.10.0.0/16
+                services: 10.16.0.0/13
+                shootDefaults:
+                  pods: 100.73.0.0/16
+                  services: 100.88.0.0/13
+              provider:
+                region: fsn1
+                type: hcloud
+              settings:
+                shootDNS:
+                  enabled: true
+                excessCapacityReservation:
+                  enabled: false
+                loadBalancerServices:
+                  annotations:
+                    load-balancer.hetzner.cloud/disable-private-ingress: "true"
+                    load-balancer.hetzner.cloud/ipv6-disabled: "true"
+                verticalPodAutoscaler:
+                  enabled: false
