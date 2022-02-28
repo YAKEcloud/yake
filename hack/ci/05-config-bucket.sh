@@ -15,4 +15,8 @@ echo -n "."
 
 mc cp hack/ci/dev-env/config/kube-apiserver-values.yaml $MC_ALIAS/$CONFIG_BUCKET/dev-env/config/ > /tmp/stdout 2> /tmp/stderr || { echo -e "\rError while uploading kube-apiserver-values.yaml to Bucket ❌"; echo "STDOUT":; cat /tmp/stdout; echo "STDERR:"; cat /tmp/stderr; exit 1; }
 echo -n "."
+
+mc cp hack/ci/dev-env/config/gardenlet-values.yaml $MC_ALIAS/$CONFIG_BUCKET/dev-env/config/ > /tmp/stdout 2> /tmp/stderr || { echo -e "\rError while uploading gardenlet-values.yaml to Bucket ❌"; echo "STDOUT":; cat /tmp/stdout; echo "STDERR:"; cat /tmp/stderr; exit 1; }
+echo -n "."
+
 echo -e "\rConfig Bucket ready  ✅       "
