@@ -4,6 +4,8 @@ resources:
 - dashboard.yaml
 - etcd.yaml
 - gardener.yaml
+- pre-gardenlet.yaml
+- gardenlet.yaml
 - identity.yaml
 - kube-apiserver.yaml
 - extensions.yaml
