@@ -41,7 +41,7 @@ jobs:
         run: bash hack/ci/07-23ke.sh
       - name: Install Gardenlet
         id: installGardenlet
-        run: echo "$CLOUD_SECRET" > hack/ci/secrets/hcloud_token ; bash hack/ci/08-gardenlet.sh
+        run: echo -n "$CLOUD_SECRET" > hack/ci/secrets/hcloud_token ; bash hack/ci/08-gardenlet.sh
         env:
           CLOUD_SECRET: ${{ secrets.HCLOUD_TESTING_TOKEN }}
       - name: Install demo app
