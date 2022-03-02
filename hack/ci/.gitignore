@@ -7,4 +7,5 @@ secrets/azure_dns
 secrets/gardener-kubeconfig.yaml
 secrets/apiserver-in-shoot-kubeconfig.yaml
 secrets/shoot-kubeconfig.yaml
+secrets/shoot-microservice-kubeconfig.yaml
 dev-env/gardenlet/garden-content/cloud_secret.yaml
