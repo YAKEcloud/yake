@@ -29,7 +29,7 @@ spec:
         zones:
           - fsn1-dc14
         cri:
-          name: docker
+          name: containerd
         volume:
           size: 50Gi
   networking:
