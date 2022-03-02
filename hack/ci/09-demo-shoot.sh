@@ -27,7 +27,7 @@ echo -n -e "\rDeploying sample shoot: .           "
 kubectl apply -f https://raw.githubusercontent.com/GoogleCloudPlatform/microservices-demo/main/release/kubernetes-manifests.yaml --kubeconfig hack/ci/secrets/shoot-microservice-kubeconfig.yaml > /tmp/stdout 2> /tmp/stderr || { echo -e "\rUnsuccessful microservice deployment            ❌               "; echo "STDOUT":; cat /tmp/stdout; echo "STDERR:"; cat /tmp/stderr; exit 1; }
 echo -e -n "\rWaiting for microservice demo:         "
 sleep 5
-kubectl wait --for=condition=ready --timeout=600s deployment/loadgenerator --kubeconfig hack/ci/secrets/shoot-microservice-kubeconfig.yaml 2> /tmp/stderr || { echo -e "\rUnsuccessful microservice deployment            ❌               "; echo "STDERR:"; cat /tmp/stderr; exit 1; }
+kubectl wait --for=condition=available --timeout=600s deployment/loadgenerator --kubeconfig hack/ci/secrets/shoot-microservice-kubeconfig.yaml > /tmp/stdout 2> /tmp/stderr || { echo -e "\rUnsuccessful microservice deployment            ❌               "; echo "STDOUT":; cat /tmp/stdout; echo "STDERR:"; cat /tmp/stderr; exit 1; }
 
 
 echo -e "\rDemo-Deployment ready✅                "
