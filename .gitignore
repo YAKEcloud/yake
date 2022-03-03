@@ -11,3 +11,6 @@ hack/secrets/gardener-kubeconfig.yaml
 hack/secrets/apiserver-in-shoot-kubeconfig.yaml
 hack/secrets/shoot-kubeconfig.yaml
 hack/dev-env/gardenlet/garden-content/cloud_secret.yaml
+hack/ci/handy.sh
+hack/ci/secrets/
+hack/ci/shoot-kubeconfig.yaml
