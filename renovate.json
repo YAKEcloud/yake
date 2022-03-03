@@ -1,0 +1,12 @@
+{
+  "prHourlyLimit": 0,
+  "flux": {
+    "fileMatch": ["base-install/.*.yaml", "flux/23ke-charts-helmrepo.yaml"]
+  },
+  "lockFileMaintenance": {
+    "enabled": false
+  },
+  "includeForks": true,
+  "enabledManagers": ["flux"],
+  "prCreation": "immediate"
+}
