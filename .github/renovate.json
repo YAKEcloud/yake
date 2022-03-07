@@ -3,6 +3,12 @@
   "flux": {
     "fileMatch": ["base-install/.*.yaml", "flux/23ke-charts-helmrepo.yaml"]
   },
+  "packageRules": [
+    {
+      "matchPackagePatterns": [".*gardener-controlplane.*", "gardenlet"],
+      "groupName": "gardener-controlplane"
+    }
+  ],
   "lockFileMaintenance": {
     "enabled": false
   },
