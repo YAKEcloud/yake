@@ -14,5 +14,6 @@
   },
   "includeForks": true,
   "enabledManagers": ["flux"],
-  "prCreation": "immediate"
+  "prCreation": "immediate",
+  "semanticCommits": "disabled"
 }
