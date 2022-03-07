@@ -1,0 +1,33 @@
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: cloudprofiles
+  namespace: flux-system
+spec:
+  kubeConfig:
+    secretRef:
+      name: gardener-internal-kubeconfig
+  interval: 1m
+  targetNamespace: flux-system
+  dependsOn:
+    - name: internal-gardenlet
+  chart:
+    spec:
+      chart: cloudprofiles
+      version: 0.1.0
+      sourceRef:
+        kind: HelmRepository
+        name: 23ke-charts
+        namespace: flux-system
+      interval: 1m
+  install:
+    remediation:
+      retries: 300
+    createNamespace: true
+  valuesFrom:
+    - kind: ConfigMap
+      name: cpfl-base-values
+      optional: false
+    - kind: Secret
+      name: cpfl-values
+      optional: true
