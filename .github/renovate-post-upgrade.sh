@@ -7,7 +7,8 @@ CHANGED_FILE=$(git status -s)
 if echo "$CHANGED_FILE" | grep "base-install/gardenlet.yaml"
 then
     # looks like gardener-core has been updated, import charts:
-    echo 'export GARDENER_VERSION=v$(yq eval ".spec.chart.spec.version" base-install/gardenlet.yaml)' > /tmp/tmpscript
+    echo 'cd /tmp/renovate/repos/github/23technologies/23ke' > /tmp/tmpscript
+    echo 'export GARDENER_VERSION=v$(yq eval ".spec.chart.spec.version" base-install/gardenlet.yaml)' >> /tmp/tmpscript
     echo 'yq eval ".data.GARDENER_VERSION=env(GARDENER_VERSION)" -i 23ke-base-substitutions.yaml' >> /tmp/tmpscript
     echo "chmod -R 777 /tmp/renovate/repos/github/23technologies/23ke" >> /tmp/tmpscript
     mv /tmp/tmpscript /tmp/scripts/renovate-post-upgrade-script
