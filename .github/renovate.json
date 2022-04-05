@@ -12,6 +12,10 @@
     {
       "matchPackagePatterns": [".*gardener-controlplane.*", "gardenlet"],
       "groupName": "gardener-controlplane"
+    },
+    {
+      "matchPackagePatterns": ["identity", "gardener-dashboard"],
+      "groupName": "dashboard-identity"
     }
   ],
   "lockFileMaintenance": {
