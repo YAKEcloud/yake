@@ -7,6 +7,7 @@ kubectl delete -n default -f https://raw.githubusercontent.com/GoogleCloudPlatfo
 echo -n "."
 
 echo -n -e "\rDeleting shoot: 0%        "
-kubectl delete -f hack/ci/misc/shoot-microservice.yaml --context garden --wait > /tmp/stdout 2> /tmp/stderr || { echo -e "\rError while applying testing shoot ❌"; echo "STDOUT":; cat /tmp/stdout; echo "STDERR:"; cat /tmp/stderr; exit 1; }
+kubectl annotate shoot -n garden-testing microservice confirmation.gardener.cloud/deletion=true --context garden > /tmp/stdout 2> /tmp/stderr || { echo "Error while setting shoot-deletion annotation ❌"; echo "STDOUT:"; cat /tmp/stdout; echo "STDERR:"; cat /tmp/stderr; exit 1; }
+sleep 300
 
 echo -e "\rDemo-Shoot deleted✅                "
