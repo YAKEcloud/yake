@@ -47,8 +47,13 @@ jobs:
       - name: Install demo app
         id: installDemoApp
         run: bash hack/ci/09-demo-shoot.sh
+      - name: Delete demo shoot
+        run: bash hack/ci/delete-microservice-shoot.sh
       - name: Delete shoot
         run: bash hack/ci/delete-shoot.sh
+      - name: Delete demo shoot after failure
+        if: failure() && ( steps.installDemoApp.outcome == 'failure' )
+        run: bash hack/ci/delete-microservice-shoot.sh
       - name: Delete shoot after failure
         if: failure() && ( steps.installCertManager.outcome == 'failure' || steps.installMinio.outcome == 'failure' || steps.upload23KE.outcome == 'failure' || steps.upload23KEConfig.outcome == 'failure' || steps.installFlux.outcome == 'failure' || steps.install23ke.outcome == 'failure' || steps.installGardenlet.outcome == 'failure' || steps.installDemoApp.outcome == 'failure' )
         run: bash hack/ci/delete-shoot.sh
