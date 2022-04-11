@@ -13,6 +13,7 @@ while [ ! "$(kubectl get shoot microservice -n garden-testing -o jsonpath="{.sta
 do
     sleep 5
     PERCENTAGE=$(kubectl get shoot -n garden-testing microservice -o jsonpath="{.status.lastOperation.progress}" --context garden)
+    if [ -z $PERCENTAGE ]; then PERCENTAGE=0; fi
     if [ $OLD_PERCENTAGE -le $PERCENTAGE ]
     then
         echo -n -e "\rCreating shoot: $PERCENTAGE%         "
