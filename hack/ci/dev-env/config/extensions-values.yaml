@@ -12,6 +12,9 @@ stringData:
     provider-hcloud:
       enabled: true
 
+    provider-azure:
+      enabled: true
+
     networking-calico:
       enabled: true
 
