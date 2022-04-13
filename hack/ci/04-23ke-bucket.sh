@@ -12,8 +12,6 @@ echo  -n -e "\r23KE Bucket creating"
 echo -n "."
 mc cp kustomization.yaml $MC_ALIAS/$BUCKET > /tmp/stdout 2> /tmp/stderr || { echo -e "\rError while uploading 23KE root-ks Bucket ❌"; echo "STDOUT":; cat /tmp/stdout; echo "STDERR:"; cat /tmp/stderr; exit 1; }
 echo -n "."
-mc cp 23ke-base-substitutions.yaml $MC_ALIAS/$BUCKET > /tmp/stdout 2> /tmp/stderr || { echo -e "\rError while uploading 23KE-base-substitutions to Bucket ❌"; echo "STDOUT":; cat /tmp/stdout; echo "STDERR:"; cat /tmp/stderr; exit 1; }
-echo -n "."
 mc cp --recursive flux $MC_ALIAS/$BUCKET > /tmp/stdout 2> /tmp/stderr || { echo -e "\rError while uploading 23KE/flux to Bucket ❌"; echo "STDOUT":; cat /tmp/stdout; echo "STDERR:"; cat /tmp/stderr; exit 1; }
 echo -n "."
 mc cp --recursive base-install $MC_ALIAS/$BUCKET > /tmp/stdout 2> /tmp/stderr || { echo -e "\rError while uploading 23KE/base-install to Bucket ❌"; echo "STDOUT":; cat /tmp/stdout; echo "STDERR:"; cat /tmp/stderr; exit 1; }

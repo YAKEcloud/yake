@@ -1,7 +1,6 @@
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 resources:
-- 23ke-base-substitutions.yaml
 - flux/23ke-base-config.yaml
 - flux/23ke-base-install.yaml
 - flux/23ke-charts-helmrepo.yaml
