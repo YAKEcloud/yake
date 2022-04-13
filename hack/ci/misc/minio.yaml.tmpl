@@ -80,7 +80,7 @@ apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   annotations:
-    cert-manager.io/cluster-issuer: letsencrypt-staging
+    cert-manager.io/cluster-issuer: local-ca-issuer
   name: minio
   namespace: minio
 spec:
