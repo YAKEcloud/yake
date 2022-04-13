@@ -1,4 +1,6 @@
 {
+  "automerge": "true",
+  "platformAutomerge": "true",
   "prHourlyLimit": 0,
   "postUpgradeTasks": {
       "commands": [".github/renovate-post-upgrade.sh"],
