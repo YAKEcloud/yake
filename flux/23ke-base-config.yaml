@@ -13,7 +13,5 @@ spec:
   validation: client
   postBuild:
     substituteFrom:
-      - kind: ConfigMap
-        name: 23ke-base-substitutions
       - kind: Secret
         name: 23ke-env-substitutions

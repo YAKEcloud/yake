@@ -2,11 +2,6 @@
   "automerge": "true",
   "platformAutomerge": "true",
   "prHourlyLimit": 0,
-  "postUpgradeTasks": {
-      "commands": [".github/renovate-post-upgrade.sh"],
-      "executionMode": "branch",
-      "fileFilters": ["23ke-base-substitutions.yaml"]
-   },
   "flux": {
     "fileMatch": ["base-install/.*.yaml", "flux/23ke-charts-helmrepo.yaml"]
   },
