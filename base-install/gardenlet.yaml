@@ -14,7 +14,7 @@ spec:
   chart:
     spec:
       chart: gardenlet
-      version: 1.44.4
+      version: 1.44.5
       sourceRef:
         kind: HelmRepository
         name: 23ke-charts
