@@ -46,15 +46,16 @@ spec:
   region: fsn1
   secretBindingName: gardener-test1
   kubernetes:
-    version: 1.21.9
+    version: 1.22.6
     verticalPodAutoscaler:
       enabled: true
-  purpose: testing
+  purpose: evaluation
   addons:
     kubernetesDashboard:
       enabled: false
     nginxIngress:
       enabled: true
+      externalTrafficPolicy: Cluster
   maintenance:
     timeWindow:
       begin: 020000+0200
