@@ -4,7 +4,7 @@ export PROGRESS_WIDTH=90
 export PROGRESS_NUMBER_OF_STEPS=9
 
 # Setup Environment
-bash hack/ci/00-environment.sh || exit 1
+bash hack/ci/00-environment-matrix.sh || exit 1
 source hack/ci/misc/progress.sh
 echo "env (handy.sh) ready ✅ "
 progress_step

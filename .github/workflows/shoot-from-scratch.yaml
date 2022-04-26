@@ -5,6 +5,10 @@ on:
 jobs:
   ci:
     runs-on: self-hosted
+    strategy:
+      fail-fast: false
+      matrix:
+        k8s: [1.20.15, 1.21.9, 1.22.6]
     name: "23KE shoot testrun"
     steps:
       - name: Checkout source
@@ -14,9 +18,10 @@ jobs:
       - name: Install packages
         run: bash hack/ci/00-packages.sh
       - name: Setup Environment
-        run: echo "$KUBECONFIG_CONTENT" > hack/ci/secrets/gardener-kubeconfig.yaml; bash hack/ci/00-environment.sh
+        run: echo "$KUBECONFIG_CONTENT" > hack/ci/secrets/gardener-kubeconfig.yaml; bash hack/ci/00-environment-matrix.sh
         env:
           KUBECONFIG_CONTENT: ${{ secrets.GARDENER_APISERVER_KUBECONFIG }}
+          KUBERNETES_VERSION: ${{ matrix.k8s }}
       - name: Setup shoot
         run: bash hack/ci/01-shoot.sh
       - name: Install cert-manager
