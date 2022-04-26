@@ -5,8 +5,8 @@ on:
 jobs:
   ci:
     runs-on: self-hosted
-      env:
-        PROVIDER: ${{ matrix.provider }}
+    env:
+      PROVIDER: ${{ matrix.provider }}
     strategy:
       fail-fast: false
       matrix:
