@@ -40,14 +40,7 @@ export TOKEN_ID_SECRET=$(openssl rand -hex 8)
 echo "The script will now setup your development / testing environment."
 echo
 echo "shoot-name:   $SHOOT"
-echo "S3-URL:       $MINIO_URL"
-echo "S3-User:      minio"
-if [[ $CI == "true" ]]
-then
-    echo "S3-Password:  <omitted in Github Action run>"
-else
-    echo "S3-Password:  $MINIO_PW"
-fi
+echo "Dashboard:    https://dashboard.ingress.$SHOOT.23t-test-okeanos.dev"
 echo
 echo "This line might be handy:"
 echo ". hack/ci/handy.sh"
