@@ -9,6 +9,8 @@ stringData:
     ingress:
       annotations:
         cert-manager.io/cluster-issuer: letsencrypt-staging
+    frontendConfig:
+      seedCandidateDeterminationStrategy: MinimalDistance
     oidc:
       ca: |
         -----BEGIN CERTIFICATE-----

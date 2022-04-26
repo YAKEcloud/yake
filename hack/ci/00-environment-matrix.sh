@@ -4,7 +4,7 @@ export KUBECONFIG=hack/ci/secrets/gardener-kubeconfig.yaml
 export K8S_VERSION=${KUBERNETES_VERSION:=1.22.6}
 RAND=$(openssl rand -hex 2)
 
-export SHOOT="23ke-ma-$RAND"
+export SHOOT="23ke-gh-$RAND"
 
 # Alter shoot template
 yq eval '.spec.kubernetes.version = env(K8S_VERSION)' hack/ci/misc/shoot-template.yaml.tmpl > hack/ci/misc/shoot.yaml || { echo -e "\rShoot templating unsuccessful ❌"; echo "STDOUT:"; cat /tmp/stdout; echo "STDERR:"; cat /tmp/stderr; exit 1; }

@@ -8,7 +8,18 @@ stringData:
   values.yaml: |
     global:
       versions:
-        - version: 1.20.11
+        - version: 1.20.15
           classification: supported
+        - version: 1.21.9
+          classification: supported
+        - version: 1.22.6
+          classification: supported
+      seedSelector:
+        enabled: true
+        selector:
+          providerTypes:
+            - hcloud
     hcloud:
+      enabled: true
+    betacloud:
       enabled: true
