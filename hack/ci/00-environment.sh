@@ -40,7 +40,7 @@ export TOKEN_ID_SECRET=$(openssl rand -hex 8)
 echo "The script will now setup your development / testing environment."
 echo
 echo "shoot-name:   $SHOOT"
-echo "Dashboard:    https://dashboard.ingress.$SHOOT.23t-test-okeanos.dev"
+echo "Dashboard:    https://dashboard.ingress.$SHOOT.23t-test.okeanos.dev"
 echo
 echo "This line might be handy:"
 echo ". hack/ci/handy.sh"
