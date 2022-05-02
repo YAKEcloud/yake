@@ -4,14 +4,14 @@ on:
   pull_request:
 jobs:
   ci:
-    runs-on: test-own-image-runner
+    runs-on: 23ke-runner
     env:
       PROVIDER: ${{ matrix.provider }}
     strategy:
       fail-fast: false
       matrix:
         k8s: [1.20.15, 1.21.9, 1.22.6]
-        provider: [hcloud, betacloud]
+        provider: [hcloud]
     name: "23KE shoot testrun"
     steps:
       - name: Checkout source
