@@ -17,8 +17,6 @@ jobs:
           KUBECONFIG_CONTENT: ${{ secrets.GARDENER_APISERVER_KUBECONFIG }}
       - name: Setup shoot
         run: bash hack/ci/01-shoot.sh
-      - name: Install cert-manager
-        id: installCertManager
       - name: Upload 23ke bucket
         id: upload23KE
         run: bash hack/ci/04-23ke-bucket.sh
