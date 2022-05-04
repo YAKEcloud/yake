@@ -5,10 +5,6 @@ on:
 jobs:
   ci:
     runs-on: 23ke-runner
-    env:
-      PROVIDER: ${{ matrix.provider }}
-    strategy:
-      fail-fast: false
     name: "23KE shoot testrun"
     steps:
       - name: Checkout source
