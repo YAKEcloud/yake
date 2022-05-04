@@ -9,9 +9,6 @@ jobs:
       PROVIDER: ${{ matrix.provider }}
     strategy:
       fail-fast: false
-      matrix:
-        k8s: [1.20.15, 1.21.9, 1.22.6]
-        provider: [hcloud]
     name: "23KE shoot testrun"
     steps:
       - name: Checkout source
@@ -19,20 +16,13 @@ jobs:
         with:
           fetch-depth: 0
       - name: Setup Environment
-        run: echo "$KUBECONFIG_CONTENT" > hack/ci/secrets/gardener-kubeconfig.yaml; echo "$BETACLOUD_SECRET" > hack/ci/secrets/openstack-secret.yaml ; bash hack/ci/00-environment-matrix.sh
+        run: echo "$KUBECONFIG_CONTENT" > hack/ci/secrets/gardener-kubeconfig.yaml; bash hack/ci/00-environment.sh
         env:
           KUBECONFIG_CONTENT: ${{ secrets.GARDENER_APISERVER_KUBECONFIG }}
-          KUBERNETES_VERSION: ${{ matrix.k8s }}
-          BETACLOUD_SECRET: ${{ secrets.BETACLOUD_SECRET }}
-          PROVIDER: ${{ matrix.provider }}
       - name: Setup shoot
         run: bash hack/ci/01-shoot.sh
       - name: Install cert-manager
         id: installCertManager
-        run: bash hack/ci/02-letsencrypt.sh
-      - name: Install minio
-        id: installMinio
-        run: bash hack/ci/03-minio.sh
       - name: Upload 23ke bucket
         id: upload23KE
         run: bash hack/ci/04-23ke-bucket.sh
@@ -63,5 +53,5 @@ jobs:
         if: failure() && ( steps.installDemoApp.outcome == 'failure' )
         run: bash hack/ci/delete-microservice-shoot.sh
       - name: Delete shoot after failure
-        if: failure() && ( steps.installCertManager.outcome == 'failure' || steps.installMinio.outcome == 'failure' || steps.upload23KE.outcome == 'failure' || steps.upload23KEConfig.outcome == 'failure' || steps.installFlux.outcome == 'failure' || steps.install23ke.outcome == 'failure' || steps.installGardenlet.outcome == 'failure' || steps.installDemoApp.outcome == 'failure' )
+        if: failure() && ( steps.upload23KE.outcome == 'failure' || steps.upload23KEConfig.outcome == 'failure' || steps.installFlux.outcome == 'failure' || steps.install23ke.outcome == 'failure' || steps.installGardenlet.outcome == 'failure' || steps.installDemoApp.outcome == 'failure' )
         run: bash hack/ci/delete-shoot.sh
