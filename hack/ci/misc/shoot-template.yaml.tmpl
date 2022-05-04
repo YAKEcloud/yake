@@ -1,7 +1,7 @@
 kind: Shoot
 apiVersion: core.gardener.cloud/v1beta1
 metadata:
-  namespace: garden-23t-test
+  namespace: garden-23ke-ci
   name: 23ke-test
   labels:
     23technologies.cloud/free-to-use: "true"
@@ -44,7 +44,7 @@ spec:
     type: calico
   cloudProfileName: hcloud
   region: fsn1
-  secretBindingName: gardener-test1
+  secretBindingName: hcloud-secret
   kubernetes:
     version: 1.22.6
     verticalPodAutoscaler:
@@ -56,6 +56,8 @@ spec:
     nginxIngress:
       enabled: true
       externalTrafficPolicy: Cluster
+  extensions:
+    - type: shoot-flux
   maintenance:
     timeWindow:
       begin: 020000+0200
