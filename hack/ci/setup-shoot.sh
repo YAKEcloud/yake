@@ -13,14 +13,6 @@ progress_step
 bash hack/ci/01-shoot.sh || exit 1
 progress_step
 
-# Deploy Letsencrypt
-bash hack/ci/02-letsencrypt.sh || exit 1
-progress_step
-
-# Install minio
-bash hack/ci/03-minio.sh || exit 1
-progress_step
-
 # 23KE Bucket
 bash hack/ci/04-23ke-bucket.sh || exit 1
 progress_step
@@ -29,7 +21,7 @@ progress_step
 bash hack/ci/05-config-bucket.sh || exit 1
 progress_step
 
-# Install flux
+# Configure Flux
 bash hack/ci/06-flux.sh || exit 1
 progress_step
 
