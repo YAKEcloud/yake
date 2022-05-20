@@ -14,7 +14,7 @@ spec:
   chart:
     spec:
       chart: extensions
-      version: 1.0.42
+      version: 1.0.43
       sourceRef:
         kind: HelmRepository
         name: 23ke-charts
