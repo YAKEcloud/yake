@@ -18,22 +18,14 @@ data:
         replicaCount: 2
         vpa: true
         clusterIdentity: garden-cluster-identity
-        image:
-          tag: ${GARDENER_VERSION}
         etcd:
           servers: https://etcd:2379
       admission:
         replicaCount: 2
         vpa: true
-        image:
-          tag: ${GARDENER_VERSION}
       controller:
         replicaCount: 2
         vpa: true
-        image:
-          tag: ${GARDENER_VERSION}
       scheduler:
         replicaCount: 2
         vpa: true
-        image:
-          tag: ${GARDENER_VERSION}
