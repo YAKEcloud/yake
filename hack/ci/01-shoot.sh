@@ -19,12 +19,14 @@ do
 done
 
 
+
 # Get shoot kubeconfig
 kubectl get secret -n garden-23ke-ci $SHOOT.kubeconfig -o go-template='{{.data.kubeconfig|base64decode}}' > hack/ci/secrets/shoot-kubeconfig.yaml 2> /tmp/stderr || { echo -e "\rshoot creation unsuccessful            ❌               "; echo "STDERR:"; cat /tmp/stderr; exit 1; }
 export KUBECONFIG=hack/ci/secrets/shoot-kubeconfig.yaml
 
 
 # Wait for Toolchain (flux/minio/letsencrypt)
+echo -e -n "\rWaiting for toolchain...           "
 kubectl wait ks -n flux-system main-ks --for=condition=ready --timeout=10m > /tmp/stdout 2> /tmp/stderr || { echo -e "\rError while waiting for kustomization toolchain(main-ks) ❌"; echo "STDOUT":; cat /tmp/stdout; echo "STDERR:"; cat /tmp/stderr; exit 1; }
 kubectl wait hr -n default secrets --for=condition=ready --timeout=10m > /tmp/stdout 2> /tmp/stderr || { echo -e "\rError while waiting for helmrelease secrets ❌"; echo "STDOUT":; cat /tmp/stdout; echo "STDERR:"; cat /tmp/stderr; exit 1; }
 kubectl wait hr -n default minio --for=condition=ready --timeout=10m > /tmp/stdout 2> /tmp/stderr || { echo -e "\rError while waiting for helmrelease minio ❌"; echo "STDOUT":; cat /tmp/stdout; echo "STDERR:"; cat /tmp/stderr; exit 1; }
