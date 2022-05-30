@@ -41,7 +41,7 @@ spec:
   region: betacloud-1
   purpose: evaluation
   kubernetes:
-    version: 1.22.6
+    version: 1.22.9
   addons:
     kubernetesDashboard:
       enabled: false
