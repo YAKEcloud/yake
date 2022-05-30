@@ -14,21 +14,17 @@ bash hack/ci/01-shoot.sh || exit 1
 progress_step
 
 # 23KE Bucket
-bash hack/ci/04-23ke-bucket.sh || exit 1
+bash hack/ci/02-23ke-bucket.sh || exit 1
 progress_step
 
 # 23KE Config-Bucket
-bash hack/ci/05-config-bucket.sh || exit 1
-progress_step
-
-# Configure Flux
-bash hack/ci/06-flux.sh || exit 1
+bash hack/ci/03-23ke-config-bucket.sh || exit 1
 progress_step
 
 # Install 23KE
-bash hack/ci/07-23ke.sh || exit 1
+bash hack/ci/04-23ke.sh || exit 1
 progress_step
 
 # Add hcloud secret
-bash hack/ci/08-gardenlet.sh || exit 1
+bash hack/ci/05-gardenlet.sh || exit 1
 progress_step
