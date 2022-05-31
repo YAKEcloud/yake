@@ -26,8 +26,12 @@ spec:
     createNamespace: true
   valuesFrom:
     - kind: ConfigMap
-      name: cpfl-base-values
+      name: cloudprofiles-base-values
       optional: false
+    - kind: Secret
+      name: cloudprofiles-values
+      optional: true
+    # backwards compatability with pre v1.9 cpfl -> cloudprofiles rename
     - kind: Secret
       name: cpfl-values
       optional: true
