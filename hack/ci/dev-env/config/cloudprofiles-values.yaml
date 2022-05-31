@@ -1,7 +1,7 @@
 apiVersion: v1
 kind: Secret
 metadata:
-  name: cpfl-values
+  name: cloudprofiles-values
   namespace: flux-system
 type: Opaque
 stringData:

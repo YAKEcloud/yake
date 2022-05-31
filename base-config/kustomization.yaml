@@ -3,7 +3,7 @@ kind: Kustomization
 resources:
 - namespace.yaml
 - cert-manager-ca.yaml
-- cpfl-base-values.yaml
+- cloudprofiles-base-values.yaml
 - dashboard-base-values.yaml
 - gardener-base-values.yaml
 - gardenlet-base-values.yaml
