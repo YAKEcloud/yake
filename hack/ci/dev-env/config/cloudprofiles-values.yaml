@@ -9,12 +9,8 @@ stringData:
     global:
       kubernetes:
         versions:
-          - version: 1.20.15
-            classification: supported
-          - version: 1.21.9
-            classification: supported
-          - version: 1.22.9
-            classification: supported
+          1.22.9:
+            classification: preview
       seedSelector:
         enabled: true
         selector:
