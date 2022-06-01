@@ -1,0 +1,6 @@
+spec:
+  provider:
+    type: hcloud
+    workers:
+    - name: worker-cx41
+      minimum: 4

@@ -21,6 +21,9 @@ export SHOOT=$(kubectl get shoot -n garden-23ke-ci -o custom-columns=NAME:.metad
 # Mark as in use
 kubectl label shoot -n garden-23ke-ci $SHOOT 23technologies.cloud/free-to-use=false --overwrite=true > /tmp/stdout 2> /tmp/stderr || { echo -e "\rShoot labelling unsuccessful ❌"; echo "STDOUT:"; cat /tmp/stdout; echo "STDERR:"; cat /tmp/stderr; exit 1; }
 
+# Scale to 4 worker nodes
+kubectl patch -n garden-23t-test shoot $SHOOT --patch-file hack/ci/misc/scale-nodes-min4.patch > /tmp/stdout 2> /tmp/stderr || { echo -e "\rError while scaling shoot-cluster to 4 nodes. ❌" ; echo "STDOUT":; cat /tmp/stdout; echo "STDERR:"; cat /tmp/stderr; exit 1; }
+echo -n "."
 
 export MC_ALIAS=${MC_ALIAS:-shoot}
 export MINIO_HOSTNAME="minio.ingress.$SHOOT.23ke-ci.okeanos.dev"
