@@ -3,7 +3,7 @@
 export KUBECONFIG=hack/ci/secrets/gardener-kubeconfig.yaml
 DESIRED_PRESPAWNED_SHOOTS=2
 LABEL=23technologies.cloud/free-to-use
-ACTUAL_PRESPAWNED_SHOOTS=$(kubectl get shoots --namespace garden-23t-test --selector=23technologies.cloud/free-to-use='true' --no-headers=true | wc -l)
+ACTUAL_PRESPAWNED_SHOOTS=$(kubectl get shoots --namespace garden-23ke-ci --selector=23technologies.cloud/free-to-use='true' --no-headers=true | wc -l)
 NEEDED_PRESPAWNED_SHOOTS=$(( $DESIRED_PRESPAWNED_SHOOTS - ACTUAL_PRESPAWNED_SHOOTS ))
 while [ $NEEDED_PRESPAWNED_SHOOTS -gt 0 ]
 do
@@ -11,24 +11,23 @@ do
     export SHOOT="23ke-run-$RAND"
     # Alter shoot template
     yq eval '.metadata.name = env(SHOOT)' hack/ci/misc/shoot-template.yaml.tmpl | kubectl apply -f - > /tmp/stdout 2> /tmp/stderr || { echo -e "\rShoot creation unsuccessful ❌"; echo "STDOUT:"; cat /tmp/stdout; echo "STDERR:"; cat /tmp/stderr; exit 1; }
-    ACTUAL_PRESPAWNED_SHOOTS=$(kubectl get shoots --namespace garden-23t-test --selector=23technologies.cloud/free-to-use='true' --no-headers=true | wc -l)
+    ACTUAL_PRESPAWNED_SHOOTS=$(kubectl get shoots --namespace garden-23ke-ci --selector=23technologies.cloud/free-to-use='true' --no-headers=true | wc -l)
     NEEDED_PRESPAWNED_SHOOTS=$(( $DESIRED_PRESPAWNED_SHOOTS - ACTUAL_PRESPAWNED_SHOOTS ))
 done
 
 # Choose our shoot (free to use and the one with highest progress)
-export SHOOT=$(kubectl get shoot -n garden-23t-test -o custom-columns=NAME:.metadata.name --sort-by=.status.lastOperation.progress --no-headers=true --selector=23technologies.cloud/free-to-use='true'|tail -n 1)
+export SHOOT=$(kubectl get shoot -n garden-23ke-ci -o custom-columns=NAME:.metadata.name --sort-by=.status.lastOperation.progress --no-headers=true --selector=23technologies.cloud/free-to-use='true'|tail -n 1)
 
 # Mark as in use
-kubectl label shoot -n garden-23t-test $SHOOT 23technologies.cloud/free-to-use=false --overwrite=true > /tmp/stdout 2> /tmp/stderr || { echo -e "\rShoot labelling unsuccessful ❌"; echo "STDOUT:"; cat /tmp/stdout; echo "STDERR:"; cat /tmp/stderr; exit 1; }
+kubectl label shoot -n garden-23ke-ci $SHOOT 23technologies.cloud/free-to-use=false --overwrite=true > /tmp/stdout 2> /tmp/stderr || { echo -e "\rShoot labelling unsuccessful ❌"; echo "STDOUT:"; cat /tmp/stdout; echo "STDERR:"; cat /tmp/stderr; exit 1; }
 
 # Scale to 4 worker nodes
 kubectl patch -n garden-23t-test shoot $SHOOT --patch-file hack/ci/misc/scale-nodes-min4.patch > /tmp/stdout 2> /tmp/stderr || { echo -e "\rError while scaling shoot-cluster to 4 nodes. ❌" ; echo "STDOUT":; cat /tmp/stdout; echo "STDERR:"; cat /tmp/stderr; exit 1; }
 echo -n "."
 
 export MC_ALIAS=${MC_ALIAS:-shoot}
-export MINIO_HOSTNAME="minio.ingress.$SHOOT.23t-test.okeanos.dev"
+export MINIO_HOSTNAME="minio.ingress.$SHOOT.23ke-ci.okeanos.dev"
 export MINIO_URL="https://$MINIO_HOSTNAME"
-export MINIO_PW=$(openssl rand -hex 20)
 export DASHBOARD_CLIENTSECRET=$(openssl rand -hex 20)
 export DASHBOARD_SESSIONSECRET=$(openssl rand -hex 20)
 export KUBEAPISERVER_BASICAUTHPASSWORD=$(openssl rand -hex 20)
@@ -54,7 +53,6 @@ export MC_ALIAS=$MC_ALIAS
 export SHOOT=$SHOOT
 export MINIO_HOSTNAME=$MINIO_HOSTNAME
 export MINIO_URL=$MINIO_URL
-export MINIO_PW=$MINIO_PW
 export DASHBOARD_CLIENTSECRET=$DASHBOARD_CLIENTSECRET
 export DASHBOARD_SESSIONSECRET=$DASHBOARD_SESSIONSECRET
 export KUBEAPISERVER_BASICAUTHPASSWORD=$KUBEAPISERVER_BASICAUTHPASSWORD

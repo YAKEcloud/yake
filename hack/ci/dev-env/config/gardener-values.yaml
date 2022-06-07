@@ -30,6 +30,10 @@ stringData:
         replicaCount: 1
       scheduler:
         replicaCount: 1
+        config:
+          schedulers:
+            shoot:
+              candidateDeterminationStrategy: MinimalDistance
       admission:
         replicaCount: 1
       controller:
