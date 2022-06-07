@@ -18,8 +18,8 @@ spec:
       zone: fsn1-dc14
     workers:
       - name: worker-cx31
-        minimum: 1
-        maximum: 2
+        minimum: 2
+        maximum: 4
         maxSurge: 1
         machine:
           type: cx31
