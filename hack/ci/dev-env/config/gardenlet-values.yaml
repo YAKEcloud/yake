@@ -11,7 +11,7 @@ stringData:
         config:
           seedConfig:
             metadata:
-              name: hcloud-fsn1-0
+              name: hcloud-hel1-0
             spec:
               dns:
                 ingressDomain: ingress.${AZURE_DOMAIN}
@@ -23,7 +23,7 @@ stringData:
                   pods: 100.73.0.0/16
                   services: 100.88.0.0/13
               provider:
-                region: fsn1
+                region: hel1
                 type: hcloud
               settings:
                 shootDNS:
