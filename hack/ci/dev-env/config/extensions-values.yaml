@@ -9,10 +9,16 @@ stringData:
     os-ubuntu:
       enabled: true
 
+    os-gardenlinux:
+      enabled: true
+
     provider-hcloud:
       enabled: true
 
     provider-azure:
+      enabled: true
+
+    provider-openstack:
       enabled: true
 
     networking-calico:

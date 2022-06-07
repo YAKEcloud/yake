@@ -7,8 +7,16 @@ type: Opaque
 stringData:
   values.yaml: |
     global:
-      versions:
-        - version: 1.20.11
-          classification: supported
+      kubernetes:
+        versions:
+          1.22.9:
+            classification: preview
+      seedSelector:
+        enabled: true
+        selector:
+          providerTypes:
+            - hcloud
     hcloud:
+      enabled: true
+    betacloud:
       enabled: true
