@@ -35,8 +35,8 @@ stringData:
   AZURE_SUBSCRIPTION_ID: ${AZURE_SUBSCRIPTION_ID}
   AZURE_SECRET_ID: ${AZURE_SECRET_ID}
   AZURE_SECRET_VALUE: ${AZURE_SECRET_VALUE}
-  TOKEN_ID: $(openssl rand -hex 3)
-  TOKEN_SECRET: $(openssl rand -hex 8)
+  TOKEN_ID: ab$(openssl rand -hex 2)
+  TOKEN_SECRET: cd$(openssl rand -hex 7)
 EOF
 
 if ! kubectl -n flux-system get secret minio-local > /tmp/stdout 2> /tmp/stderr
