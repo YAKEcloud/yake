@@ -1,22 +1,23 @@
 #!/usr/bin/env bash
 
+export PROVIDER=${PROVIDER:=hcloud}
 export KUBECONFIG=hack/ci/secrets/gardener-kubeconfig.yaml
 DESIRED_PRESPAWNED_SHOOTS=2
 LABEL=23technologies.cloud/free-to-use
-ACTUAL_PRESPAWNED_SHOOTS=$(kubectl get shoots --namespace garden-23ke-ci --selector=23technologies.cloud/free-to-use='true' --no-headers=true | wc -l)
+ACTUAL_PRESPAWNED_SHOOTS=$(kubectl get shoots --namespace garden-23ke-ci --selector=23technologies.cloud/free-to-use='true' --no-headers=true | cut -d ' ' -f4 | grep $PROVIDER | wc -l)
 NEEDED_PRESPAWNED_SHOOTS=$(( $DESIRED_PRESPAWNED_SHOOTS - ACTUAL_PRESPAWNED_SHOOTS ))
 while [ $NEEDED_PRESPAWNED_SHOOTS -gt 0 ]
 do
     RAND=$(openssl rand -hex 2)
     export SHOOT="23ke-run-$RAND"
     # Alter shoot template
-    yq eval '.metadata.name = env(SHOOT)' hack/ci/misc/shoot-template.yaml.tmpl | kubectl apply -f - > /tmp/stdout 2> /tmp/stderr || { echo -e "\rShoot creation unsuccessful ❌"; echo "STDOUT:"; cat /tmp/stdout; echo "STDERR:"; cat /tmp/stderr; exit 1; }
-    ACTUAL_PRESPAWNED_SHOOTS=$(kubectl get shoots --namespace garden-23ke-ci --selector=23technologies.cloud/free-to-use='true' --no-headers=true | wc -l)
+    yq eval '.metadata.name = env(SHOOT)' hack/ci/misc/shoot-template-$PROVIDER.yaml.tmpl | kubectl apply -f - > /tmp/stdout 2> /tmp/stderr || { echo -e "\rShoot creation unsuccessful ❌"; echo "STDOUT:"; cat /tmp/stdout; echo "STDERR:"; cat /tmp/stderr; exit 1; }
+    ACTUAL_PRESPAWNED_SHOOTS=$(kubectl get shoots --namespace garden-23ke-ci --selector=23technologies.cloud/free-to-use='true' --no-headers=true | cut -d ' ' -f4 | grep $PROVIDER | wc -l)
     NEEDED_PRESPAWNED_SHOOTS=$(( $DESIRED_PRESPAWNED_SHOOTS - ACTUAL_PRESPAWNED_SHOOTS ))
 done
 
 # Choose our shoot (free to use and the one with highest progress)
-export SHOOT=$(kubectl get shoot -n garden-23ke-ci -o custom-columns=NAME:.metadata.name --sort-by=.status.lastOperation.progress --no-headers=true --selector=23technologies.cloud/free-to-use='true'|tail -n 1)
+export SHOOT=$(kubectl get shoot -n garden-23ke-ci -o custom-columns=NAME:.metadata.name --sort-by=.status.lastOperation.progress --no-headers=true --selector=23technologies.cloud/free-to-use='true'| cut -d ' ' -f4 | grep $PROVIDER |tail -n 1)
 
 # Mark as in use
 kubectl label shoot -n garden-23ke-ci $SHOOT 23technologies.cloud/free-to-use=false --overwrite=true > /tmp/stdout 2> /tmp/stderr || { echo -e "\rShoot labelling unsuccessful ❌"; echo "STDOUT:"; cat /tmp/stdout; echo "STDERR:"; cat /tmp/stderr; exit 1; }
@@ -57,4 +58,5 @@ export BUCKET=$BUCKET
 export CONFIG_BUCKET=$CONFIG_BUCKET
 export TOKEN_ID=$(openssl rand -hex 3)
 export TOKEN_ID_SECRET=$(openssl rand -hex 8)
+export PROVIDER=$PROVIDER
 EOF
