@@ -17,10 +17,11 @@ do
 done
 
 # Choose our shoot (free to use and the one with highest progress)
-export SHOOT=$(kubectl get shoot -n garden-23ke-ci -o custom-columns=NAME:.metadata.name --sort-by=.status.lastOperation.progress --no-headers=true --selector=23technologies.cloud/free-to-use='true'| cut -d ' ' -f4 | grep $PROVIDER |tail -n 1)
+export SHOOT=$(kubectl get shoot -n garden-23ke-ci --sort-by=.status.lastOperation.progress --no-headers=true --selector=23technologies.cloud/free-to-use='true'| grep "   $PROVIDER   " |cut -d ' ' -f1|tail -n1)
+
 
 # Mark as in use
-kubectl label shoot -n garden-23ke-ci $SHOOT 23technologies.cloud/free-to-use=false --overwrite=true > /tmp/stdout 2> /tmp/stderr || { echo -e "\rShoot labelling unsuccessful ❌"; echo "STDOUT:"; cat /tmp/stdout; echo "STDERR:"; cat /tmp/stderr; exit 1; }
+kubectl label shoot -n garden-23ke-ci $SHOOT 23technologies.cloud/free-to-use=false --overwrite=true > /tmp/stdout 2> /tmp/stderr || { echo -e "\rShoot labeling ($SHOOT) unsuccessful ❌"; echo "STDOUT:"; cat /tmp/stdout; echo "STDERR:"; cat /tmp/stderr; exit 1; }
 
 export MC_ALIAS=${MC_ALIAS:-shoot}
 export MINIO_HOSTNAME="minio.ingress.$SHOOT.23ke-ci.okeanos.dev"
@@ -39,7 +40,8 @@ export TOKEN_ID_SECRET=$(openssl rand -hex 8)
 echo "The script will now setup your development / testing environment."
 echo
 echo "shoot-name:   $SHOOT"
-echo "Dashboard:    https://dashboard.ingress.$SHOOT.23t-test.okeanos.dev"
+echo "Dashboard:    https://dashboard.ingress.$SHOOT.23ke-ci.okeanos.dev"
+echo "Provider:     $PROVIDER"
 echo
 echo "This line might be handy:"
 echo ". hack/ci/handy.sh"
