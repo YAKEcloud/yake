@@ -1,0 +1,71 @@
+kind: Shoot
+apiVersion: core.gardener.cloud/v1beta1
+metadata:
+  namespace: garden-23ke-ci
+  name: 23ke-test
+  labels:
+    23technologies.cloud/free-to-use: "true"
+  annotations:
+    shoot.gardener.cloud/cleanup-webhooks-finalize-grace-period-seconds: "0"
+    shoot.gardener.cloud/cleanup-extended-apis-finalize-grace-period-seconds: "0"
+spec:
+  provider:
+    type: openstack
+    infrastructureConfig:
+      apiVersion: openstack.provider.extensions.gardener.cloud/v1alpha1
+      kind: InfrastructureConfig
+      networks:
+        workers: 10.250.0.0/16
+      floatingPoolName: external
+    controlPlaneConfig:
+      apiVersion: openstack.provider.extensions.gardener.cloud/v1alpha1
+      kind: ControlPlaneConfig
+      loadBalancerProvider: amphora
+      zone: south-2
+    workers:
+      - name: worker-v0gri
+        minimum: 4
+        maximum: 10
+        maxSurge: 1
+        machine:
+          type: 4C-8GB-20GB
+          image:
+            name: gardenlinux
+            version: 576.1.0
+        zones:
+          - south-2
+        cri:
+          name: containerd
+        volume:
+          size: 20Gi
+  networking:
+    nodes: 10.250.0.0/16
+    type: calico
+  cloudProfileName: betacloud
+  region: betacloud-1
+  secretBindingName: 23technologies-svc-gardener-1
+  kubernetes:
+    version: 1.22.10
+    verticalPodAutoscaler:
+      enabled: true
+  purpose: evaluation
+  addons:
+    kubernetesDashboard:
+      enabled: false
+    nginxIngress:
+      enabled: true
+      externalTrafficPolicy: Cluster
+  extensions:
+    - type: shoot-flux
+  maintenance:
+    timeWindow:
+      begin: 020000+0200
+      end: 030000+0200
+    autoUpdate:
+      kubernetesVersion: true
+      machineImageVersion: true
+  hibernation:
+    schedules:
+    - start: '00 19 * * 1,2,3,4,5'
+      end: '00 08 * * 1,2,3,4,5'
+      location: Europe/Berlin

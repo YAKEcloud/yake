@@ -1,19 +1,10 @@
 #/usr/bin/env bash
 
 source hack/ci/handy.sh
-export PROVIDER=${PROVIDER:=hcloud}
 
 echo -e -n "\rDeploying sample Shoot"
 
-if [[ $PROVIDER == "hcloud" ]]
-then
-  kubectl apply -f hack/ci/misc/shoot-microservice-hcloud.yaml --context garden > /tmp/stdout 2> /tmp/stderr || { echo -e "\rError while applying testing shoot ❌"; echo "STDOUT":; cat /tmp/stdout; echo "STDERR:"; cat /tmp/stderr; exit 1; }
-elif [[ $PROVIDER == "betacloud" ]]
-then
-  kubectl apply -f hack/ci/misc/shoot-microservice-betacloud.yaml --context garden > /tmp/stdout 2> /tmp/stderr || { echo -e "\rError while applying testing shoot ❌"; echo "STDOUT":; cat /tmp/stdout; echo "STDERR:"; cat /tmp/stderr; exit 1; }
-else
-  echo "Kein Provider angegeben"
-fi
+kubectl apply -f hack/ci/misc/shoot-microservice-$PROVIDER.yaml --context garden > /tmp/stdout 2> /tmp/stderr || { echo -e "\rError while applying testing shoot ❌"; echo "STDOUT":; cat /tmp/stdout; echo "STDERR:"; cat /tmp/stderr; exit 1; }
 
 echo -n "."
 

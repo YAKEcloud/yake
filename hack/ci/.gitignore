@@ -4,6 +4,8 @@ dev-env/gardenlet/garden-content/token.yaml
 dev-env/gardenlet/config/internal-gardenlet-values.yaml
 secrets/hcloud_token
 secrets/openstack-secret.yaml
+secrets/betacloud-secret.yaml
+secrets/hcloud-secret.yaml
 secrets/azure_dns
 secrets/gardener-kubeconfig.yaml
 secrets/apiserver-in-shoot-kubeconfig.yaml

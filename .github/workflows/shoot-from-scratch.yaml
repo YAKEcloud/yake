@@ -30,9 +30,10 @@ jobs:
         run: bash hack/ci/04-23ke.sh
       - name: Install Gardenlet
         id: installGardenlet
-        run: echo -n "$CLOUD_SECRET" > hack/ci/secrets/hcloud_token ; bash hack/ci/05-gardenlet.sh
+        run: echo -n "$HCLOUD_SECRET" > hack/ci/secrets/hcloud-secret.yaml ; echo -n "$BETACLOUD_SECRET" > hack/ci/secrets/betacloud-secret.yaml ;  bash hack/ci/05-gardenlet.sh
         env:
-          CLOUD_SECRET: ${{ secrets.HCLOUD_TESTING_TOKEN }}
+          HCLOUD_SECRET: ${{ secrets.HCLOUD_TESTING_SECRET }}
+          BETACLOUD_SECRET: ${{ secrets.BETACLOUD_TESTING_SECRET }}
       - name: Install demo app
         id: installDemoApp
         run: bash hack/ci/06-microservice-shoot.sh
