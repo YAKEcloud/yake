@@ -38,3 +38,7 @@ spec:
       name: gardener-internal-kubeconfig
       valuesKey: value
       targetPath: kubeconfig
+    - kind: Secret
+      name: gardener-ca-keypair
+      valuesKey: tls.crt
+      targetPath: apiServerCa
