@@ -12,38 +12,38 @@ jobs:
         with:
           fetch-depth: 0
       - name: Setup Environment
-        run: echo "$KUBECONFIG_CONTENT" > hack/ci/secrets/gardener-kubeconfig.yaml; bash hack/ci/00-environment.sh
-        env:
-          KUBECONFIG_CONTENT: ${{ secrets.TOKEN_OKEANOS_23KE_CI }}
+        timeout-minutes: 5
+        run: |
+          echo "${{ secrets.TOKEN_OKEANOS_23KE_CI }}" > hack/ci/secrets/gardener-kubeconfig.yaml
+          bash hack/ci/00-environment.sh
       - name: Setup shoot
+        timeout-minutes: 30
         run: bash hack/ci/01-shoot.sh
       - name: Upload 23ke bucket
-        id: upload23KE
+        timeout-minutes: 5
         run: bash hack/ci/02-23ke-bucket.sh
       - name: Upload 23ke-config bucket
-        id: upload23KEConfig
-        run: echo "$AZURE_DNS" > hack/ci/secrets/azure_dns ; bash hack/ci/03-23ke-config-bucket.sh
-        env:
-          AZURE_DNS: ${{ secrets.AZURE_DNS_SECRET }}
+        timeout-minutes: 5
+        run: |
+          echo "${{ secrets.AZURE_DNS_SECRET }}" > hack/ci/secrets/azure_dns
+          bash hack/ci/03-23ke-config-bucket.sh
       - name: Install 23KE
-        id: install23ke
+        timeout-minutes: 15
         run: bash hack/ci/04-23ke.sh
       - name: Install Gardenlet
-        id: installGardenlet
-        run: echo -n "$HCLOUD_SECRET" > hack/ci/secrets/hcloud-secret.yaml ; echo -n "$BETACLOUD_SECRET" > hack/ci/secrets/betacloud-secret.yaml ;  bash hack/ci/05-gardenlet.sh
-        env:
-          HCLOUD_SECRET: ${{ secrets.HCLOUD_TESTING_SECRET }}
-          BETACLOUD_SECRET: ${{ secrets.BETACLOUD_TESTING_SECRET }}
+        timeout-minutes: 10
+        run: |
+          echo -n "${{ secrets.HCLOUD_TESTING_SECRET }}" > hack/ci/secrets/hcloud-secret.yaml
+          echo -n "${{ secrets.BETACLOUD_TESTING_SECRET }}" > hack/ci/secrets/betacloud-secret.yaml
+          bash hack/ci/05-gardenlet.sh
       - name: Install demo app
-        id: installDemoApp
+        timeout-minutes: 30
         run: bash hack/ci/06-microservice-shoot.sh
       - name: Delete demo shoot
+        timeout-minutes: 30
         run: bash hack/ci/delete-microservice-shoot.sh
+        if: ${{ always() }}
       - name: Delete shoot
+        timeout-minutes: 5
         run: bash hack/ci/delete-shoot.sh
-      - name: Delete demo shoot after failure
-        if: failure() && ( steps.installDemoApp.outcome == 'failure' )
-        run: bash hack/ci/delete-microservice-shoot.sh
-      - name: Delete shoot after failure
-        if: failure() && ( steps.upload23KE.outcome == 'failure' || steps.upload23KEConfig.outcome == 'failure' || steps.install23ke.outcome == 'failure' || steps.installGardenlet.outcome == 'failure' || steps.installDemoApp.outcome == 'failure' )
-        run: bash hack/ci/delete-shoot.sh
+        if: ${{ always() }}
