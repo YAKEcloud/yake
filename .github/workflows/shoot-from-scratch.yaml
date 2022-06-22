@@ -36,8 +36,8 @@ jobs:
           HCLOUD_SECRET: ${{ secrets.HCLOUD_TESTING_SECRET }}
           BETACLOUD_SECRET: ${{ secrets.BETACLOUD_TESTING_SECRET }}
         run: |
-          echo -n "${{ $HCLOUD_SECRET }}" > hack/ci/secrets/hcloud-secret.yaml
-          echo -n "${{ $BETACLOUD_SECRET }}" > hack/ci/secrets/betacloud-secret.yaml
+          echo -n "$HCLOUD_SECRET" > hack/ci/secrets/hcloud-secret.yaml
+          echo -n "$BETACLOUD_SECRET" > hack/ci/secrets/betacloud-secret.yaml
           bash hack/ci/05-gardenlet.sh
       - name: Install demo app
         timeout-minutes: 30
