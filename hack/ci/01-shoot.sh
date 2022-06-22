@@ -6,10 +6,10 @@ export KUBECONFIG=hack/ci/secrets/gardener-kubeconfig.yaml
 # Wait for shoot to become available
 echo -n "Creating shoot: 0%"
 OLD_PERCENTAGE=0
-while [ ! "$(kubectl get shoot $SHOOT -n garden-23ke-ci -o jsonpath="{.status.lastOperation.state}")" == "Succeeded" ]
+while [ ! "$(kubectl get shoot $SHOOT -o jsonpath="{.status.lastOperation.state}")" == "Succeeded" ]
 do
     sleep 5
-    PERCENTAGE=$(kubectl get shoot -n garden-23ke-ci $SHOOT -o jsonpath="{.status.lastOperation.progress}")
+    PERCENTAGE=$(kubectl get shoot $SHOOT -o jsonpath="{.status.lastOperation.progress}")
     if [ $OLD_PERCENTAGE -le $PERCENTAGE ]
     then
         echo -n -e "\rCreating shoot: $PERCENTAGE%"
@@ -21,7 +21,7 @@ done
 
 
 # Get shoot kubeconfig
-kubectl get secret -n garden-23ke-ci $SHOOT.kubeconfig -o go-template='{{.data.kubeconfig|base64decode}}' > hack/ci/secrets/shoot-kubeconfig.yaml 2> /tmp/stderr || { echo -e "\rshoot creation unsuccessful            ❌               "; echo "STDERR:"; cat /tmp/stderr; exit 1; }
+kubectl get secret $SHOOT.kubeconfig -o go-template='{{.data.kubeconfig|base64decode}}' > hack/ci/secrets/shoot-kubeconfig.yaml 2> /tmp/stderr || { echo -e "\rshoot creation unsuccessful            ❌               "; echo "STDERR:"; cat /tmp/stderr; exit 1; }
 export KUBECONFIG=hack/ci/secrets/shoot-kubeconfig.yaml
 
 

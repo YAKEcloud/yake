@@ -2,6 +2,10 @@
 
 source hack/ci/handy.sh
 source hack/ci/secrets/azure_dns
+
+export SHOOT_DOMAIN=$(kubectl get shoot $SHOOT -o jsonpath="{.spec.dns.domain}")
+
+
 if [[ $CI == "true" ]]
 then
     FLUX=/usr/local/bin/flux
@@ -26,7 +30,7 @@ metadata:
 type: Opaque
 stringData:
   ENV: ingress
-  BASE_DOMAIN: ${SHOOT}.23ke-ci.okeanos.dev
+  BASE_DOMAIN: ${SHOOT_DOMAIN}
   DASHBOARD_CLIENTSECRET: ${DASHBOARD_CLIENTSECRET}
   DASHBOARD_SESSIONSECRET: ${DASHBOARD_SESSIONSECRET}
   KUBEAPISERVER_BASICAUTHPASSWORD: ${KUBEAPISERVER_BASICAUTHPASSWORD}
@@ -35,8 +39,8 @@ stringData:
   AZURE_SUBSCRIPTION_ID: ${AZURE_SUBSCRIPTION_ID}
   AZURE_SECRET_ID: ${AZURE_SECRET_ID}
   AZURE_SECRET_VALUE: ${AZURE_SECRET_VALUE}
-  TOKEN_ID: ab$(openssl rand -hex 2)
-  TOKEN_SECRET: cd$(openssl rand -hex 7)
+  TOKEN_ID: ${TOKEN_ID}
+  TOKEN_SECRET: ${TOKEN_SECRET}
 EOF
 
 if ! kubectl -n flux-system get secret minio-local > /tmp/stdout 2> /tmp/stderr

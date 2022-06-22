@@ -14,8 +14,8 @@ else
 fi
 export KUBECONFIG=hack/ci/secrets/gardener-kubeconfig.yaml
 # Annotate Shoot for deletion
-kubectl annotate shoot -n garden-23ke-ci $SHOOT confirmation.gardener.cloud/deletion=true > /tmp/stdout 2> /tmp/stderr || { echo "Error while setting shoot-deletion annotation ❌"; echo "STDOUT:"; cat /tmp/stdout; echo "STDERR:"; cat /tmp/stderr; exit 1; }
+kubectl annotate shoot $SHOOT confirmation.gardener.cloud/deletion=true > /tmp/stdout 2> /tmp/stderr || { echo "Error while setting shoot-deletion annotation ❌"; echo "STDOUT:"; cat /tmp/stdout; echo "STDERR:"; cat /tmp/stderr; exit 1; }
 
 # Delete shoot
-kubectl delete shoot -n garden-23ke-ci $SHOOT --wait=false > /tmp/stdout 2> /tmp/stderr || { echo -e "Shoot deletion unsuccessful ❌"; exit 1; }
+kubectl delete shoot $SHOOT --wait=false > /tmp/stdout 2> /tmp/stderr || { echo -e "Shoot deletion unsuccessful ❌"; exit 1; }
 echo "shoot annotated for deletion              ✅       "
