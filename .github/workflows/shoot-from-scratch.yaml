@@ -2,10 +2,12 @@ name: "23KE on shoot"
 on:
   workflow_dispatch:
   pull_request:
+ 
 jobs:
-  ci:
+  prepare:
+    name: Prepare Shoot
+    timeout-minutes: 10
     runs-on: 23ke-runner
-    name: "23KE shoot testrun"
     steps:
       - name: Checkout source
         uses: actions/checkout@v2.3.4
@@ -25,6 +27,20 @@ jobs:
         run: echo "$AZURE_DNS" > hack/ci/secrets/azure_dns ; bash hack/ci/03-23ke-config-bucket.sh
         env:
           AZURE_DNS: ${{ secrets.AZURE_DNS_SECRET }}
+  install:
+    needs: prepare
+    name: Install 23KE
+    timeout-minutes: 10
+    runs-on: 23ke-runner
+    steps:
+      - name: Checkout source
+        uses: actions/checkout@v2.3.4
+        with:
+          fetch-depth: 0
+      - name: Checkout source
+        uses: actions/checkout@v2.3.4
+        with:
+          fetch-depth: 0
       - name: Install 23KE
         id: install23ke
         run: bash hack/ci/04-23ke.sh
@@ -34,16 +50,27 @@ jobs:
         env:
           HCLOUD_SECRET: ${{ secrets.HCLOUD_TESTING_SECRET }}
           BETACLOUD_SECRET: ${{ secrets.BETACLOUD_TESTING_SECRET }}
+  test:
+    needs: install
+    name: Test 23KE
+    timeout-minutes: 30
+    runs-on: 23ke-runner
+    steps:
       - name: Install demo app
         id: installDemoApp
         run: bash hack/ci/06-microservice-shoot.sh
+  cleanup:
+    if: ${{ always() }}
+    needs: [prepare, install, test] # run always, but after all other tests
+    name: Cleanup, Delete Shoot
+    timeout-minutes: 60
+    runs-on: 23ke-runner
+    steps:
+      - name: Checkout source
+        uses: actions/checkout@v2.3.4
+        with:
+          fetch-depth: 0
       - name: Delete demo shoot
         run: bash hack/ci/delete-microservice-shoot.sh
       - name: Delete shoot
-        run: bash hack/ci/delete-shoot.sh
-      - name: Delete demo shoot after failure
-        if: failure() && ( steps.installDemoApp.outcome == 'failure' )
-        run: bash hack/ci/delete-microservice-shoot.sh
-      - name: Delete shoot after failure
-        if: failure() && ( steps.upload23KE.outcome == 'failure' || steps.upload23KEConfig.outcome == 'failure' || steps.install23ke.outcome == 'failure' || steps.installGardenlet.outcome == 'failure' || steps.installDemoApp.outcome == 'failure' )
         run: bash hack/ci/delete-shoot.sh
