@@ -1,7 +1,6 @@
 #/usr/bin/env bash
 
 source hack/ci/handy.sh
-source hack/ci/secrets/azure_dns
 
 # 23KE Config-Bucket
 echo  -n -e "\rConfig Bucket creating"

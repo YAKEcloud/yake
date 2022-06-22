@@ -30,9 +30,7 @@ jobs:
         run: bash hack/ci/02-23ke-bucket.sh
       - name: Upload 23ke-config bucket
         id: upload23KEConfig
-        run: echo "$AZURE_DNS" > hack/ci/secrets/azure_dns ; bash hack/ci/03-23ke-config-bucket.sh
-        env:
-          AZURE_DNS: ${{ secrets.AZURE_DNS_SECRET }}
+        run: bash hack/ci/03-23ke-config-bucket.sh
   install:
     needs: prepare
     name: Install 23KE
@@ -48,6 +46,7 @@ jobs:
           echo "${{ secrets.TOKEN_OKEANOS_23KE_CI }}" > hack/ci/secrets/gardener-kubeconfig.yaml;
           echo "${{ needs.prepare.outputs.handy }}" > hack/ci/handy.sh
           echo "${{ needs.prepare.outputs.shoot-kubeconfig }}" > hack/ci/secrets/shoot-kubeconfig.yaml
+          echo "${{ secrets.AZURE_DNS_SECRET }}" > hack/ci/secrets/azure_dns ; 
       - name: Install 23KE
         id: install23ke
         run: bash hack/ci/04-23ke.sh
