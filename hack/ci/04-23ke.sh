@@ -2,6 +2,7 @@
 
 source hack/ci/handy.sh
 source hack/ci/secrets/azure_dns
+
 if [[ $CI == "true" ]]
 then
     FLUX=/usr/local/bin/flux
