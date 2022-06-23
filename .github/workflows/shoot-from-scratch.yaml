@@ -28,17 +28,27 @@ jobs:
       - name: Install 23KE
         timeout-minutes: 15
         run: bash hack/ci/04-23ke.sh
-      - name: Install Gardenlet
-        timeout-minutes: 10
+      - name: Copy provider secret
+        timeout-minutes: 5
         run: bash hack/ci/05-secret.sh
-      - name: Install demo app
+      - name: Create demo shoot with demo app
         timeout-minutes: 30
         run: bash hack/ci/06-microservice-shoot.sh
       - name: Delete demo shoot
-        timeout-minutes: 30
-        run: bash hack/ci/delete-microservice-shoot.sh
         if: ${{ always() }}
+        uses: nick-fields/retry@v2
+        with:
+          timeout_minutes: 5
+          max_attempts: 3
+          retry_wait_seconds: 30
+          retry_on: error
+          command: bash hack/ci/delete-microservice-shoot.sh
       - name: Delete shoot
-        timeout-minutes: 5
-        run: bash hack/ci/delete-shoot.sh
         if: ${{ always() }}
+        uses: nick-fields/retry@v2
+        with:
+          timeout_minutes: 5
+          max_attempts: 3
+          retry_wait_seconds: 30
+          retry_on: error
+          command: bash hack/ci/delete-shoot.sh
