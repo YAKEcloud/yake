@@ -12,28 +12,63 @@ jobs:
         with:
           fetch-depth: 0
       - name: Setup Environment
-        timeout-minutes: 5
-        run: |
+        uses: nick-fields/retry@v2
+        with:
+          timeout_minutes: 5
+          max_attempts: 3
+          retry_wait_seconds: 30
+          retry_on: error
+          command: |
           echo "${{ secrets.TOKEN_OKEANOS_23KE_CI }}" > hack/ci/secrets/gardener-kubeconfig.yaml
           bash hack/ci/00-environment.sh
       - name: Setup shoot
-        timeout-minutes: 30
-        run: bash hack/ci/01-shoot.sh
+        uses: nick-fields/retry@v2
+        with:
+          timeout_minutes: 30
+          max_attempts: 2
+          retry_wait_seconds: 30
+          retry_on: error
+          command: bash hack/ci/01-shoot.sh
       - name: Upload 23ke bucket
-        timeout-minutes: 5
-        run: bash hack/ci/02-23ke-bucket.sh
+        uses: nick-fields/retry@v2
+        with:
+          timeout_minutes: 5
+          max_attempts: 3
+          retry_wait_seconds: 30
+          retry_on: error
+          command: bash hack/ci/02-23ke-bucket.sh
       - name: Upload 23ke-config bucket
-        timeout-minutes: 5
-        run: bash hack/ci/03-23ke-config-bucket.sh
+        uses: nick-fields/retry@v2
+        with:
+          timeout_minutes: 5
+          max_attempts: 3
+          retry_wait_seconds: 30
+          retry_on: error
+          command: bash hack/ci/03-23ke-config-bucket.sh
       - name: Install 23KE
-        timeout-minutes: 15
-        run: bash hack/ci/04-23ke.sh
+        uses: nick-fields/retry@v2
+        with:
+          timeout_minutes: 15
+          max_attempts: 3
+          retry_wait_seconds: 30
+          retry_on: error
+          command: bash hack/ci/04-23ke.sh
       - name: Copy provider secret
-        timeout-minutes: 5
-        run: bash hack/ci/05-secret.sh
+        uses: nick-fields/retry@v2
+        with:
+          timeout_minutes: 5
+          max_attempts: 3
+          retry_wait_seconds: 30
+          retry_on: error
+          command: bash hack/ci/05-secret.sh
       - name: Create demo shoot with demo app
-        timeout-minutes: 30
-        run: bash hack/ci/06-microservice-shoot.sh
+        uses: nick-fields/retry@v2
+        with:
+          timeout_minutes: 30
+          max_attempts: 3
+          retry_wait_seconds: 30
+          retry_on: error
+          command: bash hack/ci/06-microservice-shoot.sh
       - name: Delete demo shoot
         if: ${{ always() }}
         uses: nick-fields/retry@v2
