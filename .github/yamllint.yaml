@@ -9,6 +9,5 @@ rules:
 ignore: |
   /helmcharts/
   kustomization.*
-  /hack/helmchart-import/secret-kubeconfig-for-gardener.yaml
-  /hack/ci/secrets/apiserver-in-shoot-kubeconfig.yaml
-  /hack/ci/secrets/shoot-kubeconfig.yaml
+  /hack/ci/secrets/*
+  /hack/ci/misc/microservices-demo.yaml

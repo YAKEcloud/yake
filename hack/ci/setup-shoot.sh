@@ -26,5 +26,5 @@ bash hack/ci/04-23ke.sh || exit 1
 progress_step
 
 # Add provider secret
-bash hack/ci/05-gardenlet.sh || exit 1
+bash hack/ci/05-secret.sh || exit 1
 progress_step

@@ -41,19 +41,19 @@ mkdir $MYENV && cd $MYENV
 After creating and commiting the environment to the config repository you need to bootstrap flux into the cluster and give it read access to the config repository.
 
 # How to use the testbed
-This repo contains a quick way to setup 23KE for testing and development. The scripts that bootstrap the testing environment are all located in `hack/ci`. The testbed itself runs as shoot on top of okeanos. To start you have to place a valid kubeconfig that accesses the okeanos API-Server under `hack/secrets/gardener-kubeconfig.yaml`. If you want to deploy a working seed on hetznercloud you have to place a hetzner token under `hack/secrets/hcloud_token` it is important to place the token there without trailing newline character. After that you can start the deployment with a simple `bash hack/ci/setup_shoot.sh`. The script runs approximately 10 Minutes and in the end you should have a working gardener. The script calls 8 different scripts sequentially, all of them can be executed seperately as well. Here a brief description of each script:
+This repo contains a quick way to setup 23KE for testing and development. The scripts that bootstrap the testing environment are all located in `hack/ci`. The testbed itself runs as shoot on top of okeanos in the project 23ke-ci. To use the script you need the kubeconfig for a service account in that project and place it under `hack/secrets/gardener-kubeconfig.yaml`. After that you can start the deployment with a simple `bash hack/ci/setup_shoot.sh`. The script runs approximately 10 minutes and in the end you should have a working gardener. The script calls multiple scripts sequentially, all of them can be executed seperately as well. Here a brief description of each script:
 
-* 00-environment.sh:    Reserves a shoot, generates random passwords, tokens, names
-* 01-shoot.sh           Waits for the shoot to be in "Ready" state
-* 02-letsencrypt.sh     Deploys cert-manager and installs le-staging clusterissuer
-* 03-minio.sh           Deploys minio
-* 04-23ke-bucket.sh     Uploads the 23KE content to the bucket
-* 05-config-bucket.sh   Uploads the 23KE-testbed-config to the bucket
-* 06-flux.sh            Installs flux
-* 07-23ke.sh            Creates flux kustomizations and waits for reconciliation
+* 00-environment.sh:       Reserves a shoot, generates random passwords, tokens, names
+* 01-shoot.sh              Waits for the shoot to be in "Ready" state
+* 02-23ke-bucket.sh        Uploads the local state of 23ke to a minio bucket
+* 03-23ke-config-bucket.sh Uploads the local state of hack/ci/dev-env to a minio bucket
+* 04-23ke.sh               Configures and installs 23ke gardener in shoot
+* 05-secret.sh             Copy provider secret from base gardener to new gardener
+* 06-microservice-shoot.sh Create a new shoot in the new gardener
 
+The main goal is to iterate and test local changes before creating a PR or even a commit, and do so quickly. Nearly all of the time it should be sufficient to re-upload the local state with 02-23ke-bucket.sh/03-23ke-config-bucket.sh or/and re-run the 04-23ke.sh to watch flux reconcile the changes.
 
-To deploy a hcloud-gardenlet in that gardener (requires the hcloud_token) you can call `bash hack/ci/08-gardenlet.sh`.
+To clean up you need to then run delete-microservice-shoot.sh and delete-shoot.sh
 
 # Prevent nix-shell garbage collection
 Nix by default collects unused packages. Using nix-shell does not automatically root it's dependencies,
