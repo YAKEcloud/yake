@@ -11,7 +11,7 @@ kubectl apply -f hack/ci/misc/shoot-microservice-"$PROVIDER".yaml --context gard
 echo "Waiting for shoot creation..."
 
 while [ ! "$(kubectl --context garden get shoot microservice -n garden-testing -o jsonpath="{.status.lastOperation.state}")" == "Succeeded" ]; do
-  PERCENTAGE=$(kubectl --context garden get shootmicroservice -n garden-testing -o jsonpath="{.status.lastOperation.progress}")
+  PERCENTAGE=$(kubectl --context garden get shoot microservice -n garden-testing -o jsonpath="{.status.lastOperation.progress}")
   echo "Creating shoot: $PERCENTAGE%"
 	sleep 5
 done
