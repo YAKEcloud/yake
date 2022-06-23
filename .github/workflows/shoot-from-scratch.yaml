@@ -24,21 +24,13 @@ jobs:
         run: bash hack/ci/02-23ke-bucket.sh
       - name: Upload 23ke-config bucket
         timeout-minutes: 5
-        run: |
-          echo "${{ secrets.AZURE_DNS_SECRET }}" > hack/ci/secrets/azure_dns
-          bash hack/ci/03-23ke-config-bucket.sh
+        run: bash hack/ci/03-23ke-config-bucket.sh
       - name: Install 23KE
         timeout-minutes: 15
         run: bash hack/ci/04-23ke.sh
       - name: Install Gardenlet
         timeout-minutes: 10
-        env:
-          HCLOUD_SECRET: ${{ secrets.HCLOUD_TESTING_SECRET }}
-          BETACLOUD_SECRET: ${{ secrets.BETACLOUD_TESTING_SECRET }}
-        run: |
-          echo -n "$HCLOUD_SECRET" > hack/ci/secrets/hcloud-secret.yaml
-          echo -n "$BETACLOUD_SECRET" > hack/ci/secrets/betacloud-secret.yaml
-          bash hack/ci/05-gardenlet.sh
+        run: bash hack/ci/05-gardenlet.sh
       - name: Install demo app
         timeout-minutes: 30
         run: bash hack/ci/06-microservice-shoot.sh

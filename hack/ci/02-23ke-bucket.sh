@@ -1,4 +1,5 @@
-#/usr/bin/env bash
+#!/usr/bin/env bash
+set -euo pipefail
 
 source hack/ci/handy.sh
 
@@ -7,20 +8,18 @@ source hack/ci/handy.sh
 mkdir -p ~/.mc/certs/CAs/
 cp hack/ci/misc/le-staging.pem ~/.mc/certs/CAs/le-staging.pem
 cp hack/ci/misc/local-ca.pem ~/.mc/certs/CAs/local-ca.pem
-echo  -n -e "\r23KE Bucket creating"
-(mc ls $MC_ALIAS/$BUCKET > /tmp/stdout 2> /tmp/stderr ) || mc mb $MC_ALIAS/$BUCKET > /dev/null 2>&1 || { echo -e "\r23KE Bucket did not exist. error while creating a new one ❌"; echo "STDOUT":; cat /tmp/stdout; echo "STDERR:"; cat /tmp/stderr; exit 1; }
-echo -n "."
-mc cp kustomization.yaml $MC_ALIAS/$BUCKET > /tmp/stdout 2> /tmp/stderr || { echo -e "\rError while uploading 23KE root-ks Bucket ❌"; echo "STDOUT":; cat /tmp/stdout; echo "STDERR:"; cat /tmp/stderr; exit 1; }
-echo -n "."
-mc cp --recursive flux $MC_ALIAS/$BUCKET > /tmp/stdout 2> /tmp/stderr || { echo -e "\rError while uploading 23KE/flux to Bucket ❌"; echo "STDOUT":; cat /tmp/stdout; echo "STDERR:"; cat /tmp/stderr; exit 1; }
-echo -n "."
-mc cp --recursive base-install $MC_ALIAS/$BUCKET > /tmp/stdout 2> /tmp/stderr || { echo -e "\rError while uploading 23KE/base-install to Bucket ❌"; echo "STDOUT":; cat /tmp/stdout; echo "STDERR:"; cat /tmp/stderr; exit 1; }
-echo -n "."
-mc cp --recursive base-config $MC_ALIAS/$BUCKET > /tmp/stdout 2> /tmp/stderr || { echo -e "\rError while uploading 23KE/base-config to Bucket ❌"; echo "STDOUT":; cat /tmp/stdout; echo "STDERR:"; cat /tmp/stderr; exit 1; }
-echo -n "."
+
+echo "23KE Bucket upload"
+
+mc ls "$MC_ALIAS/$BUCKET" &> /dev/null || mc mb "$MC_ALIAS/$BUCKET"
+mc cp -q kustomization.yaml "$MC_ALIAS/$BUCKET"
+mc cp -q --recursive flux "$MC_ALIAS/$BUCKET"
+mc cp -q --recursive base-install "$MC_ALIAS/$BUCKET"
+mc cp -q --recursive base-config "$MC_ALIAS/$BUCKET"
+
 # we now upload packet versions which use a bucket instead of the GitRepository
-for file in $(grep --exclude-dir=hack --exclude-dir=env-template -lr GitRepository . | sed 's/^\.\///'); do
-    cat $file | sed s/GitRepository/Bucket/ | mc pipe $MC_ALIAS/$BUCKET/$file > /tmp/stdout 2> /tmp/stderr || { echo -e "\rError while uploading to 23KE Bucket ❌"; echo "STDOUT":; cat /tmp/stdout; echo "STDERR:"; cat /tmp/stderr; exit 1; }
+grep -lr GitRepository flux/ | while IFS= read -r file; do
+    sed s/GitRepository/Bucket/ "$file" | mc pipe -q "$MC_ALIAS/$BUCKET/$file"
 done
-echo -n "."
-echo -e "\r23KE Bucket ready    ✅               "
+
+echo "23KE Bucket ready ✅"
