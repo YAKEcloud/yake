@@ -19,8 +19,8 @@ jobs:
           retry_wait_seconds: 30
           retry_on: error
           command: |
-          echo "${{ secrets.TOKEN_OKEANOS_23KE_CI }}" > hack/ci/secrets/gardener-kubeconfig.yaml
-          bash hack/ci/00-environment.sh
+            echo "${{ secrets.TOKEN_OKEANOS_23KE_CI }}" > hack/ci/secrets/gardener-kubeconfig.yaml
+            bash hack/ci/00-environment.sh
       - name: Setup shoot
         uses: nick-fields/retry@v2
         with:
