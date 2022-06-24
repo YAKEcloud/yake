@@ -1,13 +1,10 @@
 extends: default
 
 rules:
-  comments: disable
-  line-length: disable
-  truthy: disable
+  truthy:
+    check-keys: false
   document-start: disable
 
 ignore: |
-  /helmcharts/
-  kustomization.*
   /hack/ci/secrets/*
   /hack/ci/misc/microservices-demo.yaml
