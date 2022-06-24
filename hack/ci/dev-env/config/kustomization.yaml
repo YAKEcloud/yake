@@ -1,11 +1,11 @@
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 resources:
-- clusterissuer-ca.yaml
-- cloudprofiles-values.yaml
-- dashboard-values.yaml
-- gardener-values.yaml
-- gardenlet-values.yaml
-- identity-values.yaml
-- kube-apiserver-values.yaml
-- extensions-values.yaml
+  - clusterissuer-ca.yaml
+  - cloudprofiles-values.yaml
+  - dashboard-values.yaml
+  - gardener-values.yaml
+  - gardenlet-values.yaml
+  - identity-values.yaml
+  - kube-apiserver-values.yaml
+  - extensions-values.yaml

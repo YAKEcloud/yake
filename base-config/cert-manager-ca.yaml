@@ -13,7 +13,7 @@ metadata:
   namespace: flux-system
 spec:
   secretName: gardener-ca-keypair
-  duration: 87600h #10y
+  duration: 87600h  # 10y
   isCA: true
   issuerRef:
     name: gardener-ca-selfsigned
@@ -36,7 +36,7 @@ metadata:
   namespace: flux-system
 spec:
   secretName: etcd-tls
-  duration: 87600h #10y
+  duration: 87600h  # 10y
   usages:
     - server auth
   dnsNames:
@@ -53,7 +53,7 @@ metadata:
   namespace: flux-system
 spec:
   secretName: etcd-client-tls
-  duration: 87600h #10y
+  duration: 87600h  # 10y
   usages:
     - client auth
   commonName: etcd-client
@@ -67,7 +67,7 @@ metadata:
   namespace: flux-system
 spec:
   secretName: kube-apiserver-tls
-  duration: 87600h #10y
+  duration: 87600h  # 10y
   usages:
     - server auth
   dnsNames:
@@ -88,7 +88,7 @@ metadata:
   namespace: flux-system
 spec:
   secretName: kube-controllermanager-tls
-  duration: 87600h #10y
+  duration: 87600h  # 10y
   usages:
     - client auth
   commonName: system:kube-controller-manager
@@ -102,7 +102,7 @@ metadata:
   namespace: flux-system
 spec:
   secretName: kube-aggregator-tls
-  duration: 87600h #10y
+  duration: 87600h  # 10y
   usages:
     - server auth
     - client auth
@@ -121,7 +121,7 @@ metadata:
   namespace: flux-system
 spec:
   secretName: kube-serviceaccount-tls
-  duration: 87600h #10y
+  duration: 87600h  # 10y
   usages:
     - server auth
     - client auth
@@ -137,7 +137,7 @@ metadata:
   namespace: flux-system
 spec:
   secretName: kube-admin-tls
-  duration: 87600h #10y
+  duration: 87600h  # 10y
   usages:
     - client auth
   subject:
@@ -154,7 +154,7 @@ metadata:
   namespace: flux-system
 spec:
   secretName: gardener-apiserver-tls
-  duration: 87600h #10y
+  duration: 87600h  # 10y
   usages:
     - server auth
   dnsNames:
@@ -172,7 +172,7 @@ metadata:
   namespace: flux-system
 spec:
   secretName: gardener-admission-controller-tls
-  duration: 87600h #10y
+  duration: 87600h  # 10y
   usages:
     - server auth
   dnsNames:

@@ -1,12 +1,12 @@
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 resources:
-- cloudprofiles.yaml
-- dashboard.yaml
-- etcd.yaml
-- gardener.yaml
-- pre-gardenlet.yaml
-- gardenlet.yaml
-- identity.yaml
-- kube-apiserver.yaml
-- extensions.yaml
+  - cloudprofiles.yaml
+  - dashboard.yaml
+  - etcd.yaml
+  - gardener.yaml
+  - pre-gardenlet.yaml
+  - gardenlet.yaml
+  - identity.yaml
+  - kube-apiserver.yaml
+  - extensions.yaml

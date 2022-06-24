@@ -19,5 +19,6 @@ data:
       clientId: dashboard
       # clientSecret is the private secret of the gardener-dashboard aplication
       clientSecret: ${DASHBOARD_CLIENTSECRET}
-      # redirectUri is the endpoint receiving the OTAC from the OpenID provider after successful login
+      # redirectUri is the endpoint receiving the OTAC from the OpenID provider
+      # after successful login
       redirectUri: https://dashboard.${ENV}.${BASE_DOMAIN}/auth/callback
