@@ -4,9 +4,6 @@ metadata:
   name: internal-gardenlet
   namespace: flux-system
 spec:
-  kubeConfig:
-    secretRef:
-      name: target-gardencluster-kubeconfig
   interval: 1m
   targetNamespace: flux-system
   dependsOn:

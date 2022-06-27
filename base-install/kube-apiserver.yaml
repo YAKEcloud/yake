@@ -4,9 +4,6 @@ metadata:
   name: kube-apiserver
   namespace: flux-system
 spec:
-  kubeConfig:
-    secretRef:
-      name: target-gardencluster-kubeconfig
   targetNamespace: garden
   dependsOn:
     - name: etcd

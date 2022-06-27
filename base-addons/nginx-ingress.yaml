@@ -4,9 +4,6 @@ metadata:
   name: ingress-nginx
   namespace: flux-system
 spec:
-  kubeConfig:
-    secretRef:
-      name: target-gardencluster-kubeconfig
   targetNamespace: kube-system
   interval: 1m
   chart:

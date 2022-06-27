@@ -12,8 +12,6 @@ AZURE_SECRET_ID=$(kubectl --kubeconfig hack/ci/secrets/gardener-kubeconfig.yaml 
 AZURE_SECRET_VALUE=$(kubectl --kubeconfig hack/ci/secrets/gardener-kubeconfig.yaml get secret dns-for-ci -o go-template='{{.data.AZURE_SECRET_VALUE}}')
 
 echo "Installing 23KE"
-# Create or update secret
-kubectl -n flux-system create secret generic target-gardencluster-kubeconfig --from-literal=value="$(cat hack/ci/secrets/shoot-kubeconfig.yaml)" --save-config --dry-run=client -o yaml | kubectl apply -f -
 
 # Templating 23ke-env-substitutions.yaml
 cat << EOF | kubectl apply -f -
