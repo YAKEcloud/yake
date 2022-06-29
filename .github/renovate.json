@@ -21,5 +21,6 @@
   "includeForks": true,
   "enabledManagers": ["flux"],
   "prCreation": "immediate",
-  "semanticCommits": "disabled"
+  "semanticCommits": "disabled",
+  "addLabels": ["version-bump"]
 }
