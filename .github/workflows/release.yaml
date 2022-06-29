@@ -1,9 +1,9 @@
 name: Releases
 
-on: 
+on:
   push:
     tags:
-    - '*'
+      - '*'
 
 jobs:
 
@@ -12,17 +12,16 @@ jobs:
     permissions:
       contents: write
     steps:
-    - uses: actions/checkout@v2
-    - uses: actions/setup-python@v4
-      with:
-        python-version: '3.10'
-        cache: 'pip'
-    - run: pip install -r hack/ci/release-notes/requirements.txt
-    - name: Create release notes
-      run: python hack/ci/release-notes/gen-release-notes.py
-    - uses: ncipollo/release-action@v1
-      with:
-        generateReleaseNotes: true
-        bodyFile: "body.md"
-        token: ${{ secrets.GITHUB_TOKEN }}
-
+      - uses: actions/checkout@v2
+      - uses: actions/setup-python@v4
+        with:
+          python-version: '3.10'
+          cache: 'pip'
+      - run: pip install -r hack/ci/release-notes/requirements.txt
+      - name: Create release notes
+        run: python hack/ci/release-notes/gen-release-notes.py
+      - uses: ncipollo/release-action@v1
+        with:
+          generateReleaseNotes: true
+          bodyFile: "body.md"
+          token: ${{ secrets.GITHUB_TOKEN }}
