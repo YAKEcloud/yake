@@ -39,3 +39,15 @@ spec:
       name: gardener-ca-keypair
       valuesKey: tls.crt
       targetPath: apiServerCa
+  postRenderers:
+    - kustomize:
+        patchesStrategicMerge:
+          - kind: Deployment
+            apiVersion: apps/v1
+            metadata:
+              name: gardener-dashboard
+              namespace: garden
+            spec:
+              template:
+                spec:
+                  priorityClassName: gardener-dashboard
