@@ -89,3 +89,15 @@ spec:
       name: kube-admin-tls
       valuesKey: tls.key
       targetPath: tls.admin.key
+  postRenderers:
+    - kustomize:
+        patchesStrategicMerge:
+          - kind: Deployment
+            apiVersion: apps/v1
+            metadata:
+              name: garden-kube-apiserver
+              namespace: garden
+            spec:
+              template:
+                spec:
+                  priorityClassName: gardener-kubernetes

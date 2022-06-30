@@ -26,8 +26,6 @@ stringData:
                 region: hel1
                 type: hcloud
               settings:
-                shootDNS:
-                  enabled: true
                 excessCapacityReservation:
                   enabled: false
                 loadBalancerServices:

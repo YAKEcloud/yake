@@ -47,3 +47,15 @@ spec:
       name: etcd-client-tls
       valuesKey: tls.key
       targetPath: tls.client.key
+  postRenderers:
+    - kustomize:
+        patchesStrategicMerge:
+          - kind: StatefulSet
+            apiVersion: apps/v1
+            metadata:
+              name: etcd
+              namespace: garden
+            spec:
+              template:
+                spec:
+                  priorityClassName: gardener-kubernetes

@@ -28,3 +28,15 @@ spec:
     - kind: Secret
       name: identity-values
       optional: true
+  postRenderers:
+    - kustomize:
+        patchesStrategicMerge:
+          - kind: Deployment
+            apiVersion: apps/v1
+            metadata:
+              name: identity
+              namespace: garden
+            spec:
+              template:
+                spec:
+                  priorityClassName: gardener-kubernetes
