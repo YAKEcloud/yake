@@ -100,4 +100,4 @@ spec:
             spec:
               template:
                 spec:
-                  priorityClassName: gardener-controlplane
+                  priorityClassName: gardener-kubernetes
