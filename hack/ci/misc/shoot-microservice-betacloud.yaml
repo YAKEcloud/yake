@@ -18,12 +18,12 @@ spec:
       loadBalancerProvider: amphora
       zone: south-2
     workers:
-      - name: worker-4c8gb
+      - name: worker-2c4gb
         minimum: 2
-        maximum: 4
+        maximum: 6
         maxSurge: 1
         machine:
-          type: 4C-8GB-40GB
+          type: 2C-4GB-40GB
           image:
             name: gardenlinux
             version: 576.1.0
