@@ -1,3 +1,4 @@
 .github/gardener-kubeconfig.yaml
+23ke-charts-dev
 flux_*
 *.DS_STORE*
