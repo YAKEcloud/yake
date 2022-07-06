@@ -18,8 +18,8 @@ mc cp -q --recursive base-install "$MC_ALIAS/$BUCKET"
 mc cp -q --recursive base-config "$MC_ALIAS/$BUCKET"
 
 # we now upload packet versions which use a bucket instead of the GitRepository
-grep -lr GitRepository flux/ | while IFS= read -r file; do
-    sed s/GitRepository/Bucket/ "$file" | mc pipe -q "$MC_ALIAS/$BUCKET/$file"
+for file in $(grep --exclude-dir=hack --exclude-dir=env-template -lr GitRepository . | sed 's/^\.\///'); do
+    cat $file | sed s/GitRepository/Bucket/ | mc pipe $MC_ALIAS/$BUCKET/$file 
 done
 
 # In case you want to use a local version of the 23ke-charts, you can clone the 23ke-charts repository
