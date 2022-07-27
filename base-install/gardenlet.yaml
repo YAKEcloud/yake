@@ -21,6 +21,11 @@ spec:
     remediation:
       retries: 300
     createNamespace: true
+  values:
+    runtime:
+      enabled: true
+    utils-templates:
+      enabled: true
   valuesFrom:
     - kind: ConfigMap
       name: gardenlet-base-values
