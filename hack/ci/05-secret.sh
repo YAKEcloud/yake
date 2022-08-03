@@ -18,6 +18,8 @@ metadata:
     cloudprofile.garden.sapcloud.io/name: $PROVIDER
   name: $PROVIDER-secret
   namespace: garden-testing
+provider:
+  type:	$PROVIDER
 secretRef:
   name: $PROVIDER-secret
   namespace: garden-testing
