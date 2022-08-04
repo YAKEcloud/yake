@@ -9,7 +9,7 @@ spec:
   chart:
     spec:
       chart: garden-etcd
-      version: 3.29.0
+      version: 3.30.0
       sourceRef:
         kind: HelmRepository
         name: 23ke-charts
