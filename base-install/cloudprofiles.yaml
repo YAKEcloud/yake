@@ -10,7 +10,8 @@ spec:
   interval: 1m
   targetNamespace: flux-system
   dependsOn:
-    - name: internal-gardenlet
+    - name: gardener-application
+    - name: gardener-runtime
   chart:
     spec:
       chart: cloudprofiles
