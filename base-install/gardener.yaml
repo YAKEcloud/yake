@@ -13,17 +13,24 @@ spec:
     - name: kube-apiserver
   chart:
     spec:
-      chart: gardener-controlplane-application
+      chart: gardener-controlplane
       version: 1.53.1
       sourceRef:
         kind: HelmRepository
-        name: 23ke-charts
+        name: gardener-community-charts
         namespace: flux-system
       interval: 1m
   install:
     remediation:
       retries: 300
     createNamespace: true
+  values:
+    application:
+      enabled: true
+    utils-common:
+      enabled: true
+    utils-templates:
+      enabled: true
   valuesFrom:
     - kind: ConfigMap
       name: gardener-base-values
@@ -96,11 +103,11 @@ spec:
   interval: 1m
   chart:
     spec:
-      chart: gardener-controlplane-runtime
+      chart: gardener-controlplane
       version: 1.53.1
       sourceRef:
         kind: HelmRepository
-        name: 23ke-charts
+        name: gardener-community-charts
         namespace: flux-system
       interval: 1m
   install:
@@ -109,6 +116,13 @@ spec:
   upgrade:
     remediation:
       remediateLastFailure: false
+  values:
+    runtime:
+      enabled: true
+    utils-common:
+      enabled: true
+    utils-templates:
+      enabled: true
   valuesFrom:
     - kind: ConfigMap
       name: gardener-base-values

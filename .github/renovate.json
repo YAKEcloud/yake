@@ -3,7 +3,7 @@
   "platformAutomerge": "true",
   "prHourlyLimit": 0,
   "flux": {
-    "fileMatch": ["base-install/.*.yaml", "flux/23ke-charts-helmrepo.yaml"]
+    "fileMatch": ["base-install/.*.yaml", "flux/23ke-charts-helmrepo.yaml", "flux/gardener-community-charts-helmrepo.yaml"]
   },
   "packageRules": [
     {
