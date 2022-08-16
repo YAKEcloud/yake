@@ -10,6 +10,14 @@ kubectl --kubeconfig hack/ci/secrets/gardener-kubeconfig.yaml get secret "$PROVI
   | yq eval '.metadata.labels as $labels | del(.metadata)| .metadata.name = env(PROVIDER)+"-secret" | .metadata.namespace = "garden-testing" | .metadata.labels = $labels' - \
   | kubectl apply -f - --context garden
 
+if [ $PROVIDER == "hcloud" ]
+then
+    PROVIDERTYPE=hcloud
+elif [ $PROVIDER == "betacloud" ]
+then
+    PROVIDERTYPE=openstack
+fi
+
 cat << EOF | kubectl apply -f - --context garden
 apiVersion: core.gardener.cloud/v1beta1
 kind: SecretBinding
@@ -18,6 +26,8 @@ metadata:
     cloudprofile.garden.sapcloud.io/name: $PROVIDER
   name: $PROVIDER-secret
   namespace: garden-testing
+provider:
+  type: $PROVIDERTYPE
 secretRef:
   name: $PROVIDER-secret
   namespace: garden-testing

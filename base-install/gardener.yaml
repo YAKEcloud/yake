@@ -14,10 +14,10 @@ spec:
   chart:
     spec:
       chart: gardener-controlplane
-      version: 1.50.1
+      version: 1.53.1
       sourceRef:
         kind: HelmRepository
-        name: 23ke-charts
+        name: gardener-community-charts
         namespace: flux-system
       interval: 1m
   install:
@@ -104,10 +104,10 @@ spec:
   chart:
     spec:
       chart: gardener-controlplane
-      version: 1.50.1
+      version: 1.53.1
       sourceRef:
         kind: HelmRepository
-        name: 23ke-charts
+        name: gardener-community-charts
         namespace: flux-system
       interval: 1m
   install:
