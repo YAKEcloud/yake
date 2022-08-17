@@ -11,10 +11,10 @@ spec:
   chart:
     spec:
       chart: gardenlet
-      version: 1.53.1
+      version: 1.53.2
       sourceRef:
         kind: HelmRepository
-        name: 23ke-charts
+        name: gardener-community-charts
         namespace: flux-system
       interval: 1m
   install:
