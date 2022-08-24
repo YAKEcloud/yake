@@ -7,8 +7,6 @@ data:
   values.yaml: |-
     namespace: garden
     serviceName: garden-kube-apiserver
-    images:
-      hyperkube: k8s.gcr.io/hyperkube:v1.18.20
     replicas: 2
     apiServer:
       hostname: api.${ENV}.${BASE_DOMAIN}
@@ -22,3 +20,8 @@ data:
         client: etcd-client
       events:
         endpoints: https://etcd:2379
+    gardenletBootstrap:
+      createToken: true
+      token:
+        id: ${TOKEN_ID}
+        secret: ${TOKEN_SECRET}

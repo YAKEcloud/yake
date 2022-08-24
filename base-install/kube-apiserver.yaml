@@ -12,10 +12,10 @@ spec:
   chart:
     spec:
       chart: garden-kube-apiserver
-      version: v1.24.3
+      version: v1.0.0
       sourceRef:
         kind: HelmRepository
-        name: 23ke-charts
+        name: gardener-community-charts
         namespace: flux-system
       interval: 1m
   install:
