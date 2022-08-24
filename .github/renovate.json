@@ -7,10 +7,6 @@
   },
   "packageRules": [
     {
-      "matchPackagePatterns": ["garden-kube-apiserver"],
-      "allowedVersions": "/^v1\\..*$/"
-    },
-    {
       "matchPackagePatterns": [".*gardener-controlplane.*", "gardenlet"],
       "groupName": "gardener-controlplane"
     },
