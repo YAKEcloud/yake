@@ -33,25 +33,3 @@ stringData:
               acme:
                 email: operations@23technologies.cloud
               name: garden
-
-    shoot-dns-service:
-      enabled: true
-      globallyEnabled: true
-      values:
-        dnsControllerManager:
-          image:
-            repository: eu.gcr.io/gardener-project/dns-controller-manager
-            tag: v0.13.1
-          configuration:
-            cacheTtl: 300
-            controllers: dnscontrollers,dnssources
-            dnsPoolResyncPeriod: 30m
-            #poolSize: 20
-            #providersPoolResyncPeriod: 24h
-            serverPortHttp: 8080
-          createCRDs: false
-          deploy: true
-          replicaCount: 1
-
-    external-dns-management:
-      enabled: false
