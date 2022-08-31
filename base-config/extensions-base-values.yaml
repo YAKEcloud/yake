@@ -31,8 +31,6 @@ data:
 
     shoot-dns-service:
       version: 1.24.0
-      enabled: true
-      globallyEnabled: true
       values:
         dnsControllerManager:
           deploy: true
@@ -44,7 +42,3 @@ data:
             controllers: dnscontrollers,dnssources
             dnsPoolResyncPeriod: 30m
             serverPortHttp: 8080
-
-    external-dns-management:
-      version: 0.13.1
-      enabled: false
