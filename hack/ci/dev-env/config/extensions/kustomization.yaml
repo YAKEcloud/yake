@@ -1,0 +1,11 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+resources:
+ - networking-calico-values.yaml
+ - os-gardenlinux-values.yaml
+ - os-ubuntu-values.yaml
+ - provider-azure-values.yaml
+ - provider-hcloud-values.yaml
+ - provider-openstack-values.yaml
+ - shoot-dns-service-values.yaml
+ - shoot-cert-service-values.yaml

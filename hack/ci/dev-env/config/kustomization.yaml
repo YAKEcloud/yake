@@ -8,4 +8,4 @@ resources:
   - gardenlet-values.yaml
   - identity-values.yaml
   - kube-apiserver-values.yaml
-  - extensions-values.yaml
+  - extensions/

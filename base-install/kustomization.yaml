@@ -9,4 +9,4 @@ resources:
   - gardenlet.yaml
   - identity.yaml
   - kube-apiserver.yaml
-  - extensions.yaml
+  - extensions/

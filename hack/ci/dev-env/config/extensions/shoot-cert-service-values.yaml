@@ -1,0 +1,16 @@
+apiVersion: v1
+kind: Secret
+metadata:
+  name: shoot-cert-service-values 
+  namespace: flux-system
+type: Opaque
+stringData:
+  values.yaml: |
+    controller:
+      enabled: true
+      values:
+        certificateConfig:
+            defaultIssuer:
+              acme:
+                email: operations@23technologies.cloud
+              name: garden

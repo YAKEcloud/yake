@@ -1,0 +1,16 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+resources:
+ - networking-calico.yaml
+ - networking-cilium.yaml
+ - os-gardenlinux.yaml
+ - os-ubuntu.yaml
+ - provider-alicloud.yaml
+ - provider-aws.yaml
+ - provider-azure.yaml
+ - provider-gcp.yaml
+ - provider-hcloud.yaml
+ - provider-openstack.yaml
+ - runtime-gvisor.yaml
+ - shoot-cert-service.yaml
+ - shoot-dns-service.yaml

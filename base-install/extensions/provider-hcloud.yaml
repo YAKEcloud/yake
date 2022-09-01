@@ -1,0 +1,26 @@
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: extension-provider-hcloud
+  namespace: flux-system
+spec:
+  interval: 5m
+  kubeConfig:
+    secretRef:
+      name: gardener-internal-kubeconfig
+  dependsOn:
+    - name: gardener-application
+    - name: gardener-runtime
+  chart:
+    spec:
+      chart: provider-hcloud
+      version: 0.5.6
+      sourceRef:
+        kind: HelmRepository
+        name: gardener-community-charts
+        namespace: flux-system
+      interval: 1m
+  valuesFrom:
+    - kind: Secret
+      name: provider-hcloud-values
+      optional: true
