@@ -1,7 +1,7 @@
 apiVersion: v1
 kind: Secret
 metadata:
-  name: os-gardenlinux-values 
+  name: os-gardenlinux-values
   namespace: flux-system
 type: Opaque
 stringData:

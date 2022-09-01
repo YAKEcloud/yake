@@ -1,7 +1,7 @@
 apiVersion: v1
 kind: Secret
 metadata:
-  name: shoot-dns-service-values 
+  name: shoot-dns-service-values
   namespace: flux-system
 type: Opaque
 stringData:
