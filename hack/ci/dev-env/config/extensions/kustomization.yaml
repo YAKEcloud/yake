@@ -9,3 +9,4 @@ resources:
  - provider-openstack-values.yaml
  - shoot-dns-service-values.yaml
  - shoot-cert-service-values.yaml
+ - external-dns-management-values.yaml

@@ -14,3 +14,4 @@ resources:
  - runtime-gvisor.yaml
  - shoot-cert-service.yaml
  - shoot-dns-service.yaml
+ - external-dns-management.yaml
