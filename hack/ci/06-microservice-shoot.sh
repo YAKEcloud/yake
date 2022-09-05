@@ -2,10 +2,12 @@
 set -euo pipefail
 
 source hack/ci/handy.sh
+PROVIDER=${PROVIDER:=hcloud}
+ZONE=${ZONE:=hel1}
 
 echo "Deploying sample Shoot"
 
-kubectl apply -f hack/ci/misc/shoot-microservice-"$PROVIDER".yaml --context garden
+kubectl apply -f hack/ci/misc/shoot-microservice-"$PROVIDER"-"$ZONE".yaml --context garden
 
 # Wait for shoot to become available
 echo "Waiting for shoot creation..."
