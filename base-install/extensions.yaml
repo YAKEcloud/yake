@@ -4,20 +4,16 @@ metadata:
   name: extensions
   namespace: flux-system
 spec:
-  interval: 5m
-  kubeConfig:
-    secretRef:
-      name: gardener-internal-kubeconfig
+  interval: 1m
   dependsOn:
     - name: gardener-application
     - name: gardener-runtime
   chart:
     spec:
-      chart: extensions
-      version: 1.0.100
+      chart: base-install/helmcharts/extensions-meta-chart
       sourceRef:
-        kind: HelmRepository
-        name: 23ke-charts
+        kind: GitRepository
+        name: 23ke
         namespace: flux-system
       interval: 1m
   valuesFrom:
