@@ -22,10 +22,15 @@
       "matchBaseBranches": [
         "release-v1.14"
       ],
-      "matchPackageNames": [
-        "gardener-controlplane", "gardenlet"
+      "enabled": "false"
+    },
+    {
+      "matchBaseBranches": [
+        "release-v1.14"
       ],
-      "allowedVersions": "/^1\\.53\\..*$/"
+      "matchPackagePatterns": ["gardener-controlplane-application", "gardener-application", "gardenlet"],
+      "matchUpdateTypes": "patch",
+      "enabled": true
     }
   ],
   "lockFileMaintenance": {
