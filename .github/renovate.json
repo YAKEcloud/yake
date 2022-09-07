@@ -22,15 +22,9 @@
       "matchBaseBranches": [
         "release-v1.14"
       ],
-      "enabled": "false"
-    },
-    {
-      "matchBaseBranches": [
-        "release-v1.14"
-      ],
       "matchPackagePatterns": ["gardener-controlplane-application", "gardener-application", "gardenlet"],
       "allowedVersions": "/^1\\.53\\..*$/",
-      "enabled": true
+      "excludePackageNames": ["gardener-dashboard", "identity", "garden-kube-apiserver", "garden-etcd", "extensions"]
     }
   ],
   "lockFileMaintenance": {
