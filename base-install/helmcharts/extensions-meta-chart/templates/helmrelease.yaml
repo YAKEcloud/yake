@@ -24,6 +24,8 @@ spec:
         namespace: flux-system
       interval: 1m
   values:
+    controller:
+      enabled: true
     {{- toYaml $v.values | nindent 4 }}
 
 {{- if $v.globallyEnabled }}

@@ -8,46 +8,26 @@ stringData:
   values.yaml: |
     os-ubuntu:
       enabled: true
-      values:
-        controller:
-          enabled: true
 
     os-gardenlinux:
       enabled: true
-      values:
-        controller:
-          enabled: true
 
     provider-hcloud:
       enabled: true
-      values:
-        controller:
-          enabled: true
 
     provider-azure:
       enabled: true
-      values:
-        controller:
-          enabled: true
 
     provider-openstack:
       enabled: true
-      values:
-        controller:
-          enabled: true
 
     networking-calico:
       enabled: true
-      values:
-        controller:
-          enabled: true
 
     shoot-cert-service:
       enabled: true
       globallyEnabled: true
       values:
-        controller:
-          enabled: true
         certificateConfig:
             defaultIssuer:
               acme:
@@ -57,12 +37,6 @@ stringData:
     shoot-dns-service:
       enabled: true
       globallyEnabled: true
-      values:
-        controller:
-          enabled: true
 
     external-dns-management:
       enabled: true
-      values:
-        controller:
-          enabled: true
