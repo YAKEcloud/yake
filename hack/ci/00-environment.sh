@@ -2,6 +2,7 @@
 set -euo pipefail
 
 PROVIDER=${PROVIDER:=hcloud}
+ZONE=${ZONE:=hel1}
 
 # Kubeconfig file is required to define the correct current namespace
 export KUBECONFIG=hack/ci/secrets/gardener-kubeconfig.yaml
@@ -13,20 +14,24 @@ USERNAME=$(kubectl config view --minify -o jsonpath='{..context.user}')
 
 
 DESIRED_PRESPAWNED_SHOOTS=2
-ACTUAL_PRESPAWNED_SHOOTS=$(kubectl get shoots --selector=23technologies.cloud/free-to-use='true' --no-headers=true | cut -d ' ' -f4 | grep -c $PROVIDER)
+set +e
+ACTUAL_PRESPAWNED_SHOOTS=$(kubectl get shoots --selector=23technologies.cloud/free-to-use='true',23technologies.cloud/region=$ZONE --no-headers=true | cut -d ' ' -f4 | grep -c $PROVIDER)
+set -e
 NEEDED_PRESPAWNED_SHOOTS=$(( DESIRED_PRESPAWNED_SHOOTS - ACTUAL_PRESPAWNED_SHOOTS ))
 while [ $NEEDED_PRESPAWNED_SHOOTS -gt 0 ]
 do
     RANDNAME="23ke-run-$(openssl rand -hex 2)"
     export RANDNAME
     # Alter shoot template
-    yq eval '.metadata.name = env(RANDNAME)' hack/ci/misc/shoot-template-$PROVIDER.yaml.tmpl | kubectl apply -f -
-    ACTUAL_PRESPAWNED_SHOOTS=$(kubectl get shoots --selector=23technologies.cloud/free-to-use='true' --no-headers=true | cut -d ' ' -f4 | grep -c $PROVIDER)
+    yq eval '.metadata.name = env(RANDNAME)' hack/ci/misc/shoot-template-$PROVIDER-$ZONE.yaml.tmpl | kubectl apply -f -
+    set +e
+    ACTUAL_PRESPAWNED_SHOOTS=$(kubectl get shoots --selector=23technologies.cloud/free-to-use='true',23technologies.cloud/region=$ZONE --no-headers=true | cut -d ' ' -f4 | grep -c $PROVIDER)
+    set -e
     NEEDED_PRESPAWNED_SHOOTS=$(( DESIRED_PRESPAWNED_SHOOTS - ACTUAL_PRESPAWNED_SHOOTS ))
 done
 
 # Choose our shoot (free to use and the one with highest progress)
-SHOOT=$(kubectl get shoot --sort-by=.status.lastOperation.progress --no-headers=true --selector=23technologies.cloud/free-to-use='true'| grep "   $PROVIDER   " |cut -d ' ' -f1|tail -n1)
+SHOOT=$(kubectl get shoot --sort-by=.status.lastOperation.progress --no-headers=true --selector=23technologies.cloud/free-to-use='true',23technologies.cloud/region=$ZONE | grep "   $PROVIDER   " |cut -d ' ' -f1|tail -n1)
 
 # Mark as in use and by whom
 kubectl label shoot "$SHOOT" 23technologies.cloud/free-to-use=false --overwrite=true
