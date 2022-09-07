@@ -1,4 +1,8 @@
 {
+  "baseBranches": [
+    "main",
+    "release-v1.14"
+  ],
   "automerge": "true",
   "platformAutomerge": "true",
   "prHourlyLimit": 0,
@@ -13,6 +17,15 @@
     {
       "matchPackagePatterns": ["identity", "gardener-dashboard"],
       "groupName": "dashboard-identity"
+    },
+    {
+      "matchBaseBranches": [
+        "release-v1.14"
+      ],
+      "matchPackageNames": [
+        "gardener-controlplane", "gardenlet"
+      ],
+      "allowedVersions": "/^1\\.53\\..*$/"
     }
   ],
   "lockFileMaintenance": {
