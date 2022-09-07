@@ -17,12 +17,12 @@ spec:
       loadBalancerProvider: provider
       zone: hel1-dc2
     workers:
-      - name: worker-cx21
+      - name: worker-cpx21
         minimum: 2
         maximum: 6
         maxSurge: 1
         machine:
-          type: cx21
+          type: cpx21
           image:
             name: ubuntu
             version: 20.4.20210616
