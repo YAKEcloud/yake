@@ -8,11 +8,11 @@ spec:
   interval: 1m
   chart:
     spec:
-      chart: garden-etcd
-      version: 3.35.0
+      chart: etcd
+      version: 4.0.0
       sourceRef:
         kind: HelmRepository
-        name: 23ke-charts
+        name: gardener-community-charts
         namespace: flux-system
       interval: 1m
   install:

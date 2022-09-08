@@ -1,0 +1,47 @@
+{{- range $k, $v := .Values }}
+{{- if $v.enabled }}
+---
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: {{ $k }}
+  namespace: flux-system
+spec:
+  interval: 5m
+  kubeConfig:
+    secretRef:
+      name: gardener-internal-kubeconfig
+  dependsOn:
+    - name: gardener-application
+    - name: gardener-runtime
+  chart:
+    spec:
+      chart: {{ $k }}
+      version: {{ $v.version }}
+      sourceRef:
+        kind: HelmRepository
+        name: gardener-community-charts
+        namespace: flux-system
+      interval: 1m
+  values:
+    controller:
+      enabled: true
+    {{- if $v.values  }}
+      {{- toYaml $v.values | nindent 4 }}
+    {{- end }}
+
+{{- if $v.globallyEnabled }}
+  postRenderers:
+    - kustomize:
+        patches:
+          - patch: |
+              - op: add
+                path: /spec/resources/0/globallyEnabled
+                value:
+                    true
+            target:
+              kind: ControllerRegistration
+              name: extension-{{ $k }}
+{{- end }}
+{{- end }}
+{{- end }}

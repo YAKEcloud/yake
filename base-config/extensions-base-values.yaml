@@ -6,3 +6,29 @@ metadata:
   namespace: flux-system
 data:
   values.yaml: |-
+    os-ubuntu:
+      version: 1.18.0
+
+    os-gardenlinux:
+      version: 0.14.0
+
+    provider-hcloud:
+      version: 0.5.7
+
+    provider-azure:
+      version: 1.29.0
+
+    provider-openstack:
+      version: 1.28.0
+
+    networking-calico:
+      version: 1.26.0
+
+    shoot-cert-service:
+      version: 1.24.0
+
+    shoot-dns-service:
+      version: 1.24.0
+
+    external-dns-management:
+      version: 0.13.1

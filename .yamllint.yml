@@ -8,3 +8,4 @@ rules:
 ignore: |
   /hack/ci/secrets/*
   /hack/ci/misc/microservices-demo.yaml
+  base-install/helmcharts/*
