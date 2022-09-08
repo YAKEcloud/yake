@@ -9,3 +9,4 @@ ignore: |
   /hack/ci/secrets/*
   /hack/ci/misc/microservices-demo.yaml
   base-install/helmcharts/*
+  base-addons/vertical-pod-autoscaler/*
