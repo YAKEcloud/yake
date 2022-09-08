@@ -11,7 +11,7 @@ spec:
   interval: 1m
   chart:
     spec:
-      chart: gardener-dashboard
+      chart: dashboard
       version: 1.61.0
       sourceRef:
         kind: HelmRepository
