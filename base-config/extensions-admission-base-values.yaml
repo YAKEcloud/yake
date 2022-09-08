@@ -1,0 +1,14 @@
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: extensions-admission-base-values
+  namespace: flux-system
+data:
+  values.yaml: |-
+    # list all provider for which admission controllers should be
+    # enabled here. This is necessary, as extensions not necessarily
+    # ship with admission controllers. If they are enabled here, they
+    # will be deployed, when the corresponding extension is enabled.
+    provider-azure:
+      admission: true

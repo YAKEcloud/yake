@@ -1,0 +1,22 @@
+{{- range $k, $v := .Values }}
+{{ $extShortName := trimPrefix "provider-" $k }}
+{{- if $v.enabled }}
+{{- if $v.admission }}
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: gardener-extension-{{ $extShortName }}-admission
+  namespace: flux-system
+spec:
+  secretName: gardener-extension-{{ $extShortName }}-admission-tls
+  duration: 87600h #10y
+  usages:
+    - server auth
+  dnsNames:
+    - gardener-extension-admission-{{ $extShortName }}.garden
+    - gardener-extension-admission-{{ $extShortName }}.garden.svc
+  issuerRef:
+    name: gardener-ca
+{{- end }}
+{{- end }}
+{{- end }}
