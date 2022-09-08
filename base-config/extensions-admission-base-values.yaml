@@ -12,3 +12,18 @@ data:
     # will be deployed, when the corresponding extension is enabled.
     provider-azure:
       admission: true
+
+    provider-hcloud:
+      admission: true
+
+    provider-openstack:
+      admission: true
+
+    provider-aws:
+      admission: true
+
+    provider-gcp:
+      admission: true
+
+    provider-alicloud:
+      admission: true
