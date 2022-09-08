@@ -2,8 +2,3 @@ apiVersion: v1
 kind: Namespace
 metadata:
   name: garden
----
-apiVersion: v1
-kind: Namespace
-metadata:
-  name: capi
