@@ -10,7 +10,6 @@ data:
       token:
         id: ${TOKEN_ID}
         secret: ${TOKEN_SECRET}
-        ca: test
       gardenlet:
         config:
           gardenClientConnection:
@@ -21,14 +20,5 @@ data:
             kubeconfigSecret:
               name: gardenlet-kubeconfig
               namespace: garden
-          seedConfig:
-            spec:
-              settings:
-                excessCapacityReservation:
-                  enabled: false
-          deployment:
-            virtualGarden:
-              enabled: false
           featureGates:
             ManagedIstio: true
-        vpa: false
