@@ -1,0 +1,89 @@
+{{- range $k, $v := .Values }}
+{{ $extShortName := trimPrefix "provider-" $k }}
+{{- if $v.enabled }}
+{{- if $v.admission }}
+---
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: admission-{{ $k }}-application
+  namespace: flux-system
+spec:
+  kubeConfig:
+    secretRef:
+      name: gardener-internal-kubeconfig
+  interval: 1m
+  timeout: 30m
+  targetNamespace: garden
+  chart:
+    spec:
+      chart: {{ $k }}
+      version: {{ $v.version }}
+      sourceRef:
+        kind: HelmRepository
+        name: gardener-community-charts
+        namespace: flux-system
+      interval: 1m
+  install:
+    remediation:
+      retries: 300
+    createNamespace: true
+  values:
+    gardener-extension-admission-{{ $extShortName }}:
+      enabled: true
+      application:
+        enabled: true
+  valuesFrom:
+    - kind: Secret
+      name: gardener-extension-{{ $extShortName }}-admission-tls
+      valuesKey: ca.crt
+      targetPath: global.webhookConfig.caBundle
+      optional: false
+---
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: admission-{{ $k }}-runtime
+  namespace: flux-system
+spec:
+  interval: 1m
+  targetNamespace: garden
+  chart:
+    spec:
+      chart: {{ $k }}
+      version: {{ $v.version }}
+      sourceRef:
+        kind: HelmRepository
+        name: gardener-community-charts
+        namespace: flux-system
+      interval: 1m
+  dependsOn:
+    - name: admission-{{ $k }}-application
+  install:
+    remediation:
+      retries: 300
+    createNamespace: true
+  values:
+    gardener-extension-admission-{{ $extShortName }}:
+      enabled: true
+      runtime:
+        enabled: true
+  valuesFrom:
+    - kind: Secret
+      name: gardener-extension-{{ $extShortName }}-admission-tls
+      valuesKey: tls.crt
+      targetPath: global.webhookConfig.tls.crt
+      optional: false
+    - kind: Secret
+      name: gardener-extension-{{ $extShortName }}-admission-tls
+      valuesKey: tls.key
+      targetPath: global.webhookConfig.tls.key
+      optional: false
+    - kind: Secret
+      name: gardener-internal-kubeconfig
+      valuesKey: value
+      targetPath: global.kubeconfig
+      optional: false
+{{- end }}
+{{- end }}
+{{- end }}

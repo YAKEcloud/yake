@@ -17,9 +17,11 @@ data:
 
     provider-azure:
       version: 1.29.0
+      admission: true
 
     provider-openstack:
       version: 1.28.0
+      admission: true
 
     networking-calico:
       version: 1.26.0
