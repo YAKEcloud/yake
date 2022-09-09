@@ -31,6 +31,14 @@ data:
 
     shoot-dns-service:
       version: 1.24.0
-
-    external-dns-management:
-      version: 0.13.1
+      values:
+        dnsControllerManager:
+          deploy: true
+          image:
+            repository: eu.gcr.io/gardener-project/dns-controller-manager
+            tag: v0.13.1
+          configuration:
+            cacheTtl: 300
+            controllers: dnscontrollers,dnssources
+            dnsPoolResyncPeriod: 30m
+            serverPortHttp: 8080

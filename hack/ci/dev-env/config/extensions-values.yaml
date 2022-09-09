@@ -33,10 +33,3 @@ stringData:
               acme:
                 email: operations@23technologies.cloud
               name: garden
-
-    shoot-dns-service:
-      enabled: true
-      globallyEnabled: true
-
-    external-dns-management:
-      enabled: true
