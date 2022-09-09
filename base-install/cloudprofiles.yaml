@@ -26,9 +26,6 @@ spec:
       retries: 300
     createNamespace: true
   valuesFrom:
-    - kind: ConfigMap
-      name: cloudprofiles-base-values
-      optional: false
     - kind: Secret
       name: cloudprofiles-values
       optional: true
