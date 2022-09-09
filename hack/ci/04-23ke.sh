@@ -22,6 +22,7 @@ metadata:
   namespace: flux-system
 type: Opaque
 stringData:
+  CLUSTERIDENTITY: ${SHOOT}
   ENV: ingress
   BASE_DOMAIN: ${SHOOT_DOMAIN}
   DASHBOARD_CLIENTSECRET: ${DASHBOARD_CLIENTSECRET}

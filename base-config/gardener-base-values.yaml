@@ -17,9 +17,7 @@ data:
       apiserver:
         replicaCount: 2
         vpa: true
-        clusterIdentity: garden-cluster-identity
-        etcd:
-          servers: https://etcd:2379
+        clusterIdentity: ${CLUSTERIDENTITY:=garden-cluster-identity}
       admission:
         replicaCount: 2
         vpa: true
