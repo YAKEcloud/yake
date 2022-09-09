@@ -1,7 +1,0 @@
-apiVersion: v2
-name: extensions-admission
-description: A Helm chart for Gardener Extension admission controller HelmRelease management
-
-type: application
-
-version: 0.0.1

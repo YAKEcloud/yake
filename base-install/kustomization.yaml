@@ -10,4 +10,3 @@ resources:
   - identity.yaml
   - kube-apiserver.yaml
   - extensions.yaml
-  - extensions-admission.yaml

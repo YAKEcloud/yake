@@ -10,5 +10,4 @@ resources:
   - identity-base-values.yaml
   - kube-apiserver-base-values.yaml
   - extensions-base-values.yaml
-  - extensions-admission-base-values.yaml
   - priorityclasses.yaml
