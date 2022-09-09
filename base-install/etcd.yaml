@@ -22,6 +22,9 @@ spec:
     remediation:
       remediateLastFailure: true
   valuesFrom:
+    - kind: Secret
+      name: etcd-values
+      optional: true
     # All of below maps cert-manager secrets to the expected helm values
     - kind: Secret
       name: gardener-ca-keypair
