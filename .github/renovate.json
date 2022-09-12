@@ -1,11 +1,15 @@
 {
   "baseBranches": [
     "main",
-    "release-v1.14"
+    "release-v1.15",
+    "release-v1.14",
+    "release-v1.13",
+    "release-v1.12"
   ],
   "automerge": "true",
   "platformAutomerge": "true",
   "prHourlyLimit": 0,
+  "prConcurrentLimit": 1,
   "flux": {
     "fileMatch": ["base-install/.*.yaml", "flux/23ke-charts-helmrepo.yaml", "flux/gardener-community-charts-helmrepo.yaml"]
   },
@@ -20,11 +24,38 @@
     },
     {
       "matchBaseBranches": [
+        "release-v1.15", "release-v1.14", "release-v1.13", "release-v1.12"
+      ],
+      "matchPackageNames": ["gardener-dashboard", "identity", "garden-kube-apiserver", "garden-etcd", "extensions"],
+      "enabled": false
+    },
+    {
+      "matchBaseBranches": [
+        "release-v1.15"
+      ],
+      "matchPackagePatterns": ["gardener-controlplane-application", "gardener-controlplane-runtime", "gardener-application", "gardenlet"],
+      "allowedVersions": "/^1\\.54\\..*$/"
+    },
+    {
+      "matchBaseBranches": [
         "release-v1.14"
       ],
-      "matchPackagePatterns": ["gardener-controlplane-application", "gardener-application", "gardenlet"],
-      "allowedVersions": "/^1\\.53\\..*$/",
-      "excludePackageNames": ["gardener-dashboard", "identity", "garden-kube-apiserver", "garden-etcd", "extensions"]
+      "matchPackagePatterns": ["gardener-controlplane-application", "gardener-controlplane-runtime", "gardener-application", "gardenlet"],
+      "allowedVersions": "/^1\\.53\\..*$/"
+    },
+    {
+      "matchBaseBranches": [
+        "release-v1.13"
+      ],
+      "matchPackagePatterns": ["gardener-controlplane-application", "gardener-controlplane-runtime", "gardener-application", "gardenlet"],
+      "allowedVersions": "/^1\\.52\\..*$/"
+    },
+    {
+      "matchBaseBranches": [
+        "release-v1.12"
+      ],
+      "matchPackagePatterns": ["gardener-controlplane-application", "gardener-controlplane-runtime", "gardener-application", "gardenlet"],
+      "allowedVersions": "/^1\\.51\\..*$/"
     }
   ],
   "lockFileMaintenance": {
