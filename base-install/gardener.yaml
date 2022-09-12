@@ -14,7 +14,7 @@ spec:
   chart:
     spec:
       chart: gardener-controlplane-application
-      version: 1.51.0
+      version: 1.51.1
       sourceRef:
         kind: HelmRepository
         name: 23ke-charts
@@ -97,7 +97,7 @@ spec:
   chart:
     spec:
       chart: gardener-controlplane-runtime
-      version: 1.51.0
+      version: 1.51.1
       sourceRef:
         kind: HelmRepository
         name: 23ke-charts
