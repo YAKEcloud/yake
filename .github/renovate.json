@@ -1,10 +1,10 @@
 {
   "baseBranches": [
     "main",
+    "release-v1.16"
     "release-v1.15",
     "release-v1.14",
     "release-v1.13",
-    "release-v1.12"
   ],
   "automerge": "true",
   "platformAutomerge": "true",
@@ -24,10 +24,17 @@
     },
     {
       "matchBaseBranches": [
-        "release-v1.15", "release-v1.14", "release-v1.13", "release-v1.12"
+        "release-v1.16", "release-v1.15", "release-v1.14", "release-v1.13"
       ],
       "matchPackageNames": ["gardener-dashboard", "identity", "garden-kube-apiserver", "garden-etcd", "extensions"],
       "enabled": false
+    },
+    {
+      "matchBaseBranches": [
+        "release-v1.16"
+      ],
+      "matchPackagePatterns": ["gardener-controlplane", "gardener-controlplane-application", "gardener-controlplane-runtime", "gardener-application", "gardenlet"],
+      "allowedVersions": "/^1\\.55\\..*$/"
     },
     {
       "matchBaseBranches": [
@@ -49,13 +56,6 @@
       ],
       "matchPackagePatterns": ["gardener-controlplane", "gardener-controlplane-application", "gardener-controlplane-runtime", "gardener-application", "gardenlet"],
       "allowedVersions": "/^1\\.52\\..*$/"
-    },
-    {
-      "matchBaseBranches": [
-        "release-v1.12"
-      ],
-      "matchPackagePatterns": ["gardener-controlplane", "gardener-controlplane-application", "gardener-controlplane-runtime", "gardener-application", "gardenlet"],
-      "allowedVersions": "/^1\\.51\\..*$/"
     }
   ],
   "lockFileMaintenance": {
