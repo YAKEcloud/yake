@@ -1,10 +1,10 @@
 {
   "baseBranches": [
     "main",
-    "release-v1.16"
+    "release-v1.16",
     "release-v1.15",
     "release-v1.14",
-    "release-v1.13",
+    "release-v1.13"
   ],
   "automerge": "true",
   "platformAutomerge": "true",
