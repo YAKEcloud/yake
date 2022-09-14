@@ -1,4 +1,5 @@
 {
+  "assignees": ["fynluk"],
   "baseBranches": [
     "main",
     "release-v1.16",
