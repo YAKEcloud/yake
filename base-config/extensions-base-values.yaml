@@ -45,15 +45,15 @@ data:
 
     networking-cilium:
       version: 0.0.0
-  
+
     provider-alicloud:
       version: 0.0.0
-  
+
     provider-aws:
       version: 0.0.0
-  
+
     provider-gcp:
       version: 0.0.0
-  
+
     runtime-gvisor:
       version: 0.0.0
