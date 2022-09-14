@@ -50,7 +50,7 @@ data:
       version: 1.39.0
 
     provider-aws:
-      version: 0.0.0
+      version: 1.37.0
 
     provider-gcp:
       version: 0.0.0
