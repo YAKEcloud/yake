@@ -27,7 +27,7 @@
       "matchBaseBranches": [
         "release-v1.16", "release-v1.15", "release-v1.14", "release-v1.13"
       ],
-      "matchPackageNames": ["gardener-dashboard", "identity", "garden-kube-apiserver", "garden-etcd", "extensions"],
+      "matchPackageNames": ["gardener-dashboard", "identity", "garden-kube-apiserver", "garden-etcd", "extensions", "os-ubuntu", "os-gardenlinux", "provider-hcloud", "provider-aws", "provider-gcp", "provider-alicloud", "provider-openstack", "provider-azure", "runtime-gvisor", "networking-cilium", "networking-calico", "shoot-dns-service", "shoot-cert-service"],
       "enabled": false
     },
     {
@@ -59,11 +59,24 @@
       "allowedVersions": "/^1\\.52\\..*$/"
     }
   ],
+  "regexManagers": [
+    {
+      "fileMatch": [
+        "^base-config/extensions-base-values.yaml$"
+      ],
+      "datasourceTemplate": "helm",
+      "registryUrlTemplate": "https://gardener-community.github.io/gardener-charts",
+      "versioningTemplate": "semver-coerced",
+      "matchStrings": [
+       "(?<depName>[a-z\-]*?):\\n\ \ \ \ \ \ version:\ (?<currentValue>[0-9\.]*$?)"
+      ]
+    }
+  ],
   "lockFileMaintenance": {
     "enabled": false
   },
   "includeForks": true,
-  "enabledManagers": ["flux"],
+  "enabledManagers": ["flux", "regex"],
   "prCreation": "immediate",
   "semanticCommits": "disabled",
   "addLabels": ["version-bump"]
