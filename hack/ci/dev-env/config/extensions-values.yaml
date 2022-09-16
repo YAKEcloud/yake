@@ -24,6 +24,10 @@ stringData:
     networking-calico:
       enabled: true
 
+    shoot-dns-service:
+      enabled: true
+      globallyEnabled: true
+
     shoot-cert-service:
       enabled: true
       globallyEnabled: true
