@@ -26,12 +26,8 @@ spec:
   values:
     controller:
       enabled: true
-    {{- if $v.values  }}
-      {{- toYaml $v.values | nindent 4 }}
-    {{- end }}
-
-{{- if $v.globallyEnabled }}
   postRenderers:
+{{- if $v.globallyEnabled }}
     - kustomize:
         patches:
           - patch: |
@@ -41,7 +37,21 @@ spec:
                     true
             target:
               kind: ControllerRegistration
-              name: extension-{{ $k }}
+              name: .*{{ $k }}.*
+{{- end }}
+{{- if $v.values  }}
+    - kustomize:
+        patches:
+{{- range $cur_k, $cur_v := $v.values }}
+          - patch: |
+              - op: add
+                path: /providerConfig/values/{{ $cur_k }}
+                value:
+                  {{- toYaml $cur_v | nindent 18 }}
+            target:
+              kind: ControllerDeployment
+              name: .*{{ $k }}.*
+{{- end }}
 {{- end }}
 {{- end }}
 {{- end }}
