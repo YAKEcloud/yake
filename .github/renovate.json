@@ -2,10 +2,10 @@
   "assignees": ["fynluk"],
   "baseBranches": [
     "main",
+    "release-v1.17",
     "release-v1.16",
     "release-v1.15",
-    "release-v1.14",
-    "release-v1.13"
+    "release-v1.14"
   ],
   "automerge": "true",
   "platformAutomerge": "true",
@@ -25,10 +25,17 @@
     },
     {
       "matchBaseBranches": [
-        "release-v1.16", "release-v1.15", "release-v1.14", "release-v1.13"
+        "release-v1.17", "release-v1.16", "release-v1.15", "release-v1.14"
       ],
       "matchPackageNames": ["gardener-dashboard", "identity", "garden-kube-apiserver", "garden-etcd", "extensions", "os-ubuntu", "os-gardenlinux", "provider-hcloud", "provider-aws", "provider-gcp", "provider-alicloud", "provider-openstack", "provider-azure", "runtime-gvisor", "networking-cilium", "networking-calico", "shoot-dns-service", "shoot-cert-service"],
       "enabled": false
+    },
+    {
+      "matchBaseBranches": [
+        "release-v1.17"
+      ],
+      "matchPackagePatterns": ["gardener-controlplane", "gardener-controlplane-application", "gardener-controlplane-runtime", "gardener-application", "gardenlet"],
+      "allowedVersions": "/^1\\.56\\..*$/"
     },
     {
       "matchBaseBranches": [
@@ -50,13 +57,6 @@
       ],
       "matchPackagePatterns": ["gardener-controlplane", "gardener-controlplane-application", "gardener-controlplane-runtime", "gardener-application", "gardenlet"],
       "allowedVersions": "/^1\\.53\\..*$/"
-    },
-    {
-      "matchBaseBranches": [
-        "release-v1.13"
-      ],
-      "matchPackagePatterns": ["gardener-controlplane", "gardener-controlplane-application", "gardener-controlplane-runtime", "gardener-application", "gardenlet"],
-      "allowedVersions": "/^1\\.52\\..*$/"
     }
   ],
   "regexManagers": [
