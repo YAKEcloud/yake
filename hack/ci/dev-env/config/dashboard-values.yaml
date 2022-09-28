@@ -8,6 +8,19 @@ stringData:
   values.yaml: |
     frontendConfig:
       seedCandidateDeterminationStrategy: MinimalDistance
+      features:
+        terminalEnabled: true
+    terminal:
+      container:
+        image: eu.gcr.io/gardener-project/gardener/ops-toolbelt:latest
+      gardenTerminalHost:
+        secretRef:
+        seedRef: hcloud-hel1-0
+      garden: # (virtual) garden
+        operatorCredentials: # this is the credential used for operators for the (virtual) garden cluster, to create terminal session specific service accounts
+          serviceAccountRef: # serviceAccountRef or secretRef
+            name: dashboard-terminal-admin
+            namespace: garden
     oidc:
       ca: |
         -----BEGIN CERTIFICATE-----
