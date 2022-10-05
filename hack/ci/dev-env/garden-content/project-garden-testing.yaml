@@ -15,5 +15,9 @@ spec:
     apiGroup: rbac.authorization.k8s.io
     kind: User
     name: admin@localhost
-  members: []
+  members:
+    - apiGroup: rbac.authorization.k8s.io
+      kind: User
+      name: test@localhost
+      role: admin
   namespace: garden-testing
