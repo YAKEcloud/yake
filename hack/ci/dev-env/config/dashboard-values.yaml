@@ -14,13 +14,21 @@ stringData:
       container:
         image: eu.gcr.io/gardener-project/gardener/ops-toolbelt:latest
       gardenTerminalHost:
+        apiServerIngressHost: api.23ke-run-caad.23ke-ci.okeanos.dev
         secretRef:
-        seedRef: hcloud-hel1-0
-      garden: # (virtual) garden
-        operatorCredentials: # this is the credential used for operators for the (virtual) garden cluster, to create terminal session specific service accounts
-          serviceAccountRef: # serviceAccountRef or secretRef
-            name: dashboard-terminal-admin
-            namespace: garden
+          namespace: garden
+          labelSelector:
+          - runtime=gardenTerminalHost
+      garden:
+        operatorCredentials:
+          secretRef:
+            name: kubeconfig
+            namespace: terminal-system
+      bootstrap:
+        disabled: false
+        seedDisabled: true
+        shootDisabled: false
+        gardenTerminalHostDisabled: true
     oidc:
       ca: |
         -----BEGIN CERTIFICATE-----
