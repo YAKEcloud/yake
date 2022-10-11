@@ -39,7 +39,7 @@ data:
             tag: v0.13.1
           configuration:
             cacheTtl: 300
-            controllers: dnscontrollers,dnssources
+            controllers: dnscontrollers
             dnsPoolResyncPeriod: 30m
             serverPortHttp: 8080
 

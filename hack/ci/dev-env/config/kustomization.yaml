@@ -9,3 +9,7 @@ resources:
   - identity-values.yaml
   - kube-apiserver-values.yaml
   - extensions-values.yaml
+  - dnsprovider-values.yaml
+  - ingress-nginx-values.yaml
+  - issuer-values.yaml
+  - cert-management-values.yaml

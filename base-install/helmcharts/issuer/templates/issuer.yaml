@@ -1,0 +1,12 @@
+apiVersion: cert.gardener.cloud/v1alpha1
+kind: Issuer
+metadata:
+  name: le-staging-issuer
+  namespace: garden
+  annotations:
+    cert.gardener.cloud/class: base-cert-class
+spec:
+  acme:
+    autoRegistration: true
+    email: {{ .Values.email }}
+    server: {{ .Values.server }}

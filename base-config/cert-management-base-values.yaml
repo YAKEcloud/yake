@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: cert-management-base-values
+  namespace: flux-system
+data:
+  values.yaml: |-
+    configuration:
+      certClass: base-cert-class
+      issuerNamespace: garden
+      dnsClass: base-dns-class
+      dnsNamespace: garden

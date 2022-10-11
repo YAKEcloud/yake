@@ -10,3 +10,9 @@ resources:
   - identity.yaml
   - kube-apiserver.yaml
   - extensions.yaml
+  - dnsprovider.yaml
+  - ingress-nginx.yaml
+  - external-dns-management.yaml
+  - cert-management.yaml
+  - controlplane-cert-secret.yaml
+  - issuer.yaml

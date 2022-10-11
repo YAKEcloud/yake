@@ -42,7 +42,7 @@ SHOOT_DOMAIN=$(kubectl get shoot "$SHOOT" -o jsonpath="{.spec.dns.domain}")
 echo "The script will now setup your development / testing environment."
 echo
 echo "shoot-name:   $SHOOT"
-echo "Dashboard:    https://dashboard.ingress.$SHOOT_DOMAIN"
+echo "Dashboard:    https://dashboard.$SHOOT.23ke-testbed.23t.dev"
 echo "Provider:     $PROVIDER"
 echo
 echo "This line might be handy:"

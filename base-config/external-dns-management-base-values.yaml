@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: external-dns-management-base-values
+  namespace: flux-system
+data:
+  values.yaml: |-
+    external-dns-management:
+      enabled: true
+      configuration:
+        dnsClass: base-dns-class
+        identifier: 23ke-dns-identifier

@@ -5,3 +5,4 @@ resources:
   - flux/23ke-base-install.yaml
   - flux/23ke-charts-helmrepo.yaml
   - flux/gardener-community-charts-helmrepo.yaml
+  - flux/ingress-nginx-helmrepo.yaml
