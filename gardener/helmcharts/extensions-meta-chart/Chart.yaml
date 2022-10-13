@@ -1,0 +1,7 @@
+apiVersion: v2
+name: extensions
+description: A Helm chart for Gardener Extension HelmRelease management
+
+type: application
+
+version: 0.0.2

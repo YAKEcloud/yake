@@ -9,10 +9,10 @@ spec:
       name: gardener-internal-kubeconfig
   interval: 1m0s
   dependsOn:
-    - name: 23ke-base-install
+    - name: gardener
   sourceRef:
     kind: Bucket
     name: 23ke-config
-  path: ./dev-env/garden-content/
+  path: ./garden-content/
   prune: false
   validation: none

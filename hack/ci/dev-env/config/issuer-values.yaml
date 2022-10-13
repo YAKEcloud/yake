@@ -1,0 +1,10 @@
+apiVersion: v1
+kind: Secret
+metadata:
+  name: issuer-values
+  namespace: flux-system
+type: Opaque
+stringData:
+  values.yaml: |
+    email: operations@23technologies.cloud
+    server: https://acme-staging-v02.api.letsencrypt.org/directory

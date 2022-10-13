@@ -1,0 +1,59 @@
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: extensions-base-values
+  namespace: flux-system
+data:
+  values.yaml: |-
+    os-ubuntu:
+      version: 1.18.0
+
+    os-gardenlinux:
+      version: 0.14.0
+
+    provider-hcloud:
+      version: 0.6.0
+
+    provider-azure:
+      version: 1.30.0
+      admission: true
+
+    provider-openstack:
+      version: 1.28.0
+      admission: true
+
+    networking-calico:
+      version: 1.26.0
+
+    shoot-cert-service:
+      version: 1.25.0
+
+    shoot-dns-service:
+      version: 1.25.0
+      values:
+        dnsControllerManager:
+          deploy: true
+          image:
+            repository: eu.gcr.io/gardener-project/dns-controller-manager
+            tag: v0.13.1
+          configuration:
+            cacheTtl: 300
+            controllers: dnscontrollers
+            dnsPoolResyncPeriod: 30m
+            serverPortHttp: 8080
+
+    networking-cilium:
+      version: 1.17.0
+
+    provider-alicloud:
+      version: 1.40.1
+
+    provider-aws:
+      version: 1.38.2
+
+    provider-gcp:
+      version: 1.25.1
+
+    runtime-gvisor:
+      version: 0.6.0

@@ -53,10 +53,14 @@ spec:
     kubernetesDashboard:
       enabled: false
     nginxIngress:
-      enabled: true
+      enabled: false
       externalTrafficPolicy: Cluster
   extensions:
     - type: shoot-flux
+    - type: shoot-dns-service
+      disabled: true
+    - type: shoot-cert-service
+      disabled: true
   maintenance:
     timeWindow:
       begin: 020000+0200

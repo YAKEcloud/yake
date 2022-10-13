@@ -1,0 +1,41 @@
+apiVersion: kustomize.toolkit.fluxcd.io/v1beta2
+kind: Kustomization
+metadata:
+  name: pre-gardener
+  namespace: flux-system
+spec:
+  interval: 1m0s
+  sourceRef:
+    kind: GitRepository
+    name: 23ke
+  path: ./pre-gardener
+  prune: true
+  healthChecks:
+    - apiVersion: helm.toolkit.fluxcd.io/v2beta1
+      kind: HelmRelease
+      name: ingress-nginx
+      namespace: flux-system
+    - apiVersion: helm.toolkit.fluxcd.io/v2beta1
+      kind: HelmRelease
+      name: cert-manager
+      namespace: flux-system
+    - apiVersion: helm.toolkit.fluxcd.io/v2beta1
+      kind: HelmRelease
+      name: cert-management
+      namespace: flux-system
+    - apiVersion: helm.toolkit.fluxcd.io/v2beta1
+      kind: HelmRelease
+      name: external-dns-management
+      namespace: flux-system
+    - apiVersion: helm.toolkit.fluxcd.io/v2beta1
+      kind: HelmRelease
+      name: dnsprovider
+      namespace: flux-system
+    - apiVersion: helm.toolkit.fluxcd.io/v2beta1
+      kind: HelmRelease
+      name: issuer
+      namespace: flux-system
+  postBuild:
+    substituteFrom:
+      - kind: Secret
+        name: 23ke-env-substitutions

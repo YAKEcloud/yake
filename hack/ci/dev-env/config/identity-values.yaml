@@ -6,9 +6,6 @@ metadata:
 type: Opaque
 stringData:
   values.yaml: |
-    ingress:
-      annotations:
-        cert-manager.io/cluster-issuer: letsencrypt-staging
     staticPasswords:
     - email: "admin@localhost"
       # bcrypt hash of the string "password"

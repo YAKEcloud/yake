@@ -14,7 +14,7 @@ stringData:
               name: hcloud-hel1-0
             spec:
               dns:
-                ingressDomain: ingress.${AZURE_DOMAIN}
+                ingressDomain: internal.${AZURE_DOMAIN}
               networks:
                 nodes: 10.11.0.0/16
                 pods: 10.10.0.0/16

@@ -3,23 +3,17 @@ set -euo pipefail
 
 source hack/ci/handy.sh
 
-# 23KE Bucket
-# Let's Encrypt Staging CA needed.
-mkdir -p ~/.mc/certs/CAs/
-cp hack/ci/misc/le-staging.pem ~/.mc/certs/CAs/le-staging.pem
-cp hack/ci/misc/local-ca.pem ~/.mc/certs/CAs/local-ca.pem
-
 echo "23KE Bucket upload"
 
-mc ls "$MC_ALIAS/$BUCKET" &> /dev/null || mc mb "$MC_ALIAS/$BUCKET"
-mc cp -q kustomization.yaml "$MC_ALIAS/$BUCKET"
-mc cp -q --recursive flux "$MC_ALIAS/$BUCKET"
-mc cp -q --recursive base-install "$MC_ALIAS/$BUCKET"
-mc cp -q --recursive base-config "$MC_ALIAS/$BUCKET"
+rclone -q mkdir $REMOTE:$BUCKET
+rclone -q sync kustomization.yaml $REMOTE:$BUCKET
+rclone -q sync flux $REMOTE:$BUCKET/flux
+rclone -q sync pre-gardener $REMOTE:$BUCKET/pre-gardener
+rclone -q sync gardener $REMOTE:$BUCKET/gardener
 
 # we now upload packet versions which use a bucket instead of the GitRepository
 for file in $(grep --exclude-dir=hack --exclude-dir=env-template -lr GitRepository . | sed 's/^\.\///'); do
-    cat $file | sed s/GitRepository/Bucket/ | mc pipe $MC_ALIAS/$BUCKET/$file 
+    cat $file | sed s/GitRepository/Bucket/ | rclone -q rcat $REMOTE:$BUCKET/$file 
 done
 
 # In case you want to use a local version of the 23ke-charts, you can clone the 23ke-charts repository
@@ -29,10 +23,10 @@ done
 if [[ -d 23ke-charts-dev ]]
 then
     echo "Using local charts-folder  ./23ke-charts-dev"
-    for file in $(grep -lr 23ke-charts base-install); do
-            cat $file | yq eval '.spec.chart.spec |= (.chart = "./23ke-charts-dev/" + .chart | del .version) |= .sourceRef |= (.kind = "Bucket" | .name  = "23ke" )' - |   mc pipe $MC_ALIAS/$BUCKET/$file
+    for file in $(grep -lr gardener-community-charts gardener); do
+            cat $file | yq eval '.spec.chart.spec |= (.chart = "./23ke-charts-dev/" + .chart | del .version) |= .sourceRef |= (.kind = "Bucket" | .name  = "23ke" )' - | rclone -q rcat $REMOTE:$BUCKET/$file
     done
-    mc cp -q --recursive 23ke-charts-dev/charts/ $MC_ALIAS/$BUCKET/23ke-charts-dev/
+    rclone sync 23ke-charts-dev/charts/ $REMOTE:$BUCKET/23ke-charts-dev/
 fi
 
 echo "23KE Bucket ready ✅"

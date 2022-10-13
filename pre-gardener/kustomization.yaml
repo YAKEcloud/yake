@@ -1,0 +1,11 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+resources:
+  - cert-management.yaml
+  - cert-manager.yaml
+  - dnsprovider.yaml
+  - external-dns-management.yaml
+  - gardener-community-charts-helmrepo.yaml
+  - ingress-nginx.yaml
+  - issuer.yaml
+  - namespace.yaml

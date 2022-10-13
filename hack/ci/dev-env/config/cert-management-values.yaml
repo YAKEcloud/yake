@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: Secret
+metadata:
+  name: cert-management-values
+  namespace: flux-system
+type: Opaque
+stringData:
+  values.yaml: |
+    createCRDs:
+      issuers: false
+      certificates: false
+    configuration:
+      defaultIssuer: le-staging-issuer
+      defaultIssuerDomainRanges: internal.${AZURE_DOMAIN}

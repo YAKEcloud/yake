@@ -3,14 +3,6 @@ set -euo pipefail
 
 source hack/ci/handy.sh
 
-# FIXME: maybe do in a single get
-echo "Fetching DNS secret from base gardener"
-AZURE_BASE_DOMAIN=$(kubectl --kubeconfig hack/ci/secrets/gardener-kubeconfig.yaml get secret dns-for-ci -o go-template='{{.data.AZURE_BASE_DOMAIN|base64decode}}')
-AZURE_TENANT_ID=$(kubectl --kubeconfig hack/ci/secrets/gardener-kubeconfig.yaml get secret dns-for-ci -o go-template='{{.data.AZURE_TENANT_ID}}')
-AZURE_SUBSCRIPTION_ID=$(kubectl --kubeconfig hack/ci/secrets/gardener-kubeconfig.yaml get secret dns-for-ci -o go-template='{{.data.AZURE_SUBSCRIPTION_ID}}')
-AZURE_SECRET_ID=$(kubectl --kubeconfig hack/ci/secrets/gardener-kubeconfig.yaml get secret dns-for-ci -o go-template='{{.data.AZURE_SECRET_ID}}')
-AZURE_SECRET_VALUE=$(kubectl --kubeconfig hack/ci/secrets/gardener-kubeconfig.yaml get secret dns-for-ci -o go-template='{{.data.AZURE_SECRET_VALUE}}')
-
 echo "Installing 23KE"
 
 # Templating 23ke-env-substitutions.yaml
@@ -23,8 +15,8 @@ metadata:
 type: Opaque
 stringData:
   CLUSTERIDENTITY: ${SHOOT}
-  ENV: ingress
-  BASE_DOMAIN: ${SHOOT_DOMAIN}
+  ENV: ${SHOOT}
+  BASE_DOMAIN: ${AZURE_BASE_DOMAIN}
   DASHBOARD_CLIENTSECRET: ${DASHBOARD_CLIENTSECRET}
   DASHBOARD_SESSIONSECRET: ${DASHBOARD_SESSIONSECRET}
   KUBEAPISERVER_BASICAUTHPASSWORD: ${KUBEAPISERVER_BASICAUTHPASSWORD}
@@ -37,11 +29,10 @@ stringData:
   TOKEN_SECRET: ${TOKEN_SECRET}
 EOF
 
-# Create or update secret
-kubectl create secret generic -n flux-system minio-local --from-literal=accesskey=minio --from-literal=secretkey="$MINIO_PW" --save-config --dry-run=client -o yaml | kubectl apply -f -
+flux create source bucket 23ke --endpoint=https://23ketestbed.blob.core.windows.net --bucket-name="$SHOOT-23ke" --secret-ref=azure-blob-storage-key --provider=azure --interval=1m
 
-flux create source bucket 23ke --insecure --endpoint=minio.minio:9000 --bucket-name="$BUCKET" --secret-ref=minio-local
-flux create source bucket 23ke-config --insecure --endpoint=minio.minio:9000 --bucket-name="$CONFIG_BUCKET" --secret-ref=minio-local
+flux create source bucket 23ke-config --endpoint=https://23ketestbed.blob.core.windows.net --bucket-name="$SHOOT-config" --secret-ref=azure-blob-storage-key --provider=azure --interval=1m
+
 kubectl apply -f hack/ci/flux
 
 echo "Waiting for ks"
