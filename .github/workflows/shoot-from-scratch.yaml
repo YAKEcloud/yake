@@ -16,6 +16,8 @@ on:
           - fsn1
           - hel1
   pull_request:
+    branches:
+      - "main"
 jobs:
   ci:
     runs-on: 23ke-runner
