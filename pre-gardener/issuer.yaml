@@ -1,0 +1,19 @@
+---
+apiVersion: kustomize.toolkit.fluxcd.io/v1beta2
+kind: Kustomization
+metadata:
+  name: issuer
+  namespace: flux-system
+spec:
+  dependsOn:
+    - name: cert-management
+  interval: 1m0s
+  sourceRef:
+    kind: GitRepository
+    name: 23ke
+  path: ./pre-gardener/issuer
+  prune: true
+  postBuild:
+    substituteFrom:
+      - kind: Secret
+        name: 23ke-env-substitutions

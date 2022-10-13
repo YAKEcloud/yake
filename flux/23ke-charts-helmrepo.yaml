@@ -1,9 +1,0 @@
-apiVersion: source.toolkit.fluxcd.io/v1beta1
-kind: HelmRepository
-metadata:
-  name: 23ke-charts
-  namespace: flux-system
-spec:
-  interval: 5m
-  url: https://23technologies.github.io/23ke-charts/
----

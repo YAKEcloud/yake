@@ -10,7 +10,7 @@ spec:
     - name: gardener-runtime
   chart:
     spec:
-      chart: base-install/helmcharts/extensions-meta-chart
+      chart: gardener/helmcharts/extensions-meta-chart
       sourceRef:
         kind: GitRepository
         name: 23ke

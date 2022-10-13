@@ -1,16 +1,16 @@
 apiVersion: helm.toolkit.fluxcd.io/v2beta1
 kind: HelmRelease
 metadata:
-  name: dnsprovider
+  name: issuer
   namespace: flux-system
 spec:
   dependsOn:
-    - name: external-dns-management
+    - name: cert-management
   targetNamespace: garden
   interval: 1m
   chart:
     spec:
-      chart: base-install/helmcharts/dnsprovider
+      chart: pre-gardener/issuer/chart
       sourceRef:
         kind: GitRepository
         name: 23ke
@@ -18,4 +18,4 @@ spec:
       interval: 1m
   valuesFrom:
     - kind: Secret
-      name: dnsprovider-values
+      name: issuer-values

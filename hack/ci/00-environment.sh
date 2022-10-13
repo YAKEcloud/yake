@@ -63,6 +63,7 @@ export SHOOT=$SHOOT
 export DASHBOARD_CLIENTSECRET=$(openssl rand -hex 20)
 export DASHBOARD_SESSIONSECRET=$(openssl rand -hex 20)
 export KUBEAPISERVER_BASICAUTHPASSWORD=$(openssl rand -hex 20)
+export REMOTE=23KETESTBED
 export BUCKET=$SHOOT-23ke
 export CONFIG_BUCKET=$SHOOT-config
 export TOKEN_ID=ab$(openssl rand -hex 2)

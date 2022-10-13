@@ -1,14 +1,20 @@
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 resources:
-  - namespace.yaml
   - cert-manager-ca.yaml
+  - cloudprofiles.yaml
   - dashboard-base-values.yaml
-  - gardener-base-values.yaml
-  - gardenlet-base-values.yaml
-  - identity-base-values.yaml
-  - kube-apiserver-base-values.yaml
+  - dashboard.yaml
+  - etcd.yaml
   - extensions-base-values.yaml
+  - extensions.yaml
+  - gardener-base-values.yaml
+  - gardener.yaml
+  - gardenlet-base-values.yaml
+  - gardenlet.yaml
+  - identity-base-values.yaml
+  - identity.yaml
+  - kube-apiserver-base-values.yaml
+  - kube-apiserver.yaml
+  - pre-gardenlet.yaml
   - priorityclasses.yaml
-  - cert-management-base-values.yaml
-  - external-dns-management-base-values.yaml

@@ -29,12 +29,9 @@ stringData:
   TOKEN_SECRET: ${TOKEN_SECRET}
 EOF
 
-# Create or update secret
-kubectl create secret generic -n flux-system minio-local --from-literal=accesskey=minio --from-literal=secretkey="$MINIO_PW" --save-config --dry-run=client -o yaml | kubectl apply -f -
+flux create source bucket 23ke --endpoint=https://23ketestbed.blob.core.windows.net --bucket-name="$SHOOT-23ke" --secret-ref=azure-blob-storage-key --provider=azure --interval=1m
 
-flux create source bucket 23ke --endpoint=https://23ketestbed.blob.core.windows.net --bucket-name="$SHOOT-23ke" --secret-ref=azure-bucket-key --provider=azure --interval=1m 
-
-flux create source bucket 23ke-config --endpoint=https://23ketestbed.blob.core.windows.net --bucket-name="$SHOOT-config" --secret-ref=azure-bucket-key --provider=azure --interval=1m 
+flux create source bucket 23ke-config --endpoint=https://23ketestbed.blob.core.windows.net --bucket-name="$SHOOT-config" --secret-ref=azure-blob-storage-key --provider=azure --interval=1m
 
 kubectl apply -f hack/ci/flux
 
