@@ -39,10 +39,19 @@ kubectl label shoot "$SHOOT" 23technologies.cloud/shoot-owner="$USERNAME"
 
 SHOOT_DOMAIN=$(kubectl get shoot "$SHOOT" -o jsonpath="{.spec.dns.domain}")
 
+
+# FIXME: maybe do in a single get
+echo "Fetching DNS secret from base gardener"
+AZURE_BASE_DOMAIN=$(kubectl --kubeconfig hack/ci/secrets/gardener-kubeconfig.yaml get secret dns-for-ci -o go-template='{{.data.AZURE_BASE_DOMAIN|base64decode}}')
+AZURE_TENANT_ID=$(kubectl --kubeconfig hack/ci/secrets/gardener-kubeconfig.yaml get secret dns-for-ci -o go-template='{{.data.AZURE_TENANT_ID}}')
+AZURE_SUBSCRIPTION_ID=$(kubectl --kubeconfig hack/ci/secrets/gardener-kubeconfig.yaml get secret dns-for-ci -o go-template='{{.data.AZURE_SUBSCRIPTION_ID}}')
+AZURE_SECRET_ID=$(kubectl --kubeconfig hack/ci/secrets/gardener-kubeconfig.yaml get secret dns-for-ci -o go-template='{{.data.AZURE_SECRET_ID}}')
+AZURE_SECRET_VALUE=$(kubectl --kubeconfig hack/ci/secrets/gardener-kubeconfig.yaml get secret dns-for-ci -o go-template='{{.data.AZURE_SECRET_VALUE}}')
+
 echo "The script will now setup your development / testing environment."
 echo
 echo "shoot-name:   $SHOOT"
-echo "Dashboard:    https://dashboard.$SHOOT.23ke-testbed.23t.dev"
+echo "Dashboard:    https://dashboard.$SHOOT.$AZURE_BASE_DOMAIN"
 echo "Provider:     $PROVIDER"
 echo
 echo "This line might be handy:"
@@ -50,16 +59,19 @@ echo ". hack/ci/handy.sh"
 
 cat << EOF > hack/ci/handy.sh
 export KUBECONFIG='hack/ci/secrets/shoot-kubeconfig.yaml:hack/ci/secrets/apiserver-in-shoot-kubeconfig.yaml'
-export MC_ALIAS=${MC_ALIAS:-shoot}
 export SHOOT=$SHOOT
-export MINIO_HOSTNAME="minio.ingress.$SHOOT_DOMAIN"
 export DASHBOARD_CLIENTSECRET=$(openssl rand -hex 20)
 export DASHBOARD_SESSIONSECRET=$(openssl rand -hex 20)
 export KUBEAPISERVER_BASICAUTHPASSWORD=$(openssl rand -hex 20)
-export BUCKET=${BUCKET:-23ke}
-export CONFIG_BUCKET=${CONFIG_BUCKET:-config}
+export BUCKET=$SHOOT-23ke
+export CONFIG_BUCKET=$SHOOT-config
 export TOKEN_ID=ab$(openssl rand -hex 2)
 export TOKEN_SECRET=cd$(openssl rand -hex 7)
 export PROVIDER=$PROVIDER
 export SHOOT_DOMAIN=$SHOOT_DOMAIN
+export AZURE_BASE_DOMAIN=$AZURE_BASE_DOMAIN
+export AZURE_TENANT_ID=$AZURE_TENANT_ID
+export AZURE_SUBSCRIPTION_ID=$AZURE_SUBSCRIPTION_ID
+export AZURE_SECRET_ID=$AZURE_SECRET_ID
+export AZURE_SECRET_VALUE=$AZURE_SECRET_VALUE
 EOF

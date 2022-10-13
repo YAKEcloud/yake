@@ -8,7 +8,7 @@ spec:
   sourceRef:
     kind: Bucket
     name: 23ke-config
-  path: ./dev-env/config/
+  path: ./config/
   prune: true
   validation: client
   postBuild:
