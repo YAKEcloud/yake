@@ -12,7 +12,7 @@
   "prHourlyLimit": 0,
   "prConcurrentLimit": 1,
   "flux": {
-    "fileMatch": ["base-install/.*.yaml", "flux/23ke-charts-helmrepo.yaml", "flux/gardener-community-charts-helmrepo.yaml"]
+    "fileMatch": ["pre-gardener/.*.yaml", "gardener/.*.yaml"]
   },
   "packageRules": [
     {
@@ -62,7 +62,7 @@
   "regexManagers": [
     {
       "fileMatch": [
-        "^base-config/extensions-base-values.yaml$"
+        "^gardener/extensions-base-values.yaml$"
       ],
       "datasourceTemplate": "helm",
       "registryUrlTemplate": "https://gardener-community.github.io/gardener-charts",
