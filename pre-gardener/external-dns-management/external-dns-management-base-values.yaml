@@ -9,4 +9,4 @@ data:
       enabled: true
       configuration:
         dnsClass: base-dns-class
-        identifier: 23ke-dns-identifier
+        identifier: ${CLUSTERIDENTITY:=garden-cluster-identity}-base-dns
