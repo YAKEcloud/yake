@@ -14,7 +14,7 @@ stringData:
       container:
         image: eu.gcr.io/gardener-project/gardener/ops-toolbelt:latest
       gardenTerminalHost:
-        apiServerIngressHost: api.23ke-run-caad.23ke-ci.okeanos.dev
+        apiServerIngressHost: api.${AZURE_DOMAIN}
         secretRef:
           namespace: garden
           labelSelector:
@@ -24,11 +24,21 @@ stringData:
           secretRef:
             name: kubeconfig
             namespace: terminal-system
+
       bootstrap:
         disabled: false
-        seedDisabled: true
         shootDisabled: false
+        seedDisabled: true
         gardenTerminalHostDisabled: true
+        apiServerIngress:
+          annotations:
+            cert.gardener.cloud/class: base-cert-class
+            cert.gardener.cloud/purpose: managed
+            dns.gardener.cloud/class: base-dns-class
+            dns.gardener.cloud/dnsnames: "*.internal.${ENV}.${BASE_DOMAIN}"
+            dns.gardener.cloud/ttl: "600"
+            kubernetes.io/ingress.class: nginx
+            nginx.ingress.kubernetes.io/backend-protocol: HTTPS
     oidc:
       ca: |
         -----BEGIN CERTIFICATE-----
