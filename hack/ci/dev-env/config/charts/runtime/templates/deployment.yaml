@@ -1,0 +1,113 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    component: terminal-manager
+    control-plane: controller-manager
+  name: terminal-controller-manager
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      component: terminal-manager
+      control-plane: controller-manager
+  template:
+    metadata:
+      annotations:
+        kubectl.kubernetes.io/default-container: manager
+      labels:
+        component: terminal-manager
+        control-plane: controller-manager
+    spec:
+      containers:
+      - args:
+        - --secure-listen-address=0.0.0.0:8443
+        - --upstream=http://127.0.0.1:8080/
+        - --logtostderr=true
+        - --v=0
+        image: quay.io/brancz/kube-rbac-proxy:v0.13.0
+        name: kube-rbac-proxy
+        ports:
+        - containerPort: 8443
+          name: https
+          protocol: TCP
+        resources:
+          limits:
+            cpu: 500m
+            memory: 128Mi
+          requests:
+            cpu: 5m
+            memory: 64Mi
+        securityContext:
+          allowPrivilegeEscalation: false
+        volumeMounts:
+        - mountPath: /etc/terminal-controller-manager/secrets/kubeconfig
+          name: terminal-controller-secret-kubeconfig
+          readOnly: true
+      - args:
+        - --health-probe-bind-address=:8081
+        - --metrics-bind-address=127.0.0.1:8080
+        - --leader-elect
+        - --config-file=/etc/terminal-controller-manager/config.yaml
+        - --zap-devel=false
+        command:
+        - /manager
+        env:
+        - name: KUBECONFIG
+          value: /etc/terminal-controller-manager/secrets/kubeconfig/value
+        image: eu.gcr.io/gardener-project/gardener/terminal-controller-manager:v0.22.0-dev-aca4875d2fb868f87d4269492b6046ed702e0cdd
+        livenessProbe:
+          httpGet:
+            path: /healthz
+            port: 8081
+          initialDelaySeconds: 15
+          periodSeconds: 20
+        name: manager
+        ports:
+        - containerPort: 9443
+          name: webhook-server
+          protocol: TCP
+        readinessProbe:
+          httpGet:
+            path: /readyz
+            port: 8081
+          initialDelaySeconds: 5
+          periodSeconds: 10
+        resources:
+          limits:
+            cpu: 200m
+            memory: 300Mi
+          requests:
+            cpu: 100m
+            memory: 100Mi
+        securityContext:
+          allowPrivilegeEscalation: false
+        volumeMounts:
+        - mountPath: /etc/terminal-controller-manager/secrets/kubeconfig
+          name: terminal-controller-secret-kubeconfig
+          readOnly: true
+        - mountPath: /tmp/k8s-webhook-server/serving-certs
+          name: cert
+          readOnly: true
+        - mountPath: /etc/terminal-controller-manager
+          name: manager-config
+      securityContext:
+        runAsNonRoot: true
+        runAsUser: 65532
+      serviceAccountName: terminal-controller-manager
+      terminationGracePeriodSeconds: 10
+      volumes:
+      - name: terminal-controller-secret-kubeconfig
+        secret:
+          secretName: gardener-internal-kubeconfig
+      - name: cert
+        secret:
+          defaultMode: 420
+          secretName: terminal-webhook-server-cert
+      - configMap:
+          defaultMode: 420
+          items:
+          - key: config.yaml
+            path: config.yaml
+          name: terminal-controller-manager-configmap
+        name: manager-config

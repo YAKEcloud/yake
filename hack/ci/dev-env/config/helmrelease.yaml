@@ -1,0 +1,18 @@
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: terminal-controller-manager-runtime
+  namespace: flux-system
+spec:
+  dependsOn:
+    - name: gardener-application
+  targetNamespace: flux-system
+  interval: 1m
+  chart:
+    spec:
+      chart: config/charts/runtime
+      sourceRef:
+        kind: Bucket
+        name: 23ke-config
+        namespace: flux-system
+      interval: 1m

@@ -1,0 +1,27 @@
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: terminal-controller-manager-application
+  namespace: flux-system
+spec:
+  dependsOn:
+    - name: terminal-controller-manager-runtime
+  targetNamespace: flux-system
+  kubeConfig:
+    secretRef:
+      name: gardener-internal-kubeconfig
+  interval: 1m
+  chart:
+    spec:
+      chart: config/charts/application
+      sourceRef:
+        kind: Bucket
+        name: 23ke-config
+        namespace: flux-system
+      interval: 1m
+  valuesFrom:
+    - kind: Secret
+      name: terminal-webhook-server-cert
+      valuesKey: tls.crt
+      targetPath: webhook.caBundle
+      optional: false
