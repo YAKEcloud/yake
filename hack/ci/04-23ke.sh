@@ -45,4 +45,7 @@ kubectl wait helmrelease -A --all --for=condition=ready --timeout=20m
 # Extract apiserver-in-shoot-kubeconfig.yaml
 kubectl get secrets -n garden garden-kubeconfig-for-admin -o go-template='{{.data.kubeconfig | base64decode }}' > hack/ci/secrets/apiserver-in-shoot-kubeconfig.yaml
 
+# this is required for the webterminals to work with the internal-seed
+kubectl create secret generic hcloud-hel1-0-kubeconfig -n garden --from-file=kubeconfig=hack/ci/secrets/shoot-kubeconfig.yaml --context garden
+
 echo -e "23KE Ready ✅"
