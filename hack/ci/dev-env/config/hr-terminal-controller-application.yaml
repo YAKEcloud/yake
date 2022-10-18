@@ -13,7 +13,7 @@ spec:
   interval: 1m
   chart:
     spec:
-      chart: config/charts/application
+      chart: config/charts/terminal-controller-manager/application
       sourceRef:
         kind: Bucket
         name: 23ke-config

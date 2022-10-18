@@ -12,5 +12,5 @@ resources:
   - dnsprovider-values.yaml
   - issuer-values.yaml
   - cert-management-values.yaml
-  - helmrelease.yaml
-  - helmrelease-application.yaml
+  - hr-terminal-controller-application.yaml
+  - hr-terminal-controller-runtime.yaml
