@@ -29,6 +29,9 @@ stringData:
   TOKEN_SECRET: ${TOKEN_SECRET}
 EOF
 
+# install flux
+kubectl apply -f flux/gotk-components.yaml
+
 flux create source bucket 23ke --endpoint=https://23ketestbed.blob.core.windows.net --bucket-name="$SHOOT-23ke" --secret-ref=azure-blob-storage-key --provider=azure --interval=1m
 
 flux create source bucket 23ke-config --endpoint=https://23ketestbed.blob.core.windows.net --bucket-name="$SHOOT-config" --secret-ref=azure-blob-storage-key --provider=azure --interval=1m
