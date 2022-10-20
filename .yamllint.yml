@@ -12,3 +12,4 @@ ignore: |
   base-addons/vertical-pod-autoscaler/*
   pre-gardener/dnsprovider/chart/*
   pre-gardener/issuer/chart/*
+  flux/gotk-components.yaml
