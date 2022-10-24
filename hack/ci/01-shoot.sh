@@ -19,7 +19,7 @@ kubectl get secret "$SHOOT".kubeconfig -o go-template='{{.data.kubeconfig|base64
 export KUBECONFIG=hack/ci/secrets/shoot-kubeconfig.yaml
 
 # install flux
-kubectl apply -f flux/gotk-components.yaml
+kubectl apply -f flux-system/gotk-components.yaml
 
 # Download azure blob storage secret from host gardener, and upload it again
 kubectl --kubeconfig hack/ci/secrets/gardener-kubeconfig.yaml get secret azure-blob-storage-key -o yaml \
