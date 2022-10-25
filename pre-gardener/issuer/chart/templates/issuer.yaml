@@ -1,7 +1,7 @@
 apiVersion: cert.gardener.cloud/v1alpha1
 kind: Issuer
 metadata:
-  name: le-staging-issuer
+  name: le-issuer
   namespace: garden
   annotations:
     cert.gardener.cloud/class: base-cert-class
