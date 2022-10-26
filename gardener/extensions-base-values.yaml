@@ -36,10 +36,10 @@ data:
           deploy: true
           image:
             repository: eu.gcr.io/gardener-project/dns-controller-manager
-            tag: v0.13.1
+            tag: v0.13.3
           configuration:
             cacheTtl: 300
-            controllers: dnscontrollers
+            controllers: dnscontrollers,dnssources
             dnsPoolResyncPeriod: 30m
             serverPortHttp: 8080
 
