@@ -61,6 +61,16 @@ spec:
       disabled: true
     - type: shoot-cert-service
       disabled: true
+    - type: registry-cache
+      providerConfig:
+        apiVersion: registry.extensions.gardener.cloud/v1alpha1
+        kind: RegistryConfig
+        caches:
+        - upstream: docker.io
+          size: 500Mi
+        - upstream: ghcr.io
+        - upstream: quay.io
+          garbageCollectionEnabled: false
   maintenance:
     timeWindow:
       begin: 020000+0200
