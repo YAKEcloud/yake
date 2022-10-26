@@ -29,6 +29,9 @@ data:
     shoot-cert-service:
       version: 1.24.0
 
+    registry-cache:
+      version: 0.0.1-alpha
+
     shoot-dns-service:
       version: 1.25.0
       values:
