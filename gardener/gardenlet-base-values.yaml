@@ -13,6 +13,7 @@ data:
       gardenlet:
         config:
           gardenClientConnection:
+            gardenClusterAddress: https://api.${ENV}.${BASE_DOMAIN}:443
             bootstrapKubeconfig:
               secretRef:
                 name: gardenlet-kubeconfig-bootstrap
