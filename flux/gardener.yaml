@@ -13,6 +13,39 @@ spec:
     name: 23ke
   path: ./gardener
   prune: true
+  healthChecks:
+    - apiVersion: helm.toolkit.fluxcd.io/v2beta1
+      kind: HelmRelease
+      name: cloudprofiles
+      namespace: flux-system
+    - apiVersion: helm.toolkit.fluxcd.io/v2beta1
+      kind: HelmRelease
+      name: dashboard
+      namespace: flux-system
+    - apiVersion: helm.toolkit.fluxcd.io/v2beta1
+      kind: HelmRelease
+      name: etcd
+      namespace: flux-system
+    - apiVersion: helm.toolkit.fluxcd.io/v2beta1
+      kind: HelmRelease
+      name: extensions
+      namespace: flux-system
+    - apiVersion: helm.toolkit.fluxcd.io/v2beta1
+      kind: HelmRelease
+      name: gardener-application
+      namespace: flux-system
+    - apiVersion: helm.toolkit.fluxcd.io/v2beta1
+      kind: HelmRelease
+      name: gardener-runtime
+      namespace: flux-system
+    - apiVersion: helm.toolkit.fluxcd.io/v2beta1
+      kind: HelmRelease
+      name: internal-gardenlet
+      namespace: flux-system
+    - apiVersion: helm.toolkit.fluxcd.io/v2beta1
+      kind: HelmRelease
+      name: kube-apiserver
+      namespace: flux-system
   postBuild:
     substituteFrom:
       - kind: Secret
