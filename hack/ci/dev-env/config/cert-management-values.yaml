@@ -9,5 +9,3 @@ stringData:
     createCRDs:
       issuers: false
       certificates: false
-    configuration:
-      defaultIssuerDomainRanges: internal.${AZURE_DOMAIN}
