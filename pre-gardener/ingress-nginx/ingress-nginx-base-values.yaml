@@ -10,7 +10,8 @@ data:
         annotations:
           cert.gardener.cloud/class: base-cert-class
           cert.gardener.cloud/secretname: controlplane-cert-secret
-          dns.gardener.cloud/dnsnames: "*.${GARDENLET_INGRESS:=internal}.${ENV}.${BASE_DOMAIN}"
+          dns.gardener.cloud/dnsnames: >-
+            "*.${GARDENLET_INGRESS:=internal}.${ENV}.${BASE_DOMAIN}"
           dns.gardener.cloud/ttl: "600"
           dns.gardener.cloud/class: base-dns-class
       extraArgs:

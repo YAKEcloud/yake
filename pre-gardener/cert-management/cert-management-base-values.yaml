@@ -7,7 +7,8 @@ data:
   values.yaml: |-
     configuration:
       defaultIssuer: default-issuer
-      defaultIssuerDomainRanges: ${GARDENLET_INGRESS:=internal}.${ENV}.${BASE_DOMAIN}
+      defaultIssuerDomainRanges: >-
+        ${GARDENLET_INGRESS:=internal}.${ENV}.${BASE_DOMAIN}
       certClass: base-cert-class
       issuerNamespace: garden
       dnsClass: base-dns-class
