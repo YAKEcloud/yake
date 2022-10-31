@@ -8,7 +8,6 @@ stringData:
   values.yaml: |
     global:
       internalDomain:
-        domain: internal.${AZURE_DOMAIN}
         provider: azure-dns
         credentials:
           tenantID: ${AZURE_TENANT_ID}

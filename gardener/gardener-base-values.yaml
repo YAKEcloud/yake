@@ -12,8 +12,7 @@ data:
         virtualGarden:
           enabled: true
       internalDomain:
-        domain: nip.io
-        provider: unmanaged # depends on the DNS extension of your choice
+        domain: internal.${ENV}.${BASE_DOMAIN}
       apiserver:
         replicaCount: 2
         vpa: true

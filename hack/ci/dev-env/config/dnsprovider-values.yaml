@@ -6,8 +6,6 @@ metadata:
 type: Opaque
 stringData:
   values.yaml: |
-    domains:
-      - ${AZURE_DOMAIN}
     dnsProviderType: azure-dns
     dnsProviderCredentials:
       tenantID: ${AZURE_TENANT_ID}
