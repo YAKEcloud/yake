@@ -27,7 +27,7 @@
       "matchBaseBranches": [
         "release-v1.19", "release-v1.18", "release-v1.17", "release-v1.16"
       ],
-      "matchPackageNames": ["gardener-dashboard", "identity", "garden-kube-apiserver", "garden-etcd", "extensions", "os-ubuntu", "os-gardenlinux", "provider-hcloud", "provider-aws", "provider-gcp", "provider-alicloud", "provider-openstack", "provider-azure", "runtime-gvisor", "networking-cilium", "networking-calico", "shoot-dns-service", "shoot-cert-service"],
+      "matchPackageNames": ["gardener-dashboard", "identity", "garden-kube-apiserver", "garden-etcd", "extensions", "os-ubuntu", "os-gardenlinux", "provider-hcloud", "provider-aws", "provider-gcp", "provider-alicloud", "provider-openstack", "provider-azure", "runtime-gvisor", "networking-cilium", "networking-calico", "shoot-dns-service", "shoot-cert-service", "gardener/external-dns-management"],
       "enabled": false
     },
     {
@@ -69,6 +69,17 @@
       "versioningTemplate": "semver-coerced",
       "matchStrings": [
        "(?<depName>[a-z\-]*?):\\n\ \ \ \ \ \ version:\ (?<currentValue>[0-9\.]*$?)"
+      ]
+    },
+    {
+      "fileMatch": [
+        "^base-config/extensions-base-values.yaml$"
+      ],
+      "datasourceTemplate": "github-releases",
+      "depNameTemplate" : "gardener/external-dns-management",
+      "versioningTemplate": "semver-coerced",
+      "matchStrings": [
+       "dns-controller-manager\\n\ \ \ \ \ \ \ \ \ \ \ \ tag:\ (?<currentValue>v[0-9\.]*$?)"
       ]
     }
   ],
