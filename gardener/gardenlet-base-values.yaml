@@ -15,7 +15,8 @@ data:
           seedConfig:
             spec:
               dns:
-                ingressDomain: internal.${ENV}.${BASE_DOMAIN}
+                ingressDomain: >-
+                  ${GARDENLET_INGRESS:=internal}.${ENV}.${BASE_DOMAIN}
           gardenClientConnection:
             gardenClusterAddress: https://api.${ENV}.${BASE_DOMAIN}:443
             bootstrapKubeconfig:
