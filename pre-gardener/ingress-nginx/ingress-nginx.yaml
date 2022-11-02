@@ -25,10 +25,6 @@ spec:
         name: ingress-nginx
         namespace: flux-system
       interval: 1m
-  postBuild:
-    substituteFrom:
-      - kind: Secret
-        name: 23ke-env-substitutions
   valuesFrom:
     - kind: ConfigMap
       name: ingress-nginx-base-values

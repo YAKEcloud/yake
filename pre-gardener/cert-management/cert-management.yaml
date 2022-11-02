@@ -17,10 +17,6 @@ spec:
         name: gardener-community-charts
         namespace: flux-system
       interval: 1m
-  postBuild:
-    substituteFrom:
-      - kind: Secret
-        name: 23ke-env-substitutions
   valuesFrom:
     - kind: ConfigMap
       name: cert-management-base-values
