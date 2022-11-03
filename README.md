@@ -41,6 +41,17 @@ mkdir $MYENV && cd $MYENV
 After creating and commiting the environment to the config repository you need to bootstrap flux into the cluster and give it read access to the config repository.
 
 # How to use the testbed
+
+## Setup your PATH
+As we use e.g. [flux](https://fluxcd.io/), [kubectl](https://kubernetes.io/docs/reference/kubectl/), and [yq](https://mikefarah.gitbook.io/yq/) in the testbed, it is important that we maintain a common base of these cli tools.In order to setup your path you can run:
+```shell
+make -f hack/tools/tools.mk all
+export PATH=hack/tools/bin:$PATH
+```
+and you should be good to go.
+
+## Get started with the testbed
+
 This repo contains a quick way to setup 23KE for testing and development. The scripts that bootstrap the testing environment are all located in `hack/ci`. The testbed itself runs as shoot on top of okeanos in the project 23ke-ci. To use the script you need the kubeconfig for a service account in that project and place it under `hack/secrets/gardener-kubeconfig.yaml`. After that you can start the deployment with a simple `bash hack/ci/setup_shoot.sh`. The script runs approximately 10 minutes and in the end you should have a working gardener. The script calls multiple scripts sequentially, all of them can be executed seperately as well. Here a brief description of each script:
 
 * 00-environment.sh:       Reserves a shoot, generates random passwords, tokens, names
@@ -54,11 +65,3 @@ This repo contains a quick way to setup 23KE for testing and development. The sc
 The main goal is to iterate and test local changes before creating a PR or even a commit, and do so quickly. Nearly all of the time it should be sufficient to re-upload the local state with 02-23ke-bucket.sh/03-23ke-config-bucket.sh or/and re-run the 04-23ke.sh to watch flux reconcile the changes.
 
 To clean up you need to then run delete-microservice-shoot.sh and delete-shoot.sh
-
-# Prevent nix-shell garbage collection
-Nix by default collects unused packages. Using nix-shell does not automatically root it's dependencies,
-which causes nix to rebuild missing packages after garbage collection ran. You can prevent this with:
-```
-nix-instantiate shell.nix --indirect --add-root /nix/var/nix/gcroots/per-user/$USER/23ke.drv
-```
-More information on [Nix Wiki on Pinning](https://nixos.wiki/wiki/Storage_optimization#Pinning) and [Nix Pills](https://nixos.org/guides/nix-pills/garbage-collector.html)

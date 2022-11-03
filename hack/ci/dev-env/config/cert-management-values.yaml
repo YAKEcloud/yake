@@ -9,6 +9,3 @@ stringData:
     createCRDs:
       issuers: false
       certificates: false
-    configuration:
-      defaultIssuer: le-staging-issuer
-      defaultIssuerDomainRanges: internal.${AZURE_DOMAIN}

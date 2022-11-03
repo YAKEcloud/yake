@@ -7,20 +7,20 @@ metadata:
 data:
   values.yaml: |-
     os-ubuntu:
-      version: 1.18.0
+      version: 1.19.0
 
     os-gardenlinux:
-      version: 0.14.0
+      version: 0.15.0
 
     provider-hcloud:
-      version: 0.6.0
+      version: 0.6.2
 
     provider-azure:
-      version: 1.30.0
+      version: 1.31.0
       admission: true
 
     provider-openstack:
-      version: 1.28.0
+      version: 1.29.0
       admission: true
 
     networking-calico:
@@ -30,16 +30,16 @@ data:
       version: 1.25.0
 
     shoot-dns-service:
-      version: 1.25.0
+      version: 1.26.0
       values:
         dnsControllerManager:
           deploy: true
           image:
             repository: eu.gcr.io/gardener-project/dns-controller-manager
-            tag: v0.13.1
+            tag: v0.13.3
           configuration:
             cacheTtl: 300
-            controllers: dnscontrollers
+            controllers: dnscontrollers,dnssources
             dnsPoolResyncPeriod: 30m
             serverPortHttp: 8080
 
@@ -50,7 +50,7 @@ data:
       version: 1.40.1
 
     provider-aws:
-      version: 1.38.2
+      version: 1.39.1
 
     provider-gcp:
       version: 1.25.1

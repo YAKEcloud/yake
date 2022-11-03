@@ -33,6 +33,12 @@ done
 # Choose our shoot (free to use and the one with highest progress)
 SHOOT=$(kubectl get shoot --sort-by=.status.lastOperation.progress --no-headers=true --selector=23technologies.cloud/free-to-use='true',23technologies.cloud/region=$ZONE | grep "   $PROVIDER   " |cut -d ' ' -f1|tail -n1)
 
+# Check if shoot is hibernated and wake-up otherwise
+is_hibernated=$(kubectl get shoot $SHOOT -o jsonpath="{.status.hibernated}")
+if [ $is_hibernated  == "true" ]; then
+		kubectl patch shoot $SHOOT -p '{"spec":{"hibernation":{"enabled": false}}}'
+fi
+
 # Mark as in use and by whom
 kubectl label shoot "$SHOOT" 23technologies.cloud/free-to-use=false --overwrite=true
 kubectl label shoot "$SHOOT" 23technologies.cloud/shoot-owner="$USERNAME"

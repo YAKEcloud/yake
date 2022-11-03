@@ -1,0 +1,9 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: dnsprovider-base-values
+  namespace: flux-system
+data:
+  values.yaml: |-
+    domains:
+      - ${ENV}.${BASE_DOMAIN}

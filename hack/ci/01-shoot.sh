@@ -18,6 +18,9 @@ echo "Shoot creation succeeded"
 kubectl get secret "$SHOOT".kubeconfig -o go-template='{{.data.kubeconfig|base64decode}}' > hack/ci/secrets/shoot-kubeconfig.yaml
 export KUBECONFIG=hack/ci/secrets/shoot-kubeconfig.yaml
 
+# install flux
+kubectl apply -f flux-system/gotk-components.yaml
+
 # Download azure blob storage secret from host gardener, and upload it again
 kubectl --kubeconfig hack/ci/secrets/gardener-kubeconfig.yaml get secret azure-blob-storage-key -o yaml \
   | yq eval '.metadata.labels as $labels | del(.metadata)| .metadata.name = "azure-blob-storage-key" | .metadata.namespace = "flux-system" | .metadata.labels = $labels' - \

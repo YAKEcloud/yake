@@ -1,18 +1,18 @@
 {
-  "assignees": ["fynluk"],
+  "assignees": ["gesslein"],
   "baseBranches": [
     "main",
+    "release-v1.19",
     "release-v1.18",
     "release-v1.17",
-    "release-v1.16",
-    "release-v1.15"
+    "release-v1.16"
   ],
   "automerge": "true",
   "platformAutomerge": "true",
   "prHourlyLimit": 0,
   "prConcurrentLimit": 1,
   "flux": {
-    "fileMatch": ["pre-gardener/.*.yaml", "gardener/.*.yaml"]
+			"fileMatch": ["pre-gardener/.*.yaml", "gardener/.*.yaml", "flux-system/gotk-components.yaml"]
   },
   "packageRules": [
     {
@@ -25,10 +25,17 @@
     },
     {
       "matchBaseBranches": [
-        "release-v1.18", "release-v1.17", "release-v1.16", "release-v1.15"
+        "release-v1.19", "release-v1.18", "release-v1.17", "release-v1.16"
       ],
-      "matchPackageNames": ["gardener-dashboard", "identity", "garden-kube-apiserver", "garden-etcd", "extensions", "os-ubuntu", "os-gardenlinux", "provider-hcloud", "provider-aws", "provider-gcp", "provider-alicloud", "provider-openstack", "provider-azure", "runtime-gvisor", "networking-cilium", "networking-calico", "shoot-dns-service", "shoot-cert-service"],
+      "matchPackageNames": ["gardener-dashboard", "identity", "garden-kube-apiserver", "garden-etcd", "extensions", "os-ubuntu", "os-gardenlinux", "provider-hcloud", "provider-aws", "provider-gcp", "provider-alicloud", "provider-openstack", "provider-azure", "runtime-gvisor", "networking-cilium", "networking-calico", "shoot-dns-service", "shoot-cert-service", "gardener/external-dns-management"],
       "enabled": false
+    },
+    {
+      "matchBaseBranches": [
+        "release-v1.19"
+      ],
+      "matchPackagePatterns": ["gardener-controlplane", "gardener-controlplane-application", "gardener-controlplane-runtime", "gardener-application", "gardenlet"],
+      "allowedVersions": "/^1\\.58\\..*$/"
     },
     {
       "matchBaseBranches": [
@@ -50,13 +57,6 @@
       ],
       "matchPackagePatterns": ["gardener-controlplane", "gardener-controlplane-application", "gardener-controlplane-runtime", "gardener-application", "gardenlet"],
       "allowedVersions": "/^1\\.55\\..*$/"
-    },
-    {
-      "matchBaseBranches": [
-        "release-v1.15"
-      ],
-      "matchPackagePatterns": ["gardener-controlplane", "gardener-controlplane-application", "gardener-controlplane-runtime", "gardener-application", "gardenlet"],
-      "allowedVersions": "/^1\\.54\\..*$/"
     }
   ],
   "regexManagers": [
@@ -69,6 +69,17 @@
       "versioningTemplate": "semver-coerced",
       "matchStrings": [
        "(?<depName>[a-z\-]*?):\\n\ \ \ \ \ \ version:\ (?<currentValue>[0-9\.]*$?)"
+      ]
+    },
+    {
+      "fileMatch": [
+        "^base-config/extensions-base-values.yaml$"
+      ],
+      "datasourceTemplate": "github-releases",
+      "depNameTemplate" : "gardener/external-dns-management",
+      "versioningTemplate": "semver-coerced",
+      "matchStrings": [
+       "dns-controller-manager\\n\ \ \ \ \ \ \ \ \ \ \ \ tag:\ (?<currentValue>v[0-9\.]*$?)"
       ]
     }
   ],
