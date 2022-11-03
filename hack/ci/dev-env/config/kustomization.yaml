@@ -11,4 +11,3 @@ resources:
   - extensions-values.yaml
   - dnsprovider-values.yaml
   - issuer-values.yaml
-  - cert-management-values.yaml
