@@ -7,7 +7,7 @@ metadata:
 spec:
   dependsOn:
     - name: cert-management
-  interval: 1m0s
+  interval: 1m
   sourceRef:
     kind: GitRepository
     name: 23ke

@@ -1,4 +1,4 @@
-apiVersion: source.toolkit.fluxcd.io/v1beta1
+apiVersion: source.toolkit.fluxcd.io/v1beta2
 kind: HelmRepository
 metadata:
   name: jetstack
@@ -14,7 +14,7 @@ metadata:
   namespace: flux-system
 spec:
   targetNamespace: kube-system
-  interval: 5m
+  interval: 1m
   dependsOn:
     - name: pre-gardener-configuration
   chart:

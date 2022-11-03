@@ -1,5 +1,5 @@
 ---
-apiVersion: source.toolkit.fluxcd.io/v1beta1
+apiVersion: source.toolkit.fluxcd.io/v1beta2
 kind: HelmRepository
 metadata:
   name: ingress-nginx
@@ -18,6 +18,10 @@ spec:
   interval: 1m
   dependsOn:
     - name: pre-gardener-configuration
+  install:
+    remediation:
+      retries: 10
+      remediateLastFailure: true
   chart:
     spec:
       chart: ingress-nginx

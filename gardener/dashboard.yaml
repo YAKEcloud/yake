@@ -20,7 +20,7 @@ spec:
       interval: 1m
   install:
     remediation:
-      retries: -1
+      retries: 10
   upgrade:
     remediation:
       remediateLastFailure: false
