@@ -19,7 +19,7 @@ spec:
       interval: 1m
   install:
     remediation:
-      retries: 300
+      retries: 10
     createNamespace: true
   values:
     runtime:

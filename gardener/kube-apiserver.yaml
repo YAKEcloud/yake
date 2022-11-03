@@ -20,7 +20,7 @@ spec:
       interval: 1m
   install:
     remediation:
-      retries: 3
+      retries: 10
   valuesFrom:
     - kind: Secret
       name: kube-apiserver-base-values

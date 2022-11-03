@@ -4,7 +4,7 @@ metadata:
   name: pre-gardener
   namespace: flux-system
 spec:
-  interval: 1m0s
+  interval: 1m
   sourceRef:
     kind: GitRepository
     name: 23ke
