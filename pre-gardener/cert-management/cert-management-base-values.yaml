@@ -5,6 +5,9 @@ metadata:
   namespace: flux-system
 data:
   values.yaml: |-
+    createCRDs:
+      issuers: false
+      certificates: false
     configuration:
       defaultIssuer: default-issuer
       defaultIssuerDomainRanges: >-
