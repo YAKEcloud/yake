@@ -8,7 +8,6 @@ stringData:
   values.yaml: |
     tls:
       identity:
-        # this is the selfsigned dev-ca
         ca: |
           -----BEGIN CERTIFICATE-----
           MIIFmDCCA4CgAwIBAgIQU9C87nMpOIFKYpfvOHFHFDANBgkqhkiG9w0BAQsFADBm

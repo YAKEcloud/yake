@@ -8,15 +8,19 @@ metadata:
 data:
   values.yaml: |-
     global:
+      defaultDomains:
+        - domain: {{ .Values.baseDomain }}
+          {{- toYaml .Values.dnsProviderConfig | nindent 10 }}
       deployment:
         virtualGarden:
           enabled: true
       internalDomain:
-        domain: internal.${ENV}.${BASE_DOMAIN}
+        domain: internal.{{ .Values.baseDomain }}
+        {{- toYaml .Values.dnsProviderConfig | nindent 8 }}
       apiserver:
         replicaCount: 2
         vpa: true
-        clusterIdentity: ${CLUSTERIDENTITY:=garden-cluster-identity}
+        clusterIdentity: {{ .Values.clusterIdentity }}
       admission:
         replicaCount: 2
         vpa: true

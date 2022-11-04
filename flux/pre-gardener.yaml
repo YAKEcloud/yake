@@ -35,7 +35,3 @@ spec:
       kind: HelmRelease
       name: issuer
       namespace: flux-system
-  postBuild:
-    substituteFrom:
-      - kind: Secret
-        name: 23ke-env-substitutions

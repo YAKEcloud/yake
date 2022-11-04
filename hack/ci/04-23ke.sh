@@ -10,23 +10,28 @@ cat << EOF | kubectl apply -f -
 apiVersion: v1
 kind: Secret
 metadata:
-  name: 23ke-env-substitutions # only supports single line strings!
+  name: 23ke-env-substitutions 
   namespace: flux-system
 type: Opaque
 stringData:
-  CLUSTERIDENTITY: ${SHOOT}
-  ENV: ${SHOOT}
-  BASE_DOMAIN: ${AZURE_BASE_DOMAIN}
-  DASHBOARD_CLIENTSECRET: ${DASHBOARD_CLIENTSECRET}
-  DASHBOARD_SESSIONSECRET: ${DASHBOARD_SESSIONSECRET}
-  KUBEAPISERVER_BASICAUTHPASSWORD: ${KUBEAPISERVER_BASICAUTHPASSWORD}
-  AZURE_DOMAIN: ${SHOOT}.${AZURE_BASE_DOMAIN}
-  AZURE_TENANT_ID: ${AZURE_TENANT_ID}
-  AZURE_SUBSCRIPTION_ID: ${AZURE_SUBSCRIPTION_ID}
-  AZURE_SECRET_ID: ${AZURE_SECRET_ID}
-  AZURE_SECRET_VALUE: ${AZURE_SECRET_VALUE}
-  TOKEN_ID: ${TOKEN_ID}
-  TOKEN_SECRET: ${TOKEN_SECRET}
+  config: |
+    clusterIdentity: ${SHOOT}
+    gardenletIngress: internal
+    baseDomain: ${SHOOT}.${AZURE_BASE_DOMAIN}
+    dashboardClientSecret: ${DASHBOARD_CLIENTSECRET}
+    dashboardSessionSecret: ${DASHBOARD_SESSIONSECRET}
+    kubeApiServerBasicAuthPassword: ${KUBEAPISERVER_BASICAUTHPASSWORD}
+    tokenId: ${TOKEN_ID}
+    tokenSecret: ${TOKEN_SECRET}
+    issuerEmailAddress: operations@23technologies.cloud
+
+    dnsProviderConfig:
+      provider: azure-dns
+      credentials:
+        tenantID: ${AZURE_TENANT_ID}
+        subscriptionID: ${AZURE_SUBSCRIPTION_ID}
+        clientID: ${AZURE_SECRET_ID}
+        clientSecret: ${AZURE_SECRET_VALUE}
 EOF
 
 flux create source bucket 23ke --endpoint=https://23ketestbed.blob.core.windows.net --bucket-name="$SHOOT-23ke" --secret-ref=azure-blob-storage-key --provider=azure --interval=1m

@@ -8,17 +8,17 @@ data:
   values.yaml: |-
     global:
       token:
-        id: ${TOKEN_ID}
-        secret: ${TOKEN_SECRET}
+        id: {{ .Values.tokenId }}
+        secret: {{ .Values.tokenSecret }}
       gardenlet:
         config:
           seedConfig:
             spec:
               dns:
                 ingressDomain: >-
-                  ${GARDENLET_INGRESS:=internal}.${ENV}.${BASE_DOMAIN}
+                  {{- (print .Values.gardenletIngress "." .Values.baseDomain) | nindent 18 }}
           gardenClientConnection:
-            gardenClusterAddress: https://api.${ENV}.${BASE_DOMAIN}:443
+            gardenClusterAddress: https://api.{{ .Values.baseDomain }}:443
             bootstrapKubeconfig:
               secretRef:
                 name: gardenlet-kubeconfig-bootstrap

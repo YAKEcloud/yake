@@ -13,7 +13,3 @@ spec:
     name: 23ke
   path: ./pre-gardener/dnsprovider
   prune: true
-  postBuild:
-    substituteFrom:
-      - kind: Secret
-        name: 23ke-env-substitutions

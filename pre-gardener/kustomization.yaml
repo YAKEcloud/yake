@@ -3,6 +3,7 @@ kind: Kustomization
 resources:
   - cert-management.yaml
   - cert-manager.yaml
+  - configuration.yaml
   - dnsprovider.yaml
   - external-dns-management.yaml
   - gardener-community-charts-helmrepo.yaml

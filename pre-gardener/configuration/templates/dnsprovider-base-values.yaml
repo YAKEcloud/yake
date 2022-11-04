@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: dnsprovider-base-values
+  namespace: flux-system
+data:
+  values.yaml: |-
+    domains:
+      - {{ .Values.baseDomain }}
+    provider: {{ .Values.dnsProviderConfig.provider }}
+    credentials:
+      {{- toYaml .Values.dnsProviderConfig.credentials | nindent 6 }}

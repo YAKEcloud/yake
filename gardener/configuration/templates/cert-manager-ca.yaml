@@ -76,8 +76,7 @@ spec:
     - garden-kube-apiserver
     - garden-kube-apiserver.garden
     - garden-kube-apiserver.garden.svc
-    - api.${ENV}.${BASE_DOMAIN}
-    - api.${BASE_DOMAIN}
+    - api.{{ .Values.baseDomain }}
   issuerRef:
     name: gardener-ca
 ---
