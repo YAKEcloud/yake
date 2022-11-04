@@ -41,7 +41,5 @@ stringData:
           gN9WUwCbEMBy/YhBSrXycKA8crgGg3x1mIsopn88JKwmMBa68oS7EHM9w7C4y71M
           7DiA+/9Qdp9RBWJpTS9i/mDnJg1xvo8Xz49mrrgfmcAXTCJqXi24NatI3Oc=
           -----END CERTIFICATE-----
-      kubeAPIServer:
-        basicAuthPassword: ${KUBEAPISERVER_BASICAUTHPASSWORD}
     ingress:
       annotations: {}
