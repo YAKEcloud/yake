@@ -6,7 +6,7 @@ metadata:
 data:
   values.yaml: |-
     domains:
-      - {{ .Values.baseDomain }}
-    provider: {{ .Values.dnsProviderConfig.provider }}
+      - {{ .Values.domains.global.domain }}
+    provider: {{ .Values.domains.global.provider }}
     credentials:
-      {{- toYaml .Values.dnsProviderConfig.credentials | nindent 6 }}
+      {{- toYaml .Values.domains.global.credentials | nindent 6 }}

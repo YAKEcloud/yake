@@ -6,11 +6,11 @@ metadata:
 data:
   values.yaml: |-
     connectors: ~
-    issuerUrl: https://identity.{{ .Values.baseDomain }}/oidc
+    issuerUrl: https://identity.{{ .Values.domains.global.domain }}/oidc
     dashboardOrigins:
-      - 'https://dashboard.{{ .Values.baseDomain }}'
+      - 'https://dashboard.{{ .Values.domains.global.domain }}'
       - 'http://localhost:8000'
-    dashboardClientSecret: {{ .Values.dashboardClientSecret }}
+    dashboardClientSecret: {{ .Values.dashboard.clientSecret }}
     tls: ~
     ingress:
       annotations:
@@ -21,3 +21,12 @@ data:
         dns.gardener.cloud/dnsnames: "*"
         dns.gardener.cloud/ttl: "600"
         dns.gardener.cloud/class: base-dns-class
+
+{{ - if .Values.admin.staticPassword.enabled }}
+    staticPasswords:
+    - email: "{{ .Values.admin.email }}"
+      # bcrypt hash of the string "password"
+      hash: {{ .Values.admin.staticPassword.hash }}
+      username: "admin"
+      userID: {{ .Values.admin.staticPassword.userID }}
+{{ - end }}

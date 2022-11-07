@@ -11,7 +11,7 @@ data:
           cert.gardener.cloud/class: base-cert-class
           cert.gardener.cloud/secretname: controlplane-cert-secret
           dns.gardener.cloud/dnsnames: >-
-            {{- (print "*." .Values.gardenletIngress "." .Values.baseDomain) | nindent 12 }}
+            {{- (print "*." .Values.gardenlet.ingressDomain "." .Values.domains.global.domain) | nindent 12 }}
           dns.gardener.cloud/ttl: "600"
           dns.gardener.cloud/class: base-dns-class
       extraArgs:

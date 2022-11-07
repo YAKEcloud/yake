@@ -9,9 +9,9 @@ data:
     serviceName: garden-kube-apiserver
     replicas: 2
     apiServer:
-      hostname: api.{{ .Values.baseDomain }}
+      hostname: api.{{ .Values.domains.global.domain }}
       serviceName: garden-kube-apiserver
-      oidcIssuerURL: https://identity.{{ .Values.baseDomain }}/oidc
+      oidcIssuerURL: https://identity.{{ .Values.domains.global.domain }}/oidc
     ingress:
       annotations:
         dns.gardener.cloud/dnsnames: "*"
@@ -28,8 +28,11 @@ data:
     gardenletBootstrap:
       createToken: true
       token:
-        id: {{ .Values.tokenId }}
-        secret: {{ .Values.tokenSecret }}
+        id: {{ .Values.gardenlet.bootstrapToken.id }}
+        secret: {{ .Values.gardenlet.bootstrapToken.secret }}
     tls:
       kubeAPIServer:
-        basicAuthPassword: {{ .Values.kubeApiServerBasicAuthPassword }}
+        basicAuthPassword: {{ .Values.kubeApiServer.basicAuthPassword }}
+      identity:
+        ca: {{ .Values.issuer.ca }}
+

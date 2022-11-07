@@ -7,9 +7,6 @@ type: Opaque
 stringData:
   values.yaml: |
     global:
-      deployment:
-        virtualGarden:
-          clusterIP: 10.16.1.1
       apiserver:
         replicaCount: 1
       scheduler:

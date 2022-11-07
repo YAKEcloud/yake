@@ -5,5 +5,5 @@ metadata:
   namespace: flux-system
 data:
   values.yaml: |
-    email: {{ .Values.issuerEmailAddress }}
-    server: https://acme-staging-v02.api.letsencrypt.org/directory
+    email: {{ .Values.admin.email }}
+    server: {{ .Values.issuer.acme.server }}
