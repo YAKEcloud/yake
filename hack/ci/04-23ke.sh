@@ -35,7 +35,7 @@ stringData:
       staticPassword:
         enabled: true
         hash: "$2a$10$2b2cU8CPhOTaGrs1HRQuAueS7JTT5ZHsHSzYiFPm1leZck7Mc8T4W"
-        userID: 
+        userID: 08a8684b-db88-4b73-90a9-3cd1661f5466
 
     issuer:
       acme:
