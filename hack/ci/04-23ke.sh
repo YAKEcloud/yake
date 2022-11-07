@@ -14,18 +14,23 @@ metadata:
   namespace: flux-system
 type: Opaque
 stringData:
-  config: |
-    clusterIdentity: ${SHOOT}
-    gardenletIngress: internal
-    baseDomain: ${SHOOT}.${AZURE_BASE_DOMAIN}
+  values.yaml: |
+    # generate and hide from user?
     dashboardClientSecret: ${DASHBOARD_CLIENTSECRET}
     dashboardSessionSecret: ${DASHBOARD_SESSIONSECRET}
     kubeApiServerBasicAuthPassword: ${KUBEAPISERVER_BASICAUTHPASSWORD}
     tokenId: ${TOKEN_ID}
     tokenSecret: ${TOKEN_SECRET}
+    clusterIdentity: ${SHOOT}
+
+    # how to set as default?
+    gardenletIngress: internal
+
     issuerEmailAddress: operations@23technologies.cloud
 
-    dnsProviderConfig:
+    domains:
+    - type: global # means used for ingress, gardener defaultDomain and internalDomain
+      domain: ${SHOOT}.${AZURE_BASE_DOMAIN}
       provider: azure-dns
       credentials:
         tenantID: ${AZURE_TENANT_ID}
