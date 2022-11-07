@@ -15,5 +15,5 @@ spec:
       interval: 1m
   valuesFrom:
     - kind: Secret
-      name: 23ke-env-substitutions
+      name: 23ke-config
       valuesKey: config

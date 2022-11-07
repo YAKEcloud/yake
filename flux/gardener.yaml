@@ -49,4 +49,4 @@ spec:
   postBuild:
     substituteFrom:
       - kind: Secret
-        name: 23ke-env-substitutions
+        name: 23ke-config

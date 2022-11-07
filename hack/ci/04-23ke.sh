@@ -5,12 +5,12 @@ source hack/ci/handy.sh
 
 echo "Installing 23KE"
 
-# Templating 23ke-env-substitutions.yaml
+# Templating 23ke-config.yaml
 cat << EOF | kubectl apply -f -
 apiVersion: v1
 kind: Secret
 metadata:
-  name: 23ke-env-substitutions 
+  name: 23ke-config
   namespace: flux-system
 type: Opaque
 stringData:
