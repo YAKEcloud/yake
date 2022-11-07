@@ -13,6 +13,11 @@ stringData:
             metadata:
               name: hcloud-hel1-0
             spec:
+              secretRef:
+                name: hcloud-hel1-0-kubeconfig
+                namespace: garden
+              dns:
+                ingressDomain: internal.${AZURE_DOMAIN}
               networks:
                 nodes: 10.11.0.0/16
                 pods: 10.10.0.0/16

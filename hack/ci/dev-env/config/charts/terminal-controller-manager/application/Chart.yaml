@@ -1,0 +1,5 @@
+apiVersion: v2
+dependencies:
+description: A Helm chart to deploy the terminal controller manager application related resources
+name: terminal-controller-manager-application
+version: 0.0.1

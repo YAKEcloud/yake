@@ -11,3 +11,5 @@ resources:
   - extensions-values.yaml
   - dnsprovider-values.yaml
   - issuer-values.yaml
+  - hr-terminal-controller-application.yaml
+  - hr-terminal-controller-runtime.yaml
