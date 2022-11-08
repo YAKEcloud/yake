@@ -11,7 +11,7 @@ data:
     configuration:
       defaultIssuer: default-issuer
       defaultIssuerDomainRanges: >-
-        {{- (print .Values.gardenlet.ingressDomain "." .Values.domains.global.domain) | nindent 8 }}
+        {{- .Values.domains.global.domain | nindent 8 }}
       certClass: base-cert-class
       issuerNamespace: garden
       dnsClass: base-dns-class
