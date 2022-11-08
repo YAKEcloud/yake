@@ -16,4 +16,3 @@ spec:
   valuesFrom:
     - kind: Secret
       name: 23ke-config
-      valuesKey: config

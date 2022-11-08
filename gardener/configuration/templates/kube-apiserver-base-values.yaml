@@ -34,5 +34,5 @@ data:
       kubeAPIServer:
         basicAuthPassword: {{ .Values.kubeApiServer.basicAuthPassword }}
       identity:
-        ca: {{ .Values.issuer.ca }}
-
+        ca: |
+          {{- .Values.issuer.ca | nindent 10 }}

@@ -22,11 +22,11 @@ data:
         dns.gardener.cloud/ttl: "600"
         dns.gardener.cloud/class: base-dns-class
 
-{{ - if .Values.admin.staticPassword.enabled }}
+{{- if .Values.admin.staticPassword.enabled }}
     staticPasswords:
     - email: "{{ .Values.admin.email }}"
       # bcrypt hash of the string "password"
       hash: {{ .Values.admin.staticPassword.hash }}
       username: "admin"
       userID: {{ .Values.admin.staticPassword.userID }}
-{{ - end }}
+{{- end }}

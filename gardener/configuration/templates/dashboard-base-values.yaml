@@ -25,4 +25,5 @@ data:
       # redirectUri is the endpoint receiving the OTAC from the OpenID provider
       # after successful login
       redirectUri: https://dashboard.{{ .Values.domains.global.domain }}/auth/callback
-      ca: {{ .Values.issuer.ca }}
+      ca: |
+        {{- .Values.issuer.ca | nindent 8 }}

@@ -27,7 +27,7 @@ spec:
       optional: false
     - kind: Secret
       name: kube-apiserver-values
-      optional: false
+      optional: true
     # All of below maps cert-manager secrets to the expected helm values
     - kind: Secret
       name: etcd-client-tls
