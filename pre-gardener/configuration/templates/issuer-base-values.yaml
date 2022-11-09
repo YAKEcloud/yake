@@ -5,5 +5,5 @@ metadata:
   namespace: flux-system
 data:
   values.yaml: |
-    email: {{ .Values.admin.email }}
+    email: {{ .Values.issuer.email }}
     server: {{ .Values.issuer.acme.server }}

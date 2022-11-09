@@ -11,7 +11,6 @@ data:
       deployment:
         virtualGarden:
           enabled: true
-          clusterIP: {{ .Values.gardener.clusterIP }}
       defaultDomains:
         - domain: {{ .Values.domains.global.domain }}
           provider: {{ .Values.domains.global.provider }}
