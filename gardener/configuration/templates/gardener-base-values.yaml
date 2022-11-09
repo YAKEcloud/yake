@@ -14,11 +14,13 @@ data:
       defaultDomains:
         - domain: {{ .Values.domains.global.domain }}
           provider: {{ .Values.domains.global.provider }}
-          {{- toYaml .Values.domains.global.credentials | nindent 10 }}
+          credentials:
+            {{- toYaml .Values.domains.global.credentials | nindent 12 }}
       internalDomain:
         domain: internal.{{ .Values.domains.global.domain }}
         provider: {{ .Values.domains.global.provider }}
-        {{- toYaml .Values.domains.global.credentials | nindent 8 }}
+        credentials:
+          {{- toYaml .Values.domains.global.credentials | nindent 10 }}
       apiserver:
         replicaCount: 2
         vpa: true
