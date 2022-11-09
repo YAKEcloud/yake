@@ -9,4 +9,4 @@ data:
       enabled: true
       configuration:
         dnsClass: base-dns-class
-        identifier: ${CLUSTERIDENTITY:=garden-cluster-identity}-base-dns
+        identifier: {{ .Values.clusterIdentity }}-base-dns

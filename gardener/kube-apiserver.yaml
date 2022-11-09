@@ -12,7 +12,7 @@ spec:
   chart:
     spec:
       chart: garden-kube-apiserver
-      version: 4.1.1
+      version: 4.1.2
       sourceRef:
         kind: HelmRepository
         name: gardener-community-charts
@@ -27,7 +27,7 @@ spec:
       optional: false
     - kind: Secret
       name: kube-apiserver-values
-      optional: false
+      optional: true
     # All of below maps cert-manager secrets to the expected helm values
     - kind: Secret
       name: etcd-client-tls

@@ -1,25 +1,18 @@
 apiVersion: helm.toolkit.fluxcd.io/v2beta1
 kind: HelmRelease
 metadata:
-  name: dnsprovider
+  name: pre-gardener-configuration
   namespace: flux-system
 spec:
-  dependsOn:
-    - name: external-dns-management
-  targetNamespace: garden
   interval: 1m
   chart:
     spec:
-      chart: pre-gardener/dnsprovider/chart
+      chart: pre-gardener/configuration
       sourceRef:
         kind: GitRepository
         name: 23ke
         namespace: flux-system
       interval: 1m
   valuesFrom:
-    - kind: ConfigMap
-      name: dnsprovider-base-values
-      optional: false
     - kind: Secret
-      name: dnsprovider-values
-      optional: true
+      name: 23ke-config

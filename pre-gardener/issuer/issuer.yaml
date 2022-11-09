@@ -17,5 +17,9 @@ spec:
         namespace: flux-system
       interval: 1m
   valuesFrom:
+    - kind: ConfigMap
+      name: issuer-base-values
+      optional: false
     - kind: Secret
       name: issuer-values
+      optional: true

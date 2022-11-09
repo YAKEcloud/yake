@@ -5,23 +5,28 @@ metadata:
   namespace: flux-system
 data:
   values.yaml: |-
-    apiServerUrl: https://api.${ENV}.${BASE_DOMAIN}/
-    sessionSecret: ${DASHBOARD_SESSIONSECRET}
+    apiServerUrl: https://api.{{ .Values.domains.global.domain }}/
+    sessionSecret: {{ .Values.dashboard.sessionSecret }}
     ingress:
       hosts:
-      - dashboard.${ENV}.${BASE_DOMAIN}
+      - dashboard.{{ .Values.domains.global.domain }}
       annotations:
         kubernetes.io/ingress.class: nginx
-        cert-manager.io/cluster-issuer: default-issuer
+        cert.gardener.cloud/purpose: managed
+        cert.gardener.cloud/class: base-cert-class
         dns.gardener.cloud/dnsnames: "*"
         dns.gardener.cloud/ttl: "600"
         dns.gardener.cloud/class: base-dns-class
     oidc:
-      issuerUrl: https://identity.${ENV}.${BASE_DOMAIN}/oidc
+      issuerUrl: https://identity.{{ .Values.domains.global.domain }}/oidc
       # clientId is the public identifier of the gardener-dashboard aplication
       clientId: dashboard
       # clientSecret is the private secret of the gardener-dashboard aplication
-      clientSecret: ${DASHBOARD_CLIENTSECRET}
+      clientSecret: {{ .Values.dashboard.clientSecret }}
       # redirectUri is the endpoint receiving the OTAC from the OpenID provider
       # after successful login
-      redirectUri: https://dashboard.${ENV}.${BASE_DOMAIN}/auth/callback
+      redirectUri: https://dashboard.{{ .Values.domains.global.domain }}/auth/callback
+{{- if (((.Values).issuer).ca) }}
+      ca: |
+        {{- .Values.issuer.ca | nindent 8 }}
+{{- end }}

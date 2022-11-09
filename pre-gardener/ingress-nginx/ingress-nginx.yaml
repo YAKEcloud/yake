@@ -16,6 +16,8 @@ metadata:
 spec:
   targetNamespace: garden
   interval: 1m
+  dependsOn:
+    - name: pre-gardener-configuration
   chart:
     spec:
       chart: ingress-nginx

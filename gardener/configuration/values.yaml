@@ -1,0 +1,3 @@
+clusterIdentity: garden-cluster-identity
+gardenlet:
+  ingressDomain: internal

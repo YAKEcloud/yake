@@ -6,18 +6,19 @@ metadata:
 data:
   values.yaml: |-
     connectors: ~
-    issuerUrl: https://identity.${ENV}.${BASE_DOMAIN}/oidc
+    issuerUrl: https://identity.{{ .Values.domains.global.domain }}/oidc
     dashboardOrigins:
-      - 'https://dashboard.${ENV}.${BASE_DOMAIN}'
+      - 'https://dashboard.{{ .Values.domains.global.domain }}'
       - 'http://localhost:8000'
-    dashboardClientSecret: ${DASHBOARD_CLIENTSECRET}
+    dashboardClientSecret: {{ .Values.dashboard.clientSecret }}
     tls: ~
     ingress:
       annotations:
         nginx.ingress.kubernetes.io/ssl-redirect: "true"
         nginx.ingress.kubernetes.io/use-port-in-redirects: "true"
         kubernetes.io/ingress.class: nginx
-        cert-manager.io/cluster-issuer: default-issuer
+        cert.gardener.cloud/purpose: managed
+        cert.gardener.cloud/class: base-cert-class
         dns.gardener.cloud/dnsnames: "*"
         dns.gardener.cloud/ttl: "600"
         dns.gardener.cloud/class: base-dns-class

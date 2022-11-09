@@ -6,11 +6,13 @@ rules:
   document-start: disable
 
 ignore: |
-  hack/ci/secrets/*
+  hack/ci/secrets/
   hack/ci/misc/microservices-demo.yaml
   hack/ci/dev-env/config/charts
   gardener/helmcharts
   base-addons/vertical-pod-autoscaler
   pre-gardener/dnsprovider/chart
   pre-gardener/issuer/chart
+  gardener/configuration/templates/
+  pre-gardener/configuration/templates/
   flux-system/gotk-components.yaml
