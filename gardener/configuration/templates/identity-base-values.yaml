@@ -1,9 +1,10 @@
 apiVersion: v1
-kind: ConfigMap
+kind: Secret
 metadata:
   name: identity-base-values
   namespace: flux-system
-data:
+type: Opaque
+stringData:
   values.yaml: |-
     connectors: ~
     issuerUrl: https://identity.{{ .Values.domains.global.domain }}/oidc

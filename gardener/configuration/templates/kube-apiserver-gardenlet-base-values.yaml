@@ -2,12 +2,13 @@
 {{- $tokenSecret := (print (randNumeric 2) (randAlphaNum 12) (randAlpha 2)) | lower -}}
 
 apiVersion: v1
-kind: ConfigMap
+kind: Secret
 metadata:
   creationTimestamp: null
   name: gardenlet-base-values
   namespace: flux-system
-data:
+type: Opaque
+stringData:
   values.yaml: |-
     global:
       token:
@@ -33,11 +34,12 @@ data:
             ManagedIstio: true
 ---
 apiVersion: v1
-kind: ConfigMap
+kind: Secret
 metadata:
   name: kube-apiserver-base-values
   namespace: flux-system
-data:
+type: Opaque
+stringData:
   values.yaml: |-
     namespace: garden
     serviceName: garden-kube-apiserver

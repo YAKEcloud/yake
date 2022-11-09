@@ -1,9 +1,10 @@
 apiVersion: v1
-kind: ConfigMap
+kind: Secret
 metadata:
   name: external-dns-management-base-values
   namespace: flux-system
-data:
+type: Opaque
+stringData:
   values.yaml: |-
     external-dns-management:
       enabled: true

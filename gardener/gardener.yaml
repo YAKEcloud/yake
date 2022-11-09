@@ -32,7 +32,7 @@ spec:
     utils-templates:
       enabled: true
   valuesFrom:
-    - kind: ConfigMap
+    - kind: Secret
       name: gardener-base-values
       optional: false
     - kind: Secret
@@ -124,7 +124,7 @@ spec:
     utils-templates:
       enabled: true
   valuesFrom:
-    - kind: ConfigMap
+    - kind: Secret
       name: gardener-base-values
       optional: false
     - kind: Secret

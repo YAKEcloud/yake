@@ -22,7 +22,7 @@ spec:
     remediation:
       retries: 3
   valuesFrom:
-    - kind: ConfigMap
+    - kind: Secret
       name: kube-apiserver-base-values
       optional: false
     - kind: Secret

@@ -1,9 +1,10 @@
 apiVersion: v1
-kind: ConfigMap
+kind: Secret
 metadata:
   name: issuer-base-values
   namespace: flux-system
-data:
+type: Opaque
+stringData:
   values.yaml: |
     email: {{ .Values.issuer.acme.email }}
     server: {{ .Values.issuer.acme.server }}

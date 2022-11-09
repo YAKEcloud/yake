@@ -1,9 +1,10 @@
 apiVersion: v1
-kind: ConfigMap
+kind: Secret
 metadata:
   name: dnsprovider-base-values
   namespace: flux-system
-data:
+type: Opaque
+stringData:
   values.yaml: |-
     domains:
       - {{ .Values.domains.global.domain }}

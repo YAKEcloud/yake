@@ -27,7 +27,7 @@ spec:
     utils-templates:
       enabled: true
   valuesFrom:
-    - kind: ConfigMap
+    - kind: Secret
       name: gardenlet-base-values
       optional: false
     - kind: Secret

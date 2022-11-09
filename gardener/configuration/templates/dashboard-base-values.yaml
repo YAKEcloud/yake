@@ -1,9 +1,10 @@
 apiVersion: v1
-kind: ConfigMap
+kind: Secret
 metadata:
   name: dashboard-base-values
   namespace: flux-system
-data:
+type: Opaque
+stringData:
   values.yaml: |-
     apiServerUrl: https://api.{{ .Values.domains.global.domain }}/
     sessionSecret: {{ .Values.dashboard.sessionSecret }}

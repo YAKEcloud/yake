@@ -18,7 +18,7 @@ spec:
         namespace: flux-system
       interval: 1m
   valuesFrom:
-    - kind: ConfigMap
+    - kind: Secret
       name: external-dns-management-base-values
       optional: false
     - kind: Secret

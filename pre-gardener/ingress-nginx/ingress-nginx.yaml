@@ -28,7 +28,7 @@ spec:
         namespace: flux-system
       interval: 1m
   valuesFrom:
-    - kind: ConfigMap
+    - kind: Secret
       name: ingress-nginx-base-values
     - kind: Secret
       name: ingress-nginx-values
