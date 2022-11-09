@@ -1,5 +1,5 @@
-{{- $tokenId := print (randNumeric 1) (randAlphaNum 4)  (randAlpha 1) -}}
-{{- $tokenSecret := print (randNumeric 2) (randAlphaNum 12) (randAlpha 2) -}}
+{{- $tokenId := (print (randNumeric 1) (randAlphaNum 4)  (randAlpha 1)) | lower -}}
+{{- $tokenSecret := (print (randNumeric 2) (randAlphaNum 12) (randAlpha 2)) | lower -}}
 
 apiVersion: v1
 kind: ConfigMap
@@ -11,8 +11,8 @@ data:
   values.yaml: |-
     global:
       token:
-        id: {{- $tokenId }}
-        secret: {{- $tokenSecret }}
+        id: {{ $tokenId }}
+        secret: {{ $tokenSecret }}
       gardenlet:
         config:
           seedConfig:
@@ -62,8 +62,8 @@ data:
     gardenletBootstrap:
       createToken: true
       token:
-        id: {{- $tokenId }}
-        secret: {{- $tokenSecret }}
+        id: {{ $tokenId }}
+        secret: {{ $tokenSecret }}
     tls:
       kubeAPIServer:
         basicAuthPassword: {{ .Values.kubeApiServer.basicAuthPassword }}
