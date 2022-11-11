@@ -9,10 +9,11 @@ rclone -q mkdir $REMOTE:$BUCKET
 rclone -q sync kustomization.yaml $REMOTE:$BUCKET
 rclone -q sync flux $REMOTE:$BUCKET/flux
 rclone -q sync pre-gardener $REMOTE:$BUCKET/pre-gardener
+rclone -q sync flux-system $REMOTE:$BUCKET/flux-system
 rclone -q sync gardener $REMOTE:$BUCKET/gardener
 
 # we now upload packet versions which use a bucket instead of the GitRepository
-for file in $(grep --exclude-dir=hack --exclude-dir=env-template -lr GitRepository . | sed 's/^\.\///'); do
+for file in $(grep --exclude-dir=hack --exclude-dir=flux-system -lr GitRepository . | sed 's/^\.\///'); do
     cat $file | sed s/GitRepository/Bucket/ | rclone -q rcat $REMOTE:$BUCKET/$file 
 done
 

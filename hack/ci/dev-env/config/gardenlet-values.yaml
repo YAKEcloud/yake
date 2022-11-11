@@ -6,32 +6,30 @@ metadata:
 type: Opaque
 stringData:
   values.yaml: |-
-    global:
-      gardenlet:
-        config:
-          seedConfig:
-            metadata:
-              name: hcloud-hel1-0
-            spec:
-              secretRef:
-                name: hcloud-hel1-0-kubeconfig
-                namespace: garden
-              networks:
-                nodes: 10.11.0.0/16
-                pods: 10.10.0.0/16
-                services: 10.16.0.0/13
-                shootDefaults:
-                  pods: 100.73.0.0/16
-                  services: 100.88.0.0/13
-              provider:
-                region: hel1
-                type: hcloud
-              settings:
-                excessCapacityReservation:
-                  enabled: false
-                loadBalancerServices:
-                  annotations:
-                    load-balancer.hetzner.cloud/disable-private-ingress: "true"
-                    load-balancer.hetzner.cloud/ipv6-disabled: "true"
-                verticalPodAutoscaler:
-                  enabled: false
+    config:
+      seedConfig:
+        metadata:
+          name: hcloud-hel1-0
+        spec:
+          secretRef:
+            name: hcloud-hel1-0-kubeconfig
+            namespace: garden
+          networks:
+            nodes: 10.11.0.0/16
+            pods: 10.10.0.0/16
+            services: 10.16.0.0/13
+            shootDefaults:
+              pods: 100.73.0.0/16
+              services: 100.88.0.0/13
+          provider:
+            region: hel1
+            type: hcloud
+          settings:
+            excessCapacityReservation:
+              enabled: false
+            loadBalancerServices:
+              annotations:
+                load-balancer.hetzner.cloud/disable-private-ingress: "true"
+                load-balancer.hetzner.cloud/ipv6-disabled: "true"
+            verticalPodAutoscaler:
+              enabled: false
