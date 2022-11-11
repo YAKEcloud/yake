@@ -14,24 +14,23 @@ stringData:
       token:
         id: {{ $tokenId }}
         secret: {{ $tokenSecret }}
-      gardenlet:
-        config:
-          seedConfig:
-            spec:
-              dns:
-                ingressDomain: >-
-                  {{- (print .Values.gardenlet.ingressDomain "." .Values.domains.global.domain) | nindent 18 }}
-          gardenClientConnection:
-            gardenClusterAddress: https://api.{{ .Values.domains.global.domain }}:443
-            bootstrapKubeconfig:
-              secretRef:
-                name: gardenlet-kubeconfig-bootstrap
-                namespace: flux-system
-            kubeconfigSecret:
-              name: gardenlet-kubeconfig
-              namespace: garden
-          featureGates:
-            ManagedIstio: true
+    config:
+      seedConfig:
+        spec:
+          dns:
+            ingressDomain: >-
+              {{- (print .Values.gardenlet.ingressDomain "." .Values.domains.global.domain) | nindent 18 }}
+      gardenClientConnection:
+        gardenClusterAddress: https://api.{{ .Values.domains.global.domain }}:443
+        bootstrapKubeconfig:
+          secretRef:
+            name: gardenlet-kubeconfig-bootstrap
+            namespace: flux-system
+        kubeconfigSecret:
+          name: gardenlet-kubeconfig
+          namespace: garden
+      featureGates:
+        ManagedIstio: true
 ---
 apiVersion: v1
 kind: Secret
