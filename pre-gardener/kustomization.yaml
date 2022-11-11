@@ -6,6 +6,7 @@ resources:
   - configuration.yaml
   - dnsprovider.yaml
   - external-dns-management.yaml
+  - flux-system.yaml
   - gardener-community-charts-helmrepo.yaml
   - ingress-nginx.yaml
   - issuer.yaml
