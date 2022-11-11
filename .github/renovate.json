@@ -2,7 +2,7 @@
   "assignees": ["gesslein"],
   "baseBranches": [
     "main",
-    "release-v1.19",
+    "release-v1.58",
     "release-v1.18",
     "release-v1.17",
     "release-v1.16"
@@ -25,14 +25,14 @@
     },
     {
       "matchBaseBranches": [
-        "release-v1.19", "release-v1.18", "release-v1.17", "release-v1.16"
+        "release-v1.58", "release-v1.18", "release-v1.17", "release-v1.16"
       ],
       "matchPackageNames": ["gardener-dashboard", "identity", "garden-kube-apiserver", "garden-etcd", "extensions", "os-ubuntu", "os-gardenlinux", "provider-hcloud", "provider-aws", "provider-gcp", "provider-alicloud", "provider-openstack", "provider-azure", "runtime-gvisor", "networking-cilium", "networking-calico", "shoot-dns-service", "shoot-cert-service", "gardener/external-dns-management"],
       "enabled": false
     },
     {
       "matchBaseBranches": [
-        "release-v1.19"
+        "release-v1.58"
       ],
       "matchPackagePatterns": ["gardener-controlplane", "gardener-controlplane-application", "gardener-controlplane-runtime", "gardener-application", "gardenlet"],
       "allowedVersions": "/^1\\.58\\..*$/"
