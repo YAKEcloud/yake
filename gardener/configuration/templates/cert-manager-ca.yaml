@@ -41,6 +41,7 @@ spec:
     - server auth
   dnsNames:
     - etcd
+    - etcd-0
     - etcd.garden
     - etcd.garden.svc
   issuerRef:
