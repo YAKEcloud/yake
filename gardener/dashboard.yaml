@@ -1,7 +1,7 @@
 apiVersion: helm.toolkit.fluxcd.io/v2beta1
 kind: HelmRelease
 metadata:
-  name: dashboard
+  name: dashboard-runtime
   namespace: flux-system
 spec:
   targetNamespace: garden
@@ -12,7 +12,7 @@ spec:
   chart:
     spec:
       chart: dashboard
-      version: 1.61.2
+      version: 1.63.0
       sourceRef:
         kind: HelmRepository
         name: gardener-community-charts
@@ -24,6 +24,9 @@ spec:
   upgrade:
     remediation:
       remediateLastFailure: false
+  values:
+    runtime:
+      enabled: true
   valuesFrom:
     - kind: Secret
       name: dashboard-base-values
@@ -34,11 +37,11 @@ spec:
     - kind: Secret
       name: gardener-internal-kubeconfig
       valuesKey: value
-      targetPath: kubeconfig
+      targetPath: global.kubeconfig
     - kind: Secret
       name: gardener-ca-keypair
       valuesKey: tls.crt
-      targetPath: apiServerCa
+      targetPath: global.apiServerCa
   postRenderers:
     - kustomize:
         patchesStrategicMerge:
@@ -51,3 +54,43 @@ spec:
               template:
                 spec:
                   priorityClassName: gardener-dashboard
+---
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: dashboard-application
+  namespace: flux-system
+spec:
+  kubeConfig:
+    secretRef:
+      name: gardener-internal-kubeconfig
+  targetNamespace: garden
+  dependsOn:
+    - name: gardener-application
+    - name: gardener-runtime
+  interval: 1m
+  chart:
+    spec:
+      chart: dashboard
+      version: 1.63.0
+      sourceRef:
+        kind: HelmRepository
+        name: gardener-community-charts
+        namespace: flux-system
+      interval: 1m
+  install:
+    remediation:
+      retries: -1
+  upgrade:
+    remediation:
+      remediateLastFailure: false
+  values:
+    application:
+      enabled: true
+  valuesFrom:
+    - kind: Secret
+      name: dashboard-base-values
+      optional: false
+    - kind: Secret
+      name: dashboard-values
+      optional: true
