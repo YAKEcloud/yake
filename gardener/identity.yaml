@@ -15,12 +15,6 @@ spec:
         name: gardener-community-charts
         namespace: flux-system
       interval: 1m
-  install:
-    remediation:
-      retries: 10
-  upgrade:
-    remediation:
-      remediateLastFailure: false
   valuesFrom:
     - kind: Secret
       name: identity-base-values

@@ -20,10 +20,7 @@ spec:
       interval: 1m
   install:
     remediation:
-      retries: 10
-  upgrade:
-    remediation:
-      remediateLastFailure: false
+      retries: 3
   values:
     runtime:
       enabled: true
@@ -78,12 +75,6 @@ spec:
         name: gardener-community-charts
         namespace: flux-system
       interval: 1m
-  install:
-    remediation:
-      retries: -1
-  upgrade:
-    remediation:
-      remediateLastFailure: false
   values:
     application:
       enabled: true

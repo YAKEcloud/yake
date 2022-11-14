@@ -18,10 +18,6 @@ spec:
   interval: 1m
   dependsOn:
     - name: pre-gardener-configuration
-  install:
-    remediation:
-      retries: 10
-      remediateLastFailure: true
   chart:
     spec:
       chart: ingress-nginx
