@@ -18,9 +18,6 @@ spec:
         name: gardener-community-charts
         namespace: flux-system
       interval: 1m
-  install:
-    remediation:
-      retries: 10
   valuesFrom:
     - kind: Secret
       name: kube-apiserver-base-values
