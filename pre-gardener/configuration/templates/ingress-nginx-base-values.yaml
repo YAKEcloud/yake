@@ -7,6 +7,9 @@ type: Opaque
 stringData:
   values.yaml: |-
     controller:
+      podLabels:
+        app: nginx-ingress
+        component: controller
       service:
         annotations:
           cert.gardener.cloud/class: base-cert-class
