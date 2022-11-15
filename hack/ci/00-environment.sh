@@ -13,9 +13,10 @@ USERNAME=$(kubectl config view --minify -o jsonpath='{..context.user}')
 #PROJECT=$(kubectl get ns $NAMESPACE -o jsonpath="{.metadata.labels['project\.gardener\.cloud/name']}")
 
 
+export SHOOTHASH=$(git log -n 1 --pretty=format:%H -- hack/ci/misc/shoot-template-hcloud-fsn1.yaml.tmpl)
 DESIRED_PRESPAWNED_SHOOTS=2
 set +e
-ACTUAL_PRESPAWNED_SHOOTS=$(kubectl get shoots --selector=23technologies.cloud/free-to-use='true',23technologies.cloud/region=$ZONE --no-headers=true | cut -d ' ' -f4 | grep -c $PROVIDER)
+ACTUAL_PRESPAWNED_SHOOTS=$(kubectl get shoots --selector=23technologies.cloud/free-to-use='true',23technologies.cloud/region=$ZONE,23technologies.cloud/shoot.yaml=$SHOOTHASH --no-headers=true | cut -d ' ' -f4 | grep -c $PROVIDER)
 set -e
 NEEDED_PRESPAWNED_SHOOTS=$(( DESIRED_PRESPAWNED_SHOOTS - ACTUAL_PRESPAWNED_SHOOTS ))
 while [ $NEEDED_PRESPAWNED_SHOOTS -gt 0 ]
@@ -23,7 +24,7 @@ do
     RANDNAME="23ke-run-$(openssl rand -hex 2)"
     export RANDNAME
     # Alter shoot template
-    yq eval '.metadata.name = env(RANDNAME)' hack/ci/misc/shoot-template-$PROVIDER-$ZONE.yaml.tmpl | kubectl apply -f -
+    yq eval '.metadata.name = env(RANDNAME)' hack/ci/misc/shoot-template-$PROVIDER-$ZONE.yaml.tmpl |yq eval '.metadata.labels["23technologies.cloud/shoot.yaml"]=env(SHOOTHASH)' - | kubectl apply -f -
     set +e
     ACTUAL_PRESPAWNED_SHOOTS=$(kubectl get shoots --selector=23technologies.cloud/free-to-use='true',23technologies.cloud/region=$ZONE --no-headers=true | cut -d ' ' -f4 | grep -c $PROVIDER)
     set -e
@@ -31,7 +32,7 @@ do
 done
 
 # Choose our shoot (free to use and the one with highest progress)
-SHOOT=$(kubectl get shoot --sort-by=.status.lastOperation.progress --no-headers=true --selector=23technologies.cloud/free-to-use='true',23technologies.cloud/region=$ZONE | grep "   $PROVIDER   " |cut -d ' ' -f1|tail -n1)
+SHOOT=$(kubectl get shoot --sort-by=.status.lastOperation.progress --no-headers=true --selector=23technologies.cloud/free-to-use='true',23technologies.cloud/region=$ZONE,23technologies.cloud/shoot.yaml=$SHOOTHASH | grep "   $PROVIDER   " |cut -d ' ' -f1|tail -n1)
 
 # Check if shoot is hibernated and wake-up otherwise
 is_hibernated=$(kubectl get shoot $SHOOT -o jsonpath="{.status.hibernated}")
