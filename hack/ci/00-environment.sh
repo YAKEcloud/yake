@@ -13,7 +13,7 @@ USERNAME=$(kubectl config view --minify -o jsonpath='{..context.user}')
 #PROJECT=$(kubectl get ns $NAMESPACE -o jsonpath="{.metadata.labels['project\.gardener\.cloud/name']}")
 
 
-SHOOTHASH=$(git log -n 1 --pretty=format:%H -- hack/ci/misc/shoot-template-hcloud-fsn1.yaml.tmpl)
+export SHOOTHASH=$(git log -n 1 --pretty=format:%H -- hack/ci/misc/shoot-template-hcloud-fsn1.yaml.tmpl)
 DESIRED_PRESPAWNED_SHOOTS=2
 set +e
 ACTUAL_PRESPAWNED_SHOOTS=$(kubectl get shoots --selector=23technologies.cloud/free-to-use='true',23technologies.cloud/region=$ZONE,23technologies.cloud/shoot.yaml=$SHOOTHASH --no-headers=true | cut -d ' ' -f4 | grep -c $PROVIDER)
