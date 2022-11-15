@@ -71,18 +71,6 @@
         // https://regex101.com/r/oimJd1/1
         "(?<depName>[a-z-]+):\\s+version: (?<currentValue>[0-9.]+)"
       ]
-    },
-    {
-      "fileMatch": [
-        "^base-config/extensions-base-values.yaml$"
-      ],
-      "datasourceTemplate": "github-releases",
-      "depNameTemplate" : "gardener/external-dns-management",
-      "versioningTemplate": "semver-coerced",
-      "matchStrings": [
-         // https://regex101.com/r/yijFL3/1
-        "dns-controller-manager\\s+tag: (?<currentValue>v[0-9.]+)"
-      ]
     }
   ],
   "lockFileMaintenance": {
