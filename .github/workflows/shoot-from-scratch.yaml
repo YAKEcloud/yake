@@ -27,7 +27,7 @@ jobs:
       ZONE: ${{ github.event.inputs.zone }}
     steps:
       - name: Checkout source
-        uses: actions/checkout@v2.3.4
+        uses: actions/checkout@v3.1.0
         with:
           fetch-depth: 0
       - name: Setup Environment
