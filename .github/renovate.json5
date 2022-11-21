@@ -2,10 +2,10 @@
   "assignees": ["gesslein"],
   "baseBranches": [
     "main",
+    "release-v1.60",
+    "release-v1.59",
     "release-v1.58",
     "release-v1.18",
-    "release-v1.17",
-    "release-v1.16"
   ],
   "automerge": "true",
   "platformAutomerge": "true",
@@ -25,10 +25,26 @@
     },
     {
       "matchBaseBranches": [
-        "release-v1.58", "release-v1.18", "release-v1.17", "release-v1.16"
+        "release-v1.60", "release-v1.59", "release-v1.58", "release-v1.19"
       ],
       "matchPackagePatterns": [".*"],
       "enabled": false
+    },
+    {
+      "matchBaseBranches": [
+        "release-v1.60"
+      ],
+      "matchPackagePatterns": ["gardener-controlplane", "gardener-controlplane-application", "gardener-controlplane-runtime", "gardener-application", "gardenlet"],
+      "allowedVersions": "/^1\\.60\\..*$/",
+      "enabled": true
+    },
+    {
+      "matchBaseBranches": [
+        "release-v1.59"
+      ],
+      "matchPackagePatterns": ["gardener-controlplane", "gardener-controlplane-application", "gardener-controlplane-runtime", "gardener-application", "gardenlet"],
+      "allowedVersions": "/^1\\.59\\..*$/",
+      "enabled": true
     },
     {
       "matchBaseBranches": [
@@ -44,22 +60,6 @@
       ],
       "matchPackagePatterns": ["gardener-controlplane", "gardener-controlplane-application", "gardener-controlplane-runtime", "gardener-application", "gardenlet"],
       "allowedVersions": "/^1\\.57\\..*$/",
-      "enabled": true
-    },
-    {
-      "matchBaseBranches": [
-        "release-v1.17"
-      ],
-      "matchPackagePatterns": ["gardener-controlplane", "gardener-controlplane-application", "gardener-controlplane-runtime", "gardener-application", "gardenlet"],
-      "allowedVersions": "/^1\\.56\\..*$/",
-      "enabled": true
-    },
-    {
-      "matchBaseBranches": [
-        "release-v1.16"
-      ],
-      "matchPackagePatterns": ["gardener-controlplane", "gardener-controlplane-application", "gardener-controlplane-runtime", "gardener-application", "gardenlet"],
-      "allowedVersions": "/^1\\.55\\..*$/",
       "enabled": true
     }
   ],
