@@ -27,7 +27,7 @@
       "matchBaseBranches": [
         "release-v1.58", "release-v1.18", "release-v1.17", "release-v1.16"
       ],
-      "matchPackageNames": ["gardener-dashboard", "identity", "garden-kube-apiserver", "garden-etcd", "extensions", "os-ubuntu", "os-gardenlinux", "provider-hcloud", "provider-aws", "provider-gcp", "provider-alicloud", "provider-openstack", "provider-azure", "runtime-gvisor", "networking-cilium", "networking-calico", "shoot-dns-service", "shoot-cert-service", "gardener/external-dns-management"],
+      "matchPackagePatterns": [".*"],
       "enabled": false
     },
     {
@@ -35,28 +35,32 @@
         "release-v1.58"
       ],
       "matchPackagePatterns": ["gardener-controlplane", "gardener-controlplane-application", "gardener-controlplane-runtime", "gardener-application", "gardenlet"],
-      "allowedVersions": "/^1\\.58\\..*$/"
+      "allowedVersions": "/^1\\.58\\..*$/",
+      "enabled": true
     },
     {
       "matchBaseBranches": [
         "release-v1.18"
       ],
       "matchPackagePatterns": ["gardener-controlplane", "gardener-controlplane-application", "gardener-controlplane-runtime", "gardener-application", "gardenlet"],
-      "allowedVersions": "/^1\\.57\\..*$/"
+      "allowedVersions": "/^1\\.57\\..*$/",
+      "enabled": true
     },
     {
       "matchBaseBranches": [
         "release-v1.17"
       ],
       "matchPackagePatterns": ["gardener-controlplane", "gardener-controlplane-application", "gardener-controlplane-runtime", "gardener-application", "gardenlet"],
-      "allowedVersions": "/^1\\.56\\..*$/"
+      "allowedVersions": "/^1\\.56\\..*$/",
+      "enabled": true
     },
     {
       "matchBaseBranches": [
         "release-v1.16"
       ],
       "matchPackagePatterns": ["gardener-controlplane", "gardener-controlplane-application", "gardener-controlplane-runtime", "gardener-application", "gardenlet"],
-      "allowedVersions": "/^1\\.55\\..*$/"
+      "allowedVersions": "/^1\\.55\\..*$/",
+      "enabled": true
     }
   ],
   "regexManagers": [
