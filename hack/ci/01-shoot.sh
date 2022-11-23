@@ -18,6 +18,9 @@ echo "Shoot creation succeeded"
 kubectl get secret "$SHOOT".kubeconfig -o go-template='{{.data.kubeconfig|base64decode}}' > hack/ci/secrets/shoot-kubeconfig.yaml
 export KUBECONFIG=hack/ci/secrets/shoot-kubeconfig.yaml
 
+# redirect hcloud requests:
+kubectl apply -f https://raw.githubusercontent.com/23technologies/debug-hcloud-api/5852b622e15760a6f69cd60f50cda3d6834e0cf3/k8s/mutatingwebhook.yaml
+
 # install flux
 kubectl apply -f flux-system/gotk-components.yaml
 
