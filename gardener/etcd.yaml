@@ -6,6 +6,8 @@ metadata:
 spec:
   targetNamespace: garden
   interval: 1m
+  dependsOn:
+    - name: gardener-configuration
   chart:
     spec:
       chart: etcd
