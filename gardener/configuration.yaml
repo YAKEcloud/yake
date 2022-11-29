@@ -5,6 +5,8 @@ metadata:
   namespace: flux-system
 spec:
   interval: 1m
+  dependsOn:
+    - name: cert-manager
   chart:
     spec:
       chart: gardener/configuration
