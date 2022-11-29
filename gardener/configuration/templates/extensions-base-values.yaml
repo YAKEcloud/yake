@@ -45,7 +45,7 @@ stringData:
             serverPortHttp: 8080
 
     networking-cilium:
-      version: 1.17.0
+      version: 1.18.0
 
     provider-alicloud:
       version: 1.42.0
