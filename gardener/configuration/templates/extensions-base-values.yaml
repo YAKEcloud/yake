@@ -54,7 +54,7 @@ stringData:
       version: 1.40.2
 
     provider-gcp:
-      version: 1.26.0
+      version: 1.26.1
 
     runtime-gvisor:
       version: 0.7.0
