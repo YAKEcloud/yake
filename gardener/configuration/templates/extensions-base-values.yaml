@@ -25,7 +25,7 @@ stringData:
       admission: true
 
     networking-calico:
-      version: 1.27.0
+      version: 1.27.1
 
     shoot-cert-service:
       version: 1.26.0
