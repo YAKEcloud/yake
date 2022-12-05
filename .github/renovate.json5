@@ -8,6 +8,7 @@
     "release-v1.58",
   ],
   "automerge": "true",
+  "dependencyDashboard": true,
   "platformAutomerge": "true",
   "prHourlyLimit": 0,
   "prConcurrentLimit": 1,
