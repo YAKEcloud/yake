@@ -29,6 +29,9 @@ spec:
       retries: 3
     createNamespace: true
   values:
+    global:
+      virtualGarden:
+        enabled: true
     gardener-extension-admission-{{ $extShortName }}:
       enabled: true
       application:
@@ -64,6 +67,9 @@ spec:
       retries: 3
     createNamespace: true
   values:
+    global:
+      virtualGarden:
+        enabled: true
     gardener-extension-admission-{{ $extShortName }}:
       enabled: true
       runtime:
