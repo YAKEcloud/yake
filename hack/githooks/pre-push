@@ -1,0 +1,42 @@
+#!/usr/bin/env bash
+
+remote="$1"
+url="$2"
+
+while read local_ref local_oid remote_ref remote_oid
+do
+
+		# If not pushing a tag we are not really interested in the push
+		ref_type=$(echo $local_ref | tr "/" " " | cut -d " " -f 2 -)
+		if [ $ref_type != "tags" ]; then
+				echo "Go ahead pushing. I will only watch you pushing tags."
+				exit 0
+		fi
+
+		# If pushing a tag, make sure that the working directory is as
+		# clean as possible. This prevents the pusher from forgetting something.
+		# Moreover, it ensures that the user cannot edit the files in the working
+		# tree to fake the correct versions in Chart.yamls.
+		stat=$(git status -s -uno)
+		if [[ -n "$stat" ]]; then
+				echo "You have unstaged changes. I will not push anything."
+				exit 1
+		fi
+
+
+		# Check whether, the correct version is set in Chart.yamls, before
+		# pushing the tag.
+		tag=$(git describe --tags | cut -c2- -)
+		for file in $(find -type f -not -path './hack/*' -name Chart.yaml); do
+				chart_version=$(yq e '.version' Chart.yaml)
+				if [ $tag != $chart_version ]; then
+						echo "Version in" $file  "not correct."
+						echo "You need to align it with the current tag."
+						echo "Not pushing."
+						exit 1
+				fi
+		done
+
+done
+
+exit 0
