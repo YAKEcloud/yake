@@ -6,22 +6,29 @@ on:
       - '*'
 
 jobs:
-
   build:
-    runs-on: ubuntu-latest
-    permissions:
-      contents: write
+    runs-on: self-hosted
     steps:
       - uses: actions/checkout@v3.1.0
-      - uses: actions/setup-python@v4
-        with:
-          python-version: '3.10'
-          cache: 'pip'
-      - run: pip install -r hack/ci/release-notes/requirements.txt
-      - name: Create release notes
-        run: python hack/ci/release-notes/gen-release-notes.py
-      - uses: ncipollo/release-action@v1
-        with:
-          generateReleaseNotes: true
-          bodyFile: "body.md"
-          token: ${{ secrets.GITHUB_TOKEN }}
+      - name: Upload to release bucket
+        env:
+          MINIO_HOSTNAME: ${{ secrets.MINIOHOSTNAME }}
+          MINIO_URL: ${{ secrets.MINIOURL }}
+          MINIO_PW: ${{ secrets.MINIOPASSWORD }}
+        run: |
+          export MC_ALIAS=releases
+          export MC_HOST_$MC_ALIAS=https://minio:$MINIO_PW@$MINIO_HOSTNAME
+
+          releaseName=$(git describe --tags)
+          mc mb $MC_ALIAS/$releaseName
+
+          mc cp kustomization.yaml $MC_ALIAS/$releaseName
+          mc cp --recursive flux-system $MC_ALIAS/$releaseName
+          mc cp --recursive flux $MC_ALIAS/$releaseName
+          mc cp --recursive base-addons $MC_ALIAS/$releaseName
+          mc cp --recursive pre-gardener $MC_ALIAS/$releaseName
+          mc cp --recursive gardener $MC_ALIAS/$releaseName
+
+          for file in $(grep --exclude-dir=hack --exclude-dir=flux-system -lr GitRepository . | sed 's/^\.\///'); do
+            cat $file | sed s/GitRepository/Bucket/ | mc pipe $MC_ALIAS/$releaseName/$file
+          done
