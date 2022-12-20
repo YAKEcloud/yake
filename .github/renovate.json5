@@ -5,7 +5,7 @@
     "release-v1.61",
     "release-v1.60",
     "release-v1.59",
-    "release-v1.58",
+    "release-v1.62",
   ],
   "automerge": "true",
   "dependencyDashboard": true,
@@ -26,7 +26,7 @@
     },
     {
       "matchBaseBranches": [
-        "release-v1.61", "release-v1.60", "release-v1.59", "release-v1.58"
+        "release-v1.61", "release-v1.60", "release-v1.59", "release-v1.62"
       ],
       "matchPackagePatterns": [".*"],
       "enabled": false
@@ -57,10 +57,10 @@
     },
     {
       "matchBaseBranches": [
-        "release-v1.58"
+        "release-v1.62"
       ],
       "matchPackagePatterns": ["gardener-controlplane", "gardener-controlplane-application", "gardener-controlplane-runtime", "gardener-application", "gardenlet"],
-      "allowedVersions": "/^1\\.58\\..*$/",
+      "allowedVersions": "/^1\\.62\\..*$/",
       "enabled": true
     }
   ],
