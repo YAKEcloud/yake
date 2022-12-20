@@ -74,7 +74,3 @@ hack/ci/delete-microservice-shoot.sh
 hack/ci/delete-shoot.sh
 
 cd "$DIR_BASE"
-
-git worktree remove "$DIR_WT"
-
-trap
