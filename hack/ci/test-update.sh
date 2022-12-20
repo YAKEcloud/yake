@@ -1,5 +1,6 @@
 #!/usr/bin/env bash
 set -euo pipefail
+set -vx
 
 # todo: make configurable
 BRANCH_LOW=release-v1.61
@@ -22,7 +23,15 @@ dumpKs() {
   kubectl get kustomizations $kustomizations -n flux-system -o yaml
 }
 
-git worktree remove "$DIR_WT" || true
+function onExit() {
+  cd "$DIR_BASE"
+  git worktree remove "$DIR_WT" || true
+}
+
+trap onExit EXIT
+
+# -----------------------
+
 git worktree add "$DIR_WT" "$BRANCH_LOW"
 cp hack/ci/secrets/gardener-kubeconfig.yaml "$DIR_WT/hack/ci/secrets/gardener-kubeconfig.yaml"
 
@@ -49,19 +58,23 @@ hack/ci/02-23ke-bucket.sh
 # hack/ci/03-23ke-config-bucket.sh
 # hack/ci/04-23ke.sh
 
+source hack/ci/handy.sh
+
 flux reconcile source bucket 23ke
 # flux reconcile source bucket 23ke-config
 
 kubectl wait kustomization gardener -n flux-system --for=condition=ready=false --timeout=10m
 kubectl wait kustomization gardener -n flux-system --for=condition=ready --timeout=10m || { dumpKs; exit 1; }
 
-# hack/ci/05-secret.sh
-# hack/ci/06-microservice-shoot.sh
-# hack/ci/delete-microservice-shoot.sh
-# hack/ci/delete-shoot.sh
-
 # todo: test if microservice is still up
 
-# cd "$DIR_BASE"
+# hack/ci/05-secret.sh
+# hack/ci/06-microservice-shoot.sh
+hack/ci/delete-microservice-shoot.sh
+hack/ci/delete-shoot.sh
 
-# git worktree remove "$DIR_WT"
+cd "$DIR_BASE"
+
+git worktree remove "$DIR_WT"
+
+trap
