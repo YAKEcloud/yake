@@ -27,7 +27,7 @@ spec:
     configuration:
       extraEnvVars:
         AZURE_STORAGE_ACCOUNT_ACCESS_KEY: {{ .Values.backups.credentials.storageAccountAccessKey }}
-        AZURE_CLOUD_NAME: AzureGermanCloud
+        AZURE_CLOUD_NAME: AzurePublicCloud
         AZURE_SECRET_ID: {{ .Values.backups.credentials.clientID | b64dec }}
         AZURE_SECRET_VALUE: {{ .Values.backups.credentials.clientSecret | b64dec }}
         AZURE_SUBSCRIPTION_ID: {{ .Values.backups.credentials.subscriptionID | b64dec }}
