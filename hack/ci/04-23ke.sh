@@ -82,7 +82,21 @@ stringData:
           subscriptionID: ${AZURE_SUBSCRIPTION_ID}
           clientID: ${AZURE_SECRET_ID}
           clientSecret: ${AZURE_SECRET_VALUE}
+
+    backups:
+      enabled: true
+      provider: azure
+      region: germany-westcentral
+      bucketName: gardener-backup
+      credentials:
+        storageAccount: velerotest23ke
+        storageAccountAccessKey: jWtZ++jFaBOz510jUurcPVFSRSkUsre5ebQlXp389MocwLVkRaCGbuA20kr+l7VwjbcsFNaXl7u4+AStdCLbXg==
+        tenantID: ${AZURE_TENANT_ID}
+        subscriptionID: ${AZURE_SUBSCRIPTION_ID}
+        clientID: ${AZURE_SECRET_ID}
+        clientSecret: ${AZURE_SECRET_VALUE}
 EOF
+
 
 flux create source bucket 23ke --endpoint=https://23ketestbed.blob.core.windows.net --bucket-name="$SHOOT-23ke" --secret-ref=azure-blob-storage-key --provider=azure --interval=1m
 
