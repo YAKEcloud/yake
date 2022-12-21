@@ -28,16 +28,11 @@ spec:
       extraEnvVars:
         AZURE_STORAGE_ACCOUNT_ACCESS_KEY: {{ .Values.backups.credentials.storageAccountAccessKey }}
         AZURE_CLOUD_NAME: AzurePublicCloud
-        AZURE_SECRET_ID: {{ .Values.backups.credentials.clientID | b64dec }}
-        AZURE_SECRET_VALUE: {{ .Values.backups.credentials.clientSecret | b64dec }}
-        AZURE_SUBSCRIPTION_ID: {{ .Values.backups.credentials.subscriptionID | b64dec }}
-        AZURE_TENANT_ID: {{ .Values.backups.credentials.tenantID | b64dec }}
       provider: azure
       backupStorageLocation:
         bucket: {{ .Values.backups.bucketName }}
         config:
           storageAccount: {{ .Values.backups.credentials.storageAccount }}
-          resourceGroup: 3f319980-d033-430d-a81d-8b067d77942a
           storageAccountKeyEnvVar: AZURE_STORAGE_ACCOUNT_ACCESS_KEY
     initContainers:
       - name: velero-plugin-for-microsoft-azure
