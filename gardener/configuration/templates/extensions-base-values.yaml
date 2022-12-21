@@ -31,7 +31,7 @@ stringData:
       version: 1.26.0
 
     shoot-dns-service:
-      version: 1.28.0
+      version: 1.28.1
       values:
         dnsControllerManager:
           deploy: true
