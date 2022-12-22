@@ -26,13 +26,14 @@ spec:
       useSecret: false
     configuration:
       extraEnvVars:
-        AZURE_STORAGE_ACCOUNT_ACCESS_KEY: {{ .Values.backups.credentials.storageAccountAccessKey }}
+        AZURE_STORAGE_ACCOUNT_ACCESS_KEY: {{ .Values.backups.credentials.storageAccountAccessKey | b64dec }}
         AZURE_CLOUD_NAME: AzurePublicCloud
       provider: azure
       backupStorageLocation:
         bucket: {{ .Values.backups.bucketName }}
+        prefix: velero-backup
         config:
-          storageAccount: {{ .Values.backups.credentials.storageAccount }}
+          storageAccount: {{ .Values.backups.credentials.storageAccount | b64dec }}
           storageAccountKeyEnvVar: AZURE_STORAGE_ACCOUNT_ACCESS_KEY
     initContainers:
       - name: velero-plugin-for-microsoft-azure

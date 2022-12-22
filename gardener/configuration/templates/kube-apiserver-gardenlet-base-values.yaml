@@ -17,6 +17,14 @@ stringData:
     config:
       seedConfig:
         spec:
+{{- if .Values.backups.enabled }}
+          backup:
+            provider: {{ .Values.backups.provider }}
+            region: {{ .Values.backups.region }}
+            secretRef:
+              name: for-backups-internal-seed
+              namespace: garden
+{{- end }}
           dns:
             ingressDomain: >-
               {{- (print .Values.gardenlet.ingressDomain "." .Values.domains.global.domain) | nindent 18 }}

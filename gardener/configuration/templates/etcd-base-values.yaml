@@ -12,8 +12,8 @@ stringData:
         backup:
           storageProvider: ABS
           secretData:
-            storage-account: {{ .Values.backups.credentials.storageAccount | b64enc }}
-            storage-key: {{ .Values.backups.credentials.storageAccountAccessKey | b64enc }}
+            storage-account: {{ .Values.backups.credentials.storageAccount }}
+            storage-key: {{ .Values.backups.credentials.storageAccountAccessKey }}
           storageContainer: {{ .Values.backups.bucketName }}
           env:
             - name: "STORAGE_ACCOUNT"
