@@ -44,10 +44,11 @@ spec:
 
 {{- else if eq .Values.backups.provider "aws" }}
     credentials:
+      useSecret: false
+    configuration:
       extraEnvVars:
         AWS_ACCESS_KEY_ID: {{ .Values.backups.credentials.accessKeyID }}
         AWS_SECRET_ACCESS_KEY: {{ .Values.backups.credentials.secretAccessKey }}
-    configuration:
       provider: aws
       backupStorageLocation:
         bucket: {{ .Values.backups.bucketName }}
@@ -63,6 +64,8 @@ spec:
 
 {{- else if eq .Values.backups.provider "openstack" }}
     credentials:
+      useSecret: false
+    configuration:
       extraEnvVars:
         OS_AUTH_URL: {{ .Values.backups.credentials.authURL }}
         OS_PASSWORD: {{ .Values.backups.credentials.password }}
@@ -70,7 +73,6 @@ spec:
         OS_PROJECT_NAME: {{ .Values.backups.credentials.tenantName }}
         OS_REGION_NAME: {{ .Values.backups.credentials.region }}
         OS_DOMAIN_NAME: {{ .Values.backups.credentials.domainName }}
-    configuration:
       provider: community.openstack.org/openstack
       backupStorageLocation:
         bucket: {{ .Values.backups.bucketName }}
