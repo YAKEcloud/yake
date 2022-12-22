@@ -56,6 +56,10 @@ if [[ $(grep "$branch" .github/renovate.json5 | wc -l) == "0" ]]; then
     s;_MAJOR_;$maj;g
     s;_MINOR_;$min;g
   }" .github/renovate.json5
+
+  git add .github/renovate.json5
+  git commit -m "track $tag"
+  git push
 fi
 
 if [[ -e ".git/refs/remotes/origin/$branch" ]]; then
