@@ -2,4 +2,4 @@ apiVersion: v2
 dependencies:
 description: A Helm chart to deploy the terminal controller manager runtime related resources
 name: terminal-controller-manager-runtime
-version: 0.0.1
+version: 1.62.0-0
