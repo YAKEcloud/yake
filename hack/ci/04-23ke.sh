@@ -84,13 +84,13 @@ stringData:
           clientSecret: ${AZURE_SECRET_VALUE}
 
     backups:
-      enabled: true
+      enabled: false
       provider: azure
-      region: germany-westcentral
+      region: germanywestcentral
       bucketName: gardener-backup
       credentials:
-        storageAccount: velerotest23ke
-        storageAccountAccessKey: jWtZ++jFaBOz510jUurcPVFSRSkUsre5ebQlXp389MocwLVkRaCGbuA20kr+l7VwjbcsFNaXl7u4+AStdCLbXg==
+        storageAccount: <base64encoded storageAccountName>
+        storageAccountAccessKey: <base64encoded storageAccountAccessKey>
         tenantID: ${AZURE_TENANT_ID}
         subscriptionID: ${AZURE_SUBSCRIPTION_ID}
         clientID: ${AZURE_SECRET_ID}
