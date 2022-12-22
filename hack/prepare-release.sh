@@ -44,9 +44,17 @@ if [[ ! -f "$releaseNotes" ]]; then
 fi
 
 if [[ $(grep "$branch" .github/renovate.json5 | wc -l) == "0" ]]; then
-  # todo: update renovate.json5 automatically
+  echo Updating .github/renovate.json5
 
-  _fail "It seems you haven't set up .github/renovate.json5 to track the new version's release branch ($branch). Please do so."
+  maj=$(echo "$minor" | grep -oE "^[0-9]{1,}")
+  min=$(echo "$minor" | grep -oE "[0-9]{1,}$")
+
+  sed "/\/\/ template/ {
+    p
+    s;// template\s*;;
+    s;major;$maj;g
+    s;minor;$min;g
+  }" .github/renovate.json5
 fi
 
 if [[ -e ".git/refs/remotes/origin/$branch" ]]; then
@@ -68,3 +76,4 @@ git commit -m "$tag"
 git tag "$tag"
 git push -u origin "$branch"
 git push -u origin "$tag"
+
