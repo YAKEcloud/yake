@@ -52,8 +52,9 @@ if [[ $(grep "$branch" .github/renovate.json5 | wc -l) == "0" ]]; then
   sed "/\/\/ template/ {
     p
     s;// template\s*;;
-    s;major;$maj;g
-    s;minor;$min;g
+    s;_BRANCH_;$branch;g
+    s;_MAJOR_;$maj;g
+    s;_MINOR_;$min;g
   }" .github/renovate.json5
 fi
 

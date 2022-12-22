@@ -2,7 +2,7 @@
   "assignees": ["gesslein"],
   "baseBranches": [
     "main",
-    // template "release-vmajor.minor",
+    // template "_BRANCH_",
     "release-v1.62",
     "release-v1.61",
     "release-v1.60",
@@ -27,7 +27,7 @@
     },
     {
       "matchBaseBranches": [
-        // template "release-vmajor.minor",
+        // template "_BRANCH_",
         "release-v1.62",
         "release-v1.61",
         "release-v1.60",
@@ -36,7 +36,7 @@
       "matchPackagePatterns": [".*"],
       "enabled": false
     },
-    // template {"matchBaseBranches":["release-vmajor.minor"],"allowedVersions":"/^major[.]minor[.].*$/","matchPackagePatterns": ["gardener-controlplane", "gardener-controlplane-application", "gardener-controlplane-runtime", "gardener-application", "gardenlet"],"enabled": true },
+    // template {"matchBaseBranches":["_BRANCH_"],"allowedVersions":"/^_MAJOR_[.]_MINOR_[.].*$/","matchPackagePatterns": ["gardener-controlplane", "gardener-controlplane-application", "gardener-controlplane-runtime", "gardener-application", "gardenlet"],"enabled": true },
     {
       "matchBaseBranches": [
         "release-v1.60"
