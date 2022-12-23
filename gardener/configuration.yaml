@@ -10,6 +10,7 @@ spec:
   chart:
     spec:
       chart: gardener/configuration
+      reconcileStrategy: Revision
       sourceRef:
         kind: GitRepository
         name: 23ke
