@@ -1,34 +1,63 @@
-name: Releases
-
+name: Release
 on:
-  push:
-    tags:
-      - '*'
+  workflow_dispatch:
+    inputs:
+      version:
+        description: 'New version to be released. Format: 1.3.3-7'
+        required: true
+        type: string
 
 jobs:
-  build:
+  prepare:
     runs-on: self-hosted
+    name: Prepare
+    env:
+      version: ${{ github.event.inputs.version }}
     steps:
-      - uses: actions/checkout@v3.1.0
+      - name: Checkout source
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+      - name: Configure git
+        run: |
+          git config user.name "${GITHUB_ACTOR}"
+          git config user.email "${GITHUB_ACTOR}@users.noreply.github.com"
+      - name: Prepare release
+        run: hack/prepare-release.sh "${{ env.version }}"
+
+  upload:
+    runs-on: self-hosted
+    name: Upload
+    needs:
+      - prepare
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          ref: "v${{ github.event.inputs.version }}"
+      - name: Install MC
+        run: |
+          mkdir -p ~/.local/bin
+          wget https://dl.minio.io/client/mc/release/linux-amd64/mc -O ~/.local/bin/mc
+          chmod +x ~/.local/bin/mc
       - name: Upload to release bucket
         env:
           MINIO_HOSTNAME: ${{ secrets.MINIOHOSTNAME }}
           MINIO_URL: ${{ secrets.MINIOURL }}
           MINIO_PW: ${{ secrets.MINIOPASSWORD }}
+          MC_ALIAS: releases
+          tag: v${{ github.event.inputs.version }}
         run: |
-          export MC_ALIAS=releases
           export MC_HOST_$MC_ALIAS=https://minio:$MINIO_PW@$MINIO_HOSTNAME
 
-          releaseName=$(git describe --tags)
-          mc mb $MC_ALIAS/$releaseName
+          mc mb "$MC_ALIAS/$tag"
 
-          mc cp kustomization.yaml $MC_ALIAS/$releaseName
-          mc cp --recursive flux-system $MC_ALIAS/$releaseName
-          mc cp --recursive flux $MC_ALIAS/$releaseName
-          mc cp --recursive base-addons $MC_ALIAS/$releaseName
-          mc cp --recursive pre-gardener $MC_ALIAS/$releaseName
-          mc cp --recursive gardener $MC_ALIAS/$releaseName
+          mc cp kustomization.yaml "$MC_ALIAS/$tag"
+          mc cp --recursive flux-system "$MC_ALIAS/$tag"
+          mc cp --recursive flux "$MC_ALIAS/$tag"
+          mc cp --recursive base-addons "$MC_ALIAS/$tag"
+          mc cp --recursive pre-gardener "$MC_ALIAS/$tag"
+          mc cp --recursive gardener "$MC_ALIAS/$tag"
 
-          for file in $(grep --exclude-dir=hack --exclude-dir=flux-system -lr GitRepository . | sed 's/^\.\///'); do
-            cat $file | sed s/GitRepository/Bucket/ | mc pipe $MC_ALIAS/$releaseName/$file
+          for file i  n $(grep --exclude-dir=hack --exclude-dir=flux-system -lr GitRepository . | sed 's/^\.\///'); do
+                      cat $file | sed s/GitRepository/Bucket/ | mc pipe "$MC_ALIAS/$tag/$file"
           done
