@@ -14,6 +14,7 @@ spec:
   chart:
     spec:
       chart: config/charts/terminal-controller-manager/application
+      reconcileStrategy: Revision
       sourceRef:
         kind: Bucket
         name: 23ke-config

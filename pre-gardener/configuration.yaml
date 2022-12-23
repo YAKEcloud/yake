@@ -8,6 +8,7 @@ spec:
   chart:
     spec:
       chart: pre-gardener/configuration
+      reconcileStrategy: Revision
       sourceRef:
         kind: GitRepository
         name: 23ke
