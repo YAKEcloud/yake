@@ -14,20 +14,23 @@ rclone -q sync gardener $REMOTE:$BUCKET/gardener
 
 # we now upload packet versions which use a bucket instead of the GitRepository
 for file in $(grep --exclude-dir=hack --exclude-dir=flux-system -lr GitRepository . | sed 's/^\.\///'); do
-    cat $file | sed s/GitRepository/Bucket/ | rclone -q rcat $REMOTE:$BUCKET/$file 
+    cat $file | sed s/GitRepository/Bucket/ | rclone -q rcat $REMOTE:$BUCKET/$file
 done
 
-# In case you want to use a local version of the 23ke-charts, you can clone the 23ke-charts repository
-# to the folder "23ke-charts-dev", this script will detect the folder and use the local
-# version instead. that way you can quickly alter the charts to use a development image or
-# anything else youd like to change quickly.
-if [[ -d 23ke-charts-dev ]]
-then
-    echo "Using local charts-folder  ./23ke-charts-dev"
-    for file in $(grep -lr gardener-community-charts gardener); do
-            cat $file | yq eval '.spec.chart.spec |= (.chart = "./23ke-charts-dev/" + .chart | del .version) |= .sourceRef |= (.kind = "Bucket" | .name  = "23ke" )' - | rclone -q rcat $REMOTE:$BUCKET/$file
-    done
-    rclone sync 23ke-charts-dev/charts/ $REMOTE:$BUCKET/23ke-charts-dev/
+# In case you need to modify and test a chart, you can copy/symlink the required charts
+# to the folder "23ke-charts-dev". Each subfolder needs to be named like the chart in
+# the repository, f.e. "gardener-kube-apiserver" and in that directly contain the chart
+# (values.yaml, Chart.yaml, templates folder etc).
+# This script will detect the folder and use the local version instead, which you can
+# quickly modify and re-upload with this script.
+if [[ -d ./23ke-charts-dev ]]; then
+  for dir in ./23ke-charts-dev/*/; do
+      echo "Using local charts-folder $dir"
+      for file in $(grep -lr "chart: $(basename $dir)" gardener); do
+              cat $file | yq eval '.spec.chart.spec |= (.chart = "./23ke-charts-dev/" + .chart | del .version) |= .sourceRef |= (.kind = "Bucket" | .name  = "23ke" )' - | rclone -q rcat $REMOTE:$BUCKET/$file
+      done
+      rclone -q sync -L 23ke-charts-dev/ $REMOTE:$BUCKET/23ke-charts-dev/
+  done
 fi
 
 echo "23KE Bucket ready ✅"
