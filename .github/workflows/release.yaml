@@ -58,6 +58,6 @@ jobs:
           mc cp --recursive pre-gardener "$MC_ALIAS/$tag"
           mc cp --recursive gardener "$MC_ALIAS/$tag"
 
-          for file i  n $(grep --exclude-dir=hack --exclude-dir=flux-system -lr GitRepository . | sed 's/^\.\///'); do
-                      cat $file | sed s/GitRepository/Bucket/ | mc pipe "$MC_ALIAS/$tag/$file"
+          for file in $(grep --exclude-dir=hack --exclude-dir=flux-system -lr GitRepository . | sed 's/^\.\///'); do
+            cat $file | sed s/GitRepository/Bucket/ | mc pipe "$MC_ALIAS/$tag/$file"
           done
