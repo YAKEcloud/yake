@@ -4,4 +4,4 @@ description: A Helm chart for the gardener configuration files
 
 type: application
 
-version: 1.62.0-0
+version: 1.62.0-1
