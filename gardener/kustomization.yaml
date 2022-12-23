@@ -5,6 +5,7 @@ resources:
   - configuration.yaml
   - dashboard.yaml
   - etcd.yaml
+  - etcd-events.yaml
   - extensions.yaml
   - gardener.yaml
   - gardenlet.yaml
