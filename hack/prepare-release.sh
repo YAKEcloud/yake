@@ -69,16 +69,8 @@ else
   git switch -c "$branch"
 fi
 
-echo "Updating chart versions to $version"
-while read -r chart; do
-  echo "$chart"
-  sed -i -r -e "s;^version:.+$;version: $version;" "$chart"
-done <<< "$(find . -name Chart.yaml)"
-echo "Done"
-
 git add .
 git commit -m "$tag"
 git tag "$tag"
 git push -u origin "$branch"
 git push -u origin "$tag"
-
