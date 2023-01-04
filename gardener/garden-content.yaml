@@ -1,0 +1,24 @@
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: garden-content
+  namespace: flux-system
+spec:
+  interval: 1m
+  kubeConfig:
+    secretRef:
+      name: gardener-internal-kubeconfig
+  dependsOn:
+    - name: kube-apiserver
+  chart:
+    spec:
+      chart: gardener/helmcharts/garden-content-chart
+      sourceRef:
+        kind: GitRepository
+        name: 23ke
+        namespace: flux-system
+      interval: 1m
+  valuesFrom:
+    - kind: Secret
+      name: 23ke-config
+      optional: false

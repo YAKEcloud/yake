@@ -1,0 +1,7 @@
+apiVersion: v2
+name: extensions
+description: A Helm chart for the velero backups
+
+type: application
+
+version: 0.0.15

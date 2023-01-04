@@ -19,6 +19,9 @@ spec:
       interval: 1m
   valuesFrom:
     - kind: Secret
+      name: etcd-base-values
+      optional: true
+    - kind: Secret
       name: etcd-values
       optional: true
     # All of below maps cert-manager secrets to the expected helm values
