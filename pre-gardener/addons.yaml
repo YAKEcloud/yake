@@ -15,4 +15,7 @@ spec:
       interval: 1m
   valuesFrom:
     - kind: Secret
-      name: 23ke-config
+      name: addons-base-values
+    - kind: Secret
+      name: addons-values
+      optional: true

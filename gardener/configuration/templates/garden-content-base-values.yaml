@@ -1,0 +1,11 @@
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: garden-content-base-values
+  namespace: flux-system
+type: Opaque
+stringData:
+  values.yaml: |-
+    backups:
+      {{- toYaml .Values.backups | nindent 6 }}
