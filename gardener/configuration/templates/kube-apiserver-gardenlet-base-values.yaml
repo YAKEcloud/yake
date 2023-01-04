@@ -64,7 +64,7 @@ stringData:
       main:
         endpoints: https://etcd:2379
       events:
-        endpoints: https://etcd:2379
+        endpoints: https://etcd-events:2379
       secretNames:
         ca: etcd-ca
         client: etcd-client

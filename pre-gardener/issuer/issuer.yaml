@@ -11,6 +11,7 @@ spec:
   chart:
     spec:
       chart: pre-gardener/issuer/chart
+      reconcileStrategy: Revision
       sourceRef:
         kind: GitRepository
         name: 23ke

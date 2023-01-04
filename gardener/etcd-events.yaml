@@ -1,7 +1,7 @@
 apiVersion: helm.toolkit.fluxcd.io/v2beta1
 kind: HelmRelease
 metadata:
-  name: etcd
+  name: etcd-events
   namespace: flux-system
 spec:
   targetNamespace: garden
@@ -17,12 +17,11 @@ spec:
         name: gardener-community-charts
         namespace: flux-system
       interval: 1m
+  values:
+    name: etcd-events
   valuesFrom:
     - kind: Secret
-      name: etcd-base-values
-      optional: true
-    - kind: Secret
-      name: etcd-values
+      name: etcd-events-values
       optional: true
     # All of below maps cert-manager secrets to the expected helm values
     - kind: Secret
@@ -34,11 +33,11 @@ spec:
       valuesKey: tls.key
       targetPath: tls.ca.key
     - kind: Secret
-      name: etcd-tls
+      name: etcd-events-tls
       valuesKey: tls.crt
       targetPath: tls.server.crt
     - kind: Secret
-      name: etcd-tls
+      name: etcd-events-tls
       valuesKey: tls.key
       targetPath: tls.server.key
     - kind: Secret
@@ -55,7 +54,7 @@ spec:
           - kind: StatefulSet
             apiVersion: apps/v1
             metadata:
-              name: etcd
+              name: etcd-events
               namespace: garden
             spec:
               template:
