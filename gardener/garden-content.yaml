@@ -20,5 +20,5 @@ spec:
       interval: 1m
   valuesFrom:
     - kind: Secret
-      name: 23ke-config
+      name: garden-content-base-values
       optional: false
