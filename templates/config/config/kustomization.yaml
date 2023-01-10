@@ -1,0 +1,11 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+resources:
+  - cloudprofiles-values.yaml
+  - dashboard-values.yaml
+  - extensions-values.yaml
+  - gardener-values.yaml
+  - gardenlet-values.yaml
+#  - hr-terminal-controller-application.yaml
+#  - hr-terminal-controller-runtime.yaml
+  - identity-values.yaml
