@@ -65,15 +65,15 @@ spec:
     - kind: Secret
       name: gardener-admission-controller-tls
       valuesKey: ca.crt
-      targetPath: global.admission.config.server.webhooks.tls.caBundle
+      targetPath: global.admission.config.server.https.tls.caBundle
     - kind: Secret
       name: gardener-admission-controller-tls
       valuesKey: tls.crt
-      targetPath: global.admission.config.server.webhooks.tls.crt
+      targetPath: global.admission.config.server.https.tls.crt
     - kind: Secret
       name: gardener-admission-controller-tls
-      valuesKey: tls.crt
-      targetPath: global.admission.config.server.webhooks.tls.crt
+      valuesKey: tls.key
+      targetPath: global.admission.config.server.https.tls.key
     - kind: Secret
       name: gardener-internal-kubeconfig
       valuesKey: value
