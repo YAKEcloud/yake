@@ -57,4 +57,4 @@ stringData:
       version: 1.26.1
 
     runtime-gvisor:
-      version: 0.7.0
+      version: 0.8.0
