@@ -18,3 +18,4 @@ ignore: |
   pre-gardener/addons/templates/
   flux-system/gotk-components.yaml
   .github/workflows/
+  templates/
