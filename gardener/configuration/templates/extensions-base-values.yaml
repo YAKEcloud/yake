@@ -14,7 +14,7 @@ stringData:
       version: 0.15.0
 
     provider-hcloud:
-      version: 0.6.4
+      version: 0.6.5
 
     provider-azure:
       version: 1.32.0
