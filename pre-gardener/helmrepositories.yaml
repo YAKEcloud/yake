@@ -6,3 +6,12 @@ metadata:
 spec:
   interval: 5m
   url: https://gardener-community.github.io/gardener-charts
+---
+apiVersion: source.toolkit.fluxcd.io/v1beta2
+kind: HelmRepository
+metadata:
+  name: vmware-tanzu-charts
+  namespace: flux-system
+spec:
+  interval: 5m
+  url: https://vmware-tanzu.github.io/helm-charts

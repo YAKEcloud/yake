@@ -11,6 +11,7 @@ spec:
   chart:
     spec:
       chart: gardener/helmcharts/extensions-meta-chart
+      reconcileStrategy: Revision
       sourceRef:
         kind: GitRepository
         name: 23ke

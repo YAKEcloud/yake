@@ -5,9 +5,11 @@ resources:
   - configuration.yaml
   - dashboard.yaml
   - etcd.yaml
+  - etcd-events.yaml
   - extensions.yaml
   - gardener.yaml
   - gardenlet.yaml
+  - garden-content.yaml
   - identity.yaml
   - kube-apiserver.yaml
   - pre-gardenlet.yaml

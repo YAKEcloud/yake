@@ -2,7 +2,10 @@ repos:
   - repo: https://github.com/pre-commit/pre-commit-hooks
     rev: v3.3.0
     hooks:
-      - id: check-yaml
-        args: [--allow-multiple-documents]
       - id: trailing-whitespace
       - id: no-commit-to-branch
+  - repo: https://github.com/adrienverge/yamllint.git
+    rev: v1.28.0
+    hooks:
+      - id: yamllint
+        args: [-c=.yamllint.yml]

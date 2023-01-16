@@ -1,0 +1,7 @@
+apiVersion: v2
+name: extensions
+description: A Helm chart for addons to install with the pre-gardener ks
+
+type: application
+
+version: 0.0.1

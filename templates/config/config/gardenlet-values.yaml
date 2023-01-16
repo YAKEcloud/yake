@@ -1,0 +1,28 @@
+apiVersion: v1
+kind: Secret
+metadata:
+  name: gardenlet-values
+  namespace: flux-system
+type: Opaque
+stringData:
+  values.yaml: |-
+    config:
+      seedConfig:
+        metadata:
+          name: initial-seed 
+        spec:
+          networks:
+            nodes: {{ .Gardenlet.SeedNodeCidr }}
+            pods: {{ .Gardenlet.SeedPodCidr }}
+            services: {{ .Gardenlet.SeedServiceCidr }}
+            shootDefaults:
+              pods: 100.100.0.0/16
+              services: 100.101.0.0/16
+          provider:
+            region: {{ .BaseCluster.Region }}
+            type: {{ .BaseCluster.Provider }}
+          settings:
+            excessCapacityReservation:
+              enabled: false
+            verticalPodAutoscaler:
+              enabled: {{ not .BaseCluster.HasVerticalPodAutoscaler }} 

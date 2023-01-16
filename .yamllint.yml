@@ -15,4 +15,7 @@ ignore: |
   pre-gardener/issuer/chart
   gardener/configuration/templates/
   pre-gardener/configuration/templates/
+  pre-gardener/addons/templates/
   flux-system/gotk-components.yaml
+  .github/workflows/
+  templates/

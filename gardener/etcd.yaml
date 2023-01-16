@@ -11,13 +11,16 @@ spec:
   chart:
     spec:
       chart: etcd
-      version: 4.0.0
+      version: 5.0.1
       sourceRef:
         kind: HelmRepository
         name: gardener-community-charts
         namespace: flux-system
       interval: 1m
   valuesFrom:
+    - kind: Secret
+      name: etcd-base-values
+      optional: true
     - kind: Secret
       name: etcd-values
       optional: true

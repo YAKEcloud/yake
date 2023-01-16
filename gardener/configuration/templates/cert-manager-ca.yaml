@@ -50,6 +50,24 @@ spec:
 apiVersion: cert-manager.io/v1
 kind: Certificate
 metadata:
+  name: etcd-events
+  namespace: flux-system
+spec:
+  secretName: etcd-events-tls
+  duration: 87600h  # 10y
+  usages:
+    - server auth
+  dnsNames:
+    - etcd-events
+    - etcd-events-0
+    - etcd-events.garden
+    - etcd-events.garden.svc
+  issuerRef:
+    name: gardener-ca
+---
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
   name: etcd-client
   namespace: flux-system
 spec:

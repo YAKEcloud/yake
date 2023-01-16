@@ -17,6 +17,14 @@ stringData:
     config:
       seedConfig:
         spec:
+{{- if .Values.backups.enabled }}
+          backup:
+            provider: {{ .Values.backups.provider }}
+            region: {{ .Values.backups.region }}
+            secretRef:
+              name: for-backups-internal-seed
+              namespace: garden
+{{- end }}
           dns:
             ingressDomain: >-
               {{- (print .Values.gardenlet.ingressDomain "." .Values.domains.global.domain) | nindent 18 }}
@@ -56,7 +64,7 @@ stringData:
       main:
         endpoints: https://etcd:2379
       events:
-        endpoints: https://etcd:2379
+        endpoints: https://etcd-events:2379
       secretNames:
         ca: etcd-ca
         client: etcd-client
