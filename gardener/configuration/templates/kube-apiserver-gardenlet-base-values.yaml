@@ -29,7 +29,7 @@ stringData:
             ingressDomain: >-
               {{- (print .Values.gardenlet.ingressDomain "." .Values.domains.global.domain) | nindent 18 }}
       gardenClientConnection:
-        gardenClusterAddress: https://{{ .Values.kube-apiserver.ingressDomain }}.{{ .Values.domains.global.domain }}:443
+        gardenClusterAddress: https://{{ .Values.kubeApiServer.ingressDomain }}.{{ .Values.domains.global.domain }}:443
         bootstrapKubeconfig:
           secretRef:
             name: gardenlet-kubeconfig-bootstrap
@@ -52,7 +52,7 @@ stringData:
     serviceName: garden-kube-apiserver
     replicas: 2
     apiServer:
-      hostname: {{ .Values.kube-apiserver.ingressDomain }}.{{ .Values.domains.global.domain }}
+      hostname: {{ .Values.kubeApiServer.ingressDomain }}.{{ .Values.domains.global.domain }}
       serviceName: garden-kube-apiserver
       oidcIssuerURL: https://{{ .Values.identity.ingressDomain }}.{{ .Values.domains.global.domain }}/oidc
     ingress:

@@ -9,7 +9,7 @@ stringData:
     global:
       virtualGarden:
         enabled: true
-      apiServerUrl: https://{{ .Values.kube-apiserver.ingressDomain }}.{{ .Values.domains.global.domain }}/
+      apiServerUrl: https://{{ .Values.kubeApiServer.ingressDomain }}.{{ .Values.domains.global.domain }}/
       sessionSecret: {{ .Values.dashboard.sessionSecret }}
       ingress:
         hosts:
