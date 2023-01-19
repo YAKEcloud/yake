@@ -1,3 +1,9 @@
 clusterIdentity: garden-cluster-identity
 gardenlet:
   ingressDomain: internal
+kube-apiserver:
+  ingressDomain: api
+identity:
+  ingressDomain: identity
+dashboard:
+  ingressDomain: dashboard

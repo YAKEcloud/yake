@@ -95,7 +95,7 @@ spec:
     - garden-kube-apiserver
     - garden-kube-apiserver.garden
     - garden-kube-apiserver.garden.svc
-    - api.{{ .Values.domains.global.domain }}
+    - {{ .Values.kube-apiserver.ingressDomain }}.{{ .Values.domains.global.domain }}
   issuerRef:
     name: gardener-ca
 ---
