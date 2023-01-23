@@ -17,7 +17,7 @@ stringData:
       version: 0.6.5
 
     provider-azure:
-      version: 1.32.0
+      version: 1.33.0
       admission: true
 
     provider-openstack:
