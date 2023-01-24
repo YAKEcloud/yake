@@ -9,11 +9,11 @@ stringData:
     global:
       virtualGarden:
         enabled: true
-      apiServerUrl: https://{{ .Values.kubeApiServer.ingressDomain }}.{{ .Values.domains.global.domain }}/
+      apiServerUrl: https://{{ include "api.domain" . }}/
       sessionSecret: {{ .Values.dashboard.sessionSecret }}
       ingress:
         hosts:
-        - {{ .Values.dashboard.ingressDomain }}.{{ .Values.domains.global.domain }}
+        - {{ include "dashboard.domain" . }}
         annotations:
           kubernetes.io/ingress.class: nginx
           cert.gardener.cloud/purpose: managed
@@ -22,14 +22,14 @@ stringData:
           dns.gardener.cloud/ttl: "600"
           dns.gardener.cloud/class: base-dns-class
       oidc:
-        issuerUrl: https://{{ .Values.identity.ingressDomain }}.{{ .Values.domains.global.domain }}/oidc
+        issuerUrl: https://{{ include "identity.domain" . }}/oidc
         # clientId is the public identifier of the gardener-dashboard aplication
         clientId: dashboard
         # clientSecret is the private secret of the gardener-dashboard aplication
         clientSecret: {{ .Values.dashboard.clientSecret }}
         # redirectUri is the endpoint receiving the OTAC from the OpenID provider
         # after successful login
-        redirectUri: https://{{ .Values.dashboard.ingressDomain }}.{{ .Values.domains.global.domain }}/auth/callback
+        redirectUri: https://{{ include "dashboard.domain" . }}/auth/callback
   {{- if (((.Values).issuer).ca) }}
         ca: |
           {{- .Values.issuer.ca | nindent 10 }}
