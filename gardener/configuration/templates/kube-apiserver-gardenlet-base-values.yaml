@@ -18,10 +18,9 @@ stringData:
       seedConfig:
         spec:
           dns:
-            ingressDomain: >-
-              {{- (print .Values.gardenlet.ingressDomain "." .Values.domains.global.domain) | nindent 18 }}
+            ingressDomain: {{ include "gardenlet.ingressDomain" . }}
       gardenClientConnection:
-        gardenClusterAddress: https://api.{{ .Values.domains.global.domain }}:443
+        gardenClusterAddress: https://{{ include "api.domain" . }}:443
         bootstrapKubeconfig:
           secretRef:
             name: gardenlet-kubeconfig-bootstrap
@@ -44,9 +43,9 @@ stringData:
     serviceName: garden-kube-apiserver
     replicas: 2
     apiServer:
-      hostname: api.{{ .Values.domains.global.domain }}
+      hostname: {{ include "api.domain" . }}
       serviceName: garden-kube-apiserver
-      oidcIssuerURL: https://identity.{{ .Values.domains.global.domain }}/oidc
+      oidcIssuerURL: https://{{ include "identity.domain" . }}/oidc
     ingress:
       annotations:
         dns.gardener.cloud/dnsnames: "*"

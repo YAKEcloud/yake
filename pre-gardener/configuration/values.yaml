@@ -2,6 +2,10 @@ clusterIdentity: garden-cluster-identity
 gardenlet:
   ingressDomain: internal
 
+domains:
+  global:
+    domain: "example.org"
+
 issuer:
   acme:
     server: https://acme-v02.api.letsencrypt.org/directory

@@ -7,10 +7,9 @@ type: Opaque
 stringData:
   values.yaml: |-
     connectors: ~
-    issuerUrl: https://identity.{{ .Values.domains.global.domain }}/oidc
+    issuerUrl: https://{{ include "identity.domain" . }}/oidc
     dashboardOrigins:
-      - 'https://dashboard.{{ .Values.domains.global.domain }}'
-      - 'http://localhost:8000'
+      - 'https://{{ include "dashboard.domain" . }}'
     dashboardClientSecret: {{ .Values.dashboard.clientSecret }}
     tls: ~
     ingress:

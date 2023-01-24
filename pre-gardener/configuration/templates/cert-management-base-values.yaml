@@ -11,8 +11,7 @@ stringData:
       certificates: false
     configuration:
       defaultIssuer: default-issuer
-      defaultIssuerDomainRanges: >-
-        {{- .Values.domains.global.domain | nindent 8 }}
+      defaultIssuerDomainRanges: {{ .Values.domains.global.domain }}
       certClass: base-cert-class
       issuerNamespace: garden
       dnsClass: base-dns-class
