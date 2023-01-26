@@ -21,7 +21,7 @@ stringData:
       admission: true
 
     provider-openstack:
-      version: 1.30.3
+      version: 1.31.0
       admission: true
 
     networking-calico:
