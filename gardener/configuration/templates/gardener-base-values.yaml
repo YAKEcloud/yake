@@ -12,16 +12,8 @@ stringData:
       deployment:
         virtualGarden:
           enabled: true
-      defaultDomains:
-        - domain: {{ .Values.domains.global.domain }}
-          provider: {{ .Values.domains.global.provider }}
-          credentials:
-            {{- toYaml .Values.domains.global.credentials | nindent 12 }}
-      internalDomain:
-        domain: internal.{{ .Values.domains.global.domain }}
-        provider: {{ .Values.domains.global.provider }}
-        credentials:
-          {{- toYaml .Values.domains.global.credentials | nindent 10 }}
+      defaultDomains: {{ include "gardener.defaultDomains" . | indent 8 }}
+      internalDomain: {{ include "gardener.internalDomain" . | indent 8 }}
       apiserver:
         replicaCount: 2
         vpa: true
