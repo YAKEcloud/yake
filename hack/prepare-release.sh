@@ -70,7 +70,7 @@ else
 fi
 
 git add .
-git commit -m "$tag"
+git commit --allow-empty -m "$tag"
 git tag "$tag"
 git push -u origin "$branch"
 git push -u origin "$tag"
