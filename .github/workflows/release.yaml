@@ -57,8 +57,7 @@ jobs:
           mc cp --recursive base-addons "$MC_ALIAS/$tag"
           mc cp --recursive pre-gardener "$MC_ALIAS/$tag"
           mc cp --recursive gardener "$MC_ALIAS/$tag"
-          mc cp --recursive templates "$MC_ALIAS/$tag"
 
-          for file in $(grep --exclude-dir=hack --exclude-dir=flux-system --exclude-dir=templates -lr GitRepository . | sed 's/^\.\///'); do
+          for file in $(grep --exclude-dir=hack --exclude-dir=flux-system -lr GitRepository . | sed 's/^\.\///'); do
             cat $file | sed s/GitRepository/Bucket/ | mc pipe "$MC_ALIAS/$tag/$file"
           done
