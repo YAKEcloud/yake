@@ -8,6 +8,7 @@ spec:
   interval: 1m
   dependsOn:
     - name: pre-gardener-configuration
+    - name: addons
   chart:
     spec:
       chart: cert-manager
