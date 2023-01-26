@@ -1,3 +1,10 @@
 clusterIdentity: garden-cluster-identity
 gardenlet:
   ingressDomain: internal
+
+domains:
+  global:
+    domain: "example.org"
+
+backups:
+  enabled: false
