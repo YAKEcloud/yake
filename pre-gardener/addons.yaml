@@ -4,6 +4,8 @@ metadata:
   name: addons
   namespace: flux-system
 spec:
+  dependsOn:
+    - name: pre-gardener-configuration
   interval: 1m
   chart:
     spec:

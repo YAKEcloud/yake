@@ -6,16 +6,14 @@ rules:
   document-start: disable
 
 ignore: |
+  .github/workflows/
+  flux-system/gotk-components.yaml
+  gardener/configuration/templates/
+  gardener/helmcharts
   hack/ci/secrets/
   hack/ci/misc/microservices-demo.yaml
   hack/ci/dev-env/config/charts
-  gardener/helmcharts
-  base-addons/vertical-pod-autoscaler
-  pre-gardener/dnsprovider/chart
-  pre-gardener/issuer/chart
-  gardener/configuration/templates/
-  pre-gardener/configuration/templates/
   pre-gardener/addons/templates/
-  flux-system/gotk-components.yaml
-  .github/workflows/
-  templates/
+  pre-gardener/configuration/templates/
+  pre-gardener/dnsprovider/templates
+  pre-gardener/issuer/templates/
