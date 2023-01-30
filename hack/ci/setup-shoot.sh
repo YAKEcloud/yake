@@ -17,8 +17,8 @@ progress_step
 bash hack/ci/02-23ke-bucket.sh || exit 1
 progress_step
 
-# 23KE Config-Bucket
-bash hack/ci/03-23ke-config-bucket.sh || exit 1
+# 23KE Config and Backup Bucket
+bash hack/ci/03-config-and-backup-bucket.sh || exit 1
 progress_step
 
 # Install 23KE
