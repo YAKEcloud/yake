@@ -1,19 +1,23 @@
-package installv1_test
+package install_test
 
 import (
 	"context"
 	"fmt"
-	install "github.com/23technologies/23kectl/pkg/install/v1"
+	"github.com/23technologies/23kectl/pkg/install/v1"
+	"github.com/fluxcd/flux2/pkg/manifestgen"
+	fluxInstall "github.com/fluxcd/flux2/pkg/manifestgen/install"
 	"github.com/go-git/go-git/v5"
 	"github.com/go-git/go-git/v5/plumbing"
+	"github.com/go-git/go-git/v5/plumbing/transport/ssh"
 	. "github.com/onsi/ginkgo/v2"
 	. "github.com/onsi/gomega"
 	"github.com/spf13/viper"
-	"math/rand"
+	"net/url"
 	"os"
 	"os/exec"
 	"path"
 	"sigs.k8s.io/controller-runtime/pkg/client"
+	"strings"
 
 	kustomizecontrollerv1beta2 "github.com/fluxcd/kustomize-controller/api/v1beta2"
 	sourcecontrollerv1beta2 "github.com/fluxcd/source-controller/api/v1beta2"
@@ -21,53 +25,75 @@ import (
 	corev1 "k8s.io/api/core/v1"
 )
 
-var testConfig = map[string]any{
-	"admin.email":                          "test@example.org",
-	"admin.gitrepobranch":                  configRepoBranch,
-	"admin.gitrepourl":                     configRepoUrl,
-	"admin.password":                       "$2a$10$eWNJshWJxf24FVm4u7W1XOYiPzdSscmFgs3GVF.PYaC42DjuX1piu",
-	"basecluster.hasverticalpodautoscaler": "false",
-	"basecluster.nodecidr":                 "10.250.0.0/16",
-	"basecluster.provider":                 "hcloud",
-	"basecluster.region":                   "hel1",
-	"bucket.accesskey":                     "minioadmin",
-	"bucket.endpoint":                      "localhost:9000",
-	"bucket.secretkey":                     "minioadmin",
-	"clusteridentity":                      "garden-cluster-my-identity",
-	"dashboard.clientsecret":               "my-client-secret",
-	"dashboard.sessionsecret":              "my-session-secret",
-	"domainconfig": map[string]any{
-		"credentials": map[string]string{
-			"clientid":       "my-client-id",
-			"clientsecret":   "my-client-secret",
-			"subscriptionid": "my-subscription-id",
-			"tenantid":       "my-tenantid",
-		},
-		"domain":   "my-domain.example.org",
-		"provider": "azure-dns",
-	},
-
-	"emailaddress":                    "test@example.org",
-	"gardener.clusterip":              "10.0.0.1",
-	"gardenlet.seednodecidr":          "10.250.0.0/16",
-	"gardenlet.seedpodcidr":           "100.73.0.0/16",
-	"gardenlet.seedservicecidr":       "100.88.0.0/13",
-	"issuer.acme.email":               "test@example.org",
-	"kubeapiserver.basicauthpassword": "my-basic-auth-password",
-
-	"version": "test",
-}
-
-var cwd, _ = os.Getwd()
-
-var bucketName = fmt.Sprint(rand.Uint32())
-var configFileName = path.Join(tmpFolder, "config.yaml")
-var configRepo = path.Join(tmpFolder, "config.git")
-var configRepoUrl = "file://" + configRepo
-var configRepoBranch = "test"
-var configFixture = path.Join(cwd, "__fixture__/config")
-
 func init() {
+	var configFileName = path.Join(tmpFolder, "config.yaml")
+	var configRepo = path.Join(tmpFolder, "config.git")
+	var configRepoUrl = "file://" + configRepo
+	var configRepoBranch = "test"
+	var configFixture = path.Join(cwd, "__fixture__/config")
+
+	var testConfig = map[string]any{
+		"admin.email":                          "test@example.org",
+		"admin.gitrepobranch":                  configRepoBranch,
+		"admin.gitrepourl":                     configRepoUrl,
+		"admin.password":                       "$2a$10$eWNJshWJxf24FVm4u7W1XOYiPzdSscmFgs3GVF.PYaC42DjuX1piu",
+		"basecluster.hasverticalpodautoscaler": "false",
+		"basecluster.nodecidr":                 "10.250.0.0/16",
+		"basecluster.provider":                 "hcloud",
+		"basecluster.region":                   "hel1",
+		"bucket.accesskey":                     "minioadmin",
+		"bucket.endpoint":                      "localhost:9000",
+		"bucket.secretkey":                     "minioadmin",
+		"clusteridentity":                      "garden-cluster-my-identity",
+		"dashboard.clientsecret":               "my-client-secret",
+		"dashboard.sessionsecret":              "my-session-secret",
+		"domainconfig": map[string]any{
+			"credentials": map[string]string{
+				"clientid":       "my-client-id",
+				"clientsecret":   "my-client-secret",
+				"subscriptionid": "my-subscription-id",
+				"tenantid":       "my-tenantid",
+			},
+			"domain":   "my-domain.example.org",
+			"provider": "azure-dns",
+		},
+
+		"emailaddress":                    "test@example.org",
+		"gardener.clusterip":              "10.0.0.1",
+		"gardenlet.seednodecidr":          "10.250.0.0/16",
+		"gardenlet.seedpodcidr":           "100.73.0.0/16",
+		"gardenlet.seedservicecidr":       "100.88.0.0/13",
+		"issuer.acme.email":               "test@example.org",
+		"kubeapiserver.basicauthpassword": "my-basic-auth-password",
+
+		"version": "test",
+	}
+
+	install.Container.BlockUntilKeyCanRead = func(_ string, _ *ssh.PublicKeys, _ string) {}
+	install.Container.GetSSHHostname = func(_ *url.URL) string { return "github.com" }
+	install.Container.QueryConfigKey = func(configKey string, _ func() (any, error)) error {
+		lc := strings.ToLower(configKey)
+
+		result := testConfig[lc]
+
+		if result == nil || result == "" {
+			panic("key doesn't exist: " + lc)
+		}
+
+		viper.Set(configKey, result)
+
+		return nil
+	}
+	install.Container.CreateFluxManifest = func() (*manifestgen.Manifest, error) {
+		opts := fluxInstall.MakeDefaultOptions()
+		manifest, err := fluxInstall.Generate(opts, "")
+		if err != nil {
+			return nil, err
+		}
+		return manifest, nil
+
+	}
+
 	When("Running the `install` command", Ordered, func() {
 		var installErr error
 
@@ -93,16 +119,7 @@ func init() {
 				panic(err)
 			}
 
-			install.TestConfig = testConfig
 			installErr = install.Install(testKubeConfig)
-
-			//By("Using bucket " + bucketName)
-			//err = s3Client.MakeBucket(context.Background(), bucketName, minio.MakeBucketOptions{})
-			//Expect(err).NotTo(HaveOccurred())
-		})
-
-		AfterAll(func(ctx SpecContext) {
-			// _ = s3Client.RemoveBucket(context.Background(), bucketName)
 		})
 
 		It("should install flux", func() {
@@ -269,6 +286,7 @@ func init() {
 				URL:           configRepoUrl,
 				ReferenceName: plumbing.NewBranchReferenceName(configRepoBranch),
 			})
+			Expect(err).NotTo(HaveOccurred())
 
 			wt, err := r.Worktree()
 			Expect(err).NotTo(HaveOccurred())

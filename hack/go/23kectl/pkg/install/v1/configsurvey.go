@@ -1,4 +1,4 @@
-package installv1
+package install
 
 import (
 	"github.com/23technologies/23kectl/pkg/common"
@@ -8,14 +8,12 @@ import (
 	"golang.org/x/crypto/bcrypt"
 )
 
-var queryConfigKey = common.QueryConfigKey
-
 // queryAdminConfig ...
 func queryAdminConfig() error {
 	var err error
 	var prompt survey.Prompt
 
-	queryConfigKey("admin.email", func() (any, error) {
+	Container.QueryConfigKey("admin.email", func() (any, error) {
 		prompt = &survey.Input{
 			Message: `Please enter your email address.
 This will be the email address to use, when you want to login to the Gardener dashboard.`,
@@ -30,7 +28,7 @@ This will be the email address to use, when you want to login to the Gardener da
 		return queryResult, nil
 	})
 
-	queryConfigKey("admin.password", func() (any, error) {
+	Container.QueryConfigKey("admin.password", func() (any, error) {
 		prompt = &survey.Password{
 			Message: `Please enter the administrator password to use.
 This will be the password to use, when you login to the Gardener dashboard.`,
@@ -51,7 +49,7 @@ This will be the password to use, when you login to the Gardener dashboard.`,
 		return string(hash), nil
 	})
 
-	queryConfigKey("admin.gitrepourl", func() (any, error) {
+	Container.QueryConfigKey("admin.gitrepourl", func() (any, error) {
 		prompt = &survey.Input{
 			Message: "Please enter an ssh git remote in URL form. e.g. ssh://git@github.com/User/Repo.git",
 			Help: `
@@ -68,7 +66,7 @@ Flux will monitor these files to pick up configuration changes.
 		return queryResult, nil
 	})
 
-	queryConfigKey("admin.gitrepobranch", func() (any, error) {
+	Container.QueryConfigKey("admin.gitrepobranch", func() (any, error) {
 		prompt = &survey.Input{
 			Message: "Please enter the git branch to use. Will be created if it doesn't exist.",
 			Default: "main",
@@ -94,7 +92,7 @@ func queryBaseClusterConfig() error {
 	var prompt survey.Prompt
 
 	// todo explain to user. what's this for?
-	queryConfigKey("baseCluster.provider", func() (any, error) {
+	Container.QueryConfigKey("baseCluster.provider", func() (any, error) {
 		prompt = &survey.Select{
 			Message: "Select the provider of your base cluster",
 			Options: []string{"hcloud", "azure", "aws", "openstack"},
@@ -112,7 +110,7 @@ If you feel like this list in incomplete, contact the 23T support.
 		return queryResult, nil
 	})
 
-	queryConfigKey("baseCluster.Region", func() (any, error) {
+	Container.QueryConfigKey("baseCluster.Region", func() (any, error) {
 		prompt = &survey.Input{
 			Message: "Please enter the region of your base cluster",
 			Help: `
@@ -131,7 +129,7 @@ For clusters hosted on Azure, this could be e.g. germanywestcentral or westeurop
 	})
 
 	// todo explain to user. document where to find it on supported providers
-	queryConfigKey("baseCluster.nodeCidr", func() (any, error) {
+	Container.QueryConfigKey("baseCluster.nodeCidr", func() (any, error) {
 		prompt = &survey.Input{
 			Message: "Please enter the node CIDR of your base cluster in the form: x.x.x.x/y",
 			Help: `
@@ -148,11 +146,11 @@ Therefore, the node CIDR should match a network that comprises all ip addresses 
 		return queryResult, nil
 	})
 
-	queryConfigKey("gardenlet.seedNodeCidr", func() (any, error) {
+	Container.QueryConfigKey("gardenlet.seedNodeCidr", func() (any, error) {
 		return viper.GetString("baseCluster.nodeCidr"), nil
 	})
 
-	queryConfigKey("baseCluster.hasVerticalPodAutoscaler", func() (any, error) {
+	Container.QueryConfigKey("baseCluster.hasVerticalPodAutoscaler", func() (any, error) {
 		const (
 			yes       = "Yes"
 			no        = "No"

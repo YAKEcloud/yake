@@ -1,4 +1,4 @@
-package installv1
+package install
 
 import (
 	"context"
@@ -26,7 +26,7 @@ func installFlux(kubeconfigArgs *genericclioptions.ConfigFlags, kubeclientOption
 
 	defer os.RemoveAll(tmpDir)
 
-	manifest, err := createFluxManifest()
+	manifest, err := Container.CreateFluxManifest()
 	if err != nil {
 		return err
 	}
@@ -45,7 +45,7 @@ func installFlux(kubeconfigArgs *genericclioptions.ConfigFlags, kubeclientOption
 }
 
 // createFluxManifests ...
-var createFluxManifest = func() (*manifestgen.Manifest, error) {
+func createFluxManifest() (*manifestgen.Manifest, error) {
 
 	s3Client, err := common.CreateMinioClient()
 	if err != nil {
