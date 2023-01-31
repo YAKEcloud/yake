@@ -1,9 +1,12 @@
-package installv1
+package install
 
 import (
 	"context"
 	"fmt"
+	"github.com/fluxcd/flux2/pkg/manifestgen"
+	"github.com/go-git/go-git/v5/plumbing/transport/ssh"
 	"net"
+	"net/url"
 	"strings"
 
 	"github.com/23technologies/23kectl/pkg/common"
@@ -12,7 +15,6 @@ import (
 	"github.com/fatih/color"
 	"github.com/mitchellh/mapstructure"
 	"github.com/spf13/viper"
-
 	corev1 "k8s.io/api/core/v1"
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/apis/meta/v1/unstructured"
@@ -20,9 +22,17 @@ import (
 	"sigs.k8s.io/controller-runtime/pkg/client"
 )
 
-var services = struct {
-	fetchRequirements func()
-}{}
+var Container = struct {
+	BlockUntilKeyCanRead func(string, *ssh.PublicKeys, string)
+	GetSSHHostname       func(_ *url.URL) string
+	QueryConfigKey       func(configKey string, _ func() (any, error)) error
+	CreateFluxManifest   func() (*manifestgen.Manifest, error)
+}{
+	BlockUntilKeyCanRead: blockUntilKeyCanRead,
+	QueryConfigKey:       common.QueryConfigKey,
+	GetSSHHostname:       getSSHHostname,
+	CreateFluxManifest:   createFluxManifest,
+}
 
 func Install(kubeconfig string) error {
 	log := logger.Get("Install")
@@ -139,7 +149,7 @@ func completeKeConfig(kubeClient client.WithWatch) error {
 	viper.SetDefault("kubeApiServer.basicAuthPassword", common.RandHex(20))
 	viper.SetDefault("clusterIdentity", "garden-cluster-"+common.RandHex(5)+"-identity")
 
-	queryConfigKey("gardenlet.seedPodCidr", func() (any, error) {
+	Container.QueryConfigKey("gardenlet.seedPodCidr", func() (any, error) {
 		// If either calico or cilium are used as CNI we can pull the needed info from the cluster
 		// Otherwise prompt the user
 

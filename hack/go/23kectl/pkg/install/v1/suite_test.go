@@ -1,4 +1,4 @@
-package installv1_test
+package install_test
 
 import (
 	"context"
@@ -7,16 +7,14 @@ import (
 	"testing"
 
 	"github.com/23technologies/23kectl/pkg/logger"
-	"github.com/minio/minio-go/v7"
-	"github.com/minio/minio-go/v7/pkg/credentials"
 	. "github.com/onsi/ginkgo/v2"
 	. "github.com/onsi/gomega"
 	"k8s.io/client-go/rest"
 	"sigs.k8s.io/controller-runtime/pkg/client"
 	"sigs.k8s.io/controller-runtime/pkg/envtest"
 
-	sourcecontrollerv1beta2 "github.com/fluxcd/source-controller/api/v1beta2"
 	kustomizecontrollerv1beta2 "github.com/fluxcd/kustomize-controller/api/v1beta2"
+	sourcecontrollerv1beta2 "github.com/fluxcd/source-controller/api/v1beta2"
 )
 
 var tmpFolder, _ = os.MkdirTemp("", "23kectl-test-*")
@@ -25,7 +23,7 @@ var testKubeConfig = path.Join(tmpFolder, "testKubeConfig.yaml")
 var cancel context.CancelFunc
 var k8sClient client.WithWatch
 var k8sTestEnv *envtest.Environment
-var s3Client *minio.Client
+var cwd, _ = os.Getwd()
 
 var _ = BeforeSuite(func() {
 	By("bootstrapping test environment")
@@ -35,7 +33,6 @@ var _ = BeforeSuite(func() {
 
 	_, cancel = context.WithCancel(context.TODO())
 	k8sTestEnv, k8sClient = createK8sTestenv(testKubeConfig)
-	s3Client = createMinioClient()
 })
 
 var _ = AfterSuite(func() {
@@ -82,20 +79,4 @@ func createK8sTestenv(configPath string) (*envtest.Environment, client.WithWatch
 	Expect(err).NotTo(HaveOccurred())
 
 	return testEnv, k8sClient
-}
-
-func createMinioClient() *minio.Client {
-	endpoint := testConfig["bucket.endpoint"].(string)
-	accessKeyID := testConfig["bucket.accesskey"].(string)
-	secretAccessKey := testConfig["bucket.secretkey"].(string)
-
-	// Initialize minio client object.
-	s3Client, err := minio.New(endpoint, &minio.Options{
-		Creds:  credentials.NewStaticV4(accessKeyID, secretAccessKey, ""),
-		Secure: false,
-	})
-
-	Expect(err).NotTo(HaveOccurred())
-
-	return s3Client
 }

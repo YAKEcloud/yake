@@ -1,4 +1,4 @@
-package installv1
+package install
 
 import (
 	"bytes"
@@ -41,7 +41,7 @@ func createBucketSecret(kubeClient client.WithWatch) error {
 }
 
 func create23keConfigSecret(kubeClient client.WithWatch) error {
-	queryConfigKey("issuer.acme.email", func() (any, error) {
+	Container.QueryConfigKey("issuer.acme.email", func() (any, error) {
 		prompt := &survey.Input{
 			Message: "Please enter your email address for acme certificate generation",
 			Default: viper.GetString("admin.email"),
@@ -56,7 +56,7 @@ func create23keConfigSecret(kubeClient client.WithWatch) error {
 		return queryResult, nil
 	})
 
-	queryConfigKey("domainConfig", func() (any, error) {
+	Container.QueryConfigKey("domainConfig", func() (any, error) {
 		domainConfig, err := queryDomainConfig()
 		if err != nil {
 			return nil, err
@@ -120,4 +120,4 @@ stringData:
 	}
 
 	return nil
-	}
+}

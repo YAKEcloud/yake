@@ -1,4 +1,4 @@
-package installv1
+package install
 
 import (
 	"context"
@@ -28,19 +28,17 @@ func generateDeployKey(kubeClient client.WithWatch, secretName string, repoUrl s
 	}, &sec)
 	exists := err == nil
 
-
 	testEnv := &envtest.Environment{}
-
 
 	_ = testEnv
 	var keys *ssh.PublicKeys
-	
+
 	if exists {
 		keys, _ = ssh.NewPublicKeys("git", sec.Data["identity"], "")
 
 		fmt.Println(`A key was already deployed to your cluster and I did not change it.`)
 
-		blockUntilKeyCanRead(repoUrl, keys, string(sec.Data["identity.pub"]))
+		Container.BlockUntilKeyCanRead(repoUrl, keys, string(sec.Data["identity.pub"]))
 
 		return keys, nil
 	} else {
@@ -53,7 +51,7 @@ func generateDeployKey(kubeClient client.WithWatch, secretName string, repoUrl s
 		// define some options for the generation of the flux source secret
 		sourceSecOpts := sourcesecret.MakeDefaultOptions()
 		sourceSecOpts.PrivateKeyAlgorithm = "ed25519"
-		sourceSecOpts.SSHHostname = getSSHHostname(repourl)
+		sourceSecOpts.SSHHostname = Container.GetSSHHostname(repourl)
 		sourceSecOpts.Name = secretName
 
 		// generate the flux source secret manifest and store it as []byte in the shootResources
@@ -82,13 +80,13 @@ func generateDeployKey(kubeClient client.WithWatch, secretName string, repoUrl s
 			return nil, err
 		}
 
-		blockUntilKeyCanRead(repoUrl, keys, string(fluxRepoSecret.Data["identity.pub"]))
+		Container.BlockUntilKeyCanRead(repoUrl, keys, string(fluxRepoSecret.Data["identity.pub"]))
 
 		return keys, nil
 	}
 }
 
-var blockUntilKeyCanRead = func(repoUrl string, keys *ssh.PublicKeys, pubkey string) {
+func blockUntilKeyCanRead(repoUrl string, keys *ssh.PublicKeys, pubkey string) {
 	var err error
 	for {
 		err = keyCanRead(repoUrl, keys)
@@ -121,6 +119,6 @@ func keyCanRead(url string, publicKeys *ssh.PublicKeys) error {
 	return nil
 }
 
-var getSSHHostname = func(repourl *url.URL) string {
+func getSSHHostname(repourl *url.URL) string {
 	return repourl.Host
 }

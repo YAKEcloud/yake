@@ -10,7 +10,7 @@ import (
 	"github.com/spf13/viper"
 	"gopkg.in/yaml.v2"
 
-	"github.com/23technologies/23kectl/pkg/install/v1"
+	installv1 "github.com/23technologies/23kectl/pkg/install/v1"
 )
 
 func Install(kubeconfig string) error {
