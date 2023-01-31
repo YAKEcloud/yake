@@ -5,13 +5,13 @@ metadata:
   namespace: flux-system
 spec:
   interval: 1m
-  targetNamespace: flux-system
+  targetNamespace: garden
   dependsOn:
     - name: pre-gardenlet
   chart:
     spec:
       chart: gardenlet
-      version: 1.62.2
+      version: 1.63.0
       sourceRef:
         kind: HelmRepository
         name: gardener-community-charts
