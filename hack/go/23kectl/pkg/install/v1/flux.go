@@ -6,7 +6,7 @@ import (
 	"path"
 
 	"github.com/23technologies/23kectl/pkg/common"
-	utils "github.com/23technologies/23kectl/pkg/flux_utils"
+	utils "github.com/23technologies/23kectl/pkg/fluxutils"
 	"github.com/fluxcd/flux2/pkg/manifestgen"
 	runclient "github.com/fluxcd/pkg/runtime/client"
 	"github.com/minio/minio-go/v7"

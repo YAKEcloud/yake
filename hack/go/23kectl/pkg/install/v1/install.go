@@ -16,7 +16,7 @@ import (
 	"github.com/mitchellh/mapstructure"
 	"github.com/spf13/viper"
 
-	utils "github.com/23technologies/23kectl/pkg/flux_utils"
+	utils "github.com/23technologies/23kectl/pkg/fluxutils"
 
 	runclient "github.com/fluxcd/pkg/runtime/client"
 	corev1 "k8s.io/api/core/v1"
