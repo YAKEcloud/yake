@@ -11,7 +11,7 @@ stringData:
       version: 1.20.0
 
     os-gardenlinux:
-      version: 0.16.0
+      version: 0.17.0
 
     provider-hcloud:
       version: 0.6.5
