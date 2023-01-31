@@ -18,7 +18,7 @@ func testKind(v string) {
 			kubeconfig, _ = useKindCluster(ctx, v)
 		})
 
-		It("should create a working kbueconfig", func() {
+		It("should create a working kubeconfig", func() {
 			Expect(kubeconfig).To(BeAnExistingFile())
 		})
 	})
