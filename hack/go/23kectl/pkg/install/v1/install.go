@@ -13,38 +13,16 @@ import (
 	"github.com/mitchellh/mapstructure"
 	"github.com/spf13/viper"
 
-	utils "github.com/23technologies/23kectl/pkg/flux_utils"
-
-	runclient "github.com/fluxcd/pkg/runtime/client"
 	corev1 "k8s.io/api/core/v1"
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/apis/meta/v1/unstructured"
 	"k8s.io/apimachinery/pkg/runtime/schema"
-	"k8s.io/cli-runtime/pkg/genericclioptions"
 	"sigs.k8s.io/controller-runtime/pkg/client"
 )
 
 var services = struct {
 	fetchRequirements func()
 }{}
-
-// install ...
-
-func createKubeClient(kubeconfig string) (*genericclioptions.ConfigFlags, *runclient.Options, client.WithWatch, error) {
-	log := logger.Get("createKubeClient")
-
-	var kubeconfigArgs = genericclioptions.NewConfigFlags(false)
-	kubeconfigArgs.KubeConfig = &kubeconfig
-
-	var kubeclientOptions = new(runclient.Options)
-	kubeClient, err := utils.KubeClient(kubeconfigArgs, kubeclientOptions)
-	if err != nil {
-		log.Error(err, "Couldn't create kubeclient")
-		return nil, nil, nil, err
-	}
-
-	return kubeconfigArgs, kubeclientOptions, kubeClient, nil
-}
 
 func Install(kubeconfig string) error {
 	log := logger.Get("Install")
@@ -53,7 +31,7 @@ func Install(kubeconfig string) error {
 	UnmarshalKeConfig(keConfiguration)
 
 	var err error
-	kubeconfigArgs, kubeclientOptions, kubeClient, err := createKubeClient(kubeconfig)
+	kubeconfigArgs, kubeclientOptions, kubeClient, err := common.CreateKubeClient(kubeconfig)
 	if err != nil {
 		return err
 	}
