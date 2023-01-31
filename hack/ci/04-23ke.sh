@@ -119,9 +119,10 @@ kubectl wait helmrelease kube-apiserver -n flux-system --for=condition=ready --t
 # sleep until dnsentry appears and is ready
 while ! dnsentryname="$(kubectl get dnsentries -n garden -o name | grep apiserver-ingress-ingress)"; do sleep 1; done
 kubectl wait $dnsentryname -n garden --for=jsonpath='{.status.state}'=Ready
-sleep 5 # dns needs a few more seconds
+# wait for gardener-application so garden namespace exists
+kubectl wait helmrelease gardener-application -n flux-system --for=condition=ready --timeout=10m || { dumpHr; exit 1; }
 kubectl get secrets -n garden garden-kubeconfig-for-admin -o go-template='{{.data.kubeconfig | base64decode }}' > hack/ci/secrets/apiserver-in-shoot-kubeconfig.yaml
-kubectl create secret generic hcloud-hel1-0-kubeconfig -n garden --from-file=kubeconfig=hack/ci/secrets/shoot-kubeconfig.yaml --context garden
+kubectl create secret generic hcloud-hel1-0-kubeconfig -n garden --from-file=kubeconfig=hack/ci/secrets/shoot-kubeconfig.yaml --save-config --dry-run=client -o yaml | kubectl --context garden apply -f -
 
 kubectl wait kustomization gardener -n flux-system --for=condition=ready --timeout=10m  || { dumpKs; exit 1; }
 
