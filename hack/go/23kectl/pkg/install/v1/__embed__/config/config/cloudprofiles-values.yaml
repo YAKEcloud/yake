@@ -1,0 +1,22 @@
+apiVersion: v1
+kind: Secret
+metadata:
+  name: cloudprofiles-values
+  namespace: flux-system
+type: Opaque
+stringData:
+  values.yaml: |
+    global:
+      kubernetes:
+        versions:
+          1.22.9:
+            classification: preview
+      seedSelector:
+        enabled: true
+        selector:
+          providerTypes:
+            - hcloud
+    hcloud:
+      enabled: true
+    betacloud:
+      enabled: true
