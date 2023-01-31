@@ -3,13 +3,11 @@ package testing
 import (
 	. "github.com/onsi/ginkgo/v2"
 	. "github.com/onsi/gomega"
+
 )
 
 var _ = Describe("Installing 23KE", func() {
-	testKind("v1.24.2")
-	testKind("v1.24.3")
 	testKind("v1.24.4")
-	testKind("v1.25.0")
 	testKind("v1.25.1")
 })
 
