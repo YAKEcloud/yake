@@ -2,6 +2,9 @@
 set -euo pipefail
 
 source hack/ci/handy.sh
+RCLONE_CONFIG_23KETESTBED_ACCOUNT_BASE64=$(echo -n $RCLONE_CONFIG_23KETESTBED_ACCOUNT|base64 -w0)
+RCLONE_CONFIG_23KETESTBED_KEY_BASE64=$(echo -n $RCLONE_CONFIG_23KETESTBED_KEY|base64 -w0)
+
 
 dumpHr() {
   local helmreleases=$(kubectl get helmreleases -n flux-system | sed 1,1d | awk '{ if($3 != "True") print $1 }' | xargs echo)
@@ -84,13 +87,13 @@ stringData:
           clientSecret: ${AZURE_SECRET_VALUE}
 
     backups:
-      enabled: false
+      enabled: true
       provider: azure
       region: germanywestcentral
-      bucketName: gardener-backup
+      bucketName: ${BACKUP_BUCKET}
       credentials:
-        storageAccount: <base64encoded storageAccountName>
-        storageAccountAccessKey: <base64encoded storageAccountAccessKey>
+        storageAccount: ${RCLONE_CONFIG_23KETESTBED_ACCOUNT_BASE64}
+        storageAccountAccessKey: ${RCLONE_CONFIG_23KETESTBED_KEY_BASE64}
         tenantID: ${AZURE_TENANT_ID}
         subscriptionID: ${AZURE_SUBSCRIPTION_ID}
         clientID: ${AZURE_SECRET_ID}
