@@ -11,11 +11,12 @@ var _ = Describe("Installing 23KE", func() {
 })
 
 func testKind(v string) {
-	Context("on kind "+v, Ordered, func() {
+	Describe("on kind "+v, Ordered, func() {
 		var kubeconfig string
 
 		BeforeAll(func(ctx SpecContext) {
 			kubeconfig, _ = useKindCluster(ctx, v)
+			s3Client, bucketName := useBucket(ctx)
 		})
 
 		It("should create a working kubeconfig", func() {
@@ -23,3 +24,9 @@ func testKind(v string) {
 		})
 	})
 }
+
+var _ = When("backups are configured", func() {
+	BeforeAll(func(ctx SpecContext) {
+
+	})
+})
