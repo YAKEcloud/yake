@@ -11,7 +11,7 @@ import (
 	"time"
 )
 
-func useBucket(ctx context.Context) (*minio.Client, string) {
+func UseRemoteBucket(ctx context.Context) (*minio.Client, string) {
 	bucketName := fmt.Sprintf("23ke-run-%v", time.Now().UnixNano())
 
 	s3Client, err := minio.New(os.Getenv("TEST_MINIO_ENDPOINT"), &minio.Options{
@@ -24,7 +24,7 @@ func useBucket(ctx context.Context) (*minio.Client, string) {
 	Expect(err).NotTo(HaveOccurred())
 
 	DeferCleanup(func() {
-		err := s3Client.RemoveBucket(ctx, bucketName)
+		err := s3Client.RemoveBucketWithOptions(context.Background(), bucketName, minio.RemoveBucketOptions{ForceDelete: true})
 		Expect(err).NotTo(HaveOccurred())
 	})
 

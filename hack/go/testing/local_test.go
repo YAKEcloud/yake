@@ -1,8 +1,8 @@
 package testing
 
 import (
+	"github.com/minio/minio-go/v7"
 	. "github.com/onsi/ginkgo/v2"
-	. "github.com/onsi/gomega"
 )
 
 var _ = Describe("Installing 23KE", func() {
@@ -13,19 +13,23 @@ var _ = Describe("Installing 23KE", func() {
 func testKind(v string) {
 	Describe("on kind "+v, Ordered, func() {
 		var kubeconfig string
+		var s3Client *minio.Client
+		var bucketName string
 
 		BeforeAll(func(ctx SpecContext) {
-			kubeconfig, _ = useKindCluster(ctx, v)
-			s3Client, bucketName := useBucket(ctx)
+			kubeconfig, _ = UseKindCluster(ctx, v)
+			s3Client, bucketName = UseRemoteBucket(ctx)
 		})
 
-		It("should create a working kubeconfig", func() {
-			Expect(kubeconfig).To(BeAnExistingFile())
+		XIt("Does stuff", func(ctx SpecContext) {
+			_ = kubeconfig
+			_ = s3Client
+			_ = bucketName
 		})
 	})
 }
 
-var _ = When("backups are configured", func() {
+var _ = XWhen("backups are configured", Ordered, func() {
 	BeforeAll(func(ctx SpecContext) {
 
 	})

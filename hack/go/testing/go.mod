@@ -4,6 +4,8 @@ go 1.19
 
 replace k8s.io/kubectl v0.0.0 => k8s.io/kubectl v0.25.4
 
+replace k8s.io/kubelet v0.0.0 => k8s.io/kubelet v0.25.4
+
 require (
 	github.com/23technologies/23kectl v0.0.4
 	github.com/docker/docker v20.10.23+incompatible

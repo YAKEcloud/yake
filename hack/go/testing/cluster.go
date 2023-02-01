@@ -33,7 +33,7 @@ import (
 
 var clusterProvider = cluster.NewProvider()
 
-func useKindCluster(ctx SpecContext, version string) (string, string) {
+func UseKindCluster(ctx SpecContext, version string) (string, string) {
 	name := fmt.Sprintf("kind-%v", time.Now().UnixNano())
 	nodeImage := fmt.Sprintf("kindest/node:%v", version)
 	kubeconfig := path.Join(os.TempDir(), fmt.Sprintf("kubeconfig-%s.yaml", name))
@@ -96,8 +96,10 @@ func useKindCluster(ctx SpecContext, version string) (string, string) {
 		Expect(err).NotTo(HaveOccurred())
 	}
 
+	GinkgoWriter.Print("Waiting for metallb pod")
 	// wait for the metallb pods to be ready
 	err = wait.PollUntilWithContext(ctx, time.Second, func(ctx context.Context) (bool, error) {
+		GinkgoWriter.Print(".")
 		var err error
 
 		ls, err := labels.Parse("app=metallb")
@@ -131,6 +133,7 @@ func useKindCluster(ctx SpecContext, version string) (string, string) {
 
 		return true, nil
 	})
+	GinkgoWriter.Print("\n")
 	Expect(err).NotTo(HaveOccurred())
 
 	// find out the cidr of the kind docker network and use some
