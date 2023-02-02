@@ -32,4 +32,4 @@ stringData:
   {{- end }}
         public:
           clientId: kube-kubectl
-          clientSecret: {{ .Values.dashboard.kubectlClientSecret }}
+          usePKCE: true
