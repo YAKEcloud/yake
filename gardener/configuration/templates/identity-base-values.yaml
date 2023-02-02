@@ -11,6 +11,7 @@ stringData:
     dashboardOrigins:
       - 'https://{{ include "dashboard.domain" . }}'
     dashboardClientSecret: {{ .Values.dashboard.clientSecret }}
+    kubectlClientSecret: {{ .Values.dashboard.kubectlClientSecret }}
     tls: ~
     ingress:
       annotations:

@@ -36,6 +36,7 @@ stringData:
     dashboard:
       clientSecret: ${DASHBOARD_CLIENTSECRET}
       sessionSecret: ${DASHBOARD_SESSIONSECRET}
+      kubectlClientSecret: ${DASHBOARD_KUBECTLCLIENTSECRET}
     kubeApiServer:
       basicAuthPassword: ${KUBEAPISERVER_BASICAUTHPASSWORD}
 
