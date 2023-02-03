@@ -27,7 +27,7 @@ if [[ -d ./23ke-charts-dev ]]; then
   for dir in ./23ke-charts-dev/*/; do
       echo "Using local charts-folder $dir"
       for file in $(grep -lr "chart: $(basename $dir)" gardener); do
-              cat $file | yq eval '.spec.chart.spec |= (.chart = "./23ke-charts-dev/" + .chart | del .version) |= .sourceRef |= (.kind = "Bucket" | .name  = "23ke" )' - | rclone -q rcat $REMOTE:$BUCKET/$file
+              cat $file | yq eval '.spec.chart.spec |= (.chart = "./23ke-charts-dev/" + .chart | del .version | .reconcileStrategy = "Bucket") |= .sourceRef |= (.kind = "Bucket" | .name  = "23ke" )' - | rclone -q rcat $REMOTE:$BUCKET/$file
       done
       rclone -q sync -L 23ke-charts-dev/ $REMOTE:$BUCKET/23ke-charts-dev/
   done
