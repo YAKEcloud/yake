@@ -85,6 +85,7 @@ export KUBEAPISERVER_BASICAUTHPASSWORD=$(openssl rand -hex 20)
 export REMOTE=23KETESTBED
 export BUCKET_23KE=$SHOOT-23ke
 export CONFIG_BUCKET=$SHOOT-config
+export BACKUP_BUCKET=$SHOOT-backup
 export TOKEN_ID=ab$(openssl rand -hex 2)
 export TOKEN_SECRET=cd$(openssl rand -hex 7)
 export PROVIDER=$PROVIDER

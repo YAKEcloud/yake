@@ -10,6 +10,7 @@ spec:
   chart:
     spec:
       chart: pre-gardener/addons
+      reconcileStrategy: Revision
       sourceRef:
         kind: GitRepository
         name: 23ke

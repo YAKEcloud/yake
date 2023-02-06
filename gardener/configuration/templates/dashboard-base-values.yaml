@@ -23,14 +23,13 @@ stringData:
           dns.gardener.cloud/class: base-dns-class
       oidc:
         issuerUrl: https://{{ include "identity.domain" . }}/oidc
-        # clientId is the public identifier of the gardener-dashboard aplication
         clientId: dashboard
-        # clientSecret is the private secret of the gardener-dashboard aplication
         clientSecret: {{ .Values.dashboard.clientSecret }}
-        # redirectUri is the endpoint receiving the OTAC from the OpenID provider
-        # after successful login
         redirectUri: https://{{ include "dashboard.domain" . }}/auth/callback
   {{- if (((.Values).issuer).ca) }}
         ca: |
           {{- .Values.issuer.ca | nindent 10 }}
   {{- end }}
+        public:
+          clientId: kube-kubectl
+          usePKCE: true

@@ -8,27 +8,27 @@ type: Opaque
 stringData:
   values.yaml: |-
     os-ubuntu:
-      version: 1.19.0
+      version: 1.20.0
 
     os-gardenlinux:
-      version: 0.15.0
+      version: 0.17.0
 
     provider-hcloud:
-      version: 0.6.5
+      version: 0.6.1
 
     provider-azure:
       version: 1.33.0
       admission: true
 
     provider-openstack:
-      version: 1.31.0
+      version: 1.31.1
       admission: true
 
     networking-calico:
       version: 1.28.0
 
     shoot-cert-service:
-      version: 1.27.0
+      version: 1.28.0
 
     shoot-dns-service:
       version: 1.29.0
@@ -45,7 +45,7 @@ stringData:
             serverPortHttp: 8080
 
     networking-cilium:
-      version: 1.20.1
+      version: 1.21.0
 
     provider-alicloud:
       version: 1.43.0
@@ -54,7 +54,7 @@ stringData:
       version: 1.41.0
 
     provider-gcp:
-      version: 1.26.1
+      version: 1.27.0
 
     runtime-gvisor:
       version: 0.8.0
