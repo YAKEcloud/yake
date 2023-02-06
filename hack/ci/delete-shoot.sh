@@ -4,8 +4,7 @@ set -euo pipefail
 source hack/ci/handy.sh
 
 # delete buckets on azure
-rclone -q purge $REMOTE:$BUCKET || echo "Deleting bucket failed"
-rclone -q purge $REMOTE:$CONFIG_BUCKET || echo "Deleting config bucket failed"
+mc rb -q --dangerous --force $MC_ALIAS/$BUCKET_23KE || echo "Deleting bucket failed"
 
 echo "Deleting shoot"
 export KUBECONFIG=hack/ci/secrets/gardener-kubeconfig.yaml

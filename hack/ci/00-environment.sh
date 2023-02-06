@@ -55,6 +55,15 @@ AZURE_SUBSCRIPTION_ID=$(kubectl --kubeconfig hack/ci/secrets/gardener-kubeconfig
 AZURE_SECRET_ID=$(kubectl --kubeconfig hack/ci/secrets/gardener-kubeconfig.yaml get secret dns-for-ci -o go-template='{{.data.AZURE_SECRET_ID}}')
 AZURE_SECRET_VALUE=$(kubectl --kubeconfig hack/ci/secrets/gardener-kubeconfig.yaml get secret dns-for-ci -o go-template='{{.data.AZURE_SECRET_VALUE}}')
 
+echo "Fetching gh token from base cluster"
+GH_TOKEN=$(kubectl --kubeconfig hack/ci/secrets/gardener-kubeconfig.yaml get secret gh-token-for-ci -o go-template='{{.data.GH_TOKEN|base64decode}}')
+
+echo "Fetching Minio credentials from base cluster"
+
+MINIO_HOSTNAME=$(kubectl --kubeconfig hack/ci/secrets/gardener-kubeconfig.yaml get secret minio-creds-for-ci -o go-template='{{.data.MINIO_HOSTNAME|base64decode}}')
+MINIO_PW=$(kubectl --kubeconfig hack/ci/secrets/gardener-kubeconfig.yaml get secret minio-creds-for-ci -o go-template='{{.data.MINIO_PW|base64decode}}')
+
+
 echo "The script will now setup your development / testing environment."
 echo
 echo "shoot-name:   $SHOOT"
@@ -64,14 +73,17 @@ echo
 echo "This line might be handy:"
 echo ". hack/ci/handy.sh"
 
+export MC_ALIAS=releasesci
 cat << EOF > hack/ci/handy.sh
 export KUBECONFIG='hack/ci/secrets/shoot-kubeconfig.yaml:hack/ci/secrets/apiserver-in-shoot-kubeconfig.yaml'
 export SHOOT=$SHOOT
+export PROVIDER=$PROVIDER
+export ZONE=$ZONE
 export DASHBOARD_CLIENTSECRET=$(openssl rand -hex 20)
 export DASHBOARD_SESSIONSECRET=$(openssl rand -hex 20)
 export KUBEAPISERVER_BASICAUTHPASSWORD=$(openssl rand -hex 20)
 export REMOTE=23KETESTBED
-export BUCKET=$SHOOT-23ke
+export BUCKET_23KE=$SHOOT-23ke
 export CONFIG_BUCKET=$SHOOT-config
 export TOKEN_ID=ab$(openssl rand -hex 2)
 export TOKEN_SECRET=cd$(openssl rand -hex 7)
@@ -82,4 +94,10 @@ export AZURE_TENANT_ID=$AZURE_TENANT_ID
 export AZURE_SUBSCRIPTION_ID=$AZURE_SUBSCRIPTION_ID
 export AZURE_SECRET_ID=$AZURE_SECRET_ID
 export AZURE_SECRET_VALUE=$AZURE_SECRET_VALUE
+export MC_ALIAS=$MC_ALIAS
+export MINIO_HOSTNAME=$MINIO_HOSTNAME
+export MINIO_URL=https://$MINIO_HOSTNAME
+export MINIO_PW=$MINIO_PW
+export MC_HOST_$MC_ALIAS=https://minio:$MINIO_PW@$MINIO_HOSTNAME
+export GH_TOKEN=$GH_TOKEN
 EOF

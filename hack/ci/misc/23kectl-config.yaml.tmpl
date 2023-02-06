@@ -1,0 +1,42 @@
+admin:
+    email: operations@23technologies.cloud
+    gitrepobranch: ${SHOOT}
+    gitrepourl: ssh://git@github.com/23technologies/23ke-ci-config.git
+    password: $2a$10$eWNJshWJxf24FVm4u7W1XOYiPzdSscmFgs3GVF.PYaC42DjuX1piu
+basecluster:
+    hasverticalpodautoscaler: true
+    nodecidr: 10.11.0.0/16
+    provider: hcloud
+    region: ${ZONE}
+bucket:
+    accesskey: minio
+    endpoint: ${MINIO_HOSTNAME}
+    secretkey: ${MINIO_PW}
+clusteridentity: garden-cluster-${SHOOT}
+dashboard:
+    clientsecret: ${DASHBOARD_CLIENTSECRET}
+    sessionsecret: ${DASHBOARD_SESSIONSECRET}
+domainconfig:
+    credentials:
+        clientid: ${AZURE_SECRET_ID}
+        clientsecret: ${AZURE_SECRET_VALUE}
+        subscriptionid: ${AZURE_SUBSCRIPTION_ID}
+        tenantid: ${AZURE_TENANT_ID}
+    domain: ${SHOOT_DOMAIN}
+    provider: azure-dns
+emailaddress: opeartions@23technologies.cloud
+extensionsconfig:
+    provider-azure:
+        enabled: true
+    provider-hcloud:
+        enabled: true
+gardenlet:
+    seednodecidr: 10.11.0.0/16
+    seedpodcidr: 10.10.0.0/16
+    seedservicecidr: 10.16.0.0/13
+issuer:
+    acme:
+        email: operations@23technologies.cloud
+kubeapiserver:
+    basicauthpassword: ${KUBEAPISERVER_BASICAUTHPASSWORD}
+version: ${BUCKET_23KE}
