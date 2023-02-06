@@ -4,9 +4,12 @@ import (
 	"context"
 	"fmt"
 	"net/url"
+	"os"
 	"strings"
 
 	"github.com/23technologies/23kectl/pkg/common"
+	"github.com/spf13/viper"
+	"golang.org/x/oauth2"
 
 	"github.com/fluxcd/flux2/pkg/manifestgen/sourcesecret"
 	"github.com/go-git/go-git/v5"
@@ -15,9 +18,12 @@ import (
 	"github.com/go-git/go-git/v5/plumbing/transport/ssh"
 	"github.com/go-git/go-git/v5/storage/memory"
 	corev1 "k8s.io/api/core/v1"
+	"k8s.io/utils/pointer"
 	"sigs.k8s.io/controller-runtime/pkg/client"
 	"sigs.k8s.io/controller-runtime/pkg/envtest"
 	k8syaml "sigs.k8s.io/yaml"
+
+	gh "github.com/google/go-github/v36/github"
 )
 
 func generateDeployKey(kubeClient client.WithWatch, secretName string, repoUrl string) (*ssh.PublicKeys, error) {
@@ -87,6 +93,32 @@ func generateDeployKey(kubeClient client.WithWatch, secretName string, repoUrl s
 }
 
 func blockUntilKeyCanRead(repoUrl string, keys *ssh.PublicKeys, pubkey string) {
+
+	// add github deploy key automatically, when GH_TOKEN is provided
+	if token, exists := os.LookupEnv("GH_TOKEN"); exists {
+		// get a *github.Client	for the github token
+		// this client will be used for interacting with the github api
+		ts := oauth2.StaticTokenSource(
+			&oauth2.Token{AccessToken: token},
+		)
+		tokenClient := oauth2.NewClient(context.Background(), ts)
+		client := gh.NewClient(tokenClient)
+
+		owner := strings.Split(viper.GetString("admin.gitrepourl"), "/")[3]
+		repo := strings.Split(viper.GetString("admin.gitrepourl"), "/")[4]
+		repo = strings.Replace(repo, ".git", "", 1)
+
+		key := gh.Key{
+			Key:      pointer.StringPtr(pubkey),
+			ReadOnly: pointer.BoolPtr(false),
+		}
+		_, _, err := client.Repositories.CreateKey(context.Background(), owner, repo, &key)
+
+		if err != nil {
+			panic(err)
+		}
+	}
+
 	var err error
 	for {
 		err = keyCanRead(repoUrl, keys)

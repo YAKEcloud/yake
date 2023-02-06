@@ -38,8 +38,10 @@ Dependent on your relationship with 23T you will be charged for using 23KE.
 `,
 	RunE: func(cmd *cobra.Command, args []string) error {
 		// todo check required flags
-
-		viper.ReadInConfig()
+		err := viper.ReadInConfig()
+		if err != nil {
+			return err
+		}
 
 		kubeConfig, err := cmd.Flags().GetString("kubeconfig")
 		if err != nil {
