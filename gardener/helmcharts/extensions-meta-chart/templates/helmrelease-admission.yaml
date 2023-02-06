@@ -31,7 +31,7 @@ spec:
   values:
     global:
       image:
-        tag: {{ $v.version }}
+        tag: v{{ $v.version }}
       virtualGarden:
         enabled: true
     gardener-extension-admission-{{ $extShortName }}:
@@ -71,7 +71,7 @@ spec:
   values:
     global:
       image:
-        tag: {{ $v.version }}
+        tag: v{{ $v.version }}
       virtualGarden:
         enabled: true
     gardener-extension-admission-{{ $extShortName }}:
