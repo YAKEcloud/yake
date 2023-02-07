@@ -11,6 +11,7 @@ ignore: |
   .github/workflows/
   flux-system/gotk-components.yaml
   gardener/configuration/templates/
+  gardener/configuration/images.yaml
   gardener/helmcharts
   hack/ci/secrets/
   hack/ci/misc/microservices-demo.yaml
