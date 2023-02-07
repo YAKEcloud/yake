@@ -38,6 +38,10 @@ stringData:
           namespace: garden
       featureGates:
         ManagedIstio: true
+{{- if .Values.registryOverwrite }}
+    imageVectorOverwrite: |
+{{ include "gardenlet.imageVectorOverwrite" . | indent 6 }}
+{{- end }}
 ---
 apiVersion: v1
 kind: Secret

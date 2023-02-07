@@ -15,6 +15,10 @@ stringData:
       defaultDomains: {{ include "gardener.defaultDomains" . | indent 8 }}
       internalDomain: {{ include "gardener.internalDomain" . | indent 8 }}
       apiserver:
+        {{- if .Values.myReg }}
+           image:
+             registry: $myReg
+        {{- end }}
         replicaCount: 2
         vpa: true
         clusterIdentity: {{ .Values.clusterIdentity }}

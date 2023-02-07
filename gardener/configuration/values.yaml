@@ -1,6 +1,4 @@
 clusterIdentity: garden-cluster-identity
-gardenlet:
-  ingressDomain: internal
 
 domains:
   global:
@@ -8,3 +6,6 @@ domains:
 
 backups:
   enabled: false
+
+gardenlet:
+  ingressDomain: internal

@@ -23,9 +23,19 @@ stringData:
     provider-openstack:
       version: 1.31.3
       admission: true
+{{- if .Values.registryOverwrite }}
+      values:
+        imageVectorOverwrite: |
+{{ include "provider-openstack.imageVectorOverwrite" . | indent 10 }}
+{{- end }}
 
     networking-calico:
       version: 1.29.0
+{{- if .Values.registryOverwrite }}
+      values:
+        imageVectorOverwrite: |
+{{ include "networking-calico.imageVectorOverwrite" . | indent 10 }}
+{{- end }}
 
     shoot-cert-service:
       version: 1.28.0
