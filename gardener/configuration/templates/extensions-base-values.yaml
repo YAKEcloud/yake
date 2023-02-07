@@ -51,7 +51,7 @@ stringData:
       version: 1.43.0
 
     provider-aws:
-      version: 1.41.0
+      version: 1.41.1
 
     provider-gcp:
       version: 1.27.0
