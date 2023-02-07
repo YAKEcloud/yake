@@ -49,7 +49,7 @@ if [[ $(grep "$branch" .github/renovate.json5 | wc -l) == "0" ]]; then
   maj=$(echo "$minor" | grep -oE "^[0-9]{1,}")
   min=$(echo "$minor" | grep -oE "[0-9]{1,}$")
 
-  sed "/\/\/ template/ {
+  sed -i "/\/\/ template/ {
     p
     s;// template\s*;;
     s;_BRANCH_;$branch;g
