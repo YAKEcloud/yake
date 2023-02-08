@@ -94,5 +94,10 @@
   "enabledManagers": ["flux", "regex"],
   "prCreation": "immediate",
   "semanticCommits": "disabled",
-  "addLabels": ["version-bump"]
+  "addLabels": ["version-bump"],
+  "postUpgradeTasks": {
+    "commands": ["cd hack/go/imagevector-importer && go run main.go import --config config.yaml > ../../../gardener/configuration/images.yaml"],
+    "fileFilters": ["gardener/configuration/images.yaml"],
+    "executionMode": "update"
+  }
 }
