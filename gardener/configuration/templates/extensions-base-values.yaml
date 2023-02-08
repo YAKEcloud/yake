@@ -15,10 +15,20 @@ stringData:
 
     provider-hcloud:
       version: 0.6.1
+{{- if .Values.registryOverwrite }}
+      values:
+        imageVectorOverwrite: |
+{{ include "provider-hcloud.imageVectorOverwrite" . | indent 10 }}
+{{- end }}
 
     provider-azure:
       version: 1.33.0
       admission: true
+{{- if .Values.registryOverwrite }}
+      values:
+        imageVectorOverwrite: |
+{{ include "provider-hcloud.imageVectorOverwrite" . | indent 10 }}
+{{- end }}
 
     provider-openstack:
       version: 1.31.3
@@ -39,6 +49,11 @@ stringData:
 
     shoot-cert-service:
       version: 1.28.0
+{{- if .Values.registryOverwrite }}
+      values:
+        imageVectorOverwrite: |
+{{ include "shoot-cert-service.imageVectorOverwrite" . | indent 10 }}
+{{- end }}
 
     shoot-dns-service:
       version: 1.29.0
@@ -53,18 +68,48 @@ stringData:
             controllers: dnscontrollers,dnssources
             dnsPoolResyncPeriod: 30m
             serverPortHttp: 8080
+{{- if .Values.registryOverwrite }}
+      values:
+        imageVectorOverwrite: |
+{{ include "shoot-dns-service.imageVectorOverwrite" . | indent 10 }}
+{{- end }}
 
     networking-cilium:
       version: 1.21.0
+{{- if .Values.registryOverwrite }}
+      values:
+        imageVectorOverwrite: |
+{{ include "networking-cilium.imageVectorOverwrite" . | indent 10 }}
+{{- end }}
 
     provider-alicloud:
       version: 1.43.0
+{{- if .Values.registryOverwrite }}
+      values:
+        imageVectorOverwrite: |
+{{ include "provider-alicloud.imageVectorOverwrite" . | indent 10 }}
+{{- end }}
 
     provider-aws:
       version: 1.41.1
+{{- if .Values.registryOverwrite }}
+      values:
+        imageVectorOverwrite: |
+{{ include "provider-aws.imageVectorOverwrite" . | indent 10 }}
+{{- end }}
 
     provider-gcp:
       version: 1.27.1
+{{- if .Values.registryOverwrite }}
+      values:
+        imageVectorOverwrite: |
+{{ include "provider-gcp.imageVectorOverwrite" . | indent 10 }}
+{{- end }}
 
     runtime-gvisor:
       version: 0.8.0
+{{- if .Values.registryOverwrite }}
+      values:
+        imageVectorOverwrite: |
+{{ include "provider-gcp.imageVectorOverwrite" . | indent 10 }}
+{{- end }}
