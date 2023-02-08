@@ -2,7 +2,7 @@
 images:
 {{- range $i := index .Values "gardenlet" "imageVectorOriginal" "images" }}
 {{- range $k, $v := $.Values.registryOverwrite }}
-{{- if contains $k $i.repository }}
+{{- if hasPrefix $k $i.repository }}
 {{- $a := replace $k $v $i.repository }}
 {{- $_ := set $i "repository" $a }}
 {{- end }}
@@ -15,7 +15,7 @@ images:
 images:
 {{- range $i := index .Values "etcd-druid" "imageVectorOriginal" "images" }}
 {{- range $k, $v := $.Values.registryOverwrite }}
-{{- if contains $k $i.repository }}
+{{- if hasPrefix $k $i.repository }}
 {{- $a := replace $k $v $i.repository }}
 {{- $_ := set $i "repository" $a }}
 {{- end }}
@@ -27,7 +27,7 @@ images:
 images:
 {{- range $i := index .Values "networking-calico" "imageVectorOriginal" "images" }}
 {{- range $k, $v := $.Values.registryOverwrite }}
-{{- if contains $k $i.repository }}
+{{- if hasPrefix $k $i.repository }}
 {{- $a := replace $k $v $i.repository }}
 {{- $_ := set $i "repository" $a }}
 {{- end }}
@@ -40,7 +40,7 @@ images:
 images:
 {{- range $i := index .Values "provider-openstack" "imageVectorOriginal" "images" }}
 {{- range $k, $v := $.Values.registryOverwrite }}
-{{- if contains $k $i.repository }}
+{{- if hasPrefix $k $i.repository }}
 {{- $a := replace $k $v $i.repository }}
 {{- $_ := set $i "repository" $a }}
 {{- end }}
