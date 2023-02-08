@@ -4,6 +4,8 @@ rules:
   truthy:
     check-keys: false
   document-start: disable
+  line-length: disable
+  empty-lines: disable
 
 ignore: |
   .github/workflows/
