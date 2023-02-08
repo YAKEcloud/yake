@@ -8,6 +8,7 @@ import (
 	"net/http"
 	"net/url"
 	"regexp"
+	"strings"
 
 	"gopkg.in/yaml.v3"
 )
@@ -97,6 +98,19 @@ func getImageVector(cfg SrcConfiguration, bytesForVersion []byte) ([]byte, error
 	if err != nil {
 		return nil, err
 	}
+
+	// insert docker.io, when it is missing in upstream image vector
+	for _, item := range imageVector["images"].([]any) {
+		// tmp := item.(map[string]any)["repository"].(string)
+		// tmp = strings.Split(tmp, "/")[0]
+
+		isDockerIo := !strings.Contains(strings.Split(item.(map[string]any)["repository"].(string), "/")[0], ".")
+
+		if isDockerIo {
+			item.(map[string]any)["repository"] = "docker.io/" + item.(map[string]any)["repository"].(string)
+		}
+	}
+
 	out := make(map[string]any)
 	out[cfg.Name] = make(map[string]any)
 	out[cfg.Name].(map[string]any)["imageVectorOriginal"] = imageVector
