@@ -4,7 +4,7 @@ Copyright © 2022 NAME HERE <EMAIL ADDRESS>
 package cmd
 
 import (
-	"github.com/gardener-community/gardener-chart-releaser/pkg/releaser"
+	"github.com/23technologies/23ke/imagevector-importer/pkg/importer"
 	"github.com/spf13/cobra"
 	"github.com/spf13/viper"
 )
@@ -16,10 +16,10 @@ var exportCmd = &cobra.Command{
 	Long: ``,
 	Run: func(cmd *cobra.Command, args []string) {
 
-		config := releaser.Configuration{}
+		config := importer.Configuration{}
 		viper.Unmarshal(&config)
 
-		releaser.ImportImageVectors(config)
+		importer.ImportImageVectors(config)
 	},
 }
 

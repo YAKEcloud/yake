@@ -1,4 +1,4 @@
-module github.com/gardener-community/gardener-chart-releaser
+module github.com/23technologies/23ke/imagevector-importer
 
 go 1.18
 
