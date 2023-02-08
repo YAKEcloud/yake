@@ -1,12 +1,15 @@
 package importer
 
 import (
+	"bytes"
 	"container/ring"
 	"fmt"
+	"io"
 	"io/ioutil"
 	"math"
 	"net/http"
 	"net/url"
+	"path"
 	"regexp"
 	"strings"
 
@@ -99,25 +102,30 @@ func getImageVector(cfg SrcConfiguration, bytesForVersion []byte) ([]byte, error
 		return nil, err
 	}
 
-	// insert docker.io, when it is missing in upstream image vector
+	// insert docker.io or docker.io/library, when it is missing in upstream image vector
 	for _, item := range imageVector["images"].([]any) {
-		// tmp := item.(map[string]any)["repository"].(string)
-		// tmp = strings.Split(tmp, "/")[0]
-
-		isDockerIo := !strings.Contains(strings.Split(item.(map[string]any)["repository"].(string), "/")[0], ".")
-
-		if isDockerIo {
+		repository := item.(map[string]any)["repository"].(string)
+		repositorySplitted := strings.Split(repository, "/")
+		if len(repositorySplitted) == 1 {
+			item.(map[string]any)["repository"] = "docker.io/library/" + item.(map[string]any)["repository"].(string)
+		} else if !strings.Contains(repositorySplitted[0], ".") {
 			item.(map[string]any)["repository"] = "docker.io/" + item.(map[string]any)["repository"].(string)
+		} else if repositorySplitted[0] == "docker.io" && len(repositorySplitted) == 2 {
+			item.(map[string]any)["repository"] = path.Join(repositorySplitted[0], "library", repositorySplitted[1])
 		}
 	}
 
 	out := make(map[string]any)
 	out[cfg.Name] = make(map[string]any)
 	out[cfg.Name].(map[string]any)["imageVectorOriginal"] = imageVector
-	outBytes, err := yaml.Marshal(out)
+
+	var outBytes bytes.Buffer
+	yamlEncoder := yaml.NewEncoder(io.Writer(&outBytes))
+	yamlEncoder.SetIndent(2)
+	err = yamlEncoder.Encode(out)
 	if err != nil {
 		return nil, err
 	}
 
-	return outBytes, nil
+	return outBytes.Bytes(), nil
 }
