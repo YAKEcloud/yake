@@ -42,7 +42,7 @@ stringData:
     imageVectorOverwrite: |
 {{ include "gardenlet.imageVectorOverwrite" . | indent 6 }}
     componentImageVectorOverwrites: |
-      image:
+      components:
       - name: etcd-druid
         imageVectorOverwrite:
 {{ include "etcd-druid.imageVectorOverwrite" . | indent 10 }}
