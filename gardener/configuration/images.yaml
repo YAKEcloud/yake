@@ -1,5 +1,20 @@
+gardener:
+    apiserver:
+        repoOriginal: eu.gcr.io/gardener-project/gardener/apiserver
+etcd-druid:
+    imageVectorOriginal:
+        images:
+        - name: etcd-backup-restore
+          sourceRepository: github.com/gardener/etcd-backup-restore
+          repository: eu.gcr.io/gardener-project/gardener/etcdbrctl
+          tag: "v0.21.0"
+        - name: etcd
+          sourceRepository: github.com/gardener/etcd-custom-image
+          repository: eu.gcr.io/gardener-project/gardener/etcd
+          tag: "v3.4.13-bootstrap-8"
 gardenlet:
     imageVectorOriginal:
+        images:
         - name: gardenlet
           repository: eu.gcr.io/gardener-project/gardener/gardenlet
           sourceRepository: github.com/gardener/gardener
@@ -439,6 +454,7 @@ gardenlet:
           tag: v0.10.0
 networking-calico:
     imageVectorOriginal:
+        images:
         - labels:
             - name: gardener.cloud/cve-categorisation
               value:
@@ -600,6 +616,7 @@ networking-calico:
           tag: v0.8.4
 provider-openstack:
     imageVectorOriginal:
+        images:
         - labels:
             - name: gardener.cloud/cve-categorisation
               value:
