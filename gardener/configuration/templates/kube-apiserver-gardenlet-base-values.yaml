@@ -44,7 +44,7 @@ stringData:
     componentImageVectorOverwrites: |
       components:
       - name: etcd-druid
-        imageVectorOverwrite:
+        imageVectorOverwrite: |
 {{ include "etcd-druid.imageVectorOverwrite" . | indent 10 }}
 {{- end }}
 ---
