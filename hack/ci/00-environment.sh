@@ -1,6 +1,8 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
+source hack/ci/util.sh
+
 PROVIDER=${PROVIDER:=hcloud}
 ZONE=${ZONE:=hel1}
 

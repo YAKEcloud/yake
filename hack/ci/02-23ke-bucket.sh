@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
+source hack/ci/util.sh
 source hack/ci/handy.sh
 
 echo "23KE Bucket upload"
