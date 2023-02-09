@@ -30,6 +30,8 @@ spec:
     createNamespace: true
   values:
     global:
+      image:
+        tag: v{{ $v.version }}
       virtualGarden:
         enabled: true
     gardener-extension-admission-{{ $extShortName }}:
@@ -68,6 +70,8 @@ spec:
     createNamespace: true
   values:
     global:
+      image:
+        tag: v{{ $v.version }}
       virtualGarden:
         enabled: true
     gardener-extension-admission-{{ $extShortName }}:

@@ -38,6 +38,15 @@ stringData:
           namespace: garden
       featureGates:
         ManagedIstio: true
+{{- if .Values.registryOverwrite }}
+    imageVectorOverwrite: |
+{{ include "gardenlet.imageVectorOverwrite" . | indent 6 }}
+    componentImageVectorOverwrites: |
+      components:
+      - name: etcd-druid
+        imageVectorOverwrite: |
+{{ include "etcd-druid.imageVectorOverwrite" . | indent 10 }}
+{{- end }}
 ---
 apiVersion: v1
 kind: Secret

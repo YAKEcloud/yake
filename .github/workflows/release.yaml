@@ -17,6 +17,7 @@ jobs:
       - name: Checkout source
         uses: actions/checkout@v3
         with:
+          token: "${{ secrets.GH_TOKEN_23T_MACHINE_USER }}"
           fetch-depth: 0
       - name: Configure git
         run: |
@@ -33,6 +34,7 @@ jobs:
     steps:
       - uses: actions/checkout@v3
         with:
+          token: "${{ secrets.GH_TOKEN_23T_MACHINE_USER }}"
           ref: "v${{ github.event.inputs.version }}"
       - name: Install MC
         run: |

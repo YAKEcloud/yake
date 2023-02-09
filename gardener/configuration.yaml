@@ -16,6 +16,9 @@ spec:
         name: 23ke
         namespace: flux-system
       interval: 1m
+      valuesFiles:
+        - gardener/configuration/values.yaml
+        - gardener/configuration/images.yaml
   valuesFrom:
     - kind: Secret
       name: 23ke-config

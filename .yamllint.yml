@@ -4,6 +4,10 @@ rules:
   truthy:
     check-keys: false
   document-start: disable
+  line-length: disable
+  empty-lines: disable
+  indentation:
+    indent-sequences: whatever
 
 ignore: |
   .github/workflows/
@@ -11,7 +15,6 @@ ignore: |
   gardener/configuration/templates/
   gardener/helmcharts
   hack/ci/secrets/
-  hack/ci/misc/microservices-demo.yaml
   hack/ci/dev-env/config/charts
   pre-gardener/addons/templates/
   pre-gardener/configuration/templates/
