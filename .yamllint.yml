@@ -12,11 +12,12 @@ rules:
 ignore: |
   .github/workflows/
   flux-system/gotk-components.yaml
-  gardener/configuration/templates/
-  gardener/helmcharts
+  configuration/23ke-config/templates/
+  gardener/extensions-meta-chart/templates/
+  gardener/gardener-ca/templates/
+  gardener/garden-content-chart/templates/
   hack/ci/secrets/
   hack/ci/dev-env/config/charts
   pre-gardener/addons/templates/
-  pre-gardener/configuration/templates/
   pre-gardener/dnsprovider/templates
   pre-gardener/issuer/templates/
