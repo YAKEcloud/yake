@@ -1,0 +1,66 @@
+sources:
+    - name: gardenlet
+      repo: gardener/gardener
+      version:
+        fromFile: ../../../gardener/gardenlet.yaml
+      imageVector: charts/images.yaml
+    - name: etcd-druid
+      repo: gardener/etcd-druid
+      version:
+        fromFile: iterative
+      imageVector: charts/images.yaml
+    - name: provider-openstack
+      repo: gardener/gardener-extension-provider-openstack
+      version:
+        fromFile: ../../../gardener/configuration/templates/extensions-base-values.yaml
+      imageVector: charts/images.yaml
+    - name: provider-azure
+      repo: gardener/gardener-extension-provider-azure
+      version:
+        fromFile: ../../../gardener/configuration/templates/extensions-base-values.yaml
+      imageVector: charts/images.yaml
+    - name: provider-aws
+      repo: gardener/gardener-extension-provider-aws
+      version:
+        fromFile: ../../../gardener/configuration/templates/extensions-base-values.yaml
+      imageVector: charts/images.yaml
+    - name: provider-gcp
+      repo: gardener/gardener-extension-provider-gcp
+      version:
+        fromFile: ../../../gardener/configuration/templates/extensions-base-values.yaml
+      imageVector: charts/images.yaml
+    - name: provider-alicloud
+      repo: gardener/gardener-extension-provider-alicloud
+      version:
+        fromFile: ../../../gardener/configuration/templates/extensions-base-values.yaml
+      imageVector: charts/images.yaml
+    - name: provider-hcloud
+      repo: 23technologies/gardener-extension-provider-hcloud
+      version:
+        fromFile: ../../../gardener/configuration/templates/extensions-base-values.yaml
+      imageVector: charts/images.yaml
+    - name: networking-calico
+      repo: gardener/gardener-extension-networking-calico
+      version:
+        fromFile: ../../../gardener/configuration/templates/extensions-base-values.yaml
+      imageVector: charts/images.yaml
+    - name: networking-cilium
+      repo: gardener/gardener-extension-networking-cilium
+      version:
+        fromFile: ../../../gardener/configuration/templates/extensions-base-values.yaml
+      imageVector: charts/images.yaml
+    - name: shoot-cert-service
+      repo: gardener/gardener-extension-shoot-cert-service
+      version:
+        fromFile: ../../../gardener/configuration/templates/extensions-base-values.yaml
+      imageVector: charts/images.yaml
+    - name: shoot-dns-service
+      repo: gardener/gardener-extension-shoot-dns-service
+      version:
+        fromFile: ../../../gardener/configuration/templates/extensions-base-values.yaml
+      imageVector: charts/images.yaml
+    - name: runtime-gvisor
+      repo: gardener/gardener-extension-runtime-gvisor
+      version:
+        fromFile: ../../../gardener/configuration/templates/extensions-base-values.yaml
+      imageVector: charts/images.yaml
