@@ -5,7 +5,7 @@ source hack/ci/util.sh
 source hack/ci/handy.sh
 
 echo "Installing 23KE"
-cat hack/ci/misc/23kectl-config.yaml.tmpl | envsubst > hack/ci/misc/23kectl-config.yaml
+cat hack/ci/misc/23kectl-config.yaml.tmpl | DOLLAR='$' envsubst > hack/ci/misc/23kectl-config.yaml
 repoRoot=$(pwd)
 cd hack/go/23kectl
 go run main.go install --kubeconfig $repoRoot/hack/ci/secrets/shoot-kubeconfig.yaml --config $repoRoot/hack/ci/misc/23kectl-config.yaml
