@@ -14,7 +14,7 @@ stringData:
       version: 0.17.0
 
     provider-hcloud:
-      version: 0.6.1
+      version: 0.6.6
 {{- if .Values.registryOverwrite }}
       values:
         imageVectorOverwrite: |

@@ -1819,9 +1819,9 @@ provider-hcloud:
         sourceRepository: https://github.com/kubernetes-csi/external-provisioner
         tag: v2.2.2
       - name: hcloud-cloud-controller-manager
-        repository: ghcr.io/23technologies/hcloud-cloud-controller-manager
+        repository: docker.io/hetznercloud/hcloud-cloud-controller-manager
         sourceRepository: https://github.com/hetznercloud/hcloud-cloud-controller-manager
-        tag: v1.12.1-23technologies.1
+        tag: v1.13.2
       - name: machine-controller-manager
         repository: eu.gcr.io/gardener-project/gardener/machine-controller-manager
         sourceRepository: https://github.com/gardener/machine-controller-manager
@@ -1829,7 +1829,7 @@ provider-hcloud:
       - name: machine-controller-manager-provider-hcloud
         repository: ghcr.io/23technologies/machine-controller-manager-provider-hcloud
         sourceRepository: https://github.com/23technologies/machine-controller-manager-provider-hcloud
-        tag: v0.2.19
+        tag: v0.2.20
       - name: csi-driver-controller
         repository: ghcr.io/23technologies/hcloud-csi-driver
         sourceRepository: https://github.com/hetznercloud/csi-driver
