@@ -8,6 +8,9 @@ metadata:
 type: Opaque
 stringData:
   values.yaml: |-
-    certificate:
-      certManager:
-        enabled: true
+    global:
+      runtime:
+        certificate:
+          certManager:
+            enabled: true
+            issuerName: gardener-ca
