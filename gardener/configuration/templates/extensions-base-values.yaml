@@ -27,7 +27,7 @@ stringData:
 {{- if .Values.registryOverwrite }}
       values:
         imageVectorOverwrite: |
-{{ include "provider-hcloud.imageVectorOverwrite" . | indent 10 }}
+{{ include "provider-azure.imageVectorOverwrite" . | indent 10 }}
 {{- end }}
 
     provider-openstack:
@@ -111,5 +111,5 @@ stringData:
 {{- if .Values.registryOverwrite }}
       values:
         imageVectorOverwrite: |
-{{ include "provider-gcp.imageVectorOverwrite" . | indent 10 }}
+{{ include "runtime-gvisor.imageVectorOverwrite" . | indent 10 }}
 {{- end }}
