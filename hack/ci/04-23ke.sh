@@ -3,9 +3,6 @@ set -euo pipefail
 
 source hack/ci/util.sh
 source hack/ci/handy.sh
-RCLONE_CONFIG_23KETESTBED_ACCOUNT_BASE64=$(echo -n $RCLONE_CONFIG_23KETESTBED_ACCOUNT|base64 -w0)
-RCLONE_CONFIG_23KETESTBED_KEY_BASE64=$(echo -n $RCLONE_CONFIG_23KETESTBED_KEY|base64 -w0)
-
 
 dumpHr() {
 	local helmreleases=$(kubectl get helmreleases -n flux-system | sed 1,1d | awk '{ if($3 != "True") print $1 }' | xargs echo)
