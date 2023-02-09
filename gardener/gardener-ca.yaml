@@ -1,14 +1,15 @@
 apiVersion: helm.toolkit.fluxcd.io/v2beta1
 kind: HelmRelease
 metadata:
-  name: pre-gardener-configuration
+  name: garden-ca
   namespace: flux-system
 spec:
   interval: 1m
+  dependsOn:
+    - name: cert-manager
   chart:
     spec:
-      chart: pre-gardener/configuration
-      reconcileStrategy: Revision
+      chart: gardener/gardener-ca
       sourceRef:
         kind: GitRepository
         name: 23ke
@@ -16,4 +17,5 @@ spec:
       interval: 1m
   valuesFrom:
     - kind: Secret
-      name: 23ke-config
+      name: gardener-ca-base-values
+      optional: false

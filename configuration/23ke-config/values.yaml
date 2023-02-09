@@ -2,12 +2,17 @@ clusterIdentity: garden-cluster-identity
 gardenlet:
   ingressDomain: internal
 
-backups:
-  enabled: false
+dashboard:
+  image:
+    repository: eu.gcr.io/gardener-project/gardener/dashboard
+    tagOriginal:
 
 domains:
   global:
     domain: "example.org"
+
+backups:
+  enabled: false
 
 issuer:
   acme:

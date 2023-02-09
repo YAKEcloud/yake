@@ -8,6 +8,7 @@ echo "23KE Bucket upload"
 rclone -q mkdir $REMOTE:$BUCKET
 rclone -q sync kustomization.yaml $REMOTE:$BUCKET
 rclone -q sync flux $REMOTE:$BUCKET/flux
+rclone -q sync configuration $REMOTE:$BUCKET/configuration
 rclone -q sync pre-gardener $REMOTE:$BUCKET/pre-gardener
 rclone -q sync flux-system $REMOTE:$BUCKET/flux-system
 rclone -q sync gardener $REMOTE:$BUCKET/gardener

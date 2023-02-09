@@ -10,7 +10,7 @@ spec:
     - name: gardener-runtime
   chart:
     spec:
-      chart: gardener/helmcharts/extensions-meta-chart
+      chart: gardener/extensions-meta-chart
       reconcileStrategy: Revision
       sourceRef:
         kind: GitRepository

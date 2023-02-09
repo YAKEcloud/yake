@@ -12,7 +12,7 @@ spec:
     - name: kube-apiserver
   chart:
     spec:
-      chart: gardener/helmcharts/garden-content-chart
+      chart: gardener/garden-content-chart
       sourceRef:
         kind: GitRepository
         name: 23ke

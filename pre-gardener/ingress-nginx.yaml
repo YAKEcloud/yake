@@ -7,7 +7,6 @@ spec:
   targetNamespace: garden
   interval: 1m
   dependsOn:
-    - name: pre-gardener-configuration
     - name: addons
   chart:
     spec:

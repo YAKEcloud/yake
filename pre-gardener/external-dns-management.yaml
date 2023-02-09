@@ -7,7 +7,6 @@ spec:
   interval: 1m
   targetNamespace: flux-system
   dependsOn:
-    - name: pre-gardener-configuration
     - name: addons
   chart:
     spec:

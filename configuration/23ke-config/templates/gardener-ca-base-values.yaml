@@ -1,0 +1,10 @@
+apiVersion: v1
+kind: Secret
+metadata:
+  name: gardener-ca-base-values
+  namespace: flux-system
+type: Opaque
+stringData:
+  values.yaml: |-
+    api:
+      domain: {{ include "api.domain" . }}

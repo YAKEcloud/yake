@@ -1,0 +1,7 @@
+apiVersion: v2
+name: gardener-ca
+description: A Helm chart for gardeners internal ca
+
+type: application
+
+version: 0.0.1

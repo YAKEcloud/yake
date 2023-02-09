@@ -7,6 +7,10 @@ type: Opaque
 stringData:
   values.yaml: |-
     global:
+{{- if .Values.registryOverwrite }}
+      image:
+        repository: {{ include "replaceRegistry" (dict "eu.gcr.io/gardener-project/gardener/dashboard" .Values.registryOverwrite) }}
+{{- end }}
       virtualGarden:
         enabled: true
       apiServerUrl: https://{{ include "api.domain" . }}/
