@@ -23,10 +23,10 @@ dumpKs() {
 
 echo "Installing 23KE"
 cat hack/ci/misc/23kectl-config.yaml.tmpl | envsubst > hack/ci/misc/23kectl-config.yaml
-cwd=$(pwd)
+repoRoot=$(pwd)
 cd hack/go/23kectl
-go run main.go install --kubeconfig $cwd/hack/ci/secrets/shoot-kubeconfig.yaml --config $cwd/hack/ci/misc/23kectl-config.yaml
-cd $cwd
+go run main.go install --kubeconfig $repoRoot/hack/ci/secrets/shoot-kubeconfig.yaml --config $repoRoot/hack/ci/misc/23kectl-config.yaml
+cd $repoRoot
 
 echo "Waiting for Kustomization pre-gardener"
 kubectl wait kustomization 23ke-base -n flux-system --for=condition=ready --timeout=10m || { dumpKs; exit 1; }
