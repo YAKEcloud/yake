@@ -11,8 +11,17 @@ mc cp -q kustomization.yaml "$MC_ALIAS/$BUCKET_23KE"
 mc cp -q 23kectl.yaml "$MC_ALIAS/$BUCKET_23KE"
 mc cp -q --recursive flux "$MC_ALIAS/$BUCKET_23KE"
 mc cp -q --recursive pre-gardener "$MC_ALIAS/$BUCKET_23KE"
-mc cp -q --recursive flux-system  "$MC_ALIAS/$BUCKET_23KE"
 mc cp -q --recursive gardener "$MC_ALIAS/$BUCKET_23KE"
+
+file=flux-system/gotk-components.yaml
+yq eval '(
+  select(.kind == "Deployment") |
+  select(
+    .metadata.name == "helm-controller" or
+    .metadata.name == "kustomize-controller"
+  ) |
+  .spec.template.spec.containers[0].args
+) += "--requeue-dependency=5s"' $file | mc pipe $MC_ALIAS/$BUCKET_23KE/$file
 
 # we now upload packet versions which use a bucket instead of the GitRepository
 for file in $(grep --exclude 23kectl --exclude-dir=hack --exclude-dir=flux-system  -lr GitRepository . | sed 's/^\.\///'); do
