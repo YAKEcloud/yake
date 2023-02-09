@@ -13,7 +13,7 @@ cd $repoRoot
 
 echo "Waiting for Kustomization pre-gardener"
 kubectl wait kustomization 23ke-base -n flux-system --for=condition=ready --timeout=10m || { dumpKs; exit 1; }
-kubectl wait kustomization 23ke-env -n flux-system --for=condition=ready --timeout=10m || { dumpKs; exit 1; }
+kubectl wait kustomization 23ke-config -n flux-system --for=condition=ready --timeout=10m || { dumpKs; exit 1; }
 kubectl wait kustomization 23ke-env-config -n flux-system --for=condition=ready --timeout=10m || { dumpKs; exit 1; }
 kubectl wait kustomization pre-gardener -n flux-system --for=condition=ready --timeout=10m || { dumpKs; exit 1; }
 
