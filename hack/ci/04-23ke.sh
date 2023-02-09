@@ -4,20 +4,6 @@ set -euo pipefail
 source hack/ci/util.sh
 source hack/ci/handy.sh
 
-dumpHr() {
-	local helmreleases=$(kubectl get helmreleases -n flux-system | sed 1,1d | awk '{ if($3 != "True") print $1 }' | xargs echo)
-	kubectl get hr $helmreleases -n flux-system -o wide
-	echo ''
-	kubectl get hr $helmreleases -n flux-system -o yaml
-}
-
-dumpKs() {
-	local kustomizations=$(kubectl get kustomizations -n flux-system | sed 1,1d | awk '{ if($3 != "True") print $1 }' | xargs echo)
-	kubectl get kustomizations $kustomizations -n flux-system -o wide
-	echo ''
-	kubectl get kustomizations $kustomizations -n flux-system -o yaml
-}
-
 echo "Installing 23KE"
 cat hack/ci/misc/23kectl-config.yaml.tmpl | envsubst > hack/ci/misc/23kectl-config.yaml
 repoRoot=$(pwd)
