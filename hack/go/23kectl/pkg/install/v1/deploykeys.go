@@ -8,7 +8,6 @@ import (
 	"strings"
 
 	"github.com/23technologies/23kectl/pkg/common"
-	"github.com/spf13/viper"
 	"golang.org/x/oauth2"
 
 	"github.com/fluxcd/flux2/pkg/manifestgen/sourcesecret"
@@ -92,31 +91,39 @@ func generateDeployKey(kubeClient client.WithWatch, secretName string, repoUrl s
 	}
 }
 
+func registerDeployKeyWithGithub(repoUrl, pubkey, token string) {
+
+	// get a *github.Client	for the github token
+	// this client will be used for interacting with the github api
+	ts := oauth2.StaticTokenSource(
+		&oauth2.Token{AccessToken: token},
+	)
+	tokenClient := oauth2.NewClient(context.Background(), ts)
+	client := gh.NewClient(tokenClient)
+
+	owner := strings.Split(repoUrl, "/")[3]
+	repo := strings.Split(repoUrl, "/")[4]
+	repo = strings.Replace(repo, ".git", "", 1)
+
+	key := gh.Key{
+		Key:      pointer.String(pubkey),
+		ReadOnly: pointer.Bool(false),
+	}
+	_, _, err := client.Repositories.CreateKey(context.Background(), owner, repo, &key)
+
+	if err != nil {
+		msg := err.Error()
+
+		if !strings.Contains(msg, "key is already in use") {
+			fmt.Println("Tried to add deploy key to github, but failed.", msg)
+		}
+	}
+}
+
 func blockUntilKeyCanRead(repoUrl string, keys *ssh.PublicKeys, pubkey string) {
-
 	// add github deploy key automatically, when GH_TOKEN is provided
-	if token, exists := os.LookupEnv("GH_TOKEN"); exists {
-		// get a *github.Client	for the github token
-		// this client will be used for interacting with the github api
-		ts := oauth2.StaticTokenSource(
-			&oauth2.Token{AccessToken: token},
-		)
-		tokenClient := oauth2.NewClient(context.Background(), ts)
-		client := gh.NewClient(tokenClient)
-
-		owner := strings.Split(viper.GetString("admin.gitrepourl"), "/")[3]
-		repo := strings.Split(viper.GetString("admin.gitrepourl"), "/")[4]
-		repo = strings.Replace(repo, ".git", "", 1)
-
-		key := gh.Key{
-			Key:      pointer.StringPtr(pubkey),
-			ReadOnly: pointer.BoolPtr(false),
-		}
-		_, _, err := client.Repositories.CreateKey(context.Background(), owner, repo, &key)
-
-		if err != nil {
-			panic(err)
-		}
+	if token, exists := os.LookupEnv("GH_TOKEN"); exists && keyCanRead(repoUrl, keys) != nil {
+		registerDeployKeyWithGithub(repoUrl, pubkey, token)
 	}
 
 	var err error
