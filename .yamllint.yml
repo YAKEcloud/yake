@@ -15,7 +15,6 @@ ignore: |
   gardener/configuration/templates/
   gardener/helmcharts
   hack/ci/secrets/
-  hack/ci/misc/microservices-demo.yaml
   hack/ci/dev-env/config/charts
   pre-gardener/addons/templates/
   pre-gardener/configuration/templates/
