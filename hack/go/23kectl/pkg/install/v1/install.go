@@ -215,7 +215,7 @@ func completeKeConfig(kubeClient client.WithWatch) error {
 		clusterIp, ipnet, _ := net.ParseCIDR(seedServiceCidr)
 
 		// clusterIp[len(clusterIp)-2] += 1
-		clusterIp[len(clusterIp)-1] += 1
+		clusterIp[len(clusterIp)-1] += 100
 
 		if !ipnet.Contains(clusterIp) {
 			panic(fmt.Sprintf("Your cluster ip (%s) is out of the service IP range: %s", clusterIp, ipnet.String()))
