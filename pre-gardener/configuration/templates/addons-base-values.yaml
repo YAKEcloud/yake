@@ -8,3 +8,8 @@ stringData:
   values.yaml: |-
     backups:
       {{- toYaml .Values.backups | nindent 6 }}
+{{- if .Values.registryOverwrite }}
+    velero:
+      image:
+        repository: {{ include "replaceRegistry" (dict "docker.io/velero/velero" .Values.registryOverwrite) }}
+{{- end }}

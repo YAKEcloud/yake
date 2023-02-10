@@ -20,7 +20,10 @@ spec:
       retries: 10
   values:
     snapshotsEnabled: false
-
+{{- if ((.Values.velero).image).repository }}
+    image:
+      repository: {{ .Values.velero.image.repository }}
+{{- end }}
 {{- if eq .Values.backups.provider "azure" }}
     credentials:
       useSecret: false

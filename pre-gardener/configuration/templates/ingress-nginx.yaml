@@ -9,8 +9,7 @@ stringData:
     controller:
 {{- if .Values.registryOverwrite }}
       image:
-        registry: {{ include "replaceRegistry" (dict "registry.k8s.io" .Values.registryOverwrite) }}
-        image: ingress-nginx/controller #!!!!!!!!!!!!!
+        repository: {{ include "replaceRegistry" (dict "registry.k8s.io/ingress-nginx/controller" .Values.registryOverwrite) }}
 {{- end }}
       podLabels:
         app: nginx-ingress
@@ -26,6 +25,14 @@ stringData:
           dns.gardener.cloud/class: base-dns-class
       extraArgs:
         enable-ssl-passthrough: ""
+{{- if .Values.registryOverwrite }}
+    patch:
+      image:
+        repository: {{ include "replaceRegistry" (dict "registry.k8s.io/ingress-nginx/kube-webhook-certgen" .Values.registryOverwrite) }}
+    defaultbackend:
+      image:
+        repository: {{ include "replaceRegistry" (dict "registry.k8s.io/defaultbackend-amd64" .Values.registryOverwrite) }}
+{{- end }}
 {{- if .Values.issuer.enabled }}
 ---
 apiVersion: v1
