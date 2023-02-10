@@ -7,6 +7,11 @@ type: Opaque
 stringData:
   values.yaml: |-
     controller:
+{{- if .Values.registryOverwrite }}
+      image:
+        registry: {{ include "replaceRegistry" (dict "registry.k8s.io" .Values.registryOverwrite) }}
+        image: ingress-nginx/controller #!!!!!!!!!!!!!
+{{- end }}
       podLabels:
         app: nginx-ingress
         component: controller

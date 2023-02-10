@@ -38,7 +38,17 @@ stringData:
       sessionSecret: ${DASHBOARD_SESSIONSECRET}
     kubeApiServer:
       basicAuthPassword: ${KUBEAPISERVER_BASICAUTHPASSWORD}
-
+    registryOverwrite:
+      eu.gcr.io: core.harbor.23ke-run-9e00.23ke-testbed.23t.dev/eu.gcr.io
+      registry.k8s.io: core.harbor.23ke-run-9e00.23ke-testbed.23t.dev/registry.k8s.io
+      quay.io: core.harbor.23ke-run-9e00.23ke-testbed.23t.dev/quay.io
+      docker.io: core.harbor.23ke-run-9e00.23ke-testbed.23t.dev/docker.io
+      gcr.io: core.harbor.23ke-run-9e00.23ke-testbed.23t.dev/gcr.io
+      ghcr.io: core.harbor.23ke-run-9e00.23ke-testbed.23t.dev/ghcr.io
+      k8s.gcr.io: core.harbor.23ke-run-9e00.23ke-testbed.23t.dev/k8s.gcr.io
+      mcr.microsoft.com: core.harbor.23ke-run-9e00.23ke-testbed.23t.dev/mcr.microsoft.com
+      public.ecr.aws: core.harbor.23ke-run-9e00.23ke-testbed.23t.dev/public.ecr.aws
+      registry.eu-central-1.aliyuncs.com: core.harbor.23ke-run-9e00.23ke-testbed.23t.dev/registry.eu-central-1.aliyuncs.com
     issuer:
       acme:
         email: operations@23technologies.cloud
