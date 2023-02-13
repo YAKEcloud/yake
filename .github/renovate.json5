@@ -1,13 +1,13 @@
 {
-  "assignees": ["gesslein"],
+  "assignees": ["mxmxchere"],
   "baseBranches": [
     "main",
     // template "_BRANCH_",
+    "release-v1.64",
     "release-v1.63",
     "release-v1.62",
     "release-v1.61",
     "release-v1.60",
-    "release-v1.59",
   ],
   "automerge": "true",
   "dependencyDashboard": true,
@@ -29,16 +29,24 @@
     {
       "matchBaseBranches": [
         // template "_BRANCH_",
+        "release-v1.64",
         "release-v1.63",
         "release-v1.62",
         "release-v1.61",
         "release-v1.60",
-        "release-v1.59",
       ],
       "matchPackagePatterns": [".*"],
       "enabled": false
     },
     // template {"matchBaseBranches":["_BRANCH_"],"allowedVersions":"/^_MAJOR_[.]_MINOR_[.].*$/","matchPackagePatterns": ["gardener-controlplane", "gardener-controlplane-application", "gardener-controlplane-runtime", "gardener-application", "gardenlet"],"enabled": true },
+    {
+      "matchBaseBranches": [
+        "release-v1.64"
+      ],
+      "matchPackagePatterns": ["gardener-controlplane", "gardener-controlplane-application", "gardener-controlplane-runtime", "gardener-application", "gardenlet"],
+      "allowedVersions": "/^1\\.64\\..*$/",
+      "enabled": true
+    },
     {"matchBaseBranches":["release-v1.63"],"allowedVersions":"/^1[.]63[.].*$/","matchPackagePatterns": ["gardener-controlplane", "gardener-controlplane-application", "gardener-controlplane-runtime", "gardener-application", "gardenlet"],"enabled": true },
     {
       "matchBaseBranches": [
@@ -62,14 +70,6 @@
       ],
       "matchPackagePatterns": ["gardener-controlplane", "gardener-controlplane-application", "gardener-controlplane-runtime", "gardener-application", "gardenlet"],
       "allowedVersions": "/^1\\.60\\..*$/",
-      "enabled": true
-    },
-    {
-      "matchBaseBranches": [
-        "release-v1.59"
-      ],
-      "matchPackagePatterns": ["gardener-controlplane", "gardener-controlplane-application", "gardener-controlplane-runtime", "gardener-application", "gardenlet"],
-      "allowedVersions": "/^1\\.59\\..*$/",
       "enabled": true
     },
   ],
