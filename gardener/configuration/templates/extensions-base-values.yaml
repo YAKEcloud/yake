@@ -31,7 +31,7 @@ stringData:
 {{- end }}
 
     provider-openstack:
-      version: 1.31.3
+      version: 1.31.4
       admission: true
 {{- if .Values.registryOverwrite }}
       values:

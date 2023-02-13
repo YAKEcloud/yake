@@ -38,7 +38,7 @@ gardenlet:
       - name: ingress-default-backend
         repository: eu.gcr.io/gardener-project/gardener/ingress-default-backend
         sourceRepository: github.com/gardener/ingress-default-backend
-        tag: 0.12.0
+        tag: 0.13.0
       - name: hyperkube
         repository: eu.gcr.io/gardener-project/hyperkube
         sourceRepository: github.com/gardener/hyperkube
@@ -87,48 +87,140 @@ gardenlet:
       - name: vpn-seed-server
         repository: eu.gcr.io/gardener-project/gardener/vpn-seed-server
         sourceRepository: github.com/gardener/vpn2
-        tag: 0.14.0
-      - name: alertmanager
+        tag: 0.15.0
+      - labels:
+          - name: gardener.cloud/cve-categorisation
+            value:
+              authentication_enforced: true
+              availability_requirement: low
+              confidentiality_requirement: high
+              integrity_requirement: high
+              network_exposure: public
+              user_interaction: end-user
+        name: alertmanager
         repository: quay.io/prometheus/alertmanager
         sourceRepository: github.com/prometheus/alertmanager
         tag: v0.24.0
-      - name: prometheus
+      - labels:
+          - name: gardener.cloud/cve-categorisation
+            value:
+              authentication_enforced: true
+              availability_requirement: low
+              confidentiality_requirement: high
+              integrity_requirement: high
+              network_exposure: public
+              user_interaction: end-user
+        name: prometheus
         repository: quay.io/prometheus/prometheus
         sourceRepository: github.com/prometheus/prometheus
         tag: v2.41.0
-      - name: configmap-reloader
+      - labels:
+          - name: gardener.cloud/cve-categorisation
+            value:
+              authentication_enforced: false
+              availability_requirement: low
+              confidentiality_requirement: high
+              integrity_requirement: high
+              network_exposure: private
+              user_interaction: gardener-operator
+        name: configmap-reloader
         repository: ghcr.io/prometheus-operator/prometheus-config-reloader
         sourceRepository: github.com/prometheus-operator/prometheus-operator
         tag: v0.61.1
-      - name: kube-state-metrics
+      - labels:
+          - name: gardener.cloud/cve-categorisation
+            value:
+              authentication_enforced: false
+              availability_requirement: low
+              confidentiality_requirement: high
+              integrity_requirement: high
+              network_exposure: private
+              user_interaction: gardener-operator
+        name: kube-state-metrics
         repository: registry.k8s.io/kube-state-metrics/kube-state-metrics
         sourceRepository: github.com/kubernetes/kube-state-metrics
         tag: v2.5.0
-      - name: node-exporter
+      - labels:
+          - name: gardener.cloud/cve-categorisation
+            value:
+              authentication_enforced: false
+              availability_requirement: low
+              comment: the node-exporter is also deployed to the shoot cluster
+              confidentiality_requirement: high
+              integrity_requirement: high
+              network_exposure: protected
+              user_interaction: end-user
+        name: node-exporter
         repository: quay.io/prometheus/node-exporter
         sourceRepository: github.com/prometheus/node_exporter
         tag: v1.5.0
-      - name: grafana
+      - labels:
+          - name: gardener.cloud/cve-categorisation
+            value:
+              authentication_enforced: true
+              availability_requirement: low
+              confidentiality_requirement: high
+              integrity_requirement: high
+              network_exposure: public
+              user_interaction: end-user
+        name: grafana
         repository: docker.io/grafana/grafana
         sourceRepository: github.com/grafana/grafana
         tag: 7.5.17
-      - name: blackbox-exporter
+      - labels:
+          - name: gardener.cloud/cve-categorisation
+            value:
+              authentication_enforced: false
+              availability_requirement: low
+              comment: the blackbox-exporter is also deployed to the shoot cluster
+              confidentiality_requirement: high
+              integrity_requirement: high
+              network_exposure: protected
+              user_interaction: end-user
+        name: blackbox-exporter
         repository: quay.io/prometheus/blackbox-exporter
         sourceRepository: github.com/prometheus/blackbox_exporter
         tag: v0.23.0
-      - name: metrics-server
+      - labels:
+          - name: gardener.cloud/cve-categorisation
+            value:
+              authentication_enforced: false
+              availability_requirement: low
+              confidentiality_requirement: high
+              integrity_requirement: high
+              network_exposure: private
+              user_interaction: gardener-operator
+        name: metrics-server
         repository: registry.k8s.io/metrics-server/metrics-server
         sourceRepository: github.com/kubernetes-sigs/metrics-server
         tag: v0.6.2
       - name: vpn-shoot-client
         repository: eu.gcr.io/gardener-project/gardener/vpn-shoot-client
         sourceRepository: github.com/gardener/vpn2
-        tag: 0.14.0
-      - name: coredns
+        tag: 0.15.0
+      - labels:
+          - name: gardener.cloud/cve-categorisation
+            value:
+              authentication_enforced: false
+              availability_requirement: high
+              confidentiality_requirement: low
+              integrity_requirement: high
+              network_exposure: protected
+              user_interaction: end-user
+        name: coredns
         repository: docker.io/coredns/coredns
         sourceRepository: github.com/coredns/coredns
         tag: 1.10.0
-      - name: node-local-dns
+      - labels:
+          - name: gardener.cloud/cve-categorisation
+            value:
+              authentication_enforced: false
+              availability_requirement: high
+              confidentiality_requirement: low
+              integrity_requirement: high
+              network_exposure: private
+              user_interaction: end-user
+        name: node-local-dns
         repository: registry.k8s.io/dns/k8s-dns-node-cache
         sourceRepository: github.com/kubernetes/kubernetes/blob/master/cluster/addons/dns/nodelocaldns
         tag: 1.22.15
@@ -339,7 +431,7 @@ gardenlet:
         name: vpa-admission-controller
         repository: registry.k8s.io/autoscaling/vpa-admission-controller
         sourceRepository: github.com/kubernetes/autoscaler
-        tag: 0.12.0
+        tag: 0.13.0
         targetVersion: '>= 1.21'
       - labels:
           - name: gardener.cloud/cve-categorisation
@@ -367,7 +459,7 @@ gardenlet:
         name: vpa-recommender
         repository: registry.k8s.io/autoscaling/vpa-recommender
         sourceRepository: github.com/kubernetes/autoscaler
-        tag: 0.12.0
+        tag: 0.13.0
         targetVersion: '>= 1.21'
       - labels:
           - name: gardener.cloud/cve-categorisation
@@ -395,7 +487,7 @@ gardenlet:
         name: vpa-updater
         repository: registry.k8s.io/autoscaling/vpa-updater
         sourceRepository: github.com/kubernetes/autoscaler
-        tag: 0.12.0
+        tag: 0.13.0
         targetVersion: '>= 1.21'
       - labels:
           - name: gardener.cloud/cve-categorisation
@@ -414,30 +506,57 @@ gardenlet:
         repository: registry.k8s.io/cpa/cluster-proportional-autoscaler
         sourceRepository: https://github.com/kubernetes-sigs/cluster-proportional-autoscaler
         tag: 1.8.6
-      - name: istio-proxy
+      - labels:
+          - name: gardener.cloud/cve-categorisation
+            value:
+              authentication_enforced: false
+              availability_requirement: high
+              confidentiality_requirement: low
+              integrity_requirement: high
+              network_exposure: public
+              user_interaction: end-user
+        name: istio-proxy
         repository: gcr.io/istio-release/proxyv2
         sourceRepository: github.com/istio/istio
         tag: 1.15.3-distroless
-      - name: istio-istiod
+      - labels:
+          - name: gardener.cloud/cve-categorisation
+            value:
+              authentication_enforced: false
+              availability_requirement: low
+              confidentiality_requirement: low
+              integrity_requirement: high
+              network_exposure: protected
+              user_interaction: gardener-operator
+        name: istio-istiod
         repository: gcr.io/istio-release/pilot
         sourceRepository: github.com/istio/istio
         tag: 1.15.3-distroless
       - name: ext-authz-server
         repository: eu.gcr.io/gardener-project/gardener/ext-authz-server
         sourceRepository: github.com/gardener/ext-authz-server
-        tag: 0.6.0
-      - name: apiserver-proxy
+        tag: 0.7.0
+      - labels:
+          - name: gardener.cloud/cve-categorisation
+            value:
+              authentication_enforced: false
+              availability_requirement: high
+              confidentiality_requirement: low
+              integrity_requirement: high
+              network_exposure: protected
+              user_interaction: end-user
+        name: apiserver-proxy
         repository: docker.io/envoyproxy/envoy-distroless
         sourceRepository: github.com/envoyproxy/envoy
         tag: v1.24.1
       - name: apiserver-proxy-sidecar
         repository: eu.gcr.io/gardener-project/gardener/apiserver-proxy
         sourceRepository: github.com/gardener/apiserver-proxy
-        tag: v0.10.0
+        tag: v0.11.0
       - name: apiserver-proxy-pod-webhook
         repository: eu.gcr.io/gardener-project/gardener/apiserver-proxy-pod-webhook
         sourceRepository: github.com/gardener/apiserver-proxy
-        tag: v0.10.0
+        tag: v0.11.0
 provider-openstack:
   imageVectorOriginal:
     images:
