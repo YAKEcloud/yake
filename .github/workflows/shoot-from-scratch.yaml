@@ -26,6 +26,7 @@ jobs:
       PROVIDER: ${{ github.event.inputs.provider }}
       ZONE: ${{ github.event.inputs.zone }}
     steps:
+      - run: apt-get update && install -y gettext-base
       - name: Checkout source
         uses: actions/checkout@v3.1.0
         with:
