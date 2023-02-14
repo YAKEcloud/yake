@@ -2,3 +2,5 @@ backups:
   enabled: false
 vpa:
   enabled: false
+webterminal:
+  enabled: false
