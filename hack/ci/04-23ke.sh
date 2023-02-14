@@ -29,6 +29,8 @@ kubectl wait $dnsentryname -n garden --for=jsonpath='{.status.state}'=Ready
 # wait for gardener-application so garden namespace exists
 kubectl wait helmrelease gardener-application -n flux-system --for=condition=ready --timeout=10m || { dumpHr; exit 1; }
 kubectl get secrets -n garden garden-kubeconfig-for-admin -o go-template='{{.data.kubeconfig | base64decode }}' > hack/ci/secrets/apiserver-in-shoot-kubeconfig.yaml
+
+waitForDNS "api.${SHOOT}.${AZURE_BASE_DOMAIN}"
 kubectl create secret generic hcloud-hel1-0-kubeconfig -n garden --from-file=kubeconfig=hack/ci/secrets/shoot-kubeconfig.yaml --save-config --dry-run=client -o yaml | kubectl --context garden apply -f -
 
 kubectl wait kustomization gardener -n flux-system --for=condition=ready --timeout=10m  || { dumpKs; exit 1; }
