@@ -1,5 +1,22 @@
 #!/usr/bin/env bash
 
+checkBinaries() {
+  DEPS=(kubectl yq flux envsubst git mc rclone)
+
+  for DEP in "${DEPS[@]}"; do
+    if ! which "$DEP" &>/dev/null; then
+      DIE=1
+      printErr "$DEP not found, please install $DEP."
+    fi
+  done
+
+  if [ -v DIE ]; then
+      return 1
+  fi
+
+  return 0
+}
+
 waitForDNS() {
   local DOMAIN=$1
   local TIMEOUT=${2:-120}
@@ -40,12 +57,24 @@ dumpKs() {
   kubectl get kustomizations $kustomizations -n flux-system -o yaml
 }
 
-onErr() {
-  local red='\033[0;31m'
-  local clear='\033[0m'
+printErr() {
+  local msg=$1
 
+  if [ -v GITHUB_ACTIONS ]; then
+    local prefix="::error::"
+    local suffix=""
+  else
+    local prefix='\033[0;31m' # red
+    local suffix='\033[0m' # clear
+  fi
+
+  echo -e "${prefix}${msg}${suffix}" >&2
+}
+
+onErr() {
   local lineno=$1
   local msg=$2
-  printf "${red}Failed at line $lineno: $msg${clear}\n"
+
+  printErr "Failed at line $lineno: $msg"
 }
 trap 'onErr ${LINENO} "$BASH_COMMAND"' ERR

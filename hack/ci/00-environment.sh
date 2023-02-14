@@ -3,6 +3,8 @@ set -euo pipefail
 
 source hack/ci/util.sh
 
+checkBinaries
+
 PROVIDER=${PROVIDER:=hcloud}
 ZONE=${ZONE:=hel1}
 
