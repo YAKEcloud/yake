@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
-checkBinaries() {
-  DEPS=(envsubst flux git kubectl mc rclone yq)
+checkDependencies() {
+  DEPS=(envsubst flux git go kubectl mc rclone yq)
 
   for DEP in "${DEPS[@]}"; do
     if ! which "$DEP" &>/dev/null; then
