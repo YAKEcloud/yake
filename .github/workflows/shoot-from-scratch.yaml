@@ -26,11 +26,15 @@ jobs:
       PROVIDER: ${{ github.event.inputs.provider }}
       ZONE: ${{ github.event.inputs.zone }}
     steps:
-      - run: sudo apt-get update && sudo apt-get install -y gettext-base
       - name: Checkout source
         uses: actions/checkout@v3.1.0
         with:
           fetch-depth: 0
+      - name: Install Dependencies
+        run: sudo apt-get update && sudo apt-get install -y gettext-base
+      - uses: actions/setup-go@v3
+        with:
+          go-version: '>=1.19.0'
       - name: Setup Environment
         uses: nick-fields/retry@v2
         with:
