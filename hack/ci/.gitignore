@@ -13,3 +13,4 @@ secrets/shoot-kubeconfig.yaml
 secrets/shoot-microservice-kubeconfig.yaml
 dev-env/gardenlet/garden-content/cloud_secret.yaml
 misc/23kectl-config.yaml
+config-git/
