@@ -7,3 +7,4 @@ resources:
   - gardener-values.yaml
   - gardenlet-values.yaml
   - identity-values.yaml
+  - webterminal-values.yaml
