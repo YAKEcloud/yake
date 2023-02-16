@@ -11,3 +11,16 @@ spec:
     name: 23ke
   path: ./flux-system
   prune: false
+  images:
+    - name: ghcr.io/fluxcd/source-controller
+      newName: core.harbor.23ke-run-9e00.23ke-testbed.23t.dev/ghcr.io/fluxcd/source-controller
+    - name: ghcr.io/fluxcd/kustomize-controller
+      newName: core.harbor.23ke-run-9e00.23ke-testbed.23t.dev/ghcr.io/fluxcd/kustomize-controller
+    - name: ghcr.io/fluxcd/helm-controller
+      newName: core.harbor.23ke-run-9e00.23ke-testbed.23t.dev/ghcr.io/fluxcd/helm-controller
+    - name: ghcr.io/fluxcd/notification-controller
+      newName: core.harbor.23ke-run-9e00.23ke-testbed.23t.dev/ghcr.io/fluxcd/notification-controller
+    - name: ghcr.io/fluxcd/image-reflector-controller
+      newName: core.harbor.23ke-run-9e00.23ke-testbed.23t.dev/ghcr.io/fluxcd/image-reflector-controller
+    - name: ghcr.io/fluxcd/image-automation-controller
+      newName: core.harbor.23ke-run-9e00.23ke-testbed.23t.dev/ghcr.io/fluxcd/image-automation-controller
