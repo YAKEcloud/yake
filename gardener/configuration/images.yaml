@@ -1845,11 +1845,29 @@ provider-alicloud:
         repository: eu.gcr.io/gardener-project/gardener/terraformer-alicloud
         sourceRepository: github.com/gardener/terraformer
         tag: v2.18.1
-      - name: machine-controller-manager
+      - labels:
+          - name: gardener.cloud/cve-categorisation
+            value:
+              authentication_enforced: false
+              availability_requirement: low
+              confidentiality_requirement: high
+              integrity_requirement: high
+              network_exposure: protected
+              user_interaction: gardener-operator
+        name: machine-controller-manager
         repository: eu.gcr.io/gardener-project/gardener/machine-controller-manager
         sourceRepository: github.com/gardener/machine-controller-manager
-        tag: v0.47.0
-      - name: machine-controller-manager-provider-alicloud
+        tag: v0.48.1
+      - labels:
+          - name: gardener.cloud/cve-categorisation
+            value:
+              authentication_enforced: false
+              availability_requirement: low
+              confidentiality_requirement: high
+              integrity_requirement: high
+              network_exposure: protected
+              user_interaction: gardener-operator
+        name: machine-controller-manager-provider-alicloud
         repository: eu.gcr.io/gardener-project/gardener/machine-controller-manager-provider-alicloud
         sourceRepository: github.com/gardener/machine-controller-manager-provider-alicloud
         tag: v0.7.0
@@ -1857,64 +1875,111 @@ provider-alicloud:
         repository: registry.eu-central-1.aliyuncs.com/gardener-de/alibaba-cloud-controller-manager
         sourceRepository: https://github.com/kubernetes/cloud-provider-alibaba-cloud
         tag: v1.9.3-372
-      - name: csi-attacher
+      - labels:
+          - name: gardener.cloud/cve-categorisation
+            value:
+              authentication_enforced: false
+              availability_requirement: low
+              confidentiality_requirement: low
+              integrity_requirement: high
+              network_exposure: private
+              user_interaction: gardener-operator
+        name: csi-attacher
         repository: registry.k8s.io/sig-storage/csi-attacher
         sourceRepository: https://github.com/kubernetes-csi/external-attacher
         tag: v3.5.0
-        targetVersion: '>= 1.17'
-      - name: csi-node-driver-registrar
+      - labels:
+          - name: gardener.cloud/cve-categorisation
+            value:
+              authentication_enforced: false
+              availability_requirement: low
+              confidentiality_requirement: low
+              integrity_requirement: high
+              network_exposure: private
+              user_interaction: end-user
+        name: csi-node-driver-registrar
         repository: registry.k8s.io/sig-storage/csi-node-driver-registrar
         sourceRepository: https://github.com/kubernetes-csi/node-driver-registrar
         tag: v2.5.1
-      - name: csi-provisioner
-        repository: registry.k8s.io/sig-storage/csi-provisioner
-        sourceRepository: https://github.com/kubernetes-csi/external-provisioner
-        tag: v2.2.2
-        targetVersion: < 1.20
-      - name: csi-provisioner
+      - labels:
+          - name: gardener.cloud/cve-categorisation
+            value:
+              authentication_enforced: false
+              availability_requirement: low
+              confidentiality_requirement: low
+              integrity_requirement: high
+              network_exposure: private
+              user_interaction: gardener-operator
+        name: csi-provisioner
         repository: k8s.gcr.io/sig-storage/csi-provisioner
         sourceRepository: github.com/kubernetes-csi/external-provisioner
         tag: v3.2.1
-        targetVersion: '>= 1.20'
-      - name: csi-snapshotter
-        repository: registry.k8s.io/sig-storage/csi-snapshotter
-        sourceRepository: https://github.com/kubernetes-csi/external-snapshotter
-        tag: v3.0.3
-        targetVersion: < 1.20
-      - name: csi-snapshotter
+      - labels:
+          - name: gardener.cloud/cve-categorisation
+            value:
+              authentication_enforced: false
+              availability_requirement: low
+              confidentiality_requirement: low
+              integrity_requirement: high
+              network_exposure: private
+              user_interaction: gardener-operator
+        name: csi-snapshotter
         repository: k8s.gcr.io/sig-storage/csi-snapshotter
         sourceRepository: github.com/kubernetes-csi/external-snapshotter
         tag: v4.2.1
-        targetVersion: '>= 1.20'
-      - name: csi-snapshot-validation-webhook
-        repository: registry.k8s.io/sig-storage/snapshot-validation-webhook
-        sourceRepository: github.com/kubernetes-csi/external-snapshotter
-        tag: v3.0.3
-        targetVersion: < 1.20
-      - name: csi-snapshot-validation-webhook
+      - labels:
+          - name: gardener.cloud/cve-categorisation
+            value:
+              authentication_enforced: false
+              availability_requirement: low
+              confidentiality_requirement: low
+              integrity_requirement: high
+              network_exposure: private
+              user_interaction: gardener-operator
+        name: csi-snapshot-validation-webhook
         repository: k8s.gcr.io/sig-storage/snapshot-validation-webhook
         sourceRepository: github.com/kubernetes-csi/external-snapshotter
         tag: v4.2.1
-        targetVersion: '>= 1.20'
-      - name: csi-snapshot-controller
-        repository: registry.k8s.io/sig-storage/snapshot-controller
-        sourceRepository: https://github.com/kubernetes-csi/external-snapshotter
-        tag: v3.0.3
-        targetVersion: < 1.20
-      - name: csi-snapshot-controller
+      - labels:
+          - name: gardener.cloud/cve-categorisation
+            value:
+              authentication_enforced: false
+              availability_requirement: low
+              confidentiality_requirement: low
+              integrity_requirement: high
+              network_exposure: private
+              user_interaction: gardener-operator
+        name: csi-snapshot-controller
         repository: k8s.gcr.io/sig-storage/snapshot-controller
         sourceRepository: github.com/kubernetes-csi/external-snapshotter
         tag: v4.2.1
-        targetVersion: '>= 1.20'
-      - name: csi-resizer
+      - labels:
+          - name: gardener.cloud/cve-categorisation
+            value:
+              authentication_enforced: false
+              availability_requirement: low
+              confidentiality_requirement: low
+              integrity_requirement: high
+              network_exposure: private
+              user_interaction: gardener-operator
+        name: csi-resizer
         repository: registry.k8s.io/sig-storage/csi-resizer
         sourceRepository: https://github.com/kubernetes-csi/external-resizer
         tag: v1.5.0
       - name: csi-plugin-alicloud
         repository: registry.eu-central-1.aliyuncs.com/acs/csi-plugin
         sourceRepository: https://github.com/kubernetes-sigs/alibaba-cloud-csi-driver
-        tag: v1.24.3-55228c1-aliyun
-      - name: csi-liveness-probe
+        tag: v1.24.6-55c95dd-aliyun
+      - labels:
+          - name: gardener.cloud/cve-categorisation
+            value:
+              authentication_enforced: false
+              availability_requirement: low
+              confidentiality_requirement: low
+              integrity_requirement: high
+              network_exposure: private
+              user_interaction: end-user
+        name: csi-liveness-probe
         repository: registry.k8s.io/sig-storage/livenessprobe
         sourceRepository: github.com/kubernetes-csi/livenessprobe
         tag: v2.7.0
