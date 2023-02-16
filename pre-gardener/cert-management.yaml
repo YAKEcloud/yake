@@ -26,12 +26,3 @@ spec:
     - kind: Secret
       name: cert-management-values
       optional: true
----
-apiVersion: v1
-kind: Secret
-metadata:
-  labels:
-    gardener.cloud/role: controlplane-cert
-  name: controlplane-cert-secret
-  namespace: garden
-type: Opaque

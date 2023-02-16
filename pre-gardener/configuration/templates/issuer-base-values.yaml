@@ -6,5 +6,9 @@ metadata:
 type: Opaque
 stringData:
   values.yaml: |
+{{- if .Values.issuer.enabled }}
     email: {{ .Values.issuer.acme.email }}
     server: {{ .Values.issuer.acme.server }}
+{{- else }}
+    enabled: false
+{{- end }}
