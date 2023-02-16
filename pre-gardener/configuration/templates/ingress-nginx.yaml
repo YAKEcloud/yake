@@ -12,10 +12,23 @@ stringData:
         component: controller
       service:
         annotations:
+{{- if .Values.issuer.enabled }}
           cert.gardener.cloud/class: base-cert-class
           cert.gardener.cloud/secretname: controlplane-cert-secret
+{{- end }}
           dns.gardener.cloud/dnsnames: "*.{{ include "gardenlet.ingressDomain" . }}"
           dns.gardener.cloud/ttl: "600"
           dns.gardener.cloud/class: base-dns-class
       extraArgs:
         enable-ssl-passthrough: ""
+{{- if .Values.issuer.enabled }}
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  labels:
+    gardener.cloud/role: controlplane-cert
+  name: controlplane-cert-secret
+  namespace: garden
+type: Opaque
+{{- end }}

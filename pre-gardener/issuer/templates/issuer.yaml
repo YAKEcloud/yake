@@ -1,3 +1,4 @@
+{{- if .Values.enabled }}
 apiVersion: cert.gardener.cloud/v1alpha1
 kind: Issuer
 metadata:
@@ -10,3 +11,4 @@ spec:
     autoRegistration: true
     email: {{ .Values.email }}
     server: {{ .Values.server }}
+{{- end }}
