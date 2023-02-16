@@ -25,7 +25,7 @@ while ! kubectl get helmrelease kube-apiserver -n flux-system; do sleep 10; done
 kubectl wait helmrelease kube-apiserver -n flux-system --for=condition=ready --timeout=10m || { dumpHr; exit 1; }
 # sleep until dnsentry appears and is ready
 while ! dnsentryname="$(kubectl get dnsentries -n garden -o name | grep apiserver-ingress-ingress)"; do sleep 1; done
-kubectl wait $dnsentryname -n garden --for=jsonpath='{.status.state}'=Ready
+kubectl wait $dnsentryname -n garden --for=jsonpath='{.status.state}'=Ready --timeout=5m
 # wait for gardener-application so garden namespace exists
 kubectl wait helmrelease gardener-application -n flux-system --for=condition=ready --timeout=10m || { dumpHr; exit 1; }
 kubectl get secrets -n garden garden-kubeconfig-for-admin -o go-template='{{.data.kubeconfig | base64decode }}' > hack/ci/secrets/apiserver-in-shoot-kubeconfig.yaml
