@@ -22,13 +22,15 @@ spec:
     remediation:
       retries: 3
     createNamespace: true
-  values:
-    terminal-controller-manager-runtime:
-      enabled: true
   valuesFrom:
     - kind: Secret
       name: webterminal-base-values
       optional: false
+    - kind: Secret
+      name: webterminal-values
+      optional: true
+      valuesKey: enabled
+      targetPath: terminal-controller-manager-runtime.enabled
 ---
 apiVersion: helm.toolkit.fluxcd.io/v2beta1
 kind: HelmRelease
@@ -56,12 +58,14 @@ spec:
     remediation:
       retries: 3
     createNamespace: true
-  values:
-    terminal-controller-manager-application:
-      enabled: true
   valuesFrom:
     - kind: Secret
       name: terminal-webhook-server-cert
       valuesKey: tls.crt
       targetPath: global.application.certificate.caBundle
-      optional: false
+      optional: true
+    - kind: Secret
+      name: webterminal-values
+      optional: true
+      valuesKey: enabled
+      targetPath: terminal-controller-manager-application.enabled
