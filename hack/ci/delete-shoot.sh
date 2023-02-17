@@ -5,6 +5,9 @@ source hack/ci/util.sh
 source hack/ci/handy.sh
 
 # delete buckets on azure
+rclone -q purge $REMOTE:$BACKUP_BUCKET || echo "Deleting backup bucket failed"
+
+# delete 23ke bucket
 mc rb -q --dangerous --force $MC_ALIAS/$BUCKET_23KE || echo "Deleting bucket failed"
 
 echo "Deleting shoot"
