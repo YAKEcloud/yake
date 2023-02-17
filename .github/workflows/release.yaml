@@ -62,3 +62,27 @@ jobs:
           for file in $(grep --exclude-dir=hack --exclude-dir=flux-system -lr GitRepository . | sed 's/^\.\///'); do
             cat $file | sed s/GitRepository/Bucket/ | mc pipe "$MC_ALIAS/$tag/$file"
           done
+      - name: Checkout 23ke-releases repo
+        uses: actions/checkout@v3
+        with:
+          repository: 23technologies/23ke-releases
+          path: 23ke-releases
+          token: "${{ secrets.GH_TOKEN_23T_MACHINE_USER }}"
+      - name: Upload to release git repository
+        env:
+          tag: v${{ github.event.inputs.version }}
+        run: |
+
+          cp kustomization.yaml 23ke-releases
+          cp -r flux-system 23ke-releases
+          cp -r flux 23ke-releases
+          cp -r pre-gardener 23ke-releases
+          cp -r gardener 23ke-releases
+
+          cd 23ke-releases
+          git add .
+          git commit -m"Add release $tag"
+
+          git tag $tag
+          git push
+          git push --tags
