@@ -18,6 +18,8 @@ on:
   pull_request:
     branches:
       - "main"
+    paths-ignore
+      - 'docs/**'
 jobs:
   ci:
     runs-on: 23ke-runner
