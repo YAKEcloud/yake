@@ -64,7 +64,7 @@ jobs:
           max_attempts: 3
           retry_wait_seconds: 30
           retry_on: error
-          command: bash hack/ci/03-config-and-backup-bucket.sh
+          command: bash hack/ci/03-backup-bucket.sh
       - name: Install 23KE
         uses: nick-fields/retry@v2
         with:
@@ -80,7 +80,7 @@ jobs:
           max_attempts: 3
           retry_wait_seconds: 30
           retry_on: error
-          command: bash hack/ci/05-secret.sh
+          command: bash hack/ci/05-project.sh
       - name: Create demo shoot with demo app
         uses: nick-fields/retry@v2
         with:
