@@ -6,10 +6,19 @@ source hack/ci/handy.sh
 
 echo "Installing 23KE"
 cat hack/ci/misc/23kectl-config.yaml.tmpl | DOLLAR='$' envsubst > hack/ci/misc/23kectl-config.yaml
-repoRoot=$(pwd)
-cd hack/go/23kectl
-go run main.go install --kubeconfig $repoRoot/hack/ci/secrets/shoot-kubeconfig.yaml --config $repoRoot/hack/ci/misc/23kectl-config.yaml
-cd $repoRoot
+
+# if we have a local development version of 23kectl in our local directory tree
+# we use this version of 23kectl instead of a true release
+if [ -d "hack/go/23kectl" ]; then
+    repoRoot=$(pwd)
+    cd hack/go/23kectl
+    go run main.go install --kubeconfig $repoRoot/hack/ci/secrets/shoot-kubeconfig.yaml --config $repoRoot/hack/ci/misc/23kectl-config.yaml
+    cd $repoRoot
+else
+		wget  -O 23kectl https://github.com/23technologies/23kectl/releases/download/v0.0.5/23kectl-v0.0.5-linux-amd64
+		chmod +x 23kectl
+    ./23kectl install --kubeconfig hack/ci/secrets/shoot-kubeconfig.yaml --config hack/ci/misc/23kectl-config.yaml
+fi
 
 echo "Waiting for Kustomization pre-gardener"
 kubectl wait kustomization 23ke-base -n flux-system --for=condition=ready --timeout=10m || { dumpKs; exit 1; }
