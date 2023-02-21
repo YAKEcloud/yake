@@ -39,6 +39,8 @@ stringData:
       featureGates:
         ManagedIstio: true
 {{- if .Values.registryOverwrite }}
+    image:
+      repository: {{ include "replaceRegistry" (dict "eu.gcr.io/gardener-project/gardener/gardenlet" .Values.registryOverwrite) }}
     imageVectorOverwrite: |
 {{ include "gardenlet.imageVectorOverwrite" . | indent 6 }}
     componentImageVectorOverwrites: |
@@ -56,6 +58,11 @@ metadata:
 type: Opaque
 stringData:
   values.yaml: |-
+{{- if .Values.registryOverwrite }}
+    images:
+      apiserver: {{ include "replaceRegistry" (dict "k8s.gcr.io/kube-apiserver:v1.24.4" .Values.registryOverwrite) }}
+      controllermanager: {{ include "replaceRegistry" (dict "k8s.gcr.io/kube-controller-manager:v1.24.4" .Values.registryOverwrite) }}
+{{- end }}
     namespace: garden
     serviceName: garden-kube-apiserver
     replicas: 2

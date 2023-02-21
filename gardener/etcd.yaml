@@ -20,7 +20,7 @@ spec:
   valuesFrom:
     - kind: Secret
       name: etcd-base-values
-      optional: true
+      optional: false
     - kind: Secret
       name: etcd-values
       optional: true
