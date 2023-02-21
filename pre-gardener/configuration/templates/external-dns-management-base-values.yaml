@@ -10,7 +10,7 @@ stringData:
     image:
       repository: {{ include "replaceRegistry" (dict "eu.gcr.io/gardener-project/dns-controller-manager" .Values.registryOverwrite) }}
 {{- end }}
-    external-dns-management: # !!!!!!!!!!!!!!!!
+    external-dns-management:
       enabled: true
       configuration:
         dnsClass: base-dns-class
