@@ -17,11 +17,14 @@ jobs:
           cache: yarn
 
       - name: Install dependencies
+        working-directory: ./docs
         run: yarn install --frozen-lockfile
       - name: Build website
+        working-directory: ./docs
         run: yarn build
 
       - name: Deploy to GitHub Pages
+        working-directory: ./docs
         uses: peaceiris/actions-gh-pages@v3
         with:
           cname: 23ke.cloud
