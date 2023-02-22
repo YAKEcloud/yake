@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkwebsite=self.webpackChunkwebsite||[]).push([[1713],{3457:e=>{e.exports=JSON.parse('[{"label":"gardener","permalink":"/blog/tags/gardener","count":4},{"label":"gardener-extensions","permalink":"/blog/tags/gardener-extensions","count":3},{"label":"gardener-community","permalink":"/blog/tags/gardener-community","count":1}]')}}]);
