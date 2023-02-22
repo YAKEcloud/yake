@@ -25,6 +25,8 @@ stringData:
 
     provider-hcloud:
       version: 0.6.6
+      admission:
+        enabled: true
 {{- if .Values.registryOverwrite }}
       values:
         image:
@@ -35,7 +37,8 @@ stringData:
 
     provider-azure:
       version: 1.33.0
-      admission: true
+      admission:
+        enabled: true
 {{- if .Values.registryOverwrite }}
       values:
         image:
@@ -46,7 +49,8 @@ stringData:
 
     provider-openstack:
       version: 1.31.4
-      admission: true
+      admission:
+        enabled: true
 {{- if .Values.registryOverwrite }}
       values:
         image:
@@ -120,6 +124,8 @@ stringData:
 
     provider-aws:
       version: 1.41.1
+      admission:
+        enabled: true
 {{- if .Values.registryOverwrite }}
       values:
         image:
@@ -130,6 +136,8 @@ stringData:
 
     provider-gcp:
       version: 1.27.1
+      admission:
+        enabled: true
 {{- if .Values.registryOverwrite }}
       values:
         image:

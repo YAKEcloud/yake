@@ -1,7 +1,7 @@
 {{- range $k, $v := .Values }}
 {{ $extShortName := trimPrefix "provider-" $k }}
 {{- if $v.enabled }}
-{{- if $v.admission }}
+{{- if $v.admission.enabled }}
 ---
 apiVersion: helm.toolkit.fluxcd.io/v2beta1
 kind: HelmRelease
