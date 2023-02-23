@@ -44,15 +44,18 @@ For the Gardener installation, you need a domain under which e.g. the Gardener d
 
 ## Kubernetes Cluster
 
-As Gardener is installed on top of Kubernetes itself, you need a base cluster which hosts your Gardener installation. This needs to be a cluster with "full cloud support", i.e. you need to have a
+As Gardener is installed on top of Kubernetes itself, you need a base cluster which hosts your Gardener installation. This needs to be a cluster with "full cloud support", i.e. you need to have a cluster with
 
-- a cluster with
-  - 3x 4vcpu, 8GB RAM (control plane) and 3x 8vcpu 16GB RAM (workers) for a production ready setup or
-  - 4x 4vcpu, 8GB RAM for a working basic setup
-- working load balancer service
+- 3x 4vcpu, 8GB RAM (control plane) and 3x 8vcpu 16GB RAM (workers) for a production ready setup (**or** 4x 4vcpu, 8GB RAM for a working basic setup)
+- a working load balancer service
 - a running [CNI](https://kubernetes.io/docs/concepts/extend-kubernetes/compute-storage-net/network-plugins/) like [calico](https://www.tigera.io/project-calico/) or [cilium](https://cilium.io/)
 - a running [CSI](https://kubernetes-csi.github.io/) for your cloud provider's volumes
   Moreover, the cluster needs to be hosted on a cloud provider with existing Gardener extension. Checkout this [list](https://gardener.cloud/docs/extensions/infrastructure-extensions/) for the infrastructure extensions maintained in the [gardener organization on GitHub](https://github.com/gardener).
+
+Moreover, you should consider the following aspects:
+
+- As 23KE ships with a deployement of [ingress-nginx](https://kubernetes.github.io/ingress-nginx/), you must not install any ingress controller into the base cluster
+- As Gardener uses the `192.168.123.0/24`internally, your pod network of the base cluster should not interfere with that range. Therefore, it is recommended to use `172.16.0.0/16` as pod network in the base cluster. For the service network no restrictions are known.
 
 :::tip
 There are more provider extensions than the ones hosted in the Gardener organization on GitHub. For instance, there is the [provider-hcloud](https://github.com/23technologies/gardener-extension-provider-hcloud) extension supporting managed Kubernetes on the [Hetzner cloud](https://www.hetzner.com/cloud). If you are interested in a custom extension, you can also contact us, and we can discuss on a development plan for another extension.
