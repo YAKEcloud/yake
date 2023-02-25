@@ -1969,7 +1969,7 @@ provider-alicloud:
       - name: csi-plugin-alicloud
         repository: registry.eu-central-1.aliyuncs.com/acs/csi-plugin
         sourceRepository: https://github.com/kubernetes-sigs/alibaba-cloud-csi-driver
-        tag: v1.24.7-48214b0-aliyun
+        tag: v1.24.10-compatible-29f36f1-aliyun
       - labels:
           - name: gardener.cloud/cve-categorisation
             value:
