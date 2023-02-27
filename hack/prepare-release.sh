@@ -67,6 +67,10 @@ if [[ -e ".git/refs/remotes/origin/$branch" ]]; then
   git pull
 else
   git switch -c "$branch"
+
+  touch release-notes/next.md
+  mv release-notes/next.md release-notes/v$minor.md
+  echo "# Release Notes next" > release-notes/next.md
 fi
 
 git add .
