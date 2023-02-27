@@ -26,8 +26,11 @@ stringData:
     provider-hcloud:
       version: 0.6.6
       admission:
-        enabled: true
+        enabled: false
 {{- if .Values.registryOverwrite }}
+        values:
+          image:
+            repository: {{ include "replaceRegistry" (dict "ghcr.io/23technologies/gardener-extension-provider-hcloud/admission" .Values.registryOverwrite) }}
       values:
         image:
           repository: {{ include "replaceRegistry" (dict "ghcr.io/23technologies/gardener-extension-provider-hcloud" .Values.registryOverwrite) }}
@@ -40,6 +43,9 @@ stringData:
       admission:
         enabled: true
 {{- if .Values.registryOverwrite }}
+        values:
+          image:
+            repository: {{ include "replaceRegistry" (dict "eu.gcr.io/gardener-project/gardener/extensions/admission-azure" .Values.registryOverwrite) }}
       values:
         image:
           repository: {{ include "replaceRegistry" (dict "eu.gcr.io/gardener-project/gardener/extensions/provider-azure" .Values.registryOverwrite) }}
@@ -52,6 +58,9 @@ stringData:
       admission:
         enabled: true
 {{- if .Values.registryOverwrite }}
+        values:
+          image:
+            repository: {{ include "replaceRegistry" (dict "eu.gcr.io/gardener-project/gardener/extensions/admission-openstack" .Values.registryOverwrite) }}
       values:
         image:
           repository: {{ include "replaceRegistry" (dict "eu.gcr.io/gardener-project/gardener/extensions/provider-openstack" .Values.registryOverwrite) }}
@@ -97,7 +106,6 @@ stringData:
             dnsPoolResyncPeriod: 30m
             serverPortHttp: 8080
 {{- if .Values.registryOverwrite }}
-      values:
         image:
           repository: {{ include "replaceRegistry" (dict "eu.gcr.io/gardener-project/gardener/extensions/shoot-dns-service" .Values.registryOverwrite) }}
         imageVectorOverwrite: |
@@ -127,6 +135,9 @@ stringData:
       admission:
         enabled: true
 {{- if .Values.registryOverwrite }}
+        values:
+          image:
+            repository: {{ include "replaceRegistry" (dict "eu.gcr.io/gardener-project/gardener/extensions/admission-aws" .Values.registryOverwrite) }}
       values:
         image:
           repository: {{ include "replaceRegistry" (dict "eu.gcr.io/gardener-project/gardener/extensions/provider-aws" .Values.registryOverwrite) }}
@@ -139,6 +150,9 @@ stringData:
       admission:
         enabled: true
 {{- if .Values.registryOverwrite }}
+        values:
+          image:
+            repository: {{ include "replaceRegistry" (dict "eu.gcr.io/gardener-project/gardener/extensions/admission-gcp" .Values.registryOverwrite) }}
       values:
         image:
           repository: {{ include "replaceRegistry" (dict "eu.gcr.io/gardener-project/gardener/extensions/provider-gcp" .Values.registryOverwrite) }}
