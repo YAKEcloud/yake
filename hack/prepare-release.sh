@@ -69,7 +69,6 @@ else
   git push
 
   git switch -c "$branch"
-
 fi
 
 git add .
