@@ -73,7 +73,7 @@ jobs:
         env:
           tag: v${{ github.event.inputs.version }}
         run: |
-          git config --global user.email "operations@23technologies.cloud"
+          git config --global user.email "trash@23technologies.cloud"
           git config --global user.name "23T Machine User"
 
           cp kustomization.yaml 23ke-releases
