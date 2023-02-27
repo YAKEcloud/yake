@@ -51,7 +51,7 @@ jobs:
         run: |
           export MC_HOST_$MC_ALIAS=https://minio:$MINIO_PW@$MINIO_HOSTNAME
 
-          mc mb "$MC_ALIAS/$tag"
+          mc mb --ignore-existing "$MC_ALIAS/$tag"
 
           mc cp kustomization.yaml "$MC_ALIAS/$tag"
           mc cp --recursive flux-system "$MC_ALIAS/$tag"
@@ -80,9 +80,12 @@ jobs:
           cp -r gardener 23ke-releases
 
           cd 23ke-releases
-          git add .
-          git commit -m"Add release $tag"
 
-          git tag $tag
-          git push
-          git push --tags
+          if [[ `git status --porcelain` ]]; then
+            git add .
+            git commit -m"Add release $tag"
+
+            git tag $tag
+            git push
+            git push --tags
+          fi
