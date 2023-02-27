@@ -20,7 +20,7 @@ gardenlet:
       - name: etcd-druid
         repository: eu.gcr.io/gardener-project/gardener/etcd-druid
         sourceRepository: github.com/gardener/etcd-druid
-        tag: v0.15.3
+        tag: v0.16.0
       - name: dependency-watchdog
         repository: eu.gcr.io/gardener-project/gardener/dependency-watchdog
         sourceRepository: github.com/gardener/dependency-watchdog
@@ -33,8 +33,13 @@ gardenlet:
       - name: nginx-ingress-controller-seed
         repository: registry.k8s.io/ingress-nginx/controller-chroot
         sourceRepository: github.com/kubernetes/ingress-nginx
-        tag: v1.3.1
-        targetVersion: '>= 1.22'
+        tag: v1.4.0
+        targetVersion: 1.22.x
+      - name: nginx-ingress-controller-seed
+        repository: registry.k8s.io/ingress-nginx/controller-chroot
+        sourceRepository: github.com/kubernetes/ingress-nginx
+        tag: v1.6.4
+        targetVersion: '>= 1.23'
       - name: ingress-default-backend
         repository: eu.gcr.io/gardener-project/gardener/ingress-default-backend
         sourceRepository: github.com/gardener/ingress-default-backend
@@ -207,6 +212,10 @@ gardenlet:
               integrity_requirement: high
               network_exposure: protected
               user_interaction: end-user
+          - name: cloud.gardener.cnudie/responsibles
+            value:
+              - teamname: gardener/gardener-core-networking-maintainers
+                type: githubTeam
         name: coredns
         repository: docker.io/coredns/coredns
         sourceRepository: github.com/coredns/coredns
@@ -220,6 +229,10 @@ gardenlet:
               integrity_requirement: high
               network_exposure: private
               user_interaction: end-user
+          - name: cloud.gardener.cnudie/responsibles
+            value:
+              - teamname: gardener/gardener-core-networking-maintainers
+                type: githubTeam
         name: node-local-dns
         repository: registry.k8s.io/dns/k8s-dns-node-cache
         sourceRepository: github.com/kubernetes/kubernetes/blob/master/cluster/addons/dns/nodelocaldns
@@ -322,7 +335,7 @@ gardenlet:
         name: fluent-bit-plugin-installer
         repository: eu.gcr.io/gardener-project/gardener/fluent-bit-to-loki
         sourceRepository: github.com/gardener/logging
-        tag: v0.48.0
+        tag: v0.49.0
       - labels:
           - name: gardener.cloud/cve-categorisation
             value:
@@ -348,7 +361,7 @@ gardenlet:
         name: loki-curator
         repository: eu.gcr.io/gardener-project/gardener/loki-curator
         sourceRepository: github.com/gardener/logging
-        tag: v0.48.0
+        tag: v0.49.0
       - labels:
           - name: gardener.cloud/cve-categorisation
             value:
@@ -391,7 +404,7 @@ gardenlet:
         name: telegraf
         repository: eu.gcr.io/gardener-project/gardener/telegraf-iptables
         sourceRepository: github.com/gardener/logging
-        tag: v0.48.0
+        tag: v0.49.0
       - labels:
           - name: gardener.cloud/cve-categorisation
             value:
@@ -404,7 +417,7 @@ gardenlet:
         name: event-logger
         repository: eu.gcr.io/gardener-project/gardener/event-logger
         sourceRepository: github.com/gardener/logging
-        tag: v0.48.0
+        tag: v0.49.0
       - labels:
           - name: gardener.cloud/cve-categorisation
             value:
@@ -515,6 +528,10 @@ gardenlet:
               integrity_requirement: high
               network_exposure: public
               user_interaction: end-user
+          - name: cloud.gardener.cnudie/responsibles
+            value:
+              - teamname: gardener/gardener-core-networking-maintainers
+                type: githubTeam
         name: istio-proxy
         repository: gcr.io/istio-release/proxyv2
         sourceRepository: github.com/istio/istio
@@ -528,6 +545,10 @@ gardenlet:
               integrity_requirement: high
               network_exposure: protected
               user_interaction: gardener-operator
+          - name: cloud.gardener.cnudie/responsibles
+            value:
+              - teamname: gardener/gardener-core-networking-maintainers
+                type: githubTeam
         name: istio-istiod
         repository: gcr.io/istio-release/pilot
         sourceRepository: github.com/istio/istio
@@ -545,6 +566,10 @@ gardenlet:
               integrity_requirement: high
               network_exposure: protected
               user_interaction: end-user
+          - name: cloud.gardener.cnudie/responsibles
+            value:
+              - teamname: gardener/gardener-core-networking-maintainers
+                type: githubTeam
         name: apiserver-proxy
         repository: docker.io/envoyproxy/envoy-distroless
         sourceRepository: github.com/envoyproxy/envoy
@@ -2248,7 +2273,7 @@ etcd-druid:
       - name: etcd-backup-restore
         repository: eu.gcr.io/gardener-project/gardener/etcdbrctl
         sourceRepository: github.com/gardener/etcd-backup-restore
-        tag: v0.21.0
+        tag: v0.22.0
       - name: etcd
         repository: eu.gcr.io/gardener-project/gardener/etcd
         sourceRepository: github.com/gardener/etcd-custom-image
