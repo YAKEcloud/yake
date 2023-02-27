@@ -68,6 +68,7 @@ jobs:
           repository: 23technologies/23ke-releases
           path: 23ke-releases
           token: "${{ secrets.GH_TOKEN_23T_MACHINE_USER }}"
+          ref: main
       - name: Upload to release git repository
         env:
           tag: v${{ github.event.inputs.version }}
