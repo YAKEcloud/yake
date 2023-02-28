@@ -1,0 +1,22 @@
+{{- if or .Values.global.apiserver.hvpa.enabled (gt (int .Values.global.apiserver.replicaCount) 1) }}
+apiVersion: {{ include "poddisruptionbudgetversion" .}}
+kind: PodDisruptionBudget
+metadata:
+  name: gardener-apiserver
+  namespace: garden
+  labels:
+    app: gardener
+    role: apiserver
+    chart: "{{ .Chart.Name }}-{{ .Chart.Version }}"
+    release: "{{ .Release.Name }}"
+    heritage: "{{ .Release.Service }}"
+spec:
+  maxUnavailable: 1
+  selector:
+    matchLabels:
+      app: gardener
+      role: apiserver
+      chart: "{{ .Chart.Name }}-{{ .Chart.Version }}"
+      release: "{{ .Release.Name }}"
+      heritage: "{{ .Release.Service }}"
+{{- end }}

@@ -1,0 +1,20 @@
+{{- if .Values.global.admission.vpa }}
+apiVersion: autoscaling.k8s.io/v1
+kind: VerticalPodAutoscaler
+metadata:
+  name: gardener-admission-controller-vpa
+  namespace: garden
+spec:
+  targetRef:
+    apiVersion: {{ include "deploymentversion" . }}
+    kind: Deployment
+    name: gardener-admission-controller
+  updatePolicy:
+    updateMode: Auto
+  resourcePolicy:
+    containerPolicies:
+      - containerName: '*'
+        minAllowed:
+          cpu: 20m
+          memory: 25Mi
+{{- end }}

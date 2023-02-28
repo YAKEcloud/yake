@@ -1,0 +1,45 @@
+additionalConfiguration: []
+affinity: {}
+configuration:
+    controllers: all
+    leaseDuration: 30s
+    serverPortHttp: 8080
+    ttl: 120
+createCRDs: false
+custom: {}
+env: []
+fullnameOverride: dns-controller-manager
+gardener:
+    garden:
+        clusterIdentity: garden
+    seed:
+        identity: ""
+        provider: ""
+    version: ""
+image:
+    pullPolicy: IfNotPresent
+    repository: eu.gcr.io/gardener-project/dns-controller-manager
+    tag: v0.15.0
+nameOverride: ""
+nodeSelector: {}
+remoteaccess:
+    enabled: false
+replicaCount: 1
+resources:
+    limits:
+        cpu: 200m
+        memory: 128Mi
+    requests:
+        cpu: 100m
+        memory: 64Mi
+security:
+    apparmorEnabled: false
+    seccompEnabled: false
+tolerations: []
+vpa:
+    enabled: true
+    minAllowed:
+        cpu: 50m
+        memory: 50Mi
+    updatePolicy:
+        updateMode: Auto

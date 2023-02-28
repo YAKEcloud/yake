@@ -1,0 +1,428 @@
+enabled: true
+global:
+    kubernetes:
+        upstreamVersions:
+            include: false
+        versions: {}
+kubernetes:
+    versions: {}
+machineImages:
+    - name: gardenlinux
+      versions:
+        - cri:
+            - name: containerd
+            - name: docker
+          version: 576.0.0
+        - cri:
+            - name: containerd
+            - name: docker
+          version: 318.8.0
+machineTypes:
+    - cpu: "2"
+      gpu: "0"
+      memory: 8Gi
+      name: m5.large
+      usable: true
+    - cpu: "4"
+      gpu: "0"
+      memory: 16Gi
+      name: m5.xlarge
+      usable: true
+    - cpu: "8"
+      gpu: "0"
+      memory: 32Gi
+      name: m5.2xlarge
+      usable: true
+    - cpu: "16"
+      gpu: "0"
+      memory: 64Gi
+      name: m5.4xlarge
+      usable: true
+    - cpu: "48"
+      gpu: "0"
+      memory: 192Gi
+      name: m5.12xlarge
+      usable: true
+    - cpu: "96"
+      gpu: "0"
+      memory: 384Gi
+      name: m5.24xlarge
+      usable: true
+    - cpu: "2"
+      gpu: "0"
+      memory: 8Gi
+      name: m4.large
+      usable: true
+    - cpu: "4"
+      gpu: "0"
+      memory: 16Gi
+      name: m4.xlarge
+      usable: true
+    - cpu: "8"
+      gpu: "0"
+      memory: 32Gi
+      name: m4.2xlarge
+      usable: true
+    - cpu: "16"
+      gpu: "0"
+      memory: 64Gi
+      name: m4.4xlarge
+      usable: true
+    - cpu: "40"
+      gpu: "0"
+      memory: 160Gi
+      name: m4.10xlarge
+      usable: true
+    - cpu: "64"
+      gpu: "0"
+      memory: 256Gi
+      name: m4.16xlarge
+      usable: true
+    - cpu: "2"
+      gpu: "0"
+      memory: 4Gi
+      name: c5.large
+      usable: true
+    - cpu: "4"
+      gpu: "0"
+      memory: 8Gi
+      name: c5.xlarge
+      usable: true
+    - cpu: "8"
+      gpu: "0"
+      memory: 16Gi
+      name: c5.2xlarge
+      usable: true
+    - cpu: "16"
+      gpu: "0"
+      memory: 32Gi
+      name: c5.4xlarge
+      usable: true
+    - cpu: "2"
+      gpu: "0"
+      memory: 5376Mi
+      name: c5n.large
+      usable: true
+    - cpu: "8"
+      gpu: "0"
+      memory: 21Gi
+      name: c5n.2xlarge
+      usable: true
+    - cpu: "16"
+      gpu: "0"
+      memory: 42Gi
+      name: c5n.4xlarge
+      usable: true
+    - cpu: "36"
+      gpu: "0"
+      memory: 96Gi
+      name: c5n.9xlarge
+      usable: true
+    - cpu: "8"
+      gpu: "1"
+      memory: 61Gi
+      name: p3.2xlarge
+      usable: true
+    - cpu: "32"
+      gpu: "4"
+      memory: 244Gi
+      name: p3.8xlarge
+      usable: true
+    - cpu: "64"
+      gpu: "8"
+      memory: 488Gi
+      name: p3.16xlarge
+      usable: true
+    - cpu: "4"
+      gpu: "1"
+      memory: 61Gi
+      name: p2.xlarge
+      usable: true
+    - cpu: "32"
+      gpu: "8"
+      memory: 488Gi
+      name: p2.8xlarge
+      usable: true
+    - cpu: "64"
+      gpu: "16"
+      memory: 732Gi
+      name: p2.16xlarge
+      usable: true
+    - cpu: "2"
+      gpu: "0"
+      memory: 15616Mi
+      name: r4.large
+      usable: true
+    - cpu: "4"
+      gpu: "0"
+      memory: 31232Mi
+      name: r4.xlarge
+      usable: true
+    - cpu: "8"
+      gpu: "0"
+      memory: 61Gi
+      name: r4.2xlarge
+      usable: true
+    - cpu: "16"
+      gpu: "0"
+      memory: 122Gi
+      name: r4.4xlarge
+      usable: true
+    - cpu: "32"
+      gpu: "0"
+      memory: 244Gi
+      name: r4.8xlarge
+      usable: true
+    - cpu: "64"
+      gpu: "0"
+      memory: 488Gi
+      name: r4.16xlarge
+      usable: true
+    - cpu: "2"
+      gpu: "0"
+      memory: 16Gi
+      name: r5.large
+      usable: true
+    - cpu: "4"
+      gpu: "0"
+      memory: 32Gi
+      name: r5.xlarge
+      usable: true
+    - cpu: "8"
+      gpu: "0"
+      memory: 64Gi
+      name: r5.2xlarge
+      usable: true
+    - cpu: "16"
+      gpu: "0"
+      memory: 128Gi
+      name: r5.4xlarge
+      usable: true
+    - cpu: "2"
+      gpu: "0"
+      memory: 16Gi
+      name: r5a.large
+      usable: true
+    - cpu: "4"
+      gpu: "0"
+      memory: 32Gi
+      name: r5a.xlarge
+      usable: true
+    - cpu: "8"
+      gpu: "0"
+      memory: 64Gi
+      name: r5a.2xlarge
+      usable: true
+    - cpu: "16"
+      gpu: "0"
+      memory: 128Gi
+      name: r5a.4xlarge
+      usable: true
+    - cpu: "2"
+      gpu: "0"
+      memory: 16Gi
+      name: r5d.large
+      usable: true
+    - cpu: "4"
+      gpu: "0"
+      memory: 32Gi
+      name: r5d.xlarge
+      usable: true
+    - cpu: "8"
+      gpu: "0"
+      memory: 64Gi
+      name: r5d.2xlarge
+      usable: true
+    - cpu: "16"
+      gpu: "0"
+      memory: 128Gi
+      name: r5d.4xlarge
+      usable: true
+    - cpu: "64"
+      gpu: "0"
+      memory: 1952Gi
+      name: x1e.16xlarge
+      usable: true
+    - cpu: "128"
+      gpu: "0"
+      memory: 3904Gi
+      name: x1e.32xlarge
+      usable: true
+    - cpu: "2"
+      gpu: "0"
+      memory: 2Gi
+      name: t3.small
+      usable: true
+    - cpu: "2"
+      gpu: "0"
+      memory: 4Gi
+      name: t3.medium
+      usable: true
+name: aws
+providerConfig:
+    apiVersion: aws.provider.extensions.gardener.cloud/v1alpha1
+    kind: CloudProfileConfig
+    machineImages:
+        - name: gardenlinux
+          versions:
+            - regions:
+                - ami: ami-0a66f7be3f5945c91
+                  name: eu-north-1
+                - ami: ami-0c716004fc56ad0ee
+                  name: ap-south-1
+                - ami: ami-0f751c73a2eed91d9
+                  name: eu-west-3
+                - ami: ami-0bed70c635c131711
+                  name: eu-west-2
+                - ami: ami-0d3706b9d66949f90
+                  name: eu-west-1
+                - ami: ami-0c0de9c6bd1701092
+                  name: ap-northeast-3
+                - ami: ami-0b7d522e00fe20c68
+                  name: ap-northeast-2
+                - ami: ami-09941687817b1c10e
+                  name: ap-northeast-1
+                - ami: ami-0f2a72a5e0e5e32e4
+                  name: sa-east-1
+                - ami: ami-023f70c6f8688f194
+                  name: ca-central-1
+                - ami: ami-036ecf429749475f9
+                  name: ap-southeast-1
+                - ami: ami-0e2e5cf768e6a2cdf
+                  name: ap-southeast-2
+                - ami: ami-06a09447841d68810
+                  name: us-east-1
+                - ami: ami-0f2ad7568ef00a629
+                  name: us-east-2
+                - ami: ami-0865042f22caab38d
+                  name: us-west-1
+                - ami: ami-0628691c6917779a2
+                  name: us-west-2
+                - ami: ami-08eef1018be75598b
+                  name: eu-central-1
+              version: 576.0.0
+            - regions:
+                - ami: ami-077967ddf49bd7822
+                  name: eu-north-1
+                - ami: ami-07f7b310124c898e1
+                  name: ap-south-1
+                - ami: ami-00e17f38ab1ba55f4
+                  name: eu-west-3
+                - ami: ami-0774a6896e4ac35e0
+                  name: eu-west-2
+                - ami: ami-032de7308a9eb91f5
+                  name: eu-west-1
+                - ami: ami-08e8b1a5ad052751f
+                  name: ap-northeast-3
+                - ami: ami-0fc6badc68b7b7dd1
+                  name: ap-northeast-2
+                - ami: ami-06a5e5183080d4345
+                  name: ap-northeast-1
+                - ami: ami-0f4797d1ea0ffbe21
+                  name: sa-east-1
+                - ami: ami-0320e4ff5c5004a6b
+                  name: ca-central-1
+                - ami: ami-041d6354bb257235d
+                  name: ap-southeast-1
+                - ami: ami-0ef9fbc659adf4a7e
+                  name: ap-southeast-2
+                - ami: ami-066eb78156cb8e30d
+                  name: us-east-1
+                - ami: ami-08782642e97383550
+                  name: us-east-2
+                - ami: ami-088a63ebb9b6d8cca
+                  name: us-west-1
+                - ami: ami-0d3df510f088f6728
+                  name: us-west-2
+                - ami: ami-0b8eda557039b448e
+                  name: eu-central-1
+              version: 318.8.0
+regions:
+    - name: ap-northeast-1
+      zones:
+        - name: ap-northeast-1a
+        - name: ap-northeast-1c
+        - name: ap-northeast-1d
+    - name: ap-northeast-2
+      zones:
+        - name: ap-northeast-2a
+        - name: ap-northeast-2c
+    - name: ap-south-1
+      zones:
+        - name: ap-south-1a
+        - name: ap-south-1b
+    - name: ap-southeast-1
+      zones:
+        - name: ap-southeast-1a
+        - name: ap-southeast-1b
+        - name: ap-southeast-1c
+    - name: ap-southeast-2
+      zones:
+        - name: ap-southeast-2a
+        - name: ap-southeast-2b
+        - name: ap-southeast-2c
+    - name: ca-central-1
+      zones:
+        - name: ca-central-1a
+        - name: ca-central-1b
+    - name: eu-central-1
+      zones:
+        - name: eu-central-1a
+        - name: eu-central-1b
+        - name: eu-central-1c
+    - name: eu-north-1
+      zones:
+        - name: eu-north-1a
+        - name: eu-north-1b
+        - name: eu-north-1c
+    - name: eu-west-1
+      zones:
+        - name: eu-west-1a
+        - name: eu-west-1b
+        - name: eu-west-1c
+    - name: eu-west-2
+      zones:
+        - name: eu-west-2a
+        - name: eu-west-2b
+        - name: eu-west-2c
+    - name: eu-west-3
+      zones:
+        - name: eu-west-3a
+        - name: eu-west-3b
+        - name: eu-west-3c
+    - name: sa-east-1
+      zones:
+        - name: sa-east-1a
+        - name: sa-east-1c
+    - name: us-east-1
+      zones:
+        - name: us-east-1a
+        - name: us-east-1b
+        - name: us-east-1c
+        - name: us-east-1d
+        - name: us-east-1e
+        - name: us-east-1f
+    - name: us-east-2
+      zones:
+        - name: us-east-2a
+        - name: us-east-2b
+        - name: us-east-2c
+    - name: us-west-1
+      zones:
+        - name: us-west-1a
+        - name: us-west-1c
+    - name: us-west-2
+      zones:
+        - name: us-west-2a
+        - name: us-west-2b
+        - name: us-west-2c
+        - name: us-west-2d
+    - name: us-gov-west-1
+      zones:
+        - name: us-gov-west-1a
+        - name: us-gov-west-1b
+        - name: us-gov-west-1c
+volumeTypes:
+    - class: standard
+      name: gp2
+      usable: true

@@ -1,0 +1,11 @@
+apiVersion: v2
+dependencies:
+- condition: utils-common.enabled
+  name: utils-common
+  repository: ""
+- condition: utils-templates.enabled
+  name: utils-templates
+  repository: ""
+description: A Helm chart to deploy the Gardener application related resources
+name: application
+version: 1.65.0

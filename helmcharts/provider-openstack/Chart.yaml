@@ -1,0 +1,11 @@
+apiVersion: v2
+dependencies:
+- condition: controller.enabled
+  name: controller
+  repository: ""
+- condition: gardener-extension-admission-openstack.enabled
+  name: gardener-extension-admission-openstack
+  repository: ""
+description: A helmchart for provider-openstack
+name: provider-openstack
+version: 1.31.4

@@ -1,0 +1,21 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: gardenlet
+  namespace: {{ .Release.Namespace }}
+  labels:
+    app: gardener
+    role: gardenlet
+    chart: "{{ .Chart.Name }}-{{ .Chart.Version }}"
+    release: "{{ .Release.Name }}"
+    heritage: "{{ .Release.Service }}"
+spec:
+  selector:
+    app: gardener
+    role: gardenlet
+    release: {{ .Release.Name }}
+  ports:
+  - name: metrics
+    protocol: TCP
+    port: {{ required ".Values.config.server.metrics.port is required" .Values.config.server.metrics.port }}
+    targetPort: {{ required ".Values.config.server.metrics.port is required" .Values.config.server.metrics.port }}

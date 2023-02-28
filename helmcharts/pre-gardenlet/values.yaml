@@ -1,0 +1,4 @@
+global:
+    token:
+        id: 12345a
+        secret: 1234567890abcdef

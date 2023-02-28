@@ -1,0 +1,23 @@
+additionalConfiguration: []
+affinity: {}
+configuration:
+    serverPortHttp: 8080
+createCRDs:
+    certificates: true
+    issuers: true
+fullnameOverride: cert-controller-manager
+image:
+    pullPolicy: IfNotPresent
+    repository: eu.gcr.io/gardener-project/cert-controller-manager
+    tag: v0.10.1
+nameOverride: ""
+nodeSelector: {}
+replicaCount: 1
+resources:
+    limits:
+        cpu: 200m
+        memory: 128Mi
+    requests:
+        cpu: 50m
+        memory: 64Mi
+tolerations: []

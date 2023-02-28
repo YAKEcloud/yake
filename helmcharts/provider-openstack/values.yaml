@@ -1,0 +1,4 @@
+controller:
+    enabled: false
+gardener-extension-admission-openstack:
+    enabled: false

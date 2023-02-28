@@ -1,0 +1,4 @@
+controller:
+    enabled: false
+external-dns-management:
+    enabled: false
