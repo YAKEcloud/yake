@@ -7,7 +7,6 @@ resources:
   - configuration.yaml
   - dnsprovider.yaml
   - external-dns-management.yaml
-  - flux-system.yaml
   - helmrepositories.yaml
   - ingress-nginx.yaml
   - issuer.yaml

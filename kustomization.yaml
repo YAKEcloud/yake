@@ -3,3 +3,4 @@ kind: Kustomization
 resources:
   - flux/pre-gardener.yaml
   - flux/gardener.yaml
+  - flux/flux-system.yaml
