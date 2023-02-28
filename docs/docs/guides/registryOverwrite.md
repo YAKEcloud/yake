@@ -99,3 +99,46 @@ the following replacements would be performed
 | eu.gcr.io/examplefolder/example1 | No                |             |
 | eu.gcr.io/otherexample/example2  | No                |             |
 | k8s.gcr.io/kube-apiserver        | No                |             |
+
+
+
+## Flux configuration to change repository
+
+23KE includes flux's controllers in a specific version and installs available updates with each release. Due to the way we include flux, unfortunately it can't use the registryOverwrite map to change where the flux images are pulled from and needs it's own instructions to use an internal registry.
+
+In your configuration git you will have a file `flux/23ke-base.yaml`, that needs to be changed similar to the following example, where you would change the `newName` parameters to point to your internal registry mirror.
+
+```
+apiVersion: kustomize.toolkit.fluxcd.io/v1beta2
+kind: Kustomization
+metadata:
+  name: 23ke-base
+  namespace: flux-system
+spec:
+  interval: 1m0s
+  path: ./
+  prune: false
+  sourceRef:
+    kind: GitRepository
+    name: 23ke
+  patches:
+    - patch: |-
+        apiVersion: kustomize.toolkit.fluxcd.io/v1beta2
+        kind: Kustomization
+        metadata:
+          name: not-used
+        spec:
+          images:
+            - name: ghcr.io/fluxcd/helm-controller
+              newName: changeme.internal.mirror/ghcr.io/fluxcd/helm-controller
+            - name: ghcr.io/fluxcd/kustomize-controller
+              newName: changeme.internal.mirror/ghcr.io/fluxcd/kustomize-controller
+            - name: ghcr.io/fluxcd/notification-controller
+              newName: changeme.internal.mirror/ghcr.io/fluxcd/notification-controller
+            - name: ghcr.io/fluxcd/source-controller
+              newName: changeme.internal.mirror/ghcr.io/fluxcd/source-controller
+      target:
+        kind: Kustomization
+        name: flux-system
+        namespace: flux-system
+```
