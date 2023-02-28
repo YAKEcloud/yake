@@ -1,0 +1,6 @@
+# [gardener-extension-os-ubuntu]
+## ✨ New Features
+* *[OPERATOR]* The extension controller has been adjusted to the high availability configuration supported by Gardener as of release `v1.60`. See [this document](https://github.com/gardener/gardener/blob/master/docs/development/high-availability.md) for more information about HA in gardener. ([gardener/gardener-extension-os-ubuntu#72](https://github.com/gardener/gardener-extension-os-ubuntu/pull/72), [@timuthy](https://github.com/timuthy))
+## 🏃 Others
+* *[OPERATOR]* Adds a heartbeat controller that creates and renews a `Lease` resource named `gardener-extension-heartbeat` in the namespace where the extension controller is deployed. This `Lease` resource can be used by other controllers to check if the `os-ubuntu` extension controller is running. ([gardener/gardener-extension-os-ubuntu#73](https://github.com/gardener/gardener-extension-os-ubuntu/pull/73), [@AleksandarSavchev](https://github.com/AleksandarSavchev))
+* *[DEPENDENCY]* Dependency `github.com/gardener/gardener` is updated `v1.56.0` -> `v1.60.0`. ([gardener/gardener-extension-os-ubuntu#73](https://github.com/gardener/gardener-extension-os-ubuntu/pull/73), [@AleksandarSavchev](https://github.com/AleksandarSavchev))

@@ -1,0 +1,8 @@
+apiVersion: v2
+dependencies:
+- condition: controller.enabled
+  name: controller
+  repository: ""
+description: A helmchart for os-ubuntu
+name: os-ubuntu
+version: 1.20.0
