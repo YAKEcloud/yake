@@ -1,0 +1,109 @@
+additionalVolumeMounts: []
+additionalVolumes: []
+config:
+    controllers:
+        backupBucket:
+            concurrentSyncs: 20
+        backupEntry:
+            concurrentSyncs: 20
+        backupEntryMigration:
+            concurrentSyncs: 5
+            gracePeriod: 10m
+            lastOperationStaleDuration: 2m
+            syncPeriod: 1m
+        bastion:
+            concurrentSyncs: 20
+        managedSeed:
+            concurrentSyncs: 5
+            jitterUpdates: false
+            syncJitterPeriod: 5m
+            syncPeriod: 1h
+            waitSyncPeriod: 15s
+        seed:
+            syncPeriod: 1h
+        seedCare:
+            conditionThresholds:
+                - duration: 1m
+                  type: SeedSystemComponentsHealthy
+            syncPeriod: 30s
+        shoot:
+            concurrentSyncs: 20
+            reconcileInMaintenanceOnly: false
+            respectSyncPeriodOverwrite: false
+            retryDuration: 12h
+            syncPeriod: 1h
+        shootCare:
+            concurrentSyncs: 5
+            conditionThresholds:
+                - duration: 1m
+                  type: APIServerAvailable
+                - duration: 1m
+                  type: ControlPlaneHealthy
+                - duration: 1m
+                  type: ObservabilityComponentsHealthy
+                - duration: 1m
+                  type: SystemComponentsHealthy
+                - duration: 5m
+                  type: EveryNodeReady
+            managedResourceProgressingThreshold: 1h
+            staleExtensionHealthChecks:
+                enabled: true
+            syncPeriod: 30s
+            webhookRemediatorEnabled: false
+        shootMigration:
+            concurrentSyncs: 5
+            gracePeriod: 2h
+            lastOperationStaleDuration: 10m
+            syncPeriod: 1m
+        shootSecret:
+            concurrentSyncs: 5
+        shootStateSync:
+            concurrentSyncs: 5
+    debugging:
+        enableContentionProfiling: false
+        enableProfiling: false
+    featureGates: {}
+    gardenClientConnection:
+        burst: 130
+        qps: 100
+    leaderElection:
+        leaderElect: true
+        leaseDuration: 15s
+        renewDeadline: 10s
+        resourceLock: leases
+        retryPeriod: 2s
+    logFormat: json
+    logLevel: info
+    resources:
+        capacity:
+            shoots: 250
+    seedClientConnection:
+        burst: 130
+        qps: 100
+    seedConfig: {}
+    server:
+        healthProbes:
+            bindAddress: 0.0.0.0
+            port: 2728
+        metrics:
+            bindAddress: 0.0.0.0
+            port: 2729
+    shootClientConnection:
+        burst: 50
+        qps: 25
+env: []
+image:
+    pullPolicy: IfNotPresent
+    repository: eu.gcr.io/gardener-project/gardener/gardenlet
+    tag: v1.65.0
+invalidateServiceAccountToken: true
+replicaCount: 2
+resources:
+    requests:
+        cpu: 100m
+        memory: 100Mi
+revisionHistoryLimit: 2
+serviceAccountName: gardenlet
+utils-templates:
+    enabled: false
+vpa: false

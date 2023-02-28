@@ -1,0 +1,8 @@
+apiVersion: v2
+dependencies:
+- condition: controller.enabled
+  name: controller
+  repository: ""
+description: A helmchart for os-gardenlinux
+name: os-gardenlinux
+version: 0.17.0

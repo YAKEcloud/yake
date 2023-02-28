@@ -96,8 +96,8 @@
   "semanticCommits": "disabled",
   "addLabels": ["version-bump"],
   "postUpgradeTasks": {
-    "commands": ["cd hack/go/imagevector-importer && go run main.go import --config config.yaml > ../../../gardener/configuration/images.yaml"],
-    "fileFilters": ["gardener/configuration/images.yaml"],
+    "commands": ["cd hack/go/imagevector-importer && go run main.go import --config config.yaml > ../../../gardener/configuration/images.yaml", "./hack/pull-helmchart.sh {{{depName}}} {{{newVersion}}}"],
+    "fileFilters": ["gardener/configuration/images.yaml", "helmcharts/**/**" ],
     "executionMode": "update"
   }
 }

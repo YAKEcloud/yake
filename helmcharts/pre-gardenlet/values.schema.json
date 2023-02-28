@@ -1,0 +1,46 @@
+{
+    "$schema": "https://json-schema.org/draft/2019-09/schema",
+    "type": "object",
+    "required": [
+        "global"
+    ],
+    "properties": {
+        "global": {
+            "type": "object",
+            "required": [
+                "token"
+            ],
+            "properties": {
+                "token": {
+                    "type": "object",
+                    "required": [
+                        "id",
+                        "secret"
+                    ],
+                    "properties": {
+                        "id": {
+                            "allOf": [
+                              {
+                                "pattern": "^.{6}$"
+                              },
+                              {
+															  "pattern": "([a-z0-9]){6}"
+                              }
+                            ]
+                        },
+                        "secret": {
+                            "allOf": [
+                              {
+                                "pattern": "^.{16}$"
+                              },
+                              {
+															  "pattern": "([a-z0-9]){16}"
+                              }
+                            ]
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

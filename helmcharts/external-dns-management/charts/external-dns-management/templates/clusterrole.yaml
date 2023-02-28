@@ -1,0 +1,90 @@
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  name: {{ include "external-dns-management.fullname" . }}
+  labels:
+    helm.sh/chart: {{ include "external-dns-management.chart" . }}
+    app.kubernetes.io/name: {{ include "external-dns-management.name" . }}
+    app.kubernetes.io/instance: {{ .Release.Name }}
+    app.kubernetes.io/managed-by: {{ .Release.Service }}
+rules:
+- apiGroups:
+  - ""
+  resources:
+  - services
+  - services/finalizers
+  - secrets
+  verbs:
+  - get
+  - list
+  - update
+  - watch
+- apiGroups:
+  - extensions
+  - "networking.k8s.io"
+  resources:
+  - ingresses
+  verbs:
+  - get
+  - list
+  - update
+  - watch
+- apiGroups:
+  - dns.gardener.cloud
+  resources:
+  - dnsproviders
+  - dnsproviders/status
+  - dnsentries
+  - dnsentries/status
+  - dnsannotations
+  - dnsannotations/status
+  - dnsowners
+  - dnsowners/status
+  - dnshostedzonepolicies
+  - dnshostedzonepolicies/status
+  - dnslocks
+  - dnslocks/status
+  - remoteaccesscertificates
+  - remoteaccesscertificates/status
+  verbs:
+  - get
+  - list
+  - update
+  - watch
+  - create
+  - delete
+- apiGroups:
+  - ""
+  resources:
+  - events
+  verbs:
+  - create
+  - patch
+- apiGroups:
+  - apiextensions.k8s.io
+  resources:
+  - customresourcedefinitions
+  verbs:
+  - get
+  - list
+  - update
+  - create
+{{- if semverCompare "<1.24-0" .Capabilities.KubeVersion.GitVersion }}
+- apiGroups:
+  - policy
+  resources:
+  - podsecuritypolicies
+  resourceNames:
+  - {{ include "external-dns-management.fullname" . }}
+  verbs:
+  - use
+{{- end }}
+- apiGroups:
+  - ""
+  resources:
+  - configmaps
+  resourceNames:
+  - "cluster-identity"
+  verbs:
+  - get

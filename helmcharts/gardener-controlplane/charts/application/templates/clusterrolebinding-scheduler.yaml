@@ -1,0 +1,26 @@
+{{- if .Values.global.scheduler.enabled }}
+---
+apiVersion: {{ include "rbacversion" . }}
+kind: ClusterRoleBinding
+metadata:
+  name: gardener.cloud:system:scheduler
+  labels:
+    app: gardener
+    chart: "{{ .Chart.Name }}-{{ .Chart.Version }}"
+    release: "{{ .Release.Name }}"
+    heritage: "{{ .Release.Service }}"
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: gardener.cloud:system:scheduler
+subjects:
+{{- if and .Values.global.deployment.virtualGarden.enabled .Values.global.deployment.virtualGarden.scheduler.user.name }}
+- apiGroup: rbac.authorization.k8s.io
+  kind: User
+  name: {{ .Values.global.deployment.virtualGarden.scheduler.user.name  }}
+{{- else }}
+- kind: ServiceAccount
+  name: "{{ required ".Values.global.scheduler.serviceAccountName is required" .Values.global.scheduler.serviceAccountName }}"
+  namespace: garden
+{{- end }}
+{{- end }}

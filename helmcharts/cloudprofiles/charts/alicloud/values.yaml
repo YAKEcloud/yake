@@ -1,0 +1,40 @@
+enabled: true
+global:
+    kubernetes:
+        upstreamVersions:
+            include: false
+        versions: {}
+kubernetes:
+    versions: {}
+machineImages:
+    - name: coreos
+      versions:
+        - cri:
+            - name: docker
+          version: 2023.4.0
+machineTypes:
+    - cpu: "2"
+      gpu: "0"
+      memory: 8Gi
+      name: ecs.sn2ne.large
+name: alicloud
+providerConfig:
+    apiVersion: alicloud.provider.extensions.gardener.cloud/v1alpha1
+    kind: CloudProfileConfig
+    machineImages:
+        - name: coreos
+          versions:
+            - regions:
+                - id: coreos_2023_4_0_64_30G_alibase_20190319.vhd
+                  name: eu-central-1
+              version: 2023.4.0
+regions:
+    - name: eu-central-1
+      zones:
+        - name: eu-central-1a
+        - name: eu-central-1b
+volumeTypes:
+    - class: standard
+      name: cloud_efficiency
+    - class: premium
+      name: cloud_ssd

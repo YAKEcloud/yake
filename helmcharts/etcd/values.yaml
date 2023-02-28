@@ -1,0 +1,30 @@
+backup:
+    maxBackups: 7
+    schedule: 0 */24 * * *
+    secretData: {}
+    storageContainer: ""
+    storageProvider: ""
+    volumeMounts: []
+images:
+    etcd: eu.gcr.io/gardener-project/gardener/etcd:v3.5.2
+    etcd-backup-restore: eu.gcr.io/gardener-project/gardener/etcdbrctl:v0.19.0
+name: etcd
+resources:
+    limits:
+        cpu: 1000m
+        memory: 2560Mi
+    requests:
+        cpu: 400m
+        memory: 2000Mi
+tls:
+    ca:
+        crt: ca-certificate
+    client:
+        crt: client-certificate
+        key: client-key
+    server:
+        crt: server-certificate
+        key: server-key
+volumeClaimTemplates:
+    requests:
+        storage: 10Gi

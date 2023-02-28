@@ -20,3 +20,4 @@ ignore: |
   pre-gardener/configuration/templates/
   pre-gardener/dnsprovider/templates
   pre-gardener/issuer/templates/
+  helmcharts

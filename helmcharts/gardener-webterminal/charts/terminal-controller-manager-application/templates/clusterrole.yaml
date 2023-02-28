@@ -1,0 +1,84 @@
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  creationTimestamp: null
+  labels:
+    component: terminal-manager
+  name: terminal-manager-role
+rules:
+- apiGroups:
+  - ""
+  resources:
+  - events
+  verbs:
+  - create
+  - patch
+- apiGroups:
+  - ""
+  resources:
+  - secrets
+  verbs:
+  - get
+  - list
+  - watch
+- apiGroups:
+  - ""
+  resources:
+  - serviceaccounts
+  verbs:
+  - get
+  - list
+  - watch
+- apiGroups:
+  - ""
+  resources:
+  - serviceaccounts/token
+  verbs:
+  - create
+- apiGroups:
+  - admissionregistration.k8s.io
+  resources:
+  - mutatingwebhookconfigurations
+  - validatingwebhookconfigurations
+  verbs:
+  - list
+- apiGroups:
+  - authorization.k8s.io
+  resources:
+  - subjectaccessreviews
+  verbs:
+  - create
+- apiGroups:
+  - core.gardener.cloud
+  resources:
+  - projects
+  verbs:
+  - get
+  - list
+  - watch
+- apiGroups:
+  - core.gardener.cloud
+  resources:
+  - shoots/adminkubeconfig
+  verbs:
+  - create
+- apiGroups:
+  - dashboard.gardener.cloud
+  resources:
+  - terminals
+  verbs:
+  - create
+  - delete
+  - get
+  - list
+  - patch
+  - update
+  - watch
+- apiGroups:
+  - dashboard.gardener.cloud
+  resources:
+  - terminals/status
+  verbs:
+  - get
+  - patch
+  - update

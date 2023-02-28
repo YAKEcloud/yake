@@ -1,0 +1,53 @@
+additionalStaticClients: null
+additionalTrustedPeers: null
+connectors:
+    - config:
+        caData: LS0tLS1CRUdJTiBDRVJUSUZJQ0FURS0tLS0tCkxpNHUKLS0tLS1FTkQgQ0VSVElGSUNBVEUtLS0tLQ==
+        emailAttr: email
+        entityIssuer: identity.ingress.example.org
+        groupsAttr: groups
+        nameIDPolicyFormat: unspecified
+        redirectURI: https://identity.ingress.example.org/callback
+        ssoIssuer: saml.example.org
+        ssoURL: https://saml.example.org/sso
+        usernameAttr: name
+      id: saml
+      name: SAML
+      type: saml
+containerPort: 5556
+dashboardClientSecret: sHq4vLoiQcIWbO3h
+dashboardOrigins:
+    - https://dashboard.ingress.example.org
+    - https://dashboard.example.org
+    - http://localhost:8080
+image:
+    pullPolicy: IfNotPresent
+    repository: ghcr.io/dexidp/dex
+    tag: v2.35.3-distroless
+ingress:
+    annotations:
+        kubernetes.io/ingress.class: nginx
+        nginx.ingress.kubernetes.io/ssl-redirect: "true"
+        nginx.ingress.kubernetes.io/use-port-in-redirects: "true"
+issuerUrl: https://identity.ingress.example.org
+replicaCount: 1
+resources:
+    limits:
+        cpu: 200m
+        memory: 128Mi
+    requests:
+        cpu: 100m
+        memory: 64Mi
+servicePort: 5556
+tls:
+    crt: |
+        -----BEGIN CERTIFICATE-----
+        Li4u
+        -----END CERTIFICATE-----
+        -----BEGIN CERTIFICATE-----
+        Li4u
+        -----END CERTIFICATE-----
+    key: |
+        -----BEGIN RSA PRIVATE KEY-----
+        Li4u
+        -----END RSA PRIVATE KEY-----

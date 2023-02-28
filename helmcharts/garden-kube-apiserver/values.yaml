@@ -1,0 +1,32 @@
+apiServer:
+    hostname: 127.0.0.1
+    oidcIssuerURL: https://identity.URL
+    serviceName: garden-kube-apiserver
+gardenletBootstrap:
+    createToken: false
+    token:
+        id: abcdef
+        secret: 0
+images:
+    apiserver: k8s.gcr.io/kube-apiserver:v1.24.4
+    controllermanager: k8s.gcr.io/kube-controller-manager:v1.24.4
+namespace: xxx
+replicas: 3
+serviceName: garden-kube-apiserver
+tls:
+    admin:
+        crt: client-certificate
+        key: client-key
+    kubeAPIServer:
+        ca:
+            crt: ca-certificate
+            key: ca-key
+        server:
+            crt: server-certificate
+            key: server-key
+        staticTokens:
+            healthCheck: token
+    kubeControllerManager:
+        crt: client-certificate
+        key: client-key
+    serviceAccountKey: key
