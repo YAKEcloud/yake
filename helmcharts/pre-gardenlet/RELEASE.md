@@ -1,1 +1,1 @@
-Update values.schema.json
+**Full Changelog**: https://github.com/gardener-community/pre-gardenlet/compare/1.39.1...1.40.0
