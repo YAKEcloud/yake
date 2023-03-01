@@ -7,6 +7,8 @@ Please check the following sites for upstream release notes:
 - [Gardener releases](https://github.com/gardener/gardener/releases)
 - [Gardener-community charts releases](https://github.com/gardener-community/gardener-charts/releases)
 
+## Requirements
+This release requires a garden cluster with at least k8s v1.21.0 (https://github.com/23technologies/23ke/pull/578)
 
 ## 23KE Changes and Upgrade Path
 ### Post Upgrade
