@@ -43,8 +43,8 @@ stringData:
       useSecret: false
     configuration:
       extraEnvVars:
-        AWS_ACCESS_KEY_ID: {{ .Values.backups.credentials.accessKeyID }}
-        AWS_SECRET_ACCESS_KEY: {{ .Values.backups.credentials.secretAccessKey }}
+        AWS_ACCESS_KEY_ID: {{ .Values.backups.credentials.accessKeyID | b64dec }}
+        AWS_SECRET_ACCESS_KEY: {{ .Values.backups.credentials.secretAccessKey | b64dec }}
       provider: aws
       backupStorageLocation:
         bucket: {{ .Values.backups.bucketName }}
@@ -68,12 +68,12 @@ stringData:
       useSecret: false
     configuration:
       extraEnvVars:
-        OS_AUTH_URL: {{ .Values.backups.credentials.authURL }}
-        OS_PASSWORD: {{ .Values.backups.credentials.password }}
-        OS_USERNAME: {{ .Values.backups.credentials.username }}
-        OS_PROJECT_NAME: {{ .Values.backups.credentials.tenantName }}
-        OS_REGION_NAME: {{ .Values.backups.credentials.region }}
-        OS_DOMAIN_NAME: {{ .Values.backups.credentials.domainName }}
+        OS_AUTH_URL: {{ .Values.backups.credentials.authURL | b64dec }}
+        OS_PASSWORD: {{ .Values.backups.credentials.password | b64dec }}
+        OS_USERNAME: {{ .Values.backups.credentials.username | b64dec }}
+        OS_PROJECT_NAME: {{ .Values.backups.credentials.tenantName | b64dec }}
+        OS_REGION_NAME: {{ .Values.backups.credentials.region | b64dec }}
+        OS_DOMAIN_NAME: {{ .Values.backups.credentials.domainName | b64dec }}
       provider: community.openstack.org/openstack
       backupStorageLocation:
         bucket: {{ .Values.backups.bucketName }}
