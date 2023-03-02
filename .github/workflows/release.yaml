@@ -56,7 +56,7 @@ jobs:
       - name: Upload to habour container registry
         env:
           tag: v${{ github.event.inputs.version }}
-          creds: ${{ secrets.HABOURCREDENTIALS }}
+          creds: ${{ secrets.HARBORCREDENTIALS }}
         run: |
           tmpDir=$(hack/make-tmp-release-dir.sh OCIRepository)
           flux push artifact --creds $creds --source https://23ke.cloud --revision $tag --path=$tmpDir oci://harbor.23t.dev/23ke-releases/23ke:$tag
