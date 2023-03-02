@@ -21,7 +21,7 @@ cp -r helmcharts $tmpDir
 cwd=$(pwd)
 cd $tmpDir
 
-# we now upload packet versions which use a bucket instead of the GitRepository
+# replace GitRepository with $sourceType in 23ke-directories
 for file in $(grep -lr GitRepository pre-gardener gardener flux | sed 's/^\.\///'); do
 		sed -i s/GitRepository/$sourceType/ $file
 done
@@ -38,7 +38,7 @@ do
 		sed -i -E "s/(chart: )(.+)/\1helmcharts\/\2/" $file
 		# delete the 3 consecutive lines of sourceRef
 		sed -i -E "/sourceRef:/{n;N;N;d}" $file
-		# add new sourceRef as GitRepository
+		# add new sourceRef as $sourceType
 		sed -i -E  "s/      sourceRef:/      sourceRef:\n        kind: $sourceType\n        name: 23ke/" $file
 done
 
