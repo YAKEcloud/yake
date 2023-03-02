@@ -12,6 +12,7 @@
   "automerge": "true",
   "dependencyDashboard": true,
   "platformAutomerge": "true",
+  "rebaseWhen": "never",
   "prHourlyLimit": 0,
   "prConcurrentLimit": 1,
   "flux": {
