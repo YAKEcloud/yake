@@ -9,14 +9,13 @@
     "release-v1.61",
     "release-v1.60",
   ],
-  "automerge": "true",
+  "automerge": true,
   "dependencyDashboard": true,
-  "platformAutomerge": "true",
-  "rebaseWhen": "never",
+  "platformAutomerge": true,
   "prHourlyLimit": 0,
   "prConcurrentLimit": 1,
   "flux": {
-			"fileMatch": ["pre-gardener/.*.yaml", "gardener/.*.yaml", "flux-system/gotk-components.yaml"]
+	"fileMatch": ["pre-gardener/.*.yaml", "gardener/.*.yaml", "flux-system/gotk-components.yaml"]
   },
   "packageRules": [
     {
@@ -97,7 +96,10 @@
   "semanticCommits": "disabled",
   "addLabels": ["version-bump"],
   "postUpgradeTasks": {
-    "commands": ["cd hack/go/imagevector-importer && go run main.go import --config config.yaml > ../../../gardener/configuration/images.yaml", "./hack/pull-helmchart.sh {{{depName}}} {{{newVersion}}}"],
+    "commands": [
+      "cd hack/go/imagevector-importer && go run main.go import --config config.yaml > ../../../gardener/configuration/images.yaml",
+      "./hack/pull-helmchart.sh {{{depName}}} {{{newVersion}}} && git add helmcharts",
+    ],
     "fileFilters": ["gardener/configuration/images.yaml", "helmcharts/**/**" ],
     "executionMode": "update"
   }
