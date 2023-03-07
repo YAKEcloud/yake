@@ -17,7 +17,7 @@ stringData:
       additionalSecrets:
         - name: base-dns-provider-secret
           namespace: garden
-          stringData:
+          data:
             {{- toYaml .Values.domains.global.credentials | nindent 12 }}
     config:
       seedConfig:
