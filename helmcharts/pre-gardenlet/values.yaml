@@ -1,4 +1,11 @@
 global:
+    additionalSecrets:
+        - data:
+            test: dGVzdAo=
+          name: testsecret
+          namespace: testsecretnamespace
+          stringData:
+            test2: test
     token:
         id: 12345a
         secret: 1234567890abcdef
