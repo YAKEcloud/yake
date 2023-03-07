@@ -11,6 +11,8 @@ echo "Testing Backup storage"
 # velero
 kubectl wait backupstoragelocations.velero.io -n flux-system default --for=jsonpath='{.status.phase}'=Available || exit 1
 # etcd br
+# The bucket should have been created by the time the seed reports itself as ready
+kubectl wait seed.core.gardener.cloud --all --for=condition=BackupBucketsReady --timeout=600s --context garden || exit 1
 FIRSTBUCKET=$(kubectl get backupbuckets.extensions.gardener.cloud -o name | head -n1)
 kubectl wait $FIRSTBUCKET --for=jsonpath='{.status.lastOperation.state}'=Succeeded || exit 1
 
