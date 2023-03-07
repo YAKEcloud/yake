@@ -9,13 +9,13 @@
     "release-v1.61",
     "release-v1.60",
   ],
-  "automerge": "true",
+  "automerge": true,
   "dependencyDashboard": true,
-  "platformAutomerge": "true",
+  "platformAutomerge": true,
   "prHourlyLimit": 0,
   "prConcurrentLimit": 1,
   "flux": {
-			"fileMatch": ["pre-gardener/.*.yaml", "gardener/.*.yaml", "flux-system/gotk-components.yaml"]
+	"fileMatch": ["pre-gardener/.*.yaml", "gardener/.*.yaml", "flux-system/gotk-components.yaml"]
   },
   "packageRules": [
     {
