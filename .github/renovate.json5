@@ -12,7 +12,6 @@
   "automerge": "true",
   "dependencyDashboard": true,
   "platformAutomerge": "true",
-  "rebaseWhen": "never",
   "prHourlyLimit": 0,
   "prConcurrentLimit": 1,
   "flux": {
@@ -97,7 +96,10 @@
   "semanticCommits": "disabled",
   "addLabels": ["version-bump"],
   "postUpgradeTasks": {
-    "commands": ["cd hack/go/imagevector-importer && go run main.go import --config config.yaml > ../../../gardener/configuration/images.yaml", "./hack/pull-helmchart.sh {{{depName}}} {{{newVersion}}}"],
+    "commands": [
+      "cd hack/go/imagevector-importer && go run main.go import --config config.yaml > ../../../gardener/configuration/images.yaml",
+      "./hack/pull-helmchart.sh {{{depName}}} {{{newVersion}}} && git add helmcharts",
+    ],
     "fileFilters": ["gardener/configuration/images.yaml", "helmcharts/**/**" ],
     "executionMode": "update"
   }
