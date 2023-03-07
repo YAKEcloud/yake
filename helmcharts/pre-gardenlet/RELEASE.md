@@ -1,1 +1,1 @@
-**Full Changelog**: https://github.com/gardener-community/pre-gardenlet/compare/1.39.1...1.40.0
+**Full Changelog**: https://github.com/gardener-community/pre-gardenlet/compare/1.40.0...1.41.0

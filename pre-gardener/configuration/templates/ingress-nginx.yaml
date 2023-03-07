@@ -20,9 +20,6 @@ stringData:
           cert.gardener.cloud/class: base-cert-class
           cert.gardener.cloud/secretname: controlplane-cert-secret
 {{- end }}
-          dns.gardener.cloud/dnsnames: "*.{{ include "gardenlet.ingressDomain" . }}"
-          dns.gardener.cloud/ttl: "600"
-          dns.gardener.cloud/class: base-dns-class
       extraArgs:
         enable-ssl-passthrough: ""
 {{- if .Values.registryOverwrite }}

@@ -14,6 +14,11 @@ stringData:
       token:
         id: {{ $tokenId }}
         secret: {{ $tokenSecret }}
+      additionalSecrets:
+        - name: base-dns-provider-secret
+          namespace: garden
+          data:
+            {{- toYaml .Values.domains.global.credentials | nindent 12 }}
     config:
       seedConfig:
         spec:
@@ -25,8 +30,19 @@ stringData:
               name: for-backups-internal-seed
               namespace: garden
 {{- end }}
+          ingress:
+            domain: internal.{{ .Values.domains.global.domain }}
+            controller:
+              kind: nginx
           dns:
-            ingressDomain: {{ include "gardenlet.ingressDomain" . }}
+            provider:
+              type: {{ .Values.domains.global.provider }}
+              secretRef:
+                name: base-dns-provider-secret
+                namespace: garden
+              domains:
+                include:
+                  - {{ .Values.domains.global.domain }}
       gardenClientConnection:
         gardenClusterAddress: https://{{ include "api.domain" . }}:443
         bootstrapKubeconfig:
