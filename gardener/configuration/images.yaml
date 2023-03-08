@@ -1236,49 +1236,7 @@ provider-aws:
         name: terraformer
         repository: eu.gcr.io/gardener-project/gardener/terraformer-aws
         sourceRepository: github.com/gardener/terraformer
-        tag: v2.18.1
-      - labels:
-          - name: gardener.cloud/cve-categorisation
-            value:
-              authentication_enforced: false
-              availability_requirement: low
-              confidentiality_requirement: high
-              integrity_requirement: high
-              network_exposure: protected
-              user_interaction: gardener-operator
-        name: cloud-controller-manager
-        repository: eu.gcr.io/gardener-project/kubernetes/cloud-provider-aws
-        sourceRepository: github.com/gardener/cloud-provider-aws
-        tag: v1.17.17
-        targetVersion: 1.17.x
-      - labels:
-          - name: gardener.cloud/cve-categorisation
-            value:
-              authentication_enforced: false
-              availability_requirement: low
-              confidentiality_requirement: high
-              integrity_requirement: high
-              network_exposure: protected
-              user_interaction: gardener-operator
-        name: cloud-controller-manager
-        repository: eu.gcr.io/gardener-project/kubernetes/cloud-provider-aws
-        sourceRepository: github.com/gardener/cloud-provider-aws
-        tag: v1.18.20
-        targetVersion: 1.18.x
-      - labels:
-          - name: gardener.cloud/cve-categorisation
-            value:
-              authentication_enforced: false
-              availability_requirement: low
-              confidentiality_requirement: high
-              integrity_requirement: high
-              network_exposure: protected
-              user_interaction: gardener-operator
-        name: cloud-controller-manager
-        repository: eu.gcr.io/gardener-project/kubernetes/cloud-provider-aws
-        sourceRepository: github.com/gardener/cloud-provider-aws
-        tag: v1.19.14
-        targetVersion: 1.19.x
+        tag: v2.19.0
       - labels:
           - name: gardener.cloud/cve-categorisation
             value:
@@ -1319,7 +1277,7 @@ provider-aws:
         name: cloud-controller-manager
         repository: eu.gcr.io/gardener-project/kubernetes/cloud-provider-aws
         sourceRepository: github.com/gardener/cloud-provider-aws
-        tag: v1.22.15
+        tag: v1.22.17
         targetVersion: 1.22.x
       - labels:
           - name: gardener.cloud/cve-categorisation
@@ -1333,7 +1291,7 @@ provider-aws:
         name: cloud-controller-manager
         repository: eu.gcr.io/gardener-project/kubernetes/cloud-provider-aws
         sourceRepository: github.com/gardener/cloud-provider-aws
-        tag: v1.23.12
+        tag: v1.23.15
         targetVersion: 1.23.x
       - labels:
           - name: gardener.cloud/cve-categorisation
@@ -1347,7 +1305,7 @@ provider-aws:
         name: cloud-controller-manager
         repository: eu.gcr.io/gardener-project/kubernetes/cloud-provider-aws
         sourceRepository: github.com/gardener/cloud-provider-aws
-        tag: v1.24.6
+        tag: v1.24.9
         targetVersion: 1.24.x
       - labels:
           - name: gardener.cloud/cve-categorisation
@@ -1359,18 +1317,50 @@ provider-aws:
               network_exposure: protected
               user_interaction: gardener-operator
         name: cloud-controller-manager
-        repository: eu.gcr.io/gardener-project/kubernetes/cloud-provider-aws
-        sourceRepository: github.com/gardener/cloud-provider-aws
-        tag: v1.25.2
-        targetVersion: '>= 1.25'
-      - name: machine-controller-manager
+        repository: registry.k8s.io/provider-aws/cloud-controller-manager
+        sourceRepository: github.com/kubernetes/cloud-provider-aws
+        tag: v1.25.3
+        targetVersion: 1.25.x
+      - labels:
+          - name: gardener.cloud/cve-categorisation
+            value:
+              authentication_enforced: false
+              availability_requirement: low
+              confidentiality_requirement: high
+              integrity_requirement: high
+              network_exposure: protected
+              user_interaction: gardener-operator
+        name: cloud-controller-manager
+        repository: registry.k8s.io/provider-aws/cloud-controller-manager
+        sourceRepository: github.com/kubernetes/cloud-provider-aws
+        tag: v1.26.0
+        targetVersion: '>= 1.26'
+      - labels:
+          - name: gardener.cloud/cve-categorisation
+            value:
+              authentication_enforced: false
+              availability_requirement: low
+              confidentiality_requirement: high
+              integrity_requirement: high
+              network_exposure: protected
+              user_interaction: gardener-operator
+        name: machine-controller-manager
         repository: eu.gcr.io/gardener-project/gardener/machine-controller-manager
         sourceRepository: github.com/gardener/machine-controller-manager
-        tag: v0.47.0
-      - name: machine-controller-manager-provider-aws
+        tag: v0.48.1
+      - labels:
+          - name: gardener.cloud/cve-categorisation
+            value:
+              authentication_enforced: false
+              availability_requirement: low
+              confidentiality_requirement: high
+              integrity_requirement: high
+              network_exposure: protected
+              user_interaction: gardener-operator
+        name: machine-controller-manager-provider-aws
         repository: eu.gcr.io/gardener-project/gardener/machine-controller-manager-provider-aws
         sourceRepository: github.com/gardener/machine-controller-manager-provider-aws
-        tag: v0.15.0
+        tag: v0.16.0
       - labels:
           - name: gardener.cloud/cve-categorisation
             value:
@@ -1396,7 +1386,7 @@ provider-aws:
         name: aws-custom-route-controller
         repository: eu.gcr.io/gardener-project/gardener/aws-custom-route-controller
         sourceRepository: github.com/gardener/aws-custom-route-controller
-        tag: v0.4.0
+        tag: v0.5.0
       - labels:
           - name: gardener.cloud/cve-categorisation
             value:
@@ -1422,8 +1412,7 @@ provider-aws:
         name: csi-provisioner
         repository: registry.k8s.io/sig-storage/csi-provisioner
         sourceRepository: github.com/kubernetes-csi/external-provisioner
-        tag: v3.3.0
-        targetVersion: '>= 1.20'
+        tag: v3.4.0
       - labels:
           - name: gardener.cloud/cve-categorisation
             value:
@@ -1436,7 +1425,7 @@ provider-aws:
         name: csi-attacher
         repository: registry.k8s.io/sig-storage/csi-attacher
         sourceRepository: github.com/kubernetes-csi/external-attacher
-        tag: v4.0.0
+        tag: v4.1.0
       - labels:
           - name: gardener.cloud/cve-categorisation
             value:
@@ -1449,7 +1438,7 @@ provider-aws:
         name: csi-resizer
         repository: registry.k8s.io/sig-storage/csi-resizer
         sourceRepository: github.com/kubernetes-csi/external-resizer
-        tag: v1.6.0
+        tag: v1.7.0
       - labels:
           - name: gardener.cloud/cve-categorisation
             value:
@@ -1462,8 +1451,7 @@ provider-aws:
         name: csi-snapshotter
         repository: registry.k8s.io/sig-storage/csi-snapshotter
         sourceRepository: github.com/kubernetes-csi/external-snapshotter
-        tag: v6.1.0
-        targetVersion: '>= 1.20'
+        tag: v6.2.1
       - labels:
           - name: gardener.cloud/cve-categorisation
             value:
@@ -1476,8 +1464,7 @@ provider-aws:
         name: csi-snapshot-validation-webhook
         repository: registry.k8s.io/sig-storage/snapshot-validation-webhook
         sourceRepository: github.com/kubernetes-csi/external-snapshotter
-        tag: v6.1.0
-        targetVersion: '>= 1.20'
+        tag: v6.2.1
       - labels:
           - name: gardener.cloud/cve-categorisation
             value:
@@ -1490,8 +1477,7 @@ provider-aws:
         name: csi-snapshot-controller
         repository: registry.k8s.io/sig-storage/snapshot-controller
         sourceRepository: github.com/kubernetes-csi/external-snapshotter
-        tag: v6.1.0
-        targetVersion: '>= 1.20'
+        tag: v6.2.1
       - labels:
           - name: gardener.cloud/cve-categorisation
             value:
@@ -1504,7 +1490,7 @@ provider-aws:
         name: csi-node-driver-registrar
         repository: registry.k8s.io/sig-storage/csi-node-driver-registrar
         sourceRepository: github.com/kubernetes-csi/node-driver-registrar
-        tag: v2.6.2
+        tag: v2.7.0
       - labels:
           - name: gardener.cloud/cve-categorisation
             value:
@@ -1517,7 +1503,7 @@ provider-aws:
         name: csi-liveness-probe
         repository: registry.k8s.io/sig-storage/livenessprobe
         sourceRepository: github.com/kubernetes-csi/livenessprobe
-        tag: v2.8.0
+        tag: v2.9.0
 provider-gcp:
   imageVectorOriginal:
     images:
