@@ -20,7 +20,7 @@ gardenlet:
       - name: etcd-druid
         repository: eu.gcr.io/gardener-project/gardener/etcd-druid
         sourceRepository: github.com/gardener/etcd-druid
-        tag: v0.16.0
+        tag: v0.16.1
       - name: dependency-watchdog
         repository: eu.gcr.io/gardener-project/gardener/dependency-watchdog
         sourceRepository: github.com/gardener/dependency-watchdog
@@ -2273,7 +2273,7 @@ etcd-druid:
       - name: etcd-backup-restore
         repository: eu.gcr.io/gardener-project/gardener/etcdbrctl
         sourceRepository: github.com/gardener/etcd-backup-restore
-        tag: v0.22.0
+        tag: v0.22.1
       - name: etcd
         repository: eu.gcr.io/gardener-project/gardener/etcd
         sourceRepository: github.com/gardener/etcd-custom-image
