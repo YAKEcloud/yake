@@ -64,7 +64,7 @@ else
   touch docs/release-notes/next.md
   mv docs/release-notes/next.md docs/release-notes/v$minor.md
   echo "# Release Notes next" > docs/release-notes/next.md
-	if [ -d docs/versioned_docs/version-$minor.x ]
+	if [ -d docs/versioned_docs/version-$minor.x ]; then
 		 cd docs
 		 yarn docusaurus docs:version $minor.x
 		 cd ..
