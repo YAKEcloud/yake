@@ -1,6 +1,8 @@
 application:
     enabled: false
 global:
+    enableOverlayAsDefaultForCalico: true
+    enableOverlayAsDefaultForCilium: true
     healthPort: 8081
     image:
         pullPolicy: IfNotPresent
@@ -22,7 +24,6 @@ global:
         enabled: true
         resourcePolicy:
             minAllowed:
-                cpu: 50m
                 memory: 64Mi
         updatePolicy:
             updateMode: Auto
