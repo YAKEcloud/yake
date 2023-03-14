@@ -5,4 +5,4 @@ dependencies:
   repository: ""
 description: A Helm chart to deploy the Gardenlet (primary "seed" agent)
 name: gardenlet
-version: 1.65.2
+version: 1.66.0

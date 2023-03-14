@@ -514,7 +514,7 @@ gardenlet:
         name: hvpa-controller
         repository: eu.gcr.io/gardener-project/gardener/hvpa-controller
         sourceRepository: github.com/gardener/hvpa-controller
-        tag: v0.9.0
+        tag: v0.10.0
       - name: cluster-proportional-autoscaler
         repository: registry.k8s.io/cpa/cluster-proportional-autoscaler
         sourceRepository: https://github.com/kubernetes-sigs/cluster-proportional-autoscaler
