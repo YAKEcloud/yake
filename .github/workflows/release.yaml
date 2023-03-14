@@ -14,6 +14,11 @@ jobs:
     env:
       version: ${{ github.event.inputs.version }}
     steps:
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 18
+          cache: yarn
+          cache-dependency-path: docs/package-lock.json
       - name: Checkout source
         uses: actions/checkout@v3
         with:
