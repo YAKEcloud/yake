@@ -100,7 +100,7 @@ jobs:
           git config --global user.name "23T Machine User"
 
           tmpDir=$(hack/make-tmp-release-dir.sh GitRepository)
-          cp $tmpDir/* 23ke-releases
+          cp -r $tmpDir/* 23ke-releases
           cd 23ke-releases
 
           if [[ `git status --porcelain` ]]; then
