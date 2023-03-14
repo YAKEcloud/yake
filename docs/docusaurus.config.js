@@ -4,6 +4,28 @@
 const lightCodeTheme = require("prism-react-renderer/themes/github");
 const darkCodeTheme = require("prism-react-renderer/themes/dracula");
 
+// Reverse the sidebar items ordering (including nested category items)
+function reverseSidebarItems(items) {
+  // Reverse items in categories
+  const result = items
+    .filter(item => {
+      if(process.env.NODE_ENV !== 'production') {
+          return true
+      }
+
+      return item.id !== 'next'
+    })
+    .map((item) => {
+      if (item.type === 'category') {
+        return {...item, items: reverseSidebarItems(item.items)};
+      }
+      return item;
+    })
+    .reverse();
+
+  return result;
+}
+
 /** @type {import('@docusaurus/types').Config} */
 const config = {
   title: "23KE",
@@ -63,6 +85,10 @@ const config = {
         path: "release-notes",
         routeBasePath: "release-notes",
         sidebarPath: require.resolve("./sidebars.js"),
+				async sidebarItemsGenerator({defaultSidebarItemsGenerator, ...args}) {
+						const sidebarItems = await defaultSidebarItemsGenerator(args);
+						return reverseSidebarItems(sidebarItems);
+        },
         // ... other options
       }),
     ],
@@ -99,7 +125,7 @@ const config = {
           {
             type: "docsVersionDropdown",
             position: "right",
-            dropdownItemsAfter: [{ to: "/versions", label: "All versions" }],
+            dropdownItemsAfter: [],
             dropdownActiveClassDisabled: true,
           },
           { to: "/blog", label: "Blog", position: "left" },

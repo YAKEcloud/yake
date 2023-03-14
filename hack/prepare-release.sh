@@ -61,11 +61,16 @@ if [[ -e ".git/refs/remotes/origin/$branch" ]]; then
   git switch "$branch"
   git pull
 else
-  touch release-notes/next.md
-  mv release-notes/next.md release-notes/v$minor.md
-  echo "# Release Notes next" > release-notes/next.md
+  touch docs/release-notes/next.md
+  mv docs/release-notes/next.md docs/release-notes/v$minor.md
+  echo "# Release Notes next" > docs/release-notes/next.md
+	if [ -d docs/versioned_docs/version-$minor.x ]
+		 cd docs
+		 yarn docusaurus docs:version $minor.x
+		 cd ..
+	fi
   git add .
-  git commit -m "Adds release notes"
+  git commit -m "Add documentation for $minor"
   git push
 
   git switch -c "$branch"
