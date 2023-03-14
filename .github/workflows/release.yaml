@@ -81,6 +81,10 @@ jobs:
     needs:
       - prepare
     steps:
+      - uses: actions/checkout@v3
+        with:
+          token: "${{ secrets.GH_TOKEN_23T_MACHINE_USER }}"
+          ref: "v${{ github.event.inputs.version }}"
       - name: Checkout 23ke-releases repo
         uses: actions/checkout@v3
         with:
