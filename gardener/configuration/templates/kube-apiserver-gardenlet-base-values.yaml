@@ -40,9 +40,6 @@ stringData:
               secretRef:
                 name: base-dns-provider-secret
                 namespace: garden
-              domains:
-                include:
-                  - {{ .Values.domains.global.domain }}
       gardenClientConnection:
         gardenClusterAddress: https://{{ include "api.domain" . }}:443
         bootstrapKubeconfig:
