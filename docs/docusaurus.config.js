@@ -7,14 +7,22 @@ const darkCodeTheme = require("prism-react-renderer/themes/dracula");
 // Reverse the sidebar items ordering (including nested category items)
 function reverseSidebarItems(items) {
   // Reverse items in categories
-  const result = items.map((item) => {
-    if (item.type === 'category') {
-      return {...item, items: reverseSidebarItems(item.items)};
-    }
-    return item;
-  });
-  // Reverse items at current level
-  result.reverse();
+  const result = items
+    .filter(item => {
+      if(process.env.NODE_ENV !== 'production') {
+          return true
+      }
+
+      return item.id !== 'next'
+    })
+    .map((item) => {
+      if (item.type === 'category') {
+        return {...item, items: reverseSidebarItems(item.items)};
+      }
+      return item;
+    })
+    .reverse();
+
   return result;
 }
 
@@ -117,7 +125,7 @@ const config = {
           {
             type: "docsVersionDropdown",
             position: "right",
-            dropdownItemsAfter: [{ to: "/versions", label: "All versions" }],
+            dropdownItemsAfter: [],
             dropdownActiveClassDisabled: true,
           },
           { to: "/blog", label: "Blog", position: "left" },
