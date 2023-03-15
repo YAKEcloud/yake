@@ -66,6 +66,7 @@ else
   echo "# Release Notes next" > docs/release-notes/next.md
 	if [ ! -d docs/versioned_docs/version-$minor.x ]; then
 		 cd docs
+		 yarn install
 		 yarn docusaurus docs:version $minor.x
 		 cd ..
 	fi
