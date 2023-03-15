@@ -1,15 +1,9 @@
 # [gardener-extension-shoot-dns-service]
+## ⚠️ Breaking Changes
+* *[OPERATOR]* When running this extension with Gardener `v1.66` and newer, several network policies are added to the extension namespace when feature gate `FullNetworkPoliciesInRuntimeCluster` is enabled. This can break existing setups if a **remote** DNS server is deployed to the **same cluster/network** as the central DNS controller. Earlier, egress connections for the DNS controller were unrestricted but with this change the controller will not be able to reach out to the remote DNS server in the same network. ([gardener/gardener-extension-shoot-dns-service#197](https://github.com/gardener/gardener-extension-shoot-dns-service/pull/197), [@timuthy](https://github.com/timuthy))
+  * If you run such a setup, please make sure to additionally deploy egress rules for the DNS controller in the extension namespace.
 ## 🏃 Others
-* *[OPERATOR]* Removed `minAllowed.cpu` from all VPA objects ([gardener/gardener-extension-shoot-dns-service#195](https://github.com/gardener/gardener-extension-shoot-dns-service/pull/195), [@voelzmo](https://github.com/voelzmo))
-* *[OPERATOR]* The following dependency is updated: ([gardener/gardener-extension-shoot-dns-service#189](https://github.com/gardener/gardener-extension-shoot-dns-service/pull/189), [@ialidzhikov](https://github.com/ialidzhikov))
-  * github.com/gardener/gardener: v1.62.1 -> v1.63.1
-* *[OPERATOR]* Provider-specific error codes are now detected/parsed on the extension side. ([gardener/gardener-extension-shoot-dns-service#190](https://github.com/gardener/gardener-extension-shoot-dns-service/pull/190), [@acumino](https://github.com/acumino))
-* *[DEPENDENCY]* The following dependency is updated: ([gardener/gardener-extension-shoot-dns-service#194](https://github.com/gardener/gardener-extension-shoot-dns-service/pull/194), [@shafeeqes](https://github.com/shafeeqes))
-  * github.com/gardener/gardener: v1.63.1 -> v1.65.0
-  * k8s.io/* : v0.25.2 -> v0.26.1
-  * sigs.k8s.io/controller-runtime: v0.13.0-> v0.14.4
+* *[OPERATOR]* Adapted extension components to support the [FullNetworkPoliciesInRuntimeCluster](https://github.com/gardener/gardener/blob/master/docs/deployment/feature_gates.md#list-of-feature-gates) feature gate introduced by `gardener/gardener` v1.66, see [here](https://github.com/gardener/gardener/blob/master/docs/concepts/resource-manager.md#networkpolicy-controller) and [#7352](https://github.com/gardener/gardener/pull/7589) for more information. ([gardener/gardener-extension-shoot-dns-service#197](https://github.com/gardener/gardener-extension-shoot-dns-service/pull/197), [@timuthy](https://github.com/timuthy))
 # [external-dns-management]
-## 🏃 Others
-* *[OPERATOR]* bump builder image `golang` from `1.19.5` to `1.20.1` ([gardener/external-dns-management#300](https://github.com/gardener/external-dns-management/pull/300), [@MartinWeindel](https://github.com/MartinWeindel))
-* *[OPERATOR]* bump k8s modules from `v0.25.4` to `v0.26.1` ([gardener/external-dns-management#300](https://github.com/gardener/external-dns-management/pull/300), [@MartinWeindel](https://github.com/MartinWeindel))
-* *[OPERATOR]* bump builder image `golang` from `1.20.1` to `1.20.2` ([gardener/external-dns-management#301](https://github.com/gardener/external-dns-management/pull/301), [@MartinWeindel](https://github.com/MartinWeindel))
+## ✨ New Features
+* *[OPERATOR]* Support for openstack `loadbalancer.openstack.org/hostname` annotation ([gardener/external-dns-management#302](https://github.com/gardener/external-dns-management/pull/302), [@MartinWeindel](https://github.com/MartinWeindel))
