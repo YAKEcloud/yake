@@ -3,6 +3,7 @@
   "baseBranches": [
     "main",
     // template "_BRANCH_",
+    "release-v1.66",
     "release-v1.65",
     "release-v1.64",
     "release-v1.63",
@@ -30,6 +31,7 @@
     {
       "matchBaseBranches": [
         // template "_BRANCH_",
+        "release-v1.66",
         "release-v1.65",
         "release-v1.64",
         "release-v1.63",
@@ -41,6 +43,7 @@
       "enabled": false
     },
     // template {"matchBaseBranches":["_BRANCH_"],"allowedVersions":"/^_MAJOR_[.]_MINOR_[.].*$/","matchPackagePatterns": ["gardener-controlplane", "gardener-controlplane-application", "gardener-controlplane-runtime", "gardener-application", "gardenlet"],"enabled": true },
+    {"matchBaseBranches":["release-v1.66"],"allowedVersions":"/^1[.]66[.].*$/","matchPackagePatterns": ["gardener-controlplane", "gardener-controlplane-application", "gardener-controlplane-runtime", "gardener-application", "gardenlet"],"enabled": true },
     {"matchBaseBranches":["release-v1.65"],"allowedVersions":"/^1[.]65[.].*$/","matchPackagePatterns": ["gardener-controlplane", "gardener-controlplane-application", "gardener-controlplane-runtime", "gardener-application", "gardenlet"],"enabled": true },
     {
       "matchBaseBranches": [
