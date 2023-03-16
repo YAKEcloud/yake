@@ -1,0 +1,43 @@
+apiVersion: v1
+kind: Secret
+metadata:
+  name: ingress-nginx-base-values
+  namespace: flux-system
+type: Opaque
+stringData:
+  values.yaml: |-
+    controller:
+{{- if .Values.registryOverwrite }}
+      image:
+        repository: {{ include "replaceRegistry" (dict "registry.k8s.io/ingress-nginx/controller" .Values.registryOverwrite) }}
+{{- end }}
+      podLabels:
+        app: nginx-ingress
+        component: controller
+      service:
+        annotations:
+{{- if .Values.issuer.enabled }}
+          cert.gardener.cloud/class: base-cert-class
+          cert.gardener.cloud/secretname: controlplane-cert-secret
+{{- end }}
+      extraArgs:
+        enable-ssl-passthrough: ""
+{{- if .Values.registryOverwrite }}
+    patch:
+      image:
+        repository: {{ include "replaceRegistry" (dict "registry.k8s.io/ingress-nginx/kube-webhook-certgen" .Values.registryOverwrite) }}
+    defaultbackend:
+      image:
+        repository: {{ include "replaceRegistry" (dict "registry.k8s.io/defaultbackend-amd64" .Values.registryOverwrite) }}
+{{- end }}
+{{- if .Values.issuer.enabled }}
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  labels:
+    gardener.cloud/role: controlplane-cert
+  name: controlplane-cert-secret
+  namespace: garden
+type: Opaque
+{{- end }}

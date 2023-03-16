@@ -1,0 +1,22 @@
+apiVersion: v1
+kind: Secret
+metadata:
+  name: cert-manager-base-values
+  namespace: flux-system
+type: Opaque
+stringData:
+  values.yaml: |-
+{{- if .Values.registryOverwrite }}
+    image:
+      repository: {{ include "replaceRegistry" (dict "quay.io/jetstack/cert-manager-controller" .Values.registryOverwrite) }}
+    cainjector:
+      image:
+        repository: {{ include "replaceRegistry" (dict "quay.io/jetstack/cert-manager-cainjector" .Values.registryOverwrite) }}
+    acmesolver:
+      image:
+        repository: {{ include "replaceRegistry" (dict "quay.io/jetstack/cert-manager-acmesolver" .Values.registryOverwrite) }}
+    startupapicheck:
+      image:
+        repository: {{ include "replaceRegistry" (dict "quay.io/jetstack/cert-manager-ctl" .Values.registryOverwrite) }}
+{{- end }}
+    installCRDs: true

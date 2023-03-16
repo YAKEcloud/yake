@@ -6,6 +6,10 @@ metadata:
 type: Opaque
 stringData:
   values.yaml: |-
+{{- if .Values.registryOverwrite }}
+    image:
+      repository: {{ include "replaceRegistry" (dict "ghcr.io/dexidp/dex" .Values.registryOverwrite) }}
+{{- end }}
     connectors: ~
     issuerUrl: https://{{ include "identity.domain" . }}/oidc
     dashboardOrigins:
@@ -17,8 +21,10 @@ stringData:
         nginx.ingress.kubernetes.io/ssl-redirect: "true"
         nginx.ingress.kubernetes.io/use-port-in-redirects: "true"
         kubernetes.io/ingress.class: nginx
+{{- if .Values.issuer.enabled }}
         cert.gardener.cloud/purpose: managed
         cert.gardener.cloud/class: base-cert-class
+{{- end }}
         dns.gardener.cloud/dnsnames: "*"
         dns.gardener.cloud/ttl: "600"
         dns.gardener.cloud/class: base-dns-class

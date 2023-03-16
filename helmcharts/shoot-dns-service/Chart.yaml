@@ -1,0 +1,8 @@
+apiVersion: v2
+dependencies:
+- condition: controller.enabled
+  name: controller
+  repository: ""
+description: A helmchart for shoot-dns-service
+name: shoot-dns-service
+version: 1.31.0

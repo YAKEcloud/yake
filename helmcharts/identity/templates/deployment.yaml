@@ -1,0 +1,87 @@
+# SPDX-FileCopyrightText: 2021 SAP SE or an SAP affiliate company and Gardener contributors
+#
+# SPDX-License-Identifier: Apache-2.0
+
+apiVersion: {{ include "deploymentversion" . }}
+kind: Deployment
+metadata:
+  name: identity
+  namespace: {{ .Release.Namespace }}
+  labels:
+    app: identity
+    chart: "{{ .Chart.Name }}-{{ .Chart.Version }}"
+    release: "{{ .Release.Name }}"
+    heritage: "{{ .Release.Service }}"
+spec:
+  replicas: {{ .Values.replicaCount }}
+  selector:
+    matchLabels:
+      app: identity
+      release: "{{ .Release.Name }}"
+  template:
+    metadata:
+      annotations:
+        checksum/configmap-identity-config: {{ include (print $.Template.BasePath "/configmap.yaml") . | sha256sum }}
+        {{- if .Values.kubeconfig }}
+        checksum/secret-identity-kubeconfig: {{ include (print $.Template.BasePath "/secret-kubeconfig.yaml") . | sha256sum }}
+        {{- end }}
+      labels:
+        app: identity
+        release: {{ .Release.Name }}
+        {{- if .Values.podLabels }}
+{{ toYaml .Values.podLabels | indent 8 }}
+        {{- end }}
+    spec:
+      volumes:
+        - name: config
+          configMap:
+            defaultMode: 420
+            items:
+            - key: config.yaml
+              path: config.yaml
+            name: identity-configmap
+        {{- if .Values.kubeconfig }}
+        - name: kubeconfig
+          secret:
+            secretName: identity-kubeconfig
+        {{- end }}
+      {{- if .Values.kubeconfig }}
+      automountServiceAccountToken: false
+      {{- else }}
+      serviceAccountName: identity
+      {{- end }}
+      dnsPolicy: ClusterFirst
+      terminationGracePeriodSeconds: 30
+      containers:
+        - name: dex
+          command:
+            - /usr/local/bin/dex
+            - serve
+            - /etc/dex/config.yaml
+          image: "{{ include "image" .Values.image }}"
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          livenessProbe:
+            failureThreshold: 3
+            httpGet:
+              path: "{{ regexReplaceAll "https://[^/]*(/.+)?" .Values.issuerUrl "${1}/healthz" }}"
+              port: {{ .Values.containerPort }}
+              scheme: HTTP
+            initialDelaySeconds: 5
+            periodSeconds: 10
+            successThreshold: 1
+            timeoutSeconds: 1
+          ports:
+            - name: http
+              containerPort: {{ .Values.containerPort }}
+              protocol: TCP
+          resources:
+{{ toYaml .Values.resources | indent 12 }}
+          terminationMessagePath: /dev/termination-log
+          terminationMessagePolicy: File
+          volumeMounts:
+          - mountPath: /etc/dex
+            name: config
+          {{- if .Values.kubeconfig }}
+          - mountPath: /etc/kubeconfig
+            name: kubeconfig
+          {{- end }}

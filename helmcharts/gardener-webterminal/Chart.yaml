@@ -1,0 +1,11 @@
+apiVersion: v2
+dependencies:
+- condition: terminal-controller-manager-application.enabled
+  name: terminal-controller-manager-application
+  repository: ""
+- condition: terminal-controller-manager-runtime.enabled
+  name: terminal-controller-manager-runtime
+  repository: ""
+description: A Helm chart to deploy the Gardener webterminal
+name: gardener-webterminal
+version: 0.0.2

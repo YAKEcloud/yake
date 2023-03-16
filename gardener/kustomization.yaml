@@ -14,3 +14,4 @@ resources:
   - kube-apiserver.yaml
   - pre-gardenlet.yaml
   - priorityclasses.yaml
+  - webterminal.yaml

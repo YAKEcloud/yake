@@ -1,0 +1,9 @@
+# [gardener-extension-shoot-dns-service]
+## ⚠️ Breaking Changes
+* *[OPERATOR]* When running this extension with Gardener `v1.66` and newer, several network policies are added to the extension namespace when feature gate `FullNetworkPoliciesInRuntimeCluster` is enabled. This can break existing setups if a **remote** DNS server is deployed to the **same cluster/network** as the central DNS controller. Earlier, egress connections for the DNS controller were unrestricted but with this change the controller will not be able to reach out to the remote DNS server in the same network. ([gardener/gardener-extension-shoot-dns-service#197](https://github.com/gardener/gardener-extension-shoot-dns-service/pull/197), [@timuthy](https://github.com/timuthy))
+  * If you run such a setup, please make sure to additionally deploy egress rules for the DNS controller in the extension namespace.
+## 🏃 Others
+* *[OPERATOR]* Adapted extension components to support the [FullNetworkPoliciesInRuntimeCluster](https://github.com/gardener/gardener/blob/master/docs/deployment/feature_gates.md#list-of-feature-gates) feature gate introduced by `gardener/gardener` v1.66, see [here](https://github.com/gardener/gardener/blob/master/docs/concepts/resource-manager.md#networkpolicy-controller) and [#7352](https://github.com/gardener/gardener/pull/7589) for more information. ([gardener/gardener-extension-shoot-dns-service#197](https://github.com/gardener/gardener-extension-shoot-dns-service/pull/197), [@timuthy](https://github.com/timuthy))
+# [external-dns-management]
+## ✨ New Features
+* *[OPERATOR]* Support for openstack `loadbalancer.openstack.org/hostname` annotation ([gardener/external-dns-management#302](https://github.com/gardener/external-dns-management/pull/302), [@MartinWeindel](https://github.com/MartinWeindel))

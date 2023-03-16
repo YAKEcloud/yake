@@ -1,0 +1,371 @@
+application:
+    enabled: false
+global:
+    admission:
+        config:
+            debugging:
+                enableContentionProfiling: false
+                enableProfiling: false
+            gardenClientConnection:
+                burst: 130
+                qps: 100
+            logFormat: json
+            logLevel: info
+            server:
+                enableDebugHandlers: false
+                healthProbes:
+                    bindAddress: 0.0.0.0
+                    port: 2722
+                metrics:
+                    bindAddress: 0.0.0.0
+                    port: 2723
+                webhooks:
+                    bindAddress: 0.0.0.0
+                    port: 2719
+                    tls:
+                        caBundle: |
+                            -----BEGIN CERTIFICATE-----
+                            ...
+                            -----END CERTIFICATE-----
+                        crt: |
+                            -----BEGIN CERTIFICATE-----
+                            ...
+                            -----END CERTIFICATE-----
+                        key: |
+                            -----BEGIN RSA PRIVATE KEY-----
+                            ...
+                            -----END RSA PRIVATE KEY-----
+                    tlsSecretName: null
+        enabled: true
+        image:
+            pullPolicy: IfNotPresent
+            repository: eu.gcr.io/gardener-project/gardener/admission-controller
+            tag: v1.66.0
+        replicaCount: 3
+        resources:
+            requests:
+                cpu: 100m
+                memory: 200Mi
+        seedRestriction:
+            enabled: false
+        serviceAccountName: gardener-admission-controller
+        serviceAccountTokenVolumeProjection:
+            audience: ""
+            enabled: false
+            expirationSeconds: 43200
+        vpa: false
+    alerting: []
+    apiserver:
+        admission:
+            mutatingWebhook:
+                token:
+                    audience: mutating-webhook
+                    enabled: false
+                    expirationSeconds: 3600
+            plugins: []
+            validatingWebhook:
+                token:
+                    audience: validating-webhook
+                    enabled: false
+                    expirationSeconds: 3600
+        audit:
+            log:
+                maxBackup: 5
+                maxSize: 100
+                path: /tmp/audit/audit.log
+            policy: |
+                apiVersion: audit.k8s.io/v1
+                kind: Policy
+                rules:
+                - level: None
+                  userGroups:
+                  - system:nodes
+                - level: None
+                  users:
+                  - gardener
+                  - kubelet
+                  - system:kube-controller-manager
+                  - system:kube-scheduler
+                  - system:gardener-resource-manager
+                  - system:kube-aggregator
+                  - system:kube-proxy
+                  - system:apiserver
+                  - system:serviceaccount:garden:gardener-controller-manager
+                  - system:serviceaccount:garden:gardener-metrics-exporter
+                  - system:serviceaccount:kube-system:generic-garbage-collector
+                  - system:serviceaccount:kube-system:namespace-controller
+                  - garden.sapcloud.io:monitoring
+                  - garden.sapcloud.io:monitoring:prometheus
+                  - garden.sapcloud.io:monitoring:kube-state-metrics
+                  - gardener.cloud:monitoring
+                  - gardener.cloud:monitoring:prometheus
+                  - gardener.cloud:monitoring:kube-state-metrics
+                - level: None
+                  nonResourceURLs:
+                  - /healthz*
+                  - /version
+                  - /openapi/*
+                  - /swagger* # Swagger endpoint is deprecated with https://github.com/kubernetes/kubernetes/pull/73148
+                - level: None
+                  resources:
+                  - group: ""
+                    resources: ["events"]
+                - level: None
+                  verbs: ["get", "list", "watch"]
+                - level: Metadata
+            webhook: {}
+        caBundle: |
+            -----BEGIN CERTIFICATE-----
+            ...
+            -----END CERTIFICATE-----
+        enabled: true
+        encryption:
+            config: |
+                apiVersion: apiserver.config.k8s.io/v1
+                kind: EncryptionConfiguration
+                resources:
+                  - resources:
+                    - controllerdeployments.core.gardener.cloud
+                    - controllerregistrations.core.gardener.cloud
+                    - shootstates.core.gardener.cloud
+                    providers:
+                    - identity: {}
+        etcd:
+            servers: https://etcd:2379
+            useSidecar: false
+        featureGates: {}
+        groupPriorityMinimum: 10000
+        hvpa:
+            enabled: false
+            limitsRequestsGapScaleParams:
+                cpu:
+                    percentage: 70
+                    value: "1"
+                memory:
+                    percentage: 70
+                    value: 1G
+            maxReplicas: 4
+            minReplicas: 1
+            targetAverageUtilizationCpu: 80
+            targetAverageUtilizationMemory: 80
+            vpaScaleDownMode: Auto
+            vpaScaleDownStabilization:
+                minChange:
+                    cpu:
+                        percentage: 80
+                        value: 600m
+                    memory:
+                        percentage: 80
+                        value: 600M
+                stabilizationDuration: 15m
+            vpaScaleUpMode: Auto
+            vpaScaleUpStabilization:
+                minChange:
+                    cpu:
+                        percentage: 80
+                        value: 300m
+                    memory:
+                        percentage: 80
+                        value: 200M
+                stabilizationDuration: 3m
+        image:
+            pullPolicy: IfNotPresent
+            repository: eu.gcr.io/gardener-project/gardener/apiserver
+            tag: v1.66.0
+        insecureSkipTLSVerify: false
+        livenessProbe:
+            failureThreshold: 3
+            initialDelaySeconds: 15
+            periodSeconds: 10
+            successThreshold: 1
+            timeoutSeconds: 15
+        logFormat: json
+        logLevel: info
+        logVerbosity: "2"
+        minReadySeconds: 30
+        readinessProbe:
+            failureThreshold: 3
+            initialDelaySeconds: 15
+            periodSeconds: 10
+            successThreshold: 1
+            timeoutSeconds: 15
+        replicaCount: 1
+        resources:
+            requests:
+                cpu: 100m
+                memory: 100Mi
+        rollingUpdate:
+            maxSurge: 1
+            maxUnavailable: 0
+        securePort: 8443
+        serviceAccountName: gardener-apiserver
+        serviceAccountTokenVolumeProjection:
+            audience: ""
+            enabled: false
+            expirationSeconds: 43200
+        serviceEnabled: true
+        shutdownDelayDuration: 15s
+        tls:
+            crt: |
+                -----BEGIN CERTIFICATE-----
+                ...
+                -----END CERTIFICATE-----
+            key: |
+                -----BEGIN RSA PRIVATE KEY-----
+                ...
+                -----END RSA PRIVATE KEY-----
+        versionPriority: 20
+        vpa: false
+    controller:
+        additionalVolumeMounts: []
+        additionalVolumes: []
+        config:
+            controllers:
+                certificateSigningRequest:
+                    concurrentSyncs: 5
+                exposureClass:
+                    concurrentSyncs: 5
+                managedSeedSet:
+                    concurrentSyncs: 5
+                    syncPeriod: 30m
+                seed:
+                    concurrentSyncs: 5
+                    monitorPeriod: 40s
+                    shootMonitorPeriod: 300s
+                    syncPeriod: 10s
+                seedBackupBucketsCheck:
+                    concurrentSyncs: 5
+                    conditionThresholds:
+                        - duration: 1m
+                          type: BackupBucketsReady
+                    syncPeriod: 30s
+                seedExtensionsCheck:
+                    concurrentSyncs: 5
+                    conditionThresholds:
+                        - duration: 1m
+                          type: ExtensionsReady
+                    syncPeriod: 30s
+                shootHibernation:
+                    concurrentSyncs: 5
+                    triggerDeadlineDuration: 2h
+                shootMaintenance:
+                    concurrentSyncs: 5
+                    enableShootControlPlaneRestarter: true
+                    enableShootCoreAddonRestarter: false
+                shootQuota:
+                    concurrentSyncs: 5
+                    syncPeriod: 60m
+                shootReference:
+                    concurrentSyncs: 5
+                shootRetry:
+                    concurrentSyncs: 5
+                    retryJitterPeriod: 5m
+                    retryPeriod: 10m
+            debugging:
+                enableContentionProfiling: false
+                enableProfiling: false
+            featureGates: {}
+            gardenClientConnection:
+                burst: 130
+                qps: 100
+            leaderElection:
+                leaderElect: true
+                leaseDuration: 15s
+                renewDeadline: 10s
+                resourceLock: leases
+                retryPeriod: 2s
+            logLevel: info
+            server:
+                healthProbes:
+                    bindAddress: 0.0.0.0
+                    port: 2718
+                metrics:
+                    bindAddress: 0.0.0.0
+                    port: 2719
+        enabled: true
+        env: []
+        image:
+            pullPolicy: IfNotPresent
+            repository: eu.gcr.io/gardener-project/gardener/controller-manager
+            tag: v1.66.0
+        replicaCount: 1
+        resources:
+            requests:
+                cpu: 100m
+                memory: 100Mi
+        serviceAccountName: gardener-controller-manager
+        serviceAccountTokenVolumeProjection:
+            audience: ""
+            enabled: false
+            expirationSeconds: 43200
+        vpa: false
+    defaultDomains: []
+    deployment:
+        virtualGarden:
+            admission:
+                user:
+                    name: ""
+            apiserver:
+                user:
+                    name: ""
+            clusterIP: 1.2.3.4
+            controller:
+                user:
+                    name: ""
+            createNamespace: true
+            enabled: false
+            scheduler:
+                user:
+                    name: ""
+    internalDomain:
+        credentials: {}
+        domain: example.com
+        provider: aws-route53
+    rbac:
+        seedAuthorizer:
+            enabled: false
+    scheduler:
+        config:
+            clientConnection:
+                burst: 130
+                qps: 100
+            debugging:
+                enableContentionProfiling: false
+                enableProfiling: false
+            featureGates: {}
+            leaderElection:
+                leaderElect: true
+                leaseDuration: 15s
+                renewDeadline: 10s
+                resourceLock: leases
+                retryPeriod: 2s
+            logLevel: info
+            server:
+                healthProbes:
+                    bindAddress: 0.0.0.0
+                    port: 10251
+                metrics:
+                    bindAddress: 0.0.0.0
+                    port: 19251
+        enabled: true
+        image:
+            pullPolicy: IfNotPresent
+            repository: eu.gcr.io/gardener-project/gardener/scheduler
+            tag: v1.66.0
+        replicaCount: 1
+        resources:
+            requests:
+                cpu: 50m
+                memory: 50Mi
+        serviceAccountName: gardener-scheduler
+        serviceAccountTokenVolumeProjection:
+            audience: ""
+            enabled: false
+            expirationSeconds: 43200
+        vpa: false
+runtime:
+    enabled: false
+utils-common:
+    enabled: false
+utils-templates:
+    enabled: false

@@ -1,0 +1,11 @@
+apiVersion: v2
+dependencies:
+- condition: application.enabled
+  name: application
+  repository: ""
+- condition: runtime.enabled
+  name: runtime
+  repository: ""
+description: A Helm chart to deploy the Gardener dashboard
+name: dashboard
+version: 1.67.0

@@ -18,95 +18,11 @@ spec:
   install:
     remediation:
       retries: 10
-  values:
-    snapshotsEnabled: false
-
-{{- if eq .Values.backups.provider "azure" }}
-    credentials:
-      useSecret: false
-    configuration:
-      extraEnvVars:
-        AZURE_STORAGE_ACCOUNT_ACCESS_KEY: {{ .Values.backups.credentials.storageAccountAccessKey | b64dec }}
-        AZURE_CLOUD_NAME: AzurePublicCloud
-      provider: azure
-      backupStorageLocation:
-        bucket: {{ .Values.backups.bucketName }}
-        prefix: velero-backup
-        config:
-          storageAccount: {{ .Values.backups.credentials.storageAccount | b64dec }}
-          storageAccountKeyEnvVar: AZURE_STORAGE_ACCOUNT_ACCESS_KEY
-    initContainers:
-      - name: velero-plugin-for-microsoft-azure
-        image: velero/velero-plugin-for-microsoft-azure:v1.6.0
-        imagePullPolicy: IfNotPresent
-        volumeMounts:
-          - mountPath: /target
-            name: plugins
-
-{{- else if eq .Values.backups.provider "aws" }}
-    credentials:
-      useSecret: false
-    configuration:
-      extraEnvVars:
-        AWS_ACCESS_KEY_ID: {{ .Values.backups.credentials.accessKeyID }}
-        AWS_SECRET_ACCESS_KEY: {{ .Values.backups.credentials.secretAccessKey }}
-      provider: aws
-      backupStorageLocation:
-        bucket: {{ .Values.backups.bucketName }}
-        prefix: velero-backup
-        config:
-          region: {{ .Values.backups.region }}
-    initContainers:
-      - name: velero-plugin-for-aws
-        image: velero/velero-plugin-for-aws:v1.6.0
-        imagePullPolicy: IfNotPresent
-        volumeMounts:
-          - mountPath: /target
-            name: plugins
-
-{{- else if eq .Values.backups.provider "openstack" }}
-    credentials:
-      useSecret: false
-    configuration:
-      extraEnvVars:
-        OS_AUTH_URL: {{ .Values.backups.credentials.authURL }}
-        OS_PASSWORD: {{ .Values.backups.credentials.password }}
-        OS_USERNAME: {{ .Values.backups.credentials.username }}
-        OS_PROJECT_NAME: {{ .Values.backups.credentials.tenantName }}
-        OS_REGION_NAME: {{ .Values.backups.credentials.region }}
-        OS_DOMAIN_NAME: {{ .Values.backups.credentials.domainName }}
-      provider: community.openstack.org/openstack
-      backupStorageLocation:
-        bucket: {{ .Values.backups.bucketName }}
-        prefix: velero-backup
-        config:
-          region: {{ .Values.backups.region }}
-    initContainers:
-      - name: velero-plugin-for-openstack
-        image: lirt/velero-plugin-for-openstack:v0.4.1
-        imagePullPolicy: IfNotPresent
-        volumeMounts:
-          - mountPath: /target
-            name: plugins
-{{- end }}
-
-    schedules:
-        full-cluster-hourly:
-          labels:
-            backup: full-cluster
-            schedule: hourly
-          schedule: "@every 1h"
-          template:
-            ttl: "52h0m"
-            includedNamespaces:
-              - '*'
-        full-cluster-daily:
-          labels:
-            backup: full-cluster
-            schedule: daily
-          schedule: "@every 24h"
-          template:
-            ttl: "2160h0m"
-            includedNamespaces:
-              - '*'
+  valuesFrom:
+    - kind: Secret
+      name: velero-base-values
+      optional: false
+    - kind: Secret
+      name: velero-values
+      optional: true
 {{- end }}

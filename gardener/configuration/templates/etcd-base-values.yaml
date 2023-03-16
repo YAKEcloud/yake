@@ -1,4 +1,3 @@
-{{- if .Values.backups.enabled }}
 apiVersion: v1
 kind: Secret
 metadata:
@@ -8,6 +7,12 @@ metadata:
 type: Opaque
 stringData:
   values.yaml: |-
+  {{- if .Values.registryOverwrite }}
+        images:
+          etcd: {{ include "replaceRegistry" (dict "eu.gcr.io/gardener-project/gardener/etcd:v3.5.2" .Values.registryOverwrite) }}
+          etcd-backup-restore: {{ include "replaceRegistry" (dict "eu.gcr.io/gardener-project/gardener/etcdbrctl:v0.19.0" .Values.registryOverwrite) }}
+{{- end }}
+{{- if .Values.backups.enabled }}
 {{- if eq .Values.backups.provider "azure" }}
         backup:
           storageProvider: ABS

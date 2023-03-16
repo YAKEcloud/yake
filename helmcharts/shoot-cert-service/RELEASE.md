@@ -1,0 +1,3 @@
+# [gardener-extension-shoot-cert-service]
+## 🏃 Others
+* *[OPERATOR]* Adapted extension components to support the [FullNetworkPoliciesInRuntimeCluster](https://github.com/gardener/gardener/blob/master/docs/deployment/feature_gates.md#list-of-feature-gates) feature gate introduced by `gardener/gardener` v1.66, see [here](https://github.com/gardener/gardener/blob/master/docs/concepts/resource-manager.md#networkpolicy-controller) and [#7352](https://github.com/gardener/gardener/pull/7589) for more information. ([gardener/gardener-extension-shoot-cert-service#152](https://github.com/gardener/gardener-extension-shoot-cert-service/pull/152), [@timuthy](https://github.com/timuthy))

@@ -8,60 +8,97 @@ type: Opaque
 stringData:
   values.yaml: |-
     os-ubuntu:
-      version: 1.20.0
+      version: 1.21.0
+{{- if .Values.registryOverwrite }}
+      values:
+        image:
+          repository: {{ include "replaceRegistry" (dict "eu.gcr.io/gardener-project/gardener/extensions/os-ubuntu" .Values.registryOverwrite) }}
+{{- end }}
 
     os-gardenlinux:
-      version: 0.17.0
+      version: 0.18.0
+{{- if .Values.registryOverwrite }}
+      values:
+        image:
+          repository: {{ include "replaceRegistry" (dict "eu.gcr.io/gardener-project/gardener/extensions/os-gardenlinux" .Values.registryOverwrite) }}
+{{- end }}
 
     provider-hcloud:
       version: 0.6.6
+      admission:
+        enabled: false
 {{- if .Values.registryOverwrite }}
+        values:
+          image:
+            repository: {{ include "replaceRegistry" (dict "ghcr.io/23technologies/gardener-extension-provider-hcloud/admission" .Values.registryOverwrite) }}
       values:
+        image:
+          repository: {{ include "replaceRegistry" (dict "ghcr.io/23technologies/gardener-extension-provider-hcloud" .Values.registryOverwrite) }}
         imageVectorOverwrite: |
 {{ include "provider-hcloud.imageVectorOverwrite" . | indent 10 }}
 {{- end }}
 
     provider-azure:
-      version: 1.33.0
-      admission: true
+      version: 1.34.0
+      admission:
+        enabled: true
 {{- if .Values.registryOverwrite }}
+        values:
+          image:
+            repository: {{ include "replaceRegistry" (dict "eu.gcr.io/gardener-project/gardener/extensions/admission-azure" .Values.registryOverwrite) }}
       values:
+        image:
+          repository: {{ include "replaceRegistry" (dict "eu.gcr.io/gardener-project/gardener/extensions/provider-azure" .Values.registryOverwrite) }}
         imageVectorOverwrite: |
 {{ include "provider-azure.imageVectorOverwrite" . | indent 10 }}
 {{- end }}
 
     provider-openstack:
-      version: 1.31.4
-      admission: true
+      version: 1.32.0
+      admission:
+        enabled: true
 {{- if .Values.registryOverwrite }}
+        values:
+          image:
+            repository: {{ include "replaceRegistry" (dict "eu.gcr.io/gardener-project/gardener/extensions/admission-openstack" .Values.registryOverwrite) }}
       values:
+        image:
+          repository: {{ include "replaceRegistry" (dict "eu.gcr.io/gardener-project/gardener/extensions/provider-openstack" .Values.registryOverwrite) }}
         imageVectorOverwrite: |
 {{ include "provider-openstack.imageVectorOverwrite" . | indent 10 }}
 {{- end }}
 
     networking-calico:
-      version: 1.29.0
+      version: 1.31.0
 {{- if .Values.registryOverwrite }}
       values:
+        image:
+          repository: {{ include "replaceRegistry" (dict "eu.gcr.io/gardener-project/gardener/extensions/networking-calico" .Values.registryOverwrite) }}
         imageVectorOverwrite: |
 {{ include "networking-calico.imageVectorOverwrite" . | indent 10 }}
 {{- end }}
 
     shoot-cert-service:
-      version: 1.28.0
+      version: 1.30.0
 {{- if .Values.registryOverwrite }}
       values:
+        image:
+          repository: {{ include "replaceRegistry" (dict "eu.gcr.io/gardener-project/gardener/extensions/shoot-cert-service" .Values.registryOverwrite) }}
         imageVectorOverwrite: |
 {{ include "shoot-cert-service.imageVectorOverwrite" . | indent 10 }}
 {{- end }}
 
     shoot-dns-service:
-      version: 1.29.0
+      version: 1.31.0
       values:
         dnsControllerManager:
           deploy: true
           image:
+{{- if .Values.registryOverwrite }}
+            repository: {{ include "replaceRegistry" (dict "eu.gcr.io/gardener-project/dns-controller-manager" .Values.registryOverwrite) }}
+{{- else }}
             repository: eu.gcr.io/gardener-project/dns-controller-manager
+{{- end }}
             tag: v0.13.3
           configuration:
             cacheTtl: 300
@@ -69,13 +106,14 @@ stringData:
             dnsPoolResyncPeriod: 30m
             serverPortHttp: 8080
 {{- if .Values.registryOverwrite }}
-      values:
+        image:
+          repository: {{ include "replaceRegistry" (dict "eu.gcr.io/gardener-project/gardener/extensions/shoot-dns-service" .Values.registryOverwrite) }}
         imageVectorOverwrite: |
 {{ include "shoot-dns-service.imageVectorOverwrite" . | indent 10 }}
 {{- end }}
 
     networking-cilium:
-      version: 1.21.0
+      version: 1.22.0
 {{- if .Values.registryOverwrite }}
       values:
         imageVectorOverwrite: |
@@ -83,33 +121,51 @@ stringData:
 {{- end }}
 
     provider-alicloud:
-      version: 1.43.0
+      version: 1.44.2
 {{- if .Values.registryOverwrite }}
       values:
+        image:
+          repository: {{ include "replaceRegistry" (dict "eu.gcr.io/gardener-project/gardener/extensions/provider-alicloud" .Values.registryOverwrite) }}
         imageVectorOverwrite: |
 {{ include "provider-alicloud.imageVectorOverwrite" . | indent 10 }}
 {{- end }}
 
     provider-aws:
-      version: 1.41.1
+      version: 1.42.0
+      admission:
+        enabled: true
 {{- if .Values.registryOverwrite }}
+        values:
+          image:
+            repository: {{ include "replaceRegistry" (dict "eu.gcr.io/gardener-project/gardener/extensions/admission-aws" .Values.registryOverwrite) }}
       values:
+        image:
+          repository: {{ include "replaceRegistry" (dict "eu.gcr.io/gardener-project/gardener/extensions/provider-aws" .Values.registryOverwrite) }}
         imageVectorOverwrite: |
 {{ include "provider-aws.imageVectorOverwrite" . | indent 10 }}
 {{- end }}
 
     provider-gcp:
-      version: 1.27.1
+      version: 1.28.0
+      admission:
+        enabled: true
 {{- if .Values.registryOverwrite }}
+        values:
+          image:
+            repository: {{ include "replaceRegistry" (dict "eu.gcr.io/gardener-project/gardener/extensions/admission-gcp" .Values.registryOverwrite) }}
       values:
+        image:
+          repository: {{ include "replaceRegistry" (dict "eu.gcr.io/gardener-project/gardener/extensions/provider-gcp" .Values.registryOverwrite) }}
         imageVectorOverwrite: |
 {{ include "provider-gcp.imageVectorOverwrite" . | indent 10 }}
 {{- end }}
 
     runtime-gvisor:
-      version: 0.8.0
+      version: 0.9.0
 {{- if .Values.registryOverwrite }}
       values:
+        image:
+          repository: {{ include "replaceRegistry" (dict "eu.gcr.io/gardener-project/gardener/extensions/runtime-gvisor" .Values.registryOverwrite) }}
         imageVectorOverwrite: |
 {{ include "runtime-gvisor.imageVectorOverwrite" . | indent 10 }}
 {{- end }}

@@ -1,0 +1,41 @@
+global:
+    healthPort: 8081
+    image:
+        pullPolicy: IfNotPresent
+        repository: eu.gcr.io/gardener-project/gardener/extensions/admission-aws
+        tag: latest
+    kubeconfig: null
+    metricsPort: 8080
+    replicaCount: 1
+    resources: {}
+    serviceAccountTokenVolumeProjection:
+        audience: ""
+        enabled: false
+        expirationSeconds: 43200
+    virtualGarden:
+        enabled: false
+        user:
+            name: ""
+    vpa:
+        enabled: true
+        resourcePolicy:
+            minAllowed:
+                memory: 64Mi
+        updatePolicy:
+            updateMode: Auto
+    webhookConfig:
+        caBundle: |
+            -----BEGIN CERTIFICATE-----
+            ...
+            -----END CERTIFICATE-----
+        serverPort: 10250
+        tls:
+            crt: |
+                -----BEGIN CERTIFICATE-----
+                ...
+                -----END CERTIFICATE-----
+            key: |
+                -----BEGIN RSA PRIVATE KEY-----
+                ...
+                -----END RSA PRIVATE KEY-----
+        useObjectSelector: false

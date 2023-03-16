@@ -7,6 +7,10 @@ type: Opaque
 stringData:
   values.yaml: |-
     global:
+{{- if .Values.registryOverwrite }}
+      image:
+        repository: {{ include "replaceRegistry" (dict "eu.gcr.io/gardener-project/gardener/dashboard" .Values.registryOverwrite) }}
+{{- end }}
       virtualGarden:
         enabled: true
       apiServerUrl: https://{{ include "api.domain" . }}/
@@ -16,8 +20,10 @@ stringData:
         - {{ include "dashboard.domain" . }}
         annotations:
           kubernetes.io/ingress.class: nginx
+{{- if .Values.issuer.enabled }}
           cert.gardener.cloud/purpose: managed
           cert.gardener.cloud/class: base-cert-class
+{{- end }}
           dns.gardener.cloud/dnsnames: "*"
           dns.gardener.cloud/ttl: "600"
           dns.gardener.cloud/class: base-dns-class

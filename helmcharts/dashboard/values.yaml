@@ -1,0 +1,71 @@
+application:
+    enabled: false
+global:
+    containerPort: 8080
+    frontendConfig:
+        defaultHibernationSchedule:
+            development:
+                - end: 00 08 * * 1,2,3,4,5
+                  start: 00 17 * * 1,2,3,4,5
+            evaluation:
+                - start: 00 17 * * 1,2,3,4,5
+            production: null
+        defaultNodesCIDR: 10.250.0.0/16
+        features:
+            projectTerminalShortcutsEnabled: false
+            terminalEnabled: false
+        helpMenuItems:
+            - icon: description
+              title: Getting Started
+              url: https://github.com/gardener/gardener/tree/master/docs
+            - icon: bug_report
+              title: Issues
+              url: https://github.com/gardener/gardener/issues
+        landingPageUrl: https://github.com/gardener
+        seedCandidateDeterminationStrategy: SameRegion
+        serviceAccountDefaultTokenExpiration: 7.776e+06
+    image:
+        pullPolicy: IfNotPresent
+        repository: eu.gcr.io/gardener-project/gardener/dashboard
+        tag: 1.67.0
+    ingress:
+        annotations:
+            kubernetes.io/ingress.class: nginx
+            nginx.ingress.kubernetes.io/ssl-redirect: "true"
+            nginx.ingress.kubernetes.io/use-port-in-redirects: "true"
+        tls:
+            secretName: gardener-dashboard-tls
+    livenessProbe:
+        enabled: true
+        failureThreshold: 6
+        initialDelaySeconds: 15
+        periodSeconds: 20
+        successThreshold: 1
+        timeoutSeconds: 5
+    logLevel: debug
+    readinessProbe:
+        enabled: true
+        failureThreshold: 6
+        initialDelaySeconds: 5
+        periodSeconds: 10
+        successThreshold: 1
+        timeoutSeconds: 5
+    replicaCount: 1
+    resources:
+        limits:
+            cpu: 1
+            memory: 1G
+        requests:
+            cpu: 100m
+            memory: 350Mi
+    serviceAccountName: gardener-dashboard
+    serviceAccountTokenVolumeProjection:
+        audience: ""
+        enabled: true
+        expirationSeconds: 43200
+    servicePort: 8080
+    sessionSecret: null
+    virtualGarden:
+        enabled: false
+runtime:
+    enabled: false

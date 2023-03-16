@@ -1,0 +1,39 @@
+alicloud:
+    enabled: false
+aws:
+    enabled: false
+azure:
+    enabled: false
+betacloud:
+    enabled: false
+citycloud:
+    enabled: false
+fugacloud:
+    enabled: false
+gcp:
+    enabled: false
+global:
+    kubernetes:
+        upstreamVersions:
+            include: true
+            versions:
+                1.20.15:
+                    classification: supported
+                1.21.9:
+                    classification: supported
+                1.22.6:
+                    classification: supported
+                1.23.3:
+                    classification: supported
+        versions: {}
+    seedSelector:
+        enabled: false
+        selector: {}
+hcloud:
+    enabled: false
+pluscloud-open:
+    enabled: false
+scs-community-platform:
+    enabled: false
+wavestack:
+    enabled: false

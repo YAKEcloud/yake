@@ -1,0 +1,83 @@
+enabled: true
+global:
+    kubernetes:
+        upstreamVersions:
+            include: false
+        versions: {}
+kubernetes:
+    versions: {}
+machineImages:
+    - name: ubuntu
+      versions:
+        - classification: preview
+          cri:
+            - name: containerd
+            - name: docker
+          version: 20.4.20210616
+        - cri:
+            - name: containerd
+            - name: docker
+          version: 20.4.20200423
+machineTypes:
+    - cpu: "2"
+      gpu: "0"
+      memory: 4Gi
+      name: 2C-4GB-50GB
+      storage:
+        class: standard
+        size: 50Gi
+        type: default
+    - cpu: "4"
+      gpu: "0"
+      memory: 8Gi
+      name: 4C-8GB-50GB
+      storage:
+        class: standard
+        size: 50Gi
+        type: default
+    - cpu: "8"
+      gpu: "0"
+      memory: 16Gi
+      name: 8C-16GB-50GB
+      storage:
+        class: standard
+        size: 50Gi
+        type: default
+name: citycloud
+providerConfig:
+    apiVersion: openstack.provider.extensions.gardener.cloud/v1alpha1
+    constraints:
+        floatingPools:
+            - name: ext-net
+        loadBalancerProviders:
+            - name: amphora
+    keystoneURLs:
+        - region: Fra1
+          url: https://fra1.citycloud.com:5000/v3/
+        - region: Kna1
+          url: https://kna1.citycloud.com:5000/v3/
+        - region: Sto2
+          url: https://sto2.citycloud.com:5000/v3/
+    kind: CloudProfileConfig
+    machineImages:
+        - name: ubuntu
+          versions:
+            - image: Ubuntu 20.04 Focal Fossa 20210616
+              version: 20.4.20210616
+            - image: Ubuntu 20.04 Focal Fossa 20200423
+              regions:
+                - id: 235d9bfb-7a13-4434-9966-cfc0ae033e79
+                  name: Fra1
+              version: 20.4.20200423
+    useOctavia: true
+regions:
+    - name: Fra1
+      zones:
+        - name: nova
+    - name: Kna1
+      zones:
+        - name: nova
+    - name: Sto2
+      zones:
+        - name: nova
+type: openstack

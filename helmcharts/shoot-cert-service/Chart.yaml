@@ -1,0 +1,8 @@
+apiVersion: v2
+dependencies:
+- condition: controller.enabled
+  name: controller
+  repository: ""
+description: A helmchart for shoot-cert-service
+name: shoot-cert-service
+version: 1.30.0

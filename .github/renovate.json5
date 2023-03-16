@@ -1,21 +1,23 @@
 {
-  "assignees": ["gesslein"],
+  "assignees": ["mxmxchere"],
   "baseBranches": [
     "main",
     // template "_BRANCH_",
+    "release-v1.66",
+    "release-v1.65",
+    "release-v1.64",
     "release-v1.63",
     "release-v1.62",
     "release-v1.61",
     "release-v1.60",
-    "release-v1.59",
   ],
-  "automerge": "true",
+  "automerge": true,
   "dependencyDashboard": true,
-  "platformAutomerge": "true",
+  "platformAutomerge": true,
   "prHourlyLimit": 0,
   "prConcurrentLimit": 1,
   "flux": {
-			"fileMatch": ["pre-gardener/.*.yaml", "gardener/.*.yaml", "flux-system/gotk-components.yaml"]
+	"fileMatch": ["pre-gardener/.*.yaml", "gardener/.*.yaml", "flux-system/gotk-components.yaml"]
   },
   "packageRules": [
     {
@@ -29,16 +31,28 @@
     {
       "matchBaseBranches": [
         // template "_BRANCH_",
+        "release-v1.66",
+        "release-v1.65",
+        "release-v1.64",
         "release-v1.63",
         "release-v1.62",
         "release-v1.61",
         "release-v1.60",
-        "release-v1.59",
       ],
       "matchPackagePatterns": [".*"],
       "enabled": false
     },
     // template {"matchBaseBranches":["_BRANCH_"],"allowedVersions":"/^_MAJOR_[.]_MINOR_[.].*$/","matchPackagePatterns": ["gardener-controlplane", "gardener-controlplane-application", "gardener-controlplane-runtime", "gardener-application", "gardenlet"],"enabled": true },
+    {"matchBaseBranches":["release-v1.66"],"allowedVersions":"/^1[.]66[.].*$/","matchPackagePatterns": ["gardener-controlplane", "gardener-controlplane-application", "gardener-controlplane-runtime", "gardener-application", "gardenlet"],"enabled": true },
+    {"matchBaseBranches":["release-v1.65"],"allowedVersions":"/^1[.]65[.].*$/","matchPackagePatterns": ["gardener-controlplane", "gardener-controlplane-application", "gardener-controlplane-runtime", "gardener-application", "gardenlet"],"enabled": true },
+    {
+      "matchBaseBranches": [
+        "release-v1.64"
+      ],
+      "matchPackagePatterns": ["gardener-controlplane", "gardener-controlplane-application", "gardener-controlplane-runtime", "gardener-application", "gardenlet"],
+      "allowedVersions": "/^1\\.64\\..*$/",
+      "enabled": true
+    },
     {"matchBaseBranches":["release-v1.63"],"allowedVersions":"/^1[.]63[.].*$/","matchPackagePatterns": ["gardener-controlplane", "gardener-controlplane-application", "gardener-controlplane-runtime", "gardener-application", "gardenlet"],"enabled": true },
     {
       "matchBaseBranches": [
@@ -62,14 +76,6 @@
       ],
       "matchPackagePatterns": ["gardener-controlplane", "gardener-controlplane-application", "gardener-controlplane-runtime", "gardener-application", "gardenlet"],
       "allowedVersions": "/^1\\.60\\..*$/",
-      "enabled": true
-    },
-    {
-      "matchBaseBranches": [
-        "release-v1.59"
-      ],
-      "matchPackagePatterns": ["gardener-controlplane", "gardener-controlplane-application", "gardener-controlplane-runtime", "gardener-application", "gardenlet"],
-      "allowedVersions": "/^1\\.59\\..*$/",
       "enabled": true
     },
   ],
@@ -96,8 +102,11 @@
   "semanticCommits": "disabled",
   "addLabels": ["version-bump"],
   "postUpgradeTasks": {
-    "commands": ["cd hack/go/imagevector-importer && go run main.go import --config config.yaml > ../../../gardener/configuration/images.yaml"],
-    "fileFilters": ["gardener/configuration/images.yaml"],
+    "commands": [
+      "cd hack/go/imagevector-importer && go run main.go import --config config.yaml > ../../../gardener/configuration/images.yaml",
+      "./hack/pull-helmchart.sh {{{depName}}} {{{newVersion}}} && git add helmcharts",
+    ],
+    "fileFilters": ["gardener/configuration/images.yaml", "helmcharts/**/**" ],
     "executionMode": "update"
   }
 }

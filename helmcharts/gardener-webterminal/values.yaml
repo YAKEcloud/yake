@@ -1,0 +1,4 @@
+terminal-controller-manager-application:
+    enabled: false
+terminal-controller-manager-runtime:
+    enabled: false

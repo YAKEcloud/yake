@@ -1,0 +1,8 @@
+apiVersion: v2
+dependencies:
+- condition: controller.enabled
+  name: controller
+  repository: ""
+description: A helmchart for runtime-gvisor
+name: runtime-gvisor
+version: 0.9.0

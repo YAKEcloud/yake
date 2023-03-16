@@ -1,0 +1,76 @@
+{{- if .Values.global.admission.enabled }}
+---
+apiVersion: {{ include "rbacversion" . }}
+kind: ClusterRole
+metadata:
+  name: gardener.cloud:system:admission-controller
+  labels:
+    app: gardener
+    role: admission-controller
+    chart: "{{ .Chart.Name }}-{{ .Chart.Version }}"
+    release: "{{ .Release.Name }}"
+    heritage: "{{ .Release.Service }}"
+rules:
+- apiGroups:
+  - core.gardener.cloud
+  resources:
+  - backupbuckets
+  - backupentries
+  - controllerinstallations
+  - secretbindings
+  - seeds
+  - shoots
+  - projects
+  verbs:
+  - get
+  - list
+  - watch
+- apiGroups:
+  - seedmanagement.gardener.cloud
+  resources:
+  - managedseeds
+  verbs:
+  - get
+  - list
+  - watch
+- apiGroups:
+  - operations.gardener.cloud
+  resources:
+  - bastions
+  verbs:
+  - get
+  - list
+  - watch
+- apiGroups:
+  - ""
+  resources:
+  - configmaps
+  verbs:
+  - get
+- apiGroups:
+  - ""
+  resources:
+  - namespaces
+  - secrets
+  - serviceaccounts
+  verbs:
+  - get
+  - list
+  - watch
+- apiGroups:
+  - coordination.k8s.io
+  resources:
+  - leases
+  verbs:
+  - get
+  - list
+  - watch
+- apiGroups:
+  - certificates.k8s.io
+  resources:
+  - certificatesigningrequests
+  verbs:
+  - get
+  - list
+  - watch
+{{- end }}

@@ -1,0 +1,130 @@
+enabled: true
+global:
+    kubernetes:
+        upstreamVersions:
+            include: false
+        versions: {}
+kubernetes:
+    versions: {}
+machineImages:
+    - name: ubuntu
+      versions:
+        - cri:
+            - name: containerd
+            - name: docker
+          version: 20.4.20210616
+machineTypes:
+    - cpu: "2"
+      gpu: "0"
+      memory: 4Gi
+      name: cx21
+    - cpu: "3"
+      gpu: "0"
+      memory: 4Gi
+      name: cpx21
+    - cpu: "2"
+      gpu: "0"
+      memory: 8Gi
+      name: cx31
+    - cpu: "4"
+      gpu: "0"
+      memory: 8Gi
+      name: cpx31
+    - cpu: "4"
+      gpu: "0"
+      memory: 16Gi
+      name: cx41
+    - cpu: "8"
+      gpu: "0"
+      memory: 16Gi
+      name: cpx41
+    - cpu: "8"
+      gpu: "0"
+      memory: 32Gi
+      name: cx51
+    - cpu: "16"
+      gpu: "0"
+      memory: 32Gi
+      name: cpx51
+    - cpu: "2"
+      gpu: "0"
+      memory: 8Gi
+      name: ccx11
+    - cpu: "2"
+      gpu: "0"
+      memory: 8Gi
+      name: ccx12
+    - cpu: "4"
+      gpu: "0"
+      memory: 16Gi
+      name: ccx21
+    - cpu: "4"
+      gpu: "0"
+      memory: 16Gi
+      name: ccx22
+    - cpu: "8"
+      gpu: "0"
+      memory: 32Gi
+      name: ccx31
+    - cpu: "8"
+      gpu: "0"
+      memory: 32Gi
+      name: ccx32
+    - cpu: "16"
+      gpu: "0"
+      memory: 64Gi
+      name: ccx41
+    - cpu: "16"
+      gpu: "0"
+      memory: 64Gi
+      name: ccx42
+    - cpu: "32"
+      gpu: "0"
+      memory: 128Gi
+      name: ccx51
+    - cpu: "32"
+      gpu: "0"
+      memory: 128Gi
+      name: ccx52
+    - cpu: "48"
+      gpu: "0"
+      memory: 192Gi
+      name: ccx62
+name: hcloud
+providerConfig:
+    apiVersion: hcloud.provider.extensions.gardener.cloud/v1alpha1
+    defaultStorageFsType: ext4
+    kind: CloudProfileConfig
+    machineImages:
+        - name: ubuntu
+          versions:
+            - imageName: ubuntu-20.04
+              version: 20.4.20210616
+    regions:
+        - name: hel1
+        - name: fsn1
+        - name: nbg1
+        - name: ash
+regions:
+    - name: hel1
+      zones:
+        - name: hel1-dc2
+    - name: fsn1
+      zones:
+        - name: fsn1-dc14
+    - name: nbg1
+      zones:
+        - name: nbg1-dc3
+    - name: ash
+      zones:
+        - name: ash-dc1
+          unavailableMachineTypes:
+            - cx21
+            - cx31
+            - cx41
+            - cx51
+            - ccx11
+            - ccx21
+            - ccx31
+            - ccx41
+            - ccx51

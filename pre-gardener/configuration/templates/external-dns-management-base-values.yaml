@@ -6,6 +6,10 @@ metadata:
 type: Opaque
 stringData:
   values.yaml: |-
+{{- if .Values.registryOverwrite }}
+    image:
+      repository: {{ include "replaceRegistry" (dict "eu.gcr.io/gardener-project/dns-controller-manager" .Values.registryOverwrite) }}
+{{- end }}
     external-dns-management:
       enabled: true
       configuration:

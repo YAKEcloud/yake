@@ -1,0 +1,22 @@
+{{- if gt (int .Values.replicaCount) 1 }}
+apiVersion: {{ include "poddisruptionbudgetversion" .}}
+kind: PodDisruptionBudget
+metadata:
+  name: gardenlet
+  namespace: {{ .Release.Namespace }}
+  labels:
+    app: gardener
+    role: gardenlet
+    chart: "{{ .Chart.Name }}-{{ .Chart.Version }}"
+    release: "{{ .Release.Name }}"
+    heritage: "{{ .Release.Service }}"
+spec:
+  maxUnavailable: 1
+  selector:
+    matchLabels:
+      app: gardener
+      role: gardenlet
+      chart: "{{ .Chart.Name }}-{{ .Chart.Version }}"
+      release: "{{ .Release.Name }}"
+      heritage: "{{ .Release.Service }}"
+{{- end }}

@@ -18,5 +18,10 @@ spec:
         name: jetstack
         namespace: flux-system
       interval: 1m
-  values:
-    installCRDs: true
+  valuesFrom:
+    - kind: Secret
+      name: cert-manager-base-values
+      optional: false
+    - kind: Secret
+      name: cert-manager-values
+      optional: true

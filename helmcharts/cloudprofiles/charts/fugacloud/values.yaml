@@ -1,0 +1,54 @@
+enabled: true
+global:
+    kubernetes:
+        upstreamVersions:
+            include: false
+        versions: {}
+kubernetes:
+    versions: {}
+machineImages:
+    - name: ubuntu
+      versions:
+        - cri:
+            - name: containerd
+            - name: docker
+          version: 20.4.20210101
+machineTypes:
+    - cpu: "2"
+      gpu: "0"
+      memory: 4Gi
+      name: s3.medium
+    - cpu: "4"
+      gpu: "0"
+      memory: 8Gi
+      name: s3.large
+    - cpu: "8"
+      gpu: "0"
+      memory: 16Gi
+      name: s3.xlarge
+name: fugacloud
+providerConfig:
+    apiVersion: openstack.provider.extensions.gardener.cloud/v1alpha1
+    constraints:
+        floatingPools:
+            - name: public
+        loadBalancerProviders:
+            - name: amphora
+    ignoreVolumeAZ: true
+    keystoneURLs:
+        - region: ams2
+          url: https://core.fuga.cloud:5000/v3
+    kind: CloudProfileConfig
+    machineImages:
+        - name: ubuntu
+          versions:
+            - image: Ubuntu 20.04 LTS
+              version: 20.4.20210101
+    useOctavia: true
+regions:
+    - name: ams2
+      zones:
+        - name: ams2-a
+        - name: ams2-b
+        - name: ams2-c
+type: openstack

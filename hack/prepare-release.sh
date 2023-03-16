@@ -27,7 +27,6 @@ if [[ ! $version =~ $versionPattern ]]; then
 fi
 
 minor=$(echo "$version" | grep -oE "$minorPattern")
-releaseNotes="release-notes/v$minor.md"
 
 tag="v$version"
 branch="release-v$minor"
@@ -36,11 +35,7 @@ git fetch
 git fetch --tags
 
 if [[ -e ".git/refs/tags/$tag" ]]; then
-  _fail "A tag named '$tag' already exists."
-fi
-
-if [[ ! -f "$releaseNotes" ]]; then
-  _fail "No release notes found for version $minor. Expected file '$releaseNotes' to exist."
+  echo "Warning: tag: $tag already exists"
 fi
 
 if [[ $(grep "$branch" .github/renovate.json5 | wc -l) == "0" ]]; then
@@ -66,11 +61,24 @@ if [[ -e ".git/refs/remotes/origin/$branch" ]]; then
   git switch "$branch"
   git pull
 else
+  touch docs/release-notes/next.md
+  mv docs/release-notes/next.md docs/release-notes/v$minor.md
+  echo "# Release Notes next" > docs/release-notes/next.md
+	if [ ! -d docs/versioned_docs/version-$minor.x ]; then
+		 cd docs
+		 yarn install
+		 yarn docusaurus docs:version $minor.x
+		 cd ..
+	fi
+  git add .
+  git commit -m "Add documentation for $minor"
+  git push
+
   git switch -c "$branch"
 fi
 
 git add .
 git commit --allow-empty -m "$tag"
-git tag "$tag"
+git tag "$tag" -f
 git push -u origin "$branch"
-git push -u origin "$tag"
+git push -u origin "$tag" -f
