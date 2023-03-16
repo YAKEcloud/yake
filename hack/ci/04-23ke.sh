@@ -4,6 +4,8 @@ set -euo pipefail
 source hack/ci/util.sh
 source hack/ci/handy.sh
 
+export _23KECTL_VERSION=v0.0.6
+
 echo "Installing 23KE"
 cat hack/ci/misc/23kectl-config.yaml.tmpl | DOLLAR='$' envsubst > hack/ci/misc/23kectl-config.yaml
 
@@ -15,7 +17,7 @@ if [ -d "hack/go/23kectl" ]; then
     go run main.go install --kubeconfig $repoRoot/hack/ci/secrets/shoot-kubeconfig.yaml --config $repoRoot/hack/ci/misc/23kectl-config.yaml
     cd $repoRoot
 else
-		wget -q -O 23kectl https://github.com/23technologies/23kectl/releases/download/v0.0.5/23kectl-v0.0.5-linux-amd64
+		wget -q -O 23kectl https://github.com/23technologies/23kectl/releases/download/${_23KECTL_VERSION}/23kectl-${_23KECTL_VERSION}-linux-amd64
 		chmod +x 23kectl
     ./23kectl install --kubeconfig hack/ci/secrets/shoot-kubeconfig.yaml --config hack/ci/misc/23kectl-config.yaml
 fi
