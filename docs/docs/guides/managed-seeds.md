@@ -2,9 +2,9 @@
 sidebar_position: 3
 ---
 
-# Managed Seeds
+# Scaling out with Managed Seeds
 
-## Deployment
+## Deployment of `ManagedSeeds` in 23KE
 
 Conceptually, a [managed seed](https://gardener.cloud/docs/gardener/usage/managed_seed/) is a `Shoot` cluster which is registered as `Seed` cluster. Thus, an operator has to deploy two resources to the virtual garden: a `Shoot` and a `ManagedSeed`. In consequence, Gardener will take care for the `Shoot` and register it as `Seed`.
 In 23KE, you can maintain managed seeds via the GitOps approach. For this, two `Kustomization`s are required. One is responsible for the creation of `Shoot` Clusters and the other one for the creation of `ManagedSeed` resources. Examples for these `Kustomization`s are given below.
@@ -57,6 +57,7 @@ Keep in mind that the `Shoot` will be used as `Seed` and should be equipped with
 :::
 
 For the `ManagedSeed` manifest, an example is given below. You can also find an example in the [Gardener upstream repository](https://github.com/gardener/gardener/blob/master/example/55-managedseed-gardenlet.yaml).
+
 ```yaml
 apiVersion: seedmanagement.gardener.cloud/v1alpha1
 kind: ManagedSeed
@@ -111,6 +112,7 @@ spec:
 		HVPA: true
 		HVPAForShootedSeed: true
 ```
+
 :::note
 You will need to provide a `Secret` for your backup provider in advance, if you want to enable backups on this `Seed`.
 :::
@@ -150,6 +152,7 @@ This instructs the `extension-shoot-cert-service` to create a `Secret` containin
 ```
 kubectl label -n garden secret seed-ingress-certificate gardener.cloud/role=controlplane-cert
 ```
+
 Afterwards, your Grafana urls should be equipped with a browser trusted certificate.
 :::info
 We are aware of the fact that these steps require some manual effort and this is not really inline with the idea of a `ManagedSeed`. However, at the moment this is the way to go, and we are looking forward to make things easier via e.g. a Gardener extension which automates the manual process.
