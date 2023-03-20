@@ -22,3 +22,6 @@ spec:
     - kind: Secret
       name: garden-content-base-values
       optional: false
+    - kind: Secret
+      name: gardenlet-base-values
+      optional: false
