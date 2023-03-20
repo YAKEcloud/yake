@@ -40,6 +40,7 @@ stringData:
       basicAuthPassword: ${KUBEAPISERVER_BASICAUTHPASSWORD}
 
     issuer:
+      enabled: true
       acme:
         email: operations@23technologies.cloud
         server: https://acme-staging-v02.api.letsencrypt.org/directory
