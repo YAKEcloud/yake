@@ -18,5 +18,3 @@ stringData:
             - hcloud
     hcloud:
       enabled: true
-    betacloud:
-      enabled: true
