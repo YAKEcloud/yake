@@ -1,0 +1,26 @@
+{{- if .Values.issuer.enabled }}
+apiVersion: cert.gardener.cloud/v1alpha1
+kind: Certificate
+metadata:
+  annotations:
+    cert.gardener.cloud/class: base-cert-class
+  name: seed-ingress
+  namespace: garden
+spec:
+  commonName: "*.{{ include "gardenlet.ingressDomain" . }}"
+  issuerRef:
+    name: default-issuer
+    namespace: garden
+  secretRef:
+    name: seed-ingress-certificate
+    namespace: garden
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  labels:
+    gardener.cloud/role: controlplane-cert
+  name: seed-ingress-certificate
+  namespace: garden
+type: Opaque
+{{- end }}
