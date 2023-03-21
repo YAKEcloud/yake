@@ -69,7 +69,7 @@ stringData:
 {{- end }}
 
     networking-calico:
-      version: 1.31.1
+      version: 1.31.2
 {{- if .Values.registryOverwrite }}
       values:
         image:
