@@ -9,7 +9,7 @@ echo "23KE Bucket upload"
 tmpDir=$(hack/make-tmp-release-dir.sh Bucket)
 
 mc ls "$MC_ALIAS/$BUCKET_23KE" &> /dev/null || mc mb "$MC_ALIAS/$BUCKET_23KE"
-mc mirror -q "$tmpDir" "$MC_ALIAS/$BUCKET_23KE"
+mc mirror -q --overwrite "$tmpDir" "$MC_ALIAS/$BUCKET_23KE"
 
 # Speed up flux
 yq eval '(
