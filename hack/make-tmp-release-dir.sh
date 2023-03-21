@@ -11,6 +11,7 @@ sourceType=$1
 
 tmpDir=$(mktemp -d)
 
+cp -r 23kectl.yaml $tmpDir
 cp -r kustomization.yaml $tmpDir
 cp -r flux $tmpDir
 cp -r pre-gardener $tmpDir
