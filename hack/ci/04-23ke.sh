@@ -4,7 +4,7 @@ set -euo pipefail
 source hack/ci/util.sh
 source hack/ci/handy.sh
 
-export _23KECTL_VERSION=v0.0.6
+export _23KECTL_VERSION=v0.0.7
 
 echo "Installing 23KE"
 cat hack/ci/misc/23kectl-config.yaml.tmpl | DOLLAR='$' envsubst > hack/ci/misc/23kectl-config.yaml
