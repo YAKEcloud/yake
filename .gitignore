@@ -5,3 +5,5 @@ flux_*
 config.yaml
 **/secrets/**
 .idea/
+23kectl
+log.txt
