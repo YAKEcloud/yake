@@ -176,6 +176,10 @@ const config = {
                 label: "Legals",
                 to: "/legals",
               },
+              {
+                label: "Privacy policy",
+                to: "/privacy-policy",
+              },
             ],
           },
         ],
