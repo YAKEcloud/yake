@@ -24,7 +24,7 @@ registryOverwrite:
   docker.io: myregistry.io/docker.io
   gcr.io: myregistry.io/gcr.io
   ghcr.io: myregistry.io/ghcr.io
-  k8s.gcr.io: myregistry.io/k8s.gcr.io
+  registry.k8s.io: myregistry.io/registry.k8s.io
   mcr.microsoft.com: myregistry.io/mcr.microsoft.com
   public.ecr.aws: myregistry.io/public.ecr.aws
   registry.eu-central-1.aliyuncs.com: myregistry.io/registry.eu-central-1.aliyuncs.com
@@ -45,7 +45,7 @@ the following replacements would be performed
 | -------------------------------- | ----------------- | ---------------------------------------------- |
 | eu.gcr.io/examplefolder/example1 | Yes               | myregistry.io/eu.gcr.io/examplefolder/example1 |
 | eu.gcr.io/otherexample/example2  | Yes               | myregistry.io/eu.gcr.io/otherexample/example2  |
-| k8s.gcr.io/kube-apiserver        | No                |                                                |
+| registry.k8s.io/kube-apiserver        | No                |                                                |
 
 ---
 
@@ -62,7 +62,7 @@ the following replacements would be performed
 | -------------------------------- | ----------------- | ------------------------------------- |
 | eu.gcr.io/examplefolder/example1 | Yes               | myregistry.io/mirror-example/example1 |
 | eu.gcr.io/otherexample/example2  | No                |                                       |
-| k8s.gcr.io/kube-apiserver        | No                |                                       |
+| registry.k8s.io/kube-apiserver        | No                |                                       |
 
 ---
 
@@ -71,7 +71,7 @@ Given the following replacement map
 registryOverwrite:
   eu.gcr.io/examplefolder: myregistry.io/mirror-example
   eu.gcr.io/otherexample: myregistry.io/mirror-example
-  k8s.gcr.io: myregistry.io/mirror-example
+  registry.k8s.io: myregistry.io/mirror-example
 ```
 
 the following replacements would be performed
@@ -81,7 +81,7 @@ the following replacements would be performed
 | -------------------------------- | ----------------- | ------------------------------------------- |
 | eu.gcr.io/examplefolder/example1 | Yes               | myregistry.io/mirror-example/example1       |
 | eu.gcr.io/otherexample/example2  | Yes               | myregistry.io/mirror-example/example2       |
-| k8s.gcr.io/kube-apiserver        | Yes               | myregistry.io/mirror-example/kube-apiserver |
+| registry.k8s.io/kube-apiserver        | Yes               | myregistry.io/mirror-example/kube-apiserver |
 
 ---
 
@@ -98,7 +98,7 @@ the following replacements would be performed
 | -------------------------------- | ----------------- | ----------- |
 | eu.gcr.io/examplefolder/example1 | No                |             |
 | eu.gcr.io/otherexample/example2  | No                |             |
-| k8s.gcr.io/kube-apiserver        | No                |             |
+| registry.k8s.io/kube-apiserver        | No                |             |
 
 
 
