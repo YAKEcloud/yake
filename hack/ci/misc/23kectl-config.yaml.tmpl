@@ -7,14 +7,14 @@ backupconfig:
   enabled: true
   provider: azure
   region: region
-  bucketName: bucket
+  bucketName: ${BACKUP_BUCKET}
   credentials:
-    tenantID: YXNk
-    subscriptionID: YXNk
-    clientID: YXNk
-    clientSecret: YXNk
-    storageAccount: YXNk
-    storageAccountAccessKey: YXNk
+    clientID: ${AZURE_SECRET_ID}
+    clientSecret: ${AZURE_SECRET_VALUE}
+    subscriptionID: ${AZURE_SUBSCRIPTION_ID}
+    tenantID: ${AZURE_TENANT_ID}
+    # storageAccount:
+    # storageAccountAccessKey:
 basecluster:
     hasverticalpodautoscaler: true
     nodecidr: 10.11.0.0/16
