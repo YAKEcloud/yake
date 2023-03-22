@@ -13,8 +13,8 @@ backupconfig:
     clientSecret: ${AZURE_SECRET_VALUE}
     subscriptionID: ${AZURE_SUBSCRIPTION_ID}
     tenantID: ${AZURE_TENANT_ID}
-    # storageAccount:
-    # storageAccountAccessKey:
+    storageAccount: ${RCLONE_CONFIG_23KETESTBED_ACCOUNT_BASE64}
+    storageAccountAccessKey: ${RCLONE_CONFIG_23KETESTBED_KEY_BASE64}
 basecluster:
     hasverticalpodautoscaler: true
     nodecidr: 10.11.0.0/16
