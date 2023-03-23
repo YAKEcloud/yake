@@ -1877,7 +1877,7 @@ provider-alicloud:
               network_exposure: private
               user_interaction: gardener-operator
         name: csi-provisioner
-        repository: registry.k8s.io/sig-storage/csi-provisioner
+        repository: k8s.gcr.io/sig-storage/csi-provisioner
         sourceRepository: github.com/kubernetes-csi/external-provisioner
         tag: v3.2.1
       - labels:
@@ -1890,7 +1890,7 @@ provider-alicloud:
               network_exposure: private
               user_interaction: gardener-operator
         name: csi-snapshotter
-        repository: registry.k8s.io/sig-storage/csi-snapshotter
+        repository: k8s.gcr.io/sig-storage/csi-snapshotter
         sourceRepository: github.com/kubernetes-csi/external-snapshotter
         tag: v4.2.1
       - labels:
@@ -1903,7 +1903,7 @@ provider-alicloud:
               network_exposure: private
               user_interaction: gardener-operator
         name: csi-snapshot-validation-webhook
-        repository: registry.k8s.io/sig-storage/snapshot-validation-webhook
+        repository: k8s.gcr.io/sig-storage/snapshot-validation-webhook
         sourceRepository: github.com/kubernetes-csi/external-snapshotter
         tag: v4.2.1
       - labels:
@@ -1916,7 +1916,7 @@ provider-alicloud:
               network_exposure: private
               user_interaction: gardener-operator
         name: csi-snapshot-controller
-        repository: registry.k8s.io/sig-storage/snapshot-controller
+        repository: k8s.gcr.io/sig-storage/snapshot-controller
         sourceRepository: github.com/kubernetes-csi/external-snapshotter
         tag: v4.2.1
       - labels:
@@ -1953,19 +1953,19 @@ provider-hcloud:
   imageVectorOriginal:
     images:
       - name: csi-attacher
-        repository: registry.k8s.io/sig-storage/csi-attacher
+        repository: k8s.gcr.io/sig-storage/csi-attacher
         sourceRepository: https://github.com/kubernetes-csi/external-attacher
         tag: v3.4.0
       - name: csi-resizer
-        repository: registry.k8s.io/sig-storage/csi-resizer
+        repository: k8s.gcr.io/sig-storage/csi-resizer
         sourceRepository: https://github.com/kubernetes-csi/external-resizer
         tag: v1.4.0
       - name: csi-node-driver-registrar
-        repository: registry.k8s.io/sig-storage/csi-node-driver-registrar
+        repository: k8s.gcr.io/sig-storage/csi-node-driver-registrar
         sourceRepository: https://github.com/kubernetes-csi/node-driver-registrar
         tag: v2.4.0
       - name: csi-provisioner
-        repository: registry.k8s.io/sig-storage/csi-provisioner
+        repository: k8s.gcr.io/sig-storage/csi-provisioner
         sourceRepository: https://github.com/kubernetes-csi/external-provisioner
         tag: v2.2.2
       - name: hcloud-cloud-controller-manager
@@ -1989,7 +1989,7 @@ provider-hcloud:
         sourceRepository: https://github.com/hetznercloud/csi-driver
         tag: 1.6.0
       - name: liveness-probe
-        repository: registry.k8s.io/sig-storage/livenessprobe
+        repository: k8s.gcr.io/sig-storage/livenessprobe
         sourceRepository: https://github.com/kubernetes-csi/livenessprobe
         tag: v2.5.0
 networking-calico:
