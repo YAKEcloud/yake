@@ -19,7 +19,7 @@ yq eval -i '(
 ) += "--requeue-dependency=5s"' "$tmpDir/flux-system/gotk-components.yaml"
 
 # add spec.install.remediation.retries to all templates/yamls in /pre-gardener and /gardener that include "^kind: HelmRelease", but don't include "remediation"
-grep -rl '^kind: HelmRelease' pre-gardener gardener \
+grep -rl '^kind: HelmRelease' $tmpDir/{pre-gardener,gardener} \
   | xargs grep -L 'remediation' \
   | xargs sed -i 's;^spec:;spec:\n  install:\n    remediation:\n      retries: 25;'
 
