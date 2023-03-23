@@ -10,8 +10,8 @@ echo "Installing 23KE"
 
 cat hack/ci/misc/23kectl-config.yaml.tmpl | \
   DOLLAR='$' \
-  RCLONE_CONFIG_23KETESTBED_ACCOUNT_BASE64=$(echo $RCLONE_CONFIG_23KETESTBED_ACCOUNT | base64 -w0) \
-  RCLONE_CONFIG_23KETESTBED_KEY_BASE64=$(echo $RCLONE_CONFIG_23KETESTBED_KEY | base64 -w0) \
+  RCLONE_CONFIG_23KETESTBED_ACCOUNT_BASE64=$(echo -n $RCLONE_CONFIG_23KETESTBED_ACCOUNT | base64 -w0) \
+  RCLONE_CONFIG_23KETESTBED_KEY_BASE64=$(echo -n $RCLONE_CONFIG_23KETESTBED_KEY | base64 -w0) \
   envsubst > hack/ci/misc/23kectl-config.yaml
 
 # if we have a local development version of 23kectl in our local directory tree
