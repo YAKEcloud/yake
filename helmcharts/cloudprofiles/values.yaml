@@ -4,8 +4,6 @@ aws:
     enabled: false
 azure:
     enabled: false
-betacloud:
-    enabled: false
 citycloud:
     enabled: false
 fugacloud:
@@ -17,13 +15,13 @@ global:
         upstreamVersions:
             include: true
             versions:
-                1.20.15:
+                1.22.17:
                     classification: supported
-                1.21.9:
+                1.23.17:
                     classification: supported
-                1.22.6:
+                1.24.12:
                     classification: supported
-                1.23.3:
+                1.25.8:
                     classification: supported
         versions: {}
     seedSelector:
@@ -32,6 +30,8 @@ global:
 hcloud:
     enabled: false
 pluscloud-open:
+    enabled: false
+regiocloud:
     enabled: false
 scs-community-platform:
     enabled: false

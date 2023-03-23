@@ -1,5 +1,20 @@
 apiVersion: v2
 dependencies:
+- condition: regiocloud.enabled
+  name: regiocloud
+  repository: ""
+- condition: wavestack.enabled
+  name: wavestack
+  repository: ""
+- condition: alicloud.enabled
+  name: alicloud
+  repository: ""
+- condition: azure.enabled
+  name: azure
+  repository: ""
+- condition: fugacloud.enabled
+  name: fugacloud
+  repository: ""
 - condition: gcp.enabled
   name: gcp
   repository: ""
@@ -9,17 +24,8 @@ dependencies:
 - condition: pluscloud-open.enabled
   name: pluscloud-open
   repository: ""
-- condition: wavestack.enabled
-  name: wavestack
-  repository: ""
-- condition: alicloud.enabled
-  name: alicloud
-  repository: ""
-- condition: fugacloud.enabled
-  name: fugacloud
-  repository: ""
-- condition: betacloud.enabled
-  name: betacloud
+- condition: aws.enabled
+  name: aws
   repository: ""
 - condition: citycloud.enabled
   name: citycloud
@@ -27,13 +33,7 @@ dependencies:
 - condition: scs-community-platform.enabled
   name: scs-community-platform
   repository: ""
-- condition: aws.enabled
-  name: aws
-  repository: ""
-- condition: azure.enabled
-  name: azure
-  repository: ""
 description: A Helm chart for Kubernetes
 name: cloudprofiles
 type: application
-version: 0.2.1
+version: 0.4.0

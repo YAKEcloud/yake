@@ -12,22 +12,204 @@ machineImages:
         - cri:
             - name: containerd
             - name: docker
-          version: 576.10.0
+          version: 576.12.0
     - name: ubuntu
       versions:
         - cri:
             - name: containerd
             - name: docker
           version: 20.4.0
+        - cri:
+            - name: containerd
+            - name: docker
+          version: 22.4.0
 machineTypes:
-    - cpu: "2"
-      gpu: "0"
-      memory: 4Gi
-      name: SCS-2V:4:10
-    - cpu: "4"
-      gpu: "0"
-      memory: 8Gi
+    - cpu: 8
+      memory: 65536
+      name: SCS-8V:64:200
+    - cpu: 4
+      memory: 32768
+      name: SCS-4V:32
+    - cpu: 1
+      memory: 8192
+      name: SCS-1V:8:20s
+    - cpu: 64
+      memory: 131072
+      name: SCS-64V:128
+    - cpu: 4
+      memory: 16384
+      name: SCS-4V:16:50
+    - cpu: 1
+      memory: 16384
+      name: SCS-1V:16
+    - cpu: 8
+      memory: 32768
+      name: SCS-8V:32:100s
+    - cpu: 16
+      memory: 131072
+      name: SCS-16V:128
+    - cpu: 1
+      memory: 8192
+      name: SCS-1V:8:20
+    - cpu: 8
+      memory: 32768
+      name: SCS-8V:32
+    - cpu: 1
+      memory: 4096
+      name: SCS-1V:4
+    - cpu: 4
+      memory: 8192
       name: SCS-4V:8:20
+    - cpu: 16
+      memory: 65536
+      name: SCS-16V:64:200s
+    - cpu: 1
+      memory: 1024
+      name: SCS-1L:1:5
+    - cpu: 1
+      memory: 16384
+      name: SCS-1V:16:50
+    - cpu: 16
+      memory: 32768
+      name: SCS-16V:32:100
+    - cpu: 2
+      memory: 16384
+      name: SCS-2V:16:50s
+    - cpu: 2
+      memory: 8192
+      name: SCS-2V:8:20s
+    - cpu: 32
+      memory: 131072
+      name: SCS-32V:128:500s
+    - cpu: 2
+      memory: 8192
+      name: SCS-2V:8:20
+    - cpu: 16
+      memory: 32768
+      name: SCS-16V:32
+    - cpu: 32
+      memory: 262144
+      name: SCS-32V:256:1000s
+    - cpu: 1
+      memory: 8192
+      name: SCS-1V:8
+    - cpu: 2
+      memory: 32768
+      name: SCS-2V:32:100
+    - cpu: 32
+      memory: 262144
+      name: SCS-32V:256:1000
+    - cpu: 1
+      memory: 2048
+      name: SCS-1V:2:5
+    - cpu: 2
+      memory: 32768
+      name: SCS-2V:32
+    - cpu: 16
+      memory: 65536
+      name: SCS-16V:64:200
+    - cpu: 2
+      memory: 8192
+      name: SCS-2V:8
+    - cpu: 8
+      memory: 65536
+      name: SCS-8V:64:200s
+    - cpu: 8
+      memory: 65536
+      name: SCS-8V:64
+    - cpu: 4
+      memory: 65536
+      name: SCS-4V:64
+    - cpu: 64
+      memory: 262144
+      name: SCS-64V:256:1000
+    - cpu: 64
+      memory: 262144
+      name: SCS-64V:256
+    - cpu: 2
+      memory: 4096
+      name: SCS-2V:4:20s
+    - cpu: 32
+      memory: 131072
+      name: SCS-32V:128
+    - cpu: 16
+      memory: 131072
+      name: SCS-16V:128:500s
+    - cpu: 4
+      memory: 8192
+      name: SCS-4V:8
+    - cpu: 1
+      memory: 2048
+      name: SCS-1V:2
+    - cpu: 1
+      memory: 1024
+      name: SCS-1L:1
+    - cpu: 2
+      memory: 16384
+      name: SCS-2V:16:50
+    - cpu: 2
+      memory: 16384
+      name: SCS-2V:16
+    - cpu: 8
+      memory: 32768
+      name: SCS-8V:32:100
+    - cpu: 4
+      memory: 32768
+      name: SCS-4V:32:100s
+    - cpu: 32
+      memory: 131072
+      name: SCS-32V:128:500
+    - cpu: 8
+      memory: 16384
+      name: SCS-8V:16:50
+    - cpu: 32
+      memory: 65536
+      name: SCS-32V:64:200
+    - cpu: 16
+      memory: 131072
+      name: SCS-16V:128:500
+    - cpu: 4
+      memory: 16384
+      name: SCS-4V:16:100s
+    - cpu: 4
+      memory: 32768
+      name: SCS-4V:32:100
+    - cpu: 4
+      memory: 65536
+      name: SCS-4V:64:200
+    - cpu: 64
+      memory: 131072
+      name: SCS-64V:128:500
+    - cpu: 64
+      memory: 262144
+      name: SCS-64V:256:1000s
+    - cpu: 2
+      memory: 4096
+      name: SCS-2V:4
+    - cpu: 4
+      memory: 16384
+      name: SCS-4V:16:50s
+    - cpu: 8
+      memory: 16384
+      name: SCS-8V:16
+    - cpu: 2
+      memory: 4096
+      name: SCS-2V:4:10
+    - cpu: 32
+      memory: 65536
+      name: SCS-32V:64
+    - cpu: 16
+      memory: 65536
+      name: SCS-16V:64
+    - cpu: 1
+      memory: 4096
+      name: SCS-1V:4:10
+    - cpu: 32
+      memory: 262144
+      name: SCS-32V:256
+    - cpu: 4
+      memory: 16384
+      name: SCS-4V:16
 name: wavestack
 providerConfig:
     apiVersion: openstack.provider.extensions.gardener.cloud/v1alpha1
@@ -43,12 +225,14 @@ providerConfig:
     machineImages:
         - name: gardenlinux
           versions:
-            - image: Garden Linux 576.10
-              version: 576.10.0
+            - image: Garden Linux 576.12
+              version: 576.12.0
         - name: ubuntu
           versions:
             - image: Ubuntu 20.04
               version: 20.4.0
+            - image: Ubuntu 22.04
+              version: 22.4.0
     useOctavia: true
 regions:
     - name: MUC5
