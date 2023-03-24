@@ -6,6 +6,8 @@ metadata:
 type: Opaque
 stringData:
   values.yaml: |-
+    podLabels:
+      networking.23ke.cloud/allow-all: allowed
 {{- if .Values.registryOverwrite }}
     image:
       repository: {{ include "replaceRegistry" (dict "ghcr.io/dexidp/dex" .Values.registryOverwrite) }}
