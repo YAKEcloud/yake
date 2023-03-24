@@ -1,0 +1,24 @@
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: allow-all-garden-extensions
+  namespace: garden
+spec:
+  podSelector:
+    matchExpressions:
+      - key: app.kubernetes.io/name
+        operator: In
+        values:
+          - gardener-extension-admission-azure
+          - gardener-extension-admission-openstack
+          - gardener-extension-admission-hcloud
+          - gardener-extension-admission-gcp
+          - gardener-extension-admission-aws
+          - gardener-extension-admission-alicloud
+  ingress:
+    - {}
+  egress:
+    - {}
+  policyTypes:
+  - Ingress
+  - Egress
