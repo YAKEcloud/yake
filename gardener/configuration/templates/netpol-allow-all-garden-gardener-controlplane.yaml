@@ -1,0 +1,16 @@
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: allow-all-garden-gardener-controlplane
+  namespace: garden
+spec:
+  podSelector:
+    matchLabels:
+      networking.23ke.cloud/allow-all: allowed
+  ingress:
+    - {}
+  egress:
+    - {}
+  policyTypes:
+  - Ingress
+  - Egress
