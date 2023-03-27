@@ -3,6 +3,7 @@
 
 const lightCodeTheme = require("prism-react-renderer/themes/github");
 const darkCodeTheme = require("prism-react-renderer/themes/dracula");
+const fs = require("fs");
 
 // Reverse the sidebar items ordering (including nested category items)
 function reverseSidebarItems(items) {
@@ -24,6 +25,14 @@ function reverseSidebarItems(items) {
     .reverse();
 
   return result;
+}
+
+function getLatestReleaseNotes() {
+  const dir = fs.readdirSync('release-notes').sort();
+
+  const latest = dir[dir.length - 1].replace('.md', '');
+
+  return latest;
 }
 
 /** @type {import('@docusaurus/types').Config} */
@@ -117,7 +126,7 @@ const config = {
             label: "Docs",
           },
           {
-            to: "/release-notes",
+            to: "/release-notes/" + getLatestReleaseNotes(),
             label: "Release Notes",
             position: "left",
             activeBaseRegex: `/release-notes/`,
