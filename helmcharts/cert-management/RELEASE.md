@@ -1,9 +1,5 @@
 # [cert-management]
-## 🐛 Bug Fixes
-* *[USER]* Fix auto registration for issuer with external account binding. ([gardener/cert-management#121](https://github.com/gardener/cert-management/pull/121), [@MartinWeindel](https://github.com/MartinWeindel))
-## 📖 Documentation
-* *[USER]* Documentation for the `followCNAME` option ([gardener/cert-management#120](https://github.com/gardener/cert-management/pull/120), [@MartinWeindel](https://github.com/MartinWeindel))
+## ✨ New Features
+* *[USER]* The certificate spec can contain an optional section `secretLabels` to specify labels for the certificate secret. ([gardener/cert-management#123](https://github.com/gardener/cert-management/pull/123), [@MartinWeindel](https://github.com/MartinWeindel))
 ## 🏃 Others
-* *[OPERATOR]* bump builder image `golang` from `1.19.5` to `1.20.1` ([gardener/cert-management#122](https://github.com/gardener/cert-management/pull/122), [@MartinWeindel](https://github.com/MartinWeindel))
-* *[OPERATOR]* k8s modules from `v0.26.0` to `v0.26.1` ([gardener/cert-management#122](https://github.com/gardener/cert-management/pull/122), [@MartinWeindel](https://github.com/MartinWeindel))
-  * `golang.org/x/net` from `v0.5.0` to `v0.7.0`
+* *[OPERATOR]* Bump builder image from golang version `1.20.1` to `1.20.2` ([gardener/cert-management#124](https://github.com/gardener/cert-management/pull/124), [@MartinWeindel](https://github.com/MartinWeindel))
