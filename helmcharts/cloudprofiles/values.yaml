@@ -15,13 +15,13 @@ global:
         upstreamVersions:
             include: true
             versions:
-                1.22.17:
-                    classification: supported
                 1.23.17:
                     classification: supported
                 1.24.12:
                     classification: supported
                 1.25.8:
+                    classification: supported
+                1.26.3:
                     classification: supported
         versions: {}
     seedSelector:
