@@ -24,6 +24,9 @@ bucket:
     accesskey: minio
     endpoint: ${MINIO_HOSTNAME}
     secretkey: ${MINIO_PW}
+cloudprofiles:
+    - hcloud
+    - regiocloud
 clusteridentity: garden-cluster-${SHOOT}
 dashboard:
     clientsecret: ${DASHBOARD_CLIENTSECRET}
