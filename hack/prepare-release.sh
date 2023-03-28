@@ -41,6 +41,9 @@ fi
 if [[ $(grep "$branch" .github/renovate.json5 | wc -l) == "0" ]]; then
   echo Updating .github/renovate.json5
 
+  assignee=$GITHUB_ACTOR
+  sed -i 's;"assignees": .*,$;"assignees": ["'$assignee'"],;' .github/renovate.json5
+
   maj=$(echo "$minor" | grep -oE "^[0-9]{1,}")
   min=$(echo "$minor" | grep -oE "[0-9]{1,}$")
 
