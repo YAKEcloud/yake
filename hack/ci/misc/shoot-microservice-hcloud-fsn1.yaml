@@ -40,7 +40,7 @@ spec:
   region: fsn1
   purpose: evaluation
   kubernetes:
-    version: 1.22.9
+    version: 1.25.8
   addons:
     kubernetesDashboard:
       enabled: false
