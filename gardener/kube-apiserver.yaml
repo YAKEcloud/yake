@@ -4,6 +4,10 @@ metadata:
   name: kube-apiserver
   namespace: flux-system
 spec:
+  install:
+    remediation:
+      retries: 3
+    createNamespace: true
   targetNamespace: garden
   dependsOn:
     - name: etcd

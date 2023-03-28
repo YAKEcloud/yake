@@ -4,6 +4,10 @@ metadata:
   name: pre-gardener-configuration
   namespace: flux-system
 spec:
+  install:
+    remediation:
+      retries: 3
+    createNamespace: true
   interval: 1m
   chart:
     spec:

@@ -4,6 +4,10 @@ metadata:
   name: etcd
   namespace: flux-system
 spec:
+  install:
+    remediation:
+      retries: 3
+    createNamespace: true
   targetNamespace: garden
   interval: 1m
   dependsOn:

@@ -4,6 +4,10 @@ metadata:
   name: cert-management
   namespace: flux-system
 spec:
+  install:
+    remediation:
+      retries: 3
+    createNamespace: true
   dependsOn:
     - name: ingress-nginx
     - name: pre-gardener-configuration
@@ -26,4 +30,3 @@ spec:
     - kind: Secret
       name: cert-management-values
       optional: true
-
