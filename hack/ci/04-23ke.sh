@@ -4,7 +4,7 @@ set -euo pipefail
 source hack/ci/util.sh
 source hack/ci/handy.sh
 
-export _23KECTL_VERSION=v0.0.11
+export _23KECTL_VERSION=v0.0.12
 
 echo "Installing 23KE"
 
