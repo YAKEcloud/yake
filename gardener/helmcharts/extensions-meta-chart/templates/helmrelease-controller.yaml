@@ -7,6 +7,9 @@ metadata:
   name: {{ $k }}
   namespace: flux-system
 spec:
+  install:
+    remediation:
+      retries: 3
   interval: 1m
   kubeConfig:
     secretRef:

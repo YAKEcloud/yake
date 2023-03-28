@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
+source hack/ci/util.sh
 source hack/ci/handy.sh
 
 PROVIDER=${PROVIDER:=hcloud}
@@ -15,8 +16,6 @@ kubectl wait backupstoragelocations.velero.io -n flux-system default --for=jsonp
 kubectl wait seed.core.gardener.cloud --all --for=condition=BackupBucketsReady --timeout=600s --context garden || exit 1
 FIRSTBUCKET=$(kubectl get backupbuckets.extensions.gardener.cloud -o name | head -n1)
 kubectl wait $FIRSTBUCKET --for=jsonpath='{.status.lastOperation.state}'=Succeeded || exit 1
-
-
 
 echo "Deploying sample Shoot"
 export SHOOTNAME="test-${SHOOT#23ke-run-}"

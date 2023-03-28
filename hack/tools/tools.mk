@@ -4,11 +4,13 @@ TOOLS_BIN_DIR              := $(TOOLS_DIR)/bin
 FLUX	                     := $(TOOLS_BIN_DIR)/flux
 KUBECTL                    := $(TOOLS_BIN_DIR)/kubectl
 YQ                         := $(TOOLS_BIN_DIR)/yq
+MC                         := $(TOOLS_BIN_DIR)/mc
 
 # default tool versions
 FLUX_VERSION ?= v0.35.0
 KUBECTL_VERSION ?= v1.24.3
 YQ_VERSION ?= v4.9.6
+MC_VERSION ?= RELEASE.2023-01-28T20-29-38Z
 
 
 #########################################
@@ -40,7 +42,7 @@ clean-tools-bin:
 #########################################
 
 $(FLUX): $(call tool_version_file,$(FLUX),$(FLUX_VERSION))
-	curl -L https://github.com/fluxcd/flux2/releases/download/$(FLUX_VERSION)/flux_$(subst v,,$(FLUX_VERSION))_$(shell uname -s | tr '[:upper:]' '[:lower:]')_$(shell uname -m | sed 's/x86_64/amd64/;s/aarch64/arm64/').tar.gz | tar -xz -C $(TOOLS_BIN_DIR) 
+	curl -L https://github.com/fluxcd/flux2/releases/download/$(FLUX_VERSION)/flux_$(subst v,,$(FLUX_VERSION))_$(shell uname -s | tr '[:upper:]' '[:lower:]')_$(shell uname -m | sed 's/x86_64/amd64/;s/aarch64/arm64/').tar.gz | tar -xz -C $(TOOLS_BIN_DIR)
 	chmod +x $(FLUX)
 
 $(KUBECTL): $(call tool_version_file,$(KUBECTL),$(KUBECTL_VERSION))
@@ -51,4 +53,8 @@ $(YQ): $(call tool_version_file,$(YQ),$(YQ_VERSION))
 	curl -L -o $(YQ) https://github.com/mikefarah/yq/releases/download/$(YQ_VERSION)/yq_$(shell uname -s | tr '[:upper:]' '[:lower:]')_$(shell uname -m | sed 's/x86_64/amd64/;s/aarch64/arm64/')
 	chmod +x $(YQ)
 
-all: $(FLUX) $(YQ) $(KUBECTL) 
+$(MC): $(call tool_version_file,$(MC),$(MC_VERSION))
+	curl -L -o $(MC) https://dl.min.io/client/mc/release/$(shell uname -s | tr '[:upper:]' '[:lower:]')-$(shell uname -m | sed 's/x86_64/amd64/;s/aarch64/arm64/')/mc.$(MC_VERSION)
+	chmod +x $(MC)
+
+all: $(FLUX) $(YQ) $(KUBECTL) $(MC)

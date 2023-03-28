@@ -4,3 +4,6 @@ flux_*
 *.DS_STORE*
 config.yaml
 **/secrets/**
+.idea/
+23kectl
+log.txt

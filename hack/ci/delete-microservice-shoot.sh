@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
+source hack/ci/util.sh
 source hack/ci/handy.sh
 
 SHOOTNAME="test-${SHOOT#23ke-run-}"

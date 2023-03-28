@@ -4,6 +4,10 @@ metadata:
   name: addons
   namespace: flux-system
 spec:
+  install:
+    remediation:
+      retries: 3
+    createNamespace: true
   dependsOn:
     - name: pre-gardener-configuration
   interval: 1m

@@ -21,6 +21,7 @@ spec:
   install:
     remediation:
       retries: 3
+    createNamespace: true
   values:
     runtime:
       enabled: true
