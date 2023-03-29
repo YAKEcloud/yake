@@ -1,15 +1,1 @@
 # Release Notes next
-
-## Upstream Changes
-
-Please check the following sites for upstream release notes:
-
-- [Gardener releases](https://github.com/gardener/gardener/releases)
-- [Gardener-community charts releases](https://github.com/gardener-community/gardener-charts/releases)
-
-
-## 23KE Changes and Upgrade Path
-
-:::danger
-This version requires the base cluster's k8s version to lie in the range `>=1.24.0 < 1.26.0`. If, your base-cluster runs on a lower version of Kubernetes than `1.24.0`, you need to upgrade the basecluster before performing the 23KE update.
-:::
