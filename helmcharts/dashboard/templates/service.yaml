@@ -2,15 +2,24 @@
 #
 # SPDX-License-Identifier: Apache-2.0
 
-{{- if or ( not .Values.global.virtualGarden.enabled ) ( not .Values.global.virtualGarden.userName ) }}
 apiVersion: v1
-kind: ServiceAccount
+kind: Service
 metadata:
-  name: {{ required ".Values.global.serviceAccountName is required" .Values.global.serviceAccountName }}
+  name: gardener-dashboard-service
   namespace: {{ .Release.Namespace }}
   labels:
     app: gardener-dashboard
     chart: "{{ .Chart.Name }}-{{ .Chart.Version }}"
     release: "{{ .Release.Name }}"
     heritage: "{{ .Release.Service }}"
-{{- end }}
+spec:
+  ports:
+  - port: {{ .Values.servicePort }}
+    targetPort: {{ .Values.containerPort }}
+    protocol: TCP
+    name: http
+  selector:
+    app: gardener-dashboard
+    release: {{ .Release.Name }}
+  type: ClusterIP
+  sessionAffinity: ClientIP

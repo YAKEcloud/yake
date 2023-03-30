@@ -12,21 +12,21 @@ metadata:
     chart: "{{ .Chart.Name }}-{{ .Chart.Version }}"
     release: "{{ .Release.Name }}"
     heritage: "{{ .Release.Service }}"
-  {{- with .Values.global.ingress.annotations }}
+  {{- with .Values.ingress.annotations }}
   annotations:
 {{ toYaml . | indent 4 }}
   {{- end }}
 spec:
-{{- if .Values.global.ingress.tls }}
+{{- if .Values.ingress.tls }}
   tls:
-  - secretName: {{ required ".Values.global.ingress.tls.secretName is required" .Values.global.ingress.tls.secretName }}
+  - secretName: {{ required ".Values.ingress.tls.secretName is required" .Values.ingress.tls.secretName }}
     hosts:
-    {{- range .Values.global.ingress.hosts }}
+    {{- range .Values.ingress.hosts }}
     - {{ . }}
     {{- end }}
 {{- end }}
   rules:
-  {{- range .Values.global.ingress.hosts }}
+  {{- range .Values.ingress.hosts }}
   - host: {{ . }}
     http:
       paths:
@@ -34,7 +34,7 @@ spec:
           service:
               name: gardener-dashboard-service
               port:
-                number: {{ $.Values.global.servicePort }}
+                number: {{ $.Values.servicePort }}
         path: /
         pathType: Prefix
   {{- end }}
