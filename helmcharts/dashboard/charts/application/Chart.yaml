@@ -1,4 +1,0 @@
-apiVersion: v2
-description: A Helm chart to deploy the Gardener dashboard application related components
-name: application
-version: 1.67.0
