@@ -5,7 +5,7 @@ metadata:
   name: 23ke-controlplane-cert
 type: helm
 providerConfig:
-  chart: H4sIAAAAAAAAA+2VTW/bMAyGc9av4DEbYNfyV4Dchl56KHbYoXdNZhKhtmRISrYh6H+f5CZeF6zuigYtivI5+EsWSYmvyLWwDWq0Cf70qJ0yOsmLW0wcYnMxOw9ZYFFVwz1weh+eeVHyvMrrOn7nVVaUM6jO5H+SrfPCAsysMX7qv6fG3ynrqfxfboT16S/RtS/yERNcl+Wj+c85P8l/vaiKGWRnWuMkHzz/olc3aGPel7DjTPT9+JqlWcpZg05a1fvh0xe4wrYDGXUBK2PBbxBGvcCoIaZFh0uYEhfb/e3nrTfigzJ5/j12fSs8upd1gufX/0VW5FT/X4P/zL9E69VKyfDy/H7wVP2vy5P6n+d5xqn+vwb7fQJqBemNaLfo0vlRD+k8KiBce5TpXOm1Rec+BdLGdEJpuLtjD3tHFEg6Tpat2TYXOy7afiM4u1W6WcLlHw2xDr1ohBdLBnDfK6K75OAn+aHaRgZjh1HXCzm2ExZDivOk6Tqjvw6zP6f7/biIMYxhCcMKDoYfBA+gnNui/YaraOwYxsEHhHikRX8y+liQ/wrzaOJafMfW3VuBkx2ypg0TpNE+PIWjpjGJG8liVlA3Mc63FghBEARBEARBEARBEARBEARBEARBEO+G32vw0KwAKAAA
+  chart: H4sIAAAAAAAAA+2VPW/bMBCGPfNXHDLVBaTo0wK8FVkyFB06ZGeps01EIgWSdloY+e8lFVlpjERpECNBkHsG64Pm3UveK96amxoVmgh/O1RWahVl+TVGFrE+n52GxFOVZX/1HF/7+zQv0qzMFovwPi2TvJhBeaL8k2yt4wZgZrR2U/97bvyDsp6q/8WGGxf/4W3zqhyhwIuieLL+WZoe1X9RlfkMkhOtcZJPXn/eySs0oe5L2KWMd934mMRJnLIarTCyc/2rb3CJTQsi+AJW2oDbIIx+gdFDTPEWlzBlLrZ7mOe9N+KTMvn9O2y7hju0r+sELz//qyTP6Px/C/6z/gKNkysp/MPL+8Fz5/+iqB7WP8uypKLz/y3Y7yOQK/jSE1/xZot2Hh9cMY+DD/xvh2IeS7U2aP1wrVsu1Rxub9m//SOYZJwai0Zv6/Ndyptuw1N2LVW9hIt7H7EWHa+540sGcNcvQrJoyBLdyKYWPtgwajsuxpbCgqAwT+i21epHP/vsa7zfw7CGex0haL+Ag/5Bvld/5iNIa7dofuIqhDsIGbKAVyQMuqPRp2Q+JvQQ4jv/hY29iwJHe2R04ycIrZy/8x+cwihsJQu1QVWHbX5vmxAEQRAEQRAEQRAEQRAEQRAEQRAE8QH4C4Y25D8AKAAA
 ---
 apiVersion: core.gardener.cloud/v1beta1
 kind: ControllerRegistration
@@ -16,6 +16,6 @@ spec:
     deploymentRefs:
     - name: 23ke-controlplane-cert
     policy: Always
-  seedSelector:
-    matchLabels:
-      23ke.cloud/generate-controlplane-cert: "true"
+    seedSelector:
+      matchLabels:
+        23ke.cloud/generate-controlplane-cert: "true"
