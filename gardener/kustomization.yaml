@@ -9,6 +9,7 @@ resources:
   - extensions.yaml
   - gardener.yaml
   - gardenlet.yaml
+  - gardener-metrics-exporter.yaml
   - identity.yaml
   - kube-apiserver.yaml
   - pre-gardenlet.yaml
