@@ -1,0 +1,61 @@
+kind: Shoot
+apiVersion: core.gardener.cloud/v1beta1
+metadata:
+  namespace: garden
+  name: mng-seed-0
+spec:
+  provider:
+    type: hcloud
+    infrastructureConfig:
+      apiVersion: hcloud.provider.extensions.gardener.cloud/v1alpha1
+      kind: InfrastructureConfig
+      networks:
+        workers: 10.250.0.0/16
+    controlPlaneConfig:
+      apiVersion: hcloud.provider.extensions.gardener.cloud/v1alpha1
+      kind: ControlPlaneConfig
+      loadBalancerProvider: provider
+      zone: hel1-dc2
+    workers:
+      - name: worker-cpx21
+        minimum: 2
+        maximum: 6
+        maxSurge: 1
+        machine:
+          type: cpx21
+          image:
+            name: ubuntu
+            version: 20.4.20210616
+        zones:
+          - hel1-dc2
+        cri:
+          name: containerd
+        volume:
+          size: 50Gi
+  networking:
+    nodes: 10.250.0.0/16
+    type: calico
+  cloudProfileName: hcloud
+  secretBindingName: hcloud-secret
+  region: hel1
+  purpose: evaluation
+  kubernetes:
+    verticalPodAutoscaler:
+      enabled: true
+    version: 1.25.8
+  addons:
+    kubernetesDashboard:
+      enabled: false
+    nginxIngress:
+      enabled: false
+  maintenance:
+    timeWindow:
+      begin: 010000+0100
+      end: 020000+0100
+    autoUpdate:
+      kubernetesVersion: true
+      machineImageVersion: true
+  hibernation:
+    schedules:
+      - start: '00 17 * * 1,2,3,4,5'
+        location: Europe/Berlin
