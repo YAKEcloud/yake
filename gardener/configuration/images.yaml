@@ -2055,7 +2055,7 @@ networking-calico:
               network_exposure: protected
               user_interaction: end-user
         name: calico-node
-        repository: docker.io/calico/node
+        repository: eu.gcr.io/gardener-project/3rd/calico/node
         sourceRepository: github.com/projectcalico/calico
         tag: v3.25.0
         targetVersion: '>= 1.21'
@@ -2069,7 +2069,7 @@ networking-calico:
               network_exposure: protected
               user_interaction: end-user
         name: calico-node
-        repository: docker.io/calico/node
+        repository: eu.gcr.io/gardener-project/3rd/calico/node
         sourceRepository: github.com/projectcalico/calico
         tag: v3.22.2
         targetVersion: < 1.21
@@ -2083,7 +2083,7 @@ networking-calico:
               network_exposure: private
               user_interaction: end-user
         name: calico-cni
-        repository: docker.io/calico/cni
+        repository: eu.gcr.io/gardener-project/3rd/calico/cni
         sourceRepository: github.com/projectcalico/cni-plugin
         tag: v3.25.0
         targetVersion: '>= 1.21'
@@ -2097,7 +2097,7 @@ networking-calico:
               network_exposure: private
               user_interaction: end-user
         name: calico-cni
-        repository: docker.io/calico/cni
+        repository: eu.gcr.io/gardener-project/3rd/calico/cni
         sourceRepository: github.com/projectcalico/cni-plugin
         tag: v3.22.2
         targetVersion: < 1.21
@@ -2115,7 +2115,7 @@ networking-calico:
               network_exposure: protected
               user_interaction: end-user
         name: calico-typha
-        repository: docker.io/calico/typha
+        repository: eu.gcr.io/gardener-project/3rd/calico/typha
         sourceRepository: github.com/projectcalico/typha
         tag: v3.25.0
         targetVersion: '>= 1.21'
@@ -2133,7 +2133,7 @@ networking-calico:
               network_exposure: protected
               user_interaction: end-user
         name: calico-typha
-        repository: docker.io/calico/typha
+        repository: eu.gcr.io/gardener-project/3rd/calico/typha
         sourceRepository: github.com/projectcalico/typha
         tag: v3.22.2
         targetVersion: < 1.21
@@ -2147,7 +2147,7 @@ networking-calico:
               network_exposure: protected
               user_interaction: end-user
         name: calico-kube-controllers
-        repository: docker.io/calico/kube-controllers
+        repository: eu.gcr.io/gardener-project/3rd/calico/kube-controllers
         sourceRepository: github.com/projectcalico/kube-controllers
         tag: v3.25.0
         targetVersion: '>= 1.21'
@@ -2161,7 +2161,7 @@ networking-calico:
               network_exposure: protected
               user_interaction: end-user
         name: calico-kube-controllers
-        repository: docker.io/calico/kube-controllers
+        repository: eu.gcr.io/gardener-project/3rd/calico/kube-controllers
         sourceRepository: github.com/projectcalico/kube-controllers
         tag: v3.22.2
         targetVersion: < 1.21
@@ -2175,7 +2175,7 @@ networking-calico:
               network_exposure: private
               user_interaction: end-user
         name: calico-podtodaemon-flex
-        repository: docker.io/calico/pod2daemon-flexvol
+        repository: eu.gcr.io/gardener-project/3rd/calico/pod2daemon-flexvol
         sourceRepository: github.com/projectcalico/pod2daemon
         tag: v3.22.2
       - labels:
