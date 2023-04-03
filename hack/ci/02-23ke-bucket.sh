@@ -8,6 +8,7 @@ echo "23KE Bucket upload"
 
 tmpDir=$(hack/make-tmp-release-dir.sh Bucket)
 
+if [ ! -v GITHUB_ACTIONS ]; then
 # Speed up flux
 yq eval -i '(
   select(.kind == "Deployment") |
@@ -17,6 +18,7 @@ yq eval -i '(
   ) |
   .spec.template.spec.containers[0].args
 ) += "--requeue-dependency=5s"' "$tmpDir/flux-system/gotk-components.yaml"
+fi
 
 mc ls "$MC_ALIAS/$BUCKET_23KE" &> /dev/null || mc mb "$MC_ALIAS/$BUCKET_23KE"
 mc mirror -q --overwrite "$tmpDir" "$MC_ALIAS/$BUCKET_23KE"
