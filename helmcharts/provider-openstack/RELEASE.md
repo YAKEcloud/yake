@@ -1,3 +1,3 @@
-# [gardener-extension-provider-openstack]
+# [machine-controller-manager]
 ## 🐛 Bug Fixes
-* *[OPERATOR]* The stale healthcheck conditions from the extension are now properly cleaned up. ([gardener/gardener-extension-provider-openstack#591](https://github.com/gardener/gardener-extension-provider-openstack/pull/591), [@acumino](https://github.com/acumino))
+* *[USER]* An edge case where all the machineSets were scaled down to zero has been dealt with. ([gardener/machine-controller-manager#804](https://github.com/gardener/machine-controller-manager/pull/804), [@himanshu-kun](https://github.com/himanshu-kun))
