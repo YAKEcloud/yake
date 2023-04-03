@@ -7,35 +7,36 @@ type: Opaque
 stringData:
   values.yaml: |-
     global:
-{{- if .Values.registryOverwrite }}
-      image:
-        repository: {{ include "replaceRegistry" (dict "eu.gcr.io/gardener-project/gardener/dashboard" .Values.registryOverwrite) }}
-{{- end }}
       virtualGarden:
         enabled: true
-      apiServerUrl: https://{{ include "api.domain" . }}/
-      sessionSecret: {{ .Values.dashboard.sessionSecret }}
-      ingress:
-        hosts:
-        - {{ include "dashboard.domain" . }}
-        annotations:
-          kubernetes.io/ingress.class: nginx
-{{- if .Values.issuer.enabled }}
-          cert.gardener.cloud/purpose: managed
-          cert.gardener.cloud/class: base-cert-class
+      dashboard:
+{{- if .Values.registryOverwrite }}
+        image:
+          repository: {{ include "replaceRegistry" (dict "eu.gcr.io/gardener-project/gardener/dashboard" .Values.registryOverwrite) }}
 {{- end }}
-          dns.gardener.cloud/dnsnames: "*"
-          dns.gardener.cloud/ttl: "600"
-          dns.gardener.cloud/class: base-dns-class
-      oidc:
-        issuerUrl: https://{{ include "identity.domain" . }}/oidc
-        clientId: dashboard
-        clientSecret: {{ .Values.dashboard.clientSecret }}
-        redirectUri: https://{{ include "dashboard.domain" . }}/auth/callback
-  {{- if (((.Values).issuer).ca) }}
-        ca: |
-          {{- .Values.issuer.ca | nindent 10 }}
-  {{- end }}
-        public:
-          clientId: kube-kubectl
-          usePKCE: true
+        apiServerUrl: https://{{ include "api.domain" . }}/
+        sessionSecret: {{ .Values.dashboard.sessionSecret }}
+        ingress:
+          hosts:
+          - {{ include "dashboard.domain" . }}
+          annotations:
+            kubernetes.io/ingress.class: nginx
+{{- if .Values.issuer.enabled }}
+            cert.gardener.cloud/purpose: managed
+            cert.gardener.cloud/class: base-cert-class
+{{- end }}
+            dns.gardener.cloud/dnsnames: "*"
+            dns.gardener.cloud/ttl: "600"
+            dns.gardener.cloud/class: base-dns-class
+        oidc:
+          issuerUrl: https://{{ include "identity.domain" . }}/oidc
+          clientId: dashboard
+          clientSecret: {{ .Values.dashboard.clientSecret }}
+          redirectUri: https://{{ include "dashboard.domain" . }}/auth/callback
+{{- if (((.Values).issuer).ca) }}
+          ca: |
+            {{- .Values.issuer.ca | nindent 10 }}
+{{- end }}
+          public:
+            clientId: kube-kubectl
+            usePKCE: true
