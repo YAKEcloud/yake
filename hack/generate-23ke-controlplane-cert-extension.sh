@@ -17,9 +17,8 @@
 # Modified from: github.com/gardener/gardener/hack/generate-controller-registration.sh
 
 NAME=23ke-controlplane-cert
-CHART_DIR=23ke-controlplane-cert-extension
+CHART_DIR=${BASH_SOURCE%/*}/23ke-controlplane-cert-extension
 VERSION=0.0.1
-DEST=23ke-controlplane-cert.yaml
 
 # The following code is to make `helm package` idempotent: Usually, everytime `helm package` is invoked,
 # it produces a different `.tgz` due to modification timestamps and some special shasums of gzip. We
@@ -41,9 +40,7 @@ helm package "$CHART_DIR" --version "$VERSION" --app-version "$VERSION" --destin
 tar -xzm -C "$temp_extract_dir" -f "$temp_dir"/*
 chart="$(tar --sort=name -c --owner=root:0 --group=root:0 --mtime='UTC 2019-01-01' -C "$temp_extract_dir" "$(basename "$temp_extract_dir"/*)" | gzip -n | base64 | tr -d '\n')"
 
-mkdir -p "$(dirname "$DEST")"
-
-cat <<EOM > "$DEST"
+cat <<EOM
 ---
 apiVersion: core.gardener.cloud/v1beta1
 kind: ControllerDeployment
@@ -65,3 +62,4 @@ spec:
     seedSelector:
       matchLabels:
         23ke.cloud/generate-controlplane-cert: "true"
+EOM
