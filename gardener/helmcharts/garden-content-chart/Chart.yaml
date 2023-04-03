@@ -1,5 +1,5 @@
 apiVersion: v2
-name: extensions
+name: garden-content
 description: A Helm chart for resources to be created in the garden-kube-apiserver
 
 type: application

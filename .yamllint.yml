@@ -22,4 +22,5 @@ ignore: |
   pre-gardener/issuer/templates/
   hack/go/23kectl/pkg/install/v1/__fixture__/
   hack/go/23kectl/pkg/install/v1/__embed__/
+  hack/23ke-controlplane-cert-extension/
   helmcharts
