@@ -23,7 +23,9 @@ spec:
       retries: 3
     createNamespace: true
   values:
-    runtime:
+    gardener-dashboard-runtime:
+      enabled: true
+    utils-templates:
       enabled: true
   valuesFrom:
     - kind: Secret
@@ -35,11 +37,11 @@ spec:
     - kind: Secret
       name: gardener-internal-kubeconfig
       valuesKey: value
-      targetPath: global.kubeconfig
+      targetPath: global.dashboard.kubeconfig
     - kind: Secret
       name: gardener-ca-keypair
       valuesKey: tls.crt
-      targetPath: global.apiServerCa
+      targetPath: global.dashboard.apiServerCa
   postRenderers:
     - kustomize:
         patchesStrategicMerge:
@@ -77,7 +79,9 @@ spec:
         namespace: flux-system
       interval: 1m
   values:
-    application:
+    gardener-dashboard-application:
+      enabled: true
+    utils-templates:
       enabled: true
   valuesFrom:
     - kind: Secret
