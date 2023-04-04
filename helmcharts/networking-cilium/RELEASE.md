@@ -1,6 +1,12 @@
 # [gardener-extension-networking-cilium]
+## ✨ New Features
+* *[OPERATOR]* The networking-cilium's `gardener-extension-networking-cilium` Service can now be topology-aware (depending on the Seed setting and the Shoot HA failure tolerance type). For more details, see the [Topology-aware Traffic Routing documentation](https://github.com/gardener/gardener/blob/v1.66.0/docs/usage/topology_aware_routing.md). ([gardener/gardener-extension-networking-cilium#172](https://github.com/gardener/gardener-extension-networking-cilium/pull/172), [@ialidzhikov](https://github.com/ialidzhikov))
 ## 🐛 Bug Fixes
-* *[OPERATOR]* The stale healthcheck conditions from the network extension are now properly cleaned up. ([gardener/gardener-extension-networking-cilium#171](https://github.com/gardener/gardener-extension-networking-cilium/pull/171), [@shafeeqes](https://github.com/shafeeqes))
+* *[OPERATOR]* The cilium operator now only runs with multiple replicas if the shoot cluster has multiple nodes ([gardener/gardener-extension-networking-cilium#166](https://github.com/gardener/gardener-extension-networking-cilium/pull/166), [@Wieneo](https://github.com/Wieneo))
+* *[OPERATOR]* The stale healthcheck conditions from the network extension are now properly cleaned up. ([gardener/gardener-extension-networking-cilium#170](https://github.com/gardener/gardener-extension-networking-cilium/pull/170), [@shafeeqes](https://github.com/shafeeqes))
 ## 🏃 Others
-* *[DEPENDENCY]* The following dependency is updated: ([gardener/gardener-extension-networking-cilium#171](https://github.com/gardener/gardener-extension-networking-cilium/pull/171), [@shafeeqes](https://github.com/shafeeqes))
+* *[OPERATOR]* Bump builder image from `golang:1.19.4` to `golang:1.20.2` ([gardener/gardener-extension-networking-cilium#168](https://github.com/gardener/gardener-extension-networking-cilium/pull/168), [@DockToFuture](https://github.com/DockToFuture))
+* *[OPERATOR]* Update cilium to `v1.13.1`. ([gardener/gardener-extension-networking-cilium#169](https://github.com/gardener/gardener-extension-networking-cilium/pull/169), [@DockToFuture](https://github.com/DockToFuture))
+* *[OPERATOR]* E2E tests are added which create a new cilium shoot cluster, run the connectivity tests and clean afterwards everything up. ([gardener/gardener-extension-networking-cilium#174](https://github.com/gardener/gardener-extension-networking-cilium/pull/174), [@DockToFuture](https://github.com/DockToFuture))
+* *[DEPENDENCY]* The following dependency is updated: ([gardener/gardener-extension-networking-cilium#170](https://github.com/gardener/gardener-extension-networking-cilium/pull/170), [@shafeeqes](https://github.com/shafeeqes))
   * github.com/gardener/gardener: v1.66.0 -> v1.66.1
