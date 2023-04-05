@@ -1,7 +1,3 @@
-gardener-dashboard-application:
-    enabled: false
-gardener-dashboard-runtime:
-    enabled: false
 global:
     bootstrapper:
         config:
@@ -105,8 +101,6 @@ global:
         servicePort: 8080
         sessionAffinity: ClientIP
         sessionSecret: null
-    image:
-        tag: 1.68.0
     virtualGarden:
         dashboardUserName: null
         enabled: false

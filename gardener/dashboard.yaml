@@ -12,7 +12,7 @@ spec:
   chart:
     spec:
       chart: dashboard
-      version: 1.67.0
+      version: 1.68.0
       sourceRef:
         kind: HelmRepository
         name: gardener-community-charts
@@ -23,7 +23,9 @@ spec:
       retries: 3
     createNamespace: true
   values:
-    runtime:
+    gardener-dashboard-runtime:
+      enabled: true
+    utils-templates:
       enabled: true
   valuesFrom:
     - kind: Secret
@@ -35,11 +37,11 @@ spec:
     - kind: Secret
       name: gardener-internal-kubeconfig
       valuesKey: value
-      targetPath: global.kubeconfig
+      targetPath: global.dashboard.kubeconfig
     - kind: Secret
       name: gardener-ca-keypair
       valuesKey: tls.crt
-      targetPath: global.apiServerCa
+      targetPath: global.dashboard.apiServerCa
   postRenderers:
     - kustomize:
         patchesStrategicMerge:
@@ -70,14 +72,16 @@ spec:
   chart:
     spec:
       chart: dashboard
-      version: 1.67.0
+      version: 1.68.0
       sourceRef:
         kind: HelmRepository
         name: gardener-community-charts
         namespace: flux-system
       interval: 1m
   values:
-    application:
+    gardener-dashboard-application:
+      enabled: true
+    utils-templates:
       enabled: true
   valuesFrom:
     - kind: Secret
