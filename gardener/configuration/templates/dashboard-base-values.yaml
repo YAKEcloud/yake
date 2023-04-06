@@ -35,7 +35,7 @@ stringData:
           redirectUri: https://{{ include "dashboard.domain" . }}/auth/callback
 {{- if (((.Values).issuer).ca) }}
           ca: |
-            {{- .Values.issuer.ca | nindent 10 }}
+            {{- .Values.issuer.ca | nindent 12 }}
 {{- end }}
           public:
             clientId: kube-kubectl
