@@ -1,3 +1,3 @@
 # [dashboard]
 ## 🐛 Bug Fixes
-* *[USER]* Fixed a regression introduced in last release that caused Gardener Dashboard not to load when using Safari Browser ([gardener/dashboard#1466](https://github.com/gardener/dashboard/pull/1466), [@grolu](https://github.com/grolu))
+* *[OPERATOR]* The `dashboard-terminal-kube-apiserver-${seedName}` `Service` now points to the `default/kubernetes` `Service`, instead of the external URL of the kube apiserver ([gardener/dashboard#1470](https://github.com/gardener/dashboard/pull/1470), [@petersutter](https://github.com/petersutter))

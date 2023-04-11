@@ -106,7 +106,7 @@ global:
         sessionAffinity: ClientIP
         sessionSecret: null
     image:
-        tag: 1.68.1
+        tag: 1.68.2
     virtualGarden:
         dashboardUserName: null
         enabled: false
