@@ -6,10 +6,10 @@ source hack/ci/handy.sh
 
 # delete ingresses and dnsentries, so that the dnsentries are not leaked on azure
 echo "Deleting dnsentries"
-kubectl delete -n garden ingress apiserver-ingress
-kubectl delete -n garden ingress gardener-dashboard-ingress
-kubectl delete -n garden ingress identity-ingress
-kubectl delete --all -n garden dnsentries.dns.gardener.cloud
+kubectl delete --timeout=1m -n garden ingress apiserver-ingress
+kubectl delete --timeout=1m -n garden ingress gardener-dashboard-ingress
+kubectl delete --timeout=1m -n garden ingress identity-ingress
+kubectl delete --timeout=1m --all -n garden dnsentries.dns.gardener.cloud
 
 # delete buckets on azure
 rclone -q purge $REMOTE:$BACKUP_BUCKET || echo "Deleting backup bucket failed"
