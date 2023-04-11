@@ -25,9 +25,11 @@ waitForDNS() {
 
   echo "waiting for $DOMAIN to resolve"
 
-  if [[ $(which dig) != "" ]]; then
+  if which dig
+  then
     local CMD="dig +short $DOMAIN"
-  elif [[ $(which drill) != "" ]]; then
+  elif which drill
+  then
     local CMD="drill -Q $DOMAIN"
   else
     echo "I need dig or drill to wait for a dns record to be present"
