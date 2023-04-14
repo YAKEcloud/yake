@@ -18,15 +18,11 @@ stringData:
         replicaCount: 2
         vpa: true
         clusterIdentity: {{ .Values.clusterIdentity }}
-        podLabels:
-          networking.23ke.cloud/allow-all: allowed
 {{- if .Values.registryOverwrite }}
         image:
           repository: {{ include "replaceRegistry" (dict "eu.gcr.io/gardener-project/gardener/apiserver" .Values.registryOverwrite) }}
 {{- end }}
       admission:
-        podLabels:
-          networking.23ke.cloud/allow-all: allowed
         replicaCount: 2
         vpa: true
 {{- if .Values.registryOverwrite }}
@@ -34,8 +30,6 @@ stringData:
           repository: {{ include "replaceRegistry" (dict "eu.gcr.io/gardener-project/gardener/admission-controller" .Values.registryOverwrite) }}
 {{- end }}
       controller:
-        podLabels:
-          networking.23ke.cloud/allow-all: allowed
         replicaCount: 2
         vpa: true
 {{- if .Values.registryOverwrite }}
@@ -43,8 +37,6 @@ stringData:
           repository: {{ include "replaceRegistry" (dict "eu.gcr.io/gardener-project/gardener/controller-manager" .Values.registryOverwrite) }}
 {{- end }}
       scheduler:
-        podLabels:
-          networking.23ke.cloud/allow-all: allowed
         replicaCount: 2
         vpa: true
 {{- if .Values.registryOverwrite }}

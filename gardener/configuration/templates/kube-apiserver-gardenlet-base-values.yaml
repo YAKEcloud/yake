@@ -10,8 +10,6 @@ metadata:
 type: Opaque
 stringData:
   values.yaml: |-
-    podLabels:
-      networking.23ke.cloud/allow-all: allowed
     global:
       token:
         id: {{ $tokenId }}

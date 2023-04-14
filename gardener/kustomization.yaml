@@ -12,5 +12,6 @@ resources:
   - garden-content.yaml
   - identity.yaml
   - kube-apiserver.yaml
+  - networkpolicies.yaml
   - priorityclasses.yaml
   - webterminal.yaml
