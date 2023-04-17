@@ -1314,7 +1314,7 @@ provider-aws:
         name: terraformer
         repository: eu.gcr.io/gardener-project/gardener/terraformer-aws
         sourceRepository: github.com/gardener/terraformer
-        tag: v2.19.0
+        tag: v2.20.0
       - labels:
           - name: gardener.cloud/cve-categorisation
             value:
@@ -1411,7 +1411,7 @@ provider-aws:
         name: cloud-controller-manager
         repository: registry.k8s.io/provider-aws/cloud-controller-manager
         sourceRepository: github.com/kubernetes/cloud-provider-aws
-        tag: v1.26.0
+        tag: v1.26.1
         targetVersion: '>= 1.26'
       - labels:
           - name: gardener.cloud/cve-categorisation
@@ -1438,7 +1438,7 @@ provider-aws:
         name: machine-controller-manager-provider-aws
         repository: eu.gcr.io/gardener-project/gardener/machine-controller-manager-provider-aws
         sourceRepository: github.com/gardener/machine-controller-manager-provider-aws
-        tag: v0.16.0
+        tag: v0.17.0
       - labels:
           - name: gardener.cloud/cve-categorisation
             value:
@@ -1464,7 +1464,7 @@ provider-aws:
         name: aws-custom-route-controller
         repository: eu.gcr.io/gardener-project/gardener/aws-custom-route-controller
         sourceRepository: github.com/gardener/aws-custom-route-controller
-        tag: v0.5.0
+        tag: v0.6.0
       - labels:
           - name: gardener.cloud/cve-categorisation
             value:
@@ -1477,7 +1477,7 @@ provider-aws:
         name: csi-driver
         repository: public.ecr.aws/ebs-csi-driver/aws-ebs-csi-driver
         sourceRepository: github.com/kubernetes-sigs/aws-ebs-csi-driver
-        tag: v1.14.1
+        tag: v1.17.0
       - labels:
           - name: gardener.cloud/cve-categorisation
             value:

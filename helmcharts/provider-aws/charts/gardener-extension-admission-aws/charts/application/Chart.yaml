@@ -2,4 +2,4 @@ apiVersion: v2
 description: A Helm chart to deploy the gardener-extension-admission-aws application
   related resources
 name: application
-version: 1.42.2
+version: 1.43.0
