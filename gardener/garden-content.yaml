@@ -14,6 +14,7 @@ spec:
       name: gardener-internal-kubeconfig
   dependsOn:
     - name: gardener-application
+    - name: gardener-runtime
   chart:
     spec:
       chart: gardener/helmcharts/garden-content-chart
