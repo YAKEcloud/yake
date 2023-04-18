@@ -10,7 +10,7 @@ spec:
     - {}
   podSelector:
     matchLabels:
-      app.kubernetes.io/name: gardener-dashboard
+      app: gardener-dashboard
   policyTypes:
     - Ingress
     - Egress
