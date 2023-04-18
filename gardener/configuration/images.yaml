@@ -975,7 +975,7 @@ provider-azure:
         name: terraformer
         repository: eu.gcr.io/gardener-project/gardener/terraformer-azure
         sourceRepository: github.com/gardener/terraformer
-        tag: v2.19.0
+        tag: v2.20.0
       - labels:
           - name: gardener.cloud/cve-categorisation
             value:
@@ -1030,7 +1030,7 @@ provider-azure:
         name: cloud-controller-manager
         repository: mcr.microsoft.com/oss/kubernetes/azure-cloud-controller-manager
         sourceRepository: github.com/kubernetes-sigs/cloud-provider-azure
-        tag: v1.23.25
+        tag: v1.23.30
         targetVersion: 1.23.x
       - labels:
           - name: gardener.cloud/cve-categorisation
@@ -1044,7 +1044,7 @@ provider-azure:
         name: cloud-controller-manager
         repository: mcr.microsoft.com/oss/kubernetes/azure-cloud-controller-manager
         sourceRepository: github.com/kubernetes-sigs/cloud-provider-azure
-        tag: v1.24.12
+        tag: v1.24.17
         targetVersion: 1.24.x
       - labels:
           - name: gardener.cloud/cve-categorisation
@@ -1058,7 +1058,7 @@ provider-azure:
         name: cloud-controller-manager
         repository: mcr.microsoft.com/oss/kubernetes/azure-cloud-controller-manager
         sourceRepository: github.com/kubernetes-sigs/cloud-provider-azure
-        tag: v1.25.6
+        tag: v1.25.11
         targetVersion: 1.25.x
       - labels:
           - name: gardener.cloud/cve-categorisation
@@ -1072,7 +1072,7 @@ provider-azure:
         name: cloud-controller-manager
         repository: mcr.microsoft.com/oss/kubernetes/azure-cloud-controller-manager
         sourceRepository: github.com/kubernetes-sigs/cloud-provider-azure
-        tag: v1.26.2
+        tag: v1.26.7
         targetVersion: '>= 1.26'
       - labels:
           - name: gardener.cloud/cve-categorisation
@@ -1166,9 +1166,9 @@ provider-azure:
               network_exposure: protected
               user_interaction: end-user
         name: csi-driver-disk
-        repository: mcr.microsoft.com/k8s/csi/azuredisk-csi
+        repository: mcr.microsoft.com/oss/kubernetes-csi/azuredisk-csi
         sourceRepository: github.com/kubernetes-sigs/azuredisk-csi-driver
-        tag: v1.25.0
+        tag: v1.27.1
       - labels:
           - name: gardener.cloud/cve-categorisation
             value:
@@ -1179,9 +1179,9 @@ provider-azure:
               network_exposure: protected
               user_interaction: end-user
         name: csi-driver-file
-        repository: mcr.microsoft.com/k8s/csi/azurefile-csi
+        repository: mcr.microsoft.com/oss/kubernetes-csi/azurefile-csi
         sourceRepository: github.com/kubernetes-sigs/azurefile-csi-driver
-        tag: v1.21.0
+        tag: v1.26.1
       - labels:
           - name: gardener.cloud/cve-categorisation
             value:
@@ -1297,6 +1297,8 @@ provider-azure:
               user_interaction: gardener-operator
         name: remedy-controller-azure
         repository: eu.gcr.io/gardener-project/gardener/remedy-controller/remedy-controller-azure
+        resourceId:
+          name: remedy-controller-image
         sourceRepository: github.com/gardener/remedy-controller
         tag: v0.10.0
 provider-aws:
