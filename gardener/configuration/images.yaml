@@ -647,7 +647,7 @@ provider-openstack:
         name: terraformer
         repository: eu.gcr.io/gardener-project/gardener/terraformer-openstack
         sourceRepository: github.com/gardener/terraformer
-        tag: v2.19.0
+        tag: v2.20.0
       - labels:
           - name: gardener.cloud/cve-categorisation
             value:
@@ -658,7 +658,7 @@ provider-openstack:
               network_exposure: protected
               user_interaction: gardener-operator
         name: cloud-controller-manager
-        repository: docker.io/k8scloudprovider/openstack-cloud-controller-manager
+        repository: eu.gcr.io/gardener-project/3rd/k8scloudprovider/openstack-cloud-controller-manager
         sourceRepository: github.com/kubernetes/cloud-provider-openstack
         tag: v1.21.0
         targetVersion: < 1.22
@@ -672,7 +672,7 @@ provider-openstack:
               network_exposure: protected
               user_interaction: gardener-operator
         name: cloud-controller-manager
-        repository: docker.io/k8scloudprovider/openstack-cloud-controller-manager
+        repository: eu.gcr.io/gardener-project/3rd/k8scloudprovider/openstack-cloud-controller-manager
         sourceRepository: github.com/kubernetes/cloud-provider-openstack
         tag: v1.22.2
         targetVersion: 1.22.x
@@ -686,7 +686,7 @@ provider-openstack:
               network_exposure: protected
               user_interaction: gardener-operator
         name: cloud-controller-manager
-        repository: docker.io/k8scloudprovider/openstack-cloud-controller-manager
+        repository: eu.gcr.io/gardener-project/3rd/k8scloudprovider/openstack-cloud-controller-manager
         sourceRepository: github.com/kubernetes/cloud-provider-openstack
         tag: v1.23.4
         targetVersion: 1.23.x
@@ -700,7 +700,7 @@ provider-openstack:
               network_exposure: protected
               user_interaction: gardener-operator
         name: cloud-controller-manager
-        repository: docker.io/k8scloudprovider/openstack-cloud-controller-manager
+        repository: registry.k8s.io/provider-os/openstack-cloud-controller-manager
         sourceRepository: github.com/kubernetes/cloud-provider-openstack
         tag: v1.24.6
         targetVersion: 1.24.x
@@ -714,7 +714,7 @@ provider-openstack:
               network_exposure: protected
               user_interaction: gardener-operator
         name: cloud-controller-manager
-        repository: docker.io/k8scloudprovider/openstack-cloud-controller-manager
+        repository: registry.k8s.io/provider-os/openstack-cloud-controller-manager
         sourceRepository: github.com/kubernetes/cloud-provider-openstack
         tag: v1.25.5
         targetVersion: 1.25.x
@@ -728,7 +728,7 @@ provider-openstack:
               network_exposure: protected
               user_interaction: gardener-operator
         name: cloud-controller-manager
-        repository: docker.io/k8scloudprovider/openstack-cloud-controller-manager
+        repository: registry.k8s.io/provider-os/openstack-cloud-controller-manager
         sourceRepository: github.com/kubernetes/cloud-provider-openstack
         tag: v1.26.2
         targetVersion: '>= 1.26'
@@ -768,7 +768,7 @@ provider-openstack:
               network_exposure: protected
               user_interaction: end-user
         name: csi-driver-cinder
-        repository: docker.io/k8scloudprovider/cinder-csi-plugin
+        repository: eu.gcr.io/gardener-project/3rd/k8scloudprovider/cinder-csi-plugin
         sourceRepository: github.com/kubernetes/cloud-provider-openstack
         tag: v1.20.3
         targetVersion: 1.20.x
@@ -782,7 +782,7 @@ provider-openstack:
               network_exposure: protected
               user_interaction: end-user
         name: csi-driver-cinder
-        repository: docker.io/k8scloudprovider/cinder-csi-plugin
+        repository: eu.gcr.io/gardener-project/3rd/k8scloudprovider/cinder-csi-plugin
         sourceRepository: github.com/kubernetes/cloud-provider-openstack
         tag: v1.21.0
         targetVersion: 1.21.x
@@ -796,7 +796,7 @@ provider-openstack:
               network_exposure: protected
               user_interaction: end-user
         name: csi-driver-cinder
-        repository: docker.io/k8scloudprovider/cinder-csi-plugin
+        repository: eu.gcr.io/gardener-project/3rd/k8scloudprovider/cinder-csi-plugin
         sourceRepository: github.com/kubernetes/cloud-provider-openstack
         tag: v1.22.2
         targetVersion: 1.22.x
@@ -810,7 +810,7 @@ provider-openstack:
               network_exposure: protected
               user_interaction: end-user
         name: csi-driver-cinder
-        repository: docker.io/k8scloudprovider/cinder-csi-plugin
+        repository: eu.gcr.io/gardener-project/3rd/k8scloudprovider/cinder-csi-plugin
         sourceRepository: github.com/kubernetes/cloud-provider-openstack
         tag: v1.23.4
         targetVersion: 1.23.x
@@ -824,9 +824,9 @@ provider-openstack:
               network_exposure: protected
               user_interaction: end-user
         name: csi-driver-cinder
-        repository: docker.io/k8scloudprovider/cinder-csi-plugin
+        repository: registry.k8s.io/provider-os/cinder-csi-plugin
         sourceRepository: github.com/kubernetes/cloud-provider-openstack
-        tag: v1.24.5
+        tag: v1.24.6
         targetVersion: 1.24.x
       - labels:
           - name: gardener.cloud/cve-categorisation
@@ -838,9 +838,9 @@ provider-openstack:
               network_exposure: protected
               user_interaction: end-user
         name: csi-driver-cinder
-        repository: docker.io/k8scloudprovider/cinder-csi-plugin
+        repository: registry.k8s.io/provider-os/cinder-csi-plugin
         sourceRepository: github.com/kubernetes/cloud-provider-openstack
-        tag: v1.25.3
+        tag: v1.25.5
         targetVersion: 1.25.x
       - labels:
           - name: gardener.cloud/cve-categorisation
@@ -852,10 +852,51 @@ provider-openstack:
               network_exposure: protected
               user_interaction: end-user
         name: csi-driver-cinder
-        repository: docker.io/k8scloudprovider/cinder-csi-plugin
+        repository: registry.k8s.io/provider-os/cinder-csi-plugin
         sourceRepository: github.com/kubernetes/cloud-provider-openstack
-        tag: v1.26.0
+        tag: v1.26.2
         targetVersion: '>= 1.26'
+      - labels:
+          - name: gardener.cloud/cve-categorisation
+            value:
+              authentication_enforced: false
+              availability_requirement: low
+              confidentiality_requirement: high
+              integrity_requirement: high
+              network_exposure: protected
+              user_interaction: end-user
+        name: csi-driver-manila
+        repository: registry.k8s.io/provider-os/manila-csi-plugin
+        sourceRepository: github.com/kubernetes/cloud-provider-openstack
+        tag: v1.25.5
+        targetVersion: < 1.26
+      - labels:
+          - name: gardener.cloud/cve-categorisation
+            value:
+              authentication_enforced: false
+              availability_requirement: low
+              confidentiality_requirement: high
+              integrity_requirement: high
+              network_exposure: protected
+              user_interaction: end-user
+        name: csi-driver-manila
+        repository: registry.k8s.io/provider-os/manila-csi-plugin
+        sourceRepository: github.com/kubernetes/cloud-provider-openstack
+        tag: v1.26.2
+        targetVersion: '>= 1.26'
+      - labels:
+          - name: gardener.cloud/cve-categorisation
+            value:
+              authentication_enforced: false
+              availability_requirement: low
+              confidentiality_requirement: high
+              integrity_requirement: high
+              network_exposure: protected
+              user_interaction: end-user
+        name: csi-driver-nfs
+        repository: registry.k8s.io/sig-storage/nfsplugin
+        sourceRepository: github.com/kubernetes-csi/csi-driver-nfs
+        tag: v4.1.0
       - labels:
           - name: gardener.cloud/cve-categorisation
             value:
