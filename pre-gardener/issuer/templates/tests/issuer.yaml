@@ -1,0 +1,21 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: {{ .Release.Name }}-test-issuer
+  namespace: flux-system
+  annotations:
+    "helm.sh/hook": test
+spec:
+  containers:
+    - name: test-issuer
+      image: bitnami/kubectl
+      command: ['bash', '-c']
+      args:
+        - |
+          state=$(kubectl get issuers.cert.gardener.cloud -n garden default-issuer -o jsonpath='{ .status.state }')
+          if [[ $state != "Ready" ]]; then
+            echo "Your dnsprovider is not ready. Please check the email address and or server provided in the 23ke-config secret."
+            exit 1
+          fi
+          exit 0
+  restartPolicy: Never
