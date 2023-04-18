@@ -40,7 +40,7 @@ global:
         image:
             pullPolicy: IfNotPresent
             repository: eu.gcr.io/gardener-project/gardener/admission-controller
-            tag: v1.67.2
+            tag: v1.68.0
         replicaCount: 3
         resources:
             requests:
@@ -48,6 +48,9 @@ global:
                 memory: 200Mi
         seedRestriction:
             enabled: false
+        service:
+            topologyAwareRouting:
+                enabled: false
         serviceAccountName: gardener-admission-controller
         serviceAccountTokenVolumeProjection:
             audience: ""
@@ -171,7 +174,7 @@ global:
         image:
             pullPolicy: IfNotPresent
             repository: eu.gcr.io/gardener-project/gardener/apiserver
-            tag: v1.67.2
+            tag: v1.68.0
         insecureSkipTLSVerify: false
         livenessProbe:
             failureThreshold: 3
@@ -198,12 +201,15 @@ global:
             maxSurge: 1
             maxUnavailable: 0
         securePort: 8443
+        service:
+            enabled: true
+            topologyAwareRouting:
+                enabled: false
         serviceAccountName: gardener-apiserver
         serviceAccountTokenVolumeProjection:
             audience: ""
             enabled: false
             expirationSeconds: 43200
-        serviceEnabled: true
         shutdownDelayDuration: 15s
         tls:
             crt: |
@@ -287,7 +293,7 @@ global:
         image:
             pullPolicy: IfNotPresent
             repository: eu.gcr.io/gardener-project/gardener/controller-manager
-            tag: v1.67.2
+            tag: v1.68.0
         replicaCount: 1
         resources:
             requests:
@@ -351,7 +357,7 @@ global:
         image:
             pullPolicy: IfNotPresent
             repository: eu.gcr.io/gardener-project/gardener/scheduler
-            tag: v1.67.2
+            tag: v1.68.0
         replicaCount: 1
         resources:
             requests:
