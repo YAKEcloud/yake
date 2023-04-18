@@ -1599,7 +1599,7 @@ provider-gcp:
         name: terraformer
         repository: eu.gcr.io/gardener-project/gardener/terraformer-gcp
         sourceRepository: github.com/gardener/terraformer
-        tag: v2.19.0
+        tag: v2.20.0
       - labels:
           - name: gardener.cloud/cve-categorisation
             value:
@@ -1736,7 +1736,7 @@ provider-gcp:
         name: csi-driver
         repository: registry.k8s.io/cloud-provider-gcp/gcp-compute-persistent-disk-csi-driver
         sourceRepository: github.com/kubernetes-sigs/gcp-compute-persistent-disk-csi-driver
-        tag: v1.7.3
+        tag: v1.9.1
       - labels:
           - name: gardener.cloud/cve-categorisation
             value:
