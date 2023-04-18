@@ -20,7 +20,7 @@ gardenlet:
       - name: etcd-druid
         repository: eu.gcr.io/gardener-project/gardener/etcd-druid
         sourceRepository: github.com/gardener/etcd-druid
-        tag: v0.16.1
+        tag: v0.17.0
       - name: dependency-watchdog
         repository: eu.gcr.io/gardener-project/gardener/dependency-watchdog
         sourceRepository: github.com/gardener/dependency-watchdog
@@ -66,7 +66,21 @@ gardenlet:
         repository: registry.k8s.io/ingress-nginx/controller-chroot
         sourceRepository: github.com/kubernetes/ingress-nginx
         tag: v1.6.4
-        targetVersion: '>= 1.23'
+        targetVersion: 1.23.x
+      - labels:
+          - name: gardener.cloud/cve-categorisation
+            value:
+              authentication_enforced: true
+              availability_requirement: low
+              confidentiality_requirement: low
+              integrity_requirement: low
+              network_exposure: public
+              user_interaction: end-user
+        name: nginx-ingress-controller-seed
+        repository: registry.k8s.io/ingress-nginx/controller-chroot
+        sourceRepository: github.com/kubernetes/ingress-nginx
+        tag: v1.7.0
+        targetVersion: '>= 1.24'
       - labels:
           - name: gardener.cloud/cve-categorisation
             value:
@@ -235,7 +249,7 @@ gardenlet:
         name: metrics-server
         repository: registry.k8s.io/metrics-server/metrics-server
         sourceRepository: github.com/kubernetes-sigs/metrics-server
-        tag: v0.6.2
+        tag: v0.6.3
       - name: vpn-shoot-client
         repository: eu.gcr.io/gardener-project/gardener/vpn-shoot-client
         sourceRepository: github.com/gardener/vpn2
@@ -277,7 +291,7 @@ gardenlet:
       - name: node-problem-detector
         repository: registry.k8s.io/node-problem-detector/node-problem-detector
         sourceRepository: github.com/kubernetes/node-problem-detector
-        tag: v0.8.12
+        tag: v0.8.13
       - labels:
           - name: cloud.gardener.cnudie/dso/scanning-hints/binary_id/v1
             value:
@@ -345,7 +359,7 @@ gardenlet:
         targetVersion: '>= 1.22'
       - name: alpine
         repository: eu.gcr.io/gardener-project/3rd/alpine
-        tag: 3.15.4
+        tag: 3.15.8
       - labels:
           - name: gardener.cloud/cve-categorisation
             value:
@@ -2370,9 +2384,9 @@ etcd-druid:
       - name: etcd-backup-restore
         repository: eu.gcr.io/gardener-project/gardener/etcdbrctl
         sourceRepository: github.com/gardener/etcd-backup-restore
-        tag: v0.22.1
+        tag: v0.23.0
       - name: etcd
         repository: eu.gcr.io/gardener-project/gardener/etcd
         sourceRepository: github.com/gardener/etcd-custom-image
-        tag: v3.4.13-bootstrap-8
+        tag: v3.4.13-bootstrap-9
 
