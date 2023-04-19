@@ -1,0 +1,58 @@
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: {{ .Release.Name }}-test-issuer-sa
+  namespace: {{ .Release.Namespace }}
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: Role
+metadata:
+  namespace: {{ .Release.Namespace }}
+  name: {{ .Release.Name }}-test-provider-role
+rules:
+- apiGroups:
+    - cert.gardener.cloud
+  resources:
+    - issuers
+  verbs:
+    - get
+---
+apiVersion: rbac.authorization.k8s.io/v1
+# This cluster role binding allows anyone in the "manager" group to read secrets in any namespace.
+kind: RoleBinding
+metadata:
+  name: {{ .Release.Name }}-test-issuer-rb
+subjects:
+- kind: ServiceAccount
+  name: {{ .Release.Name }}-test-issuer-sa
+roleRef:
+  kind: Role
+  name: {{ .Release.Name }}-test-issuer-role
+  apiGroup: rbac.authorization.k8s.io
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  name: {{ .Release.Name }}-test-issuer
+  namespace: {{ .Release.Namespace }}
+  annotations:
+    "helm.sh/hook": test
+    "helm.sh/hook-delete-policy": before-hook-creation,hook-succeeded
+  labels:
+    networking.gardener.cloud/to-runtime-apiserver: allowed
+    networking.gardener.cloud/to-dns: allowed
+spec:
+  serviceAccountName: {{ .Release.Name }}-test-issuer-sa
+  containers:
+    - name: test-issuer
+      image: bitnami/kubectl
+      command: ['bash', '-c']
+      args:
+        - |
+          kubectl wait issuers.cert.gardener.cloud -n garden default-issuer --for=jsonpath='{.status.state}'=Ready --timeout=5m --request-timeout=1m
+          if [[ ! $? ]]; then
+            echo "Your certificat issuer is not ready. Please check the email address and or server provided in the 23ke-config secret."
+            exit 1
+          fi
+          exit 0
+  restartPolicy: Never

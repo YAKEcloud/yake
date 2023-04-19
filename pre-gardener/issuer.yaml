@@ -12,6 +12,8 @@ spec:
     - name: cert-management
   targetNamespace: garden
   interval: 1m
+  test:
+    enable: true
   chart:
     spec:
       chart: pre-gardener/issuer
