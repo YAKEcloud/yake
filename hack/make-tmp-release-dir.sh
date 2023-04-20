@@ -30,7 +30,6 @@ done
 for file in $(grep  --exclude=configuration.yaml \
 										--exclude=extensions.yaml \
 										--exclude=garden-content.yaml \
-										--exclude=networkpolicies.yaml \
 										--exclude=addons.yaml \
 										--exclude=dnsprovider.yaml \
 										--exclude=issuer.yaml \
