@@ -66,7 +66,11 @@ if [[ -e ".git/refs/remotes/origin/$branch" ]]; then
 else
   touch docs/release-notes/next.md
   mv docs/release-notes/next.md docs/release-notes/v$minor.md
-  echo "# Release Notes next" > docs/release-notes/next.md
+	echo "---" > docs/release-notes/next.md
+  echo "hide_table_of_contents: true" >> docs/release-notes/next.md
+  echo "---" >> docs/release-notes/next.md
+  echo "" >> docs/release-notes/next.md
+  echo "# Release Notes next" >> docs/release-notes/next.md
   echo "" >> docs/release-notes/next.md
   echo "## 23KE release notes and upgrade guide" >> docs/release-notes/next.md
   echo "" >> docs/release-notes/next.md
