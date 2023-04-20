@@ -15,7 +15,10 @@ spec:
           - gardener-extension-admission-gcp
           - gardener-extension-admission-aws
           - gardener-extension-admission-alicloud
+  ingress:
+    - {}
   egress:
     - {}
   policyTypes:
+  - Ingress
   - Egress
