@@ -1,0 +1,15 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+resources:
+  - garden-cert-management.yaml
+  - garden-etcd.yaml
+  - garden-extensions.yaml
+  - garden-gardener-admission-controller.yaml
+  - garden-gardener-apiserver.yaml
+  - garden-gardener-controller-manager.yaml
+  - garden-gardener-dashboard.yaml
+  - garden-gardener-scheduler.yaml
+  - garden-gardenlet.yaml
+  - garden-identity.yaml
+  - garden-ingress-nginx.yaml
+  - garden-kube-apiserver.yaml

@@ -11,9 +11,14 @@ stringData:
       image:
         repository: {{ include "replaceRegistry" (dict "registry.k8s.io/ingress-nginx/controller" .Values.registryOverwrite) }}
 {{- end }}
+      admissionWebhooks:
+        patch:
+          labels:
+            23ke.cloud/component: ingress-nginx
       podLabels:
         app: nginx-ingress
         component: controller
+        23ke.cloud/component: ingress-nginx
       service:
         annotations:
 {{- if .Values.issuer.enabled }}

@@ -1,0 +1,24 @@
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: 23ke-etcd
+  namespace: garden
+spec:
+  podSelector:
+    matchLabels:
+      component: etcd
+  ingress:
+    - from:
+      - podSelector:
+          matchLabels:
+            app: gardener
+            role: apiserver
+      - podSelector:
+          matchLabels:
+            app: garden
+            component: kube-apiserver
+  egress:
+    - {}
+  policyTypes:
+  - Ingress
+  - Egress
