@@ -1,3 +1,22 @@
+# [gardener-extension-provider-gcp]
+## ⚠️ Breaking Changes
+* *[USER]* The default NAT mapping has changed to endpoint-dependent. Existing connections should not be interrupted but users will need to adapt their configuration if they want to keep Endpoint-Independent Mapping for their CloudNAT instance. ([gardener/gardener-extension-provider-gcp#571](https://github.com/gardener/gardener-extension-provider-gcp/pull/571), [@kon-angelo](https://github.com/kon-angelo))
+## ✨ New Features
+* *[USER]* Users can now specify whether they want to enable or disable Endpoint-Independent Mapping. ([gardener/gardener-extension-provider-gcp#571](https://github.com/gardener/gardener-extension-provider-gcp/pull/571), [@kon-angelo](https://github.com/kon-angelo))
+* *[OPERATOR]* `csi-driver-node` is annotated with the `wait-for-csi-node` annotation. Gardener uses this to only schedule workload pods to a `Node` once the driver has been successfully registered with the `CSINode` object. ([gardener/gardener-extension-provider-gcp#567](https://github.com/gardener/gardener-extension-provider-gcp/pull/567), [@SimonKienzler](https://github.com/SimonKienzler))
+* *[OPERATOR]* The `csi-snapshot-validation` Service deployed by the provider-gcp extension can now be topology-aware (depending on the Seed setting and the Shoot HA failure tolerance type). For more details, see the [Topology-aware Traffic Routing documentation](https://github.com/gardener/gardener/blob/v1.66.0/docs/usage/topology_aware_routing.md). ([gardener/gardener-extension-provider-gcp#574](https://github.com/gardener/gardener-extension-provider-gcp/pull/574), [@ialidzhikov](https://github.com/ialidzhikov))
+## 🐛 Bug Fixes
+* *[OPERATOR]* An issue has been fixed which caused undesired `PATCH` requests when updating the state in the `Worker` or `ShootState` resources. ([gardener/gardener-extension-provider-gcp#580](https://github.com/gardener/gardener-extension-provider-gcp/pull/580), [@oliver-goetz](https://github.com/oliver-goetz))
+* *[OPERATOR]* The stale healthcheck conditions from the extension are now properly cleaned up. ([gardener/gardener-extension-provider-gcp#575](https://github.com/gardener/gardener-extension-provider-gcp/pull/575), [@acumino](https://github.com/acumino))
+## 🏃 Others
+* *[OPERATOR]* The `gardener-extension-admission-gcp` Service in the `gardener-extension-admission-gcp` chart can now be configured to be topology-aware. ([gardener/gardener-extension-provider-gcp#582](https://github.com/gardener/gardener-extension-provider-gcp/pull/582), [@ialidzhikov](https://github.com/ialidzhikov))
+* *[OPERATOR]* Disable SNAT to the upstream dns server for non-overlay shoot cluster. ([gardener/gardener-extension-provider-gcp#556](https://github.com/gardener/gardener-extension-provider-gcp/pull/556), [@DockToFuture](https://github.com/DockToFuture))
+* *[OPERATOR]* Adapted extension components to support the [FullNetworkPoliciesInRuntimeCluster](https://github.com/gardener/gardener/blob/master/docs/deployment/feature_gates.md#list-of-feature-gates) feature gate introduced by `gardener/gardener` v1.66, see [here](https://github.com/gardener/gardener/blob/master/docs/concepts/resource-manager.md#networkpolicy-controller) and [#7352](https://github.com/gardener/gardener/pull/7589) for more information. ([gardener/gardener-extension-provider-gcp#566](https://github.com/gardener/gardener-extension-provider-gcp/pull/566), [@oliver-goetz](https://github.com/oliver-goetz))
+* *[OPERATOR]* Update csi-driver version `v1.7.3 -> v1.9.1` ([gardener/gardener-extension-provider-gcp#572](https://github.com/gardener/gardener-extension-provider-gcp/pull/572), [@kon-angelo](https://github.com/kon-angelo))
+* *[DEVELOPER]* Update to Go `1.19.7`. ([gardener/gardener-extension-provider-gcp#565](https://github.com/gardener/gardener-extension-provider-gcp/pull/565), [@oliver-goetz](https://github.com/oliver-goetz))
 # [machine-controller-manager]
 ## 🐛 Bug Fixes
 * *[USER]* An edge case where all the machineSets were scaled down to zero has been dealt with. ([gardener/machine-controller-manager#804](https://github.com/gardener/machine-controller-manager/pull/804), [@himanshu-kun](https://github.com/himanshu-kun))
+# [terraformer]
+## 🏃 Others
+* *[OPERATOR]* Update TF_VERSION `0.15.5` -> `1.3.9` and update how the local providers are fetched and stored to be compatible with the latest TF specification. ([gardener/terraformer#133](https://github.com/gardener/terraformer/pull/133), [@kon-angelo](https://github.com/kon-angelo))

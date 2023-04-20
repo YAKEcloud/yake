@@ -10,6 +10,9 @@ global:
     metricsPort: 8080
     replicaCount: 1
     resources: {}
+    service:
+        topologyAwareRouting:
+            enabled: false
     serviceAccountTokenVolumeProjection:
         audience: ""
         enabled: false

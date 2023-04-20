@@ -46,6 +46,9 @@ global:
                 memory: 200Mi
         seedRestriction:
             enabled: false
+        service:
+            topologyAwareRouting:
+                enabled: false
         serviceAccountName: gardener-admission-controller
         serviceAccountTokenVolumeProjection:
             audience: ""
@@ -196,12 +199,15 @@ global:
             maxSurge: 1
             maxUnavailable: 0
         securePort: 8443
+        service:
+            enabled: true
+            topologyAwareRouting:
+                enabled: false
         serviceAccountName: gardener-apiserver
         serviceAccountTokenVolumeProjection:
             audience: ""
             enabled: false
             expirationSeconds: 43200
-        serviceEnabled: true
         shutdownDelayDuration: 15s
         tls:
             crt: |
