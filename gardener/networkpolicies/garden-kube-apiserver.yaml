@@ -22,6 +22,11 @@ spec:
                 - gardener-extension-admission-alicloud
       - podSelector:
           matchLabels:
+            app: nginx-ingress
+            app.kubernetes.io/component: controller
+            23ke.cloud/component: ingress-nginx
+      - podSelector:
+          matchLabels:
             app.kubernetes.io/name: gardener-dashboard
       - podSelector:
           matchLabels:
