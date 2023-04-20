@@ -37,3 +37,15 @@ fi
 
 rm -rf helmcharts/$depName
 helm pull $curHelmRepo/$depName --untar --untardir helmcharts --version $newVersion
+
+if [[ $curHelmRepo == gardener-charts ]]; then
+	 echo ""  >> docs/release-notes/next.md
+	 echo "<details>"  >> docs/release-notes/next.md
+	 echo "<summary><b>Update $depName to <code>$newVersion</code></b></summary>" >> docs/release-notes/next.md
+	 echo ""  >> docs/release-notes/next.md
+	 cat helmcharts/$depName/RELEASE.md  >> docs/release-notes/next.md
+	 echo ""  >> docs/release-notes/next.md
+	 echo ""  >> docs/release-notes/next.md
+	 echo "</details>"  >> docs/release-notes/next.md
+fi
+
