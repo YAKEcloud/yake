@@ -14,11 +14,11 @@ stringData:
       admissionWebhooks:
         patch:
           labels:
-            networking.23ke.cloud/allow-all: allowed
+            23ke.cloud/component: ingress-nginx
       podLabels:
         app: nginx-ingress
         component: controller
-        networking.23ke.cloud/allow-all: allowed
+        23ke.cloud/component: ingress-nginx
       service:
         annotations:
 {{- if .Values.issuer.enabled }}

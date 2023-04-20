@@ -1,0 +1,70 @@
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: 23ke-garden-kube-apiserver
+  namespace: garden
+spec:
+  podSelector:
+    matchLabels:
+      component: kube-apiserver
+  ingress:
+    - from:
+      - podSelector:
+          matchExpressions:
+            - key: app.kubernetes.io/name
+              operator: In
+              values:
+                - gardener-extension-admission-azure
+                - gardener-extension-admission-openstack
+                - gardener-extension-admission-hcloud
+                - gardener-extension-admission-gcp
+                - gardener-extension-admission-aws
+                - gardener-extension-admission-alicloud
+      - podSelector:
+          matchLabels:
+            app: nginx-ingress
+            app.kubernetes.io/component: controller
+            23ke.cloud/component: ingress-nginx
+      - podSelector:
+          matchLabels:
+            app.kubernetes.io/name: gardener-dashboard
+      - podSelector:
+          matchLabels:
+            app: identity
+      - podSelector:
+          matchLabels:
+            app: gardener
+            role: apiserver
+      - podSelector:
+          matchLabels:
+            app: gardener
+            role: admission-controller
+      - podSelector:
+          matchLabels:
+            app: gardener
+            role: controller-manager
+      - podSelector:
+          matchLabels:
+            app: gardener
+            role: scheduler
+      - podSelector:
+          matchLabels:
+            app: gardener
+            role: gardenlet
+      - namespaceSelector:
+          matchLabels:
+            kubernetes.io/metadata.name: flux-system
+        podSelector:
+          matchLabels:
+            app: helm-controller
+      - namespaceSelector:
+          matchLabels:
+            kubernetes.io/metadata.name: flux-system
+        podSelector:
+          matchLabels:
+            app: kustomize-controller
+  egress:
+    - {}
+  policyTypes:
+  - Ingress
+  - Egress
