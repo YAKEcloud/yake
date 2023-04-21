@@ -26,3 +26,5 @@ spec:
   valuesFrom:
     - kind: Secret
       name: 23ke-config
+    - kind: Secret
+      name: 23ke-generated-secrets
