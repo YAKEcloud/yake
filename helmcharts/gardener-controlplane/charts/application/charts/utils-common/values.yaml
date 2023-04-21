@@ -12,13 +12,10 @@ global:
             server:
                 enableDebugHandlers: false
                 healthProbes:
-                    bindAddress: 0.0.0.0
                     port: 2722
                 metrics:
-                    bindAddress: 0.0.0.0
                     port: 2723
                 webhooks:
-                    bindAddress: 0.0.0.0
                     port: 2719
                     tls:
                         caBundle: |
@@ -281,10 +278,8 @@ global:
             logLevel: info
             server:
                 healthProbes:
-                    bindAddress: 0.0.0.0
                     port: 2718
                 metrics:
-                    bindAddress: 0.0.0.0
                     port: 2719
         enabled: true
         env: []
@@ -346,10 +341,8 @@ global:
             logLevel: info
             server:
                 healthProbes:
-                    bindAddress: 0.0.0.0
                     port: 10251
                 metrics:
-                    bindAddress: 0.0.0.0
                     port: 19251
         enabled: true
         image:

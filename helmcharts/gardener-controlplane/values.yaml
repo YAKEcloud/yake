@@ -14,13 +14,10 @@ global:
             server:
                 enableDebugHandlers: false
                 healthProbes:
-                    bindAddress: 0.0.0.0
                     port: 2722
                 metrics:
-                    bindAddress: 0.0.0.0
                     port: 2723
                 webhooks:
-                    bindAddress: 0.0.0.0
                     port: 2719
                     tls:
                         caBundle: |
@@ -40,7 +37,7 @@ global:
         image:
             pullPolicy: IfNotPresent
             repository: eu.gcr.io/gardener-project/gardener/admission-controller
-            tag: v1.68.0
+            tag: v1.69.0
         replicaCount: 3
         resources:
             requests:
@@ -174,7 +171,7 @@ global:
         image:
             pullPolicy: IfNotPresent
             repository: eu.gcr.io/gardener-project/gardener/apiserver
-            tag: v1.68.0
+            tag: v1.69.0
         insecureSkipTLSVerify: false
         livenessProbe:
             failureThreshold: 3
@@ -283,17 +280,15 @@ global:
             logLevel: info
             server:
                 healthProbes:
-                    bindAddress: 0.0.0.0
                     port: 2718
                 metrics:
-                    bindAddress: 0.0.0.0
                     port: 2719
         enabled: true
         env: []
         image:
             pullPolicy: IfNotPresent
             repository: eu.gcr.io/gardener-project/gardener/controller-manager
-            tag: v1.68.0
+            tag: v1.69.0
         replicaCount: 1
         resources:
             requests:
@@ -348,16 +343,14 @@ global:
             logLevel: info
             server:
                 healthProbes:
-                    bindAddress: 0.0.0.0
                     port: 10251
                 metrics:
-                    bindAddress: 0.0.0.0
                     port: 19251
         enabled: true
         image:
             pullPolicy: IfNotPresent
             repository: eu.gcr.io/gardener-project/gardener/scheduler
-            tag: v1.68.0
+            tag: v1.69.0
         replicaCount: 1
         resources:
             requests:
