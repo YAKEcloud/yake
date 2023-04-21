@@ -112,7 +112,7 @@
       "cd hack/go/imagevector-importer && go run main.go import --config config.yaml > ../../../gardener/configuration/images.yaml",
       "./hack/pull-helmchart.sh {{{depName}}} {{{newVersion}}} && git add helmcharts && git add docs/release-notes/next.md",
     ],
-    "fileFilters": ["gardener/configuration/images.yaml", "helmcharts/**/**" ],
+    "fileFilters": ["gardener/configuration/images.yaml", "helmcharts/**/**", "docs/release-notes/next.md"],
     "executionMode": "update"
   }
 }
