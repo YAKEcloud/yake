@@ -7,6 +7,15 @@ source hack/ci/handy.sh
 PROVIDER=${PROVIDER:=hcloud}
 ZONE=${ZONE:=hel1}
 
+echo "Check whether we rolled out any image with tag latest"
+images=$(kubectl get pods --all-namespaces -o go-template --template="{{range .items}}{{range .spec.containers}}{{.image}} {{end}}{{end}}")
+for image in $images; do
+		if echo $image | grep latest ; then
+			 echo "found latest tag in image $image"
+			 exit 1
+		fi
+done
+
 echo "Testing Backup storage"
 # Test if velero backuplocation and etcdbackup location work
 # velero
