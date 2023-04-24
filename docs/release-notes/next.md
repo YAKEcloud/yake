@@ -154,3 +154,12 @@ gardenlet: `eu.gcr.io/gardener-project/gardener/gardenlet:v1.69.0`
 resource-manager: `eu.gcr.io/gardener-project/gardener/resource-manager:v1.69.0`
 
 </details>
+
+<details>
+<summary><b>Update provider-azure to <code>1.35.1</code></b></summary>
+
+# [gardener-extension-provider-azure]
+## 🏃 Others
+* *[OPERATOR]* Restore terraform behavior to delete the azure resource group even if it contains other resources. ([gardener/gardener-extension-provider-azure#676](https://github.com/gardener/gardener-extension-provider-azure/pull/676), [@kon-angelo](https://github.com/kon-angelo))
+
+</details>
