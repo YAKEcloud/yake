@@ -29,6 +29,7 @@ done
 
 for file in $(grep  --exclude=configuration.yaml \
 										--exclude=extensions.yaml \
+										--exclude=generated-secrets.yaml \
 										--exclude=garden-content.yaml \
 										--exclude=addons.yaml \
 										--exclude=dnsprovider.yaml \

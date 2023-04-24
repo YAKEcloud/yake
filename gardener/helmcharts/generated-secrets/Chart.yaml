@@ -1,0 +1,7 @@
+apiVersion: v2
+name: generated-secrets
+description: A Helm chart for generating secrets used by gardener components internally
+
+type: application
+
+version: 0.0.1

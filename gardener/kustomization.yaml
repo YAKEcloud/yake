@@ -10,6 +10,7 @@ resources:
   - gardener.yaml
   - gardenlet.yaml
   - garden-content.yaml
+  - generated-secrets.yaml
   - identity.yaml
   - kube-apiserver.yaml
   - networkpolicies
