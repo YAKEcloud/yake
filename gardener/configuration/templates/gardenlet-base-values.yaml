@@ -1,6 +1,3 @@
-{{- $tokenId := (print (randNumeric 1) (randAlphaNum 4)  (randAlpha 1)) | lower -}}
-{{- $tokenSecret := (print (randNumeric 2) (randAlphaNum 12) (randAlpha 2)) | lower -}}
-
 apiVersion: v1
 kind: Secret
 metadata:
@@ -12,8 +9,8 @@ stringData:
   values.yaml: |-
     global:
       token:
-        id: {{ $tokenId }}
-        secret: {{ $tokenSecret }}
+        id: {{ .Values.gardenlet.bootstrapTokenId }}
+        secret: {{ .Values.gardenlet.bootstrapTokenSecret }}
       additionalSecrets:
         - name: base-dns-provider-secret
           namespace: garden
@@ -61,51 +58,4 @@ stringData:
       - name: etcd-druid
         imageVectorOverwrite: |
 {{ include "etcd-druid.imageVectorOverwrite" . | indent 10 }}
-{{- end }}
----
-apiVersion: v1
-kind: Secret
-metadata:
-  name: kube-apiserver-base-values
-  namespace: flux-system
-type: Opaque
-stringData:
-  values.yaml: |-
-{{- if .Values.registryOverwrite }}
-    images:
-      apiserver: {{ include "replaceRegistry" (dict "registry.k8s.io/kube-apiserver:v1.24.4" .Values.registryOverwrite) }}
-      controllermanager: {{ include "replaceRegistry" (dict "registry.k8s.io/kube-controller-manager:v1.24.4" .Values.registryOverwrite) }}
-{{- end }}
-    namespace: garden
-    serviceName: garden-kube-apiserver
-    replicas: 2
-    apiServer:
-      hostname: {{ include "api.domain" . }}
-      serviceName: garden-kube-apiserver
-      oidcIssuerURL: https://{{ include "identity.domain" . }}/oidc
-    ingress:
-      annotations:
-        dns.gardener.cloud/dnsnames: "*"
-        dns.gardener.cloud/ttl: "600"
-        dns.gardener.cloud/class: base-dns-class
-    etcd:
-      main:
-        endpoints: https://etcd:2379
-      events:
-        endpoints: https://etcd-events:2379
-      secretNames:
-        ca: etcd-ca
-        client: etcd-client
-    gardenletBootstrap:
-      createToken: true
-      token:
-        id: {{ $tokenId }}
-        secret: {{ $tokenSecret }}
-    tls:
-      kubeAPIServer:
-        basicAuthPassword: {{ .Values.kubeApiServer.basicAuthPassword }}
-{{- if (((.Values).issuer).ca) }}
-      identity:
-        ca: |
-          {{- .Values.issuer.ca | nindent 10 }}
 {{- end }}
