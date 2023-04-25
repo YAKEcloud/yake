@@ -214,3 +214,12 @@ gardenlet: `eu.gcr.io/gardener-project/gardener/gardenlet:v1.69.1`
 resource-manager: `eu.gcr.io/gardener-project/gardener/resource-manager:v1.69.1`
 
 </details>
+
+<details>
+<summary><b>Update provider-openstack to <code>1.33.1</code></b></summary>
+
+# [gardener-extension-provider-openstack]
+## 🐛 Bug Fixes
+* *[OPERATOR]* Add missing network policy labels to extension controller pod template ([gardener/gardener-extension-provider-openstack#611](https://github.com/gardener/gardener-extension-provider-openstack/pull/611), [@kon-angelo](https://github.com/kon-angelo))
+
+</details>
