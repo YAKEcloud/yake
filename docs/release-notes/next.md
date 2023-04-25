@@ -223,3 +223,18 @@ resource-manager: `eu.gcr.io/gardener-project/gardener/resource-manager:v1.69.1`
 * *[OPERATOR]* Add missing network policy labels to extension controller pod template ([gardener/gardener-extension-provider-openstack#611](https://github.com/gardener/gardener-extension-provider-openstack/pull/611), [@kon-angelo](https://github.com/kon-angelo))
 
 </details>
+
+<details>
+<summary><b>Update cloudprofiles to <code>0.5.1</code></b></summary>
+
+## What's Changed
+* feat/gen cloudprofiles openstack by @mxmxchere in https://github.com/gardener-community/cloudprofiles/pull/17
+* Ignores upstream versions if latest is lower than highest local version by @mxmxchere in https://github.com/gardener-community/cloudprofiles/pull/19
+* Alters the k8s-version tracking script so that only patch versions are tracked by @23t-machine-user in https://github.com/gardener-community/cloudprofiles/pull/21
+
+## New Contributors
+* @23t-machine-user made their first contribution in https://github.com/gardener-community/cloudprofiles/pull/21
+
+**Full Changelog**: https://github.com/gardener-community/cloudprofiles/compare/0.5.0...0.5.1
+
+</details>
