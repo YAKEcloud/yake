@@ -6,7 +6,7 @@ global:
         image:
             pullPolicy: IfNotPresent
             repository: eu.gcr.io/gardener-project/gardener/dashboard-terminal-bootstrapper
-            tag: latest
+            tag: 1.68.2
         livenessProbe:
             failureThreshold: 3
             initialDelaySeconds: 10
@@ -60,7 +60,7 @@ global:
         image:
             pullPolicy: IfNotPresent
             repository: eu.gcr.io/gardener-project/gardener/dashboard
-            tag: latest
+            tag: 1.68.2
         ingress:
             annotations:
                 kubernetes.io/ingress.class: nginx
