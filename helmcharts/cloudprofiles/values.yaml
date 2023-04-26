@@ -29,6 +29,8 @@ global:
         selector: {}
 hcloud:
     enabled: false
+ovh:
+    enabled: false
 pluscloud-open:
     enabled: false
 regiocloud:
