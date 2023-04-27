@@ -2095,11 +2095,11 @@ provider-hcloud:
       - name: machine-controller-manager
         repository: eu.gcr.io/gardener-project/gardener/machine-controller-manager
         sourceRepository: https://github.com/gardener/machine-controller-manager
-        tag: v0.47.1
+        tag: v0.48.2
       - name: machine-controller-manager-provider-hcloud
         repository: ghcr.io/23technologies/machine-controller-manager-provider-hcloud
         sourceRepository: https://github.com/23technologies/machine-controller-manager-provider-hcloud
-        tag: v0.2.21
+        tag: v0.2.22
       - name: csi-driver-controller
         repository: ghcr.io/23technologies/hcloud-csi-driver
         sourceRepository: https://github.com/hetznercloud/csi-driver
