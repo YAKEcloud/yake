@@ -238,3 +238,14 @@ resource-manager: `eu.gcr.io/gardener-project/gardener/resource-manager:v1.69.1`
 **Full Changelog**: https://github.com/gardener-community/cloudprofiles/compare/0.5.0...0.5.1
 
 </details>
+
+<details>
+<summary><b>Update cloudprofiles to <code>0.6.0</code></b></summary>
+
+## What's Changed
+* New Cloud Profile OVH by @mxmxchere in https://github.com/gardener-community/cloudprofiles/pull/20
+
+
+**Full Changelog**: https://github.com/gardener-community/cloudprofiles/compare/0.5.1...0.6.0
+
+</details>
