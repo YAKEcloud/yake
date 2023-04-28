@@ -16,6 +16,8 @@ rules:
     - dnsproviders
   verbs:
     - get
+    - list
+    - watch
 ---
 apiVersion: rbac.authorization.k8s.io/v1
 # This cluster role binding allows anyone in the "manager" group to read secrets in any namespace.
@@ -49,8 +51,8 @@ spec:
       command: ['bash', '-c']
       args:
         - |
-          kubectl wait dnsproviders.dns.gardener.cloud -n garden base-dns-provider --for=jsonpath='{.status.state}'=Ready --timeout=5m --request-timeout=1m
-          if [[ ! $? ]]; then
+          kubectl wait dnsproviders.dns.gardener.cloud -n garden base-dns-provider --for=jsonpath='{.status.state}'=Ready --timeout=30s
+          if [ $? -ne 0 ]; then
             echo "Your dnsprovider is not ready. Please check the credentials provided in the 23ke-config secret."
             echo ""
             kubectl get dnsproviders.dns.gardener.cloud -n garden base-dns-provider -o jsonpath='{.status.message}'
