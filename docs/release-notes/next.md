@@ -238,3 +238,10 @@ resource-manager: `eu.gcr.io/gardener-project/gardener/resource-manager:v1.69.1`
 **Full Changelog**: https://github.com/gardener-community/cloudprofiles/compare/0.5.0...0.5.1
 
 </details>
+
+<details>
+<summary><b>Update provider-hcloud to <code>0.6.14</code></b></summary>
+
+# [gardener-extension-provider-hcloud] v0.6.14
+
+</details>
