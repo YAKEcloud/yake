@@ -17,17 +17,19 @@ global:
             versions:
                 1.23.17:
                     classification: supported
-                1.24.12:
+                1.24.13:
                     classification: supported
-                1.25.8:
+                1.25.9:
                     classification: supported
-                1.26.3:
+                1.26.4:
                     classification: supported
         versions: {}
     seedSelector:
         enabled: false
         selector: {}
 hcloud:
+    enabled: false
+ovh:
     enabled: false
 pluscloud-open:
     enabled: false
