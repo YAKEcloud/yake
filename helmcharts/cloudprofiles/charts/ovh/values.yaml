@@ -1,0 +1,297 @@
+enabled: true
+global:
+    kubernetes:
+        upstreamVersions:
+            include: false
+        versions: {}
+kubernetes:
+    versions: {}
+machineImages:
+    - name: ubuntu
+      versions:
+        - cri:
+            - name: containerd
+            - name: docker
+          version: 22.4.20230418
+machineTypes:
+    - cpu: 2
+      memory: 7e+06
+      name: win-b2-7
+    - cpu: 60
+      memory: 1.8e+08
+      name: t2-180
+    - cpu: 8
+      memory: 3e+07
+      name: win-b2-30
+    - cpu: 16
+      memory: 6e+07
+      name: win-b2-60
+    - cpu: 4
+      memory: 1.5e+07
+      name: win-b2-15
+    - cpu: 16
+      memory: 2.4e+08
+      name: r2-240
+    - cpu: 8
+      memory: 1.2e+08
+      name: win-r2-120
+    - cpu: 16
+      memory: 6e+07
+      name: c2-60-flex
+    - cpu: 8
+      memory: 3.2e+07
+      name: bm-s1
+    - cpu: 4
+      memory: 6e+07
+      name: win-r2-60
+    - cpu: 4
+      memory: 6e+07
+      name: r2-60-flex
+    - cpu: 4
+      memory: 1.5e+07
+      name: b2-15
+    - cpu: 2
+      memory: 4e+06
+      name: d2-4
+    - cpu: 8
+      memory: 3e+07
+      name: win-c2-30-flex
+    - cpu: 2
+      memory: 7e+06
+      name: c2-7
+    - cpu: 2
+      memory: 7e+06
+      name: b2-7
+    - cpu: 8
+      memory: 3e+07
+      name: b2-30
+    - cpu: 2
+      memory: 3e+07
+      name: r2-30-flex
+    - cpu: 16
+      memory: 6e+07
+      name: win-c2-60-flex
+    - cpu: 8
+      memory: 1.2e+08
+      name: r2-120-flex
+    - cpu: 4
+      memory: 1.5e+07
+      name: win-c2-15
+    - cpu: 32
+      memory: 1.2e+08
+      name: win-b2-120
+    - cpu: 2
+      memory: 7e+06
+      name: win-c2-7-flex
+    - cpu: 32
+      memory: 1.2e+08
+      name: c2-120
+    - cpu: 4
+      memory: 1.5e+07
+      name: b2-15-flex
+    - cpu: 4
+      memory: 6e+07
+      name: r2-60
+    - cpu: 2
+      memory: 3e+07
+      name: win-r2-30-flex
+    - cpu: 8
+      memory: 1.2e+08
+      name: r2-120
+    - cpu: 16
+      memory: 2.4e+08
+      name: r2-240-flex
+    - cpu: 4
+      memory: 1.5e+07
+      name: win-b2-15-flex
+    - cpu: 56
+      memory: 1.8e+08
+      name: win-t2-180
+    - cpu: 4
+      memory: 1.5e+07
+      name: win-c2-15-flex
+    - cpu: 32
+      memory: 1.2e+08
+      name: b2-120-flex
+    - cpu: 16
+      memory: 6e+07
+      name: win-b2-60-flex
+    - cpu: 28
+      memory: 9e+07
+      name: win-t2-90
+    - cpu: 14
+      memory: 4.5e+07
+      name: win-t2-45
+    - cpu: 16
+      memory: 6e+07
+      name: b2-60
+    - cpu: 16
+      memory: 6e+07
+      name: c2-60
+    - cpu: 4
+      memory: 8e+06
+      name: d2-8
+    - cpu: 2
+      memory: 7e+06
+      name: win-c2-7
+    - cpu: 16
+      memory: 6e+07
+      name: b2-60-flex
+    - cpu: 16
+      memory: 2.4e+08
+      name: win-r2-240-flex
+    - cpu: 1
+      memory: 4e+06
+      name: s1-4
+    - cpu: 2
+      memory: 7e+06
+      name: b2-7-flex
+    - cpu: 8
+      memory: 3e+07
+      name: win-c2-30
+    - cpu: 4
+      memory: 1.5e+07
+      name: c2-15
+    - cpu: 32
+      memory: 1.2e+08
+      name: c2-120-flex
+    - cpu: 32
+      memory: 1.2e+08
+      name: b2-120
+    - cpu: 4
+      memory: 1.5e+07
+      name: c2-15-flex
+    - cpu: 32
+      memory: 1.8e+08
+      name: i1-180
+    - cpu: 8
+      memory: 3e+07
+      name: win-b2-30-flex
+    - cpu: 15
+      memory: 4.5e+07
+      name: t2-45
+    - cpu: 32
+      memory: 1.2e+08
+      name: win-b2-120-flex
+    - cpu: 2
+      memory: 7e+06
+      name: win-b2-7-flex
+    - cpu: 2
+      memory: 1.5e+07
+      name: r2-15
+    - cpu: 16
+      memory: 2.4e+08
+      name: win-r2-240
+    - cpu: 8
+      memory: 4.5e+07
+      name: win-i1-45
+    - cpu: 16
+      memory: 9e+07
+      name: win-i1-90
+    - cpu: 8
+      memory: 3e+07
+      name: b2-30-flex
+    - cpu: 2
+      memory: 3e+07
+      name: r2-30
+    - cpu: 2
+      memory: 7e+06
+      name: c2-7-flex
+    - cpu: 8
+      memory: 1.2e+08
+      name: win-r2-120-flex
+    - cpu: 32
+      memory: 1.8e+08
+      name: win-i1-180
+    - cpu: 16
+      memory: 6e+07
+      name: win-c2-60
+    - cpu: 32
+      memory: 1.2e+08
+      name: win-c2-120
+    - cpu: 1
+      memory: 2e+06
+      name: d2-2
+    - cpu: 4
+      memory: 6e+07
+      name: win-r2-60-flex
+    - cpu: 2
+      memory: 1.5e+07
+      name: r2-15-flex
+    - cpu: 16
+      memory: 6.4e+07
+      name: bm-m1
+    - cpu: 2
+      memory: 8e+06
+      name: s1-8
+    - cpu: 32
+      memory: 1.2e+08
+      name: win-c2-120-flex
+    - cpu: 2
+      memory: 3e+07
+      name: win-r2-30
+    - cpu: 8
+      memory: 3e+07
+      name: c2-30
+    - cpu: 2
+      memory: 1.5e+07
+      name: win-r2-15
+    - cpu: 1
+      memory: 2e+06
+      name: s1-2
+    - cpu: 30
+      memory: 9e+07
+      name: t2-90
+    - cpu: 8
+      memory: 3e+07
+      name: c2-30-flex
+    - cpu: 8
+      memory: 4.5e+07
+      name: i1-45
+    - cpu: 32
+      memory: 1.28e+08
+      name: bm-l1
+    - cpu: 2
+      memory: 1.5e+07
+      name: win-r2-15-flex
+    - cpu: 16
+      memory: 9e+07
+      name: i1-90
+name: ovh
+providerConfig:
+    apiVersion: openstack.provider.extensions.gardener.cloud/v1alpha1
+    constraints:
+        floatingPools:
+            - name: Ext-Net
+        loadBalancerProviders:
+            - name: amphora
+    dnsServers:
+        - 213.186.33.99
+    keystoneURL: https://auth.cloud.ovh.net/v3
+    kind: CloudProfileConfig
+    machineImages:
+        - name: ubuntu
+          versions:
+            - image: Ubuntu 22.04
+              version: 22.4.20230418
+    useOctavia: true
+regions:
+    - name: BHS5
+      zones:
+        - name: nova
+    - name: DE1
+      zones:
+        - name: nova
+    - name: GRA11
+      zones:
+        - name: nova
+    - name: SBG5
+      zones:
+        - name: nova
+    - name: UK1
+      zones:
+        - name: nova
+    - name: WAW1
+      zones:
+        - name: nova
+type: openstack
