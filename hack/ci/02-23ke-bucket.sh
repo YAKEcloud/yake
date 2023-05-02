@@ -22,7 +22,7 @@ fi
 
 mc ls "$MC_ALIAS/$BUCKET_23KE" &> /dev/null || mc mb "$MC_ALIAS/$BUCKET_23KE"
 MC_LOGFILE=$(mktemp)
-mc mirror -q --overwrite "$tmpDir" "$MC_ALIAS/$BUCKET_23KE" > $MC_LOGFILE || cat $MC_LOGFILE
+mc mirror --remove -q --overwrite "$tmpDir" "$MC_ALIAS/$BUCKET_23KE" > $MC_LOGFILE || cat $MC_LOGFILE
 rm $MC_LOGFILE
 
 echo "23KE Bucket ready ✅"
