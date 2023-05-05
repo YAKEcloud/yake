@@ -2127,22 +2127,7 @@ networking-calico:
         name: calico-node
         repository: eu.gcr.io/gardener-project/3rd/calico/node
         sourceRepository: github.com/projectcalico/calico
-        tag: v3.25.0
-        targetVersion: '>= 1.21'
-      - labels:
-          - name: gardener.cloud/cve-categorisation
-            value:
-              authentication_enforced: false
-              availability_requirement: high
-              confidentiality_requirement: low
-              integrity_requirement: high
-              network_exposure: protected
-              user_interaction: end-user
-        name: calico-node
-        repository: eu.gcr.io/gardener-project/3rd/calico/node
-        sourceRepository: github.com/projectcalico/calico
-        tag: v3.22.2
-        targetVersion: < 1.21
+        tag: v3.25.1
       - labels:
           - name: gardener.cloud/cve-categorisation
             value:
@@ -2155,22 +2140,7 @@ networking-calico:
         name: calico-cni
         repository: eu.gcr.io/gardener-project/3rd/calico/cni
         sourceRepository: github.com/projectcalico/cni-plugin
-        tag: v3.25.0
-        targetVersion: '>= 1.21'
-      - labels:
-          - name: gardener.cloud/cve-categorisation
-            value:
-              authentication_enforced: false
-              availability_requirement: high
-              confidentiality_requirement: low
-              integrity_requirement: high
-              network_exposure: private
-              user_interaction: end-user
-        name: calico-cni
-        repository: eu.gcr.io/gardener-project/3rd/calico/cni
-        sourceRepository: github.com/projectcalico/cni-plugin
-        tag: v3.22.2
-        targetVersion: < 1.21
+        tag: v3.25.1
       - labels:
           - name: cloud.gardener.cnudie/dso/scanning-hints/binary_id/v1
             value:
@@ -2187,26 +2157,7 @@ networking-calico:
         name: calico-typha
         repository: eu.gcr.io/gardener-project/3rd/calico/typha
         sourceRepository: github.com/projectcalico/typha
-        tag: v3.25.0
-        targetVersion: '>= 1.21'
-      - labels:
-          - name: cloud.gardener.cnudie/dso/scanning-hints/binary_id/v1
-            value:
-              comment: payload are two statically linked ELF-binaries and some configuration/license files - not suitable for binary-id-scanning
-              policy: skip
-          - name: gardener.cloud/cve-categorisation
-            value:
-              authentication_enforced: false
-              availability_requirement: high
-              confidentiality_requirement: low
-              integrity_requirement: high
-              network_exposure: protected
-              user_interaction: end-user
-        name: calico-typha
-        repository: eu.gcr.io/gardener-project/3rd/calico/typha
-        sourceRepository: github.com/projectcalico/typha
-        tag: v3.22.2
-        targetVersion: < 1.21
+        tag: v3.25.1
       - labels:
           - name: gardener.cloud/cve-categorisation
             value:
@@ -2219,35 +2170,7 @@ networking-calico:
         name: calico-kube-controllers
         repository: eu.gcr.io/gardener-project/3rd/calico/kube-controllers
         sourceRepository: github.com/projectcalico/kube-controllers
-        tag: v3.25.0
-        targetVersion: '>= 1.21'
-      - labels:
-          - name: gardener.cloud/cve-categorisation
-            value:
-              authentication_enforced: false
-              availability_requirement: low
-              confidentiality_requirement: low
-              integrity_requirement: high
-              network_exposure: protected
-              user_interaction: end-user
-        name: calico-kube-controllers
-        repository: eu.gcr.io/gardener-project/3rd/calico/kube-controllers
-        sourceRepository: github.com/projectcalico/kube-controllers
-        tag: v3.22.2
-        targetVersion: < 1.21
-      - labels:
-          - name: gardener.cloud/cve-categorisation
-            value:
-              authentication_enforced: false
-              availability_requirement: low
-              confidentiality_requirement: high
-              integrity_requirement: high
-              network_exposure: private
-              user_interaction: end-user
-        name: calico-podtodaemon-flex
-        repository: eu.gcr.io/gardener-project/3rd/calico/pod2daemon-flexvol
-        sourceRepository: github.com/projectcalico/pod2daemon
-        tag: v3.22.2
+        tag: v3.25.1
       - labels:
           - name: gardener.cloud/cve-categorisation
             value:
