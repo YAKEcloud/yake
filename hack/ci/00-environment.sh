@@ -22,11 +22,11 @@ USERNAME=$(kubectl config view --minify -o jsonpath='{..context.user}')
 
 
 export SHOOTHASH=$(git log -n 1 --pretty=format:%H -- hack/ci/misc/shoot-template-$PROVIDER-$ZONE.yaml.tmpl)
+
 DESIRED_PRESPAWNED_SHOOTS=2
-set +e
 ACTUAL_PRESPAWNED_SHOOTS=$(kubectl get shoots --selector=23technologies.cloud/free-to-use='true',23technologies.cloud/region=$ZONE,23technologies.cloud/shoot.yaml=$SHOOTHASH --no-headers=true | cut -d ' ' -f4 | grep -c $PROVIDER)
-set -e
 NEEDED_PRESPAWNED_SHOOTS=$(( DESIRED_PRESPAWNED_SHOOTS - ACTUAL_PRESPAWNED_SHOOTS ))
+
 while [ $NEEDED_PRESPAWNED_SHOOTS -gt 0 ]
 do
     RANDNAME="23ke-run-$(openssl rand -hex 2)"
