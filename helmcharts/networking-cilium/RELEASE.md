@@ -1,1 +1,7 @@
-no release notes available
+# [gardener-extension-networking-cilium]
+## 🏃 Others
+* *[OPERATOR]* The `gardener-extension-admission-cilium` Service in the `gardener-extension-admission-cilium` chart can now be configured to be topology-aware. ([gardener/gardener-extension-networking-cilium#176](https://github.com/gardener/gardener-extension-networking-cilium/pull/176), [@ialidzhikov](https://github.com/ialidzhikov))
+* *[OPERATOR]* A e2e test is added which tests all combinations of node to node and pod to pod communication. ([gardener/gardener-extension-networking-cilium#179](https://github.com/gardener/gardener-extension-networking-cilium/pull/179), [@DockToFuture](https://github.com/DockToFuture))
+* *[OPERATOR]* Portmap copier is removed. ([gardener/gardener-extension-networking-cilium#180](https://github.com/gardener/gardener-extension-networking-cilium/pull/180), [@DockToFuture](https://github.com/DockToFuture))
+* *[OPERATOR]* Memory limits for cilium agent are increased to 10 Gi. ([gardener/gardener-extension-networking-cilium#183](https://github.com/gardener/gardener-extension-networking-cilium/pull/183), [@DockToFuture](https://github.com/DockToFuture))
+* *[OPERATOR]* Cilium is update to `v1.13.2`. ([gardener/gardener-extension-networking-cilium#184](https://github.com/gardener/gardener-extension-networking-cilium/pull/184), [@DockToFuture](https://github.com/DockToFuture))

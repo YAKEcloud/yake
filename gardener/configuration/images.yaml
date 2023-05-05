@@ -2212,7 +2212,7 @@ networking-cilium:
         name: cilium-agent
         repository: quay.io/cilium/cilium
         sourceRepository: github.com/cilium/cilium
-        tag: v1.13.1
+        tag: v1.13.2
       - labels:
           - name: gardener.cloud/cve-categorisation
             value:
@@ -2225,7 +2225,7 @@ networking-cilium:
         name: cilium-operator
         repository: quay.io/cilium/operator
         sourceRepository: github.com/cilium/cilium
-        tag: v1.13.1
+        tag: v1.13.2
       - labels:
           - name: gardener.cloud/cve-categorisation
             value:
@@ -2238,7 +2238,7 @@ networking-cilium:
         name: hubble-ui
         repository: quay.io/cilium/hubble-ui
         sourceRepository: github.com/cilium/hubble-ui
-        tag: v0.10.0
+        tag: v0.11.0
       - labels:
           - name: gardener.cloud/cve-categorisation
             value:
@@ -2251,7 +2251,7 @@ networking-cilium:
         name: hubble-ui-backend
         repository: quay.io/cilium/hubble-ui-backend
         sourceRepository: github.com/cilium/hubble-ui-backend
-        tag: v0.10.0
+        tag: v0.11.0
       - labels:
           - name: gardener.cloud/cve-categorisation
             value:
@@ -2264,7 +2264,7 @@ networking-cilium:
         name: hubble-relay
         repository: quay.io/cilium/hubble-relay
         sourceRepository: github.com/cilium/hubble-ui
-        tag: v1.13.1
+        tag: v1.13.2
       - labels:
           - name: gardener.cloud/cve-categorisation
             value:
@@ -2281,19 +2281,6 @@ networking-cilium:
       - name: kube-proxy
         repository: registry.k8s.io/kube-proxy
         sourceRepository: github.com/kubernetes/kubernetes
-      - labels:
-          - name: gardener.cloud/cve-categorisation
-            value:
-              authentication_enforced: false
-              availability_requirement: low
-              confidentiality_requirement: low
-              integrity_requirement: high
-              network_exposure: private
-              user_interaction: end-user
-        name: portmap-copier
-        repository: eu.gcr.io/gardener-project/gardener/portmap-copier
-        sourceRepository: github.com/gardener/portmap-copier
-        tag: v0.2.0
 shoot-cert-service:
   imageVectorOriginal:
     images:
