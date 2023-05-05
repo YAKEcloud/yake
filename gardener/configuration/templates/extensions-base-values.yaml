@@ -113,7 +113,7 @@ stringData:
 {{- end }}
 
     networking-cilium:
-      version: 1.23.1
+      version: 1.24.0
 {{- if .Values.registryOverwrite }}
       values:
         imageVectorOverwrite: |
