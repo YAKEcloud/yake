@@ -16,6 +16,8 @@ rules:
     - issuers
   verbs:
     - get
+    - list
+    - watch
 ---
 apiVersion: rbac.authorization.k8s.io/v1
 # This cluster role binding allows anyone in the "manager" group to read secrets in any namespace.
@@ -49,8 +51,8 @@ spec:
       command: ['bash', '-c']
       args:
         - |
-          kubectl wait issuers.cert.gardener.cloud -n garden default-issuer --for=jsonpath='{.status.state}'=Ready --timeout=5m --request-timeout=1m
-          if [[ ! $? ]]; then
+          kubectl wait issuers.cert.gardener.cloud -n garden default-issuer --for=jsonpath='{.status.state}'=Ready --timeout=30s
+          if [ $? -ne 0 ]; then
             echo "Your certificat issuer is not ready. Please check the email address and or server provided in the 23ke-config secret."
             exit 1
           fi
