@@ -1,11 +1,6 @@
 # [gardener-extension-networking-calico]
-## 🐛 Bug Fixes
-* *[OPERATOR]* The stale healthcheck conditions from the network extension is now properly cleaned up. ([gardener/gardener-extension-networking-calico#252](https://github.com/gardener/gardener-extension-networking-calico/pull/252), [@shafeeqes](https://github.com/shafeeqes))
 ## 🏃 Others
-* *[OPERATOR]* E2E tests are added which create a new calico shoot cluster, verify that it is running and clean it afterwards up. ([gardener/gardener-extension-networking-calico#257](https://github.com/gardener/gardener-extension-networking-calico/pull/257), [@DockToFuture](https://github.com/DockToFuture))
-* *[OPERATOR]* Calico extension does not crash anymore when node cidr is not specified. ([gardener/gardener-extension-networking-calico#249](https://github.com/gardener/gardener-extension-networking-calico/pull/249), [@ScheererJ](https://github.com/ScheererJ))
-* *[OPERATOR]* Fixed bug disallowing shoot clusters without network provider configuration from reconciling successfully. ([gardener/gardener-extension-networking-calico#250](https://github.com/gardener/gardener-extension-networking-calico/pull/250), [@ScheererJ](https://github.com/ScheererJ))
-* *[OPERATOR]* Bump builder image from `golang:1.19.4` to `golang:1.20.2` ([gardener/gardener-extension-networking-calico#251](https://github.com/gardener/gardener-extension-networking-calico/pull/251), [@DockToFuture](https://github.com/DockToFuture))
-* *[OPERATOR]* Switched calico images from DockerHub to Gardener GCR ([gardener/gardener-extension-networking-calico#254](https://github.com/gardener/gardener-extension-networking-calico/pull/254), [@robinschneider](https://github.com/robinschneider))
-* *[DEPENDENCY]* The following dependency is updated: ([gardener/gardener-extension-networking-calico#252](https://github.com/gardener/gardener-extension-networking-calico/pull/252), [@shafeeqes](https://github.com/shafeeqes))
-  * github.com/gardener/gardener: v1.66.0 -> v1.66.1
+* *[OPERATOR]* The `gardener-extension-admission-calico` Service in the `gardener-extension-admission-calico` chart can now be configured to be topology-aware. ([gardener/gardener-extension-networking-calico#258](https://github.com/gardener/gardener-extension-networking-calico/pull/258), [@ialidzhikov](https://github.com/ialidzhikov))
+* *[OPERATOR]* A e2e test is added which tests all combinations of node to node and pod to pod communication. ([gardener/gardener-extension-networking-calico#261](https://github.com/gardener/gardener-extension-networking-calico/pull/261), [@DockToFuture](https://github.com/DockToFuture))
+* *[OPERATOR]* Update calico to `v3.25.1`. ([gardener/gardener-extension-networking-calico#262](https://github.com/gardener/gardener-extension-networking-calico/pull/262), [@DockToFuture](https://github.com/DockToFuture))
+* *[OPERATOR]* The Gardener networking calico extension only supports kubernetes v1.21 going forward. ([gardener/gardener-extension-networking-calico#263](https://github.com/gardener/gardener-extension-networking-calico/pull/263), [@ScheererJ](https://github.com/ScheererJ))
