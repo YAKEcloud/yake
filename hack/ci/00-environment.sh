@@ -8,6 +8,10 @@ checkDependencies
 PROVIDER=${PROVIDER:=hcloud}
 ZONE=${ZONE:=hel1}
 
+# defines the k8s minor version for the shoot, it will look up the latest patch version from the cloudprofile
+K8SMINOR=${K8SMINOR:="1.24"}
+export K8SMINOR
+
 # Kubeconfig file is required to define the correct current namespace
 export KUBECONFIG=hack/ci/secrets/gardener-kubeconfig.yaml
 
@@ -17,21 +21,22 @@ USERNAME=$(kubectl config view --minify -o jsonpath='{..context.user}')
 #PROJECT=$(kubectl get ns $NAMESPACE -o jsonpath="{.metadata.labels['project\.gardener\.cloud/name']}")
 
 
-export SHOOTHASH=$(git log -n 1 --pretty=format:%H -- hack/ci/misc/shoot-template-hcloud-fsn1.yaml.tmpl)
+export SHOOTHASH=$(git log -n 1 --pretty=format:%H -- hack/ci/misc/shoot-template-$PROVIDER-$ZONE.yaml.tmpl)
+
 DESIRED_PRESPAWNED_SHOOTS=2
-set +e
-ACTUAL_PRESPAWNED_SHOOTS=$(kubectl get shoots --selector=23technologies.cloud/free-to-use='true',23technologies.cloud/region=$ZONE,23technologies.cloud/shoot.yaml=$SHOOTHASH --no-headers=true | cut -d ' ' -f4 | grep -c $PROVIDER)
-set -e
+ACTUAL_PRESPAWNED_SHOOTS=$(kubectl get shoots --selector=23technologies.cloud/free-to-use='true',23technologies.cloud/region=$ZONE,23technologies.cloud/shoot.yaml=$SHOOTHASH --no-headers=true | cut -d ' ' -f4 | grep -c $PROVIDER || true ) # || true avoids both set -e and the ERR trap triggering when grep -c finds zero lines and exits with 1
 NEEDED_PRESPAWNED_SHOOTS=$(( DESIRED_PRESPAWNED_SHOOTS - ACTUAL_PRESPAWNED_SHOOTS ))
+
 while [ $NEEDED_PRESPAWNED_SHOOTS -gt 0 ]
 do
     RANDNAME="23ke-run-$(openssl rand -hex 2)"
     export RANDNAME
+    # Lookup latest k8s patch version for a given minor in cloudprofile
+    K8SVERSION="$(kubectl get cloudprofile $PROVIDER -o yaml | yq eval '.spec.kubernetes.versions[] | select(.version==strenv(K8SMINOR)+".*") | select(.classification=="supported") .version' -)"
+    export K8SVERSION
     # Alter shoot template
-    yq eval '.metadata.name = env(RANDNAME)' hack/ci/misc/shoot-template-$PROVIDER-$ZONE.yaml.tmpl |yq eval '.metadata.labels["23technologies.cloud/shoot.yaml"]=env(SHOOTHASH)' - | kubectl apply -f -
-    set +e
-    ACTUAL_PRESPAWNED_SHOOTS=$(kubectl get shoots --selector=23technologies.cloud/free-to-use='true',23technologies.cloud/region=$ZONE --no-headers=true | cut -d ' ' -f4 | grep -c $PROVIDER)
-    set -e
+    yq eval '.metadata.name = env(RANDNAME)' hack/ci/misc/shoot-template-$PROVIDER-$ZONE.yaml.tmpl | yq eval '.metadata.labels["23technologies.cloud/shoot.yaml"]=env(SHOOTHASH)' - | yq eval '.spec.kubernetes.version=env(K8SVERSION)' - | kubectl apply -f -
+    ACTUAL_PRESPAWNED_SHOOTS=$(kubectl get shoots --selector=23technologies.cloud/free-to-use='true',23technologies.cloud/region=$ZONE,23technologies.cloud/shoot.yaml=$SHOOTHASH --no-headers=true | cut -d ' ' -f4 | grep -c $PROVIDER || true )
     NEEDED_PRESPAWNED_SHOOTS=$(( DESIRED_PRESPAWNED_SHOOTS - ACTUAL_PRESPAWNED_SHOOTS ))
 done
 
