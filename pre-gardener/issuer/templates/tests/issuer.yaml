@@ -8,7 +8,7 @@ apiVersion: rbac.authorization.k8s.io/v1
 kind: Role
 metadata:
   namespace: {{ .Release.Namespace }}
-  name: {{ .Release.Name }}-test-provider-role
+  name: {{ .Release.Name }}-test-issuer-role
 rules:
 - apiGroups:
     - cert.gardener.cloud
