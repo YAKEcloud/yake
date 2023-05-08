@@ -46,8 +46,6 @@ stringData:
         kubeconfigSecret:
           name: gardenlet-kubeconfig
           namespace: garden
-      featureGates:
-        ManagedIstio: true
 {{- if .Values.registryOverwrite }}
     image:
       repository: {{ include "replaceRegistry" (dict "eu.gcr.io/gardener-project/gardener/gardenlet" .Values.registryOverwrite) }}
