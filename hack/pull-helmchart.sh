@@ -35,8 +35,19 @@ if [ $? -eq 1 ]; then
 	 exit
 fi
 
-rm -rf helmcharts/$depName
-helm pull $curHelmRepo/$depName --untar --untardir helmcharts --version $newVersion
+# keep the templates/tests folder as it's not from upstream but part of 23ke.
+mkdir -p "helmcharts/$depName"
+find "helmcharts/$depName" \
+  -not \( -path "helmcharts/$depName/templates/tests" -prune \) \
+  -type f \
+  -exec rm -f {} \;
+
+# helm won't untar into a non-empty folder, so untar to /tmp and rsync to existing chart-folder
+tmpDir=$(mktemp -d)
+helm pull "gardener-charts/$depName" --untar --untardir "$tmpDir" --version "$newVersion"
+rsync -r "$tmpDir/$depName/" "helmcharts/$depName/"
+rm -rf "$tmpDir"
+
 
 if [[ $curHelmRepo == gardener-charts ]]; then
 	 echo ""  >> docs/release-notes/next.md
