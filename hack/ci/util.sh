@@ -17,34 +17,6 @@ checkDependencies() {
   return 0
 }
 
-waitForDNS() {
-  local DOMAIN=$1
-  local TIMEOUT=${2:-120}
-
-  local BEGIN=$(date +%s)
-
-  echo "waiting for $DOMAIN to resolve"
-
-  if which dig
-  then
-    local CMD="dig +short $DOMAIN"
-  elif which drill
-  then
-    local CMD="drill -Q $DOMAIN"
-  else
-    echo "I need dig or drill to wait for a dns record to be present"
-  fi
-
-  while [[ $($CMD) == "" ]]; do
-    if [[ $((BEGIN + TIMEOUT)) < $(date +%s) ]]; then
-      return 1
-    fi
-    sleep 1
-  done
-
-  return 0
-}
-
 printErr() {
   local msg=$1
 
