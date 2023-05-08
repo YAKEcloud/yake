@@ -73,6 +73,7 @@ config:
     seedConfig: {}
     server:
         healthProbes:
+            enable: true
             port: 2728
         metrics:
             port: 2729
@@ -83,7 +84,7 @@ env: []
 image:
     pullPolicy: IfNotPresent
     repository: eu.gcr.io/gardener-project/gardener/gardenlet
-    tag: v1.69.1
+    tag: v1.70.0
 invalidateServiceAccountToken: true
 replicaCount: 2
 resources:
