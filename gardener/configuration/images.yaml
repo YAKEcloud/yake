@@ -6,6 +6,8 @@ gardenlet:
         sourceRepository: github.com/gardener/gardener
       - name: gardener-resource-manager
         repository: eu.gcr.io/gardener-project/gardener/resource-manager
+        resourceId:
+          name: resource-manager
         sourceRepository: github.com/gardener/gardener
       - labels:
           - name: cloud.gardener.cnudie/dso/scanning-hints/binary_id/v1
@@ -371,6 +373,8 @@ gardenlet:
               user_interaction: gardener-operator
         name: fluent-bit-plugin-installer
         repository: eu.gcr.io/gardener-project/gardener/fluent-bit-to-loki
+        resourceId:
+          name: fluent-bit-to-loki
         sourceRepository: github.com/gardener/logging
         tag: v0.52.0
       - labels:
@@ -440,6 +444,8 @@ gardenlet:
               user_interaction: gardener-operator
         name: telegraf
         repository: eu.gcr.io/gardener-project/gardener/telegraf-iptables
+        resourceId:
+          name: telegraf-iptables
         sourceRepository: github.com/gardener/logging
         tag: v0.52.0
       - labels:
@@ -626,6 +632,8 @@ gardenlet:
         tag: v1.24.1
       - name: apiserver-proxy-sidecar
         repository: eu.gcr.io/gardener-project/gardener/apiserver-proxy
+        resourceId:
+          name: apiserver-proxy
         sourceRepository: github.com/gardener/apiserver-proxy
         tag: v0.11.0
       - name: apiserver-proxy-pod-webhook
