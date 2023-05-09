@@ -589,7 +589,7 @@ gardenlet:
         name: hvpa-controller
         repository: eu.gcr.io/gardener-project/gardener/hvpa-controller
         sourceRepository: github.com/gardener/hvpa-controller
-        tag: v0.11.0
+        tag: v0.13.0
       - name: cluster-proportional-autoscaler
         repository: registry.k8s.io/cpa/cluster-proportional-autoscaler
         sourceRepository: https://github.com/kubernetes-sigs/cluster-proportional-autoscaler
@@ -2294,7 +2294,7 @@ shoot-dns-service:
       - name: dns-controller-manager
         repository: eu.gcr.io/gardener-project/dns-controller-manager
         sourceRepository: github.com/gardener/external-dns-management
-        tag: v0.15.2
+        tag: v0.15.3
 runtime-gvisor:
   imageVectorOriginal:
     images:

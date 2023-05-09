@@ -14,6 +14,7 @@ global:
             server:
                 enableDebugHandlers: false
                 healthProbes:
+                    enable: true
                     port: 2722
                 metrics:
                     port: 2723
@@ -37,7 +38,7 @@ global:
         image:
             pullPolicy: IfNotPresent
             repository: eu.gcr.io/gardener-project/gardener/admission-controller
-            tag: v1.69.1
+            tag: v1.70.0
         replicaCount: 3
         resources:
             requests:
@@ -171,9 +172,10 @@ global:
         image:
             pullPolicy: IfNotPresent
             repository: eu.gcr.io/gardener-project/gardener/apiserver
-            tag: v1.69.1
+            tag: v1.70.0
         insecureSkipTLSVerify: false
         livenessProbe:
+            enable: true
             failureThreshold: 3
             initialDelaySeconds: 15
             periodSeconds: 10
@@ -184,6 +186,7 @@ global:
         logVerbosity: "2"
         minReadySeconds: 30
         readinessProbe:
+            enable: true
             failureThreshold: 3
             initialDelaySeconds: 15
             periodSeconds: 10
@@ -280,6 +283,7 @@ global:
             logLevel: info
             server:
                 healthProbes:
+                    enable: true
                     port: 2718
                 metrics:
                     port: 2719
@@ -288,7 +292,7 @@ global:
         image:
             pullPolicy: IfNotPresent
             repository: eu.gcr.io/gardener-project/gardener/controller-manager
-            tag: v1.69.1
+            tag: v1.70.0
         replicaCount: 1
         resources:
             requests:
@@ -343,6 +347,7 @@ global:
             logLevel: info
             server:
                 healthProbes:
+                    enable: true
                     port: 10251
                 metrics:
                     port: 19251
@@ -350,7 +355,7 @@ global:
         image:
             pullPolicy: IfNotPresent
             repository: eu.gcr.io/gardener-project/gardener/scheduler
-            tag: v1.69.1
+            tag: v1.70.0
         replicaCount: 1
         resources:
             requests:
