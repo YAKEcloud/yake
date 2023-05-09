@@ -66,6 +66,7 @@ if [[ -e ".git/refs/remotes/origin/$branch" ]]; then
 else
   touch docs/release-notes/next.md
   mv docs/release-notes/next.md docs/release-notes/v$minor.md
+  sed -i "s;# Release Notes next;# Release Notes v$minor;" "docs/release-notes/v$minor.md"
 	echo "---" > docs/release-notes/next.md
   echo "hide_table_of_contents: true" >> docs/release-notes/next.md
   echo "---" >> docs/release-notes/next.md
