@@ -1,11 +1,12 @@
 # [gardener]
 ## 🐛 Bug Fixes
-* *[OPERATOR]* Prevent nil pointer exceptions on shoot deletion in `gardenlet` when seed namespace is gone. ([gardener/gardener#7833](https://github.com/gardener/gardener/pull/7833), [@gardener-ci-robot](https://github.com/gardener-ci-robot))
-## Docker Images
-admission-controller: `eu.gcr.io/gardener-project/gardener/admission-controller:v1.69.1`
-apiserver: `eu.gcr.io/gardener-project/gardener/apiserver:v1.69.1`
-controller-manager: `eu.gcr.io/gardener-project/gardener/controller-manager:v1.69.1`
-scheduler: `eu.gcr.io/gardener-project/gardener/scheduler:v1.69.1`
-operator: `eu.gcr.io/gardener-project/gardener/operator:v1.69.1`
-gardenlet: `eu.gcr.io/gardener-project/gardener/gardenlet:v1.69.1`
-resource-manager: `eu.gcr.io/gardener-project/gardener/resource-manager:v1.69.1`
+* *[OPERATOR]* A bug has been fixed which prevented components using the `networking.resources.gardener.cloud/from-world-to-ports` annotation from being reached from internal IP addresses when the cluster was using Cilium as CNI. ([gardener/gardener#7890](https://github.com/gardener/gardener/pull/7890), [@gardener-ci-robot](https://github.com/gardener-ci-robot))
+## 🏃 Others
+* *[USER]* The following images are updated: ([gardener/gardener#7900](https://github.com/gardener/gardener/pull/7900), [@gardener-ci-robot](https://github.com/gardener-ci-robot))
+  * `eu.gcr.io/gardener-project/gardener/autoscaler/cluster-autoscaler`: `v1.21.5` -> `v1.21.6` (for Kubernetes `1.21`)
+  * `eu.gcr.io/gardener-project/gardener/autoscaler/cluster-autoscaler`: `v1.22.5` -> `v1.22.6` (for Kubernetes `1.22`)
+  * `eu.gcr.io/gardener-project/gardener/autoscaler/cluster-autoscaler`: `v1.23.3` -> `v1.23.4` (for Kubernetes `1.23`)
+  * `eu.gcr.io/gardener-project/gardener/autoscaler/cluster-autoscaler`: `v1.24.2` -> `v1.24.3` (for Kubernetes `1.24`)
+  * `eu.gcr.io/gardener-project/gardener/autoscaler/cluster-autoscaler`: `v1.25.2` -> `v1.25.3` (for Kubernetes `1.24`)
+  * `eu.gcr.io/gardener-project/gardener/autoscaler/cluster-autoscaler`: `v1.26.1` -> `v1.26.2` (for Kubernetes `1.26`)
+* *[OPERATOR]* Fixed an issue that would cause the `gardenlet` to run into `CrashLoopBackoff` when following the docs/development/getting_started_locally.md#remote-local-setup guide. ([gardener/gardener#7843](https://github.com/gardener/gardener/pull/7843), [@gardener-ci-robot](https://github.com/gardener-ci-robot))

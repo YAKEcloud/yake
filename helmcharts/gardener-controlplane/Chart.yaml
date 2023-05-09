@@ -1,8 +1,5 @@
 apiVersion: v2
 dependencies:
-- condition: application.enabled
-  name: application
-  repository: ""
 - condition: runtime.enabled
   name: runtime
   repository: ""
@@ -12,7 +9,10 @@ dependencies:
 - condition: utils-templates.enabled
   name: utils-templates
   repository: ""
+- condition: application.enabled
+  name: application
+  repository: ""
 description: A Helm chart to deploy the Gardener controlplane (API server, controller-manager,
   scheduler, admission-controller)
 name: gardener-controlplane
-version: 1.69.1
+version: 1.69.2
