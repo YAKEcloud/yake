@@ -39,6 +39,7 @@ fi
 mkdir -p "helmcharts/$depName"
 find "helmcharts/$depName" \
   -not \( -path "helmcharts/$depName/templates/tests" -prune \) \
+  -not \( -path "helmcharts/$depName/*/templates/tests" -prune \) \
   -type f \
   -exec rm -f {} \;
 
