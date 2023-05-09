@@ -268,3 +268,10 @@ resource-manager: `eu.gcr.io/gardener-project/gardener/resource-manager:v1.70.0`
 * *[OPERATOR]* Updated builder image from `golang:1.20.2` to `golang:1.20.4` ([gardener/external-dns-management#305](https://github.com/gardener/external-dns-management/pull/305), [@MartinWeindel](https://github.com/MartinWeindel))
 
 </details>
+
+<details>
+<summary><b>Update provider-aws to <code>1.43.1</code></b></summary>
+
+
+
+</details>
