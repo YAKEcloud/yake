@@ -1,4 +1,0 @@
-controller:
-    enabled: false
-gardener-extension-admission-aws:
-    enabled: false
