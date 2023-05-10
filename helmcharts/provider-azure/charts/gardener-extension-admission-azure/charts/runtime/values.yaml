@@ -3,7 +3,7 @@ global:
     image:
         pullPolicy: IfNotPresent
         repository: eu.gcr.io/gardener-project/gardener/extensions/admission-azure
-        tag: latest
+        tag: v1.35.3
     kubeconfig: null
     metricsPort: 8080
     replicaCount: 1
