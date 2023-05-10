@@ -1,4 +1,6 @@
 #!/usr/bin/env bash
+set -eu
+
 depName=$1
 newVersion=$2
 if [[ -z "$depName" ]]; then
@@ -46,7 +48,7 @@ find "helmcharts/$depName" \
 # helm won't untar into a non-empty folder, so untar to /tmp and rsync to existing chart-folder
 tmpDir=$(mktemp -d)
 helm pull "gardener-charts/$depName" --untar --untardir "$tmpDir" --version "$newVersion"
-rsync -r "$tmpDir/$depName/" "helmcharts/$depName/"
+cp -rn "$tmpDir/$depName" "helmcharts/"
 rm -rf "$tmpDir"
 
 
