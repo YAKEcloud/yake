@@ -1,3 +1,3 @@
 # [gardener-extension-provider-openstack]
-## 🐛 Bug Fixes
-* *[OPERATOR]* Add missing network policy labels to extension controller pod template ([gardener/gardener-extension-provider-openstack#611](https://github.com/gardener/gardener-extension-provider-openstack/pull/611), [@kon-angelo](https://github.com/kon-angelo))
+## 🏃 Others
+* *[OPERATOR]* Remove the error code check from `NodesChecker` to prevent nil pointer panic. ([gardener/gardener-extension-provider-openstack#622](https://github.com/gardener/gardener-extension-provider-openstack/pull/622), [@acumino](https://github.com/acumino))
