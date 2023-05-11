@@ -146,7 +146,7 @@ stringData:
 {{- end }}
 
     provider-gcp:
-      version: 1.29.1
+      version: 1.29.3
       admission:
         enabled: true
 {{- if .Values.registryOverwrite }}

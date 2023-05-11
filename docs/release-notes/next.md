@@ -26,3 +26,12 @@ hide_table_of_contents: true
 * *[OPERATOR]* Remove the error code check from `NodesChecker` to prevent nil pointer panic. ([gardener/gardener-extension-provider-aws#748](https://github.com/gardener/gardener-extension-provider-aws/pull/748), [@acumino](https://github.com/acumino))
 
 </details>
+
+<details>
+<summary><b>Update provider-gcp to <code>1.29.3</code></b></summary>
+
+# [gardener-extension-provider-gcp]
+## 🏃 Others
+* *[OPERATOR]* Remove the error code check from `NodesChecker` to prevent nil pointer panic. ([gardener/gardener-extension-provider-gcp#595](https://github.com/gardener/gardener-extension-provider-gcp/pull/595), [@acumino](https://github.com/acumino))
+
+</details>

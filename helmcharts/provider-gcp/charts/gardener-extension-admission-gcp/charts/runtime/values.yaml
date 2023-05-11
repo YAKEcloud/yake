@@ -3,7 +3,7 @@ global:
     image:
         pullPolicy: IfNotPresent
         repository: eu.gcr.io/gardener-project/gardener/extensions/admission-gcp
-        tag: v1.29.1
+        tag: v1.29.3
     kubeconfig: null
     metricsPort: 8080
     replicaCount: 1
