@@ -47,7 +47,7 @@ find "helmcharts/$depName" \
 
 # helm won't untar into a non-empty folder, so untar to /tmp and rsync to existing chart-folder
 tmpDir=$(mktemp -d)
-helm pull "gardener-charts/$depName" --untar --untardir "$tmpDir" --version "$newVersion"
+helm pull "$curHelmRepo/$depName" --untar --untardir "$tmpDir" --version "$newVersion"
 cp -rn "$tmpDir/$depName" "helmcharts/"
 rm -rf "$tmpDir"
 
