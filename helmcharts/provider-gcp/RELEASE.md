@@ -1,3 +1,3 @@
 # [gardener-extension-provider-gcp]
-## 🐛 Bug Fixes
-* *[DEPENDENCY]* gcp-compute-persistent-disk-csi-driver to v1.9.4 ([gardener/gardener-extension-provider-gcp#590](https://github.com/gardener/gardener-extension-provider-gcp/pull/590), [@kon-angelo](https://github.com/kon-angelo))
+## 🏃 Others
+* *[OPERATOR]* Remove the error code check from `NodesChecker` to prevent nil pointer panic. ([gardener/gardener-extension-provider-gcp#595](https://github.com/gardener/gardener-extension-provider-gcp/pull/595), [@acumino](https://github.com/acumino))
