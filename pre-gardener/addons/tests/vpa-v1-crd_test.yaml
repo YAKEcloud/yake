@@ -1,0 +1,13 @@
+templates:
+  - vpa-v1-crd-gen.yaml
+tests:
+  - it: should not create CRD with default values
+    asserts:
+      - hasDocuments:
+          count: 0
+  - it: should create CRD when vpa-crd is enabled
+    set:
+      vpa.enabled: true
+    asserts:
+      - isKind:
+          of: CustomResourceDefinition

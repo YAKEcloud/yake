@@ -1,0 +1,18 @@
+dashboard:
+  sessionSecret: sessionSecret
+  clientSecret: clientSecret
+kubeAPIServer:
+  staticTokens:
+    healthCheck: healthCheck
+gardenlet:
+  bootstrapTokenId: bootstrapTokenId
+  bootstrapTokenSecret: bootstrapTokenSecret
+domains:
+  global:
+    domain: mydomain.example.org
+    provider: example
+    credentials:
+      token: example
+issuer:
+  acme:
+    email: mail@example.org

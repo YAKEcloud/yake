@@ -1,0 +1,37 @@
+templates:
+  - cert-manager-base-values.yaml
+tests:
+  - it: should create secret with test values
+    values:
+      - ../values-test.yaml
+    asserts:
+      - isKind:
+          of: Secret
+      - equal:
+          path: stringData['values.yaml']
+          value: |-
+            installCRDs: true
+  - it: should create secret with test values and registryOverwrite
+    values:
+      - ../values-test.yaml
+    set:
+      registryOverwrite:
+        quay.io: myregistry.example.org
+    asserts:
+      - isKind:
+          of: Secret
+      - equal:
+          path: stringData['values.yaml']
+          value: |-
+            image:
+              repository: myregistry.example.org/jetstack/cert-manager-controller
+            cainjector:
+              image:
+                repository: myregistry.example.org/jetstack/cert-manager-cainjector
+            acmesolver:
+              image:
+                repository: myregistry.example.org/jetstack/cert-manager-acmesolver
+            startupapicheck:
+              image:
+                repository: myregistry.example.org/jetstack/cert-manager-ctl
+            installCRDs: true

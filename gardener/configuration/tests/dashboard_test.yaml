@@ -1,0 +1,71 @@
+templates:
+  - dashboard-base-values.yaml
+tests:
+  - it: should create secret with test values
+    values:
+      - ../values-test.yaml
+    asserts:
+      - isKind:
+          of: Secret
+      - equal:
+          path: stringData['values.yaml']
+          value: |-
+            global:
+              virtualGarden:
+                enabled: true
+              dashboard:
+                apiServerUrl: https://api.mydomain.example.org/
+                sessionSecret: sessionSecret
+                ingress:
+                  hosts:
+                  - dashboard.mydomain.example.org
+                  annotations:
+                    kubernetes.io/ingress.class: nginx
+                    cert.gardener.cloud/purpose: managed
+                    cert.gardener.cloud/class: base-cert-class
+                    dns.gardener.cloud/dnsnames: "*"
+                    dns.gardener.cloud/ttl: "600"
+                    dns.gardener.cloud/class: base-dns-class
+                oidc:
+                  issuerUrl: https://identity.mydomain.example.org/oidc
+                  clientId: dashboard
+                  clientSecret: clientSecret
+                  redirectUri: https://dashboard.mydomain.example.org/auth/callback
+                  public:
+                    clientId: kube-kubectl
+                    usePKCE: true
+  - it: should set repository with registryOverwrite
+    values:
+      - ../values-test.yaml
+      - ../images.yaml
+    set:
+      registryOverwrite:
+        eu.gcr.io: myregistry.example.org
+    asserts:
+      - matchRegex:
+          path: stringData['values.yaml']
+          pattern: "repository: myregistry.example.org/gardener-project/gardener/dashboard\n"
+  - it: should not set cert annotations if issuer is disabled
+    values:
+      - ../values-test.yaml
+    set:
+      issuer.enabled: false
+    asserts:
+      - notMatchRegex:
+          path: stringData['values.yaml']
+          pattern: "cert.gardener.cloud/purpose: managed"
+      - notMatchRegex:
+          path: stringData['values.yaml']
+          pattern: "cert.gardener.cloud/class: base-cert-class"
+  - it: should contain ca at right indentation if issuer.ca is provided
+    values:
+      - ../values-test.yaml
+    set:
+      issuer.ca: |
+        myca has
+        multiple
+        lines
+    asserts:
+      - matchRegex:
+          path: stringData['values.yaml']
+          pattern: "myca has\\s{9}multiple\\s{9}lines"

@@ -1,0 +1,25 @@
+templates:
+  - dnsprovider.yaml
+tests:
+  - it: should create DNSProvider with default values
+    asserts:
+      - containsDocument:
+          apiVersion: dns.gardener.cloud/v1alpha1
+          kind: DNSProvider
+          name: base-dns-provider
+          namespace: garden
+      - equal:
+          path: metadata.annotations
+          value:
+            dns.gardener.cloud/class: base-dns-class
+      - equal:
+          path: spec
+          value:
+            domains:
+              include:
+                - mydomain.example.org
+            secretRef:
+              name: base-dns-provider-secret
+              namespace: garden
+            type: example
+

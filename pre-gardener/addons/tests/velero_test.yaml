@@ -1,0 +1,13 @@
+templates:
+  - velero.yaml
+tests:
+  - it: should not create HelmRelease with default values
+    asserts:
+      - hasDocuments:
+          count: 0
+  - it: should create HelmRelease when backups are enabled
+    set:
+      backups.enabled: true
+    asserts:
+      - isKind:
+          of: HelmRelease

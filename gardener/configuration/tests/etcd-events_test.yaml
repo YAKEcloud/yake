@@ -1,0 +1,26 @@
+templates:
+  - etcd-events-base-values.yaml
+tests:
+  - it: should create secret with test values
+    values:
+      - ../values-test.yaml
+    asserts:
+      - isKind:
+          of: Secret
+      - equal:
+          path: stringData['values.yaml']
+          value: ""
+  - it: should set repository with registryOverwrite
+    values:
+      - ../values-test.yaml
+      - ../images.yaml
+    set:
+      registryOverwrite:
+        eu.gcr.io: myregistry.example.org
+    asserts:
+      - matchRegex:
+          path: stringData['values.yaml']
+          pattern: |-
+            images:
+              etcd: myregistry.example.org/gardener-project/gardener/etcd:v.+
+              etcd-backup-restore: myregistry.example.org/gardener-project/gardener/etcdbrctl:v.+

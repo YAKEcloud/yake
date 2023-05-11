@@ -1,0 +1,42 @@
+templates:
+  - helmrelease-admission.yaml
+tests:
+  - it: should not create anything with default values
+    asserts:
+      - hasDocuments:
+          count: 0
+  - it: should create HelmRelease for os-exampleos and provider-example
+    set:
+      os-exampleos:
+        enabled: true
+        admission:
+          enabled: true
+      provider-example:
+        enabled: true
+        admission:
+          enabled: true
+    asserts:
+      - containsDocument:
+          apiVersion: helm.toolkit.fluxcd.io/v2beta1
+          kind: HelmRelease
+          name: admission-os-exampleos-application
+          namespace: flux-system
+        documentIndex: 0
+      - containsDocument:
+          apiVersion: helm.toolkit.fluxcd.io/v2beta1
+          kind: HelmRelease
+          name: admission-os-exampleos-runtime
+          namespace: flux-system
+        documentIndex: 1
+      - containsDocument:
+          apiVersion: helm.toolkit.fluxcd.io/v2beta1
+          kind: HelmRelease
+          name: admission-provider-example-application
+          namespace: flux-system
+        documentIndex: 2
+      - containsDocument:
+          apiVersion: helm.toolkit.fluxcd.io/v2beta1
+          kind: HelmRelease
+          name: admission-provider-example-runtime
+          namespace: flux-system
+        documentIndex: 3

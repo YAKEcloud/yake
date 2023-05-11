@@ -1,0 +1,21 @@
+templates:
+  - issuer.yaml
+tests:
+  - it: should create Issuer with default values
+    asserts:
+      - containsDocument:
+          apiVersion: cert.gardener.cloud/v1alpha1
+          kind: Issuer
+          name: default-issuer
+          namespace: garden
+      - equal:
+          path: metadata.annotations
+          value:
+            cert.gardener.cloud/class: base-cert-class
+      - equal:
+          path: spec
+          value:
+            acme:
+              autoRegistration: true
+              email: mail@example.org
+              server: https://acme-v02.api.letsencrypt.org/directory
