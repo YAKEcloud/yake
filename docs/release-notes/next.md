@@ -35,3 +35,12 @@ hide_table_of_contents: true
 * *[OPERATOR]* Remove the error code check from `NodesChecker` to prevent nil pointer panic. ([gardener/gardener-extension-provider-gcp#595](https://github.com/gardener/gardener-extension-provider-gcp/pull/595), [@acumino](https://github.com/acumino))
 
 </details>
+
+<details>
+<summary><b>Update provider-openstack to <code>1.33.3</code></b></summary>
+
+# [gardener-extension-provider-openstack]
+## 🏃 Others
+* *[OPERATOR]* Remove the error code check from `NodesChecker` to prevent nil pointer panic. ([gardener/gardener-extension-provider-openstack#622](https://github.com/gardener/gardener-extension-provider-openstack/pull/622), [@acumino](https://github.com/acumino))
+
+</details>
