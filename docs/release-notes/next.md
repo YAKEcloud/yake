@@ -17,3 +17,12 @@ hide_table_of_contents: true
 * *[OPERATOR]* Remove the error code check from `NodesChecker` to prevent nil pointer panic. ([gardener/gardener-extension-provider-azure#684](https://github.com/gardener/gardener-extension-provider-azure/pull/684), [@acumino](https://github.com/acumino))
 
 </details>
+
+<details>
+<summary><b>Update provider-aws to <code>1.43.2</code></b></summary>
+
+# [gardener-extension-provider-aws]
+## 🏃 Others
+* *[OPERATOR]* Remove the error code check from `NodesChecker` to prevent nil pointer panic. ([gardener/gardener-extension-provider-aws#748](https://github.com/gardener/gardener-extension-provider-aws/pull/748), [@acumino](https://github.com/acumino))
+
+</details>
