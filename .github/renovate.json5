@@ -117,7 +117,7 @@
     "enabled": false
   },
   "includeForks": true,
-  "enabledManagers": ["regex"],
+  "enabledManagers": ["flux", "regex"],
   "prCreation": "immediate",
   "semanticCommits": "disabled",
   "addLabels": ["version-bump"],
