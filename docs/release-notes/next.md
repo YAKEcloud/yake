@@ -5,6 +5,18 @@ hide_table_of_contents: true
 # Release Notes next
 
 ## 23KE release notes and upgrade guide
+- Before upgrade
+	- The 23KE configuration chart was unified and moved, so resources need to be annotated to get adopted by the new chart name. To prevent the old charts from deleting resources when they get removed, they need to get suspended first.
+   ```shell
+   flux suspend hr pre-gardener-configuration
+   flux suspend hr gardener-configuration
+   kubectl -n flux-system annotate Secret -l helm.toolkit.fluxcd.io/name=pre-gardener-configuration meta.helm.sh/release-name=configuration --overwrite
+   kubectl -n flux-system annotate Secret -l helm.toolkit.fluxcd.io/name=gardener-configuration meta.helm.sh/release-name=configuration --overwrite
+   kubectl -n garden annotate Secret -l helm.toolkit.fluxcd.io/name=gardener-configuration meta.helm.sh/release-name=certificates --overwrite
+   kubectl -n flux-system annotate Certificate -l helm.toolkit.fluxcd.io/name=gardener-configuration meta.helm.sh/release-name=certificates --overwrite
+   kubectl -n flux-system annotate Issuer -l helm.toolkit.fluxcd.io/name=gardener-configuration meta.helm.sh/release-name=certificates --overwrite
+   ```
+   If something goes wrong or the charts weren't suspended, other charts might complain about their -base-values Secret missing. To remedy,suspend and then resume the new `configuration` HelmRelease so it re-generates those Secrets.
 
 ## Related upstream release notes / changelogs
 
