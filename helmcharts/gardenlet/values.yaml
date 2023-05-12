@@ -84,7 +84,7 @@ env: []
 image:
     pullPolicy: IfNotPresent
     repository: eu.gcr.io/gardener-project/gardener/gardenlet
-    tag: v1.70.0
+    tag: v1.70.2
 invalidateServiceAccountToken: true
 replicaCount: 2
 resources:
