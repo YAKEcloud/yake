@@ -9,7 +9,7 @@ spec:
       retries: 3
     createNamespace: true
   dependsOn:
-    - name: pre-gardener-configuration
+    - name: configuration
   interval: 1m
   chart:
     spec:

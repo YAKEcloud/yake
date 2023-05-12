@@ -11,7 +11,8 @@ spec:
   targetNamespace: garden
   interval: 1m
   dependsOn:
-    - name: gardener-configuration
+    - name: configuration
+    - name: certificates
   chart:
     spec:
       chart: etcd

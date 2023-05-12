@@ -6,6 +6,8 @@ metadata:
 spec:
   targetNamespace: garden
   dependsOn:
+    - name: configuration
+    - name: certificates
     - name: gardener-application
     - name: gardener-runtime
   interval: 1m

@@ -10,6 +10,8 @@ spec:
   interval: 1m
   targetNamespace: flux-system
   dependsOn:
+    - name: configuration
+    - name: certificates
     - name: kube-apiserver
   chart:
     spec:
@@ -99,6 +101,8 @@ metadata:
 spec:
   targetNamespace: garden
   dependsOn:
+    - name: configuration
+    - name: certificates
     - name: kube-apiserver
   interval: 1m
   chart:

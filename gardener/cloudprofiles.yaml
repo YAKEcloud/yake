@@ -10,6 +10,7 @@ spec:
   interval: 1m
   targetNamespace: flux-system
   dependsOn:
+    - name: configuration
     - name: gardener-application
     - name: gardener-runtime
   chart:
