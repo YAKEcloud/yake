@@ -16,10 +16,6 @@ for chart in pre-gardener/addons pre-gardener/dnsprovider pre-gardener/issuer ga
 
   echo "$MYVALUES" > $tmpDir/$CHARTNAME-test-values.yaml
 
-  if [[ $CHARTNAME == "garden-content" ]]; then
-    echo "$(echo "$CONFIGVALUES" | yq eval 'select(.metadata.name=="gardenlet-base-values") .stringData."values.yaml"' -)" >> $tmpDir/$CHARTNAME-test-values.yaml
-  fi
-
   helm unittest $chart -v $tmpDir/$CHARTNAME-test-values.yaml
 
 done

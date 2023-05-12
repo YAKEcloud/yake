@@ -9,6 +9,6 @@ metadata:
 spec:
   acme:
     autoRegistration: true
-    email: {{ .Values.email }}
-    server: {{ .Values.server }}
+    email: {{ required "Value acme.email required for issuer" .Values.acme.email }}
+    server: {{ required "Value acme.server required for issuer" .Values.acme.server }}
 {{- end }}

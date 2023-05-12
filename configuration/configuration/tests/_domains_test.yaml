@@ -1,0 +1,38 @@
+# behavior of defines is used in multiple places, and it is the first template to fail that needs to be referenced
+tests:
+  - it: should fail when domains.global.domain is unset
+    values:
+      - ../values-test.yaml
+    set:
+      domains.global.domain: null
+    asserts:
+      - failedTemplate:
+          errorMessage: Value domains.global.domain is required
+        template: kube-apiserver.yaml  # this file could change
+  - it: should fail when domains is unset, with error and not with nul pointer error
+    values:
+      - ../values-test.yaml
+    set:
+      domains: null
+    asserts:
+      - failedTemplate:
+          errorMessage: Value domains.global.domain is required
+        template: kube-apiserver.yaml  # this file could change
+  - it: should fail when domains.global.provider is unset
+    values:
+      - ../values-test.yaml
+    set:
+      domains.global.provider: null
+    asserts:
+      - failedTemplate:
+          errorMessage: Value domains.global.provider is required
+        template: gardenlet.yaml  # this file could change
+  - it: should fail when domains.global.credentials is unset
+    values:
+      - ../values-test.yaml
+    set:
+      domains.global.credentials: null
+    asserts:
+      - failedTemplate:
+          errorMessage: Value domains.global.credentials are required
+        template: garden-content.yaml  # this file could change

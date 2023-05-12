@@ -10,15 +10,6 @@ tests:
       - equal:
           path: stringData['values.yaml']
           value: |-
-            global:
-              token:
-                id: bootstrapTokenId
-                secret: bootstrapTokenSecret
-              additionalSecrets:
-                - name: base-dns-provider-secret
-                  namespace: garden
-                  data:
-                    token: example
             config:
               seedConfig:
                 spec:

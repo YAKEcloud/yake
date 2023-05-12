@@ -1,3 +1,8 @@
+{{- if and .Values.backups.enabled (required "Value backups.credentials required when backups are enabled" .Values.backups.credentials) }}
+{{- if not (kindIs "map" .Values.backups.credentials) }}
+{{- fail "backups.credentials needs to be a map" }}
+{{- end }}
+{{- end }}
 ---
 apiVersion: v1
 kind: Secret
@@ -9,3 +14,12 @@ stringData:
   values.yaml: |-
     backups:
       {{- toYaml .Values.backups | nindent 6 }}
+    gardenlet:
+      token:
+        id: {{ required "Value gardenlet.bootstrapTokenId is missing" .Values.gardenlet.bootstrapTokenId }}
+        secret: {{ required "Value gardenlet.bootstrapTokenSecret is missing" .Values.gardenlet.bootstrapTokenSecret }}
+    additionalSecrets:
+      - name: base-dns-provider-secret
+        namespace: garden
+        data:
+          {{- toYaml (required "Value domains.global.credentials are required" .Values.domains.global.credentials) | nindent 10 }}

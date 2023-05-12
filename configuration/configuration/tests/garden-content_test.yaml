@@ -12,6 +12,15 @@ tests:
           value: |-
             backups:
               enabled: false
+            gardenlet:
+              token:
+                id: bootstrapTokenId
+                secret: bootstrapTokenSecret
+            additionalSecrets:
+              - name: base-dns-provider-secret
+                namespace: garden
+                data:
+                  token: example
   - it: should contain backup config with backup enabled/credentials
     values:
       - ../values-test.yaml
@@ -26,3 +35,45 @@ tests:
               credentials:
                 foo: bar
               enabled: true
+  - it: should fail when backups enabled but no credentials provided
+    values:
+      - ../values-test.yaml
+    set:
+      backups.enabled: true
+      backups.credentials: null
+    asserts:
+      - failedTemplate:
+          errorMessage: Value backups.credentials required when backups are enabled
+  - it: should fail when backups.credentials is not a map
+    values:
+      - ../values-test.yaml
+    set:
+      backups.enabled: true
+      backups.credentials[0].foo: bar
+    asserts:
+      - failedTemplate:
+          errorMessage: backups.credentials needs to be a map
+  - it: should fail when domains.global.credentials is unset
+    values:
+      - ../values-test.yaml
+    set:
+      domains.global.credentials: null
+    asserts:
+      - failedTemplate:
+          errorMessage: Value domains.global.credentials are required
+  - it: should fail when gardenlet.bootstrapTokenId is unset
+    values:
+      - ../values-test.yaml
+    set:
+      gardenlet.bootstrapTokenId: null
+    asserts:
+      - failedTemplate:
+          errorMessage: Value gardenlet.bootstrapTokenId is missing
+  - it: should fail when gardenlet.bootstrapTokenSecret is unset
+    values:
+      - ../values-test.yaml
+    set:
+      gardenlet.bootstrapTokenSecret: null
+    asserts:
+      - failedTemplate:
+          errorMessage: Value gardenlet.bootstrapTokenSecret is missing

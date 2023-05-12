@@ -7,6 +7,12 @@ tests:
           count: 0
   - it: should create CRD when vpa-crd is enabled
     set:
+      vpa-crd.enabled: true
+    asserts:
+      - isKind:
+          of: CustomResourceDefinition
+  - it: should create CRD when vpa is enabled (for backwards compatability)
+    set:
       vpa.enabled: true
     asserts:
       - isKind:

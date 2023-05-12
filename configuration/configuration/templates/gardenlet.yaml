@@ -1,21 +1,11 @@
 apiVersion: v1
 kind: Secret
 metadata:
-  creationTimestamp: null
   name: gardenlet-base-values
   namespace: flux-system
 type: Opaque
 stringData:
   values.yaml: |-
-    global:
-      token:
-        id: {{ .Values.gardenlet.bootstrapTokenId }}
-        secret: {{ .Values.gardenlet.bootstrapTokenSecret }}
-      additionalSecrets:
-        - name: base-dns-provider-secret
-          namespace: garden
-          data:
-            {{- toYaml .Values.domains.global.credentials | nindent 12 }}
     config:
       seedConfig:
         spec:
@@ -28,12 +18,12 @@ stringData:
               namespace: garden
 {{- end }}
           ingress:
-            domain: internal.{{ .Values.domains.global.domain }}
+            domain: {{ include "gardenlet.ingressDomain" . }}
             controller:
               kind: nginx
           dns:
             provider:
-              type: {{ .Values.domains.global.provider }}
+              type: {{ required "Value domains.global.provider is required" .Values.domains.global.provider }}
               secretRef:
                 name: base-dns-provider-secret
                 namespace: garden

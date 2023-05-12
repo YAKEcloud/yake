@@ -10,5 +10,7 @@ tests:
       - equal:
           path: stringData['values.yaml']
           value: |
-            email: mail@example.org
-            server: https://acme-v02.api.letsencrypt.org/directory
+            acme:
+              email: mail@example.org
+              server: https://acme-v02.api.letsencrypt.org/directory
+            enabled: true

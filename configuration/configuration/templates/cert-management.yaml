@@ -15,7 +15,7 @@ stringData:
       certificates: false
     configuration:
       defaultIssuer: default-issuer
-      defaultIssuerDomainRanges: {{ .Values.domains.global.domain }}
+      defaultIssuerDomainRanges: {{ include "global.domain" . }}
       certClass: base-cert-class
       issuerNamespace: garden
       dnsClass: base-dns-class

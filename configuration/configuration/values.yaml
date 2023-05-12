@@ -7,7 +7,7 @@ backups:
   enabled: false
 
 addons:
-  vpa:
+  vpa-crd:
     enabled: false
 
 issuer:

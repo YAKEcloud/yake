@@ -12,3 +12,6 @@ tests:
           value: |-
             backups:
               enabled: false
+            vpa-crd:
+              enabled: false
+

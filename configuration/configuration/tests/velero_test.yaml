@@ -1,16 +1,12 @@
 templates:
   - velero.yaml
 tests:
-  - it: should create secret without content
+  - it: should NOT create secret with test values
     values:
       - ../values-test.yaml
     asserts:
-      - isKind:
-          of: Secret
-      - equal:
-          path: stringData
-          value:
-            values.yaml: ""
+      - hasDocuments:
+          count: 0
   - it: should create secret when backup enabled
     values:
       - ../values-test.yaml

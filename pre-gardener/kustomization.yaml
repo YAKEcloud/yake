@@ -6,6 +6,7 @@ resources:
   - cert-manager.yaml
   - dnsprovider.yaml
   - external-dns-management.yaml
+  - generated-secrets.yaml
   - helmrepositories.yaml
   - ingress-nginx.yaml
   - issuer.yaml

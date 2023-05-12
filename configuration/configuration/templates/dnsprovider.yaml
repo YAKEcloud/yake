@@ -7,7 +7,7 @@ type: Opaque
 stringData:
   values.yaml: |-
     domains:
-      - {{ .Values.domains.global.domain }}
-    provider: {{ .Values.domains.global.provider }}
+      - {{ include "global.domain" . }}
+    provider: {{ required "Value domains.global.provider is required" .Values.domains.global.provider }}
     credentials:
-      {{- toYaml .Values.domains.global.credentials | nindent 6 }}
+      {{- toYaml (required "Value domains.global.credentials are required" .Values.domains.global.credentials) | nindent 6 }}
