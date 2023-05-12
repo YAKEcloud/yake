@@ -26,7 +26,7 @@ tests:
           path: spec
           value:
             secretName: gardener-extension-os-exampleos-admission-tls
-            duration: 87600h #10y
+            duration: 87600h
             usages:
               - server auth
             dnsNames:
@@ -45,7 +45,7 @@ tests:
           path: spec
           value:
             secretName: gardener-extension-example-admission-tls
-            duration: 87600h #10y
+            duration: 87600h
             usages:
               - server auth
             dnsNames:
