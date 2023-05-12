@@ -8,9 +8,9 @@ tags: [gardener, caph, k8s]
 ## TLDR;
 We recently built new Kubernetes clusters on Hetzner Cloud. We had several challenges to get the cluster up and running.
 
-This started with the selection of the correct Kubernetes version, the CNI solution and the actual deployment of 23KE. Spoiler: We had to add a few annotations.
+This started with the selection of the correct Kubernetes version, the CNI solution and the actual deployment of 23KE. Spoiler: We had to change the CNI solution and reset containerd.
 
-If these instructions in this blog post are followed, you can build a working gardener cluster. 
+If these instructions in this blog post are followed, you can build a working Gardener cluster. 
 
 **Table of Contents**
 - [TLDR;](#tldr)
@@ -23,7 +23,7 @@ If these instructions in this blog post are followed, you can build a working ga
 - [Summary](#summary)
 
 ## Introduction
-In times of rising costs in all areas of life, we also wanted to reduce these sustainably in our day-to-day operations.
+In times of rising costs and the reduction of the CO<sub>2</sub> footprint in all areas of life, we also wanted to reduce these sustainably in our day-to-day operations.
 
 We had been running okeanos.dev on a managed kubernetes cluster on Azure. This is very expensive so we wanted to minimize these costs. In this case, the European cloud from Hetzner was the obvious choice. The following question was how we could best build a k8s cluster there.
 
@@ -32,7 +32,7 @@ After some research, ClusterAPI provider for Hetzner (CAPH) from [Syself](https:
 When testing the provider, we had to overcome a few challenges, which we would like to discuss in the following.
 
 ## Requirements
-You need to install some basic tools to work with CAPH and Gardener. It makes sense to set up a management VM (on Hetzner) running a kind cluster and on it the management cluster. 
+You need to install some basic tools to work with CAPH and Gardener. It makes sense to set up a management vm (on Hetzner) running a kind cluster and on it the management cluster. 
 
 * [docker-engine](https://docs.docker.com/engine/install/)
 * [kind](https://kind.sigs.k8s.io/docs/user/quick-start/#installing-from-release-binaries)
@@ -115,7 +115,7 @@ and add
 + - sysctl fs.inotify.max_user_watches=524288
 ```
 
-The containerd-config is missing some options. In addition, the `SystemdCgroup` must be set to `true`. Only then the `vpn-seed-server` starts, which is created when a shoot is created.
+The containerd-config is missing some options. In addition, the `SystemdCgroup` must be set to `true` and the `inotify` settings needs to be increased. Only then the `vpn-seed-server` starts, which is created when a shoot is created.
 
 When you have finished the modification, you can start building the worker cluster by appling the modified file on the management cluster
 
@@ -159,9 +159,9 @@ At the end we need a CSI to build volumes on hcloud:
 ```shell
 cat << EOF > csi-values.yaml
 storageClasses:
-- name: hcloud-volumes
-  defaultStorageClass: true
-  reclaimPolicy: Retain
+  - name: hcloud-volumes
+    defaultStorageClass: true
+    reclaimPolicy: Retain
 EOF
 
 helm upgrade --install csi syself/csi-hcloud --version 0.2.0 \
@@ -178,7 +178,7 @@ If you plan to install 23KE, you need to keep in mind that there are a few custo
 
 If you have installed 23KE and the data from the installation is in a repository, the following file need to be adjusted.
 
-Add under `settings:` in `gardenlet-values.yaml`
+Add the following lines in `gardenlet-values.yaml`
 ```diff
 settings:
 + loadBalancerServices:
@@ -190,7 +190,7 @@ settings:
 
 Commit and push your changes. You can execute a `flux reconcile source git 23ke-config` to speed up the things.
 
-If any ingress won't get a public IP, you can add the annotations manualy e.g. for `nginx-ingress-controller`:
+If any ingress won't get a public IP, you can add some annotations manualy e.g. for `nginx-ingress-controller`:
 ```shell
 kubectl annotate svc -n garden nginx-ingress-controller load-balancer.hetzner.cloud/location=nbg1 \
   load-balancer.hetzner.cloud/ipv6-disabled=true \
@@ -203,6 +203,6 @@ In the next steps, secrets can be added to connect to a public or private cloud.
 
 ## Summary
 
-With all these steps, it is possible for you to build a functional gardener cluster on Hetzner Cloud. With this you can run a low cost K8s cluster and run what you want on it. Whereas 23KE is already very cool.
+With all these steps, it is possible for you to build a functional Gardener cluster on Hetzner Cloud. With this you can run a low cost K8s cluster and run what you want on it. Whereas 23KE is already very cool.
 
-This setup has allowed us to drastically reduce the cost of a fully functional gardener. As a pleasant side effect, we are also no longer dependent on a cloud in the USA, but now operate the gardener in a data center in Germany with a German operator in accordance with the GDPR.
+This setup has allowed us to drastically reduce the cost of a fully functional Gardener. As a pleasant side effect, we are no longer dependent on a cloud in the US, but now run Gardener in a data center in Germany with a German operator that is GDPR compliant and uses green electricity (good for our CO<sub>2</sub> footprint).
