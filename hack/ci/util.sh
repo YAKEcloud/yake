@@ -1,7 +1,16 @@
 #!/usr/bin/env bash
 
+ensureDependencies() {
+  make -f hack/tools/tools.mk all
+
+  export FLUX=hack/tools/bin/flux
+  export KUBECTL=hack/tools/bin/kubectl
+  export MC=hack/tools/bin/mc
+  export YQ=hack/tools/bin/yq
+}
+
 checkDependencies() {
-  DEPS=(envsubst flux git go kubectl mc rclone yq)
+  DEPS=(envsubst git go rclone)
 
   for DEP in "${DEPS[@]}"; do
     if ! which "$DEP" &>/dev/null; then
@@ -37,4 +46,8 @@ onErr() {
 
   printErr "Failed at line $lineno: $msg"
 }
+
+# ----------------------------------------
+
 trap 'onErr ${LINENO} "$BASH_COMMAND"' ERR
+ensureDependencies

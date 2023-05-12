@@ -7,11 +7,10 @@ YQ                         := $(TOOLS_BIN_DIR)/yq
 MC                         := $(TOOLS_BIN_DIR)/mc
 
 # default tool versions
-FLUX_VERSION ?= v0.35.0
+FLUX_VERSION ?= v0.35.0 # renovate: datasource=github-releases depName=fluxcd/flux2
 KUBECTL_VERSION ?= v1.24.3
-YQ_VERSION ?= v4.9.6
-MC_VERSION ?= RELEASE.2023-01-28T20-29-38Z
-
+YQ_VERSION ?= v4.9.6 # renovate: datasource=github-releases depName=mikefarah/yq
+MC_VERSION ?= RELEASE.2023-01-28T20-29-38Z # not yet feasible with renovate, see https://github.com/renovatebot/renovate/issues/21759
 
 #########################################
 # Common                                #

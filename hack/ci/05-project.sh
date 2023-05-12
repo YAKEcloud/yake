@@ -6,7 +6,7 @@ source hack/ci/handy.sh
 
 echo "Fetching and uploading secret for $PROVIDER"
 
-cat << EOF | kubectl apply -f - --context garden
+cat << EOF | $KUBECTL apply -f - --context garden
 apiVersion: v1
 kind: Namespace
 metadata:
@@ -33,15 +33,15 @@ spec:
 EOF
 
 # Download provider secret from host gardener, and upload it again
-kubectl --kubeconfig hack/ci/secrets/gardener-kubeconfig.yaml get secret "$PROVIDER"-secret -o yaml \
-  | yq eval '.metadata.labels as $labels | del(.metadata)| .metadata.name = env(PROVIDER)+"-secret" | .metadata.namespace = "garden-testing" | .metadata.labels = $labels' - \
-  | kubectl apply -f - --context garden
+$KUBECTL --kubeconfig hack/ci/secrets/gardener-kubeconfig.yaml get secret "$PROVIDER"-secret -o yaml \
+  | $YQ eval '.metadata.labels as $labels | del(.metadata)| .metadata.name = env(PROVIDER)+"-secret" | .metadata.namespace = "garden-testing" | .metadata.labels = $labels' - \
+  | $KUBECTL apply -f - --context garden
 
 # Currently, there is only the provider hcloud
 PROVIDERTYPE=hcloud
 
 
-cat << EOF | kubectl apply -f - --context garden
+cat << EOF | $KUBECTL apply -f - --context garden
 apiVersion: core.gardener.cloud/v1beta1
 kind: SecretBinding
 metadata:

@@ -103,13 +103,21 @@
         // https://regex101.com/r/oimJd1/1
         "(?<depName>[a-z-]+):\\s+version: (?<currentValue>[0-9.]+)"
       ]
+    },
+    {
+      "fileMatch": [
+        "^hack/tools/tools.mk$"
+      ],
+      "matchStrings": [
+        "(?<currentValue>[^ ]+) # renovate: datasource=(?<datasource>.*) depName=(?<depName>.*)( versioning=(?<versioning>.*))?"
+      ]
     }
   ],
   "lockFileMaintenance": {
     "enabled": false
   },
   "includeForks": true,
-  "enabledManagers": ["flux", "regex"],
+  "enabledManagers": ["regex"],
   "prCreation": "immediate",
   "semanticCommits": "disabled",
   "addLabels": ["version-bump"],

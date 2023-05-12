@@ -30,12 +30,12 @@ fi
 ./23kectl install --kubeconfig hack/ci/secrets/shoot-kubeconfig.yaml --config hack/ci/misc/23kectl-config.yaml
 
 echo "Waiting for Kustomization gardener"
-kubectl wait kustomization gardener -n flux-system --for=condition=ready --timeout=10m  || { ./23kectl doctor --kubeconfig hack/ci/secrets/shoot-kubeconfig.yaml; exit 1; }
+$KUBECTL wait kustomization gardener -n flux-system --for=condition=ready --timeout=10m  || { ./23kectl doctor --kubeconfig hack/ci/secrets/shoot-kubeconfig.yaml; exit 1; }
 
 echo "Waiting for all Helmreleases to be ready"
-kubectl wait helmrelease -A --all --for=condition=ready --timeout=10m || { ./23kectl doctor --kubeconfig hack/ci/secrets/shoot-kubeconfig.yaml; exit 1; }
+$KUBECTL wait helmrelease -A --all --for=condition=ready --timeout=10m || { ./23kectl doctor --kubeconfig hack/ci/secrets/shoot-kubeconfig.yaml; exit 1; }
 
 echo "Get the kubeconfig for the virtual garden"
-kubectl get secrets -n garden garden-kubeconfig-for-admin -o go-template='{{.data.kubeconfig | base64decode }}' > hack/ci/secrets/apiserver-in-shoot-kubeconfig.yaml
+$KUBECTL get secrets -n garden garden-kubeconfig-for-admin -o go-template='{{.data.kubeconfig | base64decode }}' > hack/ci/secrets/apiserver-in-shoot-kubeconfig.yaml
 
 echo -e "23KE Ready ✅"
