@@ -5,6 +5,13 @@ authors: rhizoet
 tags: [gardener, caph, k8s]
 ---
 
+## TLDR;
+We recently built new Kubernetes clusters on Hetzner Cloud. We had several challenges to get the cluster up and running.
+
+This started with the selection of the correct Kubernetes version, the CNI solution and the actual deployment of 23KE. Spoiler: We had to add a few annotations.
+
+If these instructions in this blog post are followed, you can build a working gardener cluster. 
+
 **Table of Contents**
 - [TLDR;](#tldr)
 - [Requirements](#requirements)
@@ -13,13 +20,6 @@ tags: [gardener, caph, k8s]
 - [Setup the worker cluster](#setup-the-worker-cluster)
 - [Install of 23KE](#install-of-23ke)
 - [Summary](#summary)
-
-## TLDR;
-We recently built new Kubernetes clusters on Hetzner Cloud. We had several challenges to get the cluster up and running.
-
-This started with the selection of the correct Kubernetes version, the CNI solution and the actual deployment of 23KE. Spoiler: We had to add a few annotations.
-
-If these instructions in this blog post are followed, you can build a working gardener cluster. 
 
 ## Requirements
 You need to install some basic tools to work with CAPH and Gardener. It makes sense to set up a management VM (on Hetzner) running a kind cluster and on it the management cluster. 
