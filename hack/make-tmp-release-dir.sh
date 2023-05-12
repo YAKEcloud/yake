@@ -35,6 +35,7 @@ for file in $(grep  --exclude=configuration.yaml \
 										--exclude=addons.yaml \
 										--exclude=dnsprovider.yaml \
 										--exclude=issuer.yaml \
+										--exclude=certificates.yaml \
 										-lr "kind: HelmRelease" configuration pre-gardener gardener)
 do
 		# prepend helmcharts/ to chart:
