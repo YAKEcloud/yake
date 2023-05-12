@@ -1,0 +1,28 @@
+templates:
+  - garden-content-base-values.yaml
+tests:
+  - it: should create secret with test values
+    values:
+      - ../values-test.yaml
+    asserts:
+      - isKind:
+          of: Secret
+      - equal:
+          path: stringData['values.yaml']
+          value: |-
+            backups:
+              enabled: false
+  - it: should contain backup config with backup enabled/credentials
+    values:
+      - ../values-test.yaml
+    set:
+      backups.enabled: true
+      backups.credentials.foo: bar
+    asserts:
+      - matchRegex:
+          path: stringData['values.yaml']
+          pattern: |-
+            backups:
+              credentials:
+                foo: bar
+              enabled: true

@@ -1,0 +1,9 @@
+domains:
+  global:
+    domain: mydomain.example.org
+    provider: example
+    credentials:
+      token: example
+issuer:
+  acme:
+    email: mail@example.org
