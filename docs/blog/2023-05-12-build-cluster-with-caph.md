@@ -14,12 +14,22 @@ If these instructions in this blog post are followed, you can build a working ga
 
 **Table of Contents**
 - [TLDR;](#tldr)
+- [Introduction](#introduction)
 - [Requirements](#requirements)
 - [Setup the management cluster](#setup-the-management-cluster)
   - [Modifications](#modifications)
 - [Setup the worker cluster](#setup-the-worker-cluster)
 - [Install of 23KE](#install-of-23ke)
 - [Summary](#summary)
+
+## Introduction
+In times of rising costs in all areas of life, we also wanted to reduce these sustainably in our day-to-day operations.
+
+We had been running okeanos.dev on a managed kubernetes cluster on Azure. This is very expensive so we wanted to minimize these costs. In this case, the European cloud from Hetzner was the obvious choice. The following question was how we could best build a k8s cluster there.
+
+After some research, ClusterAPI provider for Hetzner (CAPH) from [Syself](https://syself.com/) turned out to be the optimal solution.
+
+When testing the provider, we had to overcome a few challenges, which we would like to discuss in the following.
 
 ## Requirements
 You need to install some basic tools to work with CAPH and Gardener. It makes sense to set up a management VM (on Hetzner) running a kind cluster and on it the management cluster. 
@@ -39,12 +49,12 @@ To start, let's create a kind cluster with a customized Kubernetes version (Curr
 kind create cluster -n my-cluster --image=kindest/node:v1.25.9
 ```
 
-When the cluster is up, [initialize the management cluster](https://github.com/syself/cluster-api-provider-hetzner/blob/main/docs/topics/preparation.md) with
+When the cluster is up, [initialize the management cluster](https://github.com/syself/cluster-api-provider-hetzner/blob/main/docs/topics/preparation.md) with CAPH
 
 ```shell
 clusterctl init --core cluster-api --bootstrap kubeadm --control-plane kubeadm --infrastructure hetzner
 ```
-and export your envs
+and export your environment variables
 ```shell
 export HCLOUD_SSH_KEY="MY_SSH_KEY" \
 export CLUSTER_NAME="my-cluster" \
@@ -56,7 +66,7 @@ export HCLOUD_CONTROL_PLANE_MACHINE_TYPE=cpx31 \
 export HCLOUD_WORKER_MACHINE_TYPE=cpx41 \
 export HCLOUD_TOKEN="YOUR_HCLOUD_TOKEN_HERE"
 ```
-The region can be for sure anything else.
+The region can be for sure anything else like `hel1`.
 
 To be able to build the machines a secret must be created:
 ```shell
@@ -72,47 +82,40 @@ clusterctl generate cluster my-cluster --kubernetes-version v1.25.9 --control-pl
 
 ### Modifications
 
-After creation you need to modify the `my-cluster.yaml`. Remove the block near lines `21` and `305` because we need to reset the containerd config:
-```yaml
-- content: |
-    version = 2
-    [plugins."io.containerd.grpc.v1.cri".containerd.runtimes.runc]
-      runtime_type = "io.containerd.runc.v2"
-    [plugins."io.containerd.grpc.v1.cri".containerd.runtimes.runc.options]
-      SystemdCgroup = true
-    [plugins."io.containerd.grpc.v1.cri".containerd.runtimes.crun]
-      runtime_type = "io.containerd.runc.v2"
-    [plugins."io.containerd.grpc.v1.cri".containerd.runtimes.crun.options]
-      BinaryName = "crun"
-      Root = "/usr/local/sbin"
-      SystemdCgroup = true
-    [plugins."io.containerd.grpc.v1.cri".containerd]
-      default_runtime_name = "crun"
-    [plugins."io.containerd.runtime.v1.linux"]
-      runtime = "crun"
-      runtime_root = "/usr/local/sbin"
-  owner: root:root
-  path: /etc/containerd/config.toml
-  permissions: "0744"
+After creation you need to modify the `my-cluster.yaml`. Remove the following blocks (it gives two of them) because we need to reset the containerd config
+```diff
+- - content: |
+-     version = 2
+-     [plugins."io.containerd.grpc.v1.cri".containerd.runtimes.runc]
+-       runtime_type = "io.containerd.runc.v2"
+-     [plugins."io.containerd.grpc.v1.cri".containerd.runtimes.runc.options]
+-       SystemdCgroup = true
+-     [plugins."io.containerd.grpc.v1.cri".containerd.runtimes.crun]
+-       runtime_type = "io.containerd.runc.v2"
+-     [plugins."io.containerd.grpc.v1.cri".containerd.runtimes.crun.options]
+-       BinaryName = "crun"
+-       Root = "/usr/local/sbin"
+-       SystemdCgroup = true
+-     [plugins."io.containerd.grpc.v1.cri".containerd]
+-       default_runtime_name = "crun"
+-     [plugins."io.containerd.runtime.v1.linux"]
+-       runtime = "crun"
+-       runtime_root = "/usr/local/sbin"
+-   owner: root:root
+-   path: /etc/containerd/config.toml
+-   permissions: "0744"
 ```
-and add near lines `78` and `368` above
-```yaml
-- systemctl daemon-reload && systemctl enable containerd && systemctl start containerd
-```
-the following lines
-```yaml
-- mkdir /etc containerd
-- containerd config default > /etc/containerd/confi.toml
-- sed -i 's/SystemdCgroup = false/SystemdCgroup = true/g' /etc/containerd/config.toml
+and add
+```diff
++ - mkdir /etc containerd
++ - containerd config default > /etc/containerd/confi.toml
++ - sed -i 's/SystemdCgroup = false/SystemdCgroup = true/g' /etc/containerd/config.toml
+  - systemctl daemon-reload && systemctl enable containerd && systemctl start containerd
++ - sysctl fs.inotify.max_user_instances=8192
++ - sysctl fs.inotify.max_user_watches=524288
 ```
 
 The containerd-config is missing some options. In addition, the `SystemdCgroup` must be set to `true`. Only then the `vpn-seed-server` starts, which is created when a shoot is created.
-
-Also add the following lines in the config (e.g. after `systemctl...`):
-```yaml
-- sysctl fs.inotify.max_user_instances=8192
-- sysctl fs.inotify.max_user_watches=524288
-```
 
 When you have finished the modification, you can start building the worker cluster by appling the modified file on the management cluster
 
@@ -173,44 +176,21 @@ The remaining control planes should now be built and added to the cluster. Wait 
 
 If you plan to install 23KE, you need to keep in mind that there are a few customizations that need to be made for hcloud.
 
-If you have installed 23KE and the data from the installation is in a repository, the following files need to be adjusted.
+If you have installed 23KE and the data from the installation is in a repository, the following file need to be adjusted.
 
 Add under `settings:` in `gardenlet-values.yaml`
-```yaml
-...
-loadBalancerServices:
-  annotations:
-    load-balancer.hetzner.cloud/location: nbg1 # or fsn1, hel1 etc
-    load-balancer.hetzner.cloud/ipv6-disabled: "true"
-    load-balancer.hetzner.cloud/disable-private-ingress: "true"
-```
-
-Create a new config called `ingress-nginx-values.yaml` and add
-```yaml
-apiVersion: v1
-kind: Secret
-metadata:
-  name: ingress-nginx-values
-  namespace: flux-system
-type: Opaque
-stringData:
-  values.yaml: |-
-    controller:
-      service:
-        annotations:
-          load-balancer.hetzner.cloud/location: nbg1
-          load-balancer.hetzner.cloud/ipv6-disabled: "true"
-          load-balancer.hetzner.cloud/disable-private-ingress: "true"
-```
-
-Also update the `kustomization.yaml` and add
-```yaml
-- ingress-nginx-values.yaml
+```diff
+settings:
++ loadBalancerServices:
++   annotations:
++     load-balancer.hetzner.cloud/location: nbg1
++     load-balancer.hetzner.cloud/ipv6-disabled: "true"
++     load-balancer.hetzner.cloud/disable-private-ingress: "true"
 ```
 
 Commit and push your changes. You can execute a `flux reconcile source git 23ke-config` to speed up the things.
 
-If any other ingress won't get a public IP, you can add the annotations manualy e.g. for `nginx-ingress-controller`:
+If any ingress won't get a public IP, you can add the annotations manualy e.g. for `nginx-ingress-controller`:
 ```shell
 kubectl annotate svc -n garden nginx-ingress-controller load-balancer.hetzner.cloud/location=nbg1 \
   load-balancer.hetzner.cloud/ipv6-disabled=true \
@@ -224,3 +204,5 @@ In the next steps, secrets can be added to connect to a public or private cloud.
 ## Summary
 
 With all these steps, it is possible for you to build a functional gardener cluster on Hetzner Cloud. With this you can run a low cost K8s cluster and run what you want on it. Whereas 23KE is already very cool.
+
+This setup has allowed us to drastically reduce the cost of a fully functional gardener. As a pleasant side effect, we are also no longer dependent on a cloud in the USA, but now operate the gardener in a data center in Germany with a German operator in accordance with the GDPR.
