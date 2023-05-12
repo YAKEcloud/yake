@@ -1,7 +1,7 @@
 apiVersion: helm.toolkit.fluxcd.io/v2beta1
 kind: HelmRelease
 metadata:
-  name: extensions
+  name: certificates
   namespace: flux-system
 spec:
   install:
@@ -11,11 +11,11 @@ spec:
   interval: 1m
   dependsOn:
     - name: configuration
-    - name: gardener-application
-    - name: gardener-runtime
+    - name: cert-manager
+    - name: cert-management
   chart:
     spec:
-      chart: gardener/extensions
+      chart: gardener/certificates
       reconcileStrategy: Revision
       sourceRef:
         kind: GitRepository
@@ -24,8 +24,5 @@ spec:
       interval: 1m
   valuesFrom:
     - kind: Secret
-      name: extensions-base-values
+      name: certificates-base-values
       optional: false
-    - kind: Secret
-      name: extensions-values
-      optional: true

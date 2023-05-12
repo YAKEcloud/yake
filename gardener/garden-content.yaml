@@ -13,11 +13,12 @@ spec:
     secretRef:
       name: gardener-internal-kubeconfig
   dependsOn:
+    - name: configuration
     - name: gardener-application
     - name: gardener-runtime
   chart:
     spec:
-      chart: gardener/helmcharts/garden-content-chart
+      chart: gardener/garden-content
       sourceRef:
         kind: GitRepository
         name: 23ke
@@ -28,5 +29,5 @@ spec:
       name: garden-content-base-values
       optional: false
     - kind: Secret
-      name: gardenlet-base-values
-      optional: false
+      name: garden-content-values
+      optional: true

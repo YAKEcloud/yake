@@ -1,7 +1,7 @@
 apiVersion: helm.toolkit.fluxcd.io/v2beta1
 kind: HelmRelease
 metadata:
-  name: extensions
+  name: configuration
   namespace: flux-system
 spec:
   install:
@@ -10,22 +10,23 @@ spec:
     createNamespace: true
   interval: 1m
   dependsOn:
-    - name: configuration
-    - name: gardener-application
-    - name: gardener-runtime
+    - name: generated-secrets
   chart:
     spec:
-      chart: gardener/extensions
+      chart: configuration/configuration
       reconcileStrategy: Revision
       sourceRef:
         kind: GitRepository
         name: 23ke
         namespace: flux-system
       interval: 1m
+      valuesFiles:
+        - configuration/configuration/values.yaml
+        - configuration/configuration/images.yaml
   valuesFrom:
     - kind: Secret
-      name: extensions-base-values
+      name: 23ke-config
       optional: false
     - kind: Secret
-      name: extensions-values
-      optional: true
+      name: 23ke-generated-secrets
+      optional: false

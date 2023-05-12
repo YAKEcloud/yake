@@ -1,0 +1,28 @@
+templates:
+  - external-dns-management.yaml
+tests:
+  - it: should create secret with test values
+    values:
+      - ../values-test.yaml
+    asserts:
+      - isKind:
+          of: Secret
+      - equal:
+          path: stringData['values.yaml']
+          value: |-
+            external-dns-management:
+              enabled: true
+              configuration:
+                dnsClass: base-dns-class
+                identifier: garden-cluster-identity-base-dns
+  - it: should set repository with registryOverwrite
+    values:
+      - ../values-test.yaml
+      - ../images.yaml
+    set:
+      registryOverwrite:
+        eu.gcr.io: myregistry.example.org
+    asserts:
+      - matchRegex:
+          path: stringData['values.yaml']
+          pattern: "repository: myregistry.example.org/gardener-project/dns-controller-manager\n"
