@@ -1,0 +1,32 @@
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: configuration
+  namespace: flux-system
+spec:
+  install:
+    remediation:
+      retries: 3
+    createNamespace: true
+  interval: 1m
+  dependsOn:
+    - name: generated-secrets
+  chart:
+    spec:
+      chart: configuration/configuration
+      reconcileStrategy: Revision
+      sourceRef:
+        kind: GitRepository
+        name: 23ke
+        namespace: flux-system
+      interval: 1m
+      valuesFiles:
+        - configuration/configuration/values.yaml
+        - configuration/configuration/images.yaml
+  valuesFrom:
+    - kind: Secret
+      name: 23ke-config
+      optional: false
+    - kind: Secret
+      name: 23ke-generated-secrets
+      optional: false

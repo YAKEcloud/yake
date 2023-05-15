@@ -8,4 +8,4 @@ dependencies:
   repository: ""
 description: A Helm chart to deploy the Gardener application related resources
 name: application
-version: 1.70.0
+version: 1.70.2

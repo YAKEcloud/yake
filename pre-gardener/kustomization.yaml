@@ -4,7 +4,6 @@ resources:
   - addons.yaml
   - cert-management.yaml
   - cert-manager.yaml
-  - configuration.yaml
   - dnsprovider.yaml
   - external-dns-management.yaml
   - helmrepositories.yaml

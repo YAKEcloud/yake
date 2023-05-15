@@ -10,7 +10,7 @@ spec:
     createNamespace: true
   dependsOn:
     - name: ingress-nginx
-    - name: pre-gardener-configuration
+    - name: configuration
     - name: addons
   interval: 1m
   targetNamespace: garden

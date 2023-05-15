@@ -8,13 +8,15 @@ spec:
   interval: 1m
   targetNamespace: garden
   dependsOn:
+    - name: configuration
+    - name: certificates
     - name: garden-content
     - name: gardener-application
     - name: gardener-runtime
   chart:
     spec:
       chart: gardenlet
-      version: 1.70.0
+      version: 1.70.2
       sourceRef:
         kind: HelmRepository
         name: gardener-community-charts

@@ -1,0 +1,58 @@
+templates:
+  - gardener.yaml
+tests:
+  - it: should create secret with test values
+    values:
+      - ../values-test.yaml
+    asserts:
+      - isKind:
+          of: Secret
+      - equal:
+          path: stringData['values.yaml']
+          value: |-
+            global:
+              deployment:
+                virtualGarden:
+                  enabled: true
+              defaultDomains:
+                - domain: mydomain.example.org
+                  provider: example
+                  credentials:
+                    token: example
+              internalDomain:
+                domain: internal.mydomain.example.org
+                provider: example
+                credentials:
+                  token: example
+              apiserver:
+                replicaCount: 2
+                vpa: true
+                clusterIdentity: garden-cluster-identity
+              admission:
+                replicaCount: 2
+                vpa: true
+              controller:
+                replicaCount: 2
+                vpa: true
+              scheduler:
+                replicaCount: 2
+                vpa: true
+
+  - it: should set repository with registryOverwrite
+    values:
+      - ../values-test.yaml
+      - ../images.yaml
+    set:
+      registryOverwrite:
+        eu.gcr.io: myregistry.example.org
+    asserts:
+      - matchRegex:
+          path: stringData['values.yaml']
+          pattern: |-2
+                  repository: myregistry.example.org/gardener-project/gardener/apiserver
+            [\s\S]*
+                  repository: myregistry.example.org/gardener-project/gardener/admission-controller
+            [\s\S]*
+                  repository: myregistry.example.org/gardener-project/gardener/controller-manager
+            [\s\S]*
+                  repository: myregistry.example.org/gardener-project/gardener/scheduler

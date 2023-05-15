@@ -1,0 +1,14 @@
+templates:
+  - issuer.yaml
+tests:
+  - it: should create secret with test values
+    values:
+      - ../values-test.yaml
+    asserts:
+      - isKind:
+          of: Secret
+      - equal:
+          path: stringData['values.yaml']
+          value: |
+            email: mail@example.org
+            server: https://acme-v02.api.letsencrypt.org/directory

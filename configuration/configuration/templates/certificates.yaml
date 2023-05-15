@@ -1,0 +1,10 @@
+apiVersion: v1
+kind: Secret
+metadata:
+  name: certificates-base-values
+  namespace: flux-system
+type: Opaque
+stringData:
+  values.yaml: |-
+    gardener: {{ include "api.domain" . }}
+    seed-ingress: {{ include "gardenlet.ingressDomain" . }}

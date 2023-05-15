@@ -1,0 +1,202 @@
+apiVersion: cert-manager.io/v1
+kind: Issuer
+metadata:
+  name: gardener-ca-selfsigned
+  namespace: flux-system
+spec:
+  selfSigned: {}
+---
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: gardener-ca
+  namespace: flux-system
+spec:
+  secretName: gardener-ca-keypair
+  duration: 87600h  # 10y
+  isCA: true
+  issuerRef:
+    name: gardener-ca-selfsigned
+    kind: Issuer
+  commonName: "Gardener CA"
+---
+apiVersion: cert-manager.io/v1
+kind: Issuer
+metadata:
+  name: gardener-ca
+  namespace: flux-system
+spec:
+  ca:
+    secretName: gardener-ca-keypair
+---
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: etcd
+  namespace: flux-system
+spec:
+  secretName: etcd-tls
+  duration: 87600h  # 10y
+  usages:
+    - server auth
+  dnsNames:
+    - etcd
+    - etcd-0
+    - etcd.garden
+    - etcd.garden.svc
+  issuerRef:
+    name: gardener-ca
+---
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: etcd-events
+  namespace: flux-system
+spec:
+  secretName: etcd-events-tls
+  duration: 87600h  # 10y
+  usages:
+    - server auth
+  dnsNames:
+    - etcd-events
+    - etcd-events-0
+    - etcd-events.garden
+    - etcd-events.garden.svc
+  issuerRef:
+    name: gardener-ca
+---
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: etcd-client
+  namespace: flux-system
+spec:
+  secretName: etcd-client-tls
+  duration: 87600h  # 10y
+  usages:
+    - client auth
+  commonName: etcd-client
+  issuerRef:
+    name: gardener-ca
+---
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: kube-apiserver
+  namespace: flux-system
+spec:
+  secretName: kube-apiserver-tls
+  duration: 87600h  # 10y
+  usages:
+    - server auth
+  dnsNames:
+    - localhost
+    - kubernetes.default
+    - garden-kube-apiserver
+    - garden-kube-apiserver.garden
+    - garden-kube-apiserver.garden.svc
+    - {{ .Values.gardener }}
+  issuerRef:
+    name: gardener-ca
+---
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: kube-controllermanager
+  namespace: flux-system
+spec:
+  secretName: kube-controllermanager-tls
+  duration: 87600h  # 10y
+  usages:
+    - client auth
+  commonName: system:kube-controller-manager
+  issuerRef:
+    name: gardener-ca
+---
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: kube-aggregator
+  namespace: flux-system
+spec:
+  secretName: kube-aggregator-tls
+  duration: 87600h  # 10y
+  usages:
+    - server auth
+    - client auth
+  subject:
+    organizations:
+      - garden:aggregator-client:kube-aggregator
+  dnsNames:
+    - localhost
+  issuerRef:
+    name: gardener-ca
+---
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: kube-serviceaccount
+  namespace: flux-system
+spec:
+  secretName: kube-serviceaccount-tls
+  duration: 87600h  # 10y
+  usages:
+    - server auth
+    - client auth
+  dnsNames:
+    - localhost
+  issuerRef:
+    name: gardener-ca
+---
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: kube-admin
+  namespace: flux-system
+spec:
+  secretName: kube-admin-tls
+  duration: 87600h  # 10y
+  usages:
+    - client auth
+  subject:
+    organizations:
+      - system:masters
+  commonName: garden:client:admin
+  issuerRef:
+    name: gardener-ca
+---
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: gardener-apiserver
+  namespace: flux-system
+spec:
+  secretName: gardener-apiserver-tls
+  duration: 87600h  # 10y
+  usages:
+    - server auth
+  dnsNames:
+    - localhost
+    - gardener-apiserver
+    - gardener-apiserver.garden
+    - gardener-apiserver.garden.svc
+  issuerRef:
+    name: gardener-ca
+---
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: gardener-admission-controller
+  namespace: flux-system
+spec:
+  secretName: gardener-admission-controller-tls
+  duration: 87600h  # 10y
+  usages:
+    - server auth
+  dnsNames:
+    - localhost
+    - gardener-admission-controller
+    - gardener-admission-controller.garden
+    - gardener-admission-controller.garden.svc
+  issuerRef:
+    name: gardener-ca

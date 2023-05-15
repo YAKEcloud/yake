@@ -1,0 +1,46 @@
+templates:
+  - cert-management.yaml
+tests:
+  - it: should create secret with test values
+    values:
+      - ../values-test.yaml
+    asserts:
+      - isKind:
+          of: Secret
+      - equal:
+          path: stringData['values.yaml']
+          value: |-
+            createCRDs:
+              issuers: false
+              certificates: false
+            configuration:
+              defaultIssuer: default-issuer
+              defaultIssuerDomainRanges: mydomain.example.org
+              certClass: base-cert-class
+              issuerNamespace: garden
+              dnsClass: base-dns-class
+              dnsNamespace: garden
+  - it: should set repository with registryOverwrite
+    values:
+      - ../values-test.yaml
+      - ../images.yaml
+    set:
+      registryOverwrite:
+        eu.gcr.io: myregistry.example.org
+    asserts:
+      - matchRegex:
+          path: stringData['values.yaml']
+          pattern: "repository: myregistry.example.org/gardener-project/cert-controller-manager\n"
+  - it: should use original repository with registryOverwrite that does not contain the registry in use
+    values:
+      - ../values-test.yaml
+      - ../images.yaml
+    set:
+      registryOverwrite:
+        foo.bar.reg: myregistry.example.org
+        reg.foo.bar: myregistry.example.org
+    asserts:
+      - matchRegex:
+          path: stringData['values.yaml']
+          pattern: "repository: eu.gcr.io/gardener-project/cert-controller-manager\n"
+

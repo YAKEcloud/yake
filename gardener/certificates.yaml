@@ -1,0 +1,28 @@
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: certificates
+  namespace: flux-system
+spec:
+  install:
+    remediation:
+      retries: 3
+    createNamespace: true
+  interval: 1m
+  dependsOn:
+    - name: configuration
+    - name: cert-manager
+    - name: cert-management
+  chart:
+    spec:
+      chart: gardener/certificates
+      reconcileStrategy: Revision
+      sourceRef:
+        kind: GitRepository
+        name: 23ke
+        namespace: flux-system
+      interval: 1m
+  valuesFrom:
+    - kind: Secret
+      name: certificates-base-values
+      optional: false

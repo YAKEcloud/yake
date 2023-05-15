@@ -4,7 +4,7 @@ sidebar_position: 2
 
 # The 23KE config secret
 Via the `23ke-config` secret, some basic parameters for the resulting Gardener installation are configured. In particular, values which should be kept secret such as dnsprovider credentials are set in `23k-config`.
-As the `23ke-config` secret serves as input values for the `pre-gardener-configuration` and `gardener-configuration` helm charts (see [architecture](./architecture.md)), the secret is defined as
+As the `23ke-config` secret serves as input values for the `configuration` helm chart (see [architecture](./architecture.md)), the secret is defined as
 
 ```yaml
 apiVersion: v1

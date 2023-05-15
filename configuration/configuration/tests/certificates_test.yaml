@@ -1,0 +1,14 @@
+templates:
+  - certificates.yaml
+tests:
+  - it: should create secret with test values
+    values:
+      - ../values-test.yaml
+    asserts:
+      - isKind:
+          of: Secret
+      - equal:
+          path: stringData['values.yaml']
+          value: |-
+            gardener: api.mydomain.example.org
+            seed-ingress: internal.mydomain.example.org

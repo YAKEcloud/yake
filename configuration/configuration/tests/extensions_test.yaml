@@ -1,0 +1,104 @@
+templates:
+  - extensions.yaml
+tests:
+  - it: should not enable admission for provider-hcloud
+    values:
+      - ../values-test.yaml
+    asserts:
+      - matchRegex:
+          path: stringData['values.yaml']
+          pattern: |
+            provider-hcloud:
+              version: .+
+              admission:
+                enabled: false
+  - it: should enable admission for provider-aws
+    values:
+      - ../values-test.yaml
+    asserts:
+      - matchRegex:
+          path: stringData['values.yaml']
+          pattern: |
+            provider-aws:
+              version: .+
+              admission:
+                enabled: true
+  - it: should enable admission for provider-gcp
+    values:
+      - ../values-test.yaml
+    asserts:
+      - matchRegex:
+          path: stringData['values.yaml']
+          pattern: |
+            provider-gcp:
+              version: .+
+              admission:
+                enabled: true
+  - it: should enable admission for provider-openstack
+    values:
+      - ../values-test.yaml
+    asserts:
+      - matchRegex:
+          path: stringData['values.yaml']
+          pattern: |
+            provider-openstack:
+              version: .+
+              admission:
+                enabled: true
+  - it: should enable admission for provider-azure
+    values:
+      - ../values-test.yaml
+    asserts:
+      - matchRegex:
+          path: stringData['values.yaml']
+          pattern: |
+            provider-azure:
+              version: .+
+              admission:
+                enabled: true
+  - it: should set repository and imageVector with registryOverwrite, with provider-hcloud as an example
+    values:
+      - ../values-test.yaml
+      - ../images.yaml
+    set:
+      registryOverwrite:
+        ghcr.io: myregistry.example.org
+    asserts:
+      - matchRegex:
+          path: stringData['values.yaml']
+          pattern: |-
+            provider-hcloud:
+              version: .+
+              admission:
+                enabled: false
+                values:
+                  image:
+                    repository: myregistry.example.org/23technologies/gardener-extension-provider-hcloud/admission
+              values:
+                image:
+                  repository: myregistry.example.org/23technologies/gardener-extension-provider-hcloud
+                imageVectorOverwrite: \|
+                  images:
+                  [\s\S]*
+                  - name: machine-controller-manager-provider-hcloud
+                    repository: myregistry.example.org/23technologies/machine-controller-manager-provider-hcloud
+  - it: should deploy dnsControllerManager in shoot-dns-service
+    values:
+      - ../values-test.yaml
+    asserts:
+      - matchRegex:
+          path: stringData['values.yaml']
+          pattern: |-
+            shoot-dns-service:
+              version: .+
+              values:
+                dnsControllerManager:
+                  deploy: true
+                  image:
+                    repository: eu.gcr.io/gardener-project/dns-controller-manager
+                    tag: .+
+                  configuration:
+                    cacheTtl: 300
+                    controllers: dnscontrollers,dnssources
+                    dnsPoolResyncPeriod: 30m
+                    serverPortHttp: 8080

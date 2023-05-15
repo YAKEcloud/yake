@@ -10,11 +10,12 @@ spec:
     createNamespace: true
   interval: 1m
   dependsOn:
+    - name: configuration
     - name: gardener-application
     - name: gardener-runtime
   chart:
     spec:
-      chart: gardener/helmcharts/extensions-meta-chart
+      chart: gardener/extensions
       reconcileStrategy: Revision
       sourceRef:
         kind: GitRepository
