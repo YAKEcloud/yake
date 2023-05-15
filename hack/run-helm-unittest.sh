@@ -12,12 +12,12 @@ for chart in pre-gardener/addons pre-gardener/dnsprovider pre-gardener/issuer ga
   CHARTNAME="$(basename $chart)"
   export CHARTNAME
 
-  MYVALUES="$(echo "$CONFIGVALUES" | yq eval 'select(.metadata.name==strenv(CHARTNAME)+"-base-values") .stringData."values.yaml"' -)"
+  MYVALUES="$(echo "$CONFIGVALUES" | $YQ eval 'select(.metadata.name==strenv(CHARTNAME)+"-base-values") .stringData."values.yaml"' -)"
 
   echo "$MYVALUES" > $tmpDir/$CHARTNAME-test-values.yaml
 
   if [[ $CHARTNAME == "garden-content" ]]; then
-    echo "$(echo "$CONFIGVALUES" | yq eval 'select(.metadata.name=="gardenlet-base-values") .stringData."values.yaml"' -)" >> $tmpDir/$CHARTNAME-test-values.yaml
+    echo "$(echo "$CONFIGVALUES" | $YQ eval 'select(.metadata.name=="gardenlet-base-values") .stringData."values.yaml"' -)" >> $tmpDir/$CHARTNAME-test-values.yaml
   fi
 
   $HELM unittest $chart -v $tmpDir/$CHARTNAME-test-values.yaml
