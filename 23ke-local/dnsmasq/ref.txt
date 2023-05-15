@@ -1,0 +1,1 @@
+https://zinkworks.com/2022/04/04/a-method-to-override-external-domain-name-resolution-in-coredns/

@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: dnsmasq
+  labels:
+    app: dnsmasq
+spec:
+  type: ClusterIP
+  ports:
+    - name: udp-53
+      targetPort: udp-53
+      port: 53
+      protocol: UDP
+  selector:
+    app: dnsmasq

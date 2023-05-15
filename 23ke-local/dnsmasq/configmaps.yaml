@@ -1,0 +1,21 @@
+#dnsmasq.conf file
+kind: ConfigMap
+apiVersion: v1
+metadata:
+  name: dnsmasq-conf
+  labels:
+    app: dnsmasq
+data:
+  dnsmasq.conf: |
+    address=/gardener.local.de/10.100.1.1
+    txt-record=txt.gardener.local.de,"schnogbogo: dingdong"
+---
+kind: ConfigMap
+apiVersion: v1
+metadata:
+  name: dnsmasq-hosts
+  labels:
+    app: dnsmasq
+data:
+  hosts: |
+    10.100.1.2 shoot.gardener.local.de

@@ -1,0 +1,38 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  labels:
+    app: dnsmasq
+  name: dnsmasq
+spec:
+  containers:
+    - image: dnsmasq:0.0.1
+      imagePullPolicy: IfNotPresent
+      name: dnsmasq
+      ports:
+        - containerPort: 53
+          protocol: UDP
+          name: udp-53
+      volumeMounts:
+        - name: dnsmasq-conf
+          mountPath: "/var/dnsmasq/conf"
+        - name: dnsmasq-hosts
+          mountPath: "/var/dnsmasq"
+      securityContext:
+        capabilities:
+          add:
+            - NET_ADMIN
+  dnsPolicy: None
+  dnsConfig:
+    nameservers:
+      - "8.8.8.8"
+  restartPolicy: Always
+  volumes:
+    - name: dnsmasq-conf
+      configMap:
+        defaultMode: 0666
+        name: dnsmasq-conf
+    - name: dnsmasq-hosts
+      configMap:
+        defaultMode: 0666
+        name: dnsmasq-hosts

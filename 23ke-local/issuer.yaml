@@ -1,0 +1,17 @@
+apiVersion: cert-manager.io/v1
+kind: ClusterIssuer
+metadata:
+  name: step-local-issuer
+spec:
+  acme:
+    email: user@gardenerlocal.de
+    server: https://step-certificates.default.svc.cluster.local/acme/acme/directory
+    caBundle: LS0tLS1CRUdJTiBDRVJUSUZJQ0FURS0tLS0tCk1JSUJzekNDQVZtZ0F3SUJBZ0lRWnkvRnlMUXZRR0pOamNpRCtQcXBmakFLQmdncWhrak9QUVFEQWpBNE1SWXcKRkFZRFZRUUtFdzFIWVhKa1pXNWxja3h2WTJGc01SNHdIQVlEVlFRREV4VkhZWEprWlc1bGNreHZZMkZzSUZKdgpiM1FnUTBFd0hoY05Nak13TlRFeE1UTXhPREE1V2hjTk16TXdOVEE0TVRNeE9EQTVXakE0TVJZd0ZBWURWUVFLCkV3MUhZWEprWlc1bGNreHZZMkZzTVI0d0hBWURWUVFERXhWSFlYSmtaVzVsY2t4dlkyRnNJRkp2YjNRZ1EwRXcKV1RBVEJnY3Foa2pPUFFJQkJnZ3Foa2pPUFFNQkJ3TkNBQVJMYUhLNmxZaWZ2NzJXcEhsVDUyeFZNVGpBc0oxbwpQY082dmlmT013Ry9CRllOeTBmVzkwQWIxamlaWGtMTG81bld4OXlyemwwZ0phY1RPQldNNFdvMm8wVXdRekFPCkJnTlZIUThCQWY4RUJBTUNBUVl3RWdZRFZSMFRBUUgvQkFnd0JnRUIvd0lCQVRBZEJnTlZIUTRFRmdRVTBvVnAKbmc0WU9OWVhqcFBOK1RwQVRiV29TWjB3Q2dZSUtvWkl6ajBFQXdJRFNBQXdSUUloQUoxWGN0eXNUWm5iUitHVworL0hpTkV1RDBzZnNpZSs4aXpyb0dsUEFmUU5zQWlBclJCakorL0lySkNWMGk0dWQ5a0dxaDNkcm5EY1RBaEpvCmwyM1c3ajdjNEE9PQotLS0tLUVORCBDRVJUSUZJQ0FURS0tLS0t
+    privateKeySecretRef:
+      # Secret resource that will be used to store the account's private key.
+      name: example-issuer-account-key
+    # Add a single challenge solver, HTTP01 using nginx
+    solvers:
+    - http01:
+        ingress:
+          class: nginx
