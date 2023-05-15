@@ -10,10 +10,10 @@ fi
 echo "Pulling $depName in version $newVersion"
 echo ""
 
-helm repo add --force-update gardener-charts https://gardener-community.github.io/gardener-charts
-helm repo add --force-update ingress-nginx https://kubernetes.github.io/ingress-nginx
-helm repo add --force-update vmware-tanzu https://vmware-tanzu.github.io/helm-charts
-helm repo add --force-update jetstack https://charts.jetstack.io
+$HELM repo add --force-update gardener-charts https://gardener-community.github.io/gardener-charts
+$HELM repo add --force-update ingress-nginx https://kubernetes.github.io/ingress-nginx
+$HELM repo add --force-update vmware-tanzu https://vmware-tanzu.github.io/helm-charts
+$HELM repo add --force-update jetstack https://charts.jetstack.io
 
 case $depName in
 		ingress-nginx)
@@ -31,7 +31,7 @@ case $depName in
 esac
 
 # return if the current dep is not in the helmrepo
-helm show chart $curHelmRepo/$depName 2> /dev/null
+$HELM show chart $curHelmRepo/$depName 2> /dev/null
 if [ $? -eq 1 ]; then
 	 echo "There is no chart for $depName in $curHelmRepo. I will not do anything."
 	 exit
@@ -47,7 +47,7 @@ find "helmcharts/$depName" \
 
 # helm won't untar into a non-empty folder, so untar to /tmp and rsync to existing chart-folder
 tmpDir=$(mktemp -d)
-helm pull "$curHelmRepo/$depName" --untar --untardir "$tmpDir" --version "$newVersion"
+$HELM pull "$curHelmRepo/$depName" --untar --untardir "$tmpDir" --version "$newVersion"
 cp -rn "$tmpDir/$depName" "helmcharts/"
 rm -rf "$tmpDir"
 

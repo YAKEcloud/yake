@@ -5,10 +5,13 @@ FLUX	                     := $(TOOLS_BIN_DIR)/flux
 KUBECTL                    := $(TOOLS_BIN_DIR)/kubectl
 YQ                         := $(TOOLS_BIN_DIR)/yq
 MC                         := $(TOOLS_BIN_DIR)/mc
+HELM                         := $(TOOLS_BIN_DIR)/helm
 
 # default tool versions
 # renovate: datasource=github-releases depName=fluxcd/flux2
 FLUX_VERSION ?= v0.35.0
+# renovate: datasource=github-tags depName=helm/helm
+HELM_VERSION ?= v3.12.0
 # renovate: datasource=github-tags depName=kubernetes/kubectl
 KUBECTL_VERSION ?= v0.24.3
 # renovate: datasource=github-releases depName=mikefarah/yq
@@ -63,4 +66,8 @@ $(MC): $(call tool_version_file,$(MC),$(MC_VERSION))
 	curl -L -o $(MC) https://dl.min.io/client/mc/release/$(shell uname -s | tr '[:upper:]' '[:lower:]')-$(shell uname -m | sed 's/x86_64/amd64/;s/aarch64/arm64/')/mc.$(MC_VERSION)
 	chmod +x $(MC)
 
-all: $(FLUX) $(YQ) $(KUBECTL) $(MC)
+$(HELM): $(call tool_version_file,$(HELM),$(HELM_VERSION))
+	curl -L $(HELM) https://get.helm.sh/helm-$(HELM_VERSION)-$(shell uname -s | tr '[:upper:]' '[:lower:]')-$(shell uname -m | sed 's/x86_64/amd64/;s/aarch64/arm64/').tar.gz | tar -xz -C $(TOOLS_BIN_DIR)
+	chmod +x $(HELM)
+
+all: $(FLUX) $(YQ) $(KUBECTL) $(MC) $(HELM)
