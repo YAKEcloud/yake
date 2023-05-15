@@ -67,7 +67,7 @@ $(MC): $(call tool_version_file,$(MC),$(MC_VERSION))
 	chmod +x $(MC)
 
 $(HELM): $(call tool_version_file,$(HELM),$(HELM_VERSION))
-	curl -L $(HELM) https://get.helm.sh/helm-$(HELM_VERSION)-$(shell uname -s | tr '[:upper:]' '[:lower:]')-$(shell uname -m | sed 's/x86_64/amd64/;s/aarch64/arm64/').tar.gz | tar -xz -C $(TOOLS_BIN_DIR)
+	curl -L https://get.helm.sh/helm-$(HELM_VERSION)-$(shell uname -s | tr '[:upper:]' '[:lower:]')-$(shell uname -m | sed 's/x86_64/amd64/;s/aarch64/arm64/').tar.gz | tar -xz --strip-components 1 -C $(TOOLS_BIN_DIR) "$(shell uname -s | tr '[:upper:]' '[:lower:]')-$(shell uname -m | sed 's/x86_64/amd64/;s/aarch64/arm64/')/helm"
 	chmod +x $(HELM)
 
 all: $(FLUX) $(YQ) $(KUBECTL) $(MC) $(HELM)
