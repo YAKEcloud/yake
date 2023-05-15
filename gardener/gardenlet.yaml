@@ -8,6 +8,8 @@ spec:
   interval: 1m
   targetNamespace: garden
   dependsOn:
+    - name: configuration
+    - name: certificates
     - name: garden-content
     - name: gardener-application
     - name: gardener-runtime

@@ -2,14 +2,14 @@ apiVersion: seedmanagement.gardener.cloud/v1alpha1
 kind: ManagedSeed
 metadata:
   name: mng-seed-0
-  namespace: garden # Must be garden
+  namespace: garden  # Must be garden
 spec:
   shoot:
     name: mng-seed-0
   # gardenlet specifies that the ManagedSeed controller should deploy a gardenlet into the cluster
   # with the given deployment parameters and GardenletConfiguration.
   gardenlet:
-    config: # GardenletConfiguration resource
+    config:  # GardenletConfiguration resource
       apiVersion: gardenlet.config.gardener.cloud/v1alpha1
       kind: GardenletConfiguration
       seedConfig:

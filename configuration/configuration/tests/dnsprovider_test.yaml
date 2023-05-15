@@ -1,0 +1,18 @@
+templates:
+  - dnsprovider.yaml
+tests:
+  - it: should create secret with test values
+    values:
+      - ../values-test.yaml
+    asserts:
+      - isKind:
+          of: Secret
+      - equal:
+          path: stringData['values.yaml']
+          value: |-
+            domains:
+              - mydomain.example.org
+            provider: example
+            credentials:
+              token: example
+

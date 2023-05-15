@@ -1,0 +1,44 @@
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: gardener-base-values
+  namespace: flux-system
+type: Opaque
+stringData:
+  values.yaml: |-
+    global:
+      deployment:
+        virtualGarden:
+          enabled: true
+      defaultDomains: {{ include "gardener.defaultDomains" . | indent 8 }}
+      internalDomain: {{ include "gardener.internalDomain" . | indent 8 }}
+      apiserver:
+        replicaCount: 2
+        vpa: true
+        clusterIdentity: {{ .Values.clusterIdentity }}
+{{- if .Values.registryOverwrite }}
+        image:
+          repository: {{ include "replaceRegistry" (dict "eu.gcr.io/gardener-project/gardener/apiserver" .Values.registryOverwrite) }}
+{{- end }}
+      admission:
+        replicaCount: 2
+        vpa: true
+{{- if .Values.registryOverwrite }}
+        image:
+          repository: {{ include "replaceRegistry" (dict "eu.gcr.io/gardener-project/gardener/admission-controller" .Values.registryOverwrite) }}
+{{- end }}
+      controller:
+        replicaCount: 2
+        vpa: true
+{{- if .Values.registryOverwrite }}
+        image:
+          repository: {{ include "replaceRegistry" (dict "eu.gcr.io/gardener-project/gardener/controller-manager" .Values.registryOverwrite) }}
+{{- end }}
+      scheduler:
+        replicaCount: 2
+        vpa: true
+{{- if .Values.registryOverwrite }}
+        image:
+          repository: {{ include "replaceRegistry" (dict "eu.gcr.io/gardener-project/gardener/scheduler" .Values.registryOverwrite) }}
+{{- end }}

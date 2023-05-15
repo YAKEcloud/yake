@@ -1,0 +1,16 @@
+clusterIdentity: garden-cluster-identity
+
+gardenlet:
+  ingressDomain: internal
+
+backups:
+  enabled: false
+
+addons:
+  vpa:
+    enabled: false
+
+issuer:
+  enabled: true
+  acme:
+    server: https://acme-v02.api.letsencrypt.org/directory

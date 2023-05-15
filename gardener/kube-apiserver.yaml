@@ -10,6 +10,8 @@ spec:
     createNamespace: true
   targetNamespace: garden
   dependsOn:
+    - name: configuration
+    - name: certificates
     - name: etcd
     - name: etcd-events
     - name: identity

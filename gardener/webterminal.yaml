@@ -6,6 +6,7 @@ metadata:
   namespace: flux-system
 spec:
   dependsOn:
+    - name: configuration
     - name: gardener-application
   targetNamespace: flux-system
   interval: 1m
@@ -39,6 +40,7 @@ metadata:
   namespace: flux-system
 spec:
   dependsOn:
+    - name: configuration
     - name: terminal-controller-manager-runtime
   targetNamespace: flux-system
   kubeConfig:

@@ -1,0 +1,87 @@
+templates:
+  - gardenlet.yaml
+tests:
+  - it: should create secret with test values
+    values:
+      - ../values-test.yaml
+    asserts:
+      - isKind:
+          of: Secret
+      - equal:
+          path: stringData['values.yaml']
+          value: |-
+            global:
+              token:
+                id: bootstrapTokenId
+                secret: bootstrapTokenSecret
+              additionalSecrets:
+                - name: base-dns-provider-secret
+                  namespace: garden
+                  data:
+                    token: example
+            config:
+              seedConfig:
+                spec:
+                  ingress:
+                    domain: internal.mydomain.example.org
+                    controller:
+                      kind: nginx
+                  dns:
+                    provider:
+                      type: example
+                      secretRef:
+                        name: base-dns-provider-secret
+                        namespace: garden
+              gardenClientConnection:
+                gardenClusterAddress: https://api.mydomain.example.org:443
+                bootstrapKubeconfig:
+                  secretRef:
+                    name: gardenlet-kubeconfig-bootstrap
+                    namespace: flux-system
+                kubeconfigSecret:
+                  name: gardenlet-kubeconfig
+                  namespace: garden
+  - it: should contain backup config with backup enabled/credentials
+    values:
+      - ../values-test.yaml
+    set:
+      backups:
+        enabled: true
+        provider: backuprovider
+        region: backupregion
+        credentials:
+          token: example
+    asserts:
+      - matchRegex:
+          path: stringData['values.yaml']
+          pattern: |-2
+                  backup:
+                    provider: backuprovider
+                    region: backupregion
+                    secretRef:
+                      name: for-backups-internal-seed
+                      namespace: garden
+  - it: should set repository with registryOverwrite
+    values:
+      - ../values-test.yaml
+      - ../images.yaml
+    set:
+      registryOverwrite:
+        eu.gcr.io: myregistry.example.org
+    asserts:
+      - matchRegex:
+          path: stringData['values.yaml']
+          pattern: |-2
+            image:
+              repository: myregistry.example.org/gardener-project/gardener/gardenlet
+            imageVectorOverwrite: \|
+              images:[\s\S]*
+              - name: gardenlet
+                repository: myregistry.example.org/gardener-project/gardener/gardenlet[\s\S]*
+            componentImageVectorOverwrites: \|
+              components:
+              - name: etcd-druid
+                imageVectorOverwrite: \|
+                  images:[\s\S]*
+                  - name: etcd-backup-restore
+                    repository: myregistry.example.org/gardener-project/gardener/etcd

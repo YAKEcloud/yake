@@ -94,7 +94,7 @@
   "regexManagers": [
     {
       "fileMatch": [
-        "^gardener/configuration/templates/extensions-base-values.yaml$"
+        "^configuration/configuration/templates/extensions-base-values.yaml$"
       ],
       "datasourceTemplate": "helm",
       "registryUrlTemplate": "https://gardener-community.github.io/gardener-charts",
@@ -115,10 +115,10 @@
   "addLabels": ["version-bump"],
   "postUpgradeTasks": {
     "commands": [
-      "cd hack/go/imagevector-importer && go run main.go import --config config.yaml > ../../../gardener/configuration/images.yaml",
+      "cd hack/go/imagevector-importer && go run main.go import --config config.yaml > ../../../configuration/configuration/images.yaml",
       "./hack/pull-helmchart.sh {{{depName}}} {{{newVersion}}}",
     ],
-    "fileFilters": ["gardener/configuration/images.yaml", "helmcharts/**/**", "docs/release-notes/next.md"],
+    "fileFilters": ["configuration/configuration/images.yaml", "helmcharts/**/**", "docs/release-notes/next.md"],
     "executionMode": "update"
   }
 }

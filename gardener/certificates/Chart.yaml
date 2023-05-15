@@ -1,0 +1,7 @@
+apiVersion: v2
+name: certificates
+description: A Helm chart for the 23ke certificates
+
+type: application
+
+version: 0.0.1

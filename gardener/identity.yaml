@@ -9,6 +9,8 @@ spec:
       retries: 3
     createNamespace: true
   targetNamespace: garden
+  dependsOn:
+    - name: configuration
   interval: 1m
   chart:
     spec:

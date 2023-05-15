@@ -1,0 +1,16 @@
+templates:
+  - cert-manager-ca.yaml
+tests:
+  - it: should create Issuer with default values
+    documentIndex: 2  # order in template is not actually important, but for this test to work it is
+    asserts:
+      - containsDocument:
+          apiVersion: cert-manager.io/v1
+          kind: Issuer
+          name: gardener-ca
+          namespace: flux-system
+      - equal:
+          path: spec
+          value:
+            ca:
+              secretName: gardener-ca-keypair

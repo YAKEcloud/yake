@@ -1,7 +1,0 @@
-apiVersion: v2
-name: pre-gardener-configuration
-description: A Helm chart for the pre-gardener configuration files
-
-type: application
-kubeVersion: ">= 1.24.0 < 1.26.0"
-version: 0.0.1

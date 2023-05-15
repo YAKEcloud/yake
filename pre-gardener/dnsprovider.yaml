@@ -9,6 +9,7 @@ spec:
       retries: 3
     createNamespace: true
   dependsOn:
+    - name: configuration
     - name: external-dns-management
   targetNamespace: garden
   interval: 1m

@@ -12,15 +12,18 @@ rules:
 ignore: |
   .github/workflows/
   flux-system/gotk-components.yaml
-  gardener/configuration/templates/
-  gardener/helmcharts
+  gardener/certificates/templates/
+  gardener/extensions/templates/
+  gardener/garden-content/templates/
   hack/ci/secrets/
   hack/ci/dev-env/config/charts
   pre-gardener/addons/templates/
-  pre-gardener/configuration/templates/
-  pre-gardener/dnsprovider/templates
+  configuration/configuration/templates/
+  pre-gardener/dnsprovider/templates/
+  configuration/generated-secrets/templates/
   pre-gardener/issuer/templates/
   hack/go/23kectl/pkg/install/v1/__fixture__/
   hack/go/23kectl/pkg/install/v1/__embed__/
   hack/23ke-controlplane-cert-extension/
   helmcharts
+  docs
