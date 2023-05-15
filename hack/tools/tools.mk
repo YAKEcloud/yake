@@ -46,28 +46,31 @@ $(TOOLS_BIN_DIR)/.version_%:
 clean-tools-bin:
 	rm -rf $(TOOLS_BIN_DIR)/*
 
+KERNEL := $(shell uname -s | tr '[:upper:]' '[:lower:]')
+ARCH := $(shell uname -m | sed 's/x86_64/amd64/;s/aarch64/arm64/')
+
 #########################################
 # Tools                                 #
 #########################################
 
 $(FLUX): $(call tool_version_file,$(FLUX),$(FLUX_VERSION))
-	curl -L https://github.com/fluxcd/flux2/releases/download/$(FLUX_VERSION)/flux_$(subst v,,$(FLUX_VERSION))_$(shell uname -s | tr '[:upper:]' '[:lower:]')_$(shell uname -m | sed 's/x86_64/amd64/;s/aarch64/arm64/').tar.gz | tar -xz -C $(TOOLS_BIN_DIR)
+	curl -L https://github.com/fluxcd/flux2/releases/download/$(FLUX_VERSION)/flux_$(subst v,,$(FLUX_VERSION))_$(KERNEL)_$(ARCH).tar.gz | tar -xz -C $(TOOLS_BIN_DIR)
 	chmod +x $(FLUX)
 
 $(KUBECTL): $(call tool_version_file,$(KUBECTL),$(KUBERNETES_VERSION))
-	curl -Lo $(KUBECTL) https://dl.k8s.io/release/$(KUBERNETES_VERSION)/bin/$(shell uname -s | tr '[:upper:]' '[:lower:]')/$(shell uname -m | sed 's/x86_64/amd64/;s/aarch64/arm64/')/kubectl
+	curl -Lo $(KUBECTL) https://dl.k8s.io/release/$(KUBERNETES_VERSION)/bin/$(KERNEL)/$(ARCH)/kubectl
 	chmod +x $(KUBECTL)
 
 $(YQ): $(call tool_version_file,$(YQ),$(YQ_VERSION))
-	curl -L -o $(YQ) https://github.com/mikefarah/yq/releases/download/$(YQ_VERSION)/yq_$(shell uname -s | tr '[:upper:]' '[:lower:]')_$(shell uname -m | sed 's/x86_64/amd64/;s/aarch64/arm64/')
+	curl -L -o $(YQ) https://github.com/mikefarah/yq/releases/download/$(YQ_VERSION)/yq_$(KERNEL)_$(ARCH)
 	chmod +x $(YQ)
 
 $(MC): $(call tool_version_file,$(MC),$(MC_VERSION))
-	curl -L -o $(MC) https://dl.min.io/client/mc/release/$(shell uname -s | tr '[:upper:]' '[:lower:]')-$(shell uname -m | sed 's/x86_64/amd64/;s/aarch64/arm64/')/archive/mc.$(MC_VERSION)
+	curl -L -o $(MC) https://dl.min.io/client/mc/release/$(KERNEL)-$(ARCH)/archive/mc.$(MC_VERSION)
 	chmod +x $(MC)
 
 $(HELM): $(call tool_version_file,$(HELM),$(HELM_VERSION))
-	curl -L https://get.helm.sh/helm-$(HELM_VERSION)-$(shell uname -s | tr '[:upper:]' '[:lower:]')-$(shell uname -m | sed 's/x86_64/amd64/;s/aarch64/arm64/').tar.gz | tar -xz --strip-components 1 -C $(TOOLS_BIN_DIR) "$(shell uname -s | tr '[:upper:]' '[:lower:]')-$(shell uname -m | sed 's/x86_64/amd64/;s/aarch64/arm64/')/helm"
+	curl -L https://get.helm.sh/helm-$(HELM_VERSION)-$(KERNEL)-$(ARCH).tar.gz | tar -xz --strip-components 1 -C $(TOOLS_BIN_DIR) "$(KERNEL)-$(ARCH)/helm"
 	chmod +x $(HELM)
 
 all: $(FLUX) $(YQ) $(KUBECTL) $(MC) $(HELM)
