@@ -64,4 +64,3 @@ $(MC): $(call tool_version_file,$(MC),$(MC_VERSION))
 	chmod +x $(MC)
 
 all: $(FLUX) $(YQ) $(KUBECTL) $(MC)
-kubectl: $(KUBECTL)
