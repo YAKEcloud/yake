@@ -9,11 +9,15 @@ MC                         := $(TOOLS_BIN_DIR)/mc
 # default tool versions
 # renovate: datasource=github-releases depName=fluxcd/flux2
 FLUX_VERSION ?= v0.35.0
+# renovate: datasource=github-tags depName=kubernetes/kubectl
 KUBECTL_VERSION ?= v0.24.3
 # renovate: datasource=github-releases depName=mikefarah/yq
 YQ_VERSION ?= v4.9.6
 # renovate: datasource=github-tags depName=minio/mc versioning=regex:^(?<compatibility>RELEASE\.)(?<major>\d+)-(?<minor>\d+)-(?<patch>\d+)T(?<build>\d+)-\d+-\d+Z$
 MC_VERSION ?= RELEASE.2023-01-28T20-29-38Z
+
+# kubectl v0.x.y corresponds with kubernetes v1.x.y, the kubectl download server expects the kubernetes version
+KUBERNETES_VERSION := $(subst v0,v1,$(KUBECTL_VERSION))
 
 #########################################
 # Common                                #
@@ -47,8 +51,8 @@ $(FLUX): $(call tool_version_file,$(FLUX),$(FLUX_VERSION))
 	curl -L https://github.com/fluxcd/flux2/releases/download/$(FLUX_VERSION)/flux_$(subst v,,$(FLUX_VERSION))_$(shell uname -s | tr '[:upper:]' '[:lower:]')_$(shell uname -m | sed 's/x86_64/amd64/;s/aarch64/arm64/').tar.gz | tar -xz -C $(TOOLS_BIN_DIR)
 	chmod +x $(FLUX)
 
-$(KUBECTL): $(call tool_version_file,$(KUBECTL),$(KUBECTL_VERSION))
-	curl -Lo $(KUBECTL) https://dl.k8s.io/release/$(KUBECTL_VERSION)/bin/$(shell uname -s | tr '[:upper:]' '[:lower:]')/$(shell uname -m | sed 's/x86_64/amd64/;s/aarch64/arm64/')/kubectl
+$(KUBECTL): $(call tool_version_file,$(KUBECTL),$(KUBERNETES_VERSION))
+	curl -Lo $(KUBECTL) https://dl.k8s.io/release/$(KUBERNETES_VERSION)/bin/$(shell uname -s | tr '[:upper:]' '[:lower:]')/$(shell uname -m | sed 's/x86_64/amd64/;s/aarch64/arm64/')/kubectl
 	chmod +x $(KUBECTL)
 
 $(YQ): $(call tool_version_file,$(YQ),$(YQ_VERSION))
@@ -60,3 +64,4 @@ $(MC): $(call tool_version_file,$(MC),$(MC_VERSION))
 	chmod +x $(MC)
 
 all: $(FLUX) $(YQ) $(KUBECTL) $(MC)
+kubectl: $(KUBECTL)
