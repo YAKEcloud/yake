@@ -14,7 +14,7 @@ $KUBECTL delete --timeout=1m --all -n garden dnsentries.dns.gardener.cloud
 rclone -q purge $REMOTE:$BACKUP_BUCKET || echo "Deleting backup bucket failed"
 
 # delete 23ke bucket
-mc rb -q --dangerous --force $MC_ALIAS/$BUCKET_23KE || echo "Deleting bucket failed"
+$MC rb -q --dangerous --force $MC_ALIAS/$BUCKET_23KE || echo "Deleting bucket failed"
 
 echo "Deleting shoot"
 export KUBECONFIG=hack/ci/secrets/gardener-kubeconfig.yaml
