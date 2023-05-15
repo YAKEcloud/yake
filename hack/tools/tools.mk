@@ -7,10 +7,13 @@ YQ                         := $(TOOLS_BIN_DIR)/yq
 MC                         := $(TOOLS_BIN_DIR)/mc
 
 # default tool versions
-FLUX_VERSION ?= v0.35.0 # renovate: datasource=github-releases depName=fluxcd/flux2
-KUBECTL_VERSION ?= v1.24.3
-YQ_VERSION ?= v4.9.6 # renovate: datasource=github-releases depName=mikefarah/yq
-MC_VERSION ?= RELEASE.2023-01-28T20-29-38Z # renovate: datasource=github-tags depName=minio/mc versioning=regex:^(?<compatibility>RELEASE\.)(?<major>\d+)-(?<minor>\d+)-(?<patch>\d+)T(?<build>\d+)-\d+-\d+Z$
+# renovate: datasource=github-releases depName=fluxcd/flux2
+FLUX_VERSION ?= v0.35.0
+KUBECTL_VERSION ?= v0.24.3
+# renovate: datasource=github-releases depName=mikefarah/yq
+YQ_VERSION ?= v4.9.6
+# renovate: datasource=github-tags depName=minio/mc versioning=regex:^(?<compatibility>RELEASE\.)(?<major>\d+)-(?<minor>\d+)-(?<patch>\d+)T(?<build>\d+)-\d+-\d+Z$
+MC_VERSION ?= RELEASE.2023-01-28T20-29-38Z
 
 #########################################
 # Common                                #

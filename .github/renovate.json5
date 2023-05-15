@@ -109,7 +109,7 @@
         "^hack/tools/tools.mk$"
       ],
       "matchStrings": [
-        "(?<currentValue>[^ ]+) # renovate: datasource=(?<datasource>.+?) depName=(?<depName>.+?)( versioning=(?<versioning>.+?))?\n"
+        "# renovate: datasource=(?<datasource>.+?) depName=(?<depName>.+?)( versioning=(?<versioning>.+?))?\n.+?(?<currentValue>[^ ]+?)\n"
       ]
     }
   ],
