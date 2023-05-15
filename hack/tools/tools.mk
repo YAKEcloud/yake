@@ -63,7 +63,7 @@ $(YQ): $(call tool_version_file,$(YQ),$(YQ_VERSION))
 	chmod +x $(YQ)
 
 $(MC): $(call tool_version_file,$(MC),$(MC_VERSION))
-	curl -L -o $(MC) https://dl.min.io/client/mc/release/$(shell uname -s | tr '[:upper:]' '[:lower:]')-$(shell uname -m | sed 's/x86_64/amd64/;s/aarch64/arm64/')/mc.$(MC_VERSION)
+	curl -L -o $(MC) https://dl.min.io/client/mc/release/$(shell uname -s | tr '[:upper:]' '[:lower:]')-$(shell uname -m | sed 's/x86_64/amd64/;s/aarch64/arm64/')/archive/mc.$(MC_VERSION)
 	chmod +x $(MC)
 
 $(HELM): $(call tool_version_file,$(HELM),$(HELM_VERSION))
