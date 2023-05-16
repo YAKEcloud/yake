@@ -106,10 +106,10 @@
     },
     {
       "fileMatch": [
-        "^hack/tools/tools.mk$"
+        "^hack/tools/install.sh$"
       ],
       "matchStrings": [
-        "# renovate: datasource=(?<datasource>.+?) depName=(?<depName>.+?)( versioning=(?<versioning>.+?))?\n.+?(?<currentValue>[^ ]+?)\n"
+        "# renovate: datasource=(?<datasource>.+?) depName=(?<depName>.+?)( versioning=(?<versioning>.+?))?\n.+?VERSION=(?<currentValue>.+?)\n"
       ]
     }
   ],

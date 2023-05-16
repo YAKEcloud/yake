@@ -1,5 +1,10 @@
 #!/usr/bin/env bash
 
+source hack/tools/install.sh
+
+install_helm
+install_yq
+
 set -eo pipefail
 tmpDir=$(mktemp -d)
 

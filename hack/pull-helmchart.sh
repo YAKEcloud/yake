@@ -1,6 +1,10 @@
 #!/usr/bin/env bash
 set -eu
 
+source hack/tools/install.sh
+
+install_helm
+
 depName=$1
 newVersion=$2
 if [[ -z "$depName" ]]; then

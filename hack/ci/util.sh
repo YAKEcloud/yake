@@ -1,13 +1,10 @@
 #!/usr/bin/env bash
 
-ensureDependencies() {
-  make -f hack/tools/tools.mk all
+source hack/tools/install.sh
 
-  export FLUX=hack/tools/bin/flux
-  export KUBECTL=hack/tools/bin/kubectl
-  export MC=hack/tools/bin/mc
-  export YQ=hack/tools/bin/yq
-}
+install_kubectl
+install_yq
+install_mc
 
 checkDependencies() {
   DEPS=(envsubst git go rclone)
@@ -50,4 +47,3 @@ onErr() {
 # ----------------------------------------
 
 trap 'onErr ${LINENO} "$BASH_COMMAND"' ERR
-ensureDependencies

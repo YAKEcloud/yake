@@ -16,6 +16,10 @@
 #
 # Modified from: github.com/gardener/gardener/hack/generate-controller-registration.sh
 
+source hack/tools/install.sh
+
+install_helm
+
 NAME=23ke-controlplane-cert
 CHART_DIR=${BASH_SOURCE%/*}/23ke-controlplane-cert-extension
 VERSION=0.0.1
