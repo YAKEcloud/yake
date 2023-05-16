@@ -70,7 +70,7 @@ $(MC): $(call tool_version_file,$(MC),$(MC_VERSION))
 	chmod +x $(MC)
 
 $(HELM): $(call tool_version_file,$(HELM),$(HELM_VERSION))
-	curl -L https://get.helm.sh/helm-$(HELM_VERSION)-$(KERNEL)-$(ARCH).tar.gz | tar -xz --strip-components 1 -C $(TOOLS_BIN_DIR) "$(KERNEL)-$(ARCH)/helm"
+	curl -L https://get.helm.sh/helm-$(HELM_VERSION)-$(KERNEL)-$(ARCH).tar.gz | tar -xzm --strip-components 1 -C $(TOOLS_BIN_DIR) "$(KERNEL)-$(ARCH)/helm"
 	chmod +x $(HELM)
 
 all: $(FLUX) $(YQ) $(KUBECTL) $(MC) $(HELM)
