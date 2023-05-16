@@ -41,7 +41,7 @@ _setVersion() {
 
 install_flux() {
   # renovate: datasource=github-releases depName=fluxcd/flux2
-  VERSION=v0.35.0
+  VERSION=v0.41.2
 
   if _isStale $FLUX $VERSION; then
     curl -L "https://github.com/fluxcd/flux2/releases/download/$VERSION/flux_${VERSION/v/}_${TOOLS_KERNEL}_$TOOLS_ARCH.tar.gz" | tar -xzm -C "$TOOLS_BIN_DIR"
@@ -53,7 +53,7 @@ install_flux() {
 
 install_kubectl() {
   # renovate: datasource=github-tags depName=kubernetes/kubectl
-  VERSION=v0.24.3
+  VERSION=v0.27.1
 
   if _isStale $KUBECTL $VERSION; then
     curl -Lo $KUBECTL "https://dl.k8s.io/release/${VERSION/v0/v1}/bin/$TOOLS_KERNEL/$TOOLS_ARCH/kubectl"
@@ -65,7 +65,7 @@ install_kubectl() {
 
 install_yq() {
   # renovate: datasource=github-releases depName=mikefarah/yq
-  VERSION=v4.9.6
+  VERSION=v4.33.3
 
   if _isStale $YQ $VERSION; then
     curl -L -o $YQ "https://github.com/mikefarah/yq/releases/download/$VERSION/yq_${TOOLS_KERNEL}_$TOOLS_ARCH"
@@ -77,7 +77,7 @@ install_yq() {
 
 install_mc() {
   # renovate: datasource=github-tags depName=minio/mc versioning=regex:^(?<compatibility>RELEASE\.)(?<major>\d+)-(?<minor>\d+)-(?<patch>\d+)T(?<build>\d+)-\d+-\d+Z$
-  VERSION=RELEASE.2023-01-28T20-29-38Z
+  VERSION=RELEASE.2023-05-04T18-10-16Z
 
   if _isStale $MC $VERSION; then
     curl -L -o "$MC" "https://dl.min.io/client/mc/release/$TOOLS_KERNEL-$TOOLS_ARCH/archive/mc.$VERSION"
