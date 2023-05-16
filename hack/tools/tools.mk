@@ -54,7 +54,7 @@ ARCH := $(shell uname -m | sed 's/x86_64/amd64/;s/aarch64/arm64/')
 #########################################
 
 $(FLUX): $(call tool_version_file,$(FLUX),$(FLUX_VERSION))
-	curl -L https://github.com/fluxcd/flux2/releases/download/$(FLUX_VERSION)/flux_$(subst v,,$(FLUX_VERSION))_$(KERNEL)_$(ARCH).tar.gz | tar -xz -C $(TOOLS_BIN_DIR)
+	curl -L https://github.com/fluxcd/flux2/releases/download/$(FLUX_VERSION)/flux_$(subst v,,$(FLUX_VERSION))_$(KERNEL)_$(ARCH).tar.gz | tar -xzm -C $(TOOLS_BIN_DIR)
 	chmod +x $(FLUX)
 
 $(KUBECTL): $(call tool_version_file,$(KUBECTL),$(KUBERNETES_VERSION))
