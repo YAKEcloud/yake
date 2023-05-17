@@ -94,7 +94,7 @@
   "regexManagers": [
     {
       "fileMatch": [
-        "^configuration/configuration/templates/extensions-base-values.yaml$"
+        "^configuration/configuration/templates/extensions.yaml$"
       ],
       "datasourceTemplate": "helm",
       "registryUrlTemplate": "https://gardener-community.github.io/gardener-charts",
