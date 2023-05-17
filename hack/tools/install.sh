@@ -100,7 +100,6 @@ install_helm() {
   fi
 }
 
-
 install_rclone() {
   # renovate: datasource=github-tags depName=rclone/rclone
   VERSION=v1.62.2
@@ -116,4 +115,19 @@ install_rclone() {
 
     _setVersion $RCLONE $VERSION
   fi
+}
+
+install_23kectl() {
+  # not under renovate control
+  VERSION=$1
+  local _23KECTL="$TOOLS_BIN_DIR/23kectl"
+
+  if _isStale $_23KECTL $VERSION; then
+		curl -L -o $_23KECTL https://github.com/23technologies/23kectl/releases/download/${_23KECTL_VERSION}/23kectl-${_23KECTL_VERSION}-${TOOLS_KERNEL}-${TOOLS_ARCH}
+		chmod +x $_23KECTL
+
+    _setVersion $_23KECTL $VERSION
+  fi
+
+  echo $_23KECTL
 }

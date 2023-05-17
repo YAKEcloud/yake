@@ -22,18 +22,18 @@ if [ -d "hack/go/23kectl" ]; then
 		go build .
 		cp 23kectl $repoRoot
     cd $repoRoot
+    _23KECTL=$repoRoot/23kectl
 else
-		wget -q -O 23kectl https://github.com/23technologies/23kectl/releases/download/${_23KECTL_VERSION}/23kectl-${_23KECTL_VERSION}-linux-amd64
-		chmod +x 23kectl
+    _23KECTL="$(install_23kectl $_23KECTL_VERSION)"
 fi
 
-./23kectl install --kubeconfig hack/ci/secrets/shoot-kubeconfig.yaml --config hack/ci/misc/23kectl-config.yaml
+$_23KECTL install --kubeconfig hack/ci/secrets/shoot-kubeconfig.yaml --config hack/ci/misc/23kectl-config.yaml
 
 echo "Waiting for Kustomization gardener"
-$KUBECTL wait kustomization gardener -n flux-system --for=condition=ready --timeout=10m  || { ./23kectl doctor --kubeconfig hack/ci/secrets/shoot-kubeconfig.yaml; exit 1; }
+$KUBECTL wait kustomization gardener -n flux-system --for=condition=ready --timeout=10m  || { $_23KECTL doctor --kubeconfig hack/ci/secrets/shoot-kubeconfig.yaml; exit 1; }
 
 echo "Waiting for all Helmreleases to be ready"
-$KUBECTL wait helmrelease -A --all --for=condition=ready --timeout=10m || { ./23kectl doctor --kubeconfig hack/ci/secrets/shoot-kubeconfig.yaml; exit 1; }
+$KUBECTL wait helmrelease -A --all --for=condition=ready --timeout=10m || { $_23KECTL doctor --kubeconfig hack/ci/secrets/shoot-kubeconfig.yaml; exit 1; }
 
 echo "Get the kubeconfig for the virtual garden"
 $KUBECTL get secrets -n garden garden-kubeconfig-for-admin -o go-template='{{.data.kubeconfig | base64decode }}' > hack/ci/secrets/apiserver-in-shoot-kubeconfig.yaml
