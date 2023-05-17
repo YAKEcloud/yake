@@ -5,9 +5,10 @@ source hack/tools/install.sh
 install_kubectl
 install_yq
 install_mc
+install_rclone
 
 checkDependencies() {
-  DEPS=(envsubst git go rclone)
+  DEPS=(envsubst git go unzip)
 
   for DEP in "${DEPS[@]}"; do
     if ! which "$DEP" &>/dev/null; then

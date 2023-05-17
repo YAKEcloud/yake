@@ -7,6 +7,6 @@ source hack/ci/handy.sh
 # 23KE Backup-Bucket
 echo -e "Backup Bucket creation"
 
-rclone -q mkdir $REMOTE:$BACKUP_BUCKET
+$RCLONE -q mkdir $REMOTE:$BACKUP_BUCKET
 
 echo -e "Backup Bucket ready  ✅"

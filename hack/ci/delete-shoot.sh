@@ -11,7 +11,7 @@ $KUBECTL delete --timeout=1m -n garden ingress identity-ingress
 $KUBECTL delete --timeout=1m --all -n garden dnsentries.dns.gardener.cloud
 
 # delete buckets on azure
-rclone -q purge $REMOTE:$BACKUP_BUCKET || echo "Deleting backup bucket failed"
+$RCLONE -q purge $REMOTE:$BACKUP_BUCKET || echo "Deleting backup bucket failed"
 
 # delete 23ke bucket
 $MC rb -q --dangerous --force $MC_ALIAS/$BUCKET_23KE || echo "Deleting bucket failed"

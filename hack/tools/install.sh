@@ -7,6 +7,7 @@ KUBECTL="$TOOLS_BIN_DIR/kubectl"
 YQ="$TOOLS_BIN_DIR/yq"
 MC="$TOOLS_BIN_DIR/mc"
 HELM="$TOOLS_BIN_DIR/helm"
+RCLONE="$TOOLS_BIN_DIR/rclone"
 
 TOOLS_KERNEL="$(uname -s | tr '[:upper:]' '[:lower:]')"
 TOOLS_ARCH="$(uname -m | sed 's/x86_64/amd64/;s/aarch64/arm64/')"
@@ -96,5 +97,23 @@ install_helm() {
     chmod +x $HELM
 
     _setVersion $HELM $VERSION
+  fi
+}
+
+
+install_rclone() {
+  # renovate: datasource=github-tags depName=rclone/rclone
+  VERSION=v1.62.2
+
+  if _isStale $RCLONE $VERSION; then
+    ZIP="$RCLONE.zip"
+    OS=${TOOLS_KERNEL/darwin/osx}
+
+    curl -Lo $ZIP "https://github.com/rclone/rclone/releases/download/${VERSION}/rclone-${VERSION}-${OS}-${TOOLS_ARCH}.zip"
+    unzip -p $ZIP "rclone-${VERSION}-${OS}-${TOOLS_ARCH}/rclone" > $RCLONE
+    rm $ZIP -f
+    chmod +x $RCLONE
+
+    _setVersion $RCLONE $VERSION
   fi
 }
