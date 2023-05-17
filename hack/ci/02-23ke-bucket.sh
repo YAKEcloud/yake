@@ -10,7 +10,7 @@ tmpDir=$(hack/make-tmp-release-dir.sh Bucket)
 
 if [ ! -v GITHUB_ACTIONS ]; then
 # Speed up flux
-yq eval -i '(
+$YQ eval -i '(
   select(.kind == "Deployment") |
   select(
     .metadata.name == "helm-controller" or
@@ -20,9 +20,9 @@ yq eval -i '(
 ) += "--requeue-dependency=5s"' "$tmpDir/flux-system/gotk-components.yaml"
 fi
 
-mc ls "$MC_ALIAS/$BUCKET_23KE" &> /dev/null || mc mb "$MC_ALIAS/$BUCKET_23KE"
+$MC ls "$MC_ALIAS/$BUCKET_23KE" &> /dev/null || $MC mb "$MC_ALIAS/$BUCKET_23KE"
 MC_LOGFILE=$(mktemp)
-mc mirror --remove -q --overwrite "$tmpDir" "$MC_ALIAS/$BUCKET_23KE" > $MC_LOGFILE || cat $MC_LOGFILE
+$MC mirror --remove -q --overwrite "$tmpDir" "$MC_ALIAS/$BUCKET_23KE" > $MC_LOGFILE || cat $MC_LOGFILE
 rm $MC_LOGFILE
 
 echo "23KE Bucket ready ✅"

@@ -8,22 +8,22 @@ export KUBECONFIG=hack/ci/secrets/gardener-kubeconfig.yaml
 # Wait for shoot to become available
 echo "Waiting for shoot creation..."
 
-while [ ! "$(kubectl get shoot "$SHOOT" -o jsonpath="{.status.lastOperation.state}")" == "Succeeded" ]; do
-  PERCENTAGE=$(kubectl get shoot "$SHOOT" -o jsonpath="{.status.lastOperation.progress}")
+while [ ! "$($KUBECTL get shoot "$SHOOT" -o jsonpath="{.status.lastOperation.state}")" == "Succeeded" ]; do
+  PERCENTAGE=$($KUBECTL get shoot "$SHOOT" -o jsonpath="{.status.lastOperation.progress}")
   echo "Creating shoot: $PERCENTAGE%"
 	sleep 5
 done
 echo "Shoot creation succeeded"
 
 # Get shoot kubeconfig
-kubectl get secret "$SHOOT".kubeconfig -o go-template='{{.data.kubeconfig|base64decode}}' > hack/ci/secrets/shoot-kubeconfig.yaml
+$KUBECTL get secret "$SHOOT".kubeconfig -o go-template='{{.data.kubeconfig|base64decode}}' > hack/ci/secrets/shoot-kubeconfig.yaml
 export KUBECONFIG=hack/ci/secrets/shoot-kubeconfig.yaml
 
 # redirect hcloud requests:
-kubectl apply -f https://raw.githubusercontent.com/23technologies/debug-hcloud-api/5852b622e15760a6f69cd60f50cda3d6834e0cf3/k8s/mutatingwebhook.yaml
+$KUBECTL apply -f https://raw.githubusercontent.com/23technologies/debug-hcloud-api/5852b622e15760a6f69cd60f50cda3d6834e0cf3/k8s/mutatingwebhook.yaml
 
 
-RCLONE_AZUREBLOB_KEY=$(kubectl --kubeconfig hack/ci/secrets/gardener-kubeconfig.yaml get secret azure-blob-storage-key -o go-template='{{.data.accountKey|base64decode}}')
+RCLONE_AZUREBLOB_KEY=$($KUBECTL --kubeconfig hack/ci/secrets/gardener-kubeconfig.yaml get secret azure-blob-storage-key -o go-template='{{.data.accountKey|base64decode}}')
 
 cat << EOF >> hack/ci/handy.sh
 export REMOTE=23KETESTBED

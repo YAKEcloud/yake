@@ -1,7 +1,14 @@
 #!/usr/bin/env bash
 
+source hack/tools/install.sh
+
+install_kubectl
+install_yq
+install_mc
+install_rclone
+
 checkDependencies() {
-  DEPS=(envsubst flux git go kubectl mc rclone yq)
+  DEPS=(envsubst git go unzip)
 
   for DEP in "${DEPS[@]}"; do
     if ! which "$DEP" &>/dev/null; then
@@ -37,4 +44,7 @@ onErr() {
 
   printErr "Failed at line $lineno: $msg"
 }
+
+# ----------------------------------------
+
 trap 'onErr ${LINENO} "$BASH_COMMAND"' ERR

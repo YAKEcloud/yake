@@ -103,6 +103,14 @@
         // https://regex101.com/r/oimJd1/1
         "(?<depName>[a-z-]+):\\s+version: (?<currentValue>[0-9.]+)"
       ]
+    },
+    {
+      "fileMatch": [
+        "^hack/tools/install.sh$"
+      ],
+      "matchStrings": [
+        "# renovate: datasource=(?<datasource>.+?) depName=(?<depName>.+?)( versioning=(?<versioning>.+?))?\n.+?VERSION=(?<currentValue>.+?)\n"
+      ]
     }
   ],
   "lockFileMaintenance": {
