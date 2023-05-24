@@ -35,10 +35,9 @@ case $depName in
 esac
 
 # return if the current dep is not in the helmrepo
-$HELM show chart $curHelmRepo/$depName 2> /dev/null
-if [ $? -eq 1 ]; then
+if ! $HELM show chart $curHelmRepo/$depName >/dev/null 2>&1; then
 	 echo "There is no chart for $depName in $curHelmRepo. I will not do anything."
-	 exit
+	 exit 0
 fi
 
 # keep the templates/tests folder as it's not from upstream but part of 23ke.
