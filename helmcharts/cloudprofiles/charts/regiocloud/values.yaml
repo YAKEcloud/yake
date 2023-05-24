@@ -35,7 +35,7 @@ providerConfig:
         loadBalancerProviders:
             - name: amphora
     keystoneURLs:
-        - region: regiocloud-a
+        - region: RegionA
           url: https://keystone.services.a.regiocloud.tech
     kind: CloudProfileConfig
     machineImages:
@@ -45,7 +45,7 @@ providerConfig:
               version: 934.6.0
     useOctavia: true
 regions:
-    - name: regiocloud-a
+    - name: RegionA
       zones:
         - name: nova
 type: openstack

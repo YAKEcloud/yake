@@ -17,11 +17,11 @@ global:
             versions:
                 1.23.17:
                     classification: supported
-                1.24.13:
+                1.24.14:
                     classification: supported
-                1.25.9:
+                1.25.10:
                     classification: supported
-                1.26.4:
+                1.26.5:
                     classification: supported
         versions: {}
     seedSelector:
