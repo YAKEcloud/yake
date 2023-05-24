@@ -98,3 +98,14 @@ hide_table_of_contents: true
 * *[OPERATOR]* An issue causing panic in the health check for extension is fixed. ([gardener/gardener#7914](https://github.com/gardener/gardener/pull/7914), [@gardener-ci-robot](https://github.com/gardener-ci-robot))
 
 </details>
+
+<details>
+<summary><b>Update cloudprofiles to <code>0.6.2</code></b></summary>
+
+## What's Changed
+* Regiocloud: Change regiocloud-a to RegionA by @JensAc in https://github.com/gardener-community/cloudprofiles/pull/23
+
+
+**Full Changelog**: https://github.com/gardener-community/cloudprofiles/compare/0.6.1...0.6.2
+
+</details>
