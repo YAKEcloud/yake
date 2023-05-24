@@ -40,7 +40,7 @@ spec:
   region: hel1
   purpose: evaluation
   kubernetes:
-    version: 1.25.9
+    version: 1.25.10
   addons:
     kubernetesDashboard:
       enabled: false
