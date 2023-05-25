@@ -1,38 +1,30 @@
 # [gardener-extension-provider-alicloud]
-## ✨ New Features
-* *[USER]* `csi-disk-plugin-alicloud` is marked as a node-critical component. With this, workload pods are only scheduled to a `Node` if it runs a ready `csi-disk-plugin-alicloud` pod. ([gardener/gardener-extension-provider-alicloud#567](https://github.com/gardener/gardener-extension-provider-alicloud/pull/567), [@dergeberl](https://github.com/dergeberl))
-* *[OPERATOR]* `csi-disk-plugin` is annotated with the `wait-for-csi-node` annotation. Gardener uses this to only schedule workload pods to a `Node` once the driver has been successfully registered with the `CSINode` object. ([gardener/gardener-extension-provider-alicloud#582](https://github.com/gardener/gardener-extension-provider-alicloud/pull/582), [@SimonKienzler](https://github.com/SimonKienzler))
-* *[OPERATOR]* The `csi-snapshot-validation` Service deployed by the provider-alicloud extension and the provider-alicloud's `gardener-extension-provider-alicloud` Service can now be topology-aware (depending on the Seed setting and the Shoot HA failure tolerance type). For more details, see the [Topology-aware Traffic Routing documentation](https://github.com/gardener/gardener/blob/v1.66.0/docs/usage/topology_aware_routing.md). ([gardener/gardener-extension-provider-alicloud#587](https://github.com/gardener/gardener-extension-provider-alicloud/pull/587), [@ialidzhikov](https://github.com/ialidzhikov))
-## 🐛 Bug Fixes
-* *[OPERATOR]* The stale healthcheck conditions from the extension are now properly cleaned up. ([gardener/gardener-extension-provider-alicloud#588](https://github.com/gardener/gardener-extension-provider-alicloud/pull/588), [@acumino](https://github.com/acumino))
-* *[OPERATOR]* An issue has been fixed which caused undesired `PATCH` requests when updating the state in the `Worker` or `ShootState` resources. ([gardener/gardener-extension-provider-alicloud#590](https://github.com/gardener/gardener-extension-provider-alicloud/pull/590), [@oliver-goetz](https://github.com/oliver-goetz))
+## 📖 Documentation
+* *[DEPENDENCY]* The flags which went out-of-support in MCM v0.49.0 have been cleaned up from MCM deployment yaml. ([gardener/gardener-extension-provider-alicloud#595](https://github.com/gardener/gardener-extension-provider-alicloud/pull/595), [@himanshu-kun](https://github.com/himanshu-kun))
 ## 🏃 Others
-* *[OPERATOR]* upgrade csi version to v1.24.10-compatible-29f36f1-aliyun ([gardener/gardener-extension-provider-alicloud#576](https://github.com/gardener/gardener-extension-provider-alicloud/pull/576), [@shaoyongfeng](https://github.com/shaoyongfeng))
-* *[OPERATOR]* Removed `minAllowed.cpu` from all VPA objects ([gardener/gardener-extension-provider-alicloud#579](https://github.com/gardener/gardener-extension-provider-alicloud/pull/579), [@voelzmo](https://github.com/voelzmo))
-* *[OPERATOR]* Adapted extension components to support the [FullNetworkPoliciesInRuntimeCluster](https://github.com/gardener/gardener/blob/master/docs/deployment/feature_gates.md#list-of-feature-gates) feature gate introduced by `gardener/gardener` v1.66, see [here](https://github.com/gardener/gardener/blob/master/docs/concepts/resource-manager.md#networkpolicy-controller) and [#7352](https://github.com/gardener/gardener/pull/7589) for more information. ([gardener/gardener-extension-provider-alicloud#581](https://github.com/gardener/gardener-extension-provider-alicloud/pull/581), [@ScheererJ](https://github.com/ScheererJ))
-* *[OPERATOR]* Disable SNAT to the upstream dns server for non-overlay shoot cluster. ([gardener/gardener-extension-provider-alicloud#568](https://github.com/gardener/gardener-extension-provider-alicloud/pull/568), [@DockToFuture](https://github.com/DockToFuture))
-* *[OPERATOR]* The csi-plugin-alicloud is upgraded to version v1.24.7-48214b0-aliyun ([gardener/gardener-extension-provider-alicloud#570](https://github.com/gardener/gardener-extension-provider-alicloud/pull/570), [@kevin-lacoo](https://github.com/kevin-lacoo))
-* *[DEPENDENCY]* The following dependency is updated: ([gardener/gardener-extension-provider-alicloud#565](https://github.com/gardener/gardener-extension-provider-alicloud/pull/565), [@shafeeqes](https://github.com/shafeeqes))
-  * github.com/gardener/gardener: v1.62.0 -> v1.65.0
-  * k8s.io/* : v0.25.2 -> v0.26.1
-  * sigs.k8s.io/controller-runtime: v0.13.0-> v0.14.4
+* *[OPERATOR]* The `gardener-extension-admission-alicloud` Service in the `gardener-extension-admission-alicloud` chart can now be configured to be topology-aware. ([gardener/gardener-extension-provider-alicloud#591](https://github.com/gardener/gardener-extension-provider-alicloud/pull/591), [@ialidzhikov](https://github.com/ialidzhikov))
+* *[OPERATOR]* The admission/validation component is now adapted such that it works well in garden cluster with enabled `NetworkPolicy` protection (default since `gardener/gardener@v1.71` when garden cluster is managed by `gardener-operator`). ([gardener/gardener-extension-provider-alicloud#599](https://github.com/gardener/gardener-extension-provider-alicloud/pull/599), [@rfranzke](https://github.com/rfranzke))
+* *[OPERATOR]* The following dependency has been updated: ([gardener/gardener-extension-provider-alicloud#600](https://github.com/gardener/gardener-extension-provider-alicloud/pull/600), [@acumino](https://github.com/acumino))
+  * github.com/gardener/gardener 1.67.1 -> 1.70.2
 # [machine-controller-manager]
+## ⚠️ Breaking Changes
+* *[OPERATOR]* Removal of the following flags (and corresponding fields in associated structs): 'machine-creation-timeout' 'machine-drain-timeout', 'machine-pv-detach-timeout', 'machine-health-timeout=10m', 'machine-safety-apiserver-statuscheck-timeout', 'machine-safety-apiserver-statuscheck-period', 'machine-safety-orphan-vms-period', 'machine-max-evict-retries', 'node-conditions', 'bootstrap-token-auth-extra-groups', 'delete-migrated-machine-class'. The MCM no longer accepts these flags since these are options handled by the Machine Controller invoked by platform specific provider launchers. ([gardener/machine-controller-manager#769](https://github.com/gardener/machine-controller-manager/pull/769), [@elankath](https://github.com/elankath))
+* *[DEVELOPER]* Deletion of 'Driver.GenerateMachineClassForMigration'. Providers need to adapt to this. ([gardener/machine-controller-manager#769](https://github.com/gardener/machine-controller-manager/pull/769), [@elankath](https://github.com/elankath))
+## ✨ New Features
+* *[USER]* Machine object won't turn from `Pending`  to `Running` state if `node.gardener.cloud/critical-components-not-ready` taint is there on the corresponding node. ([gardener/machine-controller-manager#778](https://github.com/gardener/machine-controller-manager/pull/778), [@SimonKienzler](https://github.com/SimonKienzler))
 ## 🐛 Bug Fixes
-* *[USER]* An edge case where all the machineSets were scaled down to zero has been dealt with. ([gardener/machine-controller-manager#804](https://github.com/gardener/machine-controller-manager/pull/804), [@himanshu-kun](https://github.com/himanshu-kun))
-# [machine-controller-manager-provider-alicloud]
-## 🐛 Bug Fixes
-* *[USER]* Fix a bug in the bootstrap token creation that caused node to not be able to join the cluster due to an expired bootstrap token. ([gardener/machine-controller-manager-provider-alicloud#39](https://github.com/gardener/machine-controller-manager-provider-alicloud/pull/39), [@himanshu-kun](https://github.com/himanshu-kun))
+* *[USER]* An edge case where all the machineSets were scaled down to zero has been dealt with. ([gardener/machine-controller-manager#803](https://github.com/gardener/machine-controller-manager/pull/803), [@himanshu-kun](https://github.com/himanshu-kun))
+* *[USER]* Fix a bug in the bootstrap token creation that caused node to not be able to join the cluster due to an expired bootstrap token. ([gardener/machine-controller-manager#773](https://github.com/gardener/machine-controller-manager/pull/773), [@schrodit](https://github.com/schrodit))
+## 📖 Documentation
+* *[DEVELOPER]* Added proposal for hot-update of resources (instance/Nic/Disk) ([gardener/machine-controller-manager#761](https://github.com/gardener/machine-controller-manager/pull/761), [@himanshu-kun](https://github.com/himanshu-kun))
 ## 🏃 Others
-* *[USER]* Updated golang version to 1.19 ([gardener/machine-controller-manager-provider-alicloud#37](https://github.com/gardener/machine-controller-manager-provider-alicloud/pull/37), [@rishabh-11](https://github.com/rishabh-11))
-* *[OPERATOR]* The following dependency is updated: ([gardener/machine-controller-manager-provider-alicloud#38](https://github.com/gardener/machine-controller-manager-provider-alicloud/pull/38), [@rishabh-11](https://github.com/rishabh-11))
-  * github.com/gardener/machine-controller-manager v0.47.0 -> 0.48.0
-* *[OPERATOR]* updated golang version to 1.19.5 ([gardener/machine-controller-manager-provider-alicloud#38](https://github.com/gardener/machine-controller-manager-provider-alicloud/pull/38), [@rishabh-11](https://github.com/rishabh-11))
-* *[OPERATOR]* CVE categorization for mcm-provider-alicloud has been added. ([gardener/machine-controller-manager-provider-alicloud#43](https://github.com/gardener/machine-controller-manager-provider-alicloud/pull/43), [@dkistner](https://github.com/dkistner))
-* *[DEVELOPER]* MCM Autovendoring PR raising enabled ([gardener/machine-controller-manager-provider-alicloud#41](https://github.com/gardener/machine-controller-manager-provider-alicloud/pull/41), [@rishabh-11](https://github.com/rishabh-11))
+* *[OPERATOR]* `CrashloopBackoff` machines will turn to `Running` quicker ([gardener/machine-controller-manager#806](https://github.com/gardener/machine-controller-manager/pull/806), [@rishabh-11](https://github.com/rishabh-11))
+* *[OPERATOR]* CVE categorization for MCM has been added. ([gardener/machine-controller-manager#791](https://github.com/gardener/machine-controller-manager/pull/791), [@dkistner](https://github.com/dkistner))
+* *[DEVELOPER]* The API generation now works again. Previously the API docs was generated to a location that was ignored by git and other API docs file was maintained. ([gardener/machine-controller-manager#800](https://github.com/gardener/machine-controller-manager/pull/800), [@ialidzhikov](https://github.com/ialidzhikov))
+* *[DEVELOPER]* Bump `k8s.io/*` dependencies to v1.26.2 ([gardener/machine-controller-manager#792](https://github.com/gardener/machine-controller-manager/pull/792), [@afritzler](https://github.com/afritzler))
 # [terraformer]
 ## 🏃 Others
-* *[OPERATOR]* Update golang to v1.19.6 ([gardener/terraformer#129](https://github.com/gardener/terraformer/pull/129), [@kon-angelo](https://github.com/kon-angelo))
-* *[OPERATOR]* Terrafomer base image has been updated to alpine:3.17.2 ([gardener/terraformer#131](https://github.com/gardener/terraformer/pull/131), [@dkistner](https://github.com/dkistner))
-* *[OPERATOR]* Update TF_VERSION `0.15.5` -> `1.3.9` and update how the local providers are fetched and stored to be compatible with the latest TF specification. ([gardener/terraformer#133](https://github.com/gardener/terraformer/pull/133), [@kon-angelo](https://github.com/kon-angelo))
-* *[OPERATOR]* CVE categorization for Terraformer oci images has been added. ([gardener/terraformer#134](https://github.com/gardener/terraformer/pull/134), [@dkistner](https://github.com/dkistner))
-* *[OPERATOR]* The golang base image is now updated to 1.16.15. The alpine base image is updated to 3.16.2. ([gardener/terraformer#124](https://github.com/gardener/terraformer/pull/124), [@kon-angelo](https://github.com/kon-angelo))
+* *[OPERATOR]* Update alpine base image to `v3.17.3` ([gardener/terraformer#136](https://github.com/gardener/terraformer/pull/136), [@kon-angelo](https://github.com/kon-angelo))
+## Docker Images
+gardener-extension-provider-alicloud: `eu.gcr.io/gardener-project/gardener/extensions/provider-alicloud:v1.46.0`
+gardener-extension-admission-alicloud: `eu.gcr.io/gardener-project/gardener/extensions/admission-alicloud:v1.46.0`

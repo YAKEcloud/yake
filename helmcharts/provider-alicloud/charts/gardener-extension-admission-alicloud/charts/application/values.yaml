@@ -3,11 +3,14 @@ global:
     image:
         pullPolicy: IfNotPresent
         repository: eu.gcr.io/gardener-project/gardener/extensions/admission-alicloud
-        tag: latest
+        tag: v1.46.0
     kubeconfig: null
     metricsPort: 8080
     replicaCount: 1
     resources: {}
+    service:
+        topologyAwareRouting:
+            enabled: false
     serviceAccountTokenVolumeProjection:
         audience: ""
         enabled: false
