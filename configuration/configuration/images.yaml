@@ -1930,7 +1930,7 @@ provider-alicloud:
       - name: terraformer
         repository: eu.gcr.io/gardener-project/gardener/terraformer-alicloud
         sourceRepository: github.com/gardener/terraformer
-        tag: v2.20.0
+        tag: v2.21.0
       - labels:
           - name: gardener.cloud/cve-categorisation
             value:
@@ -1943,7 +1943,7 @@ provider-alicloud:
         name: machine-controller-manager
         repository: eu.gcr.io/gardener-project/gardener/machine-controller-manager
         sourceRepository: github.com/gardener/machine-controller-manager
-        tag: v0.48.2
+        tag: v0.49.0
       - labels:
           - name: gardener.cloud/cve-categorisation
             value:
