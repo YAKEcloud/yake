@@ -66,7 +66,7 @@ install_kubectl() {
 
 install_yq() {
   # renovate: datasource=github-releases depName=mikefarah/yq
-  VERSION=v4.33.3
+  VERSION=v4.34.1
 
   if _isStale $YQ $VERSION; then
     curl -L -o $YQ "https://github.com/mikefarah/yq/releases/download/$VERSION/yq_${TOOLS_KERNEL}_$TOOLS_ARCH"
