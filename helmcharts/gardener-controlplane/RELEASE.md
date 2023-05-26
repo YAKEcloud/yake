@@ -1,62 +1,17 @@
 # [gardener]
 ## ⚠️ Breaking Changes
-* *[OPERATOR]* The gardener controlplane Helm chart does no longer contain the value `global.apiserver.serviceEnabled`. `global.apiserver.serviceEnabled` is replaced by  `global.apiserver.service.enabled`. Before you upgrade to this version, please make sure that you adapt the corresponding value to its new equivalent. ([gardener/gardener#7729](https://github.com/gardener/gardener/pull/7729), [@ialidzhikov](https://github.com/ialidzhikov))
-* *[DEVELOPER]* Developers should no longer introduce new container images from Docker Hub. Please configure the [prow job](https://github.com/gardener/ci-infra/blob/master/config/jobs/ci-infra/copy-images.yaml) for copying images to the gardener GCR instead. Consult the [component checklist](https://github.com/gardener/gardener/blob/master/docs/development/component-checklist.md#general) for more information. ([gardener/gardener#7698](https://github.com/gardener/gardener/pull/7698), [@timebertt](https://github.com/timebertt))
-* *[DEPENDENCY]* The `extensions/pkg/webhook/certificates.AddCertificateManagementToManager` function does now take a list of source webhook configs instead of a single webhook config only. ([gardener/gardener#7693](https://github.com/gardener/gardener/pull/7693), [@rfranzke](https://github.com/rfranzke))
-## ✨ New Features
-* *[OPERATOR]* The `Garden` API was extended with the new `.spec.virtualCluster.{dns,kubernetes,networking}` sections. For now, they only allow configuring the necessary information for the deployment of `kube-apiserver`. Since the API server is not deployed yet, any configuration does not have any effect. Still, you must make sure to already specify at least `.spec.virtualCluster.kubernetes.version`, `.spec.virtualCluster.dns.domain`, and `.spec.virtualCluster.networking.services`. In the upcoming releases, `gardener-operator` will also take over the management of the `kube-apiserver` deployment whilst taking the configuration into account. ([gardener/gardener#7693](https://github.com/gardener/gardener/pull/7693), [@rfranzke](https://github.com/rfranzke))
-* *[OPERATOR]* The `Garden` resource now supports a setting for topology-aware routing. For more details, see the [Topology-aware Traffic Routing documentation](https://github.com/gardener/gardener/blob/TBD/docs/usage/topology_aware_routing.md). ([gardener/gardener#7729](https://github.com/gardener/gardener/pull/7729), [@ialidzhikov](https://github.com/ialidzhikov))
-* *[OPERATOR]* `gardener-operator` is now managing the `kube-apiserver` instance as part of the virtual garden cluster control plane. ([gardener/gardener#7730](https://github.com/gardener/gardener/pull/7730), [@rfranzke](https://github.com/rfranzke))
-* *[OPERATOR]* Enable memory-saver mode for the VPA recommender. It stops tracking resource consumption for Containers without matching VPAs and frees up memory. ([gardener/gardener#7746](https://github.com/gardener/gardener/pull/7746), [@voelzmo](https://github.com/voelzmo))
+* *[USER]* Gardener denies setting `Shoot.Spec.ControlPlane.HighAvailability.FailureTolerance.Type` if shoot is hibernated. ([gardener/gardener#7922](https://github.com/gardener/gardener/pull/7922), [@gardener-ci-robot](https://github.com/gardener-ci-robot))
 ## 🐛 Bug Fixes
-* *[OPERATOR]* A bug causing the gardenlet to be unable to access the BackupBucket generated secret in garden namespace is now fixed. ([gardener/gardener#7708](https://github.com/gardener/gardener/pull/7708), [@shafeeqes](https://github.com/shafeeqes))
-* *[OPERATOR]* A bug has been fixed which prevented existing secrets from being adopted when they were named `kube-apiserver-etcd-encryption-key` or `service-account-key`. ([gardener/gardener#7710](https://github.com/gardener/gardener/pull/7710), [@rfranzke](https://github.com/rfranzke))
-* *[OPERATOR]* A bug has been fixed for the Gardener Operator that occasionally caused "404 not-found" errors when `garden` resources where applied and the operator ran with multiple replicas. ([gardener/gardener#7739](https://github.com/gardener/gardener/pull/7739), [@timuthy](https://github.com/timuthy))
-* *[OPERATOR]* A panic causing gardenlet to fail to startup when there is already a terminating Shoot namespace in the Seed is now fixed. ([gardener/gardener#7743](https://github.com/gardener/gardener/pull/7743), [@ialidzhikov](https://github.com/ialidzhikov))
-* *[OPERATOR]* An issue causing an UID conflict between two Grafana dashboards is now fixed by removing the unneeded "istio-workload-dashboard.json" dashboard. ([gardener/gardener#7751](https://github.com/gardener/gardener/pull/7751), [@axel7born](https://github.com/axel7born))
+* *[USER]* A bug has been fixed which could cause `kube-proxy`s from being missing after a `Shoot` has been woken up from hibernation. ([gardener/gardener#7919](https://github.com/gardener/gardener/pull/7919), [@gardener-ci-robot](https://github.com/gardener-ci-robot))
 ## 🏃 Others
-* *[USER]* The following image is updated: ([gardener/gardener#7715](https://github.com/gardener/gardener/pull/7715), [@ialidzhikov](https://github.com/ialidzhikov))
-  * registry.k8s.io/metrics-server/metrics-server: v0.6.2 -> v0.6.3
-* *[OPERATOR]* `node-problem-detector` has been upgraded to `v0.8.13` ([gardener/gardener#7707](https://github.com/gardener/gardener/pull/7707), [@acumino](https://github.com/acumino))
-* *[OPERATOR]* Gardenlet switched from a "PodExec" based approach to calling the appropriate HTTP endpoint for initiating full snapshots. This usually takes place when the ETCD encryption key was rotated or during control-plane migration. ([gardener/gardener#7714](https://github.com/gardener/gardener/pull/7714), [@timuthy](https://github.com/timuthy))
-* *[OPERATOR]* Now the `fluent-bit`'s output plugin targets the `logging` service instead of the previously used `loki` service. ([gardener/gardener#7731](https://github.com/gardener/gardener/pull/7731), [@nickytd](https://github.com/nickytd))
-* *[OPERATOR]* Change the path of `update-local-ca-certificates.sh` script from `/etc/ssl` to `/var/lib/ssl` on our worker nodes. ([gardener/gardener#7740](https://github.com/gardener/gardener/pull/7740), [@AleksandarSavchev](https://github.com/AleksandarSavchev))
-* *[OPERATOR]* `nginx-ingress-controller-seed` image is updated to `v1.7.0` for `1.24.x+` seeds. ([gardener/gardener#7741](https://github.com/gardener/gardener/pull/7741), [@shafeeqes](https://github.com/shafeeqes))
-* *[DEVELOPER]* The server certificate of the `kube-apiserver` deployment now contains the `<service-name>.<namespace>.svc.cluster.local` SAN. ([gardener/gardener#7735](https://github.com/gardener/gardener/pull/7735), [@rfranzke](https://github.com/rfranzke))
-* *[DEVELOPER]* Update local-setup to `kind@v0.17.0`. ([gardener/gardener#7737](https://github.com/gardener/gardener/pull/7737), [@oliver-goetz](https://github.com/oliver-goetz))
-* *[DEVELOPER]* Go version is updated to 1.20.3. ([gardener/gardener#7752](https://github.com/gardener/gardener/pull/7752), [@oliver-goetz](https://github.com/oliver-goetz))
-* *[DEVELOPER]* The `controllermanager` and `gardenlet` controller reconciliations are now limited to a `1m` timeout. Additionally, there is a 1m limit on predicate functions that use contexts. ([gardener/gardener#7147](https://github.com/gardener/gardener/pull/7147), [@plkokanov](https://github.com/plkokanov))
-# [etcd-backup-restore]
-## 🐛 Bug Fixes
-* *[OPERATOR]* Fixes a bug in snapshotter loop when backup-restore fails to collect events or fails to apply watch if required etcd revision has been compacted. ([gardener/etcd-backup-restore#600](https://github.com/gardener/etcd-backup-restore/pull/600), [@ishan16696](https://github.com/ishan16696))
-## 🏃 Others
-* *[USER]* Introduce CLI flag `--restoration-temp-snapshots-dir` to configure directory used for temporarily persisting delta snapshots during restoration. ([gardener/etcd-backup-restore#609](https://github.com/gardener/etcd-backup-restore/pull/609), [@shreyas-s-rao](https://github.com/shreyas-s-rao))
-* *[USER]* Fix behavior of `--data-dir` for `etcdbrctl compact` command to be consistent with the flag's usage in other `etcdbrctl` commands. ([gardener/etcd-backup-restore#609](https://github.com/gardener/etcd-backup-restore/pull/609), [@shreyas-s-rao](https://github.com/shreyas-s-rao))
-* *[OPERATOR]* Enhances the scale-up detection conditions to avoid potential failure while from migrating single node etcd to multi-node etcd cluster. ([gardener/etcd-backup-restore#608](https://github.com/gardener/etcd-backup-restore/pull/608), [@ishan16696](https://github.com/ishan16696))
-* *[OPERATOR]* Optimize disk usage during restoration of delta snapshots, and remove scope for errors in the process. ([gardener/etcd-backup-restore#609](https://github.com/gardener/etcd-backup-restore/pull/609), [@shreyas-s-rao](https://github.com/shreyas-s-rao))
-* *[OPERATOR]* Allow for flexible build opts for other CI tools. ([gardener/etcd-backup-restore#610](https://github.com/gardener/etcd-backup-restore/pull/610), [@shreyas-s-rao](https://github.com/shreyas-s-rao))
-* *[OPERATOR]* Etcd snapshots are copied in parallel instead of sequentially (10 in parallel by default, configurable via `--max-parallel-copy-operations`). ([gardener/etcd-backup-restore#591](https://github.com/gardener/etcd-backup-restore/pull/591), [@timebertt](https://github.com/timebertt))
-* *[OPERATOR]* Restrict the file permissions of `safe_guard` file from 644 to 600. ([gardener/etcd-backup-restore#607](https://github.com/gardener/etcd-backup-restore/pull/607), [@AleksandarSavchev](https://github.com/AleksandarSavchev))
-# [etcd-custom-image]
-## 🏃 Others
-* *[OPERATOR]* Base alpine image upgraded from `3.15.6` to `3.15.7` ([gardener/etcd-custom-image#31](https://github.com/gardener/etcd-custom-image/pull/31), [@aaronfern](https://github.com/aaronfern))
-# [etcd-druid]
-## ⚠️ Breaking Changes
-* *[USER]* The default value for druid CLI flag `ignore-operation-annotation` is now set to `false`. This means druid will now respect the `gardener.cloud/operation` annotation for reconciling the `Etcd` resource by default. This change allows for developers to follow best practices during local development and testing. ([gardener/etcd-druid#506](https://github.com/gardener/etcd-druid/pull/506), [@shreyas-s-rao](https://github.com/shreyas-s-rao))
-## ✨ New Features
-* *[DEVELOPER]* Introduce integration tests for testing the functionalities of each controller, which can be run using `make test-integration`. ([gardener/etcd-druid#506](https://github.com/gardener/etcd-druid/pull/506), [@shreyas-s-rao](https://github.com/shreyas-s-rao))
-* *[DEVELOPER]* Eliminated `ServiceAccount` helm charts and converted into Golang component with added unit tests. ([gardener/etcd-druid#535](https://github.com/gardener/etcd-druid/pull/535), [@seshachalam-yv](https://github.com/seshachalam-yv))
-## 🐛 Bug Fixes
-* *[OPERATOR]* Squash multiple bugs in controllers as part of the refactoring process. ([gardener/etcd-druid#506](https://github.com/gardener/etcd-druid/pull/506), [@shreyas-s-rao](https://github.com/shreyas-s-rao))
-* *[DEVELOPER]* ETCD Statefulset and Services only use `instance:<ETCD Name>` as selector field. ([gardener/etcd-druid#521](https://github.com/gardener/etcd-druid/pull/521), [@abdasgupta](https://github.com/abdasgupta))
-## 🏃 Others
-* *[OPERATOR]* A bug that caused control plane migrations to fail for shoots with numeric names and a leading `0` has been fixed by eliminating the `EtcdCopyBackupsTask` helm chart. ([gardener/etcd-druid#553](https://github.com/gardener/etcd-druid/pull/553), [@seshachalam-yv](https://github.com/seshachalam-yv))
-* *[OPERATOR]* etcd-custom-image updated from `v3.4.13-bootstrap-8` to `v3.4.13-bootstrap-9` ([gardener/etcd-druid#555](https://github.com/gardener/etcd-druid/pull/555), [@aaronfern](https://github.com/aaronfern))
-* *[OPERATOR]* Adapt `etcdbrctl` dir path flags `data-dir` and `restoration-temp-snapshots-dir` based on [etcd-backup-restore#609](https://github.com/gardener/etcd-backup-restore/pull/609). ([gardener/etcd-druid#570](https://github.com/gardener/etcd-druid/pull/570), [@shreyas-s-rao](https://github.com/shreyas-s-rao))
-* *[OPERATOR]* Upgraded golang version to 1.20 ([gardener/etcd-druid#542](https://github.com/gardener/etcd-druid/pull/542), [@unmarshall](https://github.com/unmarshall))
-  * Upgraded dependencies including upstream gardener/gardener dependency to 1.65.0
-  * Upgrades client-go to v0.26.1
-  * Upgrades controller-runtime to 0.14.4
-* *[DEVELOPER]* Remove helm charts for EtcdCopyBackupsTask controller in favour of go code ([gardener/etcd-druid#553](https://github.com/gardener/etcd-druid/pull/553), [@seshachalam-yv](https://github.com/seshachalam-yv))
-* *[DEVELOPER]* Refactor etcd-druid code: refactor CLI flags, restructure controllers, add controller configs, add controller-specific unit tests, restructure existing controller tests into controller-specific integration tests. This makes etcd-druid easier to maintain and contribute to. ([gardener/etcd-druid#506](https://github.com/gardener/etcd-druid/pull/506), [@shreyas-s-rao](https://github.com/shreyas-s-rao))
-* *[DEPENDENCY]* Update HVPA dependency to `github.com/gardener/hvpa-controller/api:v0.5.0`. ([gardener/etcd-druid#522](https://github.com/gardener/etcd-druid/pull/522), [@Kostov6](https://github.com/Kostov6))
+* *[OPERATOR]* An issue causing panic in the health check for extension is fixed. ([gardener/gardener#7916](https://github.com/gardener/gardener/pull/7916), [@gardener-ci-robot](https://github.com/gardener-ci-robot))
+* *[OPERATOR]* The nested kubelet in the Gardener e2e tests (in prow/kind) now work on hosts using cgroupsv2 ([gardener/gardener#7800](https://github.com/gardener/gardener/pull/7800), [@gardener-ci-robot](https://github.com/gardener-ci-robot))
+* *[DEVELOPER]* Set `cgroupDriver` of `provider-local` to `systemd`. ([gardener/gardener#7805](https://github.com/gardener/gardener/pull/7805), [@gardener-ci-robot](https://github.com/gardener-ci-robot))
+## Docker Images
+admission-controller: `eu.gcr.io/gardener-project/gardener/admission-controller:v1.68.1`
+apiserver: `eu.gcr.io/gardener-project/gardener/apiserver:v1.68.1`
+controller-manager: `eu.gcr.io/gardener-project/gardener/controller-manager:v1.68.1`
+scheduler: `eu.gcr.io/gardener-project/gardener/scheduler:v1.68.1`
+operator: `eu.gcr.io/gardener-project/gardener/operator:v1.68.1`
+gardenlet: `eu.gcr.io/gardener-project/gardener/gardenlet:v1.68.1`
+resource-manager: `eu.gcr.io/gardener-project/gardener/resource-manager:v1.68.1`
