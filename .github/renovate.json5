@@ -123,7 +123,7 @@
   "addLabels": ["version-bump"],
   "postUpgradeTasks": {
     "commands": [
-      "cd hack/go/imagevector-importer && go run main.go import --config config.yaml > ../../../configuration/configuration/images.yaml",
+      "./hack/import-imagevectors.sh",
       "./hack/pull-helmchart.sh {{{depName}}} {{{newVersion}}}",
     ],
     "fileFilters": ["configuration/configuration/images.yaml", "helmcharts/**/**", "docs/release-notes/next.md"],
