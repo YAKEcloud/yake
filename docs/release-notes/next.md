@@ -171,3 +171,10 @@ gardener-extension-admission-alicloud: `eu.gcr.io/gardener-project/gardener/exte
   * github.com/gardener/gardener: v1.66.0 -> v1.70.2
 
 </details>
+
+<details>
+<summary><b>Update provider-hcloud to <code>0.6.16</code></b></summary>
+
+# [gardener-extension-provider-hcloud] v0.6.16
+
+</details>
