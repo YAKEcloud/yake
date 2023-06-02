@@ -10,7 +10,7 @@ global:
         image:
             pullPolicy: IfNotPresent
             repository: eu.gcr.io/gardener-project/gardener/dashboard-terminal-bootstrapper
-            tag: 1.68.2
+            tag: 1.69.1
         livenessProbe:
             failureThreshold: 3
             initialDelaySeconds: 10
@@ -38,6 +38,8 @@ global:
             expirationSeconds: 43200
     dashboard:
         containerPort: 8080
+        deploymentAnnotations: {}
+        deploymentLabels: {}
         enabled: true
         frontendConfig:
             defaultHibernationSchedule:
@@ -64,12 +66,12 @@ global:
         image:
             pullPolicy: IfNotPresent
             repository: eu.gcr.io/gardener-project/gardener/dashboard
-            tag: 1.68.2
+            tag: 1.69.1
         ingress:
             annotations:
-                kubernetes.io/ingress.class: nginx
                 nginx.ingress.kubernetes.io/ssl-redirect: "true"
                 nginx.ingress.kubernetes.io/use-port-in-redirects: "true"
+            ingressClassName: nginx
             tls:
                 secretName: gardener-dashboard-tls
         livenessProbe:
