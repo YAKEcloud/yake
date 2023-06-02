@@ -1,6 +1,9 @@
 # [gardener-extension-networking-calico]
 ## 🏃 Others
-* *[OPERATOR]* The `gardener-extension-admission-calico` Service in the `gardener-extension-admission-calico` chart can now be configured to be topology-aware. ([gardener/gardener-extension-networking-calico#258](https://github.com/gardener/gardener-extension-networking-calico/pull/258), [@ialidzhikov](https://github.com/ialidzhikov))
-* *[OPERATOR]* A e2e test is added which tests all combinations of node to node and pod to pod communication. ([gardener/gardener-extension-networking-calico#261](https://github.com/gardener/gardener-extension-networking-calico/pull/261), [@DockToFuture](https://github.com/DockToFuture))
-* *[OPERATOR]* Update calico to `v3.25.1`. ([gardener/gardener-extension-networking-calico#262](https://github.com/gardener/gardener-extension-networking-calico/pull/262), [@DockToFuture](https://github.com/DockToFuture))
-* *[OPERATOR]* The Gardener networking calico extension only supports kubernetes v1.21 going forward. ([gardener/gardener-extension-networking-calico#263](https://github.com/gardener/gardener-extension-networking-calico/pull/263), [@ScheererJ](https://github.com/ScheererJ))
+* *[OPERATOR]* The admission/validation component is now adapted such that it works well in garden cluster with enabled `NetworkPolicy` protection (default since `gardener/gardener@v1.71` when garden cluster is managed by `gardener-operator`). ([gardener/gardener-extension-networking-calico#267](https://github.com/gardener/gardener-extension-networking-calico/pull/267), [@rfranzke](https://github.com/rfranzke))
+* *[OPERATOR]* Updated cluster-proportional-autoscaler to v1.8.8 ([gardener/gardener-extension-networking-calico#268](https://github.com/gardener/gardener-extension-networking-calico/pull/268), [@ScheererJ](https://github.com/ScheererJ))
+* *[OPERATOR]* Update golang to 1.20.4. ([gardener/gardener-extension-networking-calico#269](https://github.com/gardener/gardener-extension-networking-calico/pull/269), [@ScheererJ](https://github.com/ScheererJ))
+* *[DEPENDENCY]* The following dependency is updated: ([gardener/gardener-extension-networking-calico#272](https://github.com/gardener/gardener-extension-networking-calico/pull/272), [@shafeeqes](https://github.com/shafeeqes))
+  * github.com/gardener/gardener: v1.66.1 -> v1.71.0
+  * k8s.io/* : v0.26.1 -> v0.26.3
+  * sigs.k8s.io/controller-runtime: v0.14.4-> v0.14.6
