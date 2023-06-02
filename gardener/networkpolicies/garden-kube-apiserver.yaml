@@ -63,6 +63,12 @@ spec:
         podSelector:
           matchLabels:
             app: kustomize-controller
+      - namespaceSelector:
+          matchLabels:
+            kubernetes.io/metadata.name: flux-system
+        podSelector:
+          matchLabels:
+            component: terminal-manager
   egress:
     - {}
   policyTypes:
