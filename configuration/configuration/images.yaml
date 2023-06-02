@@ -22,11 +22,11 @@ gardenlet:
       - name: etcd-druid
         repository: eu.gcr.io/gardener-project/gardener/etcd-druid
         sourceRepository: github.com/gardener/etcd-druid
-        tag: v0.17.0
+        tag: v0.18.1
       - name: dependency-watchdog
         repository: eu.gcr.io/gardener-project/gardener/dependency-watchdog
         sourceRepository: github.com/gardener/dependency-watchdog
-        tag: v1.0.0
+        tag: v1.1.0
       - labels:
           - name: gardener.cloud/cve-categorisation
             value:
@@ -666,10 +666,6 @@ gardenlet:
         repository: eu.gcr.io/gardener-project/gardener/apiserver-proxy
         resourceId:
           name: apiserver-proxy
-        sourceRepository: github.com/gardener/apiserver-proxy
-        tag: v0.12.0
-      - name: apiserver-proxy-pod-webhook
-        repository: eu.gcr.io/gardener-project/gardener/apiserver-proxy-pod-webhook
         sourceRepository: github.com/gardener/apiserver-proxy
         tag: v0.12.0
 provider-openstack:
@@ -2319,10 +2315,12 @@ etcd-druid:
     images:
       - name: etcd-backup-restore
         repository: eu.gcr.io/gardener-project/gardener/etcdbrctl
+        resourceId:
+          name: etcdbrctl
         sourceRepository: github.com/gardener/etcd-backup-restore
-        tag: v0.23.0
+        tag: v0.24.1
       - name: etcd
         repository: eu.gcr.io/gardener-project/gardener/etcd
         sourceRepository: github.com/gardener/etcd-custom-image
-        tag: v3.4.13-bootstrap-9
+        tag: v3.4.13-bootstrap-10
 
