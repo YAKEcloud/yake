@@ -14,6 +14,8 @@ config:
             syncJitterPeriod: 5m
             syncPeriod: 1h
             waitSyncPeriod: 15s
+        networkPolicy:
+            concurrentSyncs: 5
         seed:
             syncPeriod: 1h
         seedCare:
@@ -84,8 +86,11 @@ env: []
 image:
     pullPolicy: IfNotPresent
     repository: eu.gcr.io/gardener-project/gardener/gardenlet
-    tag: v1.70.2
+    tag: v1.71.3
 invalidateServiceAccountToken: true
+nodeToleration:
+    defaultNotReadyTolerationSeconds: 60
+    defaultUnreachableTolerationSeconds: 60
 replicaCount: 2
 resources:
     requests:

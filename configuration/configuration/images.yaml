@@ -81,7 +81,7 @@ gardenlet:
         name: nginx-ingress-controller-seed
         repository: registry.k8s.io/ingress-nginx/controller-chroot
         sourceRepository: github.com/kubernetes/ingress-nginx
-        tag: v1.7.0
+        tag: v1.7.1
         targetVersion: '>= 1.24'
       - labels:
           - name: gardener.cloud/cve-categorisation
@@ -150,7 +150,7 @@ gardenlet:
       - name: vpn-seed-server
         repository: eu.gcr.io/gardener-project/gardener/vpn-seed-server
         sourceRepository: github.com/gardener/vpn2
-        tag: 0.15.0
+        tag: 0.16.0
       - labels:
           - name: gardener.cloud/cve-categorisation
             value:
@@ -176,7 +176,7 @@ gardenlet:
         name: prometheus
         repository: quay.io/prometheus/prometheus
         sourceRepository: github.com/prometheus/prometheus
-        tag: v2.41.0
+        tag: v2.43.1
       - labels:
           - name: gardener.cloud/cve-categorisation
             value:
@@ -226,10 +226,10 @@ gardenlet:
               integrity_requirement: high
               network_exposure: public
               user_interaction: end-user
-        name: grafana
-        repository: eu.gcr.io/gardener-project/3rd/grafana/grafana
-        sourceRepository: github.com/grafana/grafana
-        tag: 7.5.17
+        name: plutono
+        repository: ghcr.io/credativ/plutono
+        sourceRepository: github.com/credativ/plutono
+        tag: v7.5.21
       - labels:
           - name: gardener.cloud/cve-categorisation
             value:
@@ -260,7 +260,7 @@ gardenlet:
       - name: vpn-shoot-client
         repository: eu.gcr.io/gardener-project/gardener/vpn-shoot-client
         sourceRepository: github.com/gardener/vpn2
-        tag: 0.15.0
+        tag: 0.16.0
       - labels:
           - name: gardener.cloud/cve-categorisation
             value:
@@ -362,11 +362,24 @@ gardenlet:
         name: nginx-ingress-controller
         repository: registry.k8s.io/ingress-nginx/controller-chroot
         sourceRepository: github.com/kubernetes/ingress-nginx
-        tag: v1.2.1
+        tag: v1.3.0
         targetVersion: '>= 1.22'
       - name: alpine
         repository: eu.gcr.io/gardener-project/3rd/alpine
         tag: 3.15.8
+      - labels:
+          - name: gardener.cloud/cve-categorisation
+            value:
+              authentication_enforced: false
+              availability_requirement: low
+              confidentiality_requirement: low
+              integrity_requirement: low
+              network_exposure: private
+              user_interaction: gardener-operator
+        name: fluent-operator
+        repository: eu.gcr.io/gardener-project/3rd/kubesphere/fluent-operator
+        sourceRepository: github.com/fluent/fluent-operator
+        tag: v2.2.0
       - labels:
           - name: gardener.cloud/cve-categorisation
             value:
@@ -377,9 +390,9 @@ gardenlet:
               network_exposure: private
               user_interaction: gardener-operator
         name: fluent-bit
-        repository: eu.gcr.io/gardener-project/3rd/fluent/fluent-bit
-        sourceRepository: github.com/fluent/fluent-bit
-        tag: 1.9.7
+        repository: eu.gcr.io/gardener-project/3rd/kubesphere/fluent-bit
+        sourceRepository: github.com/fluent/fluent-operator
+        tag: v2.0.9
       - labels:
           - name: gardener.cloud/cve-categorisation
             value:
@@ -391,11 +404,11 @@ gardenlet:
               network_exposure: private
               user_interaction: gardener-operator
         name: fluent-bit-plugin-installer
-        repository: eu.gcr.io/gardener-project/gardener/fluent-bit-to-loki
+        repository: eu.gcr.io/gardener-project/gardener/fluent-bit-to-vali
         resourceId:
-          name: fluent-bit-to-loki
+          name: fluent-bit-to-vali
         sourceRepository: github.com/gardener/logging
-        tag: v0.52.0
+        tag: v0.55.2
       - labels:
           - name: gardener.cloud/cve-categorisation
             value:
@@ -405,10 +418,10 @@ gardenlet:
               integrity_requirement: high
               network_exposure: private
               user_interaction: gardener-operator
-        name: loki
-        repository: eu.gcr.io/gardener-project/3rd/grafana/loki
-        sourceRepository: github.com/grafana/loki
-        tag: 2.2.1
+        name: vali
+        repository: ghcr.io/credativ/vali
+        sourceRepository: github.com/credativ/vali
+        tag: v2.2.5
       - labels:
           - name: gardener.cloud/cve-categorisation
             value:
@@ -418,10 +431,10 @@ gardenlet:
               integrity_requirement: high
               network_exposure: private
               user_interaction: gardener-operator
-        name: loki-curator
-        repository: eu.gcr.io/gardener-project/gardener/loki-curator
+        name: vali-curator
+        repository: eu.gcr.io/gardener-project/gardener/vali-curator
         sourceRepository: github.com/gardener/logging
-        tag: v0.52.0
+        tag: v0.55.2
       - labels:
           - name: gardener.cloud/cve-categorisation
             value:
@@ -446,10 +459,10 @@ gardenlet:
               integrity_requirement: high
               network_exposure: public
               user_interaction: end-user
-        name: promtail
-        repository: eu.gcr.io/gardener-project/3rd/grafana/promtail
-        sourceRepository: github.com/grafana/loki
-        tag: 2.2.1
+        name: valitail
+        repository: ghcr.io/credativ/valitail
+        sourceRepository: github.com/credativ/vali
+        tag: v2.2.5
       - labels:
           - name: gardener.cloud/cve-categorisation
             value:
@@ -466,7 +479,7 @@ gardenlet:
         resourceId:
           name: telegraf-iptables
         sourceRepository: github.com/gardener/logging
-        tag: v0.52.0
+        tag: v0.55.2
       - labels:
           - name: gardener.cloud/cve-categorisation
             value:
@@ -479,7 +492,7 @@ gardenlet:
         name: event-logger
         repository: eu.gcr.io/gardener-project/gardener/event-logger
         sourceRepository: github.com/gardener/logging
-        tag: v0.52.0
+        tag: v0.55.2
       - labels:
           - name: gardener.cloud/cve-categorisation
             value:
@@ -492,7 +505,7 @@ gardenlet:
         name: tune2fs
         repository: eu.gcr.io/gardener-project/gardener/tune2fs
         sourceRepository: github.com/gardener/logging
-        tag: v0.52.0
+        tag: v0.55.2
       - labels:
           - name: gardener.cloud/cve-categorisation
             value:
@@ -593,7 +606,7 @@ gardenlet:
       - name: cluster-proportional-autoscaler
         repository: registry.k8s.io/cpa/cluster-proportional-autoscaler
         sourceRepository: https://github.com/kubernetes-sigs/cluster-proportional-autoscaler
-        tag: 1.8.6
+        tag: v1.8.8
       - labels:
           - name: gardener.cloud/cve-categorisation
             value:
@@ -631,7 +644,7 @@ gardenlet:
       - name: ext-authz-server
         repository: eu.gcr.io/gardener-project/gardener/ext-authz-server
         sourceRepository: github.com/gardener/ext-authz-server
-        tag: 0.7.0
+        tag: 0.8.0
       - labels:
           - name: gardener.cloud/cve-categorisation
             value:
@@ -654,11 +667,11 @@ gardenlet:
         resourceId:
           name: apiserver-proxy
         sourceRepository: github.com/gardener/apiserver-proxy
-        tag: v0.11.0
+        tag: v0.12.0
       - name: apiserver-proxy-pod-webhook
         repository: eu.gcr.io/gardener-project/gardener/apiserver-proxy-pod-webhook
         sourceRepository: github.com/gardener/apiserver-proxy
-        tag: v0.11.0
+        tag: v0.12.0
 provider-openstack:
   imageVectorOriginal:
     images:

@@ -20,6 +20,19 @@ rules:
   - get
   - list
   - watch
+- apiGroups: # TODO (istvanballok,rickardsjp): remove in release v1.77. Patching persistent volumes is needed for the Loki -> Vali migration.
+  - ""
+  resources:
+  - persistentvolumes
+  verbs:
+  - delete
+  - patch
+- apiGroups:
+  - ""
+  resources:
+  - persistentvolumeclaims
+  verbs:
+  - create
 - apiGroups:
   - ""
   resources:
@@ -90,6 +103,7 @@ rules:
   - persistentvolumeclaims
   resourceNames:
   - alertmanager-db-alertmanager-0
+  - vali-vali-0
   - loki-loki-0
   - prometheus-db-prometheus-0
   verbs:
@@ -156,13 +170,22 @@ rules:
   - clusteroutputs.fluentbit.fluent.io
   - clusterparsers.fluentbit.fluent.io
   - fluentbits.fluentbit.fluent.io
+  - collectors.fluentbit.fluent.io
+  - fluentbitconfigs.fluentbit.fluent.io
+  - filters.fluentbit.fluent.io
+  - outputs.fluentbit.fluent.io
+  - parsers.fluentbit.fluent.io
   verbs:
   - delete
 - apiGroups:
   - apps
   resources:
   - deployments
+  - deployments/scale
+  # TODO(Kristian-ZH): remove this when the old fluent-bit deletion logic is removed
+  - daemonsets
   - statefulsets
+  - statefulsets/scale
   - replicasets
   verbs:
   - create
@@ -205,6 +228,7 @@ rules:
   - kube-controller-manager
   - aggregate-prometheus
   - prometheus
+  - vali
   - loki
   verbs:
   - delete

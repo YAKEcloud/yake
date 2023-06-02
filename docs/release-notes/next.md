@@ -185,3 +185,33 @@ gardener-extension-admission-alicloud: `eu.gcr.io/gardener-project/gardener/exte
 # [gardener-extension-provider-hcloud] v0.6.17
 
 </details>
+
+<details>
+<summary><b>Update gardener-controlplane to <code>1.71.3</code></b></summary>
+
+# [gardener]
+## 🐛 Bug Fixes
+* *[OPERATOR]* A bug causing `gardenlet` to panic when `admission-controller` is upgraded to `v1.71` but gardenlet is still on `v1.70`. ([gardener/gardener#7989](https://github.com/gardener/gardener/pull/7989), [@acumino](https://github.com/acumino))
+* *[OPERATOR]* Several low timeouts (30s) that were introduced in v1.71.0 for several steps are now reverted as in some cases the Network/ControlPlane reconciliation cannot succeed for 30s. ([gardener/gardener#8006](https://github.com/gardener/gardener/pull/8006), [@gardener-ci-robot](https://github.com/gardener-ci-robot))
+
+</details>
+
+<details>
+<summary><b>Update gardener-controlplane to <code>1.71.3</code></b></summary>
+
+# [gardener]
+## 🐛 Bug Fixes
+* *[OPERATOR]* A bug causing `gardenlet` to panic when `admission-controller` is upgraded to `v1.71` but gardenlet is still on `v1.70`. ([gardener/gardener#7989](https://github.com/gardener/gardener/pull/7989), [@acumino](https://github.com/acumino))
+* *[OPERATOR]* Several low timeouts (30s) that were introduced in v1.71.0 for several steps are now reverted as in some cases the Network/ControlPlane reconciliation cannot succeed for 30s. ([gardener/gardener#8006](https://github.com/gardener/gardener/pull/8006), [@gardener-ci-robot](https://github.com/gardener-ci-robot))
+
+</details>
+
+<details>
+<summary><b>Update gardenlet to <code>1.71.3</code></b></summary>
+
+# [gardener]
+## 🐛 Bug Fixes
+* *[OPERATOR]* A bug causing `gardenlet` to panic when `admission-controller` is upgraded to `v1.71` but gardenlet is still on `v1.70`. ([gardener/gardener#7989](https://github.com/gardener/gardener/pull/7989), [@acumino](https://github.com/acumino))
+* *[OPERATOR]* Several low timeouts (30s) that were introduced in v1.71.0 for several steps are now reverted as in some cases the Network/ControlPlane reconciliation cannot succeed for 30s. ([gardener/gardener#8006](https://github.com/gardener/gardener/pull/8006), [@gardener-ci-robot](https://github.com/gardener-ci-robot))
+
+</details>

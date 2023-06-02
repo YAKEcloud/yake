@@ -239,6 +239,16 @@ config.yaml: |
       jitterUpdates: {{ .Values.config.controllers.managedSeed.jitterUpdates }}
       {{- end }}
     {{- end }}
+    {{- if .Values.config.controllers.networkPolicy }}
+    networkPolicy:
+      {{- if .Values.config.controllers.networkPolicy.concurrentSyncs }}
+      concurrentSyncs: {{ .Values.config.controllers.networkPolicy.concurrentSyncs }}
+      {{- end }}
+      {{- if .Values.config.controllers.networkPolicy.additionalNamespaceSelectors }}
+      additionalNamespaceSelectors:
+{{ toYaml .Values.config.controllers.networkPolicy.additionalNamespaceSelectors | indent 6 }}
+      {{- end }}
+    {{- end }}
   resources:
     capacity:
       shoots: {{ required ".Values.config.resources.capacity.shoots is required" .Values.config.resources.capacity.shoots }}
@@ -296,12 +306,16 @@ config.yaml: |
   {{- end }}
   {{- if .Values.config.etcdConfig }}
   etcdConfig:
-{{ toYaml .Values.config.etcdConfig | indent 4}}
+{{ toYaml .Values.config.etcdConfig | indent 4 }}
   {{- end}}
   {{- if .Values.config.exposureClassHandlers }}
   exposureClassHandlers:
 {{ toYaml .Values.config.exposureClassHandlers | indent 2 }}
   {{- end }}
+  {{- if .Values.nodeToleration }}
+  nodeToleration:
+{{ toYaml .Values.nodeToleration | indent 4 }}
+  {{- end}}
 {{- end -}}
 
 {{- define "gardenlet.config.name" -}}
