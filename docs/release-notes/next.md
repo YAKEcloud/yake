@@ -187,12 +187,13 @@ gardener-extension-admission-alicloud: `eu.gcr.io/gardener-project/gardener/exte
 </details>
 
 <details>
-<summary><b>Update gardener-controlplane to <code>1.71.3</code></b></summary>
+<summary><b>Update dashboard to <code>1.69.1</code></b></summary>
 
-# [gardener]
+# [dashboard]
+## ⚠️ Breaking Changes
+* *[OPERATOR]* The default ingress class annotation under `Values.global.dashboard.ingress.annotations['kubernetes.io/ingress.class']` will not be set anymore. Instead, the ingress class name will be set using `Values.global.dashboard.ingress.ingressClassName` ([gardener/dashboard#1499](https://github.com/gardener/dashboard/pull/1499), [@petersutter](https://github.com/petersutter))
 ## 🐛 Bug Fixes
-* *[OPERATOR]* A bug causing `gardenlet` to panic when `admission-controller` is upgraded to `v1.71` but gardenlet is still on `v1.70`. ([gardener/gardener#7989](https://github.com/gardener/gardener/pull/7989), [@acumino](https://github.com/acumino))
-* *[OPERATOR]* Several low timeouts (30s) that were introduced in v1.71.0 for several steps are now reverted as in some cases the Network/ControlPlane reconciliation cannot succeed for 30s. ([gardener/gardener#8006](https://github.com/gardener/gardener/pull/8006), [@gardener-ci-robot](https://github.com/gardener-ci-robot))
+* *[OPERATOR]* Fixed an issue where the helm deployment failed with the error `annotations.kubernetes.io/ingress.class: Invalid value: "nginx": can not be set when the class field is also set` ([gardener/dashboard#1499](https://github.com/gardener/dashboard/pull/1499), [@petersutter](https://github.com/petersutter))
 
 </details>
 
