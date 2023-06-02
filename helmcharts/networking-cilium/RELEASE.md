@@ -1,7 +1,9 @@
 # [gardener-extension-networking-cilium]
+## ✨ New Features
+* *[USER]* The networking-cilium extension does now run cilium with `enable-service-topology: true`. With this it is possible to use the TopologyAwareHints (topology-aware traffic routing) feature in cilium Shoots. ([gardener/gardener-extension-networking-cilium#185](https://github.com/gardener/gardener-extension-networking-cilium/pull/185), [@ialidzhikov](https://github.com/ialidzhikov))
 ## 🏃 Others
-* *[OPERATOR]* The `gardener-extension-admission-cilium` Service in the `gardener-extension-admission-cilium` chart can now be configured to be topology-aware. ([gardener/gardener-extension-networking-cilium#176](https://github.com/gardener/gardener-extension-networking-cilium/pull/176), [@ialidzhikov](https://github.com/ialidzhikov))
-* *[OPERATOR]* A e2e test is added which tests all combinations of node to node and pod to pod communication. ([gardener/gardener-extension-networking-cilium#179](https://github.com/gardener/gardener-extension-networking-cilium/pull/179), [@DockToFuture](https://github.com/DockToFuture))
-* *[OPERATOR]* Portmap copier is removed. ([gardener/gardener-extension-networking-cilium#180](https://github.com/gardener/gardener-extension-networking-cilium/pull/180), [@DockToFuture](https://github.com/DockToFuture))
-* *[OPERATOR]* Memory limits for cilium agent are increased to 10 Gi. ([gardener/gardener-extension-networking-cilium#183](https://github.com/gardener/gardener-extension-networking-cilium/pull/183), [@DockToFuture](https://github.com/DockToFuture))
-* *[OPERATOR]* Cilium is update to `v1.13.2`. ([gardener/gardener-extension-networking-cilium#184](https://github.com/gardener/gardener-extension-networking-cilium/pull/184), [@DockToFuture](https://github.com/DockToFuture))
+* *[OPERATOR]* The admission/validation component is now adapted such that it works well in garden cluster with enabled `NetworkPolicy` protection (default since `gardener/gardener@v1.71` when garden cluster is managed by `gardener-operator`). ([gardener/gardener-extension-networking-cilium#186](https://github.com/gardener/gardener-extension-networking-cilium/pull/186), [@rfranzke](https://github.com/rfranzke))
+* *[OPERATOR]* Update golang to 1.20.4. ([gardener/gardener-extension-networking-cilium#187](https://github.com/gardener/gardener-extension-networking-cilium/pull/187), [@ScheererJ](https://github.com/ScheererJ))
+* *[OPERATOR]* The following dependency has been updated: ([gardener/gardener-extension-networking-cilium#189](https://github.com/gardener/gardener-extension-networking-cilium/pull/189), [@acumino](https://github.com/acumino))
+  * github.com/gardener/gardener 1.67.1 -> 1.71.0
+* *[OPERATOR]* Update cilium to `v1.13.3`. ([gardener/gardener-extension-networking-cilium#190](https://github.com/gardener/gardener-extension-networking-cilium/pull/190), [@DockToFuture](https://github.com/DockToFuture))
