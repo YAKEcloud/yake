@@ -6,7 +6,7 @@ source hack/ci/handy.sh
 
 echo "23KE Bucket upload"
 
-tmpDir=$(hack/make-tmp-release-dir.sh Bucket)
+tmpDir=$(hack/release/make-tmp-release-dir.sh Bucket)
 
 # Speed up flux
 yq eval -i '(
