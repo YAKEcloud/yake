@@ -1393,7 +1393,7 @@ provider-aws:
         name: terraformer
         repository: eu.gcr.io/gardener-project/gardener/terraformer-aws
         sourceRepository: github.com/gardener/terraformer
-        tag: v2.20.0
+        tag: v2.22.0
       - labels:
           - name: gardener.cloud/cve-categorisation
             value:
@@ -1504,7 +1504,7 @@ provider-aws:
         name: machine-controller-manager
         repository: eu.gcr.io/gardener-project/gardener/machine-controller-manager
         sourceRepository: github.com/gardener/machine-controller-manager
-        tag: v0.48.2
+        tag: v0.49.2
       - labels:
           - name: gardener.cloud/cve-categorisation
             value:
@@ -1517,7 +1517,7 @@ provider-aws:
         name: machine-controller-manager-provider-aws
         repository: eu.gcr.io/gardener-project/gardener/machine-controller-manager-provider-aws
         sourceRepository: github.com/gardener/machine-controller-manager-provider-aws
-        tag: v0.17.0
+        tag: v0.18.0
       - labels:
           - name: gardener.cloud/cve-categorisation
             value:
@@ -1543,7 +1543,7 @@ provider-aws:
         name: aws-custom-route-controller
         repository: eu.gcr.io/gardener-project/gardener/aws-custom-route-controller
         sourceRepository: github.com/gardener/aws-custom-route-controller
-        tag: v0.6.0
+        tag: v0.7.0
       - labels:
           - name: gardener.cloud/cve-categorisation
             value:
@@ -1556,7 +1556,20 @@ provider-aws:
         name: csi-driver
         repository: public.ecr.aws/ebs-csi-driver/aws-ebs-csi-driver
         sourceRepository: github.com/kubernetes-sigs/aws-ebs-csi-driver
-        tag: v1.17.0
+        tag: v1.19.0
+      - labels:
+          - name: gardener.cloud/cve-categorisation
+            value:
+              authentication_enforced: false
+              availability_requirement: low
+              confidentiality_requirement: high
+              integrity_requirement: high
+              network_exposure: private
+              user_interaction: gardener-operator
+        name: csi-volume-modifier
+        repository: public.ecr.aws/ebs-csi-driver/volume-modifier-for-k8s
+        sourceRepository: github.com/awslabs/volume-modifier-for-k8s
+        tag: v0.1.0
       - labels:
           - name: gardener.cloud/cve-categorisation
             value:
