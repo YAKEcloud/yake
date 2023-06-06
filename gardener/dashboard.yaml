@@ -41,6 +41,10 @@ spec:
       valuesKey: value
       targetPath: global.dashboard.kubeconfig
     - kind: Secret
+      name: gardener-internal-kubeconfig
+      valuesKey: value
+      targetPath: global.bootstrapper.kubeconfig
+    - kind: Secret
       name: gardener-ca-keypair
       valuesKey: tls.crt
       targetPath: global.dashboard.apiServerCa
