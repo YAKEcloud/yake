@@ -85,31 +85,6 @@ jobs:
           retry_wait_seconds: 30
           retry_on: error
           command: bash hack/ci/04-23ke.sh
-      - name: Copy provider secret
-        uses: nick-fields/retry@v2
-        with:
-          timeout_minutes: 5
-          max_attempts: 3
-          retry_wait_seconds: 30
-          retry_on: error
-          command: bash hack/ci/05-project.sh
-      - name: Create demo shoot with demo app
-        uses: nick-fields/retry@v2
-        with:
-          timeout_minutes: 30
-          max_attempts: 3
-          retry_wait_seconds: 30
-          retry_on: error
-          command: bash hack/ci/06-tests.sh
-      - name: Delete demo shoot
-        if: ${{ always() }}
-        uses: nick-fields/retry@v2
-        with:
-          timeout_minutes: 30
-          max_attempts: 3
-          retry_wait_seconds: 30
-          retry_on: error
-          command: bash hack/ci/delete-microservice-shoot.sh
       - name: Delete shoot
         if: ${{ always() }}
         uses: nick-fields/retry@v2
