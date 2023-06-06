@@ -5,8 +5,9 @@ git config --global user.email "trash@23technologies.cloud"
 git config --global user.name "23T Machine User"
 
 tmpDir=$(hack/release/make-tmp-release-dir.sh GitRepository)
-cp -r $tmpDir/* 23ke-releases
 cd 23ke-releases
+git rm -rf -- .
+cp -r $tmpDir/* .
 
 if [[ $(git status --porcelain) ]]; then
   git add .
