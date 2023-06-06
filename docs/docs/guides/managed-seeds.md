@@ -66,51 +66,51 @@ metadata:
   namespace: garden # Must be garden
 spec:
   shoot:
-	name: my-region-0 # has to be the name of the shoot to be used
+    name: my-region-0 # has to be the name of the shoot to be used
   # gardenlet specifies that the ManagedSeed controller should deploy a gardenlet into the cluster
   # with the given deployment parameters and GardenletConfiguration.
   gardenlet:
-	config: # GardenletConfiguration resource
-	  apiVersion: gardenlet.config.gardener.cloud/v1alpha1
-	  kind: GardenletConfiguration
-	  seedConfig:
-		metadata:
-		  labels:
-			name: my-region-0
-		taints:
-		  seed.gardener.cloud/protected: false
-		spec:
-		  dns:
-			provider:
-			  type: # a valid dns provider
-			  secretRef:
-				name: default-domain-gardener-... # the default-domain-secret of your environment
-				namespace: garden
-		  ingress:
-			domain: ingress.my-region-0.garden.BASEDOMAIN # replace BASEDOMAIN with your domain
-			controller:
-			  kind: nginx
-		  networks:
-			shootDefaults:
-			  pods: 100.74.0.0/16
-			  services: 100.96.0.0/13
-		  provider:
-			region: MYREGION
-			type: # your cluster provider type
-		  backup:
-			provider: # your backup provider type
-			region: # your backup provider region
-			secretRef:
-			  name: # your backup provider secret
-			  namespace: # your backup provider secret namespace
-		  settings:
-			scheduling:
-			  visible: true
-			excessCapacityReservation:
-			  enabled: true
-	  featureGates:
-		HVPA: true
-		HVPAForShootedSeed: true
+    config: # GardenletConfiguration resource
+      apiVersion: gardenlet.config.gardener.cloud/v1alpha1
+      kind: GardenletConfiguration
+      seedConfig:
+        metadata:
+          labels:
+            name: my-region-0
+        taints:
+          seed.gardener.cloud/protected: false
+        spec:
+          dns:
+            provider:
+              type: # a valid dns provider
+              secretRef:
+                name: default-domain-gardener-... # the default-domain-secret of your environment
+                namespace: garden
+          ingress:
+            domain: ingress.my-region-0.garden.BASEDOMAIN # replace BASEDOMAIN with your domain
+            controller:
+              kind: nginx
+          networks:
+            shootDefaults:
+              pods: 100.74.0.0/16
+              services: 100.96.0.0/13
+          provider:
+            region: MYREGION
+            type: # your cluster provider type
+          backup:
+            provider: # your backup provider type
+            region: # your backup provider region
+            secretRef:
+              name: # your backup provider secret
+              namespace: # your backup provider secret namespace
+          settings:
+            scheduling:
+              visible: true
+            excessCapacityReservation:
+              enabled: true
+      featureGates:
+        HVPA: true
+        HVPAForShootedSeed: true
 ```
 
 :::note
@@ -128,10 +128,10 @@ spec:
     ...
   gardenlet:
     ...
-	  seedConfig:
-		metadata:
-		  labels:
-		    ...
-		    23ke.cloud/generate-controlplane-cert: "true"
+      seedConfig:
+        metadata:
+          labels:
+            ...
+            23ke.cloud/generate-controlplane-cert: "true"
 ```
 When this label is set, your Grafana/Prometheus dashboard should be equipped with a browser trusted certificate.
