@@ -24,7 +24,7 @@ jobs:
           git config user.name "${GITHUB_ACTOR}"
           git config user.email "${GITHUB_ACTOR}@users.noreply.github.com"
       - name: Prepare release
-        run: hack/prepare-release.sh "${{ env.version }}"
+        run: hack/release/prepare.sh "${{ env.version }}"
 
   upload:
     runs-on: self-hosted
@@ -48,18 +48,35 @@ jobs:
           MINIO_PW: ${{ secrets.MINIOPASSWORD }}
           MC_ALIAS: releases
           tag: v${{ github.event.inputs.version }}
-        run: |
-          export MC_HOST_$MC_ALIAS=https://minio:$MINIO_PW@$MINIO_HOSTNAME
-          mc mb --ignore-existing "$MC_ALIAS/$tag"
-          tmpDir=$(hack/make-tmp-release-dir.sh Bucket)
-          mc cp --recursive $tmpDir/* "$MC_ALIAS/$tag"
-      - name: Upload to habour container registry
+        run: hack/release/upload-bucket.sh
+
+  upload-oci:
+    runs-on: self-hosted
+    name: Upload OCI
+    needs:
+      - prepare
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          token: "${{ secrets.GH_TOKEN_23T_MACHINE_USER }}"
+          ref: "v${{ github.event.inputs.version }}"
+
+      - name: Upload to harbor container registry
         env:
           tag: v${{ github.event.inputs.version }}
           creds: ${{ secrets.HARBORCREDENTIALS }}
-        run: |
-          tmpDir=$(hack/make-tmp-release-dir.sh OCIRepository)
-          flux push artifact --creds $creds --source https://23ke.cloud --revision $tag --path=$tmpDir oci://harbor.23t.dev/23ke-releases/23ke:$tag
+        run: hack/release/upload-oci.sh
+
+  upload-git:
+    runs-on: self-hosted
+    name: Upload Git
+    needs:
+      - prepare
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          token: "${{ secrets.GH_TOKEN_23T_MACHINE_USER }}"
+          ref: "v${{ github.event.inputs.version }}"
       - name: Checkout 23ke-releases repo
         uses: actions/checkout@v3
         with:
@@ -70,19 +87,4 @@ jobs:
       - name: Upload to release git repository
         env:
           tag: v${{ github.event.inputs.version }}
-        run: |
-          git config --global user.email "trash@23technologies.cloud"
-          git config --global user.name "23T Machine User"
-
-          tmpDir=$(hack/make-tmp-release-dir.sh GitRepository)
-          cp $tmpDir/* 23ke-releases
-          cd 23ke-releases
-
-          if [[ `git status --porcelain` ]]; then
-            git add .
-            git commit -m"Add release $tag"
-
-            git tag $tag
-            git push
-            git push --tags
-          fi
+        run: hack/release/upload-git.sh
