@@ -119,41 +119,19 @@ You will need to provide a `Secret` for your backup provider in advance, if you 
 
 ## Deployment of wildcard certificate for Grafana/Prometheus dashboards
 
-If you want to use e.g. the Grafana dashboard of a `Shoot` cluster hosted on the `ManagedSeed`, you will need to make sure that the `ManagedSeed` can make use of browser trusted certificates. It is possible to use the `extension-shoot-cert-service` for this purpose, as a `ManagedSeed` is also a `Shoot`. For this reason, you need to enable this extension on `Shoot`s to be used as `ManagedSeed`s, i.e.
-
-```yaml
-kind: Shoot
-apiVersion: core.gardener.cloud/v1beta1
-metadata: ...
+We prepared everything in 23KE so that the only thing you need to do is to set a label in the `SeedConfig` in your `managedSeed` resource with `23ke.cloud/generate-controlplane-cert="true"`:
+``` yaml
+apiVersion: seedmanagement.gardener.cloud/v1alpha1
+kind: ManagedSeed
 spec:
-  extensions:
-    - type: shoot-cert-service
+  shoot:
+    ...
+  gardenlet:
+    ...
+	  seedConfig:
+		metadata:
+		  labels:
+		    ...
+		    23ke.cloud/generate-controlplane-cert: "true"
 ```
-
-Then, you can apply a `Certificate` resource directly to the `Shoot` cluster used for the `ManagedSeed`. An example `Certificate` resource manifest is given below
-
-```yaml
-apiVersion: cert.gardener.cloud/v1alpha1
-kind: Certificate
-metadata:
-  name: seed-ingress
-  namespace: garden
-spec:
-  commonName: '*.ingress.my-region-0.garden.BASE_DOMAIN'
-  issuerRef:
-	name: garden
-  secretRef:
-	name: seed-ingress-certificate
-	namespace: garden
-```
-
-This instructs the `extension-shoot-cert-service` to create a `Secret` containing the certificate data. In order to use this secret as certificate for every `Ingress` in the cluster, it needs to have the "magic" label `gardener.cloud/role: controlplane-cert`. Consequently, you have to label the `Secret` as soon as it exists:
-
-```
-kubectl label -n garden secret seed-ingress-certificate gardener.cloud/role=controlplane-cert
-```
-
-Afterwards, your Grafana urls should be equipped with a browser trusted certificate.
-:::info
-We are aware of the fact that these steps require some manual effort and this is not really inline with the idea of a `ManagedSeed`. However, at the moment this is the way to go, and we are looking forward to make things easier via e.g. a Gardener extension which automates the manual process.
-:::
+When this label is set, your Grafana/Prometheus dashboard should be equipped with a browser trusted certificate.
