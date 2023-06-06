@@ -145,6 +145,7 @@ jobs:
   upload-bucket:
     runs-on: self-hosted
     name: Upload Bucket
+    if: success('prepare')
     needs:
       - prepare
     steps:
@@ -165,6 +166,7 @@ jobs:
   upload-oci:
     runs-on: self-hosted
     name: Upload OCI
+    if: success('prepare')
     needs:
       - prepare
     steps:
@@ -182,6 +184,7 @@ jobs:
   upload-git:
     runs-on: self-hosted
     name: Upload Git
+    if: success('prepare')
     needs:
       - prepare
     steps:
