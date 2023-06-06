@@ -116,7 +116,7 @@ jobs:
   prepare:
     runs-on: self-hosted
     name: Prepare
-    if:  ${{ ! inputs.runReleaseTest }}
+    if:  ${{ ! failure() || ! inputs.runReleaseTest }}
     needs:
       - release-test
     env:
