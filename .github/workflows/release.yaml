@@ -12,6 +12,8 @@ on:
         type: boolean
         default: true
 
+concurrency: release-${{ inputs.version }}
+
 jobs:
   release-test:
     if:  ${{ inputs.runReleaseTest }}
