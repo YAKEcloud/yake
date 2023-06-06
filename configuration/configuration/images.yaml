@@ -1052,7 +1052,7 @@ provider-azure:
         name: terraformer
         repository: eu.gcr.io/gardener-project/gardener/terraformer-azure
         sourceRepository: github.com/gardener/terraformer
-        tag: v2.20.0
+        tag: v2.22.0
       - labels:
           - name: gardener.cloud/cve-categorisation
             value:
@@ -1121,7 +1121,7 @@ provider-azure:
         name: cloud-controller-manager
         repository: mcr.microsoft.com/oss/kubernetes/azure-cloud-controller-manager
         sourceRepository: github.com/kubernetes-sigs/cloud-provider-azure
-        tag: v1.24.17
+        tag: v1.24.20
         targetVersion: 1.24.x
       - labels:
           - name: gardener.cloud/cve-categorisation
@@ -1135,7 +1135,7 @@ provider-azure:
         name: cloud-controller-manager
         repository: mcr.microsoft.com/oss/kubernetes/azure-cloud-controller-manager
         sourceRepository: github.com/kubernetes-sigs/cloud-provider-azure
-        tag: v1.25.11
+        tag: v1.25.14
         targetVersion: 1.25.x
       - labels:
           - name: gardener.cloud/cve-categorisation
@@ -1149,7 +1149,7 @@ provider-azure:
         name: cloud-controller-manager
         repository: mcr.microsoft.com/oss/kubernetes/azure-cloud-controller-manager
         sourceRepository: github.com/kubernetes-sigs/cloud-provider-azure
-        tag: v1.26.7
+        tag: v1.26.10
         targetVersion: '>= 1.26'
       - labels:
           - name: gardener.cloud/cve-categorisation
@@ -1219,7 +1219,7 @@ provider-azure:
         name: machine-controller-manager
         repository: eu.gcr.io/gardener-project/gardener/machine-controller-manager
         sourceRepository: github.com/gardener/machine-controller-manager
-        tag: v0.48.2
+        tag: v0.49.2
       - labels:
           - name: gardener.cloud/cve-categorisation
             value:
@@ -1232,7 +1232,7 @@ provider-azure:
         name: machine-controller-manager-provider-azure
         repository: eu.gcr.io/gardener-project/gardener/machine-controller-manager-provider-azure
         sourceRepository: github.com/gardener/machine-controller-manager-provider-azure
-        tag: v0.10.0
+        tag: v0.11.0
       - labels:
           - name: gardener.cloud/cve-categorisation
             value:
@@ -1258,7 +1258,7 @@ provider-azure:
         name: csi-driver-file
         repository: mcr.microsoft.com/oss/kubernetes-csi/azurefile-csi
         sourceRepository: github.com/kubernetes-sigs/azurefile-csi-driver
-        tag: v1.26.1
+        tag: v1.28.0
       - labels:
           - name: gardener.cloud/cve-categorisation
             value:
