@@ -6,11 +6,118 @@ on:
         description: 'New version to be released. Format: 1.3.3-7'
         required: true
         type: string
+    runReleaseTest:
+        description: 'Whether release tests should be run or not'
+        required: true
+        type: boolean
 
 jobs:
+  release-test:
+    if:  ${{ inputs.runReleaseTest }}
+    runs-on: 23ke-runner
+    name: "23KE shoot testrun"
+    env:
+      PROVIDER: ${{ github.event.inputs.provider }}
+      ZONE: ${{ github.event.inputs.zone }}
+    steps:
+      - name: Checkout source
+        uses: actions/checkout@v3.4.0
+        with:
+          fetch-depth: 0
+      - name: Install Dependencies
+        run: sudo apt-get update && sudo apt-get install -y gettext-base
+      - uses: actions/setup-go@v3
+        with:
+          go-version: ">=1.19.0"
+      - name: Setup Environment
+        uses: nick-fields/retry@v2
+        with:
+          timeout_minutes: 5
+          max_attempts: 3
+          retry_wait_seconds: 30
+          retry_on: error
+          command: |
+            # actually defeats the purpose of host keys
+            # including the actual keys would be more secure
+            mkdir -p ~/.ssh
+            ssh-keyscan github.com >> ~/.ssh/known_hosts
+
+            echo "${{ secrets.TOKEN_OKEANOS_23KE_CI }}" \
+              > hack/ci/secrets/gardener-kubeconfig.yaml
+            bash hack/ci/00-environment.sh
+      - name: Setup shoot
+        uses: nick-fields/retry@v2
+        with:
+          timeout_minutes: 30
+          max_attempts: 2
+          retry_wait_seconds: 30
+          retry_on: error
+          command: bash hack/ci/01-shoot.sh
+      - name: Upload 23ke bucket
+        uses: nick-fields/retry@v2
+        with:
+          timeout_minutes: 5
+          max_attempts: 3
+          retry_wait_seconds: 30
+          retry_on: error
+          command: bash hack/ci/02-23ke-bucket.sh
+      - name: Upload 23ke-config bucket
+        uses: nick-fields/retry@v2
+        with:
+          timeout_minutes: 5
+          max_attempts: 3
+          retry_wait_seconds: 30
+          retry_on: error
+          command: bash hack/ci/03-backup-bucket.sh
+      - name: Install 23KE
+        uses: nick-fields/retry@v2
+        with:
+          timeout_minutes: 15
+          max_attempts: 3
+          retry_wait_seconds: 30
+          retry_on: error
+          command: bash hack/ci/04-23ke.sh
+      - name: Copy provider secret
+        uses: nick-fields/retry@v2
+        with:
+          timeout_minutes: 5
+          max_attempts: 3
+          retry_wait_seconds: 30
+          retry_on: error
+          command: bash hack/ci/05-project.sh
+      - name: Create demo shoot with demo app
+        uses: nick-fields/retry@v2
+        with:
+          timeout_minutes: 30
+          max_attempts: 3
+          retry_wait_seconds: 30
+          retry_on: error
+          command: bash hack/ci/06-tests.sh
+      - name: Delete demo shoot
+        if: ${{ always() }}
+        uses: nick-fields/retry@v2
+        with:
+          timeout_minutes: 30
+          max_attempts: 3
+          retry_wait_seconds: 30
+          retry_on: error
+          command: bash hack/ci/delete-microservice-shoot.sh
+      - name: Delete shoot
+        if: ${{ always() }}
+        uses: nick-fields/retry@v2
+        with:
+          timeout_minutes: 5
+          max_attempts: 3
+          retry_wait_seconds: 30
+          retry_on: error
+          command: bash hack/ci/delete-shoot.sh
+
   prepare:
     runs-on: self-hosted
     name: Prepare
+    if:  ${{ ! inputs.runReleaseTest }}
+    needs:
+      - release-test
     env:
       version: ${{ github.event.inputs.version }}
     steps:
