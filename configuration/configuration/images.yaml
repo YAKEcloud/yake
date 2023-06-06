@@ -683,7 +683,7 @@ provider-openstack:
         name: terraformer
         repository: eu.gcr.io/gardener-project/gardener/terraformer-openstack
         sourceRepository: github.com/gardener/terraformer
-        tag: v2.20.0
+        tag: v2.22.0
       - labels:
           - name: gardener.cloud/cve-categorisation
             value:
@@ -780,7 +780,7 @@ provider-openstack:
         name: machine-controller-manager
         repository: eu.gcr.io/gardener-project/gardener/machine-controller-manager
         sourceRepository: github.com/gardener/machine-controller-manager
-        tag: v0.48.2
+        tag: v0.49.2
       - labels:
           - name: gardener.cloud/cve-categorisation
             value:
@@ -793,7 +793,7 @@ provider-openstack:
         name: machine-controller-manager-provider-openstack
         repository: eu.gcr.io/gardener-project/gardener/machine-controller-manager-provider-openstack
         sourceRepository: github.com/gardener/machine-controller-manager-provider-openstack
-        tag: v0.13.0
+        tag: v0.14.0
       - labels:
           - name: gardener.cloud/cve-categorisation
             value:
