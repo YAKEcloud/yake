@@ -7,9 +7,10 @@ on:
         required: true
         type: string
       runReleaseTest:
-        description: 'Whether release tests should be run or not'
+        description: 'Run tests'
         required: true
         type: boolean
+        default: true
 
 jobs:
   release-test:
