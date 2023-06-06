@@ -6,6 +6,8 @@ hide_table_of_contents: true
 
 ## 23KE release notes and upgrade guide
 
+No special steps needed, please refer to the gardener release notes below.
+
 ## Related upstream release notes / changelogs
 
 
