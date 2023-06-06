@@ -71,9 +71,7 @@ jobs:
         env:
           tag: v${{ github.event.inputs.version }}
           creds: ${{ secrets.HARBORCREDENTIALS }}
-        run: |
-          tmpDir=$(hack/make-tmp-release-dir.sh OCIRepository)
-          flux push artifact --creds $creds --source https://23ke.cloud --revision $tag --path=$tmpDir oci://harbor.23t.dev/23ke-releases/23ke:$tag
+        run: hack/release/upload-oci.sh
 
   upload-git:
     runs-on: self-hosted
