@@ -30,7 +30,7 @@ jobs:
           git config user.name "${GITHUB_ACTOR}"
           git config user.email "${GITHUB_ACTOR}@users.noreply.github.com"
       - name: Prepare release
-        run: hack/prepare-release.sh "${{ env.version }}"
+        run: hack/release/prepare.sh "${{ env.version }}"
 
   upload-bucket:
     runs-on: self-hosted
