@@ -5,7 +5,7 @@ source hack/ci/handy.sh
 
 echo "23KE Bucket upload"
 
-tmpDir=$(hack/make-tmp-release-dir.sh Bucket)
+tmpDir=$(hack/release/make-tmp-release-dir.sh Bucket)
 
 rclone -q mkdir $REMOTE:$BUCKET
 rclone -q sync $tmpDir $REMOTE:$BUCKET
