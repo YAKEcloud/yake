@@ -2,11 +2,26 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://23technologies.github.io/blog</id>
     <title>23KE Blog</title>
-    <updated>2023-05-12T00:00:00.000Z</updated>
+    <updated>2023-06-06T00:00:00.000Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://23technologies.github.io/blog"/>
     <subtitle>23KE Blog</subtitle>
     <icon>https://23technologies.github.io/img/favicon.ico</icon>
+    <entry>
+        <title type="html"><![CDATA[Gardener Hackathon - May 2023]]></title>
+        <id>Gardener Hackathon 2023</id>
+        <link href="https://23technologies.github.io/blog/Gardener Hackathon 2023"/>
+        <updated>2023-06-06T00:00:00.000Z</updated>
+        <summary type="html"><![CDATA[TLDR;]]></summary>
+        <content type="html"><![CDATA[<h2 class="anchor anchorWithStickyNavbar_LWe7" id="tldr">TLDR;<a class="hash-link" href="#tldr" title="Direct link to heading">​</a></h2><p>From May 22th until 26th, the colleagues from SAP, StackIT, x-cellent, and 23 Technologies met for another Gardener hackathon. One output is another <a href="https://github.com/gardener-community/hackathon" target="_blank" rel="noopener noreferrer">repository</a> collecting the hackathon outputs. Go ahead and checkout the repo, for a concise summary of all past hackathons and information on future hackathons.</p><h2 class="anchor anchorWithStickyNavbar_LWe7" id="another-great-experience-with-great-achievements">Another great experience with great achievements<a class="hash-link" href="#another-great-experience-with-great-achievements" title="Direct link to heading">​</a></h2><p>When we met on Monday 22th, we synchronized our expectations for the week in the first place. Almost everyone agreed that having a good time together belongs to the main expectations. A few days after the hackathon, I can definitely state that we had a good and productive time together. From the social perspective, we enjoyed the fruitful discussions during lunch or dinner. From the hacking perspective, we were really fascinated by the progress made with respect to some topics which have made it to the agenda for several times before:</p><ul><li>Supporting pure IPv6 shoot clusters and</li><li>Replacing the bash scripts for node provisioning with a golang-based approach.</li></ul><p>Moreover, we were working on a more research oriented topic dealing with the deployment of "masterful clusters" aka. "autonomous shoots". Even though the final concept for "gardener-like initial clusters" was not developed during the hackathon, the collected experience with respect to this challenging task is crucial for further steps.
+Besides the bigger topics mentioned above, we brought the following task close to (or even in) production:</p><ul><li>We moved the <code>machine-controller-manager</code> deployment responsibility to the <code>gardenlet</code></li><li>We introduced an <code>InternalSecret</code> resource in the Gardener API</li><li>We replaced the <code>ShootState</code>s With data in backup buckets</li><li>We found a concept for Garden cluster acccess for extensions in Seed clusters.</li></ul><p>Of course, there are still open questions and not every issue was solved during this short week. Therefore, we are happy that the colleagues from x-cellent opted for organizing the next Gardener hackathon in November/December 2023.</p><h2 class="anchor anchorWithStickyNavbar_LWe7" id="conclusion">Conclusion<a class="hash-link" href="#conclusion" title="Direct link to heading">​</a></h2><p>Once again, the Gardener hackathon was a great experience with great achievements for the overall project. The community work towards a "managed Kubernetes done right" service is still gathering pace which is forms a great basis for all future development.</p>]]></content>
+        <author>
+            <name>Jens Schneider</name>
+            <uri>https://github.com/jensac</uri>
+        </author>
+        <category label="gardener" term="gardener"/>
+        <category label="hackathon" term="hackathon"/>
+    </entry>
     <entry>
         <title type="html"><![CDATA[Build Cluster with CAPH - the challanges when installing 23KE]]></title>
         <id>build-cluster-with-caph</id>
