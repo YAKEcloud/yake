@@ -6,4 +6,4 @@ dependencies:
 description: A Helm chart to deploy common resources for the Gardener runtime and
   application
 name: utils-common
-version: 1.70.2
+version: 1.70.3
