@@ -1,4 +1,5 @@
 # [gardener]
 ## 🐛 Bug Fixes
-* *[OPERATOR]* A bug causing `gardenlet` to panic when `admission-controller` is upgraded to `v1.71` but gardenlet is still on `v1.70`. ([gardener/gardener#7989](https://github.com/gardener/gardener/pull/7989), [@acumino](https://github.com/acumino))
-* *[OPERATOR]* Several low timeouts (30s) that were introduced in v1.71.0 for several steps are now reverted as in some cases the Network/ControlPlane reconciliation cannot succeed for 30s. ([gardener/gardener#8006](https://github.com/gardener/gardener/pull/8006), [@gardener-ci-robot](https://github.com/gardener-ci-robot))
+* *[OPERATOR]* A bug has been fixed in the [HighAvailabilityConfig-Webhook](https://github.com/gardener/gardener/blob/master/docs/concepts/resource-manager.md#high-availability-config) which caused duplicated entries for zone affinities. ([gardener/gardener#8050](https://github.com/gardener/gardener/pull/8050), [@gardener-ci-robot](https://github.com/gardener-ci-robot))
+## 🏃 Others
+* *[OPERATOR]* The worker count for the [NetworkPolicy controller](https://github.com/gardener/gardener/blob/master/docs/concepts/resource-manager.md#networkpolicy-controller) in GRM was increased to `20`. This is necessary to create and update `NetworkPolicies` in time, esp. on larger seed clusters. ([gardener/gardener#8046](https://github.com/gardener/gardener/pull/8046), [@gardener-ci-robot](https://github.com/gardener-ci-robot))
