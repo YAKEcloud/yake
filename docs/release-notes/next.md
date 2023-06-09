@@ -215,3 +215,39 @@ hide_table_of_contents: true
 * *[OPERATOR]* Add calico scheme to azure-validator. ([gardener/gardener-extension-provider-azure#697](https://github.com/gardener/gardener-extension-provider-azure/pull/697), [@kon-angelo](https://github.com/kon-angelo))
 
 </details>
+
+<details>
+<summary><b>Update gardener-controlplane to <code>1.72.1</code></b></summary>
+
+# [gardener]
+## 🐛 Bug Fixes
+* *[USER]* Webhooks remediator sets the timeoutSeonds to 3 seconds for webhook affecting lease resources in `kube-system` namespace only if there is no objectSelector provided in webhook. ([gardener/gardener#8045](https://github.com/gardener/gardener/pull/8045), [@gardener-ci-robot](https://github.com/gardener-ci-robot))
+* *[OPERATOR]* A bug has been fixed in the [HighAvailabilityConfig-Webhook](https://github.com/gardener/gardener/blob/master/docs/concepts/resource-manager.md#high-availability-config) which caused duplicated entries for zone affinities. ([gardener/gardener#8049](https://github.com/gardener/gardener/pull/8049), [@gardener-ci-robot](https://github.com/gardener-ci-robot))
+## 🏃 Others
+* *[OPERATOR]* The worker count for the [NetworkPolicy controller](https://github.com/gardener/gardener/blob/master/docs/concepts/resource-manager.md#networkpolicy-controller) in GRM was increased to `20`. This is necessary to create and update `NetworkPolicies` in time, esp. on larger seed clusters. ([gardener/gardener#8044](https://github.com/gardener/gardener/pull/8044), [@timuthy](https://github.com/timuthy))
+
+</details>
+
+<details>
+<summary><b>Update gardener-controlplane to <code>1.72.1</code></b></summary>
+
+# [gardener]
+## 🐛 Bug Fixes
+* *[USER]* Webhooks remediator sets the timeoutSeonds to 3 seconds for webhook affecting lease resources in `kube-system` namespace only if there is no objectSelector provided in webhook. ([gardener/gardener#8045](https://github.com/gardener/gardener/pull/8045), [@gardener-ci-robot](https://github.com/gardener-ci-robot))
+* *[OPERATOR]* A bug has been fixed in the [HighAvailabilityConfig-Webhook](https://github.com/gardener/gardener/blob/master/docs/concepts/resource-manager.md#high-availability-config) which caused duplicated entries for zone affinities. ([gardener/gardener#8049](https://github.com/gardener/gardener/pull/8049), [@gardener-ci-robot](https://github.com/gardener-ci-robot))
+## 🏃 Others
+* *[OPERATOR]* The worker count for the [NetworkPolicy controller](https://github.com/gardener/gardener/blob/master/docs/concepts/resource-manager.md#networkpolicy-controller) in GRM was increased to `20`. This is necessary to create and update `NetworkPolicies` in time, esp. on larger seed clusters. ([gardener/gardener#8044](https://github.com/gardener/gardener/pull/8044), [@timuthy](https://github.com/timuthy))
+
+</details>
+
+<details>
+<summary><b>Update gardenlet to <code>1.72.1</code></b></summary>
+
+# [gardener]
+## 🐛 Bug Fixes
+* *[USER]* Webhooks remediator sets the timeoutSeonds to 3 seconds for webhook affecting lease resources in `kube-system` namespace only if there is no objectSelector provided in webhook. ([gardener/gardener#8045](https://github.com/gardener/gardener/pull/8045), [@gardener-ci-robot](https://github.com/gardener-ci-robot))
+* *[OPERATOR]* A bug has been fixed in the [HighAvailabilityConfig-Webhook](https://github.com/gardener/gardener/blob/master/docs/concepts/resource-manager.md#high-availability-config) which caused duplicated entries for zone affinities. ([gardener/gardener#8049](https://github.com/gardener/gardener/pull/8049), [@gardener-ci-robot](https://github.com/gardener-ci-robot))
+## 🏃 Others
+* *[OPERATOR]* The worker count for the [NetworkPolicy controller](https://github.com/gardener/gardener/blob/master/docs/concepts/resource-manager.md#networkpolicy-controller) in GRM was increased to `20`. This is necessary to create and update `NetworkPolicies` in time, esp. on larger seed clusters. ([gardener/gardener#8044](https://github.com/gardener/gardener/pull/8044), [@timuthy](https://github.com/timuthy))
+
+</details>
