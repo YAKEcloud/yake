@@ -197,3 +197,12 @@ hide_table_of_contents: true
 * *[OPERATOR]* Gardener dependency has been updated from `v1.59.1` to `v1.71.2` ([gardener/terraformer#137](https://github.com/gardener/terraformer/pull/137), [@MartinWeindel](https://github.com/MartinWeindel))
 
 </details>
+
+<details>
+<summary><b>Update provider-aws to <code>1.44.1</code></b></summary>
+
+# [gardener-extension-provider-aws]
+## 🐛 Bug Fixes
+* *[OPERATOR]* Fix the name of the aws-csi-volume-modifier container the in the respective VPA resource. ([gardener/gardener-extension-provider-aws#764](https://github.com/gardener/gardener-extension-provider-aws/pull/764), [@kon-angelo](https://github.com/kon-angelo))
+
+</details>
