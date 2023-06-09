@@ -206,3 +206,12 @@ hide_table_of_contents: true
 * *[OPERATOR]* Fix the name of the aws-csi-volume-modifier container the in the respective VPA resource. ([gardener/gardener-extension-provider-aws#764](https://github.com/gardener/gardener-extension-provider-aws/pull/764), [@kon-angelo](https://github.com/kon-angelo))
 
 </details>
+
+<details>
+<summary><b>Update provider-azure to <code>1.36.1</code></b></summary>
+
+# [gardener-extension-provider-azure]
+## 🏃 Others
+* *[OPERATOR]* Add calico scheme to azure-validator. ([gardener/gardener-extension-provider-azure#697](https://github.com/gardener/gardener-extension-provider-azure/pull/697), [@kon-angelo](https://github.com/kon-angelo))
+
+</details>
