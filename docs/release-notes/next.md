@@ -101,3 +101,36 @@ hide_table_of_contents: true
 * *[OPERATOR]* An issue causing panic in the health check for extension is fixed. ([gardener/gardener#7914](https://github.com/gardener/gardener/pull/7914), [@gardener-ci-robot](https://github.com/gardener-ci-robot))
 
 </details>
+
+<details>
+<summary><b>Update gardener-controlplane to <code>1.70.3</code></b></summary>
+
+# [gardener]
+## 🐛 Bug Fixes
+* *[OPERATOR]* A bug has been fixed in the [HighAvailabilityConfig-Webhook](https://github.com/gardener/gardener/blob/master/docs/concepts/resource-manager.md#high-availability-config) which caused duplicated entries for zone affinities. ([gardener/gardener#8051](https://github.com/gardener/gardener/pull/8051), [@timuthy](https://github.com/timuthy))
+## 🏃 Others
+* *[OPERATOR]* The worker count for the [NetworkPolicy controller](https://github.com/gardener/gardener/blob/master/docs/concepts/resource-manager.md#networkpolicy-controller) in GRM was increased to `20`. This is necessary to create and update `NetworkPolicies` in time, esp. on larger seed clusters. ([gardener/gardener#8055](https://github.com/gardener/gardener/pull/8055), [@timuthy](https://github.com/timuthy))
+
+</details>
+
+<details>
+<summary><b>Update gardener-controlplane to <code>1.70.3</code></b></summary>
+
+# [gardener]
+## 🐛 Bug Fixes
+* *[OPERATOR]* A bug has been fixed in the [HighAvailabilityConfig-Webhook](https://github.com/gardener/gardener/blob/master/docs/concepts/resource-manager.md#high-availability-config) which caused duplicated entries for zone affinities. ([gardener/gardener#8051](https://github.com/gardener/gardener/pull/8051), [@timuthy](https://github.com/timuthy))
+## 🏃 Others
+* *[OPERATOR]* The worker count for the [NetworkPolicy controller](https://github.com/gardener/gardener/blob/master/docs/concepts/resource-manager.md#networkpolicy-controller) in GRM was increased to `20`. This is necessary to create and update `NetworkPolicies` in time, esp. on larger seed clusters. ([gardener/gardener#8055](https://github.com/gardener/gardener/pull/8055), [@timuthy](https://github.com/timuthy))
+
+</details>
+
+<details>
+<summary><b>Update gardenlet to <code>1.70.3</code></b></summary>
+
+# [gardener]
+## 🐛 Bug Fixes
+* *[OPERATOR]* A bug has been fixed in the [HighAvailabilityConfig-Webhook](https://github.com/gardener/gardener/blob/master/docs/concepts/resource-manager.md#high-availability-config) which caused duplicated entries for zone affinities. ([gardener/gardener#8051](https://github.com/gardener/gardener/pull/8051), [@timuthy](https://github.com/timuthy))
+## 🏃 Others
+* *[OPERATOR]* The worker count for the [NetworkPolicy controller](https://github.com/gardener/gardener/blob/master/docs/concepts/resource-manager.md#networkpolicy-controller) in GRM was increased to `20`. This is necessary to create and update `NetworkPolicies` in time, esp. on larger seed clusters. ([gardener/gardener#8055](https://github.com/gardener/gardener/pull/8055), [@timuthy](https://github.com/timuthy))
+
+</details>
