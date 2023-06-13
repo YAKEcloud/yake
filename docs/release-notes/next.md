@@ -275,3 +275,15 @@ hide_table_of_contents: true
 * *[OPERATOR]* Bump builder image from `golang:1.20.4` to `golang:1.20.5` ([gardener/external-dns-management#308](https://github.com/gardener/external-dns-management/pull/308), [@MartinWeindel](https://github.com/MartinWeindel))
 
 </details>
+
+<details>
+<summary><b>Update cert-management to <code>0.10.6</code></b></summary>
+
+# [cert-management]
+## ✨ New Features
+* *[OPERATOR]* Added metrics named `cert_management_cert_object_expire` for certificate expiration date. ([gardener/cert-management#131](https://github.com/gardener/cert-management/pull/131), [@MartinWeindel](https://github.com/MartinWeindel))
+## 🏃 Others
+* *[OPERATOR]* The Helm chart is now adapted such that it works well in garden cluster with enabled `NetworkPolicy` protection (default since `gardener/gardener@v1.71` when garden cluster is managed by `gardener-operator`). ([gardener/cert-management#128](https://github.com/gardener/cert-management/pull/128), [@rfranzke](https://github.com/rfranzke))
+* *[OPERATOR]* Updated golang builder image from version `1.20.4` to `1.20.5`. ([gardener/cert-management#131](https://github.com/gardener/cert-management/pull/131), [@MartinWeindel](https://github.com/MartinWeindel))
+
+</details>
