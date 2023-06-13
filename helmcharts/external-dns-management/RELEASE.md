@@ -1,6 +1,4 @@
 # [external-dns-management]
-## ✨ New Features
-* *[USER]* Added support for proxy for HTTP Transport for Openstack Designate Provider ([gardener/external-dns-management#304](https://github.com/gardener/external-dns-management/pull/304), [@sdputurn](https://github.com/sdputurn))
 ## 🏃 Others
-* *[OPERATOR]* Updated controller-manager-library dependency. ([gardener/external-dns-management#305](https://github.com/gardener/external-dns-management/pull/305), [@MartinWeindel](https://github.com/MartinWeindel))
-* *[OPERATOR]* Updated builder image from `golang:1.20.2` to `golang:1.20.4` ([gardener/external-dns-management#305](https://github.com/gardener/external-dns-management/pull/305), [@MartinWeindel](https://github.com/MartinWeindel))
+* *[OPERATOR]* The Helm chart is now adapted such that it works well in garden cluster with enabled `NetworkPolicy` protection (default since `gardener/gardener@v1.71` when garden cluster is managed by `gardener-operator`). ([gardener/external-dns-management#306](https://github.com/gardener/external-dns-management/pull/306), [@rfranzke](https://github.com/rfranzke))
+* *[OPERATOR]* Bump builder image from `golang:1.20.4` to `golang:1.20.5` ([gardener/external-dns-management#308](https://github.com/gardener/external-dns-management/pull/308), [@MartinWeindel](https://github.com/MartinWeindel))

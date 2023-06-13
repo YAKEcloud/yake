@@ -265,3 +265,13 @@ hide_table_of_contents: true
   * github.com/gardener/gardener: v1.65.0 -> v1.65.3
 
 </details>
+
+<details>
+<summary><b>Update external-dns-management to <code>0.15.4</code></b></summary>
+
+# [external-dns-management]
+## 🏃 Others
+* *[OPERATOR]* The Helm chart is now adapted such that it works well in garden cluster with enabled `NetworkPolicy` protection (default since `gardener/gardener@v1.71` when garden cluster is managed by `gardener-operator`). ([gardener/external-dns-management#306](https://github.com/gardener/external-dns-management/pull/306), [@rfranzke](https://github.com/rfranzke))
+* *[OPERATOR]* Bump builder image from `golang:1.20.4` to `golang:1.20.5` ([gardener/external-dns-management#308](https://github.com/gardener/external-dns-management/pull/308), [@MartinWeindel](https://github.com/MartinWeindel))
+
+</details>
