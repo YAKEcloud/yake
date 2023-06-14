@@ -287,3 +287,12 @@ hide_table_of_contents: true
 * *[OPERATOR]* Updated golang builder image from version `1.20.4` to `1.20.5`. ([gardener/cert-management#131](https://github.com/gardener/cert-management/pull/131), [@MartinWeindel](https://github.com/MartinWeindel))
 
 </details>
+
+<details>
+<summary><b>Update provider-aws to <code>1.44.2</code></b></summary>
+
+# [gardener-extension-provider-aws]
+## 🐛 Bug Fixes
+* *[OPERATOR]* Handle S3 bucket policy IAM ARN for China and GovCloud (US) regions. ([gardener/gardener-extension-provider-aws#769](https://github.com/gardener/gardener-extension-provider-aws/pull/769), [@kon-angelo](https://github.com/kon-angelo))
+
+</details>
