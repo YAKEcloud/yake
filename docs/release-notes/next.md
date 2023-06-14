@@ -296,3 +296,12 @@ hide_table_of_contents: true
 * *[OPERATOR]* Handle S3 bucket policy IAM ARN for China and GovCloud (US) regions. ([gardener/gardener-extension-provider-aws#769](https://github.com/gardener/gardener-extension-provider-aws/pull/769), [@kon-angelo](https://github.com/kon-angelo))
 
 </details>
+
+<details>
+<summary><b>Update os-ubuntu to <code>1.22.0</code></b></summary>
+
+# [gardener-extension-os-ubuntu]
+## 🏃 Others
+* *[OPERATOR]* The Ubuntu OS extension is now built with Golang 1.20 and uses Gardener 1.70.2 libraries. ([gardener/gardener-extension-os-ubuntu#81](https://github.com/gardener/gardener-extension-os-ubuntu/pull/81), [@MrBatschner](https://github.com/MrBatschner))
+
+</details>
