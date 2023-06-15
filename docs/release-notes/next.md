@@ -342,3 +342,14 @@ hide_table_of_contents: true
 * *[OPERATOR]* Bump builder image from `golang:1.20.4` to `golang:1.20.5` ([gardener/external-dns-management#308](https://github.com/gardener/external-dns-management/pull/308), [@MartinWeindel](https://github.com/MartinWeindel))
 
 </details>
+
+<details>
+<summary><b>Update cloudprofiles to <code>0.6.3</code></b></summary>
+
+## What's Changed
+* Deprecates old versions automatically (instead of removing) by @23t-machine-user in https://github.com/gardener-community/cloudprofiles/pull/24
+
+
+**Full Changelog**: https://github.com/gardener-community/cloudprofiles/compare/0.6.2...0.6.3
+
+</details>
