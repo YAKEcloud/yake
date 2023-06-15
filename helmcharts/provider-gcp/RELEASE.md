@@ -1,3 +1,4 @@
 # [gardener-extension-provider-gcp]
 ## 🏃 Others
-* *[OPERATOR]* Remove the error code check from `NodesChecker` to prevent nil pointer panic. ([gardener/gardener-extension-provider-gcp#595](https://github.com/gardener/gardener-extension-provider-gcp/pull/595), [@acumino](https://github.com/acumino))
+* *[OPERATOR]* The following dependencies were updated: ([gardener/gardener-extension-provider-gcp#620](https://github.com/gardener/gardener-extension-provider-gcp/pull/620), [@vpnachev](https://github.com/vpnachev))
+  * registry.k8s.io/cloud-provider-gcp/gcp-compute-persistent-disk-csi-driver v1.9.4 -> v1.9.5
