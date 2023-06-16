@@ -81,7 +81,7 @@ gardenlet:
         name: nginx-ingress-controller-seed
         repository: registry.k8s.io/ingress-nginx/controller-chroot
         sourceRepository: github.com/kubernetes/ingress-nginx
-        tag: v1.7.1
+        tag: v1.8.0
         targetVersion: '>= 1.24'
       - labels:
           - name: gardener.cloud/cve-categorisation
@@ -96,7 +96,7 @@ gardenlet:
         name: ingress-default-backend
         repository: eu.gcr.io/gardener-project/gardener/ingress-default-backend
         sourceRepository: github.com/gardener/ingress-default-backend
-        tag: 0.15.0
+        tag: 0.16.0
       - name: hyperkube
         repository: eu.gcr.io/gardener-project/hyperkube
         sourceRepository: github.com/gardener/hyperkube
@@ -112,6 +112,19 @@ gardenlet:
       - name: kube-proxy
         repository: registry.k8s.io/kube-proxy
         sourceRepository: github.com/kubernetes/kubernetes
+      - labels:
+          - name: gardener.cloud/cve-categorisation
+            value:
+              authentication_enforced: false
+              availability_requirement: low
+              confidentiality_requirement: high
+              integrity_requirement: high
+              network_exposure: protected
+              user_interaction: gardener-operator
+        name: machine-controller-manager
+        repository: eu.gcr.io/gardener-project/gardener/machine-controller-manager
+        sourceRepository: github.com/gardener/machine-controller-manager
+        tag: v0.49.2
       - name: cluster-autoscaler
         repository: eu.gcr.io/gardener-project/gardener/autoscaler/cluster-autoscaler
         sourceRepository: github.com/gardener/autoscaler
@@ -160,6 +173,10 @@ gardenlet:
               integrity_requirement: high
               network_exposure: public
               user_interaction: end-user
+          - name: cloud.gardener.cnudie/responsibles
+            value:
+              - teamname: gardener/monitoring-maintainers
+                type: githubTeam
         name: alertmanager
         repository: quay.io/prometheus/alertmanager
         sourceRepository: github.com/prometheus/alertmanager
@@ -173,6 +190,10 @@ gardenlet:
               integrity_requirement: high
               network_exposure: public
               user_interaction: end-user
+          - name: cloud.gardener.cnudie/responsibles
+            value:
+              - teamname: gardener/monitoring-maintainers
+                type: githubTeam
         name: prometheus
         repository: quay.io/prometheus/prometheus
         sourceRepository: github.com/prometheus/prometheus
@@ -186,6 +207,10 @@ gardenlet:
               integrity_requirement: high
               network_exposure: private
               user_interaction: gardener-operator
+          - name: cloud.gardener.cnudie/responsibles
+            value:
+              - teamname: gardener/monitoring-maintainers
+                type: githubTeam
         name: configmap-reloader
         repository: ghcr.io/prometheus-operator/prometheus-config-reloader
         sourceRepository: github.com/prometheus-operator/prometheus-operator
@@ -199,6 +224,10 @@ gardenlet:
               integrity_requirement: high
               network_exposure: private
               user_interaction: gardener-operator
+          - name: cloud.gardener.cnudie/responsibles
+            value:
+              - teamname: gardener/monitoring-maintainers
+                type: githubTeam
         name: kube-state-metrics
         repository: registry.k8s.io/kube-state-metrics/kube-state-metrics
         sourceRepository: github.com/kubernetes/kube-state-metrics
@@ -213,6 +242,10 @@ gardenlet:
               integrity_requirement: high
               network_exposure: protected
               user_interaction: end-user
+          - name: cloud.gardener.cnudie/responsibles
+            value:
+              - teamname: gardener/monitoring-maintainers
+                type: githubTeam
         name: node-exporter
         repository: quay.io/prometheus/node-exporter
         sourceRepository: github.com/prometheus/node_exporter
@@ -226,6 +259,10 @@ gardenlet:
               integrity_requirement: high
               network_exposure: public
               user_interaction: end-user
+          - name: cloud.gardener.cnudie/responsibles
+            value:
+              - teamname: gardener/monitoring-maintainers
+                type: githubTeam
         name: plutono
         repository: ghcr.io/credativ/plutono
         sourceRepository: github.com/credativ/plutono
@@ -240,6 +277,10 @@ gardenlet:
               integrity_requirement: high
               network_exposure: protected
               user_interaction: end-user
+          - name: cloud.gardener.cnudie/responsibles
+            value:
+              - teamname: gardener/monitoring-maintainers
+                type: githubTeam
         name: blackbox-exporter
         repository: quay.io/prometheus/blackbox-exporter
         sourceRepository: github.com/prometheus/blackbox_exporter
@@ -253,6 +294,10 @@ gardenlet:
               integrity_requirement: high
               network_exposure: private
               user_interaction: gardener-operator
+          - name: cloud.gardener.cnudie/responsibles
+            value:
+              - teamname: gardener/monitoring-maintainers
+                type: githubTeam
         name: metrics-server
         repository: registry.k8s.io/metrics-server/metrics-server
         sourceRepository: github.com/kubernetes-sigs/metrics-server
@@ -448,7 +493,7 @@ gardenlet:
         name: kube-rbac-proxy
         repository: quay.io/brancz/kube-rbac-proxy
         sourceRepository: github.com/brancz/kube-rbac-proxy
-        tag: v0.14.0
+        tag: v0.14.2
       - labels:
           - name: gardener.cloud/cve-categorisation
             value:
