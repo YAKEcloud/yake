@@ -1734,7 +1734,7 @@ provider-gcp:
         name: terraformer
         repository: eu.gcr.io/gardener-project/gardener/terraformer-gcp
         sourceRepository: github.com/gardener/terraformer
-        tag: v2.20.0
+        tag: v2.22.0
       - labels:
           - name: gardener.cloud/cve-categorisation
             value:
@@ -1803,7 +1803,7 @@ provider-gcp:
         name: cloud-controller-manager
         repository: eu.gcr.io/gardener-project/kubernetes/cloud-provider-gcp
         sourceRepository: github.com/gardener/cloud-provider-gcp
-        tag: v1.24.9
+        tag: v1.24.13
         targetVersion: 1.24.x
       - labels:
           - name: gardener.cloud/cve-categorisation
@@ -1817,7 +1817,7 @@ provider-gcp:
         name: cloud-controller-manager
         repository: eu.gcr.io/gardener-project/kubernetes/cloud-provider-gcp
         sourceRepository: github.com/gardener/cloud-provider-gcp
-        tag: v1.25.5
+        tag: v1.25.9
         targetVersion: 1.25.x
       - labels:
           - name: gardener.cloud/cve-categorisation
@@ -1831,7 +1831,7 @@ provider-gcp:
         name: cloud-controller-manager
         repository: eu.gcr.io/gardener-project/kubernetes/cloud-provider-gcp
         sourceRepository: github.com/gardener/cloud-provider-gcp
-        tag: v1.26.1
+        tag: v1.26.4
         targetVersion: '>= 1.26'
       - labels:
           - name: gardener.cloud/cve-categorisation
@@ -1845,7 +1845,7 @@ provider-gcp:
         name: machine-controller-manager
         repository: eu.gcr.io/gardener-project/gardener/machine-controller-manager
         sourceRepository: github.com/gardener/machine-controller-manager
-        tag: v0.48.2
+        tag: v0.49.2
       - labels:
           - name: gardener.cloud/cve-categorisation
             value:
@@ -1858,7 +1858,7 @@ provider-gcp:
         name: machine-controller-manager-provider-gcp
         repository: eu.gcr.io/gardener-project/gardener/machine-controller-manager-provider-gcp
         sourceRepository: github.com/gardener/machine-controller-manager-provider-gcp
-        tag: v0.14.0
+        tag: v0.16.0
       - labels:
           - name: gardener.cloud/cve-categorisation
             value:
