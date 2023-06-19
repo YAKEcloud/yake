@@ -134,3 +134,25 @@ hide_table_of_contents: true
 * *[OPERATOR]* The worker count for the [NetworkPolicy controller](https://github.com/gardener/gardener/blob/master/docs/concepts/resource-manager.md#networkpolicy-controller) in GRM was increased to `20`. This is necessary to create and update `NetworkPolicies` in time, esp. on larger seed clusters. ([gardener/gardener#8055](https://github.com/gardener/gardener/pull/8055), [@timuthy](https://github.com/timuthy))
 
 </details>
+
+<details>
+<summary><b>Update etcd to <code>5.3.1</code></b></summary>
+
+## What's Changed
+* Removes, (potentially) conflicting lines in backup credentials secret template by @mxmxchere in https://github.com/gardener-community/etcd/pull/11
+
+
+**Full Changelog**: https://github.com/gardener-community/etcd/compare/5.3.0...5.3.1
+
+</details>
+
+<details>
+<summary><b>Update etcd to <code>5.3.1</code></b></summary>
+
+## What's Changed
+* Removes, (potentially) conflicting lines in backup credentials secret template by @mxmxchere in https://github.com/gardener-community/etcd/pull/11
+
+
+**Full Changelog**: https://github.com/gardener-community/etcd/compare/5.3.0...5.3.1
+
+</details>

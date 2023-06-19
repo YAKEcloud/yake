@@ -114,7 +114,7 @@ spec:
         - --max-backups={{ .Values.backup.maxBackups }}
         - --data-dir=/var/etcd/data/new.etcd
         - --storage-provider={{ .Values.backup.storageProvider }}
-        - --store-prefix={{ .Values.name }}
+        - --store-prefix={{ .Values.backup.storePrefix | default  .Values.name }}
         - --cert=/var/etcd/ssl/client/tls.crt
         - --key=/var/etcd/ssl/client/tls.key
         - --cacert=/var/etcd/ssl/ca/ca.crt
