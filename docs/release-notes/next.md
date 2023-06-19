@@ -552,3 +552,25 @@ hide_table_of_contents: true
 * *[OPERATOR]* Gardener dependency has been updated from `v1.59.1` to `v1.71.2` ([gardener/terraformer#137](https://github.com/gardener/terraformer/pull/137), [@MartinWeindel](https://github.com/MartinWeindel))
 
 </details>
+
+<details>
+<summary><b>Update etcd to <code>5.3.1</code></b></summary>
+
+## What's Changed
+* Removes, (potentially) conflicting lines in backup credentials secret template by @mxmxchere in https://github.com/gardener-community/etcd/pull/11
+
+
+**Full Changelog**: https://github.com/gardener-community/etcd/compare/5.3.0...5.3.1
+
+</details>
+
+<details>
+<summary><b>Update etcd to <code>5.3.1</code></b></summary>
+
+## What's Changed
+* Removes, (potentially) conflicting lines in backup credentials secret template by @mxmxchere in https://github.com/gardener-community/etcd/pull/11
+
+
+**Full Changelog**: https://github.com/gardener-community/etcd/compare/5.3.0...5.3.1
+
+</details>
