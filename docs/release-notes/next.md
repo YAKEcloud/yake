@@ -101,3 +101,25 @@ hide_table_of_contents: true
 * *[OPERATOR]* An issue causing panic in the health check for extension is fixed. ([gardener/gardener#7915](https://github.com/gardener/gardener/pull/7915), [@gardener-ci-robot](https://github.com/gardener-ci-robot))
 
 </details>
+
+<details>
+<summary><b>Update etcd to <code>5.3.1</code></b></summary>
+
+## What's Changed
+* Removes, (potentially) conflicting lines in backup credentials secret template by @mxmxchere in https://github.com/gardener-community/etcd/pull/11
+
+
+**Full Changelog**: https://github.com/gardener-community/etcd/compare/5.3.0...5.3.1
+
+</details>
+
+<details>
+<summary><b>Update etcd to <code>5.3.1</code></b></summary>
+
+## What's Changed
+* Removes, (potentially) conflicting lines in backup credentials secret template by @mxmxchere in https://github.com/gardener-community/etcd/pull/11
+
+
+**Full Changelog**: https://github.com/gardener-community/etcd/compare/5.3.0...5.3.1
+
+</details>
