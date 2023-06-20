@@ -797,7 +797,7 @@ provider-openstack:
         name: cloud-controller-manager
         repository: registry.k8s.io/provider-os/openstack-cloud-controller-manager
         sourceRepository: github.com/kubernetes/cloud-provider-openstack
-        tag: v1.25.5
+        tag: v1.25.6
         targetVersion: 1.25.x
       - labels:
           - name: gardener.cloud/cve-categorisation
@@ -811,8 +811,22 @@ provider-openstack:
         name: cloud-controller-manager
         repository: registry.k8s.io/provider-os/openstack-cloud-controller-manager
         sourceRepository: github.com/kubernetes/cloud-provider-openstack
-        tag: v1.26.2
-        targetVersion: '>= 1.26'
+        tag: v1.26.3
+        targetVersion: 1.26.x
+      - labels:
+          - name: gardener.cloud/cve-categorisation
+            value:
+              authentication_enforced: false
+              availability_requirement: low
+              confidentiality_requirement: high
+              integrity_requirement: high
+              network_exposure: protected
+              user_interaction: gardener-operator
+        name: cloud-controller-manager
+        repository: registry.k8s.io/provider-os/openstack-cloud-controller-manager
+        sourceRepository: github.com/kubernetes/cloud-provider-openstack
+        tag: v1.27.1
+        targetVersion: '>= 1.27'
       - labels:
           - name: gardener.cloud/cve-categorisation
             value:
@@ -921,7 +935,7 @@ provider-openstack:
         name: csi-driver-cinder
         repository: registry.k8s.io/provider-os/cinder-csi-plugin
         sourceRepository: github.com/kubernetes/cloud-provider-openstack
-        tag: v1.25.5
+        tag: v1.25.6
         targetVersion: 1.25.x
       - labels:
           - name: gardener.cloud/cve-categorisation
@@ -935,8 +949,22 @@ provider-openstack:
         name: csi-driver-cinder
         repository: registry.k8s.io/provider-os/cinder-csi-plugin
         sourceRepository: github.com/kubernetes/cloud-provider-openstack
-        tag: v1.26.2
-        targetVersion: '>= 1.26'
+        tag: v1.26.3
+        targetVersion: 1.26.x
+      - labels:
+          - name: gardener.cloud/cve-categorisation
+            value:
+              authentication_enforced: false
+              availability_requirement: low
+              confidentiality_requirement: high
+              integrity_requirement: high
+              network_exposure: protected
+              user_interaction: end-user
+        name: csi-driver-cinder
+        repository: registry.k8s.io/provider-os/cinder-csi-plugin
+        sourceRepository: github.com/kubernetes/cloud-provider-openstack
+        tag: v1.27.1
+        targetVersion: '>= 1.27'
       - labels:
           - name: gardener.cloud/cve-categorisation
             value:
@@ -949,7 +977,7 @@ provider-openstack:
         name: csi-driver-manila
         repository: registry.k8s.io/provider-os/manila-csi-plugin
         sourceRepository: github.com/kubernetes/cloud-provider-openstack
-        tag: v1.25.5
+        tag: v1.25.6
         targetVersion: < 1.26
       - labels:
           - name: gardener.cloud/cve-categorisation
@@ -963,8 +991,22 @@ provider-openstack:
         name: csi-driver-manila
         repository: registry.k8s.io/provider-os/manila-csi-plugin
         sourceRepository: github.com/kubernetes/cloud-provider-openstack
-        tag: v1.26.2
-        targetVersion: '>= 1.26'
+        tag: v1.26.3
+        targetVersion: 1.26.x
+      - labels:
+          - name: gardener.cloud/cve-categorisation
+            value:
+              authentication_enforced: false
+              availability_requirement: low
+              confidentiality_requirement: high
+              integrity_requirement: high
+              network_exposure: protected
+              user_interaction: end-user
+        name: csi-driver-manila
+        repository: registry.k8s.io/provider-os/manila-csi-plugin
+        sourceRepository: github.com/kubernetes/cloud-provider-openstack
+        tag: v1.27.1
+        targetVersion: '>= 1.27'
       - labels:
           - name: gardener.cloud/cve-categorisation
             value:
@@ -990,7 +1032,7 @@ provider-openstack:
         name: csi-provisioner
         repository: registry.k8s.io/sig-storage/csi-provisioner
         sourceRepository: github.com/kubernetes-csi/external-provisioner
-        tag: v3.4.0
+        tag: v3.4.1
       - labels:
           - name: gardener.cloud/cve-categorisation
             value:
