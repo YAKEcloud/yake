@@ -583,3 +583,12 @@ hide_table_of_contents: true
 * *[USER]* Add annotation `dns.gardener.cloud/owner-id` to set owner id ([gardener/external-dns-management#309](https://github.com/gardener/external-dns-management/pull/309), [@MartinWeindel](https://github.com/MartinWeindel))
 
 </details>
+
+<details>
+<summary><b>Update shoot-dns-service to <code>1.36.0</code></b></summary>
+
+# [external-dns-management]
+## ✨ New Features
+* *[USER]* Add annotation `dns.gardener.cloud/owner-id` to set owner id ([gardener/external-dns-management#309](https://github.com/gardener/external-dns-management/pull/309), [@MartinWeindel](https://github.com/MartinWeindel))
+
+</details>
