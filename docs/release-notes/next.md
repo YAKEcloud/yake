@@ -592,3 +592,21 @@ hide_table_of_contents: true
 * *[USER]* Add annotation `dns.gardener.cloud/owner-id` to set owner id ([gardener/external-dns-management#309](https://github.com/gardener/external-dns-management/pull/309), [@MartinWeindel](https://github.com/MartinWeindel))
 
 </details>
+
+<details>
+<summary><b>Update provider-openstack to <code>1.35.0</code></b></summary>
+
+# [gardener-extension-provider-openstack]
+## ⚠️ Breaking Changes
+* *[OPERATOR]* With https://github.com/gardener/gardener-extension-provider-openstack/pull/297 provider-openstack migrated the volumesnapshot CRDs to a new dedicated ManagedResources. provider-openstack does now remove the ignored CRDs. ([gardener/gardener-extension-provider-openstack#635](https://github.com/gardener/gardener-extension-provider-openstack/pull/635), [@ialidzhikov](https://github.com/ialidzhikov))
+  * Before updating to this version of provider-openstack, make sure that the migration of the volumesnapshot CRDs from the `extension-controlplane-shoot` to the `extension-controlplane-shoot-crds`  ManagedResource completed. If the migration did not complete yet, GRM will interpret the removal of the CRDs as deletion and will delete the CRDs.
+## ✨ New Features
+* *[USER]* The provider-openstack extension does now support shoot clusters with Kubernetes version 1.27. You should consider the [Kubernetes release notes](https://github.com/kubernetes/kubernetes/blob/master/CHANGELOG/CHANGELOG-1.27.md) before upgrading to 1.27. ([gardener/gardener-extension-provider-openstack#632](https://github.com/gardener/gardener-extension-provider-openstack/pull/632), [@ary1992](https://github.com/ary1992))
+## 🏃 Others
+* *[OPERATOR]* Update cloud-provider-openstack images v1.25.5 -> v1.25.6 ([gardener/gardener-extension-provider-openstack#642](https://github.com/gardener/gardener-extension-provider-openstack/pull/642), [@kon-angelo](https://github.com/kon-angelo))
+* *[OPERATOR]* Update cloud-provider-openstack images v1.26.2 -> v1.26.3 ([gardener/gardener-extension-provider-openstack#642](https://github.com/gardener/gardener-extension-provider-openstack/pull/642), [@kon-angelo](https://github.com/kon-angelo))
+* *[OPERATOR]* Old and obsolete logging configurations are removed. ([gardener/gardener-extension-provider-openstack#639](https://github.com/gardener/gardener-extension-provider-openstack/pull/639), [@vlvasilev](https://github.com/vlvasilev))
+* *[DEPENDENCY]* The following dependencies were updated: ([gardener/gardener-extension-provider-openstack#640](https://github.com/gardener/gardener-extension-provider-openstack/pull/640), [@dimityrmirchev](https://github.com/dimityrmirchev))
+  * registry.k8s.io/sig-storage/csi-provisioner v3.4.0 -> v3.4.1
+
+</details>
