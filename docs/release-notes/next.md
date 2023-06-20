@@ -574,3 +574,12 @@ hide_table_of_contents: true
 **Full Changelog**: https://github.com/gardener-community/etcd/compare/5.3.0...5.3.1
 
 </details>
+
+<details>
+<summary><b>Update external-dns-management to <code>0.15.5</code></b></summary>
+
+# [external-dns-management]
+## ✨ New Features
+* *[USER]* Add annotation `dns.gardener.cloud/owner-id` to set owner id ([gardener/external-dns-management#309](https://github.com/gardener/external-dns-management/pull/309), [@MartinWeindel](https://github.com/MartinWeindel))
+
+</details>
