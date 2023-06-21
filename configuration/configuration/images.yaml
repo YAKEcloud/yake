@@ -2234,7 +2234,7 @@ networking-calico:
               network_exposure: protected
               user_interaction: end-user
         name: calico-node
-        repository: eu.gcr.io/gardener-project/3rd/calico/node
+        repository: quay.io/calico/node
         sourceRepository: github.com/projectcalico/calico
         tag: v3.25.1
       - labels:
@@ -2247,7 +2247,7 @@ networking-calico:
               network_exposure: private
               user_interaction: end-user
         name: calico-cni
-        repository: eu.gcr.io/gardener-project/3rd/calico/cni
+        repository: quay.io/calico/cni
         sourceRepository: github.com/projectcalico/cni-plugin
         tag: v3.25.1
       - labels:
@@ -2264,7 +2264,7 @@ networking-calico:
               network_exposure: protected
               user_interaction: end-user
         name: calico-typha
-        repository: eu.gcr.io/gardener-project/3rd/calico/typha
+        repository: quay.io/calico/typha
         sourceRepository: github.com/projectcalico/typha
         tag: v3.25.1
       - labels:
@@ -2277,7 +2277,7 @@ networking-calico:
               network_exposure: protected
               user_interaction: end-user
         name: calico-kube-controllers
-        repository: eu.gcr.io/gardener-project/3rd/calico/kube-controllers
+        repository: quay.io/calico/kube-controllers
         sourceRepository: github.com/projectcalico/kube-controllers
         tag: v3.25.1
       - labels:
