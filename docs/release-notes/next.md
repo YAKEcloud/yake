@@ -610,3 +610,12 @@ hide_table_of_contents: true
   * registry.k8s.io/sig-storage/csi-provisioner v3.4.0 -> v3.4.1
 
 </details>
+
+<details>
+<summary><b>Update networking-calico to <code>1.34.1</code></b></summary>
+
+# [gardener-extension-networking-calico]
+## 🏃 Others
+* *[OPERATOR]* networking-calico does no longer use Gardener GCR copies for the calico images. Instead, the upstream quay.io container images are used (`quay.io/calico/node`, `quay.io/calico/cni`, `quay.io/calico/typha`, `quay.io/calico/kube-controllers`). ([gardener/gardener-extension-networking-calico#277](https://github.com/gardener/gardener-extension-networking-calico/pull/277), [@ialidzhikov](https://github.com/ialidzhikov))
+
+</details>
