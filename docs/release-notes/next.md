@@ -8,3 +8,14 @@ hide_table_of_contents: true
 
 ## Related upstream release notes / changelogs
 
+
+<details>
+<summary><b>Update provider-alicloud to <code>1.46.1</code></b></summary>
+
+# [machine-controller-manager]
+## 🐛 Bug Fixes
+* *[USER]* An edge case where outdated DesiredReplicas annotation blocked a rolling update is fixed. ([gardener/machine-controller-manager#822](https://github.com/gardener/machine-controller-manager/pull/822), [@rishabh-11](https://github.com/rishabh-11))
+* *[OPERATOR]* An issue causing nil pointer panic on scaleup of the machinedeployment along with trigger of rolling update, is fixed ([gardener/machine-controller-manager#817](https://github.com/gardener/machine-controller-manager/pull/817), [@himanshu-kun](https://github.com/himanshu-kun))
+* *[OPERATOR]* Included `UnavailableReplicas` in determining if a machine deployment status update is needed ([gardener/machine-controller-manager#834](https://github.com/gardener/machine-controller-manager/pull/834), [@ialidzhikov](https://github.com/ialidzhikov))
+
+</details>

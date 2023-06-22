@@ -2052,7 +2052,7 @@ provider-alicloud:
         name: machine-controller-manager
         repository: eu.gcr.io/gardener-project/gardener/machine-controller-manager
         sourceRepository: github.com/gardener/machine-controller-manager
-        tag: v0.49.0
+        tag: v0.49.3
       - labels:
           - name: gardener.cloud/cve-categorisation
             value:
