@@ -40,3 +40,12 @@ hide_table_of_contents: true
 * *[OPERATOR]* Included `UnavailableReplicas` in determining if a machine deployment status update is needed ([gardener/machine-controller-manager#834](https://github.com/gardener/machine-controller-manager/pull/834), [@ialidzhikov](https://github.com/ialidzhikov))
 
 </details>
+
+<details>
+<summary><b>Update provider-openstack to <code>1.35.1</code></b></summary>
+
+# [machine-controller-manager]
+## 🐛 Bug Fixes
+* *[OPERATOR]* Included `UnavailableReplicas` in determining if a machine deployment status update is needed ([gardener/machine-controller-manager#834](https://github.com/gardener/machine-controller-manager/pull/834), [@ialidzhikov](https://github.com/ialidzhikov))
+
+</details>
