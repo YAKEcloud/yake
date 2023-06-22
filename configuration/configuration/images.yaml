@@ -266,7 +266,7 @@ gardenlet:
         name: plutono
         repository: ghcr.io/credativ/plutono
         sourceRepository: github.com/credativ/plutono
-        tag: v7.5.21
+        tag: v7.5.22
       - labels:
           - name: gardener.cloud/cve-categorisation
             value:
