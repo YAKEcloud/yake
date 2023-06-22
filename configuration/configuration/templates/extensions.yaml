@@ -39,7 +39,7 @@ stringData:
 {{- end }}
 
     provider-azure:
-      version: 1.36.1
+      version: 1.36.2
       admission:
         enabled: true
 {{- if .Values.registryOverwrite }}
