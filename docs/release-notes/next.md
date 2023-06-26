@@ -107,3 +107,12 @@ hide_table_of_contents: true
 * *[OPERATOR]* Included `UnavailableReplicas` in determining if a machine deployment status update is needed ([gardener/machine-controller-manager#834](https://github.com/gardener/machine-controller-manager/pull/834), [@ialidzhikov](https://github.com/ialidzhikov))
 
 </details>
+
+<details>
+<summary><b>Update external-dns-management to <code>0.15.6</code></b></summary>
+
+# [external-dns-management]
+## 🐛 Bug Fixes
+* *[OPERATOR]* Update controller-manager-library dependency to fix panic on api-resources discovery. ([gardener/external-dns-management#310](https://github.com/gardener/external-dns-management/pull/310), [@MartinWeindel](https://github.com/MartinWeindel))
+
+</details>

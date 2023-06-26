@@ -1,3 +1,3 @@
 # [external-dns-management]
-## ✨ New Features
-* *[USER]* Add annotation `dns.gardener.cloud/owner-id` to set owner id ([gardener/external-dns-management#309](https://github.com/gardener/external-dns-management/pull/309), [@MartinWeindel](https://github.com/MartinWeindel))
+## 🐛 Bug Fixes
+* *[OPERATOR]* Update controller-manager-library dependency to fix panic on api-resources discovery. ([gardener/external-dns-management#310](https://github.com/gardener/external-dns-management/pull/310), [@MartinWeindel](https://github.com/MartinWeindel))
