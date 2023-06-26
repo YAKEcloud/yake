@@ -19,7 +19,7 @@ concurrency: release-${{ inputs.version }}
 
 jobs:
   release-test:
-    if:  ${{ inputs.runReleaseTest && github.event_name == 'push' }}
+    if:  ${{ inputs.runReleaseTest && github.event_name != 'push' }}
     runs-on: 23ke-runner
     name: "23KE shoot testrun"
     env:
