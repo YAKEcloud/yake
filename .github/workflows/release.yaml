@@ -11,12 +11,15 @@ on:
         required: true
         type: boolean
         default: true
+  push:
+    branches:
+      - 'release-v*'
 
 concurrency: release-${{ inputs.version }}
 
 jobs:
   release-test:
-    if:  ${{ inputs.runReleaseTest }}
+    if:  ${{ inputs.runReleaseTest && github.event_name == 'push' }}
     runs-on: 23ke-runner
     name: "23KE shoot testrun"
     env:
@@ -139,8 +142,13 @@ jobs:
         run: |
           git config user.name "${GITHUB_ACTOR}"
           git config user.email "${GITHUB_ACTOR}@users.noreply.github.com"
+      - name: Configure version to release
+        run: |
+          if [[ -z "$version" ]]; then
+            export version=$(echo ${{ github.event.head_commit.message }} | grep -oP "Update gardener-controlplane to v\K([0-9]{1,}[.][0-9]{1,}[.][0-9]{1,})")
+          fi
       - name: Prepare release
-        run: hack/release/prepare.sh "${{ env.version }}"
+        run: hack/release/prepare.sh $version"
 
   upload-bucket:
     runs-on: self-hosted
