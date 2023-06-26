@@ -148,7 +148,7 @@ jobs:
             export version=$(echo ${{ github.event.head_commit.message }} | grep -oP "Update gardener-controlplane to v\K([0-9]{1,}[.][0-9]{1,}[.][0-9]{1,})")
           fi
       - name: Prepare release
-        run: hack/release/prepare.sh $version"
+        run: "hack/release/prepare.sh $version"
 
   upload-bucket:
     runs-on: self-hosted
