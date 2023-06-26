@@ -145,7 +145,7 @@ jobs:
       - name: Configure version to release
         run: |
           if [[ -z "$version" ]]; then
-            export version=$(echo ${{ github.event.head_commit.message }} | grep -oP "Update gardener-controlplane to v\K([0-9]{1,}[.][0-9]{1,}[.][0-9]{1,})")
+            echo version=$(echo ${{ github.event.head_commit.message }} | grep -oP "Update gardener-controlplane to v\K([0-9]{1,}[.][0-9]{1,}[.][0-9]{1,})")-0 >> $GITHUB_ENV
           fi
       - name: Prepare release
         run: "hack/release/prepare.sh $version"
