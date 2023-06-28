@@ -24,6 +24,8 @@ spec:
         chart: "{{ .Chart.Name }}-{{ .Chart.Version }}"
         release: "{{ .Release.Name }}"
         heritage: "{{ .Release.Service }}"
+        networking.gardener.cloud/to-dns: allowed
+        networking.resources.gardener.cloud/to-virtual-garden-kube-apiserver-tcp-443: allowed
     spec:
       {{- if not .Values.global.virtualGarden.enabled }}
       serviceAccountName: gardener-metrics-exporter

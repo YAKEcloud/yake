@@ -2,7 +2,7 @@ global:
     image:
         pullPolicy: IfNotPresent
         repository: eu.gcr.io/gardener-project/gardener/metrics-exporter
-        tag: latest
+        tag: 0.27.0
     resources:
         requests:
             cpu: 100m
