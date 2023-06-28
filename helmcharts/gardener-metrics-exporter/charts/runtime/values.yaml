@@ -1,0 +1,22 @@
+global:
+    image:
+        pullPolicy: IfNotPresent
+        repository: eu.gcr.io/gardener-project/gardener/metrics-exporter
+        tag: 0.27.0
+    resources:
+        requests:
+            cpu: 100m
+            memory: 128Mi
+    securityContext:
+        readOnlyRootFilesystem: true
+    server:
+        bindAddress: 0.0.0.0
+        port: 2718
+    serviceAccountTokenVolumeProjection:
+        audience: ""
+        enabled: false
+        expirationSeconds: 43200
+    virtualGarden:
+        enabled: false
+        user:
+            name: ""

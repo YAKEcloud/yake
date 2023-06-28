@@ -51,6 +51,10 @@ spec:
           matchLabels:
             app: gardener
             role: gardenlet
+      - podSelector:
+          matchLabels:
+            app: gardener
+            role: metrics-exporter
       - namespaceSelector:
           matchLabels:
             kubernetes.io/metadata.name: flux-system

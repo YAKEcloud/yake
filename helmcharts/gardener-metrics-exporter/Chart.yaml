@@ -1,0 +1,11 @@
+apiVersion: v2
+dependencies:
+- condition: runtime.enabled
+  name: runtime
+  repository: ""
+- condition: application.enabled
+  name: application
+  repository: ""
+description: A Helm chart for the gardener-metrics-exporter
+name: gardener-metrics-exporter
+version: 0.27.0
