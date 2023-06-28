@@ -13,3 +13,4 @@ resources:
   - garden-identity.yaml
   - garden-ingress-nginx.yaml
   - garden-kube-apiserver.yaml
+  - garden-gardener-metrics-exporter.yaml
