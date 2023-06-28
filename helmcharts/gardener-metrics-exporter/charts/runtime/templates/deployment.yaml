@@ -1,0 +1,105 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: gardener-metrics-exporter
+  namespace: {{ .Release.Namespace }}
+  labels:
+    chart: "{{ .Chart.Name }}-{{ .Chart.Version }}"
+    release: "{{ .Release.Name }}"
+    heritage: "{{ .Release.Service }}"
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: gardener
+      role: metrics-exporter
+      chart: "{{ .Chart.Name }}-{{ .Chart.Version }}"
+      release: "{{ .Release.Name }}"
+      heritage: "{{ .Release.Service }}"
+  template:
+    metadata:
+      labels:
+        app: gardener
+        role: metrics-exporter
+        chart: "{{ .Chart.Name }}-{{ .Chart.Version }}"
+        release: "{{ .Release.Name }}"
+        heritage: "{{ .Release.Service }}"
+    spec:
+      {{- if not .Values.global.virtualGarden.enabled }}
+      serviceAccountName: gardener-metrics-exporter
+      {{- else if and .Values.global.virtualGarden.enabled .Values.global.virtualGarden.user.name }}
+        {{- if .Values.global.serviceAccountTokenVolumeProjection.enabled }}
+      serviceAccountName: gardener-metrics-exporter
+        {{- else }}
+      serviceAccountName: default
+        {{- end }}
+      {{- else }}
+      serviceAccountName: default
+      {{- end }}
+      {{- if .Values.global.kubeconfig }}
+      automountServiceAccountToken: false
+      {{- end }}
+      containers:
+      - name: gardener-metrics-exporter
+        image: "{{ include "image" .Values.global.image }}"
+        imagePullPolicy: {{ .Values.global.image.pullPolicy }}
+        command:
+        - /gardener-metrics-exporter
+        {{- if .Values.global.kubeconfig }}
+        - --kubeconfig=/etc/config/kubeconfig
+        {{- end }}
+        - --bind-address={{ .Values.global.server.bindAddress }}
+        - --port={{ .Values.global.server.port }}
+        {{- if or .Values.global.kubeconfig .Values.global.serviceAccountTokenVolumeProjection.enabled }}
+        volumeMounts:
+        {{- end }}
+        {{- if .Values.global.kubeconfig }}
+        - name: config
+          mountPath: /etc/config
+          readOnly: true
+        {{- end }}
+        {{- if .Values.global.serviceAccountTokenVolumeProjection.enabled }}
+        - name: service-account-token
+          mountPath: /var/run/secrets/projected/serviceaccount
+          readOnly: true
+        {{- end }}
+        ports:
+        - name: port
+          containerPort: {{ .Values.global.server.port }}
+        {{- if .Values.global.resources }}
+        resources:
+          {{- toYaml .Values.global.resources | nindent 10 }}
+        {{- end }}
+        {{- if .Values.global.securityContext }}
+        securityContext:
+          {{- toYaml .Values.global.securityContext | nindent 10 }}
+        {{- end }}
+        livenessProbe:
+          httpGet:
+            path: /
+            port: 2718
+          periodSeconds: 5
+        readinessProbe:
+          httpGet:
+            path: /metrics
+            port: 2718
+          periodSeconds: 5
+      {{- if or .Values.global.kubeconfig .Values.global.serviceAccountTokenVolumeProjection.enabled }}
+      volumes:
+      {{- end }}
+      {{- if .Values.global.kubeconfig }}
+      - name: config
+        secret:
+          secretName: gardener-metrics-exporter-config
+      {{- end }}
+      {{- if .Values.global.serviceAccountTokenVolumeProjection.enabled }}
+      - name: service-account-token
+        projected:
+          sources:
+          - serviceAccountToken:
+              path: token
+              expirationSeconds: {{ .Values.global.serviceAccountTokenVolumeProjection.expirationSeconds }}
+              {{- if .Values.global.serviceAccountTokenVolumeProjection.audience }}
+              audience: {{ .Values.global.serviceAccountTokenVolumeProjection.audience }}
+              {{- end }}
+      {{- end }}
