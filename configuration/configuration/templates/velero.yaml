@@ -31,7 +31,7 @@ stringData:
 {{- if .Values.registryOverwrite }}
         image: {{ include "replaceRegistry" (dict "docker.io/velero/velero-plugin-for-microsoft-azure:v1.6.0" .Values.registryOverwrite) }}
 {{- else }}
-        image: velero/velero-plugin-for-microsoft-azure:v1.6.0
+        image: velero/velero-plugin-for-microsoft-azure:v1.7.0
 {{- end }}
         imagePullPolicy: IfNotPresent
         volumeMounts:
@@ -56,7 +56,7 @@ stringData:
 {{- if .Values.registryOverwrite }}
         image: {{ include "replaceRegistry" (dict "docker.io/velero/velero-plugin-for-aws:v1.6.0" .Values.registryOverwrite) }}
 {{- else }}
-        image: velero/velero-plugin-for-aws:v1.6.0
+        image: velero/velero-plugin-for-aws:v1.7.0
 {{- end }}
         imagePullPolicy: IfNotPresent
         volumeMounts:
@@ -85,7 +85,7 @@ stringData:
 {{- if .Values.registryOverwrite }}
         image: {{ include "replaceRegistry" (dict "docker.io/lirt/velero-plugin-for-openstack:v0.4.1" .Values.registryOverwrite) }}
 {{- else }}
-        image: lirt/velero-plugin-for-openstack:v0.4.1
+        image: lirt/velero-plugin-for-openstack:v0.5.2
 {{- end }}
         imagePullPolicy: IfNotPresent
         volumeMounts:
