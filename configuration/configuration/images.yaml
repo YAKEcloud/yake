@@ -2039,7 +2039,7 @@ provider-alicloud:
       - name: terraformer
         repository: eu.gcr.io/gardener-project/gardener/terraformer-alicloud
         sourceRepository: github.com/gardener/terraformer
-        tag: v2.21.0
+        tag: v2.22.0
       - labels:
           - name: gardener.cloud/cve-categorisation
             value:
@@ -2065,7 +2065,7 @@ provider-alicloud:
         name: machine-controller-manager-provider-alicloud
         repository: eu.gcr.io/gardener-project/gardener/machine-controller-manager-provider-alicloud
         sourceRepository: github.com/gardener/machine-controller-manager-provider-alicloud
-        tag: v0.8.0
+        tag: v0.9.0
       - name: alicloud-controller-manager
         repository: registry.eu-central-1.aliyuncs.com/gardener-de/alibaba-cloud-controller-manager
         sourceRepository: https://github.com/kubernetes/cloud-provider-alibaba-cloud
@@ -2082,7 +2082,7 @@ provider-alicloud:
         name: csi-attacher
         repository: registry.k8s.io/sig-storage/csi-attacher
         sourceRepository: https://github.com/kubernetes-csi/external-attacher
-        tag: v3.5.0
+        tag: v4.0.0
       - labels:
           - name: gardener.cloud/cve-categorisation
             value:
@@ -2095,7 +2095,7 @@ provider-alicloud:
         name: csi-node-driver-registrar
         repository: registry.k8s.io/sig-storage/csi-node-driver-registrar
         sourceRepository: https://github.com/kubernetes-csi/node-driver-registrar
-        tag: v2.5.1
+        tag: v2.6.2
       - labels:
           - name: gardener.cloud/cve-categorisation
             value:
@@ -2106,9 +2106,9 @@ provider-alicloud:
               network_exposure: private
               user_interaction: gardener-operator
         name: csi-provisioner
-        repository: k8s.gcr.io/sig-storage/csi-provisioner
+        repository: registry.k8s.io/sig-storage/csi-provisioner
         sourceRepository: github.com/kubernetes-csi/external-provisioner
-        tag: v3.2.1
+        tag: v3.3.0
       - labels:
           - name: gardener.cloud/cve-categorisation
             value:
@@ -2119,9 +2119,9 @@ provider-alicloud:
               network_exposure: private
               user_interaction: gardener-operator
         name: csi-snapshotter
-        repository: k8s.gcr.io/sig-storage/csi-snapshotter
+        repository: registry.k8s.io/sig-storage/csi-snapshotter
         sourceRepository: github.com/kubernetes-csi/external-snapshotter
-        tag: v4.2.1
+        tag: v6.1.0
       - labels:
           - name: gardener.cloud/cve-categorisation
             value:
@@ -2132,9 +2132,9 @@ provider-alicloud:
               network_exposure: private
               user_interaction: gardener-operator
         name: csi-snapshot-validation-webhook
-        repository: k8s.gcr.io/sig-storage/snapshot-validation-webhook
+        repository: registry.k8s.io/sig-storage/snapshot-validation-webhook
         sourceRepository: github.com/kubernetes-csi/external-snapshotter
-        tag: v4.2.1
+        tag: v6.1.0
       - labels:
           - name: gardener.cloud/cve-categorisation
             value:
@@ -2145,9 +2145,9 @@ provider-alicloud:
               network_exposure: private
               user_interaction: gardener-operator
         name: csi-snapshot-controller
-        repository: k8s.gcr.io/sig-storage/snapshot-controller
+        repository: registry.k8s.io/sig-storage/snapshot-controller
         sourceRepository: github.com/kubernetes-csi/external-snapshotter
-        tag: v4.2.1
+        tag: v6.1.0
       - labels:
           - name: gardener.cloud/cve-categorisation
             value:
@@ -2160,7 +2160,7 @@ provider-alicloud:
         name: csi-resizer
         repository: registry.k8s.io/sig-storage/csi-resizer
         sourceRepository: https://github.com/kubernetes-csi/external-resizer
-        tag: v1.5.0
+        tag: v1.6.0
       - name: csi-plugin-alicloud
         repository: registry.eu-central-1.aliyuncs.com/acs/csi-plugin
         sourceRepository: https://github.com/kubernetes-sigs/alibaba-cloud-csi-driver
@@ -2177,7 +2177,7 @@ provider-alicloud:
         name: csi-liveness-probe
         repository: registry.k8s.io/sig-storage/livenessprobe
         sourceRepository: github.com/kubernetes-csi/livenessprobe
-        tag: v2.7.0
+        tag: v2.8.0
 provider-hcloud:
   imageVectorOriginal:
     images:
