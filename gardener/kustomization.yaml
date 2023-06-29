@@ -3,7 +3,6 @@ kind: Kustomization
 resources:
   - certificates.yaml
   - cloudprofiles.yaml
-  - dashboard.yaml
   - etcd.yaml
   - etcd-events.yaml
   - extensions.yaml

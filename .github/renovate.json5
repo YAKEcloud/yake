@@ -75,6 +75,18 @@
     },
     {
       "fileMatch": [
+        "^pre-gardener/addons/templates/dashboard.yaml$"
+      ],
+      "datasourceTemplate": "helm",
+      "registryUrlTemplate": "https://gardener-community.github.io/gardener-charts",
+      "versioningTemplate": "semver-coerced",
+      "matchStrings": [
+        // https://regex101.com/r/KY8baj/1
+        "chart: (?<depName>[a-z-]+)\n +version: (?<currentValue>[0-9.]+)"
+      ]
+    },
+    {
+      "fileMatch": [
         "^pre-gardener/addons/templates/velero.yaml$"
       ],
       "datasourceTemplate": "helm",
