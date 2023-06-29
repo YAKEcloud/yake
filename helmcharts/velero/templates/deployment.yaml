@@ -1,5 +1,3 @@
-{{- if .Values.configuration.provider -}}
-{{- $provider := .Values.configuration.provider -}}
 {{/* 'securityContext' got renamed to 'podSecurityContext', merge both dicts into one for backward compatibility */}}
 {{- $podSecurityContext := merge (.Values.podSecurityContext | default dict) (.Values.securityContext | default dict) -}}
 apiVersion: apps/v1
@@ -80,8 +78,12 @@ spec:
             - server
             ### Flags
           {{- with .Values.configuration }}
+            - --uploader-type={{ default "restic" .uploaderType }}
             {{- with .backupSyncPeriod }}
             - --backup-sync-period={{ . }}
+            {{- end }}
+            {{- with .fsBackupTimeout }}
+            - --fs-backup-timeout={{ . }}
             {{- end }}
             {{- with .clientBurst }}
             - --client-burst={{ . }}
@@ -98,14 +100,14 @@ spec:
             {{- with .defaultBackupTTL }}
             - --default-backup-ttl={{ . }}
             {{- end }}
-            {{- with .defaultResticPruneFrequency }}
-            - --default-restic-prune-frequency={{ . }}
-            {{- end }}
             {{- with .defaultVolumeSnapshotLocations }}
             - --default-volume-snapshot-locations={{ . }}
             {{- end }}
-            {{- if .defaultVolumesToRestic }}
-            - --default-volumes-to-restic
+            {{- if .defaultVolumesToFsBackup }}
+            - --default-volumes-to-fs-backup
+            {{- end }}
+            {{- with .defaultRepoMaintainFrequency }}
+            - --default-repo-maintain-frequency={{ . }}
             {{- end }}
             {{- with .disableControllers }}
             - --disable-controllers={{ . }}
@@ -127,9 +129,6 @@ spec:
             {{- end }}
             {{- with .profilerAddress }}
             - --profiler-address={{ . }}
-            {{- end }}
-            {{- with .resticTimeout }}
-            - --restic-timeout={{ . }}
             {{- end }}
             {{- if .restoreOnlyMode }}
             - --restore-only
@@ -154,6 +153,12 @@ spec:
           {{- with .Values.resources }}
           resources:
             {{- toYaml . | nindent 12 }}
+          {{- end }}
+          {{- with .Values.livenessProbe }}
+          livenessProbe: {{- toYaml . | nindent 12 }}
+          {{- end }}
+          {{- with .Values.readinessProbe }}
+          readinessProbe: {{- toYaml . | nindent 12 }}
           {{- end }}
           {{- with .Values.containerSecurityContext }}
           securityContext:
@@ -191,19 +196,14 @@ spec:
             - name: LD_LIBRARY_PATH
               value: /plugins
           {{- if .Values.credentials.useSecret }}
-            {{- if eq $provider "aws" }}
             - name: AWS_SHARED_CREDENTIALS_FILE
               value: /credentials/cloud
-            {{- else if eq $provider "gcp"}}
             - name: GOOGLE_APPLICATION_CREDENTIALS
               value: /credentials/cloud
-            {{- else if eq $provider "azure" }}
             - name: AZURE_CREDENTIALS_FILE
               value: /credentials/cloud
-            {{- else if eq $provider "alibabacloud" }}
             - name: ALIBABA_CLOUD_CREDENTIALS_FILE
               value: /credentials/cloud
-            {{- end }}
           {{- end }}
           {{- with .Values.configuration.extraEnvVars }}
           {{- range $key, $value := . }}
@@ -217,7 +217,7 @@ spec:
               valueFrom:
                 secretKeyRef:
                   name: {{ include "velero.secretName" $ }}
-                  key: {{ default "none" $value }}
+                  key: {{ default "none" $key }}
           {{- end }}
           {{- end }}
           {{- if .Values.lifecycle }}
@@ -269,4 +269,3 @@ spec:
       affinity:
         {{- toYaml . | nindent 8 }}
     {{- end }}
-{{- end -}}

@@ -19,19 +19,19 @@ stringData:
       extraEnvVars:
         AZURE_STORAGE_ACCOUNT_ACCESS_KEY: {{ .Values.backups.credentials.storageAccountAccessKey | b64dec }}
         AZURE_CLOUD_NAME: AzurePublicCloud
-      provider: azure
       backupStorageLocation:
-        bucket: {{ .Values.backups.bucketName }}
-        prefix: velero-backup
-        config:
-          storageAccount: {{ .Values.backups.credentials.storageAccount | b64dec }}
-          storageAccountKeyEnvVar: AZURE_STORAGE_ACCOUNT_ACCESS_KEY
+        - bucket: {{ .Values.backups.bucketName }}
+          provider: azure
+          prefix: velero-backup
+          config:
+            storageAccount: {{ .Values.backups.credentials.storageAccount | b64dec }}
+            storageAccountKeyEnvVar: AZURE_STORAGE_ACCOUNT_ACCESS_KEY
     initContainers:
       - name: velero-plugin-for-microsoft-azure
 {{- if .Values.registryOverwrite }}
         image: {{ include "replaceRegistry" (dict "docker.io/velero/velero-plugin-for-microsoft-azure:v1.6.0" .Values.registryOverwrite) }}
 {{- else }}
-        image: velero/velero-plugin-for-microsoft-azure:v1.6.0
+        image: velero/velero-plugin-for-microsoft-azure:v1.7.0
 {{- end }}
         imagePullPolicy: IfNotPresent
         volumeMounts:
@@ -45,18 +45,18 @@ stringData:
       extraEnvVars:
         AWS_ACCESS_KEY_ID: {{ .Values.backups.credentials.accessKeyID | b64dec }}
         AWS_SECRET_ACCESS_KEY: {{ .Values.backups.credentials.secretAccessKey | b64dec }}
-      provider: aws
       backupStorageLocation:
-        bucket: {{ .Values.backups.bucketName }}
-        prefix: velero-backup
-        config:
-          region: {{ .Values.backups.region }}
+        - bucket: {{ .Values.backups.bucketName }}
+          provider: aws
+          prefix: velero-backup
+          config:
+            region: {{ .Values.backups.region }}
     initContainers:
       - name: velero-plugin-for-aws
 {{- if .Values.registryOverwrite }}
         image: {{ include "replaceRegistry" (dict "docker.io/velero/velero-plugin-for-aws:v1.6.0" .Values.registryOverwrite) }}
 {{- else }}
-        image: velero/velero-plugin-for-aws:v1.6.0
+        image: velero/velero-plugin-for-aws:v1.7.0
 {{- end }}
         imagePullPolicy: IfNotPresent
         volumeMounts:
@@ -74,18 +74,18 @@ stringData:
         OS_PROJECT_NAME: {{ .Values.backups.credentials.tenantName | b64dec }}
         OS_REGION_NAME: {{ .Values.backups.credentials.region | b64dec }}
         OS_DOMAIN_NAME: {{ .Values.backups.credentials.domainName | b64dec }}
-      provider: community.openstack.org/openstack
       backupStorageLocation:
-        bucket: {{ .Values.backups.bucketName }}
-        prefix: velero-backup
-        config:
-          region: {{ .Values.backups.region }}
+        - bucket: {{ .Values.backups.bucketName }}
+          provider: community.openstack.org/openstack
+          prefix: velero-backup
+          config:
+            region: {{ .Values.backups.region }}
     initContainers:
       - name: velero-plugin-for-openstack
 {{- if .Values.registryOverwrite }}
         image: {{ include "replaceRegistry" (dict "docker.io/lirt/velero-plugin-for-openstack:v0.4.1" .Values.registryOverwrite) }}
 {{- else }}
-        image: lirt/velero-plugin-for-openstack:v0.4.1
+        image: lirt/velero-plugin-for-openstack:v0.5.2
 {{- end }}
         imagePullPolicy: IfNotPresent
         volumeMounts:
