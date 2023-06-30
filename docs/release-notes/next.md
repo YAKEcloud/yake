@@ -129,3 +129,30 @@ gardenlet: `eu.gcr.io/gardener-project/gardener/gardenlet:v1.71.5`
 resource-manager: `eu.gcr.io/gardener-project/gardener/resource-manager:v1.71.5`
 
 </details>
+
+<details>
+<summary><b>Update gardener-controlplane to <code>1.71.6</code></b></summary>
+
+# [gardener]
+## 🏃 Others
+* *[OPERATOR]* Adapt vpa-updater QPS limits such that it doesn't get throttled on large clusters ([gardener/gardener#8177](https://github.com/gardener/gardener/pull/8177), [@gardener-ci-robot](https://github.com/gardener-ci-robot))
+
+</details>
+
+<details>
+<summary><b>Update gardener-controlplane to <code>1.71.6</code></b></summary>
+
+# [gardener]
+## 🏃 Others
+* *[OPERATOR]* Adapt vpa-updater QPS limits such that it doesn't get throttled on large clusters ([gardener/gardener#8177](https://github.com/gardener/gardener/pull/8177), [@gardener-ci-robot](https://github.com/gardener-ci-robot))
+
+</details>
+
+<details>
+<summary><b>Update gardenlet to <code>1.71.6</code></b></summary>
+
+# [gardener]
+## 🏃 Others
+* *[OPERATOR]* Adapt vpa-updater QPS limits such that it doesn't get throttled on large clusters ([gardener/gardener#8177](https://github.com/gardener/gardener/pull/8177), [@gardener-ci-robot](https://github.com/gardener-ci-robot))
+
+</details>
