@@ -2,6 +2,7 @@ apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 resources:
   - flux/configuration.yaml
+  - flux/addons.yaml
   - flux/pre-gardener.yaml
   - flux/gardener.yaml
   - flux/flux-system.yaml

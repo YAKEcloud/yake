@@ -17,7 +17,7 @@ ignore: |
   gardener/garden-content/templates/
   hack/ci/secrets/
   hack/ci/dev-env/config/charts
-  pre-gardener/addons/templates/
+  addons/addons/templates/
   configuration/configuration/templates/
   pre-gardener/dnsprovider/templates/
   configuration/generated-secrets/templates/

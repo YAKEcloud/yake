@@ -6,7 +6,6 @@ metadata:
 spec:
   interval: 1m
   dependsOn:
-    - name: 23ke-env-config
     - name: pre-gardener
   sourceRef:
     kind: GitRepository
@@ -17,14 +16,6 @@ spec:
     - apiVersion: helm.toolkit.fluxcd.io/v2beta1
       kind: HelmRelease
       name: cloudprofiles
-      namespace: flux-system
-    - apiVersion: helm.toolkit.fluxcd.io/v2beta1
-      kind: HelmRelease
-      name: dashboard-runtime
-      namespace: flux-system
-    - apiVersion: helm.toolkit.fluxcd.io/v2beta1
-      kind: HelmRelease
-      name: dashboard-application
       namespace: flux-system
     - apiVersion: helm.toolkit.fluxcd.io/v2beta1
       kind: HelmRelease

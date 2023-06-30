@@ -15,6 +15,7 @@ cp -r 23kectl.yaml $tmpDir
 cp -r kustomization.yaml $tmpDir
 cp -r flux $tmpDir
 cp -r configuration $tmpDir
+cp -r addons $tmpDir
 cp -r pre-gardener $tmpDir
 cp -r flux-system $tmpDir
 cp -r gardener $tmpDir
@@ -24,7 +25,7 @@ cwd=$(pwd)
 cd $tmpDir
 
 # replace GitRepository with $sourceType in 23ke-directories
-for file in $(grep -lr GitRepository configuration pre-gardener gardener flux | sed 's/^\.\///'); do
+for file in $(grep -lr GitRepository configuration addons pre-gardener gardener flux | sed 's/^\.\///'); do
 		sed -i s/GitRepository/$sourceType/ $file
 done
 
@@ -36,7 +37,7 @@ for file in $(grep  --exclude=configuration.yaml \
 										--exclude=dnsprovider.yaml \
 										--exclude=issuer.yaml \
 										--exclude=certificates.yaml \
-										-lr "kind: HelmRelease" configuration pre-gardener gardener)
+										-lr "kind: HelmRelease" configuration addons pre-gardener gardener)
 do
 		# prepend helmcharts/ to chart:
 		sed -i -E "s/(chart: )(.+)/\1helmcharts\/\2/" $file

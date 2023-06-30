@@ -5,6 +5,28 @@ hide_table_of_contents: true
 # Release Notes next
 
 ## 23KE release notes and upgrade guide
+- Before upgrade
+  - The addons chart was moved to the top-level directory and is managed by its own `Kustomization` now. Moreover, the gardener dashboard is now part of the addons chart allowing to switch it off when not needed. Therefore, you should
+  ```sh
+  flux suspend ks pre-gardener
+ kubectl label -n flux-system hr dashboard-runtime kustomize.toolkit.fluxcd.io/name-
+ kubectl label -n flux-system hr dashboard-runtime kustomize.toolkit.fluxcd.io/namespace-
+ kubectl label -n flux-system hr dashboard-runtime app.kubernetes.io/managed-by=Helm
+ kubectl annotate -n flux-system hr dashboard-runtime meta.helm.sh/release-name=addons
+ kubectl annotate -n flux-system hr dashboard-runtime meta.helm.sh/release-namespace=flux-system
+
+ kubectl label -n flux-system hr dashboard-application kustomize.toolkit.fluxcd.io/name-
+ kubectl label -n flux-system hr dashboard-application kustomize.toolkit.fluxcd.io/namespace-
+ kubectl label -n flux-system hr dashboard-application app.kubernetes.io/managed-by=Helm
+ kubectl annotate -n flux-system hr dashboard-application meta.helm.sh/release-name=addons
+ kubectl annotate -n flux-system hr dashboard-application meta.helm.sh/release-namespace=flux-system
+  ```
+
+- After upgrade
+  - Resume the pre-gardener `Kustomization` again
+  ```sh
+  flux resume ks pre-gardener
+  ```
 
 ## Related upstream release notes / changelogs
 
