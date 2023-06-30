@@ -12,7 +12,7 @@ CONFIGVALUES="$($HELM template --kube-version 1.24.0 configuration/configuration
 
 $HELM unittest configuration/configuration
 
-for chart in pre-gardener/addons pre-gardener/dnsprovider pre-gardener/issuer gardener/certificates gardener/extensions gardener/garden-content; do
+for chart in addons/addons pre-gardener/dnsprovider pre-gardener/issuer gardener/certificates gardener/extensions gardener/garden-content; do
 
   CHARTNAME="$(basename $chart)"
   export CHARTNAME

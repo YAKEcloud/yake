@@ -1,0 +1,17 @@
+templates:
+  - dashboard.yaml
+tests:
+  - it: should create HelmRelease with default values
+    asserts:
+      - isKind:
+          of: HelmRelease
+        documentIndex: 0
+      - isKind:
+          of: HelmRelease
+        documentIndex: 1
+  - it: should create HelmRelease when dashboard is disabled
+    set:
+      dashboard.enabled: false
+    asserts:
+      - hasDocuments:
+          count: 0
