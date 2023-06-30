@@ -20,7 +20,6 @@ tests:
                   hosts:
                   - dashboard.mydomain.example.org
                   annotations:
-                    kubernetes.io/ingress.class: nginx
                     cert.gardener.cloud/purpose: managed
                     cert.gardener.cloud/class: base-cert-class
                     dns.gardener.cloud/dnsnames: "*"
