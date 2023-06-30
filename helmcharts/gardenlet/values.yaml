@@ -47,9 +47,10 @@ config:
                 enabled: true
             syncPeriod: 30s
             webhookRemediatorEnabled: false
-        shootSecret:
+        shootState:
             concurrentSyncs: 5
-        shootStateSync:
+            syncPeriod: 6h
+        tokenRequestor:
             concurrentSyncs: 5
     debugging:
         enableContentionProfiling: false
@@ -86,7 +87,7 @@ env: []
 image:
     pullPolicy: IfNotPresent
     repository: eu.gcr.io/gardener-project/gardener/gardenlet
-    tag: v1.73.1
+    tag: v1.74.0
 invalidateServiceAccountToken: true
 nodeToleration:
     defaultNotReadyTolerationSeconds: 60
