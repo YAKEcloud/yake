@@ -12,3 +12,8 @@ spec:
     name: 23ke
   path: ./addons
   prune: true
+  healthChecks:
+    - apiVersion: helm.toolkit.fluxcd.io/v2beta1
+      kind: HelmRelease
+      name: addons
+      namespace: flux-system

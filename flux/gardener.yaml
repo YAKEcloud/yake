@@ -6,7 +6,6 @@ metadata:
 spec:
   interval: 1m
   dependsOn:
-    - name: 23ke-env-config
     - name: pre-gardener
   sourceRef:
     kind: GitRepository
