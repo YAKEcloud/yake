@@ -75,7 +75,7 @@
     },
     {
       "fileMatch": [
-        "^pre-gardener/addons/templates/dashboard.yaml$"
+        "^addons/addons/templates/dashboard.yaml$"
       ],
       "datasourceTemplate": "helm",
       "registryUrlTemplate": "https://gardener-community.github.io/gardener-charts",
@@ -87,7 +87,7 @@
     },
     {
       "fileMatch": [
-        "^pre-gardener/addons/templates/velero.yaml$"
+        "^addons/addons/templates/velero.yaml$"
       ],
       "datasourceTemplate": "helm",
       "registryUrlTemplate": "https://vmware-tanzu.github.io/helm-charts",

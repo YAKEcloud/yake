@@ -13,7 +13,7 @@ spec:
   interval: 1m
   chart:
     spec:
-      chart: pre-gardener/addons
+      chart: addons/addons
       reconcileStrategy: Revision
       sourceRef:
         kind: GitRepository
