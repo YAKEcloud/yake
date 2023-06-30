@@ -221,12 +221,11 @@ config.yaml: |
       {{- if .Values.config.controllers.seedCare.conditionThresholds }}
 {{ toYaml .Values.config.controllers.seedCare.conditionThresholds | indent 6 }}
       {{- end }}
-    {{- if .Values.config.controllers.shootSecret }}
-    shootSecret:
-      concurrentSyncs: {{ required ".Values.config.controllers.shootSecret.concurrentSyncs is required" .Values.config.controllers.shootSecret.concurrentSyncs }}
+    {{- if .Values.config.controllers.shootState }}
+    shootState:
+      concurrentSyncs: {{ required ".Values.config.controllers.shootState.concurrentSyncs is required" .Values.config.controllers.shootState.concurrentSyncs }}
+      syncPeriod: {{ required ".Values.config.controllers.shootState.syncPeriod is required" .Values.config.controllers.shootState.syncPeriod }}
     {{- end }}
-    shootStateSync:
-      concurrentSyncs: {{ required ".Values.config.controllers.shootStateSync.concurrentSyncs is required" .Values.config.controllers.shootStateSync.concurrentSyncs }}
     {{- if .Values.config.controllers.managedSeed }}
     managedSeed:
       concurrentSyncs: {{ required ".Values.config.controllers.managedSeed.concurrentSyncs is required" .Values.config.controllers.managedSeed.concurrentSyncs }}
@@ -249,6 +248,8 @@ config.yaml: |
 {{ toYaml .Values.config.controllers.networkPolicy.additionalNamespaceSelectors | indent 6 }}
       {{- end }}
     {{- end }}
+    tokenRequestor:
+      concurrentSyncs: {{ required ".Values.config.controllers.tokenRequestor.concurrentSyncs is required" .Values.config.controllers.tokenRequestor.concurrentSyncs }}
   resources:
     capacity:
       shoots: {{ required ".Values.config.resources.capacity.shoots is required" .Values.config.resources.capacity.shoots }}

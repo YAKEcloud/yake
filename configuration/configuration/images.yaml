@@ -22,25 +22,11 @@ gardenlet:
       - name: etcd-druid
         repository: eu.gcr.io/gardener-project/gardener/etcd-druid
         sourceRepository: github.com/gardener/etcd-druid
-        tag: v0.18.1
+        tag: v0.18.3
       - name: dependency-watchdog
         repository: eu.gcr.io/gardener-project/gardener/dependency-watchdog
         sourceRepository: github.com/gardener/dependency-watchdog
         tag: v1.1.0
-      - labels:
-          - name: gardener.cloud/cve-categorisation
-            value:
-              authentication_enforced: true
-              availability_requirement: low
-              confidentiality_requirement: low
-              integrity_requirement: low
-              network_exposure: public
-              user_interaction: end-user
-        name: nginx-ingress-controller-seed
-        repository: registry.k8s.io/ingress-nginx/controller
-        sourceRepository: github.com/kubernetes/ingress-nginx
-        tag: v0.49.3
-        targetVersion: < 1.22
       - labels:
           - name: gardener.cloud/cve-categorisation
             value:
@@ -124,7 +110,7 @@ gardenlet:
         name: machine-controller-manager
         repository: eu.gcr.io/gardener-project/gardener/machine-controller-manager
         sourceRepository: github.com/gardener/machine-controller-manager
-        tag: v0.49.2
+        tag: v0.49.3
       - name: cluster-autoscaler
         repository: eu.gcr.io/gardener-project/gardener/autoscaler/cluster-autoscaler
         sourceRepository: github.com/gardener/autoscaler
@@ -150,16 +136,6 @@ gardenlet:
         sourceRepository: github.com/gardener/autoscaler
         tag: v1.22.6
         targetVersion: 1.22.x
-      - name: cluster-autoscaler
-        repository: eu.gcr.io/gardener-project/gardener/autoscaler/cluster-autoscaler
-        sourceRepository: github.com/gardener/autoscaler
-        tag: v1.21.6
-        targetVersion: 1.21.x
-      - name: cluster-autoscaler
-        repository: eu.gcr.io/gardener-project/gardener/autoscaler/cluster-autoscaler
-        sourceRepository: github.com/gardener/autoscaler
-        tag: v1.20.4
-        targetVersion: < 1.21
       - name: vpn-seed-server
         repository: eu.gcr.io/gardener-project/gardener/vpn-seed-server
         sourceRepository: github.com/gardener/vpn2
@@ -353,30 +329,7 @@ gardenlet:
         name: kubernetes-dashboard
         repository: eu.gcr.io/gardener-project/3rd/kubernetesui/dashboard
         sourceRepository: github.com/kubernetes/dashboard
-        tag: v2.2.0
-        targetVersion: < 1.21
-      - labels:
-          - name: cloud.gardener.cnudie/dso/scanning-hints/binary_id/v1
-            value:
-              comment: |
-                not deployed as part of gardener infrastructure. Offered to users for development purposes only, accompanied w/ warning that no support be provided.
-              policy: skip
-        name: kubernetes-dashboard
-        repository: eu.gcr.io/gardener-project/3rd/kubernetesui/dashboard
-        sourceRepository: github.com/kubernetes/dashboard
-        tag: v2.4.0
-        targetVersion: '>= 1.21, < 1.22'
-      - labels:
-          - name: cloud.gardener.cnudie/dso/scanning-hints/binary_id/v1
-            value:
-              comment: |
-                not deployed as part of gardener infrastructure. Offered to users for development purposes only, accompanied w/ warning that no support be provided.
-              policy: skip
-        name: kubernetes-dashboard
-        repository: eu.gcr.io/gardener-project/3rd/kubernetesui/dashboard
-        sourceRepository: github.com/kubernetes/dashboard
         tag: v2.5.1
-        targetVersion: '>= 1.22'
       - labels:
           - name: cloud.gardener.cnudie/dso/scanning-hints/binary_id/v1
             value:
@@ -394,10 +347,10 @@ gardenlet:
                 not deployed as part of gardener infrastructure. Offered to users for development purposes only, accompanied w/ warning that no support be provided.
               policy: skip
         name: nginx-ingress-controller
-        repository: registry.k8s.io/ingress-nginx/controller
+        repository: registry.k8s.io/ingress-nginx/controller-chroot
         sourceRepository: github.com/kubernetes/ingress-nginx
-        tag: v0.49.3
-        targetVersion: < 1.22
+        tag: v1.4.0
+        targetVersion: 1.22.x
       - labels:
           - name: cloud.gardener.cnudie/dso/scanning-hints/binary_id/v1
             value:
@@ -407,8 +360,19 @@ gardenlet:
         name: nginx-ingress-controller
         repository: registry.k8s.io/ingress-nginx/controller-chroot
         sourceRepository: github.com/kubernetes/ingress-nginx
-        tag: v1.3.0
-        targetVersion: '>= 1.22'
+        tag: v1.6.4
+        targetVersion: 1.23.x
+      - labels:
+          - name: cloud.gardener.cnudie/dso/scanning-hints/binary_id/v1
+            value:
+              comment: |
+                not deployed as part of gardener infrastructure. Offered to users for development purposes only, accompanied w/ warning that no support be provided.
+              policy: skip
+        name: nginx-ingress-controller
+        repository: registry.k8s.io/ingress-nginx/controller-chroot
+        sourceRepository: github.com/kubernetes/ingress-nginx
+        tag: v1.8.0
+        targetVersion: '>= 1.24'
       - name: alpine
         repository: eu.gcr.io/gardener-project/3rd/alpine
         tag: 3.15.8
@@ -421,10 +385,14 @@ gardenlet:
               integrity_requirement: low
               network_exposure: private
               user_interaction: gardener-operator
+          - name: cloud.gardener.cnudie/responsibles
+            value:
+              - teamname: gardener/logging-maintainers
+                type: githubTeam
         name: fluent-operator
         repository: eu.gcr.io/gardener-project/3rd/kubesphere/fluent-operator
         sourceRepository: github.com/fluent/fluent-operator
-        tag: v2.2.0
+        tag: v2.3.0
       - labels:
           - name: gardener.cloud/cve-categorisation
             value:
@@ -434,10 +402,14 @@ gardenlet:
               integrity_requirement: low
               network_exposure: private
               user_interaction: gardener-operator
+          - name: cloud.gardener.cnudie/responsibles
+            value:
+              - teamname: gardener/logging-maintainers
+                type: githubTeam
         name: fluent-bit
         repository: eu.gcr.io/gardener-project/3rd/kubesphere/fluent-bit
         sourceRepository: github.com/fluent/fluent-operator
-        tag: v2.0.9
+        tag: v2.1.4
       - labels:
           - name: gardener.cloud/cve-categorisation
             value:
@@ -448,12 +420,16 @@ gardenlet:
               integrity_requirement: none
               network_exposure: private
               user_interaction: gardener-operator
+          - name: cloud.gardener.cnudie/responsibles
+            value:
+              - teamname: gardener/logging-maintainers
+                type: githubTeam
         name: fluent-bit-plugin-installer
         repository: eu.gcr.io/gardener-project/gardener/fluent-bit-to-vali
         resourceId:
           name: fluent-bit-to-vali
         sourceRepository: github.com/gardener/logging
-        tag: v0.55.2
+        tag: v0.55.3
       - labels:
           - name: gardener.cloud/cve-categorisation
             value:
@@ -463,10 +439,14 @@ gardenlet:
               integrity_requirement: high
               network_exposure: private
               user_interaction: gardener-operator
+          - name: cloud.gardener.cnudie/responsibles
+            value:
+              - teamname: gardener/logging-maintainers
+                type: githubTeam
         name: vali
         repository: ghcr.io/credativ/vali
         sourceRepository: github.com/credativ/vali
-        tag: v2.2.5
+        tag: v2.2.6
       - labels:
           - name: gardener.cloud/cve-categorisation
             value:
@@ -476,10 +456,14 @@ gardenlet:
               integrity_requirement: high
               network_exposure: private
               user_interaction: gardener-operator
+          - name: cloud.gardener.cnudie/responsibles
+            value:
+              - teamname: gardener/logging-maintainers
+                type: githubTeam
         name: vali-curator
         repository: eu.gcr.io/gardener-project/gardener/vali-curator
         sourceRepository: github.com/gardener/logging
-        tag: v0.55.2
+        tag: v0.55.3
       - labels:
           - name: gardener.cloud/cve-categorisation
             value:
@@ -490,6 +474,10 @@ gardenlet:
               integrity_requirement: high
               network_exposure: public
               user_interaction: end-user
+          - name: cloud.gardener.cnudie/responsibles
+            value:
+              - teamname: gardener/logging-maintainers
+                type: githubTeam
         name: kube-rbac-proxy
         repository: quay.io/brancz/kube-rbac-proxy
         sourceRepository: github.com/brancz/kube-rbac-proxy
@@ -504,10 +492,14 @@ gardenlet:
               integrity_requirement: high
               network_exposure: public
               user_interaction: end-user
+          - name: cloud.gardener.cnudie/responsibles
+            value:
+              - teamname: gardener/logging-maintainers
+                type: githubTeam
         name: valitail
         repository: ghcr.io/credativ/valitail
         sourceRepository: github.com/credativ/vali
-        tag: v2.2.5
+        tag: v2.2.6
       - labels:
           - name: gardener.cloud/cve-categorisation
             value:
@@ -519,12 +511,16 @@ gardenlet:
               integrity_requirement: none
               network_exposure: private
               user_interaction: gardener-operator
+          - name: cloud.gardener.cnudie/responsibles
+            value:
+              - teamname: gardener/logging-maintainers
+                type: githubTeam
         name: telegraf
         repository: eu.gcr.io/gardener-project/gardener/telegraf-iptables
         resourceId:
           name: telegraf-iptables
         sourceRepository: github.com/gardener/logging
-        tag: v0.55.2
+        tag: v0.55.3
       - labels:
           - name: gardener.cloud/cve-categorisation
             value:
@@ -534,10 +530,14 @@ gardenlet:
               integrity_requirement: high
               network_exposure: private
               user_interaction: gardener-operator
+          - name: cloud.gardener.cnudie/responsibles
+            value:
+              - teamname: gardener/logging-maintainers
+                type: githubTeam
         name: event-logger
         repository: eu.gcr.io/gardener-project/gardener/event-logger
         sourceRepository: github.com/gardener/logging
-        tag: v0.55.2
+        tag: v0.55.3
       - labels:
           - name: gardener.cloud/cve-categorisation
             value:
@@ -547,24 +547,14 @@ gardenlet:
               integrity_requirement: none
               network_exposure: private
               user_interaction: gardener-operator
+          - name: cloud.gardener.cnudie/responsibles
+            value:
+              - teamname: gardener/logging-maintainers
+                type: githubTeam
         name: tune2fs
         repository: eu.gcr.io/gardener-project/gardener/tune2fs
         sourceRepository: github.com/gardener/logging
-        tag: v0.55.2
-      - labels:
-          - name: gardener.cloud/cve-categorisation
-            value:
-              authentication_enforced: false
-              availability_requirement: high
-              confidentiality_requirement: low
-              integrity_requirement: high
-              network_exposure: private
-              user_interaction: gardener-operator
-        name: vpa-admission-controller
-        repository: registry.k8s.io/autoscaling/vpa-admission-controller
-        sourceRepository: github.com/kubernetes/autoscaler
-        tag: 0.11.0
-        targetVersion: < 1.21
+        tag: v0.55.3
       - labels:
           - name: gardener.cloud/cve-categorisation
             value:
@@ -578,21 +568,6 @@ gardenlet:
         repository: registry.k8s.io/autoscaling/vpa-admission-controller
         sourceRepository: github.com/kubernetes/autoscaler
         tag: 0.13.0
-        targetVersion: '>= 1.21'
-      - labels:
-          - name: gardener.cloud/cve-categorisation
-            value:
-              authentication_enforced: false
-              availability_requirement: high
-              confidentiality_requirement: low
-              integrity_requirement: high
-              network_exposure: private
-              user_interaction: gardener-operator
-        name: vpa-recommender
-        repository: registry.k8s.io/autoscaling/vpa-recommender
-        sourceRepository: github.com/kubernetes/autoscaler
-        tag: 0.11.0
-        targetVersion: < 1.21
       - labels:
           - name: gardener.cloud/cve-categorisation
             value:
@@ -606,21 +581,6 @@ gardenlet:
         repository: registry.k8s.io/autoscaling/vpa-recommender
         sourceRepository: github.com/kubernetes/autoscaler
         tag: 0.13.0
-        targetVersion: '>= 1.21'
-      - labels:
-          - name: gardener.cloud/cve-categorisation
-            value:
-              authentication_enforced: false
-              availability_requirement: high
-              confidentiality_requirement: low
-              integrity_requirement: high
-              network_exposure: private
-              user_interaction: gardener-operator
-        name: vpa-updater
-        repository: registry.k8s.io/autoscaling/vpa-updater
-        sourceRepository: github.com/kubernetes/autoscaler
-        tag: 0.11.0
-        targetVersion: < 1.21
       - labels:
           - name: gardener.cloud/cve-categorisation
             value:
@@ -634,7 +594,6 @@ gardenlet:
         repository: registry.k8s.io/autoscaling/vpa-updater
         sourceRepository: github.com/kubernetes/autoscaler
         tag: 0.13.0
-        targetVersion: '>= 1.21'
       - labels:
           - name: gardener.cloud/cve-categorisation
             value:
@@ -2422,5 +2381,5 @@ etcd-druid:
       - name: etcd
         repository: eu.gcr.io/gardener-project/gardener/etcd
         sourceRepository: github.com/gardener/etcd-custom-image
-        tag: v3.4.13-bootstrap-10
+        tag: v3.4.13-bootstrap-11
 
