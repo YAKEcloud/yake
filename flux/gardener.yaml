@@ -20,14 +20,6 @@ spec:
       namespace: flux-system
     - apiVersion: helm.toolkit.fluxcd.io/v2beta1
       kind: HelmRelease
-      name: dashboard-runtime
-      namespace: flux-system
-    - apiVersion: helm.toolkit.fluxcd.io/v2beta1
-      kind: HelmRelease
-      name: dashboard-application
-      namespace: flux-system
-    - apiVersion: helm.toolkit.fluxcd.io/v2beta1
-      kind: HelmRelease
       name: etcd
       namespace: flux-system
     - apiVersion: helm.toolkit.fluxcd.io/v2beta1
