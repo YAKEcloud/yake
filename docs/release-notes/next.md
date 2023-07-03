@@ -367,3 +367,30 @@ gardener-extension-admission-alicloud: `eu.gcr.io/gardener-project/gardener/exte
 * *[OPERATOR]* Included `UnavailableReplicas` in determining if a machine deployment status update is needed ([gardener/machine-controller-manager#834](https://github.com/gardener/machine-controller-manager/pull/834), [@ialidzhikov](https://github.com/ialidzhikov))
 
 </details>
+
+<details>
+<summary><b>Update gardener-controlplane to <code>1.74.1</code></b></summary>
+
+# [gardener]
+## 🐛 Bug Fixes
+* *[OPERATOR]* Fix network annotations to allow fluent-bit connecting to shoot Valis. ([gardener/gardener#8200](https://github.com/gardener/gardener/pull/8200), [@gardener-ci-robot](https://github.com/gardener-ci-robot))
+
+</details>
+
+<details>
+<summary><b>Update gardener-controlplane to <code>1.74.1</code></b></summary>
+
+# [gardener]
+## 🐛 Bug Fixes
+* *[OPERATOR]* Fix network annotations to allow fluent-bit connecting to shoot Valis. ([gardener/gardener#8200](https://github.com/gardener/gardener/pull/8200), [@gardener-ci-robot](https://github.com/gardener-ci-robot))
+
+</details>
+
+<details>
+<summary><b>Update gardenlet to <code>1.74.1</code></b></summary>
+
+# [gardener]
+## 🐛 Bug Fixes
+* *[OPERATOR]* Fix network annotations to allow fluent-bit connecting to shoot Valis. ([gardener/gardener#8200](https://github.com/gardener/gardener/pull/8200), [@gardener-ci-robot](https://github.com/gardener-ci-robot))
+
+</details>
