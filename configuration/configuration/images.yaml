@@ -1847,7 +1847,21 @@ provider-gcp:
         repository: eu.gcr.io/gardener-project/kubernetes/cloud-provider-gcp
         sourceRepository: github.com/gardener/cloud-provider-gcp
         tag: v1.26.4
-        targetVersion: '>= 1.26'
+        targetVersion: 1.26.x
+      - labels:
+          - name: gardener.cloud/cve-categorisation
+            value:
+              authentication_enforced: false
+              availability_requirement: low
+              confidentiality_requirement: high
+              integrity_requirement: high
+              network_exposure: protected
+              user_interaction: gardener-operator
+        name: cloud-controller-manager
+        repository: eu.gcr.io/gardener-project/kubernetes/cloud-provider-gcp
+        sourceRepository: github.com/gardener/cloud-provider-gcp
+        tag: v1.27.1
+        targetVersion: '>= 1.27'
       - labels:
           - name: gardener.cloud/cve-categorisation
             value:
@@ -1913,7 +1927,7 @@ provider-gcp:
         name: csi-provisioner
         repository: registry.k8s.io/sig-storage/csi-provisioner
         sourceRepository: github.com/kubernetes-csi/external-provisioner
-        tag: v3.4.0
+        tag: v3.4.1
         targetVersion: '>= 1.22'
       - labels:
           - name: gardener.cloud/cve-categorisation
