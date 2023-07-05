@@ -1167,7 +1167,7 @@ provider-azure:
         name: cloud-controller-manager
         repository: mcr.microsoft.com/oss/kubernetes/azure-cloud-controller-manager
         sourceRepository: github.com/kubernetes-sigs/cloud-provider-azure
-        tag: v1.24.20
+        tag: v1.24.21
         targetVersion: 1.24.x
       - labels:
           - name: gardener.cloud/cve-categorisation
@@ -1181,7 +1181,7 @@ provider-azure:
         name: cloud-controller-manager
         repository: mcr.microsoft.com/oss/kubernetes/azure-cloud-controller-manager
         sourceRepository: github.com/kubernetes-sigs/cloud-provider-azure
-        tag: v1.25.14
+        tag: v1.25.15
         targetVersion: 1.25.x
       - labels:
           - name: gardener.cloud/cve-categorisation
@@ -1195,8 +1195,22 @@ provider-azure:
         name: cloud-controller-manager
         repository: mcr.microsoft.com/oss/kubernetes/azure-cloud-controller-manager
         sourceRepository: github.com/kubernetes-sigs/cloud-provider-azure
-        tag: v1.26.10
-        targetVersion: '>= 1.26'
+        tag: v1.26.11
+        targetVersion: 1.26.x
+      - labels:
+          - name: gardener.cloud/cve-categorisation
+            value:
+              authentication_enforced: false
+              availability_requirement: low
+              confidentiality_requirement: high
+              integrity_requirement: high
+              network_exposure: protected
+              user_interaction: gardener-operator
+        name: cloud-controller-manager
+        repository: mcr.microsoft.com/oss/kubernetes/azure-cloud-controller-manager
+        sourceRepository: github.com/kubernetes-sigs/cloud-provider-azure
+        tag: v1.27.5
+        targetVersion: '>= 1.27'
       - labels:
           - name: gardener.cloud/cve-categorisation
             value:
@@ -1209,7 +1223,7 @@ provider-azure:
         name: cloud-node-manager
         repository: mcr.microsoft.com/oss/kubernetes/azure-cloud-node-manager
         sourceRepository: github.com/kubernetes-sigs/cloud-provider-azure
-        tag: v1.23.25
+        tag: v1.23.30
         targetVersion: < 1.24
       - labels:
           - name: gardener.cloud/cve-categorisation
@@ -1223,7 +1237,7 @@ provider-azure:
         name: cloud-node-manager
         repository: mcr.microsoft.com/oss/kubernetes/azure-cloud-node-manager
         sourceRepository: github.com/kubernetes-sigs/cloud-provider-azure
-        tag: v1.24.12
+        tag: v1.24.21
         targetVersion: 1.24.x
       - labels:
           - name: gardener.cloud/cve-categorisation
@@ -1237,7 +1251,7 @@ provider-azure:
         name: cloud-node-manager
         repository: mcr.microsoft.com/oss/kubernetes/azure-cloud-node-manager
         sourceRepository: github.com/kubernetes-sigs/cloud-provider-azure
-        tag: v1.25.6
+        tag: v1.25.15
         targetVersion: 1.25.x
       - labels:
           - name: gardener.cloud/cve-categorisation
@@ -1251,8 +1265,22 @@ provider-azure:
         name: cloud-node-manager
         repository: mcr.microsoft.com/oss/kubernetes/azure-cloud-node-manager
         sourceRepository: github.com/kubernetes-sigs/cloud-provider-azure
-        tag: v1.26.2
-        targetVersion: '>= 1.26'
+        tag: v1.26.11
+        targetVersion: 1.26.x
+      - labels:
+          - name: gardener.cloud/cve-categorisation
+            value:
+              authentication_enforced: false
+              availability_requirement: low
+              confidentiality_requirement: high
+              integrity_requirement: high
+              network_exposure: protected
+              user_interaction: gardener-operator
+        name: cloud-node-manager
+        repository: mcr.microsoft.com/oss/kubernetes/azure-cloud-node-manager
+        sourceRepository: github.com/kubernetes-sigs/cloud-provider-azure
+        tag: v1.27.5
+        targetVersion: '>= 1.27'
       - labels:
           - name: gardener.cloud/cve-categorisation
             value:
@@ -1317,7 +1345,7 @@ provider-azure:
         name: csi-provisioner
         repository: registry.k8s.io/sig-storage/csi-provisioner
         sourceRepository: github.com/kubernetes-csi/external-provisioner
-        tag: v3.4.0
+        tag: v3.4.1
       - labels:
           - name: gardener.cloud/cve-categorisation
             value:
