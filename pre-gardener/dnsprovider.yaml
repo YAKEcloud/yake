@@ -30,5 +30,14 @@ spec:
       name: dnsprovider-base-values
       optional: false
     - kind: Secret
+      name: dnsprovider-values-0
+      optional: true
+    - kind: Secret
+      name: dnsprovider-values-1
+      optional: true
+    - kind: Secret
+      name: dnsprovider-values-2
+      optional: true
+    - kind: Secret
       name: dnsprovider-values
       optional: true

@@ -28,6 +28,15 @@ spec:
     createNamespace: true
   valuesFrom:
     - kind: Secret
+      name: cloudprofiles-values-0
+      optional: true
+    - kind: Secret
+      name: cloudprofiles-values-1
+      optional: true
+    - kind: Secret
+      name: cloudprofiles-values-2
+      optional: true
+    - kind: Secret
       name: cloudprofiles-values
       optional: true
     # backwards compatability with pre v1.9 cpfl -> cloudprofiles rename
