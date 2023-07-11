@@ -26,16 +26,16 @@ spec:
   valuesFrom:
     - kind: Secret
       name: 23ke-config-0
-      optional: false
+      optional: true
     - kind: Secret
       name: 23ke-config-1
-      optional: false
+      optional: true
     - kind: Secret
       name: 23ke-config-2
-      optional: false
+      optional: true
     - kind: Secret
       name: 23ke-config
-      optional: false
+      optional: true
     - kind: Secret
       name: 23ke-generated-secrets
       optional: false
