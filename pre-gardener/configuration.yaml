@@ -16,4 +16,13 @@ spec:
       interval: 1m
   valuesFrom:
     - kind: Secret
+      name: 23ke-config-0
+      optional: true
+    - kind: Secret
+      name: 23ke-config-1
+      optional: true
+    - kind: Secret
+      name: 23ke-config-2
+      optional: true
+    - kind: Secret
       name: 23ke-config

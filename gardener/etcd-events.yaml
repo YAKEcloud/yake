@@ -21,6 +21,15 @@ spec:
     name: etcd-events
   valuesFrom:
     - kind: Secret
+      name: etcd-events-values-0
+      optional: true
+    - kind: Secret
+      name: etcd-events-values-1
+      optional: true
+    - kind: Secret
+      name: etcd-events-values-2
+      optional: true
+    - kind: Secret
       name: etcd-events-values
       optional: true
     # All of below maps cert-manager secrets to the expected helm values
