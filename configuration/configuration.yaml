@@ -25,6 +25,15 @@ spec:
         - configuration/configuration/images.yaml
   valuesFrom:
     - kind: Secret
+      name: 23ke-config-0
+      optional: false
+    - kind: Secret
+      name: 23ke-config-1
+      optional: false
+    - kind: Secret
+      name: 23ke-config-2
+      optional: false
+    - kind: Secret
       name: 23ke-config
       optional: false
     - kind: Secret

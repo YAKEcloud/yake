@@ -30,6 +30,15 @@ spec:
       name: kube-apiserver-base-values
       optional: false
     - kind: Secret
+      name: kube-apiserver-values-0
+      optional: true
+    - kind: Secret
+      name: kube-apiserver-values-1
+      optional: true
+    - kind: Secret
+      name: kube-apiserver-values-2
+      optional: true
+    - kind: Secret
       name: kube-apiserver-values
       optional: true
     # All of below maps cert-manager secrets to the expected helm values
