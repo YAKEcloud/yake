@@ -529,3 +529,10 @@ no release notes available
 - `[OPERATOR]` Update to cilium `v1.13.4`. by @DockToFuture [#196]
 
 </details>
+
+<details>
+<summary><b>Update provider-hcloud to <code>0.6.18</code></b></summary>
+
+# [gardener-extension-provider-hcloud] v0.6.18
+
+</details>
