@@ -1,5 +1,5 @@
 ## What's Changed
-* Regiocloud: Change regiocloud-a to RegionA by @JensAc in https://github.com/gardener-community/cloudprofiles/pull/23
+* Deprecates old versions automatically (instead of removing) by @23t-machine-user in https://github.com/gardener-community/cloudprofiles/pull/24
 
 
-**Full Changelog**: https://github.com/gardener-community/cloudprofiles/compare/0.6.1...0.6.2
+**Full Changelog**: https://github.com/gardener-community/cloudprofiles/compare/0.6.2...0.6.3
