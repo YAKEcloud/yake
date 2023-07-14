@@ -26,3 +26,4 @@ spec:
       optional: true
     - kind: Secret
       name: 23ke-config
+      optional: true
