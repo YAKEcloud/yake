@@ -8,4 +8,4 @@ dependencies:
   repository: ""
 description: A Helm chart to deploy the Gardener runtime related resources
 name: runtime
-version: 1.73.1
+version: 1.73.2
