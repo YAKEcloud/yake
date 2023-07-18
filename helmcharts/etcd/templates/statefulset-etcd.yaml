@@ -160,6 +160,9 @@ spec:
           value: /root/etcd-backup
         {{- end }}
         {{- end }}
+{{- if .Values.backup.env }}
+{{ toYaml .Values.backup.env | indent 8 }}
+{{- end }}
         volumeMounts:
         - name: etcd-bootstrap
           mountPath: /bootstrap
