@@ -44,3 +44,192 @@ hide_table_of_contents: true
 **Full Changelog**: https://github.com/gardener-community/etcd/compare/5.3.1...5.3.2
 
 </details>
+
+<details>
+<summary><b>Update gardener-controlplane to <code>1.75.0</code></b></summary>
+
+# [gardener/gardener]
+
+## ⚠️ Breaking Changes
+
+- `[DEVELOPER]` Added new option to `./hack/generate-controller-registration.sh` script `[-e, --pod-security-enforce[=pod-security-standard]` which sets the `security.gardener.cloud/pod-security-enforce` annotation of the generated `ControllerRegistration`. When not set this option defaults to `baseline`. by @AleksandarSavchev [#8099]
+- `[DEVELOPER]` Shoot fields `.spec.dns.providers[].domains` and `.spec.dns.providers[].zones` are now deprecated and expected to be removed in version `v1.87`. Please plan ahead to drop using those fields in extensions. by @timuthy [#8199]
+- `[DEVELOPER]` Usage of the deprecated injection mechanisms in controller-runtime (like `InjectScheme`, `InjectLogger`, `InjectConfig`, `InjectClient`, `InjectCache` etc) as well as package `extensions/pkg/controller/common` are dropped in a preparation to upgrade to the next version where injection is removed entirely. With this, `Inject*` functions on controllers, predicates, actuators, delegates, and friends are not called anymore. When upgrading the `gardener/gardener` dependency to this version, all injection implementations need to be removed. As a replacement, you can get the needed clients and similar from the manager during initialisation of the component. by @ary1992 [#8217]
+- `[OPERATOR]` `gardener-operator` is now managing the `nginx-ingress-controller` and `nginx-ingress-k8s-backend` components. Make sure that your `Garden` resource specifies the [`.spec.runtimeCluster.ingress` section](https://github.com/gardener/gardener/blob/ee3dd5d177be1bf3435534f194e25cef67177650/example/operator/20-garden.yaml#L16-L22). by @StenlyTU [#7945]
+- `[OPERATOR]` Support for `nip.io` shoot domains is discontinued. by @timuthy [#8199]
+- `[USER]` Adding Gardener-managed finalizers (e.g., `gardener` or `gardener.cloud/reference-protection`) to the `Shoot` on creation is now forbidden.  by @shafeeqes [#8209]
+- `[USER]` Shoot fields `.spec.dns.providers[].domains` and `.spec.dns.providers[].zones` are now deprecated and expected to be removed in version `v1.87`. Please use the extensions' configuration to configure providers with this ability. by @timuthy [#8199]
+- `[DEPENDENCY]` `github.com/gardener/gardener/pkg/utils/gardener.ShootAccessSecret` was renamed to `AccessSecret`. by @timebertt [#8204]
+## ✨ New Features
+
+- `[OPERATOR]` Added pod security enforce level `baseline` label to Istio-related namespaces. The `garden` and shoot namespaces have the `privileged` level. For extension namespaces, the new `security.gardener.cloud/pod-security-standard-enforce` annotation on  `ControllerRegistration` resources specifies the level. When set, the `extension` namespace is created with `pod-security.kubernetes.io/enforce` label set to `security.gardener.cloud/pod-security-standard-enforce`'s value. by @AleksandarSavchev [#8099]
+- `[USER]` Gardener now allows to omit or to only partially define Kubernetes versions in `Shoot`s. The version will automatically be defaulted to the latest minor and/or patch version found in the linked `CloudProfile`. by @timuthy [#8198]
+- `[USER]` A new optional constraint `CRDsWithProblematicConversionWebhooks` is introduced in the `Shoot` status. This constraint indicates that there is at least one CRD in the cluster which has multiple stored versions and a conversion webhook configured, which could break the reconciliation flow of a `Shoot` in some cases. by @shafeeqes [#8159]
+- `[USER]` It is now possible to reference `Secret`s containing kubeconfigs for admission plugins in `Shoot`s. The referenced `Secret` must be referenced in`.spec.resources` as well as in `.spec.kubernetes.kubeAPIServer.admissionPlugins[].kubeconfigSecretName`. by @acumino [#8110]
+## 🐛 Bug Fixes
+
+- `[OPERATOR]` Fix network annotations to allow fluent-bit connecting to shoot Valis. by @vlvasilev [#8197]
+- `[OPERATOR]` A bug causing the gardenlet to panic when a ETCD encryption key rotation operation is triggered for a hibernated Shoot is now fixed. Now, triggering ETCD encryption key rotation or ServiceAccount signing key rotation is forbidden when the Shoot is in waking up phase. by @shafeeqes [#8184]
+## 🏃 Others
+
+- `[OPERATOR]` `nginx-ingress-controller` image is updated to `v1.8.1` for Kubernetes`v1.24+` clusters. by @shafeeqes [#8205]
+- `[OPERATOR]` The `eu.gcr.io/gardener-project/gardener/autoscaler/cluster-autoscaler` image has been updated from `v1.26.2` to `v1.27.0` (for Kubernetes `>= 1.27`). by @rishabh-11 [#8187]
+- `[OPERATOR]` The `shoots/adminkubeconfig` relies on the `ca-client` `InternalSecret` only and does not use the `ShootState` object anymore. by @timebertt [#8195]
+- `[OPERATOR]` Update Prometheus job `tunnel-probe-apiserver-proxy` to fix for HA VPN mode by @Sallyan [#7954]
+- `[OPERATOR]` Update `vertical-pod-autoscaler` to `v0.14.0`. by @voelzmo [#8166]
+- `[DEVELOPER]` Go version is updated to 1.20.6. by @oliver-goetz [#8224]
+# [gardener/etcd-druid]
+
+## ⚠️ Breaking Changes
+
+- `[OPERATOR]` :warning: `etcd.Status.ClusterSize`, `etcd.Status.ServiceName`, `etcd.Status.UpdatedReplicas` have been marked as deprecated and users should refrain from depending on these fields. by @shreyas-s-rao [gardener/etcd-druid#637]
+## 🐛 Bug Fixes
+
+- `[OPERATOR]` `AllMembersReady` condition has now been fixed to eventually show the correct overall readiness of an etcd cluster. by @shreyas-s-rao [gardener/etcd-druid#637]
+## 🏃 Others
+
+- `[OPERATOR]` Print build version and go runtime info. by @shreyas-s-rao [gardener/etcd-druid#637]
+- `[DEVELOPER]` Add CVE categorization for etcd-druid. by @shreyas-s-rao [gardener/etcd-druid#637]
+# [gardener/etcd-backup-restore]
+
+## 🏃 Others
+
+- `[OPERATOR]` Bump alpine base version for Docker build to `3.18.2`.  by @shreyas-s-rao [gardener/etcd-backup-restore#638]
+- `[DEVELOPER]` Add CVE categorization for etcd-backup-restore. by @shreyas-s-rao [gardener/etcd-backup-restore#644]
+
+# Docker Images
+admission-controller: `eu.gcr.io/gardener-project/gardener/admission-controller:v1.75.0`
+apiserver: `eu.gcr.io/gardener-project/gardener/apiserver:v1.75.0`
+controller-manager: `eu.gcr.io/gardener-project/gardener/controller-manager:v1.75.0`
+scheduler: `eu.gcr.io/gardener-project/gardener/scheduler:v1.75.0`
+operator: `eu.gcr.io/gardener-project/gardener/operator:v1.75.0`
+gardenlet: `eu.gcr.io/gardener-project/gardener/gardenlet:v1.75.0`
+resource-manager: `eu.gcr.io/gardener-project/gardener/resource-manager:v1.75.0`
+
+</details>
+
+<details>
+<summary><b>Update gardener-controlplane to <code>1.75.0</code></b></summary>
+
+# [gardener/gardener]
+
+## ⚠️ Breaking Changes
+
+- `[DEVELOPER]` Added new option to `./hack/generate-controller-registration.sh` script `[-e, --pod-security-enforce[=pod-security-standard]` which sets the `security.gardener.cloud/pod-security-enforce` annotation of the generated `ControllerRegistration`. When not set this option defaults to `baseline`. by @AleksandarSavchev [#8099]
+- `[DEVELOPER]` Shoot fields `.spec.dns.providers[].domains` and `.spec.dns.providers[].zones` are now deprecated and expected to be removed in version `v1.87`. Please plan ahead to drop using those fields in extensions. by @timuthy [#8199]
+- `[DEVELOPER]` Usage of the deprecated injection mechanisms in controller-runtime (like `InjectScheme`, `InjectLogger`, `InjectConfig`, `InjectClient`, `InjectCache` etc) as well as package `extensions/pkg/controller/common` are dropped in a preparation to upgrade to the next version where injection is removed entirely. With this, `Inject*` functions on controllers, predicates, actuators, delegates, and friends are not called anymore. When upgrading the `gardener/gardener` dependency to this version, all injection implementations need to be removed. As a replacement, you can get the needed clients and similar from the manager during initialisation of the component. by @ary1992 [#8217]
+- `[OPERATOR]` `gardener-operator` is now managing the `nginx-ingress-controller` and `nginx-ingress-k8s-backend` components. Make sure that your `Garden` resource specifies the [`.spec.runtimeCluster.ingress` section](https://github.com/gardener/gardener/blob/ee3dd5d177be1bf3435534f194e25cef67177650/example/operator/20-garden.yaml#L16-L22). by @StenlyTU [#7945]
+- `[OPERATOR]` Support for `nip.io` shoot domains is discontinued. by @timuthy [#8199]
+- `[USER]` Adding Gardener-managed finalizers (e.g., `gardener` or `gardener.cloud/reference-protection`) to the `Shoot` on creation is now forbidden.  by @shafeeqes [#8209]
+- `[USER]` Shoot fields `.spec.dns.providers[].domains` and `.spec.dns.providers[].zones` are now deprecated and expected to be removed in version `v1.87`. Please use the extensions' configuration to configure providers with this ability. by @timuthy [#8199]
+- `[DEPENDENCY]` `github.com/gardener/gardener/pkg/utils/gardener.ShootAccessSecret` was renamed to `AccessSecret`. by @timebertt [#8204]
+## ✨ New Features
+
+- `[OPERATOR]` Added pod security enforce level `baseline` label to Istio-related namespaces. The `garden` and shoot namespaces have the `privileged` level. For extension namespaces, the new `security.gardener.cloud/pod-security-standard-enforce` annotation on  `ControllerRegistration` resources specifies the level. When set, the `extension` namespace is created with `pod-security.kubernetes.io/enforce` label set to `security.gardener.cloud/pod-security-standard-enforce`'s value. by @AleksandarSavchev [#8099]
+- `[USER]` Gardener now allows to omit or to only partially define Kubernetes versions in `Shoot`s. The version will automatically be defaulted to the latest minor and/or patch version found in the linked `CloudProfile`. by @timuthy [#8198]
+- `[USER]` A new optional constraint `CRDsWithProblematicConversionWebhooks` is introduced in the `Shoot` status. This constraint indicates that there is at least one CRD in the cluster which has multiple stored versions and a conversion webhook configured, which could break the reconciliation flow of a `Shoot` in some cases. by @shafeeqes [#8159]
+- `[USER]` It is now possible to reference `Secret`s containing kubeconfigs for admission plugins in `Shoot`s. The referenced `Secret` must be referenced in`.spec.resources` as well as in `.spec.kubernetes.kubeAPIServer.admissionPlugins[].kubeconfigSecretName`. by @acumino [#8110]
+## 🐛 Bug Fixes
+
+- `[OPERATOR]` Fix network annotations to allow fluent-bit connecting to shoot Valis. by @vlvasilev [#8197]
+- `[OPERATOR]` A bug causing the gardenlet to panic when a ETCD encryption key rotation operation is triggered for a hibernated Shoot is now fixed. Now, triggering ETCD encryption key rotation or ServiceAccount signing key rotation is forbidden when the Shoot is in waking up phase. by @shafeeqes [#8184]
+## 🏃 Others
+
+- `[OPERATOR]` `nginx-ingress-controller` image is updated to `v1.8.1` for Kubernetes`v1.24+` clusters. by @shafeeqes [#8205]
+- `[OPERATOR]` The `eu.gcr.io/gardener-project/gardener/autoscaler/cluster-autoscaler` image has been updated from `v1.26.2` to `v1.27.0` (for Kubernetes `>= 1.27`). by @rishabh-11 [#8187]
+- `[OPERATOR]` The `shoots/adminkubeconfig` relies on the `ca-client` `InternalSecret` only and does not use the `ShootState` object anymore. by @timebertt [#8195]
+- `[OPERATOR]` Update Prometheus job `tunnel-probe-apiserver-proxy` to fix for HA VPN mode by @Sallyan [#7954]
+- `[OPERATOR]` Update `vertical-pod-autoscaler` to `v0.14.0`. by @voelzmo [#8166]
+- `[DEVELOPER]` Go version is updated to 1.20.6. by @oliver-goetz [#8224]
+# [gardener/etcd-druid]
+
+## ⚠️ Breaking Changes
+
+- `[OPERATOR]` :warning: `etcd.Status.ClusterSize`, `etcd.Status.ServiceName`, `etcd.Status.UpdatedReplicas` have been marked as deprecated and users should refrain from depending on these fields. by @shreyas-s-rao [gardener/etcd-druid#637]
+## 🐛 Bug Fixes
+
+- `[OPERATOR]` `AllMembersReady` condition has now been fixed to eventually show the correct overall readiness of an etcd cluster. by @shreyas-s-rao [gardener/etcd-druid#637]
+## 🏃 Others
+
+- `[OPERATOR]` Print build version and go runtime info. by @shreyas-s-rao [gardener/etcd-druid#637]
+- `[DEVELOPER]` Add CVE categorization for etcd-druid. by @shreyas-s-rao [gardener/etcd-druid#637]
+# [gardener/etcd-backup-restore]
+
+## 🏃 Others
+
+- `[OPERATOR]` Bump alpine base version for Docker build to `3.18.2`.  by @shreyas-s-rao [gardener/etcd-backup-restore#638]
+- `[DEVELOPER]` Add CVE categorization for etcd-backup-restore. by @shreyas-s-rao [gardener/etcd-backup-restore#644]
+
+# Docker Images
+admission-controller: `eu.gcr.io/gardener-project/gardener/admission-controller:v1.75.0`
+apiserver: `eu.gcr.io/gardener-project/gardener/apiserver:v1.75.0`
+controller-manager: `eu.gcr.io/gardener-project/gardener/controller-manager:v1.75.0`
+scheduler: `eu.gcr.io/gardener-project/gardener/scheduler:v1.75.0`
+operator: `eu.gcr.io/gardener-project/gardener/operator:v1.75.0`
+gardenlet: `eu.gcr.io/gardener-project/gardener/gardenlet:v1.75.0`
+resource-manager: `eu.gcr.io/gardener-project/gardener/resource-manager:v1.75.0`
+
+</details>
+
+<details>
+<summary><b>Update gardenlet to <code>1.75.0</code></b></summary>
+
+# [gardener/gardener]
+
+## ⚠️ Breaking Changes
+
+- `[DEVELOPER]` Added new option to `./hack/generate-controller-registration.sh` script `[-e, --pod-security-enforce[=pod-security-standard]` which sets the `security.gardener.cloud/pod-security-enforce` annotation of the generated `ControllerRegistration`. When not set this option defaults to `baseline`. by @AleksandarSavchev [#8099]
+- `[DEVELOPER]` Shoot fields `.spec.dns.providers[].domains` and `.spec.dns.providers[].zones` are now deprecated and expected to be removed in version `v1.87`. Please plan ahead to drop using those fields in extensions. by @timuthy [#8199]
+- `[DEVELOPER]` Usage of the deprecated injection mechanisms in controller-runtime (like `InjectScheme`, `InjectLogger`, `InjectConfig`, `InjectClient`, `InjectCache` etc) as well as package `extensions/pkg/controller/common` are dropped in a preparation to upgrade to the next version where injection is removed entirely. With this, `Inject*` functions on controllers, predicates, actuators, delegates, and friends are not called anymore. When upgrading the `gardener/gardener` dependency to this version, all injection implementations need to be removed. As a replacement, you can get the needed clients and similar from the manager during initialisation of the component. by @ary1992 [#8217]
+- `[OPERATOR]` `gardener-operator` is now managing the `nginx-ingress-controller` and `nginx-ingress-k8s-backend` components. Make sure that your `Garden` resource specifies the [`.spec.runtimeCluster.ingress` section](https://github.com/gardener/gardener/blob/ee3dd5d177be1bf3435534f194e25cef67177650/example/operator/20-garden.yaml#L16-L22). by @StenlyTU [#7945]
+- `[OPERATOR]` Support for `nip.io` shoot domains is discontinued. by @timuthy [#8199]
+- `[USER]` Adding Gardener-managed finalizers (e.g., `gardener` or `gardener.cloud/reference-protection`) to the `Shoot` on creation is now forbidden.  by @shafeeqes [#8209]
+- `[USER]` Shoot fields `.spec.dns.providers[].domains` and `.spec.dns.providers[].zones` are now deprecated and expected to be removed in version `v1.87`. Please use the extensions' configuration to configure providers with this ability. by @timuthy [#8199]
+- `[DEPENDENCY]` `github.com/gardener/gardener/pkg/utils/gardener.ShootAccessSecret` was renamed to `AccessSecret`. by @timebertt [#8204]
+## ✨ New Features
+
+- `[OPERATOR]` Added pod security enforce level `baseline` label to Istio-related namespaces. The `garden` and shoot namespaces have the `privileged` level. For extension namespaces, the new `security.gardener.cloud/pod-security-standard-enforce` annotation on  `ControllerRegistration` resources specifies the level. When set, the `extension` namespace is created with `pod-security.kubernetes.io/enforce` label set to `security.gardener.cloud/pod-security-standard-enforce`'s value. by @AleksandarSavchev [#8099]
+- `[USER]` Gardener now allows to omit or to only partially define Kubernetes versions in `Shoot`s. The version will automatically be defaulted to the latest minor and/or patch version found in the linked `CloudProfile`. by @timuthy [#8198]
+- `[USER]` A new optional constraint `CRDsWithProblematicConversionWebhooks` is introduced in the `Shoot` status. This constraint indicates that there is at least one CRD in the cluster which has multiple stored versions and a conversion webhook configured, which could break the reconciliation flow of a `Shoot` in some cases. by @shafeeqes [#8159]
+- `[USER]` It is now possible to reference `Secret`s containing kubeconfigs for admission plugins in `Shoot`s. The referenced `Secret` must be referenced in`.spec.resources` as well as in `.spec.kubernetes.kubeAPIServer.admissionPlugins[].kubeconfigSecretName`. by @acumino [#8110]
+## 🐛 Bug Fixes
+
+- `[OPERATOR]` Fix network annotations to allow fluent-bit connecting to shoot Valis. by @vlvasilev [#8197]
+- `[OPERATOR]` A bug causing the gardenlet to panic when a ETCD encryption key rotation operation is triggered for a hibernated Shoot is now fixed. Now, triggering ETCD encryption key rotation or ServiceAccount signing key rotation is forbidden when the Shoot is in waking up phase. by @shafeeqes [#8184]
+## 🏃 Others
+
+- `[OPERATOR]` `nginx-ingress-controller` image is updated to `v1.8.1` for Kubernetes`v1.24+` clusters. by @shafeeqes [#8205]
+- `[OPERATOR]` The `eu.gcr.io/gardener-project/gardener/autoscaler/cluster-autoscaler` image has been updated from `v1.26.2` to `v1.27.0` (for Kubernetes `>= 1.27`). by @rishabh-11 [#8187]
+- `[OPERATOR]` The `shoots/adminkubeconfig` relies on the `ca-client` `InternalSecret` only and does not use the `ShootState` object anymore. by @timebertt [#8195]
+- `[OPERATOR]` Update Prometheus job `tunnel-probe-apiserver-proxy` to fix for HA VPN mode by @Sallyan [#7954]
+- `[OPERATOR]` Update `vertical-pod-autoscaler` to `v0.14.0`. by @voelzmo [#8166]
+- `[DEVELOPER]` Go version is updated to 1.20.6. by @oliver-goetz [#8224]
+# [gardener/etcd-druid]
+
+## ⚠️ Breaking Changes
+
+- `[OPERATOR]` :warning: `etcd.Status.ClusterSize`, `etcd.Status.ServiceName`, `etcd.Status.UpdatedReplicas` have been marked as deprecated and users should refrain from depending on these fields. by @shreyas-s-rao [gardener/etcd-druid#637]
+## 🐛 Bug Fixes
+
+- `[OPERATOR]` `AllMembersReady` condition has now been fixed to eventually show the correct overall readiness of an etcd cluster. by @shreyas-s-rao [gardener/etcd-druid#637]
+## 🏃 Others
+
+- `[OPERATOR]` Print build version and go runtime info. by @shreyas-s-rao [gardener/etcd-druid#637]
+- `[DEVELOPER]` Add CVE categorization for etcd-druid. by @shreyas-s-rao [gardener/etcd-druid#637]
+# [gardener/etcd-backup-restore]
+
+## 🏃 Others
+
+- `[OPERATOR]` Bump alpine base version for Docker build to `3.18.2`.  by @shreyas-s-rao [gardener/etcd-backup-restore#638]
+- `[DEVELOPER]` Add CVE categorization for etcd-backup-restore. by @shreyas-s-rao [gardener/etcd-backup-restore#644]
+
+# Docker Images
+admission-controller: `eu.gcr.io/gardener-project/gardener/admission-controller:v1.75.0`
+apiserver: `eu.gcr.io/gardener-project/gardener/apiserver:v1.75.0`
+controller-manager: `eu.gcr.io/gardener-project/gardener/controller-manager:v1.75.0`
+scheduler: `eu.gcr.io/gardener-project/gardener/scheduler:v1.75.0`
+operator: `eu.gcr.io/gardener-project/gardener/operator:v1.75.0`
+gardenlet: `eu.gcr.io/gardener-project/gardener/gardenlet:v1.75.0`
+resource-manager: `eu.gcr.io/gardener-project/gardener/resource-manager:v1.75.0`
+
+</details>
