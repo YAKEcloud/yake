@@ -57,8 +57,7 @@ install_kubectl() {
   VERSION=v0.27.3
 
   if _isStale $KUBECTL $VERSION; then
-    # curl -Lo $KUBECTL "https://dl.k8s.io/release/${VERSION/v0/v1}/bin/$TOOLS_KERNEL/$TOOLS_ARCH/kubectl"
-    curl -Lo $KUBECTL "https://nextcloud.23technologies.cloud/s/KHg4G4F2D36fLoT/download?path=/${VERSION/v0/v1}/bin/$TOOLS_KERNEL/$TOOLS_ARCH/&files=kubectl"
+    curl -Lo $KUBECTL "https://dev-tools-proxy.ingress.23ke-releases.23t-prod.okeanos.dev/kubectl/release/${VERSION/v0/v1}/bin/$TOOLS_KERNEL/$TOOLS_ARCH/kubectl"
     chmod +x $KUBECTL
 
     _setVersion $KUBECTL $VERSION
