@@ -36,7 +36,7 @@ global:
         image:
             pullPolicy: IfNotPresent
             repository: eu.gcr.io/gardener-project/gardener/admission-controller
-            tag: v1.74.1
+            tag: v1.75.0
         replicaCount: 3
         resources:
             requests:
@@ -171,7 +171,7 @@ global:
         image:
             pullPolicy: IfNotPresent
             repository: eu.gcr.io/gardener-project/gardener/apiserver
-            tag: v1.74.1
+            tag: v1.75.0
         insecureSkipTLSVerify: false
         livenessProbe:
             enable: true
@@ -291,7 +291,7 @@ global:
         image:
             pullPolicy: IfNotPresent
             repository: eu.gcr.io/gardener-project/gardener/controller-manager
-            tag: v1.74.1
+            tag: v1.75.0
         replicaCount: 1
         resources:
             requests:
@@ -354,7 +354,7 @@ global:
         image:
             pullPolicy: IfNotPresent
             repository: eu.gcr.io/gardener-project/gardener/scheduler
-            tag: v1.74.1
+            tag: v1.75.0
         replicaCount: 1
         resources:
             requests:
