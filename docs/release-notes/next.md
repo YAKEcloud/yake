@@ -51,3 +51,22 @@ hide_table_of_contents: true
 - `[OPERATOR]` Now the vali ingress definition points to the shoot logging service. by @vpnachev [#8254]
 
 </details>
+
+<details>
+<summary><b>Update shoot-cert-service to <code>1.34.0</code></b></summary>
+
+# [gardener/cert-management]
+
+## 🐛 Bug Fixes
+
+- `[USER]` Allow to specify shoot issuer in annotation `cert.gardener.cloud/issuer annotation` with format `namespace/name`. by @MartinWeindel [gardener/cert-management#132]
+# [gardener/gardener-extension-shoot-cert-service]
+
+## ⚠️ Breaking Changes
+
+- `[OPERATOR]` `extension-shoot-cert-service` no longer supports Shoots with Кubernetes version < 1.22. by @shafeeqes [#169]
+## 🏃 Others
+
+- `[OPERATOR]` Updated builder image from `golang:1.20.5` to `golang:1.20.6` by @MartinWeindel [#173]
+
+</details>
