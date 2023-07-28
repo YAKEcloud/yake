@@ -1,6 +1,9 @@
 gardenlet:
   imageVectorOriginal:
     images:
+      - name: gardener-apiserver
+        repository: eu.gcr.io/gardener-project/gardener/apiserver
+        sourceRepository: github.com/gardener/gardener
       - name: gardenlet
         repository: eu.gcr.io/gardener-project/gardener/gardenlet
         sourceRepository: github.com/gardener/gardener
@@ -26,7 +29,7 @@ gardenlet:
       - name: dependency-watchdog
         repository: eu.gcr.io/gardener-project/gardener/dependency-watchdog
         sourceRepository: github.com/gardener/dependency-watchdog
-        tag: v1.1.0
+        tag: v1.1.1
       - labels:
           - name: gardener.cloud/cve-categorisation
             value:
