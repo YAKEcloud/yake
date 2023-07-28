@@ -1,11 +1,4 @@
 apiVersion: v2
-dependencies:
-- condition: utils-common.enabled
-  name: utils-common
-  repository: ""
-- condition: utils-templates.enabled
-  name: utils-templates
-  repository: ""
 description: A Helm chart to deploy the Gardener runtime related resources
 name: runtime
-version: 1.75.1
+version: 1.76.0
