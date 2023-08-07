@@ -35,6 +35,9 @@ podAnnotations: {}
 # ref: https://kubernetes.io/docs/concepts/overview/working-with-objects/labels/
 podLabels: {}
 
+# Number of old history to retain to allow rollback (If not set, default Kubernetes value is set to 10)
+# revisionHistoryLimit: 1
+
 # Resource requests/limits to specify for the Velero deployment.
 # https://velero.io/docs/v1.6/customize-installation/#customize-resource-requests-and-limits
 resources:
@@ -179,6 +182,12 @@ metrics:
     enabled: false
     annotations: {}
     additionalLabels: {}
+
+    # metrics.serviceMonitor.metricRelabelings Specify Metric Relabelings to add to the scrape endpoint
+    # ref: https://github.com/coreos/prometheus-operator/blob/master/Documentation/api.md#relabelconfig
+    # metricRelabelings: []
+    # metrics.serviceMonitor.relabelings [array] Prometheus relabeling rules
+    # relabelings: []
     # ServiceMonitor namespace. Default to Velero namespace.
     # namespace:
     # ServiceMonitor connection scheme. Defaults to HTTP.
@@ -198,6 +207,7 @@ metrics:
     # tlsConfig: {}
 
   prometheusRule:
+    autodetect: true
     enabled: false
     # Additional labels to add to deployed PrometheusRule
     additionalLabels: {}
