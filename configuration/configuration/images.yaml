@@ -2393,7 +2393,7 @@ shoot-dns-service:
       - name: dns-controller-manager
         repository: eu.gcr.io/gardener-project/dns-controller-manager
         sourceRepository: github.com/gardener/external-dns-management
-        tag: v0.15.5
+        tag: v0.15.8
 runtime-gvisor:
   imageVectorOriginal:
     images:
