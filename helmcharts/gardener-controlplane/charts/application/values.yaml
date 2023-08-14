@@ -36,7 +36,7 @@ global:
         image:
             pullPolicy: IfNotPresent
             repository: eu.gcr.io/gardener-project/gardener/admission-controller
-            tag: v1.76.2
+            tag: v1.77.0
         replicaCount: 3
         resources:
             requests:
@@ -53,7 +53,6 @@ global:
             enabled: false
             expirationSeconds: 43200
         vpa: false
-    alerting: []
     apiserver:
         admission:
             mutatingWebhook:
@@ -171,7 +170,7 @@ global:
         image:
             pullPolicy: IfNotPresent
             repository: eu.gcr.io/gardener-project/gardener/apiserver
-            tag: v1.76.2
+            tag: v1.77.0
         insecureSkipTLSVerify: false
         livenessProbe:
             enable: true
@@ -291,7 +290,7 @@ global:
         image:
             pullPolicy: IfNotPresent
             repository: eu.gcr.io/gardener-project/gardener/controller-manager
-            tag: v1.76.2
+            tag: v1.77.0
         replicaCount: 1
         resources:
             requests:
@@ -303,7 +302,6 @@ global:
             enabled: false
             expirationSeconds: 43200
         vpa: false
-    defaultDomains: []
     deployment:
         virtualGarden:
             admission:
@@ -321,10 +319,6 @@ global:
             scheduler:
                 user:
                     name: ""
-    internalDomain:
-        credentials: {}
-        domain: example.com
-        provider: aws-route53
     rbac:
         seedAuthorizer:
             enabled: false
@@ -354,7 +348,7 @@ global:
         image:
             pullPolicy: IfNotPresent
             repository: eu.gcr.io/gardener-project/gardener/scheduler
-            tag: v1.76.2
+            tag: v1.77.0
         replicaCount: 1
         resources:
             requests:
