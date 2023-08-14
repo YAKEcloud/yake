@@ -91,7 +91,7 @@ else
 fi
 
 git add .
-git commit --allow-empty -m "$tag"
+git commit --allow-empty -m "[skip ci] $tag"
 git tag "$tag" -f
 git push -u origin "$branch"
 git push -u origin "$tag" -f
