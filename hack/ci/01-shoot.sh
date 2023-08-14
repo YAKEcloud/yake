@@ -19,10 +19,6 @@ echo "Shoot creation succeeded"
 $KUBECTL get secret "$SHOOT".kubeconfig -o go-template='{{.data.kubeconfig|base64decode}}' > hack/ci/secrets/shoot-kubeconfig.yaml
 export KUBECONFIG=hack/ci/secrets/shoot-kubeconfig.yaml
 
-# redirect hcloud requests:
-$KUBECTL apply -f https://raw.githubusercontent.com/23technologies/debug-hcloud-api/5852b622e15760a6f69cd60f50cda3d6834e0cf3/k8s/mutatingwebhook.yaml
-
-
 RCLONE_AZUREBLOB_KEY=$($KUBECTL --kubeconfig hack/ci/secrets/gardener-kubeconfig.yaml get secret azure-blob-storage-key -o go-template='{{.data.accountKey|base64decode}}')
 
 cat << EOF >> hack/ci/handy.sh
