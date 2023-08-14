@@ -128,7 +128,7 @@ jobs:
     env:
       version: ${{ github.event.inputs.version }}
     outputs:
-      version: {{ steps.version.outputs.version }}
+      version: ${{ steps.version.outputs.version }}
     steps:
       - uses: actions/setup-node@v3
         with:
