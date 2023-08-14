@@ -24,6 +24,7 @@ spec:
         name: 23ke
         namespace: flux-system
       interval: 1m
+      reconcileStrategy: Revision
   valuesFrom:
     - kind: Secret
       name: garden-content-base-values
@@ -31,3 +32,13 @@ spec:
     - kind: Secret
       name: gardenlet-base-values
       optional: false
+      # also feed in the gardener-values as several secrets were removed from the gardener-controlplane chart,
+      # (https://github.com/gardener/gardener/pull/8308) but are still required in 23ke as we use the basecluster
+      # as initial seed cluster
+    - kind: Secret
+      name: gardener-base-values
+      optional: false
+    - kind: Secret
+      name: gardener-values
+      optional: false
+
