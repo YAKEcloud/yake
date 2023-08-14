@@ -11,7 +11,7 @@ cp -r $tmpDir/* .
 
 if [[ $(git status --porcelain) ]]; then
   git add .
-  git commit -m "Add release $tag"
+  git commit -m "Add release $tag" --allow-empty
 
   git tag $tag
   git push
