@@ -54,7 +54,7 @@ install_flux() {
 
 install_kubectl() {
   # renovate: datasource=github-tags depName=kubernetes/kubectl
-  VERSION=v0.27.4
+  VERSION=v0.28.0
 
   if _isStale $KUBECTL $VERSION; then
     curl -Lo $KUBECTL "https://dev-tools-proxy.ingress.23ke-releases.23t-prod.okeanos.dev/kubectl/release/${VERSION/v0/v1}/bin/$TOOLS_KERNEL/$TOOLS_ARCH/kubectl"
