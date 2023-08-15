@@ -1414,35 +1414,7 @@ provider-aws:
         name: terraformer
         repository: eu.gcr.io/gardener-project/gardener/terraformer-aws
         sourceRepository: github.com/gardener/terraformer
-        tag: v2.22.0
-      - labels:
-          - name: gardener.cloud/cve-categorisation
-            value:
-              authentication_enforced: false
-              availability_requirement: low
-              confidentiality_requirement: high
-              integrity_requirement: high
-              network_exposure: protected
-              user_interaction: gardener-operator
-        name: cloud-controller-manager
-        repository: eu.gcr.io/gardener-project/kubernetes/cloud-provider-aws
-        sourceRepository: github.com/gardener/cloud-provider-aws
-        tag: v1.20.15
-        targetVersion: 1.20.x
-      - labels:
-          - name: gardener.cloud/cve-categorisation
-            value:
-              authentication_enforced: false
-              availability_requirement: low
-              confidentiality_requirement: high
-              integrity_requirement: high
-              network_exposure: protected
-              user_interaction: gardener-operator
-        name: cloud-controller-manager
-        repository: eu.gcr.io/gardener-project/kubernetes/cloud-provider-aws
-        sourceRepository: github.com/gardener/cloud-provider-aws
-        tag: v1.21.12
-        targetVersion: 1.21.x
+        tag: v2.23.0
       - labels:
           - name: gardener.cloud/cve-categorisation
             value:
@@ -1579,6 +1551,19 @@ provider-aws:
         repository: eu.gcr.io/gardener-project/gardener/aws-custom-route-controller
         sourceRepository: github.com/gardener/aws-custom-route-controller
         tag: v0.7.0
+      - labels:
+          - name: gardener.cloud/cve-categorisation
+            value:
+              authentication_enforced: false
+              availability_requirement: low
+              confidentiality_requirement: high
+              integrity_requirement: high
+              network_exposure: protected
+              user_interaction: gardener-operator
+        name: aws-load-balancer-controller
+        repository: public.ecr.aws/eks/aws-load-balancer-controller
+        sourceRepository: github.com/kubernetes-sigs/aws-load-balancer-controller
+        tag: v2.5.3
       - labels:
           - name: gardener.cloud/cve-categorisation
             value:

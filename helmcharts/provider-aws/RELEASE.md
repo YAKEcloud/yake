@@ -1,25 +1,22 @@
 # [gardener/gardener-extension-provider-aws]
 
-## ✨ New Features
-
-- `[DEVELOPER]` This extension now uses the simplified `NetworkPolicy` approach for allowing traffic to its webhook server from `kube-apiserver`s of shoot clusters. by @rfranzke [#772]
-- `[USER]` The provider-aws extension does now support shoot clusters with Kubernetes version 1.27. You should consider the [Kubernetes release notes](https://github.com/kubernetes/kubernetes/blob/master/CHANGELOG/CHANGELOG-1.27.md) before upgrading to 1.27.  by @ary1992 [#759]
 ## ⚠️ Breaking Changes
 
-- `[OPERATOR]` With https://github.com/gardener/gardener-extension-provider-aws/pull/337 provider-aws migrated the volumesnapshot CRDs to a new dedicated ManagedResources. provider-aws does now remove the ignored CRDs. by @ialidzhikov [#752]
-- Before updating to this version of provider-aws, make sure that the migration of the volumesnapshot CRDs from the `extension-controlplane-shoot` to the `extension-controlplane-shoot-crds`  ManagedResource completed. If the migration did not complete yet, GRM will interpret the removal of the CRDs as deletion and will delete the CRDs.
+- `[OPERATOR]` `provider-aws` no longer supports Shoots or Seeds with Кubernetes version < 1.22. by @shafeeqes [#771]
+- `[USER]` If the AWS Load Balancer Controller is deployed, the user used by the cloudprovider needs additional permissions. See last section in this example AWS IAM policy document [here](https://github.com/gardener/gardener-extension-provider-aws/blob/master/docs/usage-as-end-user.md#permissions) for more details. by @MartinWeindel [#717]
+## ✨ New Features
+
+- `[OPERATOR]` The `gardener-extension-admission-aws` chart allows to optionally configure a projected volume based kubeconfig. by @timuthy [#791]
+- `[DEVELOPER]` This extension is now compatible with the `MachineControllerManagerDeployment` feature gate of `gardenlet`. by @rfranzke [#774]
+- `[USER]` The AWS Load Balancer Controller is deployed into the control plane if enabled with `spec.provider.controlPlaneConfig.loadBalancerController.enabled=true` in the shoot manifest. by @MartinWeindel [#717]
 ## 🏃 Others
 
-- `[OPERATOR]` Old and obsolete logging configurations are removed. by @vlvasilev [#765]
-- `[DEPENDENCY]` The following dependencies were updated: by @dimityrmirchev [#768]
-  - registry.k8s.io/sig-storage/csi-provisioner v3.4.0 -> v3.4.1
-- `[DEVELOPER]` All code related to the removed `APIServerSNI` feature gate of `gardenlet` has been removed from this extension. by @rfranzke [#773]
-## 🐛 Bug Fixes
+- `[OPERATOR]` Infrastructure dualstack support can be enabled via `spec.provider.infrastructureConfig.dualStack.enabled: true` in the shoot.yaml. by @DockToFuture [#778]
+- `[OPERATOR]` add a sustainable way to get available image AMIs for the test by @tedteng [#715]
+- `[OPERATOR]` Remove limits from system critical components by @kon-angelo [#787]
+# [gardener/terraformer]
 
-- `[OPERATOR]` Fix the name of the aws-csi-volume-modifier container the in the respective VPA resource. by @bd3lage [#763]
-- `[OPERATOR]` Handle S3 bucket policy IAM ARN for China and GovCloud (US) regions. by @shreyas-s-rao [#766]
-# [gardener/machine-controller-manager]
+## 🏃 Others
 
-## 🐛 Bug Fixes
-
-- `[OPERATOR]` Included `UnavailableReplicas` in determining if a machine deployment status update is needed by @ialidzhikov [gardener/machine-controller-manager#834]
+- `[OPERATOR]` Golang has been updated to v1.20.5 by @kon-angelo [gardener/terraformer#138]
+- `[OPERATOR]` Alpine has been updated to v1.18.2 by @kon-angelo [gardener/terraformer#138]
