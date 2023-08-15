@@ -1073,35 +1073,7 @@ provider-azure:
         name: terraformer
         repository: eu.gcr.io/gardener-project/gardener/terraformer-azure
         sourceRepository: github.com/gardener/terraformer
-        tag: v2.22.0
-      - labels:
-          - name: gardener.cloud/cve-categorisation
-            value:
-              authentication_enforced: false
-              availability_requirement: low
-              confidentiality_requirement: high
-              integrity_requirement: high
-              network_exposure: protected
-              user_interaction: gardener-operator
-        name: cloud-controller-manager
-        repository: eu.gcr.io/gardener-project/kubernetes/cloud-provider-azure
-        sourceRepository: github.com/gardener/cloud-provider-azure
-        tag: v1.20.15
-        targetVersion: 1.20.x
-      - labels:
-          - name: gardener.cloud/cve-categorisation
-            value:
-              authentication_enforced: false
-              availability_requirement: low
-              confidentiality_requirement: high
-              integrity_requirement: high
-              network_exposure: protected
-              user_interaction: gardener-operator
-        name: cloud-controller-manager
-        repository: eu.gcr.io/gardener-project/kubernetes/cloud-provider-azure
-        sourceRepository: github.com/gardener/cloud-provider-azure
-        tag: v1.21.12
-        targetVersion: 1.21.x
+        tag: v2.23.0
       - labels:
           - name: gardener.cloud/cve-categorisation
             value:
