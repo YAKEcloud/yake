@@ -662,21 +662,7 @@ provider-openstack:
         name: terraformer
         repository: eu.gcr.io/gardener-project/gardener/terraformer-openstack
         sourceRepository: github.com/gardener/terraformer
-        tag: v2.22.0
-      - labels:
-          - name: gardener.cloud/cve-categorisation
-            value:
-              authentication_enforced: false
-              availability_requirement: low
-              confidentiality_requirement: high
-              integrity_requirement: high
-              network_exposure: protected
-              user_interaction: gardener-operator
-        name: cloud-controller-manager
-        repository: eu.gcr.io/gardener-project/3rd/k8scloudprovider/openstack-cloud-controller-manager
-        sourceRepository: github.com/kubernetes/cloud-provider-openstack
-        tag: v1.21.0
-        targetVersion: < 1.22
+        tag: v2.23.0
       - labels:
           - name: gardener.cloud/cve-categorisation
             value:
@@ -787,34 +773,6 @@ provider-openstack:
         repository: eu.gcr.io/gardener-project/gardener/machine-controller-manager-provider-openstack
         sourceRepository: github.com/gardener/machine-controller-manager-provider-openstack
         tag: v0.14.0
-      - labels:
-          - name: gardener.cloud/cve-categorisation
-            value:
-              authentication_enforced: false
-              availability_requirement: low
-              confidentiality_requirement: high
-              integrity_requirement: high
-              network_exposure: protected
-              user_interaction: end-user
-        name: csi-driver-cinder
-        repository: eu.gcr.io/gardener-project/3rd/k8scloudprovider/cinder-csi-plugin
-        sourceRepository: github.com/kubernetes/cloud-provider-openstack
-        tag: v1.20.3
-        targetVersion: 1.20.x
-      - labels:
-          - name: gardener.cloud/cve-categorisation
-            value:
-              authentication_enforced: false
-              availability_requirement: low
-              confidentiality_requirement: high
-              integrity_requirement: high
-              network_exposure: protected
-              user_interaction: end-user
-        name: csi-driver-cinder
-        repository: eu.gcr.io/gardener-project/3rd/k8scloudprovider/cinder-csi-plugin
-        sourceRepository: github.com/kubernetes/cloud-provider-openstack
-        tag: v1.21.0
-        targetVersion: 1.21.x
       - labels:
           - name: gardener.cloud/cve-categorisation
             value:
