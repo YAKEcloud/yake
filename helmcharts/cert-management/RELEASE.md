@@ -1,8 +1,8 @@
 # [gardener/cert-management]
 
-## 🐛 Bug Fixes
+## ⚠️ Breaking Changes
 
-- `[USER]` Allow to specify shoot issuer in annotation `cert.gardener.cloud/issuer annotation` with format `namespace/name`. by @MartinWeindel [#132]
+- `[OPERATOR]` Support of CRDs of version `apiextensions.k8s.io/v1beta1` is dropped. by @acumino [#133]
 ## 🏃 Others
 
-- `[OPERATOR]` Updated builder image from `golang:1.20.5` to `golang:1.20.6` by @MartinWeindel [#132]
+- `[OPERATOR]` Bump golang from `1.20.6` to `1.20.7` by @MartinWeindel [#134]
