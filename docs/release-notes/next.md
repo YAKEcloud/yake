@@ -164,3 +164,10 @@ hide_table_of_contents: true
 - `[OPERATOR]` Fix optional deployment of CRDs which was broken with release v0.10.8 by @MartinWeindel [#135]
 
 </details>
+
+<details>
+<summary><b>Update cert-management to <code>0.10.10</code></b></summary>
+
+no release notes available
+
+</details>
