@@ -1,8 +1,5 @@
 # [gardener/cert-management]
 
-## ⚠️ Breaking Changes
+## 🐛 Bug Fixes
 
-- `[OPERATOR]` Support of CRDs of version `apiextensions.k8s.io/v1beta1` is dropped. by @acumino [#133]
-## 🏃 Others
-
-- `[OPERATOR]` Bump golang from `1.20.6` to `1.20.7` by @MartinWeindel [#134]
+- `[OPERATOR]` Fix optional deployment of CRDs which was broken with release v0.10.8 by @MartinWeindel [#135]
