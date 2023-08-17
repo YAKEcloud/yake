@@ -153,3 +153,14 @@ hide_table_of_contents: true
 - `[OPERATOR]` Bump golang from `1.20.6` to `1.20.7` by @MartinWeindel [#134]
 
 </details>
+
+<details>
+<summary><b>Update cert-management to <code>0.10.9</code></b></summary>
+
+# [gardener/cert-management]
+
+## 🐛 Bug Fixes
+
+- `[OPERATOR]` Fix optional deployment of CRDs which was broken with release v0.10.8 by @MartinWeindel [#135]
+
+</details>
