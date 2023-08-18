@@ -171,3 +171,14 @@ hide_table_of_contents: true
 no release notes available
 
 </details>
+
+<details>
+<summary><b>Update provider-azure to <code>1.38.1</code></b></summary>
+
+# [gardener/gardener-extension-provider-azure]
+
+## 🏃 Others
+
+- `[OPERATOR]` Bastion instances now use the latest ubuntu server 22.04 LTS version  by @kon-angelo [#724]
+
+</details>
