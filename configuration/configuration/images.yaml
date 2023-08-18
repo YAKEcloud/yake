@@ -1916,7 +1916,7 @@ provider-alicloud:
       - name: terraformer
         repository: eu.gcr.io/gardener-project/gardener/terraformer-alicloud
         sourceRepository: github.com/gardener/terraformer
-        tag: v2.22.0
+        tag: v2.23.0
       - labels:
           - name: gardener.cloud/cve-categorisation
             value:
