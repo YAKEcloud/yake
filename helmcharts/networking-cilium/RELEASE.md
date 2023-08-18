@@ -2,11 +2,12 @@
 
 ## ⚠️ Breaking Changes
 
-- `[OPERATOR]` `networking-cilium` no longer supports Shoots with Кubernetes version < 1.22. by @shafeeqes [#194]
+- `[OPERATOR]` The `security.gardener.cloud/pod-security-enforce` annotation in the ControllerRegistration is set to `baseline`. With this, the pods running in the extension namespace should comply with `baseline` pod-security standard. by @shafeeqes [#199]
 ## ✨ New Features
 
-- `[DEVELOPER]` This extension now uses the simplified `NetworkPolicy` approach for allowing traffic to its webhook server from `kube-apiserver`s of shoot clusters. by @rfranzke [#193]
+- `[OPERATOR]` The `gardener-extension-admission-cilium` chart allows to optionally configure a projected volume based kubeconfig. by @timuthy [#208]
 ## 🏃 Others
 
-- `[OPERATOR]` bpf-policy-map-max value is increased to 65536. by @DockToFuture [#197]
-- `[OPERATOR]` Update to cilium `v1.13.4`. by @DockToFuture [#196]
+- `[OPERATOR]` Allow propagating pod routes to nodes without overlay network by specifying `shoot.spec.networking.providerConfig.overlay.createPodRoutes: true` by @ScheererJ [#203]
+- `[OPERATOR]` Update cilium to `v1.14.0`. by @DockToFuture [#206]
+- `[OPERATOR]` Update to cilium `v1.14.1`. by @DockToFuture [#209]
