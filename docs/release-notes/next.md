@@ -182,3 +182,20 @@ no release notes available
 - `[OPERATOR]` Bastion instances now use the latest ubuntu server 22.04 LTS version  by @kon-angelo [#724]
 
 </details>
+
+<details>
+<summary><b>Update networking-calico to <code>1.36.0</code></b></summary>
+
+# [gardener/gardener-extension-networking-calico]
+
+## ⚠️ Breaking Changes
+
+- `[OPERATOR]` The `security.gardener.cloud/pod-security-enforce` annotation in the ControllerRegistration is set to `baseline`. With this, the pods running in the extension namespace should comply with `baseline` pod-security standard. by @shafeeqes [#280]
+## ✨ New Features
+
+- `[OPERATOR]` The `gardener-extension-admission-calico` chart allows to optionally configure a projected volume based kubeconfig. by @timuthy [#289]
+## 🏃 Others
+
+- `[OPERATOR]` Allow propagating pod routes to nodes without overlay network by specifying `shoot.spec.networking.providerConfig.overlay.createPodRoutes: true` by @ScheererJ [#285]
+
+</details>
