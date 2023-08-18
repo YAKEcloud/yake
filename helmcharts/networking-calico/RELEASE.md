@@ -2,9 +2,10 @@
 
 ## ⚠️ Breaking Changes
 
-- `[OPERATOR]` `networking-calico` no longer supports Shoots with Кubernetes version < 1.22. by @shafeeqes [#278]
+- `[OPERATOR]` The `security.gardener.cloud/pod-security-enforce` annotation in the ControllerRegistration is set to `baseline`. With this, the pods running in the extension namespace should comply with `baseline` pod-security standard. by @shafeeqes [#280]
+## ✨ New Features
+
+- `[OPERATOR]` The `gardener-extension-admission-calico` chart allows to optionally configure a projected volume based kubeconfig. by @timuthy [#289]
 ## 🏃 Others
 
-- `[OPERATOR]` Updated calico to v3.26.1 by @ScheererJ [#273]
-- `[OPERATOR]` The obsolete logging configuration is cleaned up. by @vlvasilev [#276]
-- `[OPERATOR]` networking-calico does no longer use Gardener GCR copies for the calico images. Instead, the upstream quay.io container images are used (`quay.io/calico/node`, `quay.io/calico/cni`, `quay.io/calico/typha`, `quay.io/calico/kube-controllers`). by @ialidzhikov [#275]
+- `[OPERATOR]` Allow propagating pod routes to nodes without overlay network by specifying `shoot.spec.networking.providerConfig.overlay.createPodRoutes: true` by @ScheererJ [#285]
