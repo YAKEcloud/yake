@@ -16,4 +16,4 @@ maintainers:
 name: velero
 sources:
 - https://github.com/vmware-tanzu/velero
-version: 5.0.1
+version: 5.0.2
