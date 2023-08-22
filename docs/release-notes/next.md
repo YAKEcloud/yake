@@ -308,3 +308,21 @@ gardener-extension-admission-alicloud: `eu.gcr.io/gardener-project/gardener/exte
 - `[OPERATOR]` A bug is fixed that prevented scraping the metrics of etcd in the shoot control plane. by @gardener-ci-robot [#8372]
 
 </details>
+
+<details>
+<summary><b>Update shoot-dns-service to <code>1.38.0</code></b></summary>
+
+# [gardener/gardener-extension-shoot-dns-service]
+
+## ✨ New Features
+
+- `[OPERATOR]` The `gardener-extension-admission-shoot-dns-service` chart allows to optionally configure a projected volume based kubeconfig. by @timuthy [#232]
+## 🐛 Bug Fixes
+
+- `[USER]` Fail if reading secret for external provider fails. by @MartinWeindel [#231]
+## 🏃 Others
+
+- `[OPERATOR]` Bumps [github.com/gardener/gardener](https://github.com/gardener/gardener) from 1.76.2 to 1.77.0. by @dependabot[bot] [#230]
+- `[OPERATOR]` Refactor imagevector package to conform to usage pattern in gardener/gardener by @MartinWeindel [#233]
+
+</details>
