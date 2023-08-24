@@ -371,3 +371,14 @@ gardener-extension-admission-alicloud: `eu.gcr.io/gardener-project/gardener/exte
 
 
 </details>
+
+<details>
+<summary><b>Update shoot-cert-service to <code>1.36.0</code></b></summary>
+
+# [gardener/cert-management]
+
+## ✨ New Features
+
+- `[USER]` Support for preferred chains to select a certificate chain returned for a certificate request from the ACME server by @MartinWeindel [gardener/cert-management#137]
+
+</details>
