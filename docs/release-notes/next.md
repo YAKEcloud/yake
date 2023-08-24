@@ -352,3 +352,10 @@ gardener-extension-admission-alicloud: `eu.gcr.io/gardener-project/gardener/exte
 - `[OPERATOR]` Add copy of images.yaml to charts dir to resolve installation issue for landscapes using RBSC (#237) by `Martin Weindel <martin.weindel@sap.com>` [$1ca03009ff7d641f48cd95b4d32e605056b50e75]
 
 </details>
+
+<details>
+<summary><b>Update cloudprofiles to <code>0.6.5</code></b></summary>
+
+**Full Changelog**: https://github.com/gardener-community/cloudprofiles/compare/0.6.4...0.6.5
+
+</details>
