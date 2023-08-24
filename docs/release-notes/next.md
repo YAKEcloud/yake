@@ -359,3 +359,15 @@ gardener-extension-admission-alicloud: `eu.gcr.io/gardener-project/gardener/exte
 **Full Changelog**: https://github.com/gardener-community/cloudprofiles/compare/0.6.4...0.6.5
 
 </details>
+
+<details>
+<summary><b>Update cert-management to <code>0.11.0</code></b></summary>
+
+# [gardener/cert-management]
+
+## ✨ New Features
+
+- `[USER]` Support for preferred chains to select a certificate chain returned for a certificate request from the ACME server by @MartinWeindel [#137]
+
+
+</details>
