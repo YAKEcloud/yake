@@ -16,7 +16,9 @@ on:
     branches:
       - 'release-v*'
 
-concurrency: release-${{ inputs.version }}
+concurrency:
+  group: release-${{ inputs.version }}-${{ github.ref_name }}
+  cancel-in-progress: false
 
 jobs:
   release-test:
