@@ -619,3 +619,16 @@ resource-manager: `eu.gcr.io/gardener-project/gardener/resource-manager:v1.78.0`
 - `[OPERATOR]` A bug has been fixed which was causing the garbage collector in `gardener-resource-manager` to wrongfully collect `Secret`s related to `ManagedResource`s when the source and the target cluster are equal. by @gardener-ci-robot [#8403]
 
 </details>
+
+<details>
+<summary><b>Update provider-aws to <code>1.47.0</code></b></summary>
+
+# [gardener/gardener-extension-provider-aws]
+
+## 🏃 Others
+
+- `[OPERATOR]` No caching of secrets by @MartinWeindel [#790]
+- `[OPERATOR]` Update aws-ebs-csi-driver to `v1.22.0` by @kon-angelo [#794]
+- `[OPERATOR]` Update volume-modifier-for-k8s to `v0.1.2` by @kon-angelo [#794]
+
+</details>
