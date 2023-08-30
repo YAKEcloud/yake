@@ -632,3 +632,10 @@ resource-manager: `eu.gcr.io/gardener-project/gardener/resource-manager:v1.78.0`
 - `[OPERATOR]` Update volume-modifier-for-k8s to `v0.1.2` by @kon-angelo [#794]
 
 </details>
+
+<details>
+<summary><b>Update provider-hcloud to <code>0.6.21</code></b></summary>
+
+# [gardener-extension-provider-hcloud] v0.6.21
+
+</details>
