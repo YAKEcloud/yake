@@ -1,5 +1,5 @@
-# [gardener/cert-management]
+# [gardener/gardener-extension-shoot-cert-service]
 
-## ✨ New Features
+## 🐛 Bug Fixes
 
-- `[USER]` Support for preferred chains to select a certificate chain returned for a certificate request from the ACME server by @MartinWeindel [gardener/cert-management#137]
+- `[OPERATOR]` No alerting for certificates in error state by @MartinWeindel [#190]
