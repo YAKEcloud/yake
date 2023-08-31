@@ -650,3 +650,10 @@ resource-manager: `eu.gcr.io/gardener-project/gardener/resource-manager:v1.78.0`
 - `[OPERATOR]` No alerting for certificates in error state by @MartinWeindel [#190]
 
 </details>
+
+<details>
+<summary><b>Update provider-hcloud to <code>0.6.23</code></b></summary>
+
+# [gardener-extension-provider-hcloud] v0.6.23
+
+</details>
