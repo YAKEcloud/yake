@@ -639,3 +639,14 @@ resource-manager: `eu.gcr.io/gardener-project/gardener/resource-manager:v1.78.0`
 # [gardener-extension-provider-hcloud] v0.6.21
 
 </details>
+
+<details>
+<summary><b>Update shoot-cert-service to <code>1.37.0</code></b></summary>
+
+# [gardener/gardener-extension-shoot-cert-service]
+
+## 🐛 Bug Fixes
+
+- `[OPERATOR]` No alerting for certificates in error state by @MartinWeindel [#190]
+
+</details>
