@@ -78,7 +78,7 @@ install_yq() {
 
 install_mc() {
   # renovate: datasource=github-tags depName=minio/mc versioning=regex:^(?<compatibility>RELEASE\.)(?<major>\d+)-(?<minor>\d+)-(?<patch>\d+)T(?<build>\d+)-\d+-\d+Z$
-  VERSION=RELEASE.2023-08-29T22-55-06Z
+  VERSION=RELEASE.2023-08-30T08-02-26Z
 
   if _isStale $MC $VERSION; then
     curl -L -o "$MC" "https://dl.min.io/client/mc/release/$TOOLS_KERNEL-$TOOLS_ARCH/archive/mc.$VERSION"
