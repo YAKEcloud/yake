@@ -6,7 +6,7 @@ global:
         image:
             pullPolicy: IfNotPresent
             repository: eu.gcr.io/gardener-project/gardener/dashboard-terminal-bootstrapper
-            tag: 1.69.1
+            tag: 1.69.2
         livenessProbe:
             failureThreshold: 3
             initialDelaySeconds: 10
@@ -62,7 +62,7 @@ global:
         image:
             pullPolicy: IfNotPresent
             repository: eu.gcr.io/gardener-project/gardener/dashboard
-            tag: 1.69.1
+            tag: 1.69.2
         ingress:
             annotations:
                 nginx.ingress.kubernetes.io/ssl-redirect: "true"
