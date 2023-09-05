@@ -9,7 +9,7 @@ fullnameOverride: cert-controller-manager
 image:
     pullPolicy: IfNotPresent
     repository: eu.gcr.io/gardener-project/cert-controller-manager
-    tag: v0.11.0
+    tag: v0.11.1
 nameOverride: ""
 nodeSelector: {}
 podLabels: {}
