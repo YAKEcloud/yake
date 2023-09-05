@@ -60,3 +60,14 @@ hide_table_of_contents: true
 - `[USER]` Fixed error handling for manage workers and hibernation dialogs. The dialogs did not show all error messages and resetted to empty broken state on errors by @grolu [#1539]
 
 </details>
+
+<details>
+<summary><b>Update provider-azure to <code>1.38.2</code></b></summary>
+
+# [gardener/gardener-extension-provider-azure]
+
+## 🐛 Bug Fixes
+
+- `[OPERATOR]` Update `k8s.io/client-go` from `v0.26.3` to `v0.26.4` to resolve panic on health-checking special shoots. by @MartinWeindel [#728]
+
+</details>
