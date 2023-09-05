@@ -17,10 +17,13 @@ jobs:
       - uses: actions/setup-node@v3
         with:
           node-version: 18
-          cache: yarn
-          cache-dependency-path: docs/package-lock.json
       - name: Install yarn
         run: npm i -g yarn
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 18
+          cache: yarn
+          cache-dependency-path: docs/package-lock.json
       - name: Install dependencies
         working-directory: ./docs
         run: yarn install --frozen-lockfile
