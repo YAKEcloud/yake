@@ -1,5 +1,6 @@
 # [gardener/cert-management]
 
-## ✨ New Features
+## 🏃 Others
 
-- `[USER]` Support for preferred chains to select a certificate chain returned for a certificate request from the ACME server by @MartinWeindel [#137]
+- `[OPERATOR]` Disable followCNAME by default again as it was activated implicitly by github.com/go-acme/lego version upgrade by @MartinWeindel [#140]
+- `[OPERATOR]` Fix edge case of inconsistent certificate/secret: request certificate in this case. by @MartinWeindel [#138]
