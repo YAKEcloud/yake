@@ -36,3 +36,27 @@ hide_table_of_contents: true
 - `[OPERATOR]` Fix edge case of inconsistent certificate/secret: request certificate in this case. by @MartinWeindel [#138]
 
 </details>
+
+<details>
+<summary><b>Update dashboard to <code>1.69.2</code></b></summary>
+
+# [gardener/dashboard]
+
+## 🐛 Bug Fixes
+
+- `[USER]` Errors shown as notification alerts sometimes did not contain the failure reason by @grolu [#1539]
+- `[USER]` Fixed error handling for manage workers and hibernation dialogs. The dialogs did not show all error messages and resetted to empty broken state on errors by @grolu [#1539]
+
+</details>
+
+<details>
+<summary><b>Update dashboard to <code>1.69.2</code></b></summary>
+
+# [gardener/dashboard]
+
+## 🐛 Bug Fixes
+
+- `[USER]` Errors shown as notification alerts sometimes did not contain the failure reason by @grolu [#1539]
+- `[USER]` Fixed error handling for manage workers and hibernation dialogs. The dialogs did not show all error messages and resetted to empty broken state on errors by @grolu [#1539]
+
+</details>
