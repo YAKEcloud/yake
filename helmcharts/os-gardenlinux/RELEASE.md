@@ -1,6 +1,10 @@
-# [gardener-extension-os-gardenlinux]
+# [gardener/gardener-extension-os-gardenlinux]
+
+## ⚠️ Breaking Changes
+
+- `[OPERATOR]` `extension-os-gardenlinux` no longer supports Shoots with Кubernetes version < 1.22. by @shafeeqes [#113]
 ## 🏃 Others
-* *[OPERATOR]* golang version is now updated to 1.20.4. ([gardener/gardener-extension-os-gardenlinux#97](https://github.com/gardener/gardener-extension-os-gardenlinux/pull/97), [@dependabot[bot]](https://github.com/dependabot[bot]))
-* *[OPERATOR]* Update go.mod to golang 1.20. ([gardener/gardener-extension-os-gardenlinux#100](https://github.com/gardener/gardener-extension-os-gardenlinux/pull/100), [@danielfoehrKn](https://github.com/danielfoehrKn))
-* *[OPERATOR]* The following dependency is updated: ([gardener/gardener-extension-os-gardenlinux#94](https://github.com/gardener/gardener-extension-os-gardenlinux/pull/94), [@dependabot[bot]](https://github.com/dependabot[bot]))
-  * github.com/gardener/gardener: v1.66.0 -> v1.70.2
+
+- `[OPERATOR]` The Garden Linux OS extension now features support for vSMP MemoryOne and Garden Linux. It will now consider itself responsible for a new type `OperatingSystemConfig/memoryone-gardenlinux` and understands a `providerConfig` with which certain parameters of MemoryOne can be configured. by @MrBatschner [#116]
+- `[OPERATOR]` The following dependency is updated:  
+  - github.com/gardener/gardener: v1.70.2 -> v1.72.0 by @dependabot[bot] [#105]
