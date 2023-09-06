@@ -87,7 +87,7 @@ env: []
 image:
     pullPolicy: IfNotPresent
     repository: eu.gcr.io/gardener-project/gardener/gardenlet
-    tag: v1.78.1
+    tag: v1.78.2
 invalidateServiceAccountToken: true
 nodeToleration:
     defaultNotReadyTolerationSeconds: 60
