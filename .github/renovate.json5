@@ -1,8 +1,9 @@
 {
-  "assignees": ["j2L4e"],
+  "assignees": ["23t-machine-user"],
   "baseBranches": [
     "main",
     // template "_BRANCH_",
+    "release-v1.78",
     "release-v1.77",
     "release-v1.76",
     "release-v1.75",
@@ -38,6 +39,7 @@
     {
       "matchBaseBranches": [
         // template "_BRANCH_",
+        "release-v1.78",
         "release-v1.77",
         "release-v1.76",
         "release-v1.75",
@@ -57,6 +59,7 @@
       "enabled": false
     },
     // template {"matchBaseBranches":["_BRANCH_"],"allowedVersions":"/^_MAJOR_[.]_MINOR_[.].*$/","matchPackagePatterns": ["gardener-controlplane", "gardener-controlplane-application", "gardener-controlplane-runtime", "gardener-application", "gardenlet"],"enabled": true },
+    {"matchBaseBranches":["release-v1.78"],"allowedVersions":"/^1[.]78[.].*$/","matchPackagePatterns": ["gardener-controlplane", "gardener-controlplane-application", "gardener-controlplane-runtime", "gardener-application", "gardenlet"],"enabled": true },
     {"matchBaseBranches":["release-v1.77"],"allowedVersions":"/^1[.]77[.].*$/","matchPackagePatterns": ["gardener-controlplane", "gardener-controlplane-application", "gardener-controlplane-runtime", "gardener-application", "gardenlet"],"enabled": true },
     {"matchBaseBranches":["release-v1.76"],"allowedVersions":"/^1[.]76[.].*$/","matchPackagePatterns": ["gardener-controlplane", "gardener-controlplane-application", "gardener-controlplane-runtime", "gardener-application", "gardenlet"],"enabled": true },
     {"matchBaseBranches":["release-v1.75"],"allowedVersions":"/^1[.]75[.].*$/","matchPackagePatterns": ["gardener-controlplane", "gardener-controlplane-application", "gardener-controlplane-runtime", "gardener-application", "gardenlet"],"enabled": true },
