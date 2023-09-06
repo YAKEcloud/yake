@@ -83,3 +83,15 @@ hide_table_of_contents: true
   - registry.k8s.io/cloud-provider-gcp/gcp-compute-persistent-disk-csi-driver: v1.9.7 -> v1.9.9 by @ialidzhikov [#641]
 
 </details>
+
+<details>
+<summary><b>Update shoot-cert-service to <code>1.37.1</code></b></summary>
+
+# [gardener/cert-management]
+
+## 🐛 Bug Fixes
+
+- `[OPERATOR]` Fix edge case of inconsistent certificate/secret: request certificate in this case. by @MartinWeindel [gardener/cert-management@dbff065ac5686aaddd8d2eb1fb6c62c3520b0c3d]
+- `[USER]` Disable followCNAME by default again as it was activated implicitly by github.com/go-acme/lego version upgrade by @MartinWeindel [gardener/cert-management@dbff065ac5686aaddd8d2eb1fb6c62c3520b0c3d]
+
+</details>
