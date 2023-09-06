@@ -71,3 +71,15 @@ hide_table_of_contents: true
 - `[OPERATOR]` Update `k8s.io/client-go` from `v0.26.3` to `v0.26.4` to resolve panic on health-checking special shoots. by @MartinWeindel [#728]
 
 </details>
+
+<details>
+<summary><b>Update provider-gcp to <code>1.32.1</code></b></summary>
+
+# [gardener/gardener-extension-provider-gcp]
+
+## 🏃 Others
+
+- `[OPERATOR]` The following image is updated:  
+  - registry.k8s.io/cloud-provider-gcp/gcp-compute-persistent-disk-csi-driver: v1.9.7 -> v1.9.9 by @ialidzhikov [#641]
+
+</details>
