@@ -56,7 +56,7 @@ if [[ $(grep "$branch" .github/renovate.json5 | wc -l) == "0" ]]; then
   }" .github/renovate.json5
 
   git add .github/renovate.json5
-  git commit -m "track $tag"
+  git commit -m "[skip ci] track $tag"
   git push
 fi
 
