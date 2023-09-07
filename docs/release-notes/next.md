@@ -74,3 +74,39 @@ hide_table_of_contents: true
 - `[OPERATOR]` A bug has been fixed which was causing the garbage collector in `gardener-resource-manager` to wrongfully collect `Secret`s related to `ManagedResource`s when the source and the target cluster are equal. by @gardener-ci-robot [#8404]
 
 </details>
+
+<details>
+<summary><b>Update gardener-controlplane to <code>1.77.3</code></b></summary>
+
+# [gardener/gardener]
+
+## 🐛 Bug Fixes
+
+- `[OPERATOR]` Update Kubernetes dependencies (especially `k8s.io/client-go`) from `v0.26.3` to `v0.26.4` to resolve panic on working with special shoots. by @gardener-ci-robot [#8424]
+- `[OPERATOR]` An issue has been fixed which was causing a broken `ControlPlaneHealthy` condition report for `Shoot`s when the `MachineControllerManagerDeployment` feature gate gets enabled until their next reconciliation. by @gardener-ci-robot [#8410]
+
+</details>
+
+<details>
+<summary><b>Update gardener-controlplane to <code>1.77.3</code></b></summary>
+
+# [gardener/gardener]
+
+## 🐛 Bug Fixes
+
+- `[OPERATOR]` Update Kubernetes dependencies (especially `k8s.io/client-go`) from `v0.26.3` to `v0.26.4` to resolve panic on working with special shoots. by @gardener-ci-robot [#8424]
+- `[OPERATOR]` An issue has been fixed which was causing a broken `ControlPlaneHealthy` condition report for `Shoot`s when the `MachineControllerManagerDeployment` feature gate gets enabled until their next reconciliation. by @gardener-ci-robot [#8410]
+
+</details>
+
+<details>
+<summary><b>Update gardenlet to <code>1.77.3</code></b></summary>
+
+# [gardener/gardener]
+
+## 🐛 Bug Fixes
+
+- `[OPERATOR]` Update Kubernetes dependencies (especially `k8s.io/client-go`) from `v0.26.3` to `v0.26.4` to resolve panic on working with special shoots. by @gardener-ci-robot [#8424]
+- `[OPERATOR]` An issue has been fixed which was causing a broken `ControlPlaneHealthy` condition report for `Shoot`s when the `MachineControllerManagerDeployment` feature gate gets enabled until their next reconciliation. by @gardener-ci-robot [#8410]
+
+</details>
