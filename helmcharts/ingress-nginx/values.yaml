@@ -15,6 +15,7 @@ commonLabels: {}
 
 controller:
   name: controller
+  enableAnnotationValidations: false
   image:
     ## Keep false as default for now!
     chroot: false
@@ -23,9 +24,9 @@ controller:
     ## for backwards compatibility consider setting the full image url via the repository value below
     ## use *either* current default registry/image or repository format or installing chart by providing the values.yaml will fail
     ## repository:
-    tag: "v1.8.1"
-    digest: sha256:e5c4824e7375fcf2a393e1c03c293b69759af37a9ca6abdb91b13d78a93da8bd
-    digestChroot: sha256:e0d4121e3c5e39de9122e55e331a32d5ebf8d4d257227cb93ab54a1b912a7627
+    tag: "v1.8.2"
+    digest: sha256:74834d3d25b336b62cabeb8bf7f1d788706e2cf1cfd64022de4137ade8881ff2
+    digestChroot: sha256:1317a563219f755a6094d990057c78e5c4dcea5e31f4ce1db8641e732a7d6133
     pullPolicy: IfNotPresent
     # www-data -> uid 101
     runAsUser: 101
@@ -48,6 +49,8 @@ controller:
   addHeaders: {}
   # -- Optionally customize the pod dnsConfig.
   dnsConfig: {}
+  # -- Optionally customize the pod hostAliases.
+  hostAliases: {}
   # -- Optionally customize the pod hostname.
   hostname: {}
   # -- Optionally change this to ClusterFirstWithHostNet in case you have 'hostNetwork: true'.
@@ -63,7 +66,7 @@ controller:
   watchIngressWithoutClass: false
   # -- Process IngressClass per name (additionally as per spec.controller).
   ingressClassByName: false
-  # -- This configuration enables Topology Aware Routing feature, used together with service annotation service.kubernetes.io/topology-aware-hints="auto"
+  # -- This configuration enables Topology Aware Routing feature, used together with service annotation service.kubernetes.io/topology-mode="auto"
   # Defaults to false
   enableTopologyAwareRouting: false
   # -- This configuration defines if Ingress Controller should allow users to set
@@ -415,6 +418,7 @@ controller:
     # Will be ignored for Kubernetes versions older than 1.20
     ##
     appProtocol: true
+    # -- Annotations are mandatory for the load balancer to come up. Varies with the cloud service. Values passed through helm tpl engine.
     annotations: {}
     labels: {}
     # clusterIP: ""
@@ -476,7 +480,7 @@ controller:
     internal:
       # -- Enables an additional internal load balancer (besides the external one).
       enabled: false
-      # -- Annotations are mandatory for the load balancer to come up. Varies with the cloud service.
+      # -- Annotations are mandatory for the load balancer to come up. Varies with the cloud service. Values passed through helm tpl engine.
       annotations: {}
       # -- Used by cloud providers to connect the resulting internal LoadBalancer to a pre-existing static IP. Make sure to add to the service the needed annotation to specify the subnet which the static IP belongs to. For instance, `networking.gke.io/internal-load-balancer-subnet` for GCP and `service.beta.kubernetes.io/aws-load-balancer-subnets` for AWS.
       loadBalancerIP: ""
@@ -552,7 +556,7 @@ controller:
 
   opentelemetry:
     enabled: false
-    image: registry.k8s.io/ingress-nginx/opentelemetry:v20230527@sha256:fd7ec835f31b7b37187238eb4fdad4438806e69f413a203796263131f4f02ed0
+    image: registry.k8s.io/ingress-nginx/opentelemetry:v20230721-3e2062ee5@sha256:13bee3f5223883d3ca62fee7309ad02d22ec00ff0d7033e3e9aca7a9f60fd472
     containerSecurityContext:
       allowPrivilegeEscalation: false
   admissionWebhooks:
