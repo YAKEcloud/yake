@@ -693,3 +693,39 @@ resource-manager: `eu.gcr.io/gardener-project/gardener/resource-manager:v1.78.0`
 - `[OPERATOR]` Update Kubernetes dependencies (especially `k8s.io/client-go`) from `v0.26.3` to `v0.26.4` to resolve panic on working with special shoots. by @gardener-ci-robot [#8423]
 
 </details>
+
+<details>
+<summary><b>Update gardener-controlplane to <code>1.78.3</code></b></summary>
+
+# [gardener/gardener]
+
+## 🐛 Bug Fixes
+
+- `[OPERATOR]` A bug has been fixed that prevented `ControllerInstallation`s from getting deleted when the backing `ControllerRegistration` with `.spec.deployment.policy={Always,AlwaysExceptNoShoots}` was deleted. by @gardener-ci-robot [#8452]
+- `[OPERATOR]` Several default settings of Kubernetes feature gates have been corrected. by @gardener-ci-robot [#8470]
+
+</details>
+
+<details>
+<summary><b>Update gardener-controlplane to <code>1.78.3</code></b></summary>
+
+# [gardener/gardener]
+
+## 🐛 Bug Fixes
+
+- `[OPERATOR]` A bug has been fixed that prevented `ControllerInstallation`s from getting deleted when the backing `ControllerRegistration` with `.spec.deployment.policy={Always,AlwaysExceptNoShoots}` was deleted. by @gardener-ci-robot [#8452]
+- `[OPERATOR]` Several default settings of Kubernetes feature gates have been corrected. by @gardener-ci-robot [#8470]
+
+</details>
+
+<details>
+<summary><b>Update gardenlet to <code>1.78.3</code></b></summary>
+
+# [gardener/gardener]
+
+## 🐛 Bug Fixes
+
+- `[OPERATOR]` A bug has been fixed that prevented `ControllerInstallation`s from getting deleted when the backing `ControllerRegistration` with `.spec.deployment.policy={Always,AlwaysExceptNoShoots}` was deleted. by @gardener-ci-robot [#8452]
+- `[OPERATOR]` Several default settings of Kubernetes feature gates have been corrected. by @gardener-ci-robot [#8470]
+
+</details>
