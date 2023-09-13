@@ -110,3 +110,39 @@ hide_table_of_contents: true
 - `[OPERATOR]` An issue has been fixed which was causing a broken `ControlPlaneHealthy` condition report for `Shoot`s when the `MachineControllerManagerDeployment` feature gate gets enabled until their next reconciliation. by @gardener-ci-robot [#8410]
 
 </details>
+
+<details>
+<summary><b>Update gardener-controlplane to <code>1.77.4</code></b></summary>
+
+# [gardener/gardener]
+
+## 🐛 Bug Fixes
+
+- `[OPERATOR]` A bug has been fixed that prevented `ControllerInstallation`s from getting deleted when the backing `ControllerRegistration` with `.spec.deployment.policy={Always,AlwaysExceptNoShoots}` was deleted. by @rfranzke [#8455]
+- `[OPERATOR]` Several default settings of Kubernetes feature gates have been corrected. by @gardener-ci-robot [#8471]
+
+</details>
+
+<details>
+<summary><b>Update gardener-controlplane to <code>1.77.4</code></b></summary>
+
+# [gardener/gardener]
+
+## 🐛 Bug Fixes
+
+- `[OPERATOR]` A bug has been fixed that prevented `ControllerInstallation`s from getting deleted when the backing `ControllerRegistration` with `.spec.deployment.policy={Always,AlwaysExceptNoShoots}` was deleted. by @rfranzke [#8455]
+- `[OPERATOR]` Several default settings of Kubernetes feature gates have been corrected. by @gardener-ci-robot [#8471]
+
+</details>
+
+<details>
+<summary><b>Update gardenlet to <code>1.77.4</code></b></summary>
+
+# [gardener/gardener]
+
+## 🐛 Bug Fixes
+
+- `[OPERATOR]` A bug has been fixed that prevented `ControllerInstallation`s from getting deleted when the backing `ControllerRegistration` with `.spec.deployment.policy={Always,AlwaysExceptNoShoots}` was deleted. by @rfranzke [#8455]
+- `[OPERATOR]` Several default settings of Kubernetes feature gates have been corrected. by @gardener-ci-robot [#8471]
+
+</details>
