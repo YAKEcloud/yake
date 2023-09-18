@@ -64,5 +64,8 @@ if [[ $curHelmRepo == gardener-charts ]]; then
 	 echo ""  >> docs/release-notes/next.md
 	 echo ""  >> docs/release-notes/next.md
 	 echo "</details>"  >> docs/release-notes/next.md
+
+	 # convert CRLF line endings to LF
+	 sed -z 's/\r\n/\n/g' -i docs/release-notes/next.md
 fi
 
