@@ -67,3 +67,14 @@ hide_table_of_contents: true
 - `[OPERATOR]` A bug has been fixed that prevented `ControllerInstallation`s from getting deleted when the backing `ControllerRegistration` with `.spec.deployment.policy={Always,AlwaysExceptNoShoots}` was deleted. by @gardener-ci-robot [#8451]
 
 </details>
+
+<details>
+<summary><b>Update provider-aws to <code>1.48.0</code></b></summary>
+
+# [gardener/gardener-extension-provider-aws]
+
+## 🏃 Others
+
+- `[OPERATOR]` State update for a Worker object can be now skipped by annotating it with `worker.gardener.cloud/skip-state-update=true`. by @ialidzhikov [#801]
+
+</details>
