@@ -131,7 +131,7 @@ stringData:
 {{- end }}
 
     provider-aws:
-      version: 1.47.0
+      version: 1.48.0
       admission:
         enabled: true
 {{- if .Values.registryOverwrite }}
