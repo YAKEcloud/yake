@@ -1,5 +1,5 @@
 # [gardener/gardener-extension-shoot-dns-service]
 
-## 🏃 Others
+## 🐛 Bug Fixes
 
-- `[OPERATOR]` Add copy of images.yaml to charts dir to resolve installation issue for landscapes using RBSC (#237) by `Martin Weindel <martin.weindel@sap.com>` [$1ca03009ff7d641f48cd95b4d32e605056b50e75]
+- `[OPERATOR]` The `CustomResourceDefinition`s deployed to shoot clusters are now annotated with `resources.gardener.cloud/skip-health-check=true` to prevent `gardener-resource-manager` from recreating them too fast during shoot deletion. by `Johannes Scheerer <johannes.scheerer@sap.com>` [$48423afc7bda51bbcdcee01df2c9317a3f278e1a]
