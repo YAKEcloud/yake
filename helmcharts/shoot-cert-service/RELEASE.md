@@ -1,6 +1,5 @@
-# [gardener/cert-management]
+# [gardener/gardener-extension-shoot-cert-service]
 
 ## 🐛 Bug Fixes
 
-- `[OPERATOR]` Fix edge case of inconsistent certificate/secret: request certificate in this case. by @MartinWeindel [gardener/cert-management@dbff065ac5686aaddd8d2eb1fb6c62c3520b0c3d]
-- `[USER]` Disable followCNAME by default again as it was activated implicitly by github.com/go-acme/lego version upgrade by @MartinWeindel [gardener/cert-management@dbff065ac5686aaddd8d2eb1fb6c62c3520b0c3d]
+- `[OPERATOR]` The `CustomResourceDefinition`s deployed to shoot clusters are now annotated with `resources.gardener.cloud/skip-health-check=true` to prevent `gardener-resource-manager` from recreating them too fast during shoot deletion. by `Johannes Scheerer <johannes.scheerer@sap.com>` [$7ab1bd02618105eed26fbdd829016be587ad0891]
