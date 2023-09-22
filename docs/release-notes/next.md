@@ -100,3 +100,14 @@ hide_table_of_contents: true
 - `[OPERATOR]` The `CustomResourceDefinition`s deployed to shoot clusters are now annotated with `resources.gardener.cloud/skip-health-check=true` to prevent `gardener-resource-manager` from recreating them too fast during shoot deletion. by `Johannes Scheerer <johannes.scheerer@sap.com>` [$48423afc7bda51bbcdcee01df2c9317a3f278e1a]
 
 </details>
+
+<details>
+<summary><b>Update networking-calico to <code>1.36.1</code></b></summary>
+
+# [gardener/gardener-extension-networking-calico]
+
+## 🏃 Others
+
+- `[OPERATOR]` Vertical and horizontal cluster-proportional autoscalers for calico-typha now use different label selectors. by `Johannes Scheerer <johannes.scheerer@sap.com>` [$0f655d29fa3c3e71b81dff7751c2f5e6156b9adc]
+
+</details>
