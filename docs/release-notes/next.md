@@ -111,3 +111,14 @@ hide_table_of_contents: true
 - `[OPERATOR]` Vertical and horizontal cluster-proportional autoscalers for calico-typha now use different label selectors. by `Johannes Scheerer <johannes.scheerer@sap.com>` [$0f655d29fa3c3e71b81dff7751c2f5e6156b9adc]
 
 </details>
+
+<details>
+<summary><b>Update shoot-dns-service to <code>1.38.3</code></b></summary>
+
+# [gardener/gardener-extension-shoot-dns-service]
+
+## 🐛 Bug Fixes
+
+- `[OPERATOR]` Correctly apply `resources.gardener.cloud/skip-health-check=true` annotation instead of `shoot.gardener.cloud/no-cleanup=true` label. by `Rafael Franzke <rafael.franzke@sap.com>` [$e3b032fd69fffd8eef0c470eedc066358c2c4e93]
+
+</details>
