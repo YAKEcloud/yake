@@ -206,3 +206,36 @@ gardenlet: `eu.gcr.io/gardener-project/gardener/gardenlet:v1.77.5`
 resource-manager: `eu.gcr.io/gardener-project/gardener/resource-manager:v1.77.5`
 
 </details>
+
+<details>
+<summary><b>Update gardener-controlplane to <code>1.77.6</code></b></summary>
+
+# [gardener/gardener]
+
+## 🐛 Bug Fixes
+
+- `[OPERATOR]` An issue causing several tasks from the Shoot reconciliation flow to fail with transient errors of type `duplicate filename in registry` is now fixed. by @gardener-ci-robot [#8557]
+
+</details>
+
+<details>
+<summary><b>Update gardener-controlplane to <code>1.77.6</code></b></summary>
+
+# [gardener/gardener]
+
+## 🐛 Bug Fixes
+
+- `[OPERATOR]` An issue causing several tasks from the Shoot reconciliation flow to fail with transient errors of type `duplicate filename in registry` is now fixed. by @gardener-ci-robot [#8557]
+
+</details>
+
+<details>
+<summary><b>Update gardenlet to <code>1.77.6</code></b></summary>
+
+# [gardener/gardener]
+
+## 🐛 Bug Fixes
+
+- `[OPERATOR]` An issue causing several tasks from the Shoot reconciliation flow to fail with transient errors of type `duplicate filename in registry` is now fixed. by @gardener-ci-robot [#8557]
+
+</details>
