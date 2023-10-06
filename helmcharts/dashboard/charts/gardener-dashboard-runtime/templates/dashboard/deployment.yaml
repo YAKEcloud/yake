@@ -14,6 +14,7 @@ metadata:
     helm.sh/chart: "{{ .Chart.Name }}-{{ .Chart.Version }}"
     app.kubernetes.io/instance: "{{ .Release.Name }}"
     app.kubernetes.io/managed-by: "{{ .Release.Service }}"
+    high-availability-config.resources.gardener.cloud/type: server
     {{- if .Values.global.dashboard.deploymentLabels }}
     {{- toYaml .Values.global.dashboard.deploymentLabels | nindent 4 }}
     {{- end }}
@@ -84,6 +85,23 @@ spec:
               {{- if .Values.global.dashboard.serviceAccountTokenVolumeProjection.audience }}
               audience: {{ .Values.global.dashboard.serviceAccountTokenVolumeProjection.audience }}
               {{- end }}
+      {{- end }}
+      {{- if .Values.global.dashboard.projectedKubeconfig }}
+      - name: kubeconfig
+        projected:
+          sources:
+          - secret:
+              items:
+              - key: kubeconfig
+                path: kubeconfig
+              name: {{ required ".Values.global.dashboard.projectedKubeconfig.genericKubeconfigSecretName is required" .Values.global.dashboard.projectedKubeconfig.genericKubeconfigSecretName }}
+              optional: false
+          - secret:
+              items:
+              - key: token
+                path: token
+              name: {{ required ".Values.global.dashboard.projectedKubeconfig.tokenSecretName is required" .Values.global.dashboard.projectedKubeconfig.tokenSecretName }}
+              optional: false
       {{- end }}
       {{- if .Values.global.dashboard.kubeconfig }}
       - name: gardener-dashboard-secret-kubeconfig
@@ -163,11 +181,39 @@ spec:
           {{- end }}
           {{- end }}
           {{- if .Values.global.dashboard.gitHub }}
+          {{- if .Values.global.dashboard.gitHub.authentication.token }}
           - name: GITHUB_AUTHENTICATION_TOKEN
             valueFrom:
               secretKeyRef:
                 name: gardener-dashboard-github
                 key: authentication.token
+          {{ else }}
+          - name: GITHUB_AUTHENTICATION_APP_ID
+            valueFrom:
+              secretKeyRef:
+                name: gardener-dashboard-github
+                key: authentication.appId
+          - name: GITHUB_AUTHENTICATION_CLIENT_ID
+            valueFrom:
+              secretKeyRef:
+                name: gardener-dashboard-github
+                key: authentication.clientId
+          - name: GITHUB_AUTHENTICATION_CLIENT_SECRET
+            valueFrom:
+              secretKeyRef:
+                name: gardener-dashboard-github
+                key: authentication.clientSecret
+          - name: GITHUB_AUTHENTICATION_INSTALLATION_ID
+            valueFrom:
+              secretKeyRef:
+                name: gardener-dashboard-github
+                key: authentication.installationId
+          - name: GITHUB_AUTHENTICATION_PRIVATE_KEY
+            valueFrom:
+              secretKeyRef:
+                name: gardener-dashboard-github
+                key: authentication.privateKey
+          {{ end }}
           - name: GITHUB_WEBHOOK_SECRET
             valueFrom:
               secretKeyRef:
@@ -179,6 +225,10 @@ spec:
           {{- if .Values.global.dashboard.kubeconfig }}
           - name: KUBECONFIG
             value: /etc/gardener-dashboard/secrets/kubeconfig/kubeconfig
+          {{- end }}
+          {{- if .Values.global.dashboard.projectedKubeconfig }}
+          - name: KUBECONFIG
+            value: {{ required ".Values.global.dashboard.projectedKubeconfig.baseMountPath is required" .Values.global.dashboard.projectedKubeconfig.baseMountPath }}/kubeconfig
           {{- end }}
           - name: METRICS_PORT
             value: {{ quote .Values.global.dashboard.metricsContainerPort }}
@@ -204,6 +254,11 @@ spec:
           {{- if .Values.global.dashboard.serviceAccountTokenVolumeProjection.enabled }}
           - name: service-account-token
             mountPath: /var/run/secrets/projected/serviceaccount
+            readOnly: true
+          {{- end }}
+          {{- if .Values.global.dashboard.projectedKubeconfig }}
+          - name: kubeconfig
+            mountPath: {{ required ".Values.global.dashboard.projectedKubeconfig.baseMountPath is required" .Values.global.dashboard.projectedKubeconfig.baseMountPath }}
             readOnly: true
           {{- end }}
           {{- if .Values.global.dashboard.kubeconfig }}
