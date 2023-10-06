@@ -137,3 +137,24 @@ resource-manager: `eu.gcr.io/gardener-project/gardener/resource-manager:v1.80.1`
 - `[USER]` A bug has been fixed that prevented users without permissions to list `CustomResourceDefinition`s from interacting with the Gardener APIs when using a `kubectl` version lower than `1.27`. by @gardener-ci-robot [#8580]
 
 </details>
+
+<details>
+<summary><b>Update gardener-controlplane to <code>1.80.4</code></b></summary>
+
+no release notes available
+
+</details>
+
+<details>
+<summary><b>Update gardener-controlplane to <code>1.80.4</code></b></summary>
+
+no release notes available
+
+</details>
+
+<details>
+<summary><b>Update gardenlet to <code>1.80.4</code></b></summary>
+
+no release notes available
+
+</details>
