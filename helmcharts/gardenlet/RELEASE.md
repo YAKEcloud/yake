@@ -2,8 +2,4 @@
 
 ## 🐛 Bug Fixes
 
-- `[OPERATOR]` An issue causing several tasks from the Shoot reconciliation flow to fail with transient errors of type `duplicate filename in registry` is now fixed. by @gardener-ci-robot [#8556]
-- `[USER]` The two additional labels `worker.gardener.cloud/image-name` and `worker.gardener.cloud/image-version` that were previously introduced and attached to worker nodes are removed again to fix a regression that causes the `kubelet` to restart on nodes that are due to be upgraded to a new OS but not rolled yet which causes their `Pod`s to become temporarily unready. by @gardener-ci-robot [#8553]
-## 🏃 Others
-
-- `[OPERATOR]` extension library: State update for a Worker object can be now skipped by annotating it with `worker.gardener.cloud/skip-state-update=true`. by @gardener-ci-robot [#8493]
+- `[OPERATOR]` Fixed a possibility for the `migrate` phase of control plane migration to become permanently stuck if the shoot was created when the `MachineControllerManagerDeployment` feature gate is disabled, control plane migration is triggered for the shoot and the feature gate is enabled during the migration phase. by @gardener-ci-robot [#8572]

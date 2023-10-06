@@ -774,3 +774,36 @@ resource-manager: `eu.gcr.io/gardener-project/gardener/resource-manager:v1.78.0`
 - `[OPERATOR]` extension library: State update for a Worker object can be now skipped by annotating it with `worker.gardener.cloud/skip-state-update=true`. by @gardener-ci-robot [#8493]
 
 </details>
+
+<details>
+<summary><b>Update gardener-controlplane to <code>1.78.5</code></b></summary>
+
+# [gardener/gardener]
+
+## 🐛 Bug Fixes
+
+- `[OPERATOR]` Fixed a possibility for the `migrate` phase of control plane migration to become permanently stuck if the shoot was created when the `MachineControllerManagerDeployment` feature gate is disabled, control plane migration is triggered for the shoot and the feature gate is enabled during the migration phase. by @gardener-ci-robot [#8572]
+
+</details>
+
+<details>
+<summary><b>Update gardener-controlplane to <code>1.78.5</code></b></summary>
+
+# [gardener/gardener]
+
+## 🐛 Bug Fixes
+
+- `[OPERATOR]` Fixed a possibility for the `migrate` phase of control plane migration to become permanently stuck if the shoot was created when the `MachineControllerManagerDeployment` feature gate is disabled, control plane migration is triggered for the shoot and the feature gate is enabled during the migration phase. by @gardener-ci-robot [#8572]
+
+</details>
+
+<details>
+<summary><b>Update gardenlet to <code>1.78.5</code></b></summary>
+
+# [gardener/gardener]
+
+## 🐛 Bug Fixes
+
+- `[OPERATOR]` Fixed a possibility for the `migrate` phase of control plane migration to become permanently stuck if the shoot was created when the `MachineControllerManagerDeployment` feature gate is disabled, control plane migration is triggered for the shoot and the feature gate is enabled during the migration phase. by @gardener-ci-robot [#8572]
+
+</details>
