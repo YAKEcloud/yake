@@ -3,39 +3,6 @@ gardener-dashboard-application:
 gardener-dashboard-runtime:
     enabled: false
 global:
-    bootstrapper:
-        config:
-            logLevel: debug
-        enabled: false
-        image:
-            pullPolicy: IfNotPresent
-            repository: eu.gcr.io/gardener-project/gardener/dashboard-terminal-bootstrapper
-            tag: 1.69.2
-        livenessProbe:
-            failureThreshold: 3
-            initialDelaySeconds: 10
-            periodSeconds: 30
-            successThreshold: 1
-            timeoutSeconds: 5
-        nodeOptions:
-            - --max-old-space-size=460
-        podAnnotations: {}
-        podLabels: {}
-        readinessProbe:
-            failureThreshold: 1
-            initialDelaySeconds: 5
-            periodSeconds: 5
-            successThreshold: 1
-            timeoutSeconds: 5
-        resources:
-            requests:
-                cpu: 100m
-                memory: 100Mi
-        serviceAccountName: gardener-dashboard-terminal-bootstrapper
-        serviceAccountTokenVolumeProjection:
-            audience: ""
-            enabled: true
-            expirationSeconds: 43200
     dashboard:
         containerPort: 8080
         deploymentAnnotations: {}
@@ -54,10 +21,10 @@ global:
                 projectTerminalShortcutsEnabled: false
                 terminalEnabled: false
             helpMenuItems:
-                - icon: description
+                - icon: mdi-file-document-outline
                   title: Getting Started
                   url: https://github.com/gardener/gardener/tree/master/docs
-                - icon: bug_report
+                - icon: mdi-bug
                   title: Issues
                   url: https://github.com/gardener/gardener/issues
             landingPageUrl: https://github.com/gardener
@@ -66,7 +33,7 @@ global:
         image:
             pullPolicy: IfNotPresent
             repository: eu.gcr.io/gardener-project/gardener/dashboard
-            tag: 1.69.2
+            tag: 1.70.0
         ingress:
             annotations:
                 nginx.ingress.kubernetes.io/ssl-redirect: "true"
@@ -110,6 +77,5 @@ global:
     virtualGarden:
         dashboardUserName: null
         enabled: false
-        terminalBootstrapperUserName: null
 utils-templates:
     enabled: false

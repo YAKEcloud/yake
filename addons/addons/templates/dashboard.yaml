@@ -15,7 +15,7 @@ spec:
   chart:
     spec:
       chart: dashboard
-      version: 1.69.2
+      version: 1.70.0
       sourceRef:
         kind: HelmRepository
         name: gardener-community-charts
@@ -88,7 +88,7 @@ spec:
   chart:
     spec:
       chart: dashboard
-      version: 1.69.2
+      version: 1.70.0
       sourceRef:
         kind: HelmRepository
         name: gardener-community-charts
