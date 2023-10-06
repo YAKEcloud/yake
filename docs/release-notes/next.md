@@ -202,3 +202,15 @@ resource-manager: `eu.gcr.io/gardener-project/gardener/resource-manager:v1.80.1`
   github.com/gardener/machine-controller-manager v0.49.1 -> v0.50.0 by @rishabh-11 [gardener/machine-controller-manager-provider-openstack#98]
 
 </details>
+
+<details>
+<summary><b>Update cert-management to <code>0.11.2</code></b></summary>
+
+# [gardener/cert-management]
+
+## 🏃 Others
+
+- `[OPERATOR]` Update k8s dependencies by updating controller-manager-library by @MartinWeindel [#142]
+- `[OPERATOR]` Bumps golang from 1.21.1 to 1.21.2. by @MartinWeindel [#142]
+
+</details>
