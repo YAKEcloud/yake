@@ -22,7 +22,8 @@ for chart in addons/addons pre-gardener/dnsprovider pre-gardener/issuer gardener
   echo "$MYVALUES" > $tmpDir/$CHARTNAME-test-values.yaml
 
   if [[ $CHARTNAME == "garden-content" ]]; then
-    echo "$(echo "$CONFIGVALUES" | $YQ eval 'select(.metadata.name=="gardenlet-base-values") .stringData."values.yaml"' -)" >> $tmpDir/$CHARTNAME-test-values.yaml
+    echo "$CONFIGVALUES" | $YQ eval 'select(.metadata.name=="gardenlet-base-values") .stringData."values.yaml"' - | $YQ eval-all --inplace '. as $item ireduce ({}; . * $item )' $tmpDir/$CHARTNAME-test-values.yaml -
+    echo "$CONFIGVALUES" | $YQ eval 'select(.metadata.name=="gardener-base-values") .stringData."values.yaml"' - | $YQ eval-all --inplace '. as $item ireduce ({}; . * $item )' $tmpDir/$CHARTNAME-test-values.yaml -
   fi
 
   $HELM unittest $chart -v $tmpDir/$CHARTNAME-test-values.yaml
