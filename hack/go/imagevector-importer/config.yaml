@@ -1,4 +1,4 @@
-ources:
+sources:
 - name: gardenlet
   repo: gardener/gardener
   version:
