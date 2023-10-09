@@ -39,3 +39,15 @@ tests:
           path: data
       - notExists:
           path: stringData
+  - it: should not create either Certificate nor Secret with "seed-ingress" being set to a falsy value
+    set:
+      seed-ingress: ""
+    asserts:
+      - hasDocuments:
+          count: 0
+  - it: should not create either Certificate nor Secret with "seed-ingress" being set to a falsy value
+    set:
+      seed-ingress: false
+    asserts:
+      - hasDocuments:
+          count: 0
