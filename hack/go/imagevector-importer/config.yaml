@@ -33,7 +33,7 @@ sources:
   repo: gardener/gardener-extension-provider-alicloud
   version:
     fromFile: ../../../configuration/configuration/templates/extensions.yaml
-  imageVector: charts/images.yaml
+  imageVector: imagevector/images.yaml
 - name: provider-hcloud
   repo: 23technologies/gardener-extension-provider-hcloud
   version:
