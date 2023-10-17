@@ -22,6 +22,7 @@ spec:
       labels:
         networking.gardener.cloud/to-dns: allowed
         networking.resources.gardener.cloud/to-virtual-garden-kube-apiserver-tcp-443: allowed
+        networking.gardener.cloud/to-public-networks: allowed
 {{ include "labels" . | indent 8 }}
     spec:
       {{- if not .Values.global.virtualGarden.enabled }}
