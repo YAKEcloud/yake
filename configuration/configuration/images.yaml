@@ -59,7 +59,7 @@ gardenlet:
         name: nginx-ingress-controller
         repository: registry.k8s.io/ingress-nginx/controller-chroot
         sourceRepository: github.com/kubernetes/ingress-nginx
-        tag: v1.9.1
+        tag: v1.9.3
       - labels:
           - name: gardener.cloud/cve-categorisation
             value:
