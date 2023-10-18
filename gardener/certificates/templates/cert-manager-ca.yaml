@@ -95,6 +95,9 @@ spec:
     - garden-kube-apiserver
     - garden-kube-apiserver.garden
     - garden-kube-apiserver.garden.svc
+    - virtual-garden-kube-apiserver
+    - virtual-garden-kube-apiserver.garden
+    - virtual-garden-kube-apiserver.garden.svc
     - {{ .Values.gardener }}
   issuerRef:
     name: gardener-ca
