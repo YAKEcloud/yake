@@ -178,3 +178,10 @@ resource-manager: `eu.gcr.io/gardener-project/gardener/resource-manager:v1.81.1`
 - `[DEPENDENCY]` `nginx-ingress-controller` image is updated to `v1.9.3`. by @gardener-ci-robot [#8658]
 
 </details>
+
+<details>
+<summary><b>Update cloudprofiles to <code>0.6.7</code></b></summary>
+
+**Full Changelog**: https://github.com/gardener-community/cloudprofiles/compare/0.6.6...0.6.7
+
+</details>
