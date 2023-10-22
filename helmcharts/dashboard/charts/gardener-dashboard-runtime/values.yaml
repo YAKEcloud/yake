@@ -29,7 +29,7 @@ global:
         image:
             pullPolicy: IfNotPresent
             repository: eu.gcr.io/gardener-project/gardener/dashboard
-            tag: 1.70.0
+            tag: 1.70.1
         ingress:
             annotations:
                 nginx.ingress.kubernetes.io/ssl-redirect: "true"
