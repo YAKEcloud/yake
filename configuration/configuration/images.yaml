@@ -42,7 +42,7 @@ gardenlet:
       - name: etcd-druid
         repository: eu.gcr.io/gardener-project/gardener/etcd-druid
         sourceRepository: github.com/gardener/etcd-druid
-        tag: v0.20.1
+        tag: v0.20.2
       - name: dependency-watchdog
         repository: eu.gcr.io/gardener-project/gardener/dependency-watchdog
         sourceRepository: github.com/gardener/dependency-watchdog
@@ -607,7 +607,7 @@ gardenlet:
       - name: ext-authz-server
         repository: eu.gcr.io/gardener-project/gardener/ext-authz-server
         sourceRepository: github.com/gardener/ext-authz-server
-        tag: 0.8.0
+        tag: 0.9.0
       - labels:
           - name: gardener.cloud/cve-categorisation
             value:
@@ -630,7 +630,7 @@ gardenlet:
         resourceId:
           name: apiserver-proxy
         sourceRepository: github.com/gardener/apiserver-proxy
-        tag: v0.13.0
+        tag: v0.14.0
 provider-openstack:
   imageVectorOriginal:
     images:
@@ -2223,11 +2223,11 @@ etcd-druid:
         resourceId:
           name: etcdbrctl
         sourceRepository: github.com/gardener/etcd-backup-restore
-        tag: v0.24.5
+        tag: v0.24.6
       - name: etcd
         repository: eu.gcr.io/gardener-project/gardener/etcd
         sourceRepository: github.com/gardener/etcd-custom-image
-        tag: v3.4.26-2
+        tag: v3.4.26-3
       - name: etcd-backup-restore-distroless
         repository: eu.gcr.io/gardener-project/gardener/etcdbrctl
         resourceId:
