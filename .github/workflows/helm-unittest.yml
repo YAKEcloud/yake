@@ -1,6 +1,6 @@
 name: Run helm unittests
 
-on: pull_request
+on: pull_reques
 
 jobs:
   unittest:
@@ -8,4 +8,6 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - uses: d3adb5/helm-unittest-action@v2
+        with:
+          github-token: ${{ secrets.GH_TOKEN_23T_MACHINE_USER }}
       - run: ./hack/run-helm-unittest.sh
