@@ -1,6 +1,6 @@
 name: Run helm unittests
 
-on: pull_reques
+on: pull_request
 
 jobs:
   unittest:
