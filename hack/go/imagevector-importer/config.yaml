@@ -48,7 +48,7 @@ sources:
   repo: gardener/gardener-extension-networking-cilium
   version:
     fromFile: ../../../configuration/configuration/templates/extensions.yaml
-  imageVector: charts/images.yaml
+  imageVector: imagevector/images.yaml
 - name: shoot-cert-service
   repo: gardener/gardener-extension-shoot-cert-service
   version:
