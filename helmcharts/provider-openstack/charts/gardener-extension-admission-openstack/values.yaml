@@ -7,7 +7,7 @@ global:
     image:
         pullPolicy: IfNotPresent
         repository: eu.gcr.io/gardener-project/gardener/extensions/admission-openstack
-        tag: v1.37.0
+        tag: v1.37.1
     kubeconfig: null
     metricsPort: 8080
     replicaCount: 1
