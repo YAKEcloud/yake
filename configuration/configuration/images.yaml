@@ -878,7 +878,7 @@ provider-openstack:
         name: csi-snapshotter
         repository: registry.k8s.io/sig-storage/csi-snapshotter
         sourceRepository: github.com/kubernetes-csi/external-snapshotter
-        tag: v6.3.0
+        tag: v6.3.1
       - labels:
           - name: gardener.cloud/cve-categorisation
             value:
@@ -891,7 +891,7 @@ provider-openstack:
         name: csi-snapshot-controller
         repository: registry.k8s.io/sig-storage/snapshot-controller
         sourceRepository: github.com/kubernetes-csi/external-snapshotter
-        tag: v6.3.0
+        tag: v6.3.1
       - labels:
           - name: gardener.cloud/cve-categorisation
             value:
@@ -904,7 +904,7 @@ provider-openstack:
         name: csi-snapshot-validation-webhook
         repository: registry.k8s.io/sig-storage/snapshot-validation-webhook
         sourceRepository: github.com/kubernetes-csi/external-snapshotter
-        tag: v6.3.0
+        tag: v6.3.1
       - labels:
           - name: gardener.cloud/cve-categorisation
             value:

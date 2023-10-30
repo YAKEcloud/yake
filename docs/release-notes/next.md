@@ -125,3 +125,19 @@ scheduler: `eu.gcr.io/gardener-project/gardener/scheduler:v1.82.1`
 
 
 </details>
+
+<details>
+<summary><b>Update provider-openstack to <code>1.37.1</code></b></summary>
+
+# [gardener/gardener-extension-provider-openstack]
+
+## 🏃 Others
+
+- `[OPERATOR]` Update external-snapshotter to v6.3.1 by @kon-angelo [#683]
+
+## Docker Images
+gardener-extension-admission-openstack: `eu.gcr.io/gardener-project/gardener/extensions/admission-openstack:v1.37.1`
+gardener-extension-provider-openstack: `eu.gcr.io/gardener-project/gardener/extensions/provider-openstack:v1.37.1`
+
+
+</details>
