@@ -43,7 +43,7 @@ sources:
   repo: gardener/gardener-extension-networking-calico
   version:
     fromFile: ../../../configuration/configuration/templates/extensions.yaml
-  imageVector: charts/images.yaml
+  imageVector: imagevector/images.yaml
 - name: networking-cilium
   repo: gardener/gardener-extension-networking-cilium
   version:
