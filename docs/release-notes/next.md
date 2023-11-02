@@ -190,3 +190,15 @@ cert-management: `eu.gcr.io/gardener-project/cert-controller-manager:v0.11.3`
 
 
 </details>
+
+<details>
+<summary><b>Update networking-cilium to <code>1.30.2</code></b></summary>
+
+no release notes available
+
+## Docker Images
+gardener-extension-admission-cilium: `eu.gcr.io/gardener-project/gardener/extensions/admission-cilium:v1.30.2`
+gardener-extension-networking-cilium: `eu.gcr.io/gardener-project/gardener/extensions/networking-cilium:v1.30.2`
+
+
+</details>
