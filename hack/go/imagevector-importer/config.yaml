@@ -63,4 +63,4 @@ sources:
   repo: gardener/gardener-extension-runtime-gvisor
   version:
     fromFile: ../../../configuration/configuration/templates/extensions.yaml
-  imageVector: charts/images.yaml
+  imageVector: imagevector/images.yaml
