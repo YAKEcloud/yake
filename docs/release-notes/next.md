@@ -314,3 +314,24 @@ scheduler: `eu.gcr.io/gardener-project/gardener/scheduler:v1.80.6`
 
 
 </details>
+
+<details>
+<summary><b>Update gardener-controlplane to <code>1.80.7</code></b></summary>
+
+no release notes available
+
+</details>
+
+<details>
+<summary><b>Update gardener-controlplane to <code>1.80.7</code></b></summary>
+
+no release notes available
+
+</details>
+
+<details>
+<summary><b>Update gardenlet to <code>1.80.7</code></b></summary>
+
+no release notes available
+
+</details>
