@@ -59,7 +59,7 @@ gardenlet:
         name: nginx-ingress-controller
         repository: registry.k8s.io/ingress-nginx/controller-chroot
         sourceRepository: github.com/kubernetes/ingress-nginx
-        tag: v1.9.3
+        tag: v1.9.4
       - labels:
           - name: gardener.cloud/cve-categorisation
             value:
@@ -234,7 +234,7 @@ gardenlet:
         name: plutono
         repository: ghcr.io/credativ/plutono
         sourceRepository: github.com/credativ/plutono
-        tag: v7.5.24
+        tag: v7.5.25
       - labels:
           - name: gardener.cloud/cve-categorisation
             value:
@@ -405,7 +405,7 @@ gardenlet:
         name: vali
         repository: ghcr.io/credativ/vali
         sourceRepository: github.com/credativ/vali
-        tag: v2.2.8
+        tag: v2.2.9
       - labels:
           - name: gardener.cloud/cve-categorisation
             value:
@@ -458,7 +458,7 @@ gardenlet:
         name: valitail
         repository: ghcr.io/credativ/valitail
         sourceRepository: github.com/credativ/vali
-        tag: v2.2.8
+        tag: v2.2.9
       - labels:
           - name: gardener.cloud/cve-categorisation
             value:
