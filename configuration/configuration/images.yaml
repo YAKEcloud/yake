@@ -2201,7 +2201,7 @@ shoot-cert-service:
       - name: cert-management
         repository: eu.gcr.io/gardener-project/cert-controller-manager
         sourceRepository: github.com/gardener/cert-management
-        tag: v0.11.2
+        tag: v0.11.3
 shoot-dns-service:
   imageVectorOriginal:
     images:
