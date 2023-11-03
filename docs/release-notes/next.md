@@ -89,3 +89,24 @@ scheduler: `eu.gcr.io/gardener-project/gardener/scheduler:v1.82.1`
 
 
 </details>
+
+<details>
+<summary><b>Update gardener-controlplane to <code>1.82.2</code></b></summary>
+
+no release notes available
+
+</details>
+
+<details>
+<summary><b>Update gardener-controlplane to <code>1.82.2</code></b></summary>
+
+no release notes available
+
+</details>
+
+<details>
+<summary><b>Update gardenlet to <code>1.82.2</code></b></summary>
+
+no release notes available
+
+</details>
