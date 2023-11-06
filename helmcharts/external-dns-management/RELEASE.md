@@ -2,12 +2,14 @@
 
 ## ✨ New Features
 
-- `[USER]` Creating a `DNSEntry` for the base domain of a hosted zone is now allowed for all providers but `azure-dns` and `azure-private-dns`. by @MartinWeindel [#316]
+- `[USER]` The `rfc2136` provider for authorive DNS servers supporting DNS Update [RFC2136](https://datatracker.ietf.org/doc/html/rfc2136) has been added. by @MartinWeindel [#331]
+## 🐛 Bug Fixes
+
+- `[OPERATOR]` Fix reading IPv6 records for azure-dns and azure-private-dns providers. by @MartinWeindel [#330]
 ## 🏃 Others
 
-- `[OPERATOR]` Update AWS canonical hosted zones from github.com/kubernetes-sigs/external-dns repository. by @MartinWeindel [#322]
-- `[OPERATOR]` Bumps golang from 1.21.1 to 1.21.2. by @MartinWeindel [#323]
-- `[OPERATOR]` Bumps golang from 1.20.7 to 1.21.1. by @dependabot[bot] [#318]
-- `[OPERATOR]` Update k8s dependencies by updating controller-manager-library by @MartinWeindel [#323]
-- `[OPERATOR]` Additional AWS regions `ap-southeast-4` and `il-central-1` with canonical hosted zones for ELBs by @MartinWeindel [#321]
-- `[USER]` Infoblox provider: support for extensible attributes by @nitrocb [#320]
+- `[USER]` 3072 bit RSA keys are now used in order to generate TLS certificates. by @dimityrmirchev [#326]
+- `[OPERATOR]` Bumps golang from 1.21.2 to 1.21.3. by @dependabot[bot] [#324]
+
+## Docker Images
+dns-controller-manager: `eu.gcr.io/gardener-project/dns-controller-manager:v0.15.10`
