@@ -23,7 +23,7 @@ sources:
   repo: gardener/gardener-extension-provider-aws
   version:
     fromFile: ../../../configuration/configuration/templates/extensions.yaml
-  imageVector: charts/images.yaml
+  imageVector: imagevector/images.yaml
 - name: provider-gcp
   repo: gardener/gardener-extension-provider-gcp
   version:
