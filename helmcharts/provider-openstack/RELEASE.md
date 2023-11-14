@@ -1,9 +1,9 @@
 # [gardener/gardener-extension-provider-openstack]
 
-## 🏃 Others
+## 🐛 Bug Fixes
 
-- `[OPERATOR]` Update external-snapshotter to v6.3.1 by @kon-angelo [#683]
+- `[OPERATOR]` Fix a crash, when a shoot that is updated has an empty overlay config.  by @axel7born [#695]
 
 ## Docker Images
-gardener-extension-admission-openstack: `eu.gcr.io/gardener-project/gardener/extensions/admission-openstack:v1.37.1`
-gardener-extension-provider-openstack: `eu.gcr.io/gardener-project/gardener/extensions/provider-openstack:v1.37.1`
+gardener-extension-admission-openstack: `eu.gcr.io/gardener-project/gardener/extensions/admission-openstack:v1.38.2`
+gardener-extension-provider-openstack: `eu.gcr.io/gardener-project/gardener/extensions/provider-openstack:v1.38.2`
