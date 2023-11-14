@@ -1814,7 +1814,7 @@ provider-alicloud:
         name: machine-controller-manager-provider-alicloud
         repository: eu.gcr.io/gardener-project/gardener/machine-controller-manager-provider-alicloud
         sourceRepository: github.com/gardener/machine-controller-manager-provider-alicloud
-        tag: v0.10.0
+        tag: v0.10.1
       - name: alicloud-controller-manager
         repository: registry.eu-central-1.aliyuncs.com/gardener-de/alibaba-cloud-controller-manager
         sourceRepository: https://github.com/kubernetes/cloud-provider-alibaba-cloud
