@@ -1663,7 +1663,7 @@ provider-gcp:
         name: machine-controller-manager-provider-gcp
         repository: eu.gcr.io/gardener-project/gardener/machine-controller-manager-provider-gcp
         sourceRepository: github.com/gardener/machine-controller-manager-provider-gcp
-        tag: v0.17.0
+        tag: v0.17.1
       - labels:
           - name: gardener.cloud/cve-categorisation
             value:
