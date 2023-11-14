@@ -22,28 +22,15 @@ helm install -f values.yaml \
      step-certificates smallstep/step-certificates
 
 
-############# dnsmasq 
+############# knot
 
-# install dnsmasq into the cluster and patch coredns to use dnsmasq as dns server
+kubectl apply -f knot.yaml 
 
-cd dnsmasq
-docker build -t dnsmasq:0.0.1 .
-kind load docker-image dnsmasq:0.0.1
-kubectl apply -f configmaps.yaml
-kubectl apply -f service.yaml 
-kubectl apply -f pod.yaml 
-
-svcIP=$(kubectl get svc dnsmasq -oyaml | yq .spec.clusterIP)
+svcIP=$(kubectl get svc knot -oyaml | yq .spec.clusterIP)
 
 kubectl -n kube-system get configmap coredns -ojson | \
   yq '.data.Corefile' | \
-  sed -z "s/forward . \/etc\/resolv.conf {\n       max_concurrent 1000\n    }/forward . $svcIP/" | \
+  sed "\$a gardener.internal:53 {\n  forward . $svcIP\n}" | \
   kubectl -n kube-system create configmap coredns --from-file Corefile=/dev/stdin --dry-run=client -oyaml | \
   kubectl -n kube-system patch configmap coredns --patch-file /dev/stdin
 
-
-
-# Eventually, we would need to implement a local dns provider for
-# https://github.com/gardener/external-dns-management
-# This would just manipulate the dnsmasq configuration for creating dns-entries
-# Once this is done, we could go ahead and install some certificate management component
