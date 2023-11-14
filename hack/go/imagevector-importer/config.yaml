@@ -18,7 +18,7 @@ sources:
   repo: gardener/gardener-extension-provider-azure
   version:
     fromFile: ../../../configuration/configuration/templates/extensions.yaml
-  imageVector: charts/images.yaml
+  imageVector: imagevector/images.yaml
 - name: provider-aws
   repo: gardener/gardener-extension-provider-aws
   version:
