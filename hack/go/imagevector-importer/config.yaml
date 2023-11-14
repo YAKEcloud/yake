@@ -13,7 +13,7 @@ sources:
   repo: gardener/gardener-extension-provider-openstack
   version:
     fromFile: ../../../configuration/configuration/templates/extensions.yaml
-  imageVector: charts/images.yaml
+  imageVector: imagevector/images.yaml
 - name: provider-azure
   repo: gardener/gardener-extension-provider-azure
   version:
