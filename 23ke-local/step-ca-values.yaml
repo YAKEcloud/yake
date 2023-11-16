@@ -1,0 +1,114 @@
+# Helm template
+inject:
+  enabled: true
+  # Config contains the configuration files ca.json and defaults.json
+  config:
+    files:
+      ca.json:
+        root: /home/step/certs/root_ca.crt
+        federateRoots: [ ]
+        crt: /home/step/certs/intermediate_ca.crt
+        key: /home/step/secrets/intermediate_ca_key
+        address: :9000
+        dnsNames:
+          - local.gardener.cloud
+          - step-certificates.garden.svc.cluster.local
+        logger:
+          format: json
+        db:
+          type: badgerv2
+          dataSource: /home/step/db
+        authority:
+          enableAdmin: false
+          provisioners:
+            - { "type": "JWK", "name": "dev@local.gardener.cloud", "key": { "use": "sig", "kty": "EC", "kid": "B_5Rj9IR9xRPIAJGpkmirB1AV7zOhw8-IJnVlCgbe6o", "crv": "P-256", "alg": "ES256", "x": "jLEr4pHOFN4i4YvlCl6As7I208DiITabYu_txCowlvM", "y": "3pR8ZUHxPRbZ8j2IZ8-Y8Lvz4pJmHuInYdLpZN3axco" },"encryptedKey": "eyJhbGciOiJQQkVTMi1IUzI1NitBMTI4S1ciLCJjdHkiOiJqd2sranNvbiIsImVuYyI6IkEyNTZHQ00iLCJwMmMiOjEwMDAwMCwicDJzIjoieUcwSjFuY01Ham5EOTNHdW9FZk5TdyJ9.VHhsCuZfkmRkv4ERFVxuQZxNpH9cn9zEFJANDV26e1eHPxIEH_trdw.x571eR_wwUNh81UN.IDkrygM2WDuPVYETl9P1psK_gJ30fdTxR-kLseTBU95UaMSQENkmVUEMUeI3AVCJb7JSClf8FtHCux1zmdPjzIIerdFjU-CbYUGJB2xuj-RXQWewav4EE3gTFeW-cFjgia0P0XxomlhZzwtBEJ2Ta8sxwVQR7g1mEK4253KtY1zlP6kphaFd3OLl5y1oMKr59oYeVI4fCzf6A5cjPARz8OKJr7HcqNNTgh7LX9ULa8UB7vfdJbanCeumDM_E-OV5QpafKg37XoVZohg02hMc93jwzVEXVsmpYqtkhz4n6X0ucS81HWZ6r-n7u05hTkyz8DqV4Y6-juyVV8QZzak.IVjIj2Jtkkv90tzEF0FwgQ", "options": { "x509": { },"ssh": { } } }
+            - { "type": "ACME", "name": "acme" }
+          claims:
+            maxTLSCertDuration: 2160h
+            defaultTLSCertDuration: 2160h
+        tls:
+          cipherSuites:
+            - TLS_ECDHE_ECDSA_WITH_CHACHA20_POLY1305_SHA256
+            - TLS_ECDHE_ECDSA_WITH_AES_128_GCM_SHA256
+          minVersion: 1.2
+          maxVersion: 1.3
+          renegotiation: false
+
+      defaults.json:
+        ca-url: https://local.gardener.cloud
+        ca-config: /home/step/config/ca.json
+        fingerprint: 522762f35a221580778a31a938d69c6416d9e941090cab7a411a0ba3e338960d
+        root: /home/step/certs/root_ca.crt
+
+  # Certificates contains the root and intermediate certificate and
+  # optionally the SSH host and user public keys
+  certificates:
+    # intermediate_ca contains the text of the intermediate CA Certificate
+    intermediate_ca: |
+      -----BEGIN CERTIFICATE-----
+      MIIB2zCCAYKgAwIBAgIQGnloyYzQKPazHqhRztq+cDAKBggqhkjOPQQDAjA4MRYw
+      FAYDVQQKEw1nYXJkZW5lcmxvY2FsMR4wHAYDVQQDExVnYXJkZW5lcmxvY2FsIFJv
+      b3QgQ0EwHhcNMjMxMTE2MTMyMjE5WhcNMzMxMTEzMTMyMjE5WjBAMRYwFAYDVQQK
+      Ew1nYXJkZW5lcmxvY2FsMSYwJAYDVQQDEx1nYXJkZW5lcmxvY2FsIEludGVybWVk
+      aWF0ZSBDQTBZMBMGByqGSM49AgEGCCqGSM49AwEHA0IABL2u8yZfwQnr3jp8TQh/
+      E2RuhEsjJCk0FvmCRfXu8hWZtWvZxPItzbiByY2OfanFAg4R6Bmmni+RlSNr+rv3
+      jx2jZjBkMA4GA1UdDwEB/wQEAwIBBjASBgNVHRMBAf8ECDAGAQH/AgEAMB0GA1Ud
+      DgQWBBTJ6eExOnhddfR5eM3CG77/nRjXUTAfBgNVHSMEGDAWgBTgGw7pW40UakvL
+      wrg0qYyb18OMgDAKBggqhkjOPQQDAgNHADBEAiBMjaYfa2617G0uAyAblFaU2h97
+      mtb4eIGP2A6FVUq4pgIgS81eGjZ11tDpnT7jxlkriZhN5F93ddE3BotJfGRz4GE=
+      -----END CERTIFICATE-----
+
+
+    # root_ca contains the text of the root CA Certificate
+    root_ca: |
+      -----BEGIN CERTIFICATE-----
+      MIIBtDCCAVqgAwIBAgIRAP02sWFaLe9o+Jg2jMe+IJkwCgYIKoZIzj0EAwIwODEW
+      MBQGA1UEChMNZ2FyZGVuZXJsb2NhbDEeMBwGA1UEAxMVZ2FyZGVuZXJsb2NhbCBS
+      b290IENBMB4XDTIzMTExNjEzMjIxOFoXDTMzMTExMzEzMjIxOFowODEWMBQGA1UE
+      ChMNZ2FyZGVuZXJsb2NhbDEeMBwGA1UEAxMVZ2FyZGVuZXJsb2NhbCBSb290IENB
+      MFkwEwYHKoZIzj0CAQYIKoZIzj0DAQcDQgAESEM2wJI/rkMQMLxabcNdU/vyMbzJ
+      644dEv8pFBM4t/hTTLWNG0ZLcsmJyuNviscpdTtG0+9piuinbcscyRcwrqNFMEMw
+      DgYDVR0PAQH/BAQDAgEGMBIGA1UdEwEB/wQIMAYBAf8CAQEwHQYDVR0OBBYEFOAb
+      DulbjRRqS8vCuDSpjJvXw4yAMAoGCCqGSM49BAMCA0gAMEUCIQD0PeiQDTZ+ZiZZ
+      ovQ/oj0kxnpg5PUNRpsJcDe7EOVXcAIgJ6EMO5F72mJX1wu1SmDvAHaFx7jeGF88
+      lvbmDTMI3zU=
+      -----END CERTIFICATE-----
+
+
+  # Secrets contains the root and intermediate keys and optionally the SSH
+  # private keys
+  secrets:
+    # ca_password contains the password used to encrypt x509.intermediate_ca_key, ssh.host_ca_key and ssh.user_ca_key
+    # This value must be base64 encoded.
+    ca_password: QnFjJVphWnxyeGh4YC5mcntWby0/enNafGdwNzZHN1w=
+    provisioner_password: QnFjJVphWnxyeGh4YC5mcntWby0/enNafGdwNzZHN1w=
+
+    x509:
+      # intermediate_ca_key contains the contents of your encrypted intermediate CA key
+      intermediate_ca_key: |
+        -----BEGIN EC PRIVATE KEY-----
+        Proc-Type: 4,ENCRYPTED
+        DEK-Info: AES-256-CBC,d0cd9a869dc6570a84f9cc13f44d3abd
+
+        lWoEuNxubpUHc0uExrXlRvP67s7DTyDoPqWdpGZzR5LfBQIK562/89f9zpJ7JVY4
+        36r0LtHnGJs6JTQV3dWau0YTafOwweeFLODnk5ebKpv7kIfTDVgYAlR7pJsF0sKV
+        8ookeNgakhKJ2yU54uyiLod7gX8wacbf5k79LyqtO/A=
+        -----END EC PRIVATE KEY-----
+
+
+      # root_ca_key contains the contents of your encrypted root CA key
+      # Note that this value can be omitted without impacting the functionality of step-certificates
+      # If supplied, this should be encrypted using a unique password that is not used for encrypting
+      # the intermediate_ca_key, ssh.host_ca_key or ssh.user_ca_key.
+      root_ca_key: |
+        -----BEGIN EC PRIVATE KEY-----
+        Proc-Type: 4,ENCRYPTED
+        DEK-Info: AES-256-CBC,6bd6cf7f835f834ce3dc76ec585f79ea
+
+        uEWKEH4dfkZRlfeGAxNV/fTO9r3j5jAAO/5FGvaVZYULDwk39LkBG1mJa7t8QEmi
+        xSadejusbC2TlauWJR/Y9QMLMjJJD0z698Y2NGiaasutuPzZfWOGKTl4vK6FYDnt
+        hscWRFlzAjTlrfaa3WLvTBA/HJ8XL98ZGC/e/crBs/0=
+        -----END EC PRIVATE KEY-----
+
+service:
+  targetPort: 9000
