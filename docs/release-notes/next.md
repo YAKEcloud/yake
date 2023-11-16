@@ -413,3 +413,10 @@ gardener-extension-provider-openstack: `eu.gcr.io/gardener-project/gardener/exte
 
 
 </details>
+
+<details>
+<summary><b>Update cloudprofiles to <code>0.6.8</code></b></summary>
+
+**Full Changelog**: https://github.com/gardener-community/cloudprofiles/compare/0.6.7...0.6.8
+
+</details>
