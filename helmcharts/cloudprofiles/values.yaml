@@ -36,6 +36,8 @@ global:
                 1.25.14:
                     classification: deprecated
                 1.25.15:
+                    classification: deprecated
+                1.25.16:
                     classification: supported
                 1.26.5:
                     classification: deprecated
