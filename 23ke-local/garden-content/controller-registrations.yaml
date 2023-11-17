@@ -27,8 +27,6 @@ spec:
       type: local
     - kind: DNSRecord
       type: local
-    - kind: DNSRecord
-      type: rfc2136
     - kind: ControlPlane
       type: local
     - kind: Infrastructure
