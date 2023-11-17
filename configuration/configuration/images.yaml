@@ -29,6 +29,11 @@ gardenlet:
         resourceId:
           name: resource-manager
         sourceRepository: github.com/gardener/gardener
+      - name: gardener-node-agent
+        repository: eu.gcr.io/gardener-project/gardener/node-agent
+        resourceId:
+          name: node-agent
+        sourceRepository: github.com/gardener/gardener
       - labels:
           - name: cloud.gardener.cnudie/dso/scanning-hints/binary_id/v1
             value:
@@ -101,7 +106,7 @@ gardenlet:
         name: machine-controller-manager
         repository: eu.gcr.io/gardener-project/gardener/machine-controller-manager
         sourceRepository: github.com/gardener/machine-controller-manager
-        tag: v0.50.0
+        tag: v0.50.1
       - name: cluster-autoscaler
         repository: eu.gcr.io/gardener-project/gardener/autoscaler/cluster-autoscaler
         sourceRepository: github.com/gardener/autoscaler
@@ -174,7 +179,7 @@ gardenlet:
               - teamname: gardener/monitoring-maintainers
                 type: githubTeam
         name: configmap-reloader
-        repository: ghcr.io/prometheus-operator/prometheus-config-reloader
+        repository: quay.io/prometheus-operator/prometheus-config-reloader
         sourceRepository: github.com/prometheus-operator/prometheus-operator
         tag: v0.67.1
       - labels:
@@ -234,7 +239,7 @@ gardenlet:
         name: plutono
         repository: ghcr.io/credativ/plutono
         sourceRepository: github.com/credativ/plutono
-        tag: v7.5.25
+        tag: v7.5.26
       - labels:
           - name: gardener.cloud/cve-categorisation
             value:
@@ -405,7 +410,7 @@ gardenlet:
         name: vali
         repository: ghcr.io/credativ/vali
         sourceRepository: github.com/credativ/vali
-        tag: v2.2.9
+        tag: v2.2.11
       - labels:
           - name: gardener.cloud/cve-categorisation
             value:
@@ -440,7 +445,7 @@ gardenlet:
         name: kube-rbac-proxy
         repository: quay.io/brancz/kube-rbac-proxy
         sourceRepository: github.com/brancz/kube-rbac-proxy
-        tag: v0.14.2
+        tag: v0.15.0
       - labels:
           - name: gardener.cloud/cve-categorisation
             value:
@@ -458,7 +463,7 @@ gardenlet:
         name: valitail
         repository: ghcr.io/credativ/valitail
         sourceRepository: github.com/credativ/vali
-        tag: v2.2.9
+        tag: v2.2.11
       - labels:
           - name: gardener.cloud/cve-categorisation
             value:
