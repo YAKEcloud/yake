@@ -2201,6 +2201,51 @@ runtime-gvisor:
       - name: runtime-gvisor-installation
         repository: eu.gcr.io/gardener-project/gardener/extensions/runtime-gvisor-installation
         sourceRepository: github.com/gardener/gardener-extension-runtime-gvisor
+shoot-oidc-service:
+  imageVectorOriginal:
+    images:
+      - name: oidc-webhook-authenticator
+        repository: eu.gcr.io/gardener-project/gardener/oidc-webhook-authenticator
+        sourceRepository: github.com/gardener/oidc-webhook-authenticator
+        tag: v0.26.0
+shoot-networking-filter:
+  imageVectorOriginal:
+    images:
+      - name: egress-filter
+        repository: eu.gcr.io/gardener-project/gardener/egress-filter
+        sourceRepository: github.com/gardener/egress-filter-refresher
+        tag: 0.12.1
+shoot-networking-problemdetector:
+  imageVectorOriginal:
+    images:
+      - name: network-problem-detector-agent
+        repository: eu.gcr.io/gardener-project/gardener/network-problem-detector
+        resourceId:
+          name: network-problem-detector
+        sourceRepository: github.com/gardener/network-problem-detector
+        tag: v0.16.0
+      - name: network-problem-detector-controller
+        repository: eu.gcr.io/gardener-project/gardener/network-problem-detector
+        resourceId:
+          name: network-problem-detector
+        sourceRepository: github.com/gardener/network-problem-detector
+        tag: v0.16.0
+shoot-rsyslog-relp:
+  imageVectorOriginal:
+    images:
+      - name: alpine
+        repository: eu.gcr.io/gardener-project/3rd/alpine
+        tag: 3.15.8
+      - labels:
+          - name: cloud.gardener.cnudie/dso/scanning-hints/binary_id/v1
+            value:
+              comment: |
+                pause-container is not accessible from outside k8s clusters and not interacted with from other containers or other systems
+              policy: skip
+        name: pause-container
+        repository: registry.k8s.io/pause
+        sourceRepository: github.com/kubernetes/kubernetes/blob/master/build/pause/Dockerfile
+        tag: "3.7"
 etcd-druid:
   imageVectorOriginal:
     images:

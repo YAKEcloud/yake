@@ -64,3 +64,23 @@ sources:
   version:
     fromFile: ../../../configuration/configuration/templates/extensions.yaml
   imageVector: imagevector/images.yaml
+- name: shoot-oidc-service
+  repo: gardener/gardener-extension-shoot-oidc-service
+  version:
+    fromFile: ../../../configuration/configuration/templates/extensions.yaml
+  imageVector: imagevector/images.yaml
+- name: shoot-networking-filter
+  repo: gardener/gardener-extension-shoot-networking-filter
+  version:
+    fromFile: ../../../configuration/configuration/templates/extensions.yaml
+  imageVector: charts/images.yaml
+- name: shoot-networking-problemdetector
+  repo: gardener/gardener-extension-shoot-networking-problemdetector
+  version:
+    fromFile: ../../../configuration/configuration/templates/extensions.yaml
+  imageVector: imagevector/images.yaml
+- name: shoot-rsyslog-relp
+  repo: gardener/gardener-extension-shoot-rsyslog-relp
+  version:
+    fromFile: ../../../configuration/configuration/templates/extensions.yaml
+  imageVector: charts/images.yaml
