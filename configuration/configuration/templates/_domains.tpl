@@ -33,14 +33,14 @@
 {{- end -}}
 
 {{- define "gardener.defaultDomains" -}}
-{{- if (.Values.domains.gardener).defaultDomains }}
-{{- range .Values.domains.gardener.defaultDomains }}
+{{- if (.Values.domains.gardener).defaultDomains -}}
+{{- range .Values.domains.gardener.defaultDomains -}}
 - domain: {{ .domain }}
-  provider: {{ $.Values.domains.global.provider }}
+  provider: {{ .provider | default $.Values.domains.global.provider }}
   credentials:
-    {{- toYaml $.Values.domains.global.credentials | nindent 4 }}
+    {{- toYaml (or .credentials $.Values.domains.global.credentials) | nindent 4 }}
 {{- end }}
-{{- else }}
+{{- else -}}
 - domain: {{ .Values.domains.global.domain }}
   provider: {{ .Values.domains.global.provider }}
   credentials:
@@ -49,12 +49,12 @@
 {{- end -}}
 
 {{- define "gardener.internalDomain" -}}
-{{- if ((.Values.domains.gardener).internalDomain).domain }}
-domain: {{ .Values.domains.gardener.internalDomain.domain }}
-provider: {{ .Values.domains.global.provider }}
+{{- if ((.Values.domains.gardener).internalDomain).domain -}}
+domain: {{  .Values.domains.gardener.internalDomain.domain }}
+provider: {{ ((.Values.domains.gardener).internalDomain).provider | default .Values.domains.global.provider }}
 credentials:
-  {{- toYaml .Values.domains.global.credentials | nindent 2 }}
-{{- else }}
+  {{- toYaml (or ((.Values.domains.gardener).internalDomain).credentials .Values.domains.global.credentials) | nindent 2 }}
+{{- else -}}
 domain: internal.{{ .Values.domains.global.domain }}
 provider: {{ .Values.domains.global.provider }}
 credentials:

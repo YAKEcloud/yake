@@ -11,8 +11,10 @@ stringData:
       deployment:
         virtualGarden:
           enabled: true
-      defaultDomains: {{ include "gardener.defaultDomains" . | indent 8 }}
-      internalDomain: {{ include "gardener.internalDomain" . | indent 8 }}
+      defaultDomains:
+        {{- include "gardener.defaultDomains" . | nindent 8 }}
+      internalDomain:
+        {{- include "gardener.internalDomain" . | nindent 8 }}
       apiserver:
         replicaCount: 2
         vpa: true
