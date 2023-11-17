@@ -23,6 +23,14 @@ stringData:
           repository: {{ include "replaceRegistry" (dict "eu.gcr.io/gardener-project/gardener/extensions/os-gardenlinux" .Values.registryOverwrite) }}
 {{- end }}
 
+    os-coreos:
+      version: 1.18.0
+{{- if .Values.registryOverwrite }}
+      values:
+        image:
+          repository: {{ include "replaceRegistry" (dict "eu.gcr.io/gardener-project/gardener/extensions/os-coreos" .Values.registryOverwrite) }}
+{{- end }}
+
     provider-hcloud:
       version: 0.6.23
       admission:
@@ -110,6 +118,46 @@ stringData:
           repository: {{ include "replaceRegistry" (dict "eu.gcr.io/gardener-project/gardener/extensions/shoot-dns-service" .Values.registryOverwrite) }}
         imageVectorOverwrite: |
 {{ include "shoot-dns-service.imageVectorOverwrite" . | indent 10 }}
+{{- end }}
+
+    shoot-oidc-service:
+      version: 0.22.0
+{{- if .Values.registryOverwrite }}
+      values:
+        image:
+          repository: {{ include "replaceRegistry" (dict "eu.gcr.io/gardener-project/gardener/extensions/shoot-oidc-service" .Values.registryOverwrite) }}
+        imageVectorOverwrite: |
+{{ include "shoot-oidc-service.imageVectorOverwrite" . | indent 10 }}
+{{- end }}
+
+    shoot-networking-filter:
+      version: 0.14.0
+{{- if .Values.registryOverwrite }}
+      values:
+        image:
+          repository: {{ include "replaceRegistry" (dict "eu.gcr.io/gardener-project/gardener/extensions/shoot-networking-filter" .Values.registryOverwrite) }}
+        imageVectorOverwrite: |
+{{ include "shoot-networking-filter.imageVectorOverwrite" . | indent 10 }}
+{{- end }}
+
+    shoot-networking-problemdetector:
+      version: 0.18.0
+{{- if .Values.registryOverwrite }}
+      values:
+        image:
+          repository: {{ include "replaceRegistry" (dict "eu.gcr.io/gardener-project/gardener/extensions/shoot-networking-problemdetector" .Values.registryOverwrite) }}
+        imageVectorOverwrite: |
+{{ include "shoot-networking-problemdetector.imageVectorOverwrite" . | indent 10 }}
+{{- end }}
+
+    shoot-rsyslog-relp:
+      version: 0.2.1
+{{- if .Values.registryOverwrite }}
+      values:
+        image:
+          repository: {{ include "replaceRegistry" (dict "eu.gcr.io/gardener-project/gardener/extensions/shoot-rsyslog-relp" .Values.registryOverwrite) }}
+        imageVectorOverwrite: |
+{{ include "shoot-rsyslog-relp.imageVectorOverwrite" . | indent 10 }}
 {{- end }}
 
     networking-cilium:

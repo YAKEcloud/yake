@@ -167,3 +167,55 @@ images:
 {{ list $i | toYaml}}
 {{- end }}
 {{- end }}
+
+{{- define "shoot-oidc-service.imageVectorOverwrite" -}}
+images:
+{{- range $i := index .Values "shoot-oidc-service" "imageVectorOriginal" "images" }}
+{{- range $k, $v := $.Values.registryOverwrite }}
+{{- if hasPrefix $k $i.repository }}
+{{- $a := replace $k $v $i.repository }}
+{{- $_ := set $i "repository" $a }}
+{{- end }}
+{{- end }}
+{{ list $i | toYaml}}
+{{- end }}
+{{- end }}
+
+{{- define "shoot-networking-filter.imageVectorOverwrite" -}}
+images:
+{{- range $i := index .Values "shoot-networking-filter" "imageVectorOriginal" "images" }}
+{{- range $k, $v := $.Values.registryOverwrite }}
+{{- if hasPrefix $k $i.repository }}
+{{- $a := replace $k $v $i.repository }}
+{{- $_ := set $i "repository" $a }}
+{{- end }}
+{{- end }}
+{{ list $i | toYaml}}
+{{- end }}
+{{- end }}
+
+{{- define "shoot-networking-problemdetector.imageVectorOverwrite" -}}
+images:
+{{- range $i := index .Values "shoot-networking-problemdetector" "imageVectorOriginal" "images" }}
+{{- range $k, $v := $.Values.registryOverwrite }}
+{{- if hasPrefix $k $i.repository }}
+{{- $a := replace $k $v $i.repository }}
+{{- $_ := set $i "repository" $a }}
+{{- end }}
+{{- end }}
+{{ list $i | toYaml}}
+{{- end }}
+{{- end }}
+
+{{- define "shoot-rsyslog-relp.imageVectorOverwrite" -}}
+images:
+{{- range $i := index .Values "shoot-rsyslog-relp" "imageVectorOriginal" "images" }}
+{{- range $k, $v := $.Values.registryOverwrite }}
+{{- if hasPrefix $k $i.repository }}
+{{- $a := replace $k $v $i.repository }}
+{{- $_ := set $i "repository" $a }}
+{{- end }}
+{{- end }}
+{{ list $i | toYaml}}
+{{- end }}
+{{- end }}

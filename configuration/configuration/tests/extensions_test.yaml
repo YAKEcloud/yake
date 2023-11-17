@@ -102,3 +102,95 @@ tests:
                     controllers: dnscontrollers,dnssources
                     dnsPoolResyncPeriod: 30m
                     serverPortHttp: 8080
+  - it: should render os-coreos with registryOverwrite
+    values:
+      - ../values-test.yaml
+      - ../images.yaml
+    set:
+      registryOverwrite:
+        eu.gcr.io: myregistry.example.org
+    asserts:
+      - matchRegex:
+          path: stringData['values.yaml']
+          pattern: |
+            os-coreos:
+              version: .+
+              values:
+                image:
+                  repository: myregistry.example.org/gardener-project/gardener/extensions/os-coreos
+  - it: should render networking-filter with registryOverwrite
+    values:
+      - ../values-test.yaml
+      - ../images.yaml
+    set:
+      registryOverwrite:
+        eu.gcr.io: myregistry.example.org
+    asserts:
+      - matchRegex:
+          path: stringData['values.yaml']
+          pattern: |
+            shoot-networking-filter:
+              version: .+
+              values:
+                image:
+                  repository: myregistry.example.org/gardener-project/gardener/extensions/shoot-networking-filter
+                imageVectorOverwrite: \|
+                  images:
+                  - name: egress-filter
+                    repository: myregistry.example.org/gardener-project/gardener/egress-filter
+  - it: should render networking-problemdetector with registryOverwrite
+    values:
+      - ../values-test.yaml
+      - ../images.yaml
+    set:
+      registryOverwrite:
+        eu.gcr.io: myregistry.example.org
+    asserts:
+      - matchRegex:
+          path: stringData['values.yaml']
+          pattern: |
+            shoot-networking-problemdetector:
+              version: .+
+              values:
+                image:
+                  repository: myregistry.example.org/gardener-project/gardener/extensions/shoot-networking-problemdetector
+                imageVectorOverwrite: \|
+                  images:
+                  - name: network-problem-detector-agent
+                    repository: myregistry.example.org/gardener-project/gardener/network-problem-detector
+  - it: should rendershoot-rsyslog-relp with registryOverwrite
+    values:
+      - ../values-test.yaml
+      - ../images.yaml
+    set:
+      registryOverwrite:
+        eu.gcr.io: myregistry.example.org
+    asserts:
+      - matchRegex:
+          path: stringData['values.yaml']
+          pattern: |
+            shoot-rsyslog-relp:
+              version: .+
+              values:
+                image:
+                  repository: myregistry.example.org/gardener-project/gardener/extensions/shoot-rsyslog-relp
+                imageVectorOverwrite: \|
+                  images:
+                  - name: alpine
+                    repository: myregistry.example.org/gardener-project/3rd/alpine
+  - it: should render os-coreos with registryOverwrite
+    values:
+      - ../values-test.yaml
+      - ../images.yaml
+    set:
+      registryOverwrite:
+        eu.gcr.io: myregistry.example.org
+    asserts:
+      - matchRegex:
+          path: stringData['values.yaml']
+          pattern: |
+            os-coreos:
+              version: .+
+              values:
+                image:
+                  repository: myregistry.example.org/gardener-project/gardener/extensions/os-coreos
