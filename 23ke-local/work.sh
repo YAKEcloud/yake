@@ -157,17 +157,18 @@ then
 		read -p "Please add these to /etc/hosts and press any key to continue."
 fi 
 
-echo ">>> waiting for provider local service account in vgarden"
-until kubectl get secrets -n garden garden-kubeconfig-for-admin -o go-template='{{.data.kubeconfig | base64decode }}' > "$VGARDEN_KUBECONFIG"; do
-  sleep 3
-done
-echo ">>> ok"
+kubectl get secrets -n garden garden-kubeconfig-for-admin -o go-template='{{.data.kubeconfig | base64decode }}' > "$VGARDEN_KUBECONFIG"; do
 
 KUBECONFIG="$VGARDEN_KUBECONFIG" kubectl apply -f garden-content/cloudprofile-local.yaml
 KUBECONFIG="$VGARDEN_KUBECONFIG" kubectl apply -f garden-content/controller-registrations.yaml
 KUBECONFIG="$VGARDEN_KUBECONFIG" kubectl apply -f garden-content/project.yaml
 
-providerLocalSAName=$(KUBECONFIG="$VGARDEN_KUBECONFIG" kubectl get sa -n seed-initial-seed -o custom-columns=NAME:.metadata.name --no-headers | grep extension-provider-local)
+echo ">>> waiting for provider local service account in vgarden"
+until providerLocalSAName=$(KUBECONFIG="$VGARDEN_KUBECONFIG" kubectl get sa -n seed-initial-seed -o custom-columns=NAME:.metadata.name --no-headers | grep extension-provider-local); do
+  sleep 3
+done
+echo ">>> ok"
+
 cat <<EOF | KUBECONFIG="$VGARDEN_KUBECONFIG" kubectl apply -f -
 apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRoleBinding
