@@ -157,7 +157,7 @@ then
 		read -p "Please add these to /etc/hosts and press any key to continue."
 fi 
 
-kubectl get secrets -n garden garden-kubeconfig-for-admin -o go-template='{{.data.kubeconfig | base64decode }}' > "$VGARDEN_KUBECONFIG"; do
+kubectl get secrets -n garden garden-kubeconfig-for-admin -o go-template='{{.data.kubeconfig | base64decode }}' > "$VGARDEN_KUBECONFIG"
 
 KUBECONFIG="$VGARDEN_KUBECONFIG" kubectl apply -f garden-content/cloudprofile-local.yaml
 KUBECONFIG="$VGARDEN_KUBECONFIG" kubectl apply -f garden-content/controller-registrations.yaml
