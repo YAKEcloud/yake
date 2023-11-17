@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: Secret
+metadata:
+  name: dashboard-values
+  namespace: flux-system
+type: Opaque
+stringData:
+  values.yaml: |
+    global:
+      dashboard:
+        frontendConfig:
+          seedCandidateDeterminationStrategy: MinimalDistance
