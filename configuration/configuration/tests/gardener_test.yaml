@@ -38,6 +38,43 @@ tests:
                 replicaCount: 2
                 vpa: true
 
+
+  - it: should create default domains with correct provider and credentials
+    values:
+      - ../values-test.yaml
+    set:
+      domains:
+        gardener:
+          defaultDomains:
+            - domain: local.gardener.cloud
+              provider: local
+              credentials:
+                secret: local
+          internalDomain:
+            domain: local.gardener.cloud
+            provider: local
+            credentials:
+              secret: local
+
+    asserts:
+      - matchRegex:
+          path: stringData['values.yaml']
+          pattern: |-2
+            global:
+              deployment:
+                virtualGarden:
+                  enabled: true
+              defaultDomains:
+                - domain: local.gardener.cloud
+                  provider: local
+                  credentials:
+                    secret: local
+              internalDomain:
+                domain: local.gardener.cloud
+                provider: local
+                credentials:
+                  secret: local
+
   - it: should set repository with registryOverwrite
     values:
       - ../values-test.yaml
