@@ -151,7 +151,7 @@ stringData:
 {{- end }}
 
     shoot-rsyslog-relp:
-      version: 0.2.1
+      version: 0.2.2
 {{- if .Values.registryOverwrite }}
       values:
         image:

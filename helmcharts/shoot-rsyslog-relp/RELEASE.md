@@ -1,17 +1,3 @@
----
-hide_table_of_contents: true
----
-
-# Release Notes next
-
-## 23KE release notes and upgrade guide
-
-## Related upstream release notes / changelogs
-
-
-<details>
-<summary><b>Update shoot-rsyslog-relp to <code>0.2.2</code></b></summary>
-
 # [gardener/gardener-extension-shoot-rsyslog-relp]
 
 ## 🏃 Others
@@ -24,6 +10,3 @@ hide_table_of_contents: true
 ## Docker Images
 - gardener-extension-shoot-rsyslog-relp-admission: `eu.gcr.io/gardener-project/gardener/extensions/shoot-rsyslog-relp-admission:v0.2.2`
 - gardener-extension-shoot-rsyslog-relp: `eu.gcr.io/gardener-project/gardener/extensions/shoot-rsyslog-relp:v0.2.2`
-
-
-</details>

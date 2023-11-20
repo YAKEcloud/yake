@@ -2238,19 +2238,25 @@ shoot-networking-problemdetector:
 shoot-rsyslog-relp:
   imageVectorOriginal:
     images:
-      - name: alpine
-        repository: eu.gcr.io/gardener-project/3rd/alpine
-        tag: 3.15.8
       - labels:
           - name: cloud.gardener.cnudie/dso/scanning-hints/binary_id/v1
             value:
               comment: |
-                pause-container is not accessible from outside k8s clusters and not interacted with from other containers or other systems
+                The alpine container is not accessible from outside k8s clusters and not interacted with from other containers or other systems.
+              policy: skip
+        name: alpine
+        repository: eu.gcr.io/gardener-project/3rd/alpine
+        tag: 3.18.4
+      - labels:
+          - name: cloud.gardener.cnudie/dso/scanning-hints/binary_id/v1
+            value:
+              comment: |
+                The pause container is not accessible from outside k8s clusters and not interacted with from other containers or other systems.
               policy: skip
         name: pause-container
         repository: registry.k8s.io/pause
         sourceRepository: github.com/kubernetes/kubernetes/blob/master/build/pause/Dockerfile
-        tag: "3.7"
+        tag: "3.9"
 etcd-druid:
   imageVectorOriginal:
     images:
