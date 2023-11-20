@@ -112,4 +112,13 @@ stringData:
             ttl: "2160h0m"
             includedNamespaces:
               - '*'
+
+    # TODO: Remove upgradeJobResources once https://github.com/vmware-tanzu/helm-charts/issues/515 is resolved
+    upgradeJobResources:
+      requests:
+        cpu: 50m
+        memory: 256Mi
+      limits:
+        cpu: 100m
+        memory: 512Mi
 {{- end }}
