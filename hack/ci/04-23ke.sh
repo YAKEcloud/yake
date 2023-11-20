@@ -30,6 +30,9 @@ fi
 $_23KECTL install --kubeconfig hack/ci/secrets/shoot-kubeconfig.yaml --config hack/ci/misc/23kectl-config.yaml
 
 echo "Waiting for Kustomization gardener"
+until $KUBECTL wait kustomization gardener -n flux-system; do
+  sleep 1
+done
 $KUBECTL wait kustomization gardener -n flux-system --for=condition=ready --timeout=10m  || { $_23KECTL doctor --kubeconfig hack/ci/secrets/shoot-kubeconfig.yaml; exit 1; }
 
 echo "Waiting for all Helmreleases to be ready"
