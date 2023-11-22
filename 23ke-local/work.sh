@@ -1,14 +1,26 @@
 #!/usr/bin/env bash
 set -eu
+
+if [[ $0 != './work.sh' ]]; then
+  echo "please run this from inside 23ke-local/"
+  exit 1
+fi
+
+source ../hack/tools/install.sh
+
 CLUSTERNAME="23ke-local"
 VGARDEN_KUBECONFIG="/tmp/$CLUSTERNAME-apiserver.yaml"
-kind create cluster --config kind-config.yaml --name $CLUSTERNAME --image=kindest/node:v1.25.11
 
-kubectl apply -f https://raw.githubusercontent.com/metallb/metallb/v0.13.12/config/manifests/metallb-native.yaml
-kubectl wait --namespace metallb-system --for=condition=ready pod --all --timeout=90s
+_create_cluster () {
+  $KIND create cluster --config kind-config.yaml --name $CLUSTERNAME --image=kindest/node:v1.26.6
+}
 
-lbrange=$(docker network inspect kind | yq '.[0].IPAM.Config[0].Subnet' | sipcalc -s24 - | head -n 10 | tail -n 1 | awk '{print $3"-"$5}')
-cat <<EOF | kubectl apply -f -
+_create_loadbalancer () {
+  $KUBECTL apply -f https://raw.githubusercontent.com/metallb/metallb/v0.13.12/config/manifests/metallb-native.yaml
+  $KUBECTL wait --namespace metallb-system --for=condition=ready pod --all --timeout=90s
+
+  lbrange=$(docker network inspect kind | $YQ '.[0].IPAM.Config[0].Subnet' | sipcalc -s24 - | head -n 10 | tail -n 1 | awk '{print $3"-"$5}')
+  cat <<EOF | $KUBECTL apply -f -
 apiVersion: metallb.io/v1beta1
 kind: IPAddressPool
 metadata:
@@ -24,50 +36,63 @@ metadata:
   name: empty
   namespace: metallb-system
 EOF
+}
 
-kubectl apply -f git-server.yaml
+_create_local_git () {
+  $KUBECTL apply -f git-server.yaml
 
-echo ">>> waiting for git server"
-kubectl wait --namespace default --for=condition=ready pod --selector=app=git-server --timeout=90s
-gitUrl="http://$(kubectl get svc git-server -o jsonpath="{.status.loadBalancer.ingress[0].ip}")/repository.git"
-git remote add local "$gitUrl" 2>/dev/null || git remote set-url local "$gitUrl"
-until git fetch local; do
-  sleep 3
-done
-echo ">>> ok"
+  printf ">>> waiting for git server "
+  $KUBECTL wait --namespace default --for=condition=ready pod --selector=app=git-server --timeout=90s
+  gitUrl="http://$($KUBECTL get svc git-server -o jsonpath="{.status.loadBalancer.ingress[0].ip}")/repository.git"
+  git remote add local "$gitUrl" 2>/dev/null || git remote set-url local "$gitUrl"
+  until git fetch local; do
+    printf .
+    sleep 3
+  done
+  echo " ok"
 
-git push local
+  git push local
+}
 
-############# step ca for acme server in kind cluster #################
-helm repo add smallstep https://smallstep.github.io/helm-charts/
+_create_step_ca () {
+  ############# step ca for acme server in kind cluster #################
+  $HELM repo add smallstep https://smallstep.github.io/helm-charts/
 
-# if values are not generated yet
-# step ca init --acme --helm > values.yaml
-helm upgrade --namespace=garden --create-namespace -i -f step-ca-values.yaml step-certificates smallstep/step-certificates
+  STEP_CA_VALUES="step-ca-values.yaml"
 
-############# knot #################
-kubectl apply -f knot.yaml
+  if [[ ! -f step-ca-values.yaml ]]; then
+    docker run --rm -it smallstep/step-cli ca init --acme --helm > "$STEP_CA_VALUES"
+    $YQ -i '.inject.config.files.["ca.json"].authority.claims.maxTLSCertDuration = "2161h"' "$STEP_CA_VALUES"
+    $YQ -i '.inject.config.files.["ca.json"].authority.claims.defaultTLSCertDuration = "2160h"' "$STEP_CA_VALUES"
+  fi
 
-svcIP=$(kubectl get svc knot -oyaml | yq .spec.clusterIP)
+  $HELM upgrade --namespace=garden --create-namespace -i -f "$STEP_CA_VALUES" step-certificates smallstep/step-certificates
+}
 
-kubectl -n kube-system get configmap coredns -ojson |
-  yq '.data.Corefile' |
-  sed "\$a local.gardener.cloud:53 {\n  forward . $svcIP\n}" |
-  kubectl -n kube-system create configmap coredns --from-file Corefile=/dev/stdin --dry-run=client -oyaml |
-  kubectl -n kube-system patch configmap coredns --patch-file /dev/stdin
+_create_local_dns () {
+  ############# knot #################
+  $KUBECTL apply -f knot.yaml
 
-############# flux #################
-kubectl apply -f ../flux-system/gotk-components.yaml
+  svcIP=$($KUBECTL get svc knot -oyaml | $YQ .spec.clusterIP)
 
-############# 23ke config #################
-export NODE_CIDR=$(docker network inspect kind | yq '.[0].IPAM.Config[0].Subnet' -r)
-export DOLLAR='$'
-for file in config/*; do
-  envsubst < "$file" | kubectl apply -f -
-done
+  $KUBECTL -n kube-system get configmap coredns -ojson |
+    $YQ '.data.Corefile' |
+    sed "\$a local.gardener.cloud:53 {\n  forward . $svcIP\n}" |
+    $KUBECTL -n kube-system create configmap coredns --from-file Corefile=/dev/stdin --dry-run=client -oyaml |
+    $KUBECTL -n kube-system patch configmap coredns --patch-file /dev/stdin
+}
 
-cat <<EOF | kubectl apply -f -
----
+_create_flux () {
+  ############# flux #################
+  $KUBECTL apply -f ../flux-system/gotk-components.yaml
+
+  ############# 23ke config #################
+  export NODE_CIDR=$(docker network inspect kind | $YQ '.[0].IPAM.Config[0].Subnet' -r)
+  for file in config/*; do
+    envsubst "\$NODE_CIDR" < "$file" | $KUBECTL apply -f -
+  done
+
+  cat <<EOF | $KUBECTL apply -f -
 apiVersion: source.toolkit.fluxcd.io/v1
 kind: GitRepository
 metadata:
@@ -80,8 +105,7 @@ spec:
     branch: $(git branch --show-current)
 EOF
 
-##
-cat <<EOF | kubectl apply -f -
+  cat <<EOF | $KUBECTL apply -f -
 apiVersion: kustomize.toolkit.fluxcd.io/v1beta2
 kind: Kustomization
 metadata:
@@ -117,7 +141,7 @@ spec:
               patch: |
                 - op: add
                   path: /spec/template/spec/containers/0/args/-
-                  value: "--requeue-dependency=10s"
+                  value: "--requeue-dependency=30s"
             - target:
                 kind: Deployment
                 name: kustomize-controller
@@ -125,51 +149,63 @@ spec:
               patch: |
                 - op: add
                   path: /spec/template/spec/containers/0/args/-
-                  value: "--requeue-dependency=10s"
+                  value: "--requeue-dependency=30s"
 EOF
+}
 
-echo ">>> waiting for deployment cert-controller-manager"
-until kubectl get deployment cert-controller-manager -n garden; do
-  sleep 3
-done
-echo ">>> ok"
+_patch_ccm() {
+  printf ">>> waiting for deployment cert-controller-manager "
+  until $KUBECTL get deployment cert-controller-manager -n garden >/dev/null 2>&1; do
+    printf .
+    sleep 3
+  done
+  echo " ok"
 
-kubectl patch deployment -n garden cert-controller-manager --patch-file cert-controller-manager.deployment.patch.yaml
+  $KUBECTL patch deployment -n garden cert-controller-manager --patch-file cert-controller-manager.deployment.patch.yaml
+}
 
-echo ">>> waiting for hr gardener-runtime"
-until kubectl get hr gardener-runtime -n flux-system; do
-  sleep 3
-done
-kubectl wait --for=condition=ready -n flux-system hr gardener-runtime --timeout=5m
-echo ">>> ok"
+_ensure_hosts() {
+  printf ">>> waiting for hr gardener-runtime "
+  until $KUBECTL get hr gardener-runtime -n flux-system >/dev/null 2>&1; do
+    printf .
+    sleep 3
+  done
+  echo " ok"
 
-garden_ingress_ip=$(kubectl get svc -n garden garden-ingress-nginx-controller -o jsonpath="{.status.loadBalancer.ingress[0].ip}")
+  $KUBECTL wait --for=condition=ready -n flux-system hr gardener-runtime --timeout=5m
 
-if [[ $(getent hosts dashboard.local.gardener.cloud | awk '{ print $1}') != $garden_ingress_ip ]] ||
-	 [[ $(getent hosts api.local.gardener.cloud | awk '{ print $1}') != $garden_ingress_ip ]]	||
-	 [[ $(getent hosts identity.local.gardener.cloud | awk '{ print $1}') != $garden_ingress_ip ]]
-then
-		echo "-------------------------------------------------"
-		echo "$garden_ingress_ip dashboard.local.gardener.cloud"
-		echo "$garden_ingress_ip api.local.gardener.cloud"
-		echo "$garden_ingress_ip identity.local.gardener.cloud"
-		echo "-------------------------------------------------"
-		read -p "Please add these to /etc/hosts and press any key to continue."
-fi 
 
-kubectl get secrets -n garden garden-kubeconfig-for-admin -o go-template='{{.data.kubeconfig | base64decode }}' > "$VGARDEN_KUBECONFIG"
+  garden_ingress_ip=$($KUBECTL get svc -n garden garden-ingress-nginx-controller -o jsonpath="{.status.loadBalancer.ingress[0].ip}")
 
-KUBECONFIG="$VGARDEN_KUBECONFIG" kubectl apply -f garden-content/cloudprofile-local.yaml
-KUBECONFIG="$VGARDEN_KUBECONFIG" kubectl apply -f garden-content/controller-registrations.yaml
-KUBECONFIG="$VGARDEN_KUBECONFIG" kubectl apply -f garden-content/project.yaml
+  while
+     [[ $(grep dashboard.local.gardener.cloud < /etc/hosts | awk '{ print $1 }') != "$garden_ingress_ip" ]] ||
+  	 [[ $(grep api.local.gardener.cloud < /etc/hosts | awk '{ print $1 }') != "$garden_ingress_ip" ]]	||
+  	 [[ $(grep identity.local.gardener.cloud < /etc/hosts | awk '{ print $1 }') != "$garden_ingress_ip" ]]
+  do
+  		echo "-------------------------------------------------"
+  		echo "$garden_ingress_ip dashboard.local.gardener.cloud"
+  		echo "$garden_ingress_ip api.local.gardener.cloud"
+  		echo "$garden_ingress_ip identity.local.gardener.cloud"
+  		echo "-------------------------------------------------"
+  		read -p "Please add these to /etc/hosts and press any key to continue."
+  done
+}
 
-echo ">>> waiting for provider local service account in vgarden"
-until providerLocalSAName=$(KUBECONFIG="$VGARDEN_KUBECONFIG" kubectl get sa -n seed-initial-seed -o custom-columns=NAME:.metadata.name --no-headers | grep extension-provider-local); do
-  sleep 3
-done
-echo ">>> ok"
+_create_rbac () {
+  $KUBECTL get secrets -n garden garden-kubeconfig-for-admin -o go-template='{{.data.kubeconfig | base64decode }}' > "$VGARDEN_KUBECONFIG"
 
-cat <<EOF | KUBECONFIG="$VGARDEN_KUBECONFIG" kubectl apply -f -
+  KUBECONFIG="$VGARDEN_KUBECONFIG" $KUBECTL apply -f garden-content/cloudprofile-local.yaml
+  KUBECONFIG="$VGARDEN_KUBECONFIG" $KUBECTL apply -f garden-content/controller-registrations.yaml
+  KUBECONFIG="$VGARDEN_KUBECONFIG" $KUBECTL apply -f garden-content/project.yaml
+
+  printf ">>> waiting for provider local service account in vgarden "
+  until providerLocalSAName=$(KUBECONFIG="$VGARDEN_KUBECONFIG" $KUBECTL get sa -n seed-initial-seed -o custom-columns=NAME:.metadata.name --no-headers | grep extension-provider-local); do
+    printf .
+    sleep 3
+  done
+  echo " ok"
+
+  cat <<EOF | KUBECONFIG="$VGARDEN_KUBECONFIG" $KUBECTL apply -f -
 apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRoleBinding
 metadata:
@@ -183,4 +219,23 @@ subjects:
     name: $providerLocalSAName
     namespace: seed-initial-seed
 EOF
+}
+
+###
+
+install_flux
+install_helm
+install_kind
+install_kubectl
+install_yq
+
+_create_cluster
+_create_loadbalancer
+_create_local_git
+_create_step_ca
+_create_local_dns
+_create_flux
+_patch_ccm
+_ensure_hosts
+_create_rbac
 
