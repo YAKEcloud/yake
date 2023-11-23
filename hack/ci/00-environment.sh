@@ -9,7 +9,7 @@ PROVIDER=${PROVIDER:=hcloud}
 ZONE=${ZONE:=hel1}
 
 # defines the k8s minor version for the shoot, it will look up the latest patch version from the cloudprofile
-K8SMINOR=${K8SMINOR:="1.24"}
+K8SMINOR=${K8SMINOR:="1.26"}
 export K8SMINOR
 
 # Kubeconfig file is required to define the correct current namespace

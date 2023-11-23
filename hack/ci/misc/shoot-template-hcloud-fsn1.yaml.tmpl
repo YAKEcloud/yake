@@ -46,6 +46,7 @@ spec:
   region: fsn1
   secretBindingName: hcloud-secret
   kubernetes:
+    enableStaticTokenKubeconfig: true
     version: 1.24.3 # gets replaced in 00-environment
     verticalPodAutoscaler:
       enabled: true
