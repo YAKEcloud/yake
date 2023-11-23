@@ -5,11 +5,11 @@ source hack/ci/util.sh
 
 checkDependencies
 
-PROVIDER=${PROVIDER:=hcloud}
-ZONE=${ZONE:=hel1}
+PROVIDER="${PROVIDER:=hcloud}"
+ZONE="${ZONE:=hel1}"
 
 # defines the k8s minor version for the shoot, it will look up the latest patch version from the cloudprofile
-K8SMINOR=${K8SMINOR:="1.26"}
+K8SMINOR="${K8SMINOR:='1.26'}"
 export K8SMINOR
 
 # Kubeconfig file is required to define the correct current namespace
@@ -17,31 +17,39 @@ export KUBECONFIG=hack/ci/secrets/gardener-kubeconfig.yaml
 
 # Lookup user and namespace in config, lookup project label from namespace
 USERNAME=$($KUBECTL config view --minify -o jsonpath='{..context.user}')
-#NAMESPACE=$($KUBECTL config view --minify -o jsonpath='{..namespace}')
+NAMESPACE=$($KUBECTL config view --minify -o jsonpath='{..namespace}')
 #PROJECT=$($KUBECTL get ns $NAMESPACE -o jsonpath="{.metadata.labels['project\.gardener\.cloud/name']}")
 
+# Lookup latest k8s patch version for a given minor in cloudprofile
+K8SVERSION="$($KUBECTL get cloudprofile $PROVIDER -o yaml | $YQ eval '.spec.kubernetes.versions[] | select(.version==strenv(K8SMINOR)+".*") | select(.classification=="supported" or .classification=="preview") .version' -)"
+export K8SVERSION
 
-export SHOOTHASH=$(git log -n 1 --pretty=format:%H -- hack/ci/misc/shoot-template-$PROVIDER-$ZONE.yaml.tmpl)
+SHOOTTPLPATH="hack/ci/misc/shoot-template-$PROVIDER-$ZONE.yaml.tmpl"
+SHOOTTPL=$($YQ eval '.spec.kubernetes.version=env(K8SVERSION)' "$SHOOTTPLPATH")
+SHOOTHASH=$(echo "$SHOOTTPL" | md5sum "$SHOOTTPLPATH" | awk '{ print $1 }')
+export SHOOTHASH
+SHOOTSELECTOR=23technologies.cloud/free-to-use='true',23technologies.cloud/region=$ZONE,23technologies.cloud/shoot.yaml=$SHOOTHASH
 
 DESIRED_PRESPAWNED_SHOOTS=2
-ACTUAL_PRESPAWNED_SHOOTS=$($KUBECTL get shoots --selector=23technologies.cloud/free-to-use='true',23technologies.cloud/region=$ZONE,23technologies.cloud/shoot.yaml=$SHOOTHASH --no-headers=true | cut -d ' ' -f4 | grep -c $PROVIDER || true ) # || true avoids both set -e and the ERR trap triggering when grep -c finds zero lines and exits with 1
+ACTUAL_PRESPAWNED_SHOOTS=$($KUBECTL get shoots "--selector=$SHOOTSELECTOR" --no-headers=true | cut -d ' ' -f4 | grep -c $PROVIDER || true ) # || true avoids both set -e and the ERR trap triggering when grep -c finds zero lines and exits with 1
 NEEDED_PRESPAWNED_SHOOTS=$(( DESIRED_PRESPAWNED_SHOOTS - ACTUAL_PRESPAWNED_SHOOTS ))
 
 while [ $NEEDED_PRESPAWNED_SHOOTS -gt 0 ]
 do
     RANDNAME="23ke-run-$(openssl rand -hex 2)"
     export RANDNAME
-    # Lookup latest k8s patch version for a given minor in cloudprofile
-    K8SVERSION="$($KUBECTL get cloudprofile $PROVIDER -o yaml | $YQ eval '.spec.kubernetes.versions[] | select(.version==strenv(K8SMINOR)+".*") | select(.classification=="supported") .version' -)"
-    export K8SVERSION
-    # Alter shoot template
-    $YQ eval '.metadata.name = env(RANDNAME)' hack/ci/misc/shoot-template-$PROVIDER-$ZONE.yaml.tmpl | $YQ eval '.metadata.labels["23technologies.cloud/shoot.yaml"]=env(SHOOTHASH)' - | $YQ eval '.spec.kubernetes.version=env(K8SVERSION)' - | $KUBECTL apply -f -
-    ACTUAL_PRESPAWNED_SHOOTS=$($KUBECTL get shoots --selector=23technologies.cloud/free-to-use='true',23technologies.cloud/region=$ZONE,23technologies.cloud/shoot.yaml=$SHOOTHASH --no-headers=true | cut -d ' ' -f4 | grep -c $PROVIDER || true )
+
+    echo "$SHOOTTPL" \
+      | $YQ eval '.metadata.name = env(RANDNAME)' - \
+      | $YQ eval '.metadata.labels["23technologies.cloud/shoot.yaml"] = env(SHOOTHASH)' - \
+      | $KUBECTL apply -f -
+
+    ACTUAL_PRESPAWNED_SHOOTS=$($KUBECTL get shoots "--selector=$SHOOTSELECTOR" --no-headers=true | cut -d ' ' -f4 | grep -c $PROVIDER || true )
     NEEDED_PRESPAWNED_SHOOTS=$(( DESIRED_PRESPAWNED_SHOOTS - ACTUAL_PRESPAWNED_SHOOTS ))
 done
 
 # Choose our shoot (free to use and the one with highest progress)
-SHOOT=$($KUBECTL get shoot --sort-by=.status.lastOperation.progress --no-headers=true --selector=23technologies.cloud/free-to-use='true',23technologies.cloud/region=$ZONE,23technologies.cloud/shoot.yaml=$SHOOTHASH | grep "   $PROVIDER   " |cut -d ' ' -f1|tail -n1)
+SHOOT=$($KUBECTL get shoot --sort-by=.status.lastOperation.progress --no-headers=true "--selector=$SHOOTSELECTOR" | grep "   $PROVIDER   " |cut -d ' ' -f1|tail -n1)
 
 # Check if shoot is hibernated and wake-up otherwise
 is_hibernated=$($KUBECTL get shoot $SHOOT -o jsonpath="{.status.hibernated}")
@@ -54,7 +62,6 @@ $KUBECTL label shoot "$SHOOT" 23technologies.cloud/free-to-use=false --overwrite
 $KUBECTL label shoot "$SHOOT" 23technologies.cloud/shoot-owner="$USERNAME"
 
 SHOOT_DOMAIN=$($KUBECTL get shoot "$SHOOT" -o jsonpath="{.spec.dns.domain}")
-
 
 # FIXME: maybe do in a single get
 echo "Fetching DNS secret from base gardener"
@@ -110,4 +117,5 @@ export MINIO_URL=https://$MINIO_HOSTNAME
 export MINIO_PW=$MINIO_PW
 export MC_HOST_$MC_ALIAS=https://minio:$MINIO_PW@$MINIO_HOSTNAME
 export GH_TOKEN=$GH_TOKEN
+export NAMESPACE=$NAMESPACE
 EOF

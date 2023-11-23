@@ -16,8 +16,11 @@ done
 echo "Shoot creation succeeded"
 
 # Get shoot kubeconfig
-$KUBECTL get secret "$SHOOT".kubeconfig -o go-template='{{.data.kubeconfig|base64decode}}' > hack/ci/secrets/shoot-kubeconfig.yaml
-export KUBECONFIG=hack/ci/secrets/shoot-kubeconfig.yaml
+$KUBECTL create \
+  -f <(printf '{"spec":{"expirationSeconds":86400}}') \
+  --raw "/apis/core.gardener.cloud/v1beta1/namespaces/${NAMESPACE}/shoots/${SHOOT}/adminkubeconfig" | \
+  jq -r ".status.kubeconfig" | \
+  base64 -d > hack/ci/secrets/shoot-kubeconfig.yaml
 
 RCLONE_AZUREBLOB_KEY=$($KUBECTL --kubeconfig hack/ci/secrets/gardener-kubeconfig.yaml get secret azure-blob-storage-key -o go-template='{{.data.accountKey|base64decode}}')
 

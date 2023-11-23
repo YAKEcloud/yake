@@ -1,0 +1,78 @@
+kind: Shoot
+apiVersion: core.gardener.cloud/v1beta1
+metadata:
+  name: 23ke-test
+  labels:
+    23technologies.cloud/free-to-use: "true"
+    23technologies.cloud/region: "RegionA"
+    23technologies.cloud/shoot.yaml: "md5"
+  annotations:
+    shoot.gardener.cloud/cleanup-webhooks-finalize-grace-period-seconds: "0"
+    shoot.gardener.cloud/cleanup-extended-apis-finalize-grace-period-seconds: "0"
+spec:
+  provider:
+    type: openstack
+    infrastructureConfig:
+      apiVersion: openstack.provider.extensions.gardener.cloud/v1alpha1
+      kind: InfrastructureConfig
+      networks:
+        workers: 10.11.0.0/16
+      floatingPoolName: public
+    controlPlaneConfig:
+      apiVersion: openstack.provider.extensions.gardener.cloud/v1alpha1
+      kind: ControlPlaneConfig
+      loadBalancerProvider: amphora
+    workers:
+      - name: worker-erys2
+        minimum: 4
+        maximum: 10
+        maxSurge: 1
+        machine:
+          type: SCS-4V-8
+          image:
+            name: gardenlinux
+            version: 934.10.0
+          architecture: amd64
+        zones:
+          - nova
+        cri:
+          name: containerd
+        volume:
+          type: hdd
+          size: 50Gi
+
+  networking:
+    nodes: 10.11.0.0/16
+    pods: 10.10.0.0/16
+    services: 10.16.0.0/13
+    type: calico
+  cloudProfileName: regiocloud
+  region: RegionA
+  secretBindingName: regio-cloud-secret
+  kubernetes:
+    version: a.b.c # gets replaced in 00-environment
+    verticalPodAutoscaler:
+      enabled: true
+  purpose: evaluation
+  addons:
+    kubernetesDashboard:
+      enabled: false
+    nginxIngress:
+      enabled: false
+      externalTrafficPolicy: Cluster
+  extensions:
+    - type: shoot-dns-service
+      disabled: true
+    - type: shoot-cert-service
+      disabled: true
+  maintenance:
+    timeWindow:
+      begin: 020000+0200
+      end: 030000+0200
+    autoUpdate:
+      kubernetesVersion: true
+      machineImageVersion: true
+  hibernation:
+    schedules:
+    - start: '00 19 * * 1,2,3,4,5'
+      location: Europe/Berlin
