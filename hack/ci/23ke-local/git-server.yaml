@@ -12,6 +12,7 @@ spec:
       app: git-server
   template:
     metadata:
+      namespace: default
       labels:
         app: git-server
     spec:
