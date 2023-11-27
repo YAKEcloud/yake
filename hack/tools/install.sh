@@ -11,6 +11,7 @@ MC="$TOOLS_BIN_DIR/mc"
 RCLONE="$TOOLS_BIN_DIR/rclone"
 YQ="$TOOLS_BIN_DIR/yq"
 SIPCALC="$TOOLS_BIN_DIR/sipcalc"
+ENVSUBST="$TOOLS_BIN_DIR/envsubst"
 
 TOOLS_KERNEL="$(uname -s | tr '[:upper:]' '[:lower:]')"
 TOOLS_ARCH="$(uname -m | sed 's/x86_64/amd64/;s/aarch64/arm64/')"
@@ -138,7 +139,6 @@ install_23kectl() {
 install_kind() {
   # not under renovate control
   VERSION=v0.20.0
-  local KIND="$TOOLS_BIN_DIR/kind"
 
   if _isStale "$KIND" "$VERSION"; then
 		curl -L -o "$KIND" "https://github.com/kubernetes-sigs/kind/releases/download/${VERSION}/kind-${TOOLS_KERNEL}-${TOOLS_ARCH}"
@@ -152,7 +152,6 @@ install_kind() {
 install_sipcalc() {
   # not under renovate control
   VERSION=1.1.6
-  local SIPCALC="$TOOLS_BIN_DIR/sipcalc"
 
   if _isStale "$SIPCALC" "$VERSION"; then
 		TAR="sipcalc-${VERSION}.tar.gz"
@@ -167,4 +166,16 @@ install_sipcalc() {
 
     _setVersion "$SIPCALC" "$VERSION"
   fi
+}
+
+install_envsubst() {
+		# not under renovate control
+		VERSION=v1.2.0
+
+		if _isStale "$SIPCALC" "$VERSION"; then
+				curl -L https://github.com/a8m/envsubst/releases/download/${VERSION}/envsubst-`uname -s`-`uname -m` -o $ENVSUBST
+				chmod +x $ENVSUBST
+
+				_setVersion "$ENVSUBST" "$VERSION"
+		fi
 }

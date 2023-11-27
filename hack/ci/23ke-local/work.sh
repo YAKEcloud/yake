@@ -91,7 +91,7 @@ _create_flux () {
   ############# 23ke config #################
   export NODE_CIDR=$(docker network inspect kind | $YQ '.[0].IPAM.Config[0].Subnet' -r)
   for file in config/*; do
-    envsubst "\$NODE_CIDR" < "$file" | $KUBECTL apply -f -
+    $ENVSUBST "\$NODE_CIDR" < "$file" | $KUBECTL apply -f -
   done
 
   cat <<EOF | $KUBECTL apply -f -
@@ -239,6 +239,7 @@ install_kind
 install_kubectl
 install_yq
 install_sipcalc
+install_envsubst
 
 _create_cluster
 _create_loadbalancer
