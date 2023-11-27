@@ -182,7 +182,7 @@ _ensure_hosts() {
   				echo "$garden_ingress_ip dashboard.local.gardener.cloud"
   				echo "$garden_ingress_ip api.local.gardener.cloud"
   				echo "$garden_ingress_ip identity.local.gardener.cloud"
-			} >> /etc/hosts
+			} | sudo tee -a /etc/hosts
 	fi
 
   while
