@@ -228,6 +228,7 @@ install_helm
 install_kind
 install_kubectl
 install_yq
+install_sipcalc
 
 _create_cluster
 _create_loadbalancer

@@ -10,6 +10,7 @@ KUBECTL="$TOOLS_BIN_DIR/kubectl"
 MC="$TOOLS_BIN_DIR/mc"
 RCLONE="$TOOLS_BIN_DIR/rclone"
 YQ="$TOOLS_BIN_DIR/yq"
+SIPCALC="$TOOLS_BIN_DIR/sipcalc"
 
 TOOLS_KERNEL="$(uname -s | tr '[:upper:]' '[:lower:]')"
 TOOLS_ARCH="$(uname -m | sed 's/x86_64/amd64/;s/aarch64/arm64/')"
@@ -144,5 +145,26 @@ install_kind() {
 		chmod +x "$KIND"
 
     _setVersion "$KIND" "$VERSION"
+  fi
+}
+
+
+install_sipcalc() {
+  # not under renovate control
+  VERSION=1.1.6
+  local SIPCALC="$TOOLS_BIN_DIR/sipcalc"
+
+  if _isStale "$SIPCALC" "$VERSION"; then
+		TAR="sipcalc-${VERSION}.tar.gz"
+		curl -L -o "$TAR" "http://www.routemeister.net/projects/sipcalc/files/${TAR}"
+	  tar -xvf $TAR
+		cd sipcalc-${VERSION}
+		./configure --prefix="$TOOLS_DIR"
+		make install
+		cd ..
+		rm -rf sipcalc-${VERSION}
+		rm $TAR
+
+    _setVersion "$SIPCALC" "$VERSION"
   fi
 }
