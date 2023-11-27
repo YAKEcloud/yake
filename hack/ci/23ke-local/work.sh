@@ -84,7 +84,7 @@ _create_local_dns () {
 
 _create_flux () {
   ############# flux #################
-  $KUBECTL apply -f ../flux-system/gotk-components.yaml
+  $KUBECTL apply -f ../../../flux-system/gotk-components.yaml
 
   ############# 23ke config #################
   export NODE_CIDR=$(docker network inspect kind | $YQ '.[0].IPAM.Config[0].Subnet' -r)
