@@ -10,8 +10,6 @@ jobs:
     steps:
       - name: Checkout source
         uses: actions/checkout@v3.4.0
-        with:
-          fetch-depth: 1
       - name: install
         run: |
           cd hack/ci/23ke-local
