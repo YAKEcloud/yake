@@ -3,6 +3,7 @@ apiVersion: v1
 kind: Service
 metadata:
   name: knot
+  namespace: default
   labels:
     app: knot
 spec:
@@ -22,6 +23,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: knot
+  namespace: default
 spec:
   replicas: 1
   selector:
@@ -65,6 +67,7 @@ apiVersion: v1
 kind: ConfigMap
 metadata:
   name: knot-config
+  namespace: default
 data:
   simple.conf: |
     # Example of a very simple Knot DNS configuration.
@@ -102,6 +105,7 @@ apiVersion: v1
 kind: ConfigMap
 metadata:
   name: knot-zone
+  namespace: default
 data:
   local.gardener.cloud.zone: |
     $ORIGIN local.gardener.cloud.
