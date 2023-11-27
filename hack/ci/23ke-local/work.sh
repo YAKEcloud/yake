@@ -174,7 +174,7 @@ _ensure_hosts() {
   done
   echo " ok"
 
-  $KUBECTL wait --for=condition=ready -n flux-system hr gardener-runtime --timeout=5m
+  $KUBECTL wait --for=condition=ready -n flux-system hr gardener-runtime --timeout=10m
 
 
   garden_ingress_ip=$($KUBECTL get svc -n garden garden-ingress-nginx-controller -o jsonpath="{.status.loadBalancer.ingress[0].ip}")
@@ -231,6 +231,17 @@ subjects:
 EOF
 }
 
+_wait_for_internal_seed_ready () {
+
+  printf ">>> waiting for internal seed to become ready "
+  until providerLocalSAName=$(KUBECONFIG="$VGARDEN_KUBECONFIG" $KUBECTL get seed internal); do
+    printf .
+    sleep 3
+  done
+	KUBECONFIG="$VGARDEN_KUBECONFIG" $KUBECTL wait --for=jsonpath='{.status.lastOperation.progress}'=100 --timeout=10m seed internal > /dev/null
+  echo " ok"
+}
+
 ###
 
 install_flux
@@ -250,4 +261,5 @@ _create_flux
 _patch_ccm
 _ensure_hosts
 _create_rbac
+_wait_for_internal_seed_ready
 
