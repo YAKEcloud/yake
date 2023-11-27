@@ -231,14 +231,14 @@ subjects:
 EOF
 }
 
-_wait_for_internal_seed_ready () {
+_wait_for_initial_seed_ready () {
 
-  printf ">>> waiting for internal seed to become ready "
-  until providerLocalSAName=$(KUBECONFIG="$VGARDEN_KUBECONFIG" $KUBECTL get seed internal); do
+  printf ">>> waiting for initial seed to become ready "
+  until providerLocalSAName=$(KUBECONFIG="$VGARDEN_KUBECONFIG" $KUBECTL get seed initial-seed); do
     printf .
     sleep 3
   done
-	KUBECONFIG="$VGARDEN_KUBECONFIG" $KUBECTL wait --for=jsonpath='{.status.lastOperation.progress}'=100 --timeout=10m seed internal > /dev/null
+	KUBECONFIG="$VGARDEN_KUBECONFIG" $KUBECTL wait --for=jsonpath='{.status.lastOperation.progress}'=100 --timeout=10m seed initial-seed > /dev/null
   echo " ok"
 }
 
@@ -261,5 +261,5 @@ _create_flux
 _patch_ccm
 _ensure_hosts
 _create_rbac
-_wait_for_internal_seed_ready
+_wait_for_initial_seed_ready
 
