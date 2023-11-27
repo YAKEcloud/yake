@@ -1,0 +1,8 @@
+apiVersion: v2
+dependencies:
+- condition: controller.enabled
+  name: controller
+  repository: ""
+description: A helmchart for shoot-networking-problemdetector
+name: shoot-networking-problemdetector
+version: 0.19.0
