@@ -5,7 +5,7 @@ on:
       - 'docs/**'
 jobs:
   install:
-    runs-on: ubuntu-22.04
+    runs-on: self-hosted
     name: "23KE install testrun"
     steps:
       - name: Checkout source
