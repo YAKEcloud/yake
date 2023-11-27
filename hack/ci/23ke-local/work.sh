@@ -6,7 +6,7 @@ if [[ $0 != './work.sh' ]]; then
   exit 1
 fi
 
-source ../hack/tools/install.sh
+source ../../../hack/tools/install.sh
 
 CLUSTERNAME="23ke-local"
 VGARDEN_KUBECONFIG="/tmp/$CLUSTERNAME-apiserver.yaml"
