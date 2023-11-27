@@ -177,6 +177,14 @@ _ensure_hosts() {
 
   garden_ingress_ip=$($KUBECTL get svc -n garden garden-ingress-nginx-controller -o jsonpath="{.status.loadBalancer.ingress[0].ip}")
 
+	if [[ "${CI}" ]]; then
+			{
+  				echo "$garden_ingress_ip dashboard.local.gardener.cloud"
+  				echo "$garden_ingress_ip api.local.gardener.cloud"
+  				echo "$garden_ingress_ip identity.local.gardener.cloud"
+			} >> /etc/hosts
+	fi
+
   while
      [[ $(grep dashboard.local.gardener.cloud < /etc/hosts | awk '{ print $1 }') != "$garden_ingress_ip" ]] ||
   	 [[ $(grep api.local.gardener.cloud < /etc/hosts | awk '{ print $1 }') != "$garden_ingress_ip" ]]	||
