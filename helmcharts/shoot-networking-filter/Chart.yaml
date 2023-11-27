@@ -1,0 +1,8 @@
+apiVersion: v2
+dependencies:
+- condition: controller.enabled
+  name: controller
+  repository: ""
+description: A helmchart for shoot-networking-filter
+name: shoot-networking-filter
+version: 0.15.0
