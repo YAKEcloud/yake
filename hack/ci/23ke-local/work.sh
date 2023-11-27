@@ -14,6 +14,7 @@ VGARDEN_KUBECONFIG="/tmp/$CLUSTERNAME-apiserver.yaml"
 _create_cluster () {
   $KIND create cluster --config kind-config.yaml --name $CLUSTERNAME --image=kindest/node:v1.26.6
 	$KIND export kubeconfig -n $CLUSTERNAME
+	$KUBECTL config set-context --current --namespace=default
 }
 
 _create_loadbalancer () {
