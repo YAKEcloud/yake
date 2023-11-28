@@ -53,7 +53,7 @@ _create_local_git () {
   done
   echo " ok"
 
-  git push local HEAD:local
+  git push local
 }
 
 _create_step_ca () {
