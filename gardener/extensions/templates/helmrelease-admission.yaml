@@ -26,7 +26,7 @@ spec:
       interval: 1m
   install:
     remediation:
-      retries: 3
+      retries: 50
     createNamespace: true
   values:
     global:
@@ -63,7 +63,7 @@ spec:
     - name: admission-{{ $k }}-application
   install:
     remediation:
-      retries: 3
+      retries: 50
     createNamespace: true
   values:
     global:

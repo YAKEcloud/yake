@@ -6,7 +6,7 @@ metadata:
 spec:
   install:
     remediation:
-      retries: 3
+      retries: 50
     createNamespace: true
   targetNamespace: garden
   dependsOn:

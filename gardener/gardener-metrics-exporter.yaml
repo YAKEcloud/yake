@@ -20,7 +20,7 @@ spec:
       interval: 1m
   install:
     remediation:
-      retries: 3
+      retries: 50
     createNamespace: true
   values:
     application:
@@ -73,7 +73,7 @@ spec:
       interval: 1m
   install:
     remediation:
-      retries: 3
+      retries: 50
     createNamespace: true
   values:
     application:

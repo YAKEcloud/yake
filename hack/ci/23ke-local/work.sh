@@ -143,7 +143,7 @@ spec:
               patch: |
                 - op: add
                   path: /spec/template/spec/containers/0/args/-
-                  value: "--requeue-dependency=30s"
+                  value: "--requeue-dependency=3s"
             - target:
                 kind: Deployment
                 name: kustomize-controller
@@ -151,7 +151,7 @@ spec:
               patch: |
                 - op: add
                   path: /spec/template/spec/containers/0/args/-
-                  value: "--requeue-dependency=30s"
+                  value: "--requeue-dependency=3s"
 EOF
 }
 
