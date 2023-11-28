@@ -1,0 +1,21 @@
+name: "23KE install"
+on:
+  pull_request:
+    branches:
+      - "main"
+    paths-ignore:
+      - 'docs/**'
+jobs:
+  install:
+    runs-on: self-hosted
+    name: "23KE install testrun"
+    steps:
+      - name: Checkout source
+        uses: actions/checkout@v3.4.0
+        with:
+          fetch-depth: 0
+          ref: ${{ github.head_ref }}
+      - name: install
+        run: |
+          cd hack/ci/23ke-local
+          ./work.sh

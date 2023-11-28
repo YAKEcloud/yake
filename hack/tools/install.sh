@@ -1,13 +1,17 @@
 #!/usr/bin/env bash
 
-TOOLS_BIN_DIR="hack/tools/bin"
+TOOLS_DIR=$(dirname "$(pwd)/${BASH_SOURCE[0]}")
+TOOLS_BIN_DIR="$TOOLS_DIR/bin"
 
 FLUX="$TOOLS_BIN_DIR/flux"
-KUBECTL="$TOOLS_BIN_DIR/kubectl"
-YQ="$TOOLS_BIN_DIR/yq"
-MC="$TOOLS_BIN_DIR/mc"
 HELM="$TOOLS_BIN_DIR/helm"
+KIND="$TOOLS_BIN_DIR/kind"
+KUBECTL="$TOOLS_BIN_DIR/kubectl"
+MC="$TOOLS_BIN_DIR/mc"
 RCLONE="$TOOLS_BIN_DIR/rclone"
+YQ="$TOOLS_BIN_DIR/yq"
+SIPCALC="$TOOLS_BIN_DIR/sipcalc"
+ENVSUBST="$TOOLS_BIN_DIR/envsubst"
 
 TOOLS_KERNEL="$(uname -s | tr '[:upper:]' '[:lower:]')"
 TOOLS_ARCH="$(uname -m | sed 's/x86_64/amd64/;s/aarch64/arm64/')"
@@ -130,4 +134,48 @@ install_23kectl() {
   fi
 
   echo $_23KECTL
+}
+
+install_kind() {
+  # not under renovate control
+  VERSION=v0.20.0
+
+  if _isStale "$KIND" "$VERSION"; then
+		curl -L -o "$KIND" "https://github.com/kubernetes-sigs/kind/releases/download/${VERSION}/kind-${TOOLS_KERNEL}-${TOOLS_ARCH}"
+		chmod +x "$KIND"
+
+    _setVersion "$KIND" "$VERSION"
+  fi
+}
+
+
+install_sipcalc() {
+  # not under renovate control
+  VERSION=1.1.6
+
+  if _isStale "$SIPCALC" "$VERSION"; then
+		TAR="sipcalc-${VERSION}.tar.gz"
+		curl -L -o "$TAR" "http://www.routemeister.net/projects/sipcalc/files/${TAR}"
+	  tar -xvf $TAR
+		cd sipcalc-${VERSION}
+		./configure --prefix="$TOOLS_DIR"
+		make install
+		cd ..
+		rm -rf sipcalc-${VERSION}
+		rm $TAR
+
+    _setVersion "$SIPCALC" "$VERSION"
+  fi
+}
+
+install_envsubst() {
+		# not under renovate control
+		VERSION=v1.2.0
+
+		if _isStale "$SIPCALC" "$VERSION"; then
+				curl -L https://github.com/a8m/envsubst/releases/download/${VERSION}/envsubst-`uname -s`-`uname -m` -o $ENVSUBST
+				chmod +x $ENVSUBST
+
+				_setVersion "$ENVSUBST" "$VERSION"
+		fi
 }

@@ -1,0 +1,38 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: git-server
+  namespace: default
+  labels:
+    app: git-server
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: git-server
+  template:
+    metadata:
+      namespace: default
+      labels:
+        app: git-server
+    spec:
+      containers:
+        - name: git-server
+          image: pascalgn/git-server-docker:latest # TODO: build locally
+          ports:
+            - containerPort: 3000
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: git-server
+  namespace: default
+  labels:
+    app: git-server
+spec:
+  type: LoadBalancer
+  ports:
+    - port: 80
+      targetPort: 3000
+  selector:
+    app: git-server

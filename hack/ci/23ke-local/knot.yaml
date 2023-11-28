@@ -1,0 +1,113 @@
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: knot
+  namespace: default
+  labels:
+    app: knot
+spec:
+  selector:
+    app: knot
+  ports:
+    - protocol: TCP
+      port: 53
+      targetPort: 53
+      name: knot-tcp
+    - protocol: UDP
+      port: 53
+      targetPort: 53
+      name: knot
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: knot
+  namespace: default
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: knot
+  template:
+    metadata:
+      labels:
+        app: knot
+    spec:
+      containers:
+        - name: knot
+          image: cznic/knot
+          command:
+            - bash
+            - -c
+            - |
+              cp /tmp/knot/local.gardener.cloud.zone /storage && \
+              knotd -c /etc/knot/config
+          ports:
+            - containerPort: 53
+              protocol: TCP
+            - containerPort: 53
+              protocol: UDP
+          volumeMounts:
+            - mountPath: /etc/knot/config
+              name: knot-config
+              subPath: simple.conf
+            - mountPath: /tmp/knot
+              name: knot-zone
+      volumes:
+        - name: knot-config
+          configMap:
+            name: knot-config
+        - name: knot-zone
+          configMap:
+            name: knot-zone
+
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: knot-config
+  namespace: default
+data:
+  simple.conf: |
+    # Example of a very simple Knot DNS configuration.
+
+    server:
+        listen: 0.0.0.0@53
+        listen: ::@53
+
+    key:
+      - id: "my-key."
+        algorithm: hmac-sha256
+        secret: Rw2NUXqO3z/SJBE8y8+vmJkBGJ0PPBtrDprww/b+Ik8=
+
+    acl:
+      - id: "update-acl"
+        address: [ "0.0.0.0/0" ] # replace with your address filter
+        action: update
+        key: "my-key."
+      - id: "transfer-acl"
+        address: [ "0.0.0.0/0" ] # replace with your address filter
+        action: transfer
+        key: "my-key."
+
+    zone:
+      - domain: local.gardener.cloud
+        acl: [ "update-acl", "transfer-acl" ]
+
+
+    log:
+      - target: stdout
+        any: debug
+
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: knot-zone
+  namespace: default
+data:
+  local.gardener.cloud.zone: |
+    $ORIGIN local.gardener.cloud.
+    $TTL 600
+    local.gardener.cloud.  IN  SOA   ns.local.gardener.cloud. root.local.gardener.cloud. ( 2020091025 7200 3600 1209600 3600 )

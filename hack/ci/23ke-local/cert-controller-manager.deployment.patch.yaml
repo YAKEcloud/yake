@@ -1,0 +1,14 @@
+spec:
+  template:
+    spec:
+      containers:
+        - name: cert-management
+          volumeMounts:
+            - mountPath: /etc/ssl/certs/step-ca.crt
+              name: step-ca
+              subPath: root_ca.crt
+      volumes:
+        - configMap:
+            defaultMode: 420
+            name: step-certificates-certs
+          name: step-ca

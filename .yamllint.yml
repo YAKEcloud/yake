@@ -11,6 +11,7 @@ rules:
 
 ignore: |
   .github/workflows/
+  23ke-local/
   flux-system/gotk-components.yaml
   gardener/certificates/templates/
   gardener/extensions/templates/
