@@ -47,7 +47,7 @@ stringData:
 {{- end }}
 
     provider-azure:
-      version: 1.39.2
+      version: 1.39.3
       admission:
         enabled: true
 {{- if .Values.registryOverwrite }}
@@ -131,7 +131,7 @@ stringData:
 {{- end }}
 
     shoot-networking-filter:
-      version: 0.14.0
+      version: 0.15.0
 {{- if .Values.registryOverwrite }}
       values:
         image:
@@ -141,7 +141,7 @@ stringData:
 {{- end }}
 
     shoot-networking-problemdetector:
-      version: 0.18.0
+      version: 0.19.0
 {{- if .Values.registryOverwrite }}
       values:
         image:
@@ -161,7 +161,7 @@ stringData:
 {{- end }}
 
     networking-cilium:
-      version: 1.30.2
+      version: 1.31.0
 {{- if .Values.registryOverwrite }}
       values:
         imageVectorOverwrite: |
