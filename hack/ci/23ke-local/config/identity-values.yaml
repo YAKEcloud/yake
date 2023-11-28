@@ -8,6 +8,6 @@ stringData:
   values.yaml: |
     staticPasswords:
     - email: dev@local.gardener.cloud
-      hash: $2a$10$eWNJshWJxf24FVm4u7W1XOYiPzdSscmFgs3GVF.PYaC42DjuX1piu
+      hash: $$2a$$10$$eWNJshWJxf24FVm4u7W1XOYiPzdSscmFgs3GVF.PYaC42DjuX1piu
       username: "admin"
       userID: "08a8684b-db88-4b73-90a9-3cd1661f5466"
