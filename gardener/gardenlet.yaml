@@ -1,3 +1,4 @@
+
 apiVersion: helm.toolkit.fluxcd.io/v2beta1
 kind: HelmRelease
 metadata:
@@ -23,7 +24,7 @@ spec:
       interval: 1m
   install:
     remediation:
-      retries: 50
+      retries: 3
     createNamespace: true
   values:
     runtime:

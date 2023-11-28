@@ -9,7 +9,7 @@ metadata:
 spec:
   install:
     remediation:
-      retries: 50
+      retries: 3
   interval: 1m
   kubeConfig:
     secretRef:

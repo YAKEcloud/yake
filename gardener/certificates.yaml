@@ -6,7 +6,7 @@ metadata:
 spec:
   install:
     remediation:
-      retries: 50
+      retries: 3
     createNamespace: true
   interval: 1m
   dependsOn:

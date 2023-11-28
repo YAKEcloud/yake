@@ -24,7 +24,7 @@ spec:
       interval: 1m
   install:
     remediation:
-      retries: 50
+      retries: 3
     createNamespace: true
   valuesFrom:
     - kind: Secret
