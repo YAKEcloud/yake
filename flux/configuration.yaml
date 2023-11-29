@@ -6,10 +6,10 @@ metadata:
 spec:
   interval: 1m
   dependsOn:
-    - name: 23ke-env-config
+    - name: yake-env-config
   sourceRef:
     kind: GitRepository
-    name: 23ke
+    name: yake
   path: ./configuration
   prune: true
   healthChecks:

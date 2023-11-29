@@ -1,7 +1,7 @@
 apiVersion: networking.k8s.io/v1
 kind: NetworkPolicy
 metadata:
-  name: 23ke-etcd
+  name: yake-etcd
   namespace: garden
 spec:
   podSelector:

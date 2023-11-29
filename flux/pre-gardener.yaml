@@ -9,7 +9,7 @@ spec:
     - name: addons
   sourceRef:
     kind: GitRepository
-    name: 23ke
+    name: yake
   path: ./pre-gardener
   prune: true
   healthChecks:

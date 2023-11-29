@@ -53,7 +53,7 @@ spec:
         - |
           kubectl wait dnsproviders.dns.gardener.cloud -n garden base-dns-provider --for=jsonpath='{.status.state}'=Ready --timeout=30s
           if [ $? -ne 0 ]; then
-            echo "Your dnsprovider is not ready. Please check the credentials provided in the 23ke-config secret."
+            echo "Your dnsprovider is not ready. Please check the credentials provided in the yake-config secret."
             echo ""
             kubectl get dnsproviders.dns.gardener.cloud -n garden base-dns-provider -o jsonpath='{.status.message}'
             echo ""

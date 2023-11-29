@@ -1,7 +1,7 @@
 apiVersion: networking.k8s.io/v1
 kind: NetworkPolicy
 metadata:
-  name: 23ke-gardener-controller-manager
+  name: yake-gardener-controller-manager
   namespace: garden
 spec:
   podSelector:

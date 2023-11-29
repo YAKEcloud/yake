@@ -53,7 +53,7 @@ spec:
         - |
           kubectl wait issuers.cert.gardener.cloud -n garden default-issuer --for=jsonpath='{.status.state}'=Ready --timeout=30s
           if [ $? -ne 0 ]; then
-            echo "Your certificat issuer is not ready. Please check the email address and or server provided in the 23ke-config secret."
+            echo "Your certificat issuer is not ready. Please check the email address and or server provided in the yake-config secret."
             exit 1
           fi
           exit 0

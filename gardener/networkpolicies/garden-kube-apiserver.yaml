@@ -1,7 +1,7 @@
 apiVersion: networking.k8s.io/v1
 kind: NetworkPolicy
 metadata:
-  name: 23ke-garden-kube-apiserver
+  name: yake-garden-kube-apiserver
   namespace: garden
 spec:
   podSelector:
@@ -24,7 +24,7 @@ spec:
           matchLabels:
             app: nginx-ingress
             app.kubernetes.io/component: controller
-            23ke.cloud/component: ingress-nginx
+            yake.cloud/component: ingress-nginx
       - podSelector:
           matchLabels:
             app.kubernetes.io/name: gardener-dashboard
