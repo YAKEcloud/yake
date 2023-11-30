@@ -2212,7 +2212,7 @@ shoot-oidc-service:
       - name: oidc-webhook-authenticator
         repository: eu.gcr.io/gardener-project/gardener/oidc-webhook-authenticator
         sourceRepository: github.com/gardener/oidc-webhook-authenticator
-        tag: v0.26.0
+        tag: v0.27.0
 shoot-networking-filter:
   imageVectorOriginal:
     images:

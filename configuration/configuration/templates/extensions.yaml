@@ -121,7 +121,7 @@ stringData:
 {{- end }}
 
     shoot-oidc-service:
-      version: 0.22.0
+      version: 0.23.0
 {{- if .Values.registryOverwrite }}
       values:
         image:
