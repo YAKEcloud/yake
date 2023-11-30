@@ -1,0 +1,8 @@
+apiVersion: v2
+dependencies:
+- condition: controller.enabled
+  name: controller
+  repository: ""
+description: A helmchart for shoot-oidc-service
+name: shoot-oidc-service
+version: 0.23.0
