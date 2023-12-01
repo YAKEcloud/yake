@@ -47,7 +47,7 @@ gardenlet:
       - name: etcd-druid
         repository: eu.gcr.io/gardener-project/gardener/etcd-druid
         sourceRepository: github.com/gardener/etcd-druid
-        tag: v0.20.3
+        tag: v0.21.0
       - name: dependency-watchdog
         repository: eu.gcr.io/gardener-project/gardener/dependency-watchdog
         sourceRepository: github.com/gardener/dependency-watchdog
@@ -531,7 +531,7 @@ gardenlet:
         name: vpa-admission-controller
         repository: registry.k8s.io/autoscaling/vpa-admission-controller
         sourceRepository: github.com/kubernetes/autoscaler
-        tag: 0.14.0
+        tag: 1.0.0
       - labels:
           - name: gardener.cloud/cve-categorisation
             value:
@@ -544,7 +544,7 @@ gardenlet:
         name: vpa-recommender
         repository: registry.k8s.io/autoscaling/vpa-recommender
         sourceRepository: github.com/kubernetes/autoscaler
-        tag: 0.14.0
+        tag: 1.0.0
       - labels:
           - name: gardener.cloud/cve-categorisation
             value:
@@ -557,7 +557,7 @@ gardenlet:
         name: vpa-updater
         repository: registry.k8s.io/autoscaling/vpa-updater
         sourceRepository: github.com/kubernetes/autoscaler
-        tag: 0.14.0
+        tag: 1.0.0
       - labels:
           - name: gardener.cloud/cve-categorisation
             value:
@@ -591,7 +591,7 @@ gardenlet:
         name: istio-proxy
         repository: gcr.io/istio-release/proxyv2
         sourceRepository: github.com/istio/istio
-        tag: 1.17.1-distroless
+        tag: 1.19.3-distroless
       - labels:
           - name: gardener.cloud/cve-categorisation
             value:
@@ -608,7 +608,7 @@ gardenlet:
         name: istio-istiod
         repository: gcr.io/istio-release/pilot
         sourceRepository: github.com/istio/istio
-        tag: 1.17.1-distroless
+        tag: 1.19.3-distroless
       - name: ext-authz-server
         repository: eu.gcr.io/gardener-project/gardener/ext-authz-server
         sourceRepository: github.com/gardener/ext-authz-server
@@ -2265,7 +2265,7 @@ etcd-druid:
         resourceId:
           name: etcdbrctl
         sourceRepository: github.com/gardener/etcd-backup-restore
-        tag: v0.24.6
+        tag: v0.24.7
       - name: etcd
         repository: eu.gcr.io/gardener-project/gardener/etcd
         sourceRepository: github.com/gardener/etcd-custom-image
@@ -2275,12 +2275,12 @@ etcd-druid:
         resourceId:
           name: etcdbrctl
         sourceRepository: github.com/gardener/etcd-backup-restore
-        tag: v0.26.0
+        tag: v0.27.0
       - name: etcd-wrapper
         repository: eu.gcr.io/gardener-project/gardener/etcd-wrapper
         sourceRepository: github.com/gardener/etcd-wrapper
         tag: v0.1.0
       - name: alpine
         repository: eu.gcr.io/gardener-project/3rd/alpine
-        tag: 3.15.8
+        tag: 3.18.4
 
