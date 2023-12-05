@@ -187,10 +187,10 @@ _ensure_hosts() {
 			} | sudo tee -a /etc/hosts
 	fi
 
-  while
-     [[ $(grep dashboard.local.gardener.cloud < /etc/hosts | awk '{ print $1 }') != "$garden_ingress_ip" ]] ||
-  	 [[ $(grep api.local.gardener.cloud < /etc/hosts | awk '{ print $1 }') != "$garden_ingress_ip" ]]	||
-  	 [[ $(grep identity.local.gardener.cloud < /etc/hosts | awk '{ print $1 }') != "$garden_ingress_ip" ]]
+  until
+      grep "$garden_ingress_ip\\s*dashboard.local.gardener.cloud" < /etc/hosts > /dev/null &&
+      grep "$garden_ingress_ip\\s*api.local.gardener.cloud" < /etc/hosts > /dev/null &&
+      grep "$garden_ingress_ip\\s*identity.local.gardener.cloud" < /etc/hosts > /dev/null
   do
   		echo "-------------------------------------------------"
   		echo "$garden_ingress_ip dashboard.local.gardener.cloud"
