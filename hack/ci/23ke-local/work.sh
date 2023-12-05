@@ -12,7 +12,7 @@ CLUSTERNAME="23ke-local"
 VGARDEN_KUBECONFIG="/tmp/$CLUSTERNAME-apiserver.yaml"
 
 _create_cluster () {
-  $KIND create cluster --config kind-config.yaml --name $CLUSTERNAME --image=kindest/node:v1.26.6
+  $KIND create cluster --config kind-config.yaml --name $CLUSTERNAME --image=kindest/node:v1.27.3@sha256:3966ac761ae0136263ffdb6cfd4db23ef8a83cba8a463690e98317add2c9ba72
 	$KIND export kubeconfig -n $CLUSTERNAME
 	$KUBECTL config set-context --current --namespace=default
 }
