@@ -5,11 +5,11 @@ source hack/ci/util.sh
 
 checkDependencies
 
-PROVIDER="${PROVIDER:=hcloud}"
-ZONE="${ZONE:=hel1}"
+PROVIDER="${PROVIDER:=regiocloud}"
+ZONE="${ZONE:=RegionA}"
 
 # defines the k8s minor version for the shoot, it will look up the latest patch version from the cloudprofile
-K8SMINOR="${K8SMINOR:='1.26'}"
+K8SMINOR="${K8SMINOR:='1.27'}"
 export K8SMINOR
 
 # Kubeconfig file is required to define the correct current namespace
