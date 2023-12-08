@@ -73,7 +73,7 @@ sources:
   repo: gardener/gardener-extension-shoot-networking-filter
   version:
     fromFile: ../../../configuration/configuration/templates/extensions.yaml
-  imageVector: charts/images.yaml
+  imageVector: imagevector/images.yaml
 - name: shoot-networking-problemdetector
   repo: gardener/gardener-extension-shoot-networking-problemdetector
   version:
