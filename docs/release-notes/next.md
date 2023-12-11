@@ -125,3 +125,35 @@ kubectl delete statefulset -n garden etcd-events
 **Full Changelog**: https://github.com/gardener-community/etcd/compare/5.3.2...6.0.0
 
 </details>
+
+<details>
+<summary><b>Update gardener-metrics-exporter to <code>0.28.0</code></b></summary>
+
+# [gardener/gardener-metrics-exporter]
+
+## 🏃 Others
+
+- `[OPERATOR]` Metrics are exported for pending shoots as well. by @timebertt [#91]
+- `[OPERATOR]` Minimum and maximum shoot node counts are no longer reversed. by @Sinscerly [#90]
+
+## Docker Images
+- metrics-exporter: `eu.gcr.io/gardener-project/gardener/metrics-exporter:0.28.0`
+
+
+</details>
+
+<details>
+<summary><b>Update gardener-metrics-exporter to <code>0.28.0</code></b></summary>
+
+# [gardener/gardener-metrics-exporter]
+
+## 🏃 Others
+
+- `[OPERATOR]` Metrics are exported for pending shoots as well. by @timebertt [#91]
+- `[OPERATOR]` Minimum and maximum shoot node counts are no longer reversed. by @Sinscerly [#90]
+
+## Docker Images
+- metrics-exporter: `eu.gcr.io/gardener-project/gardener/metrics-exporter:0.28.0`
+
+
+</details>
