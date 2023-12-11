@@ -96,7 +96,7 @@ spec:
             cpu: {{ .Values.resources.limits.cpu | default "1000m" }}
             memory: {{ .Values.resources.limits.memory | default "2560Mi" }}
         volumeMounts:
-        - name: {{ .Values.name }}
+        - name: virtual-garden-{{ .Values.name }}
           mountPath: /var/etcd/data
         - name: etcd-bootstrap
           mountPath: /bootstrap
@@ -107,8 +107,7 @@ spec:
         - name: etcd-client-tls
           mountPath: /var/etcd/ssl/client
       - name: backup-restore
-        command:
-        - etcdbrctl
+        args:
         - server
         - --schedule={{ .Values.backup.schedule }}
         - --max-backups={{ .Values.backup.maxBackups }}
@@ -134,9 +133,10 @@ spec:
           requests:
             cpu: 100m
             memory: 128Mi
-          limits:
-            cpu: 300m
-            memory: 1Gi
+        securityContext:
+          capabilities:
+            add:
+            - SYS_PTRACE
         env:
         - name: STORAGE_CONTAINER
           value: {{ .Values.backup.storageContainer }}
@@ -146,6 +146,11 @@ spec:
           valueFrom:
             fieldRef:
               fieldPath: metadata.name
+        - name: POD_NAMESPACE
+          valueFrom:
+            fieldRef:
+              apiVersion: v1
+              fieldPath: metadata.namespace
         {{- if .Values.backup.storageProvider }}
         {{- if eq .Values.backup.storageProvider "ABS" }}
         - name: AZURE_APPLICATION_CREDENTIALS
@@ -166,7 +171,7 @@ spec:
         volumeMounts:
         - name: etcd-bootstrap
           mountPath: /bootstrap
-        - name: {{ .Values.name }}
+        - name: virtual-garden-{{ .Values.name }}
           mountPath: /var/etcd/data
         - name: ca-etcd
           mountPath: /var/etcd/ssl/ca
@@ -203,7 +208,7 @@ spec:
 {{- end }}
   volumeClaimTemplates:
   - metadata:
-      name: {{ .Values.name }}
+      name: virtual-garden-{{ .Values.name }}
     spec:
       accessModes:
       - "ReadWriteOnce"
