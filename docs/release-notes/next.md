@@ -6,6 +6,19 @@ hide_table_of_contents: true
 
 ## 23KE release notes and upgrade guide
 
+In order to align the versions of `etcd` and `etcd-backup-restore` with gardener/etcd-druid, we perform a downgrade to etcd-3.4.26 and an upgrade to etcd-backup-restore-0.24.7. This is also expected to improve the stability of the backup process. For the upgrade, you need to
+- Make sure you have an up-to-date backup of the virtual garden `etcd`s. To perform a full backup you can use the following request:
+```sh
+kubectl -n garden exec -it etcd-0 curl localhost:8080/snapshot/full
+```
+- Delete the statefulset `etcd` and `etcd-events` in the `garden` namespace
+``` sh
+kubectl delete statefulset -n garden etcd
+kubectl delete statefulset -n garden etcd-events
+```
+- Perform the 23KE update. This will create new `persistentVolumes` for the virtual garden's `etcd`s. These volumes are prefixed by `virtual-garden-`.
+- (Optional) Delete the old `persistenVolumes` belonging to the already deleted statefulsets.
+
 ## Related upstream release notes / changelogs
 
 
