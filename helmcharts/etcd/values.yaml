@@ -7,8 +7,8 @@ backup:
     storageProvider: ""
     volumeMounts: []
 images:
-    etcd: eu.gcr.io/gardener-project/gardener/etcd:v3.5.2
-    etcd-backup-restore: eu.gcr.io/gardener-project/gardener/etcdbrctl:v0.19.0
+    etcd: eu.gcr.io/gardener-project/gardener/etcd:v3.4.26-3
+    etcd-backup-restore: eu.gcr.io/gardener-project/gardener/etcdbrctl:v0.24.7
 name: etcd
 resources:
     limits:
