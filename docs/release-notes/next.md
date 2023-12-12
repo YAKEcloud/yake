@@ -6,6 +6,13 @@ hide_table_of_contents: true
 
 ## 23KE release notes and upgrade guide
 
+:::danger
+
+This update definitely needs backups to be configured. If you are running a 23KE instance without backups, enable backups before performing this update.
+
+:::
+
+
 In order to align the versions of `etcd` and `etcd-backup-restore` with gardener/etcd-druid, we perform a downgrade to etcd-3.4.26 and an upgrade to etcd-backup-restore-0.24.7. This is also expected to improve the stability of the backup process. For the upgrade, you need to
 - Make sure you have an up-to-date backup of the virtual garden `etcd`s. To perform a full backup you can use the following request:
 ```sh
