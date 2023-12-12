@@ -175,3 +175,15 @@ no release notes available
 
 
 </details>
+
+<details>
+<summary><b>Update provider-alicloud to <code>1.50.1</code></b></summary>
+
+no release notes available
+
+## Docker Images
+- gardener-extension-admission-alicloud: `eu.gcr.io/gardener-project/gardener/extensions/admission-alicloud:v1.50.1`
+- gardener-extension-provider-alicloud: `eu.gcr.io/gardener-project/gardener/extensions/provider-alicloud:v1.50.1`
+
+
+</details>
