@@ -2,11 +2,9 @@
 
 ## 🏃 Others
 
-- `[OPERATOR]` The following golang dependencies have been upgraded :  
-  - `gardener/gardener`: `v1.81.6`->`v1.83.2` by @shafeeqes [#828]
-- `[OPERATOR]` Add documentation for the "flow" infrastructure reconciler. by @kon-angelo [#827]
-- `[DEVELOPER]` Add new unit tests. by @axel7born [#829]
+- `[OPERATOR]` The following dependency is updated to adopt a cherry-pick of https://github.com/gardener/gardener/pull/8943:  
+  - github.com/gardener/gardener: v1.83.2 -> v1.83.3 by @ialidzhikov [#843]
 
 ## Docker Images
-- gardener-extension-admission-aws: `eu.gcr.io/gardener-project/gardener/extensions/admission-aws:v1.51.0`
-- gardener-extension-provider-aws: `eu.gcr.io/gardener-project/gardener/extensions/provider-aws:v1.51.0`
+- gardener-extension-admission-aws: `eu.gcr.io/gardener-project/gardener/extensions/admission-aws:v1.51.1`
+- gardener-extension-provider-aws: `eu.gcr.io/gardener-project/gardener/extensions/provider-aws:v1.51.1`
