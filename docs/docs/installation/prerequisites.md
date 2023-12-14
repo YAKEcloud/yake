@@ -3,16 +3,7 @@ sidebar_position: 1
 title: Prerequisites
 ---
 
-Before you can start with your 23KE deployment, you should check whether you have everything you need at hand. In the following, the prerequisites are listed and detailed.
-
-## 23KE License
-
-First and foremost, you need a 23KE license. This could also be the trial license which you can issue yourself via our [self-service](https://self-service.ingress.23ke-releases.23t-prod.okeanos.dev/trial/request) website.
-Just enter and verify your email address, and you will be good to go.
-
-:::note
-In the trial license, some enterprise class features such as backups are unavailable.
-:::
+Before you can start with your Yake deployment, you should check whether you have everything you need at hand. In the following, the prerequisites are listed and detailed.
 
 ## Deployment Host
 
@@ -20,10 +11,9 @@ This can be any workstation machine, laptop, VM, whatnot, as long as it is conne
 
 ### Tools
 
-To use 23KE efficiently you will need these tools:
+To use Yake efficiently you will need these tools:
 
 - [git](https://git-scm.com/downloads)
-- [23kectl](https://github.com/23technologies/23kectl/releases)
 - [kubectl](https://kubernetes.io/docs/reference/kubectl/)
 - [flux](https://fluxcd.io/flux/installation/)
 - [helm](https://helm.sh/docs/intro/install/) (optional)
@@ -35,12 +25,12 @@ We recommend using an interactive tool like [k9s](https://k9scli.io/) as a more 
 To store and manage the configuration of your Gardener environment you need a git repository (see also [architecture](/docs/architecture-configuration/architecture.md)), which is accessible via ssh over the internet. Of course, you can host your configuration git repository on forges like GitHub or GitLab. Conceptually, the forge needs to support ssh deploy keys. However, this should not be a limitation with modern forges.
 
 :::note
-A local git repository will not work with 23KE, as the [flux](https://fluxcd.io/) controllers need be able to access the repository.
+A local git repository will not work with Yake, as the [flux](https://fluxcd.io/) controllers need be able to access the repository.
 :::
 
 ## Domain and DNS provider
 
-For the Gardener installation, you need a domain under which e.g. the Gardener dashboard is served. Moreover, a DNS provider like azure-dns, aws-route53, or openstack-designate is required. Make sure to delegate a domain to your DNS provider of choice (see [here](https://gardener.cloud/docs/extensions/others/gardener-extension-shoot-dns-service/docs/usage/dns_names/#gardener-dns-extension) for a list of supported DNS providers by Gardener). You will also need the DNS provider credentials in order to configure these for 23KE.
+For the Gardener installation, you need a domain under which e.g. the Gardener dashboard is served. Moreover, a DNS provider like azure-dns, aws-route53, or openstack-designate is required. Make sure to delegate a domain to your DNS provider of choice (see [here](https://gardener.cloud/docs/extensions/others/gardener-extension-shoot-dns-service/docs/usage/dns_names/#gardener-dns-extension) for a list of supported DNS providers by Gardener). You will also need the DNS provider credentials in order to configure these for Yake.
 
 ## Kubernetes Cluster
 
@@ -54,7 +44,7 @@ As Gardener is installed on top of Kubernetes itself, you need a base cluster wh
 
 Moreover, you should consider the following aspects:
 
-- As 23KE ships with a deployement of [ingress-nginx](https://kubernetes.github.io/ingress-nginx/), you must not install any ingress controller into the base cluster
+- As Yake ships with a deployement of [ingress-nginx](https://kubernetes.github.io/ingress-nginx/), you must not install any ingress controller into the base cluster
 - As Gardener uses the `192.168.123.0/24`internally, your pod network of the base cluster should not interfere with that range. Therefore, it is recommended to use `172.16.0.0/16` as pod network in the base cluster. For the service network no restrictions are known.
 
 :::tip
@@ -67,4 +57,4 @@ A local Kubernetes cluster like k3s, kind, minikube or similar will not work for
 
 ## Basic Kubernetes, Helm and Flux Knowledge
 
-If you are entirely new to [Kubernetes](https://kubernetes.io/) and related tooling like [Helm](https://helm.sh) and [Flux](https://fluxcd.io/) your learning curve will be really steep, when using 23KE. If you already have some experience with those tools, you can consult the [Helm/Flux page](/docs/architecture-configuration/helm-flux.md) for some basic commands and explanation. Otherwise, you could also contact us for a training.
+If you are entirely new to [Kubernetes](https://kubernetes.io/) and related tooling like [Helm](https://helm.sh) and [Flux](https://fluxcd.io/) your learning curve will be really steep, when using Yake. If you already have some experience with those tools, you can consult the [Helm/Flux page](/docs/architecture-configuration/helm-flux.md) for some basic commands and explanation. Otherwise, you could also contact us for a training.

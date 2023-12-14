@@ -8,7 +8,7 @@ const FeatureList = [
     Svg: require("@site/static/img/undraw_docusaurus_mountain.svg").default,
     description: (
       <>
-        23KE was designed to get you up and running with your self hosted
+        Yake was designed to get you up and running with your self hosted
         Gardener installation as quick as possible. Our helper tools 23kectl
         helps you templating a basic configuration within minutes.
       </>

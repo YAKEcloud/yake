@@ -37,7 +37,7 @@ function getLatestReleaseNotes() {
 
 /** @type {import('@docusaurus/types').Config} */
 const config = {
-  title: "23KE",
+  title: "Yake | Yet another Kubernetes Engine",
   tagline: "The GitOps driven Gardener distribution",
   url: "https://23technologies.github.io",
   baseUrl: "/",
@@ -112,7 +112,7 @@ const config = {
         },
       ],
       navbar: {
-        title: "KE",
+        title: "Yake",
         logo: {
           alt: "23|",
           src: "img/logo.svg",
