@@ -4,17 +4,17 @@ sidebar_position: 2
 
 # Use custom container registry
 
-23KE in it's default configuration will use container images from public container registries, whichever the developers of the respective component decided to publish to "upstream". Larger installations could run into rate limits of specific registries or have other reasons not to use those registries directly, and pull the same images from a registry mirror instead.
+Yake in it's default configuration will use container images from public container registries, whichever the developers of the respective component decided to publish to "upstream". Larger installations could run into rate limits of specific registries or have other reasons not to use those registries directly, and pull the same images from a registry mirror instead.
 
-For environments that prefer and can provide an internal registry, 23KE has a config switch to easily reconfigure all components to pull from this registry.
+For environments that prefer and can provide an internal registry, Yake has a config switch to easily reconfigure all components to pull from this registry.
 
 The setup and mirroring procedure of such an internal registry mirror is not covered in this guide. We use and recommend harbors [proxy cache](https://goharbor.io/docs/2.1.0/administration/configure-proxy-cache/) mode, as it won't require to identify, pull and push each single image in each version/tag beforehand, which will change frequently and even with patch updates.
 
-This feature only affects components deployed by 23KE and Gardener, from the basecluster down to each shoot node (f.e. `calico-node` pods), but will not alter anything else deployed to a shoot or custom deployments on the basecluster.
+This feature only affects components deployed by Yake and Gardener, from the basecluster down to each shoot node (f.e. `calico-node` pods), but will not alter anything else deployed to a shoot or custom deployments on the basecluster.
 
 ## Full example
 
-The registryOverwrite configuration option in 23ke-config allows you to specify replacement pairs as "originalURL: replacementURL", and will then look for and replace all registries that start with `originalURL` and replace that part of the full path with `replacementURL`. If you only want to mirror certain upstream registries, for example docker.io because of rate limits, you can only specify that and everything else will be left unchanged. To pull all containers currently used in 23KE from your internal registry you need all of the following overwrites:
+The registryOverwrite configuration option in yake-config allows you to specify replacement pairs as "originalURL: replacementURL", and will then look for and replace all registries that start with `originalURL` and replace that part of the full path with `replacementURL`. If you only want to mirror certain upstream registries, for example docker.io because of rate limits, you can only specify that and everything else will be left unchanged. To pull all containers currently used in Yake from your internal registry you need all of the following overwrites:
 
 ```
 registryOverwrite:
@@ -104,15 +104,15 @@ the following replacements would be performed
 
 ## Flux configuration to change repository
 
-23KE includes flux's controllers in a specific version and installs available updates with each release. Due to the way we include flux, unfortunately it can't use the registryOverwrite map to change where the flux images are pulled from and needs it's own instructions to use an internal registry.
+Yake includes flux's controllers in a specific version and installs available updates with each release. Due to the way we include flux, unfortunately it can't use the registryOverwrite map to change where the flux images are pulled from and needs it's own instructions to use an internal registry.
 
-In your configuration git you will have a file `flux/23ke-base.yaml`, that needs to be changed similar to the following example, where you would change the `newName` parameters to point to your internal registry mirror.
+In your configuration git you will have a file `flux/yake-base.yaml`, that needs to be changed similar to the following example, where you would change the `newName` parameters to point to your internal registry mirror.
 
 ```
 apiVersion: kustomize.toolkit.fluxcd.io/v1beta2
 kind: Kustomization
 metadata:
-  name: 23ke-base
+  name: yake-base
   namespace: flux-system
 spec:
   interval: 1m0s
@@ -120,7 +120,7 @@ spec:
   prune: false
   sourceRef:
     kind: GitRepository
-    name: 23ke
+    name: yake 
   patches:
     - patch: |-
         apiVersion: kustomize.toolkit.fluxcd.io/v1beta2
