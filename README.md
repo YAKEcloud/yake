@@ -19,6 +19,6 @@ This will setup a KinD Kubernetes cluster on you local machine and install Yake 
 ### Local development and contribution
 If you want to experiment with new features or bug fixes for Yake, you can simply apply changes to resources in this repository. In order to reflect these changes in the locally running environment, you need to commit them and push them to the `local` remote. From there Flux's source-controller will reconcile the repository state and apply your changes to the cluster. This enables a smooth local development experience. Once you are satisfied with your changes, you should rebase all your commit into meaningful commits, push the branch to the upstream repository, and file a pull request.
 
-## Production Deployments
+# Production Deployments
 
 For production deployments you can have a look at the local setup first and adjust the configuration files in `hack/ci/yake-local/config` to your needs. You will not need to install [Knot](https://www.knot-dns.cz/) and [Step-ca](https://smallstep.com/docs/step-ca/) as done in the local environment. However, you will need a domain and configured cloud dns provider for a real deployment. Please checkout the documentation for further information.
