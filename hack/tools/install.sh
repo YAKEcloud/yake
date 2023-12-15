@@ -61,7 +61,7 @@ install_kubectl() {
   VERSION=v0.29.0
 
   if _isStale $KUBECTL $VERSION; then
-    curl -Lo $KUBECTL "https://dev-tools-proxy.ingress.23ke-releases.23t-prod.okeanos.dev/kubectl/release/${VERSION/v0/v1}/bin/$TOOLS_KERNEL/$TOOLS_ARCH/kubectl"
+    curl -Lo $KUBECTL "https://dl.k8s.io/kubectl/release/${VERSION/v0/v1}/bin/$TOOLS_KERNEL/$TOOLS_ARCH/kubectl"
     chmod +x $KUBECTL
 
     _setVersion $KUBECTL $VERSION
@@ -119,21 +119,6 @@ install_rclone() {
 
     _setVersion $RCLONE $VERSION
   fi
-}
-
-install_23kectl() {
-  # not under renovate control
-  VERSION=$1
-  local _23KECTL="$TOOLS_BIN_DIR/23kectl"
-
-  if _isStale $_23KECTL $VERSION; then
-		curl -L -o $_23KECTL https://github.com/23technologies/23kectl/releases/download/${_23KECTL_VERSION}/23kectl-${_23KECTL_VERSION}-${TOOLS_KERNEL}-${TOOLS_ARCH}
-		chmod +x $_23KECTL
-
-    _setVersion $_23KECTL $VERSION
-  fi
-
-  echo $_23KECTL
 }
 
 install_kind() {
