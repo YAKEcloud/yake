@@ -61,7 +61,7 @@ install_kubectl() {
   VERSION=v0.29.0
 
   if _isStale $KUBECTL $VERSION; then
-    curl -Lo $KUBECTL "https://dl.k8s.io/kubectl/release/${VERSION/v0/v1}/bin/$TOOLS_KERNEL/$TOOLS_ARCH/kubectl"
+    curl -Lo $KUBECTL "https://dl.k8s.io/release/${VERSION/v0/v1}/bin/$TOOLS_KERNEL/$TOOLS_ARCH/kubectl"
     chmod +x $KUBECTL
 
     _setVersion $KUBECTL $VERSION
