@@ -121,13 +121,6 @@ spec:
   path: ./
   prune: true
   patches:
-    - patch: |
-        - op: remove
-          path: /spec/dependsOn/0
-      target:
-        kind: Kustomization
-        name: configuration
-        namespace: flux-system
     - target:
         kind: Kustomization
         name: flux-system
