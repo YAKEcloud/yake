@@ -48,3 +48,7 @@ jobs:
           echo "version=$version" | tee $GITHUB_ENV | tee $GITHUB_OUTPUT
       - name: Prepare release
         run: "hack/release/prepare.sh $version"
+      - name: Github Release
+        uses: softprops/action-gh-release@v1
+        with:
+          body_path: /tmp/release-body.md

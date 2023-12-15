@@ -95,3 +95,6 @@ git commit --allow-empty -m "[skip ci] $tag"
 git tag "$tag" -f
 git push -u origin "$branch"
 git push -u origin "$tag" -f
+
+# copy release notes to reuse in github release, cut frontmatter
+tail -n +5 "docs/release-notes/v$minor.md" > /tmp/release-body.md
