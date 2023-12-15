@@ -1,4 +1,4 @@
-name: "23KE install"
+name: "Yake install"
 on:
   pull_request:
     branches:
@@ -8,7 +8,7 @@ on:
 jobs:
   install:
     runs-on: self-hosted
-    name: "23KE install testrun"
+    name: "Yake install testrun"
     steps:
       - name: Checkout source
         uses: actions/checkout@v3.4.0
@@ -17,5 +17,5 @@ jobs:
           ref: ${{ github.head_ref }}
       - name: install
         run: |
-          cd hack/ci/23ke-local
+          cd hack/ci/yake-local
           ./work.sh
