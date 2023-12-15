@@ -2,7 +2,7 @@ sources:
     - name: gardenlet
       repo: gardener/gardener
       version:
-        fromFile: <PATH_TO>/23ke/gardener/gardenlet.yaml
+        fromFile: <PATH_TO>/yake/gardener/gardenlet.yaml
       imageVector: charts/images.yaml
     - name: provider-openstack
       repo: gardener/gardener-extension-provider-openstack

@@ -1,9 +1,6 @@
-module github.com/23technologies/23ke/imagevector-importer
+module github.com/yakecloud/yake/imagevector-importer
 
 go 1.18
-
-// replace the chartutil with a local copy, as we want to use our custom SaveDir-function
-replace helm.sh/helm/v3 v3.9.3 => github.com/23technologies/helm/v3 v3.9.3-saveDirPatch
 
 require (
 	github.com/spf13/cobra v1.5.0

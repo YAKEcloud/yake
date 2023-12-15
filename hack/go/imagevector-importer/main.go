@@ -1,6 +1,6 @@
 package main
 
-import 	"github.com/23technologies/23ke/imagevector-importer/cmd"
+import "github.com/yakecloud/yake/imagevector-importer/cmd"
 
 func main() {
 	cmd.Execute()
