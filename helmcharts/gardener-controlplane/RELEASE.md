@@ -1,70 +1,64 @@
-# [gardener/etcd-backup-restore]
-
-## 📰 Noteworthy
-
-- `[OPERATOR]` Fix a restoration failure which can occurs due to an etcd database space exceeds during restoration. by @ishan16696 [gardener/etcd-backup-restore#668]
-- `[OPERATOR]` Making etcd-backup-restore restart tolerant while scaling-up an etcd cluster. by @ishan16696 [gardener/etcd-backup-restore#661]
-## 🏃 Others
-
-- `[OPERATOR]` Enhanced Garbage Collector to garbage collect the chunks for cloud providers like GCP and OpenStack which does not automatically delete snapshot chunks after the formation of a composite object. by @anveshreddy18 [gardener/etcd-backup-restore#673]
-- `[USER]` The snapshots are fetched from the actual backend store when queried for latest snapshots on `/snapshot/latest` endpoint. by @abdasgupta [gardener/etcd-backup-restore#675]
 # [gardener/gardener]
 
 ## ⚠️ Breaking Changes
 
-- `[DEPENDENCY]` The `webhookcmd.NewAddToManagerSimpleOptions` function was removed, please use `webhookcmd.NewAddToManagerOptions` instead. by @timuthy [#8725]
-- `[DEPENDENCY]` The `extensionswebhook.New` forbids to pass `mutators` and `validators` at the same time. Please use separate webhooks for validating and mutating actions if required. by @timuthy [#8725]
-- `[OPERATOR]` All the functionality related to the deprecated field `seed.spec.secretRef` has been removed and subsequently `seed.spec.secretRef` will be dropped from the Seed API in a later release of Gardener. Please check your `Seed`s and remove any usage before upgrading to this Gardener version. by @acumino [#8833]
-- `[USER]` With this PR, the plutono UI will be able to fetch newer logs only. The older logs, which are submitted via the tenant operator will not be visible in the UI. To access the older logs, for the standard log retention period , either set the `--org-id` parameter for `valicli` or the `X-Scope-Org` http request header for `curl` or `wget` needs to be supplied to fetch them, using the port-forwarded service to the `vali` target. by @nickytd [#8800]
+- `[OPERATOR]` All virtual garden access Secrets have to be labeled with with `resources.gardener.cloud/class=shoot`. Otherwise the virtual-GRM won't consider the Secrets and won't renew them. by @rfranzke [#8883]
+- `[OPERATOR]` The `ContainerdRegistryHostsDir` feature gate has been promoted to beta and is now turned on by default. by @ialidzhikov [#8873]
+- `[DEVELOPER]` Support for the deprecated `NetworkPolicy` annotations `networking.resources.gardener.cloud/from-policy-allowed-ports` and `networking.resources.gardener.cloud/from-policy-pod-label-selector` has been removed. Use `networking.resources.gardener.cloud/from-<some-alias>-allowed-ports` instead ([documentation](https://github.com/gardener/gardener/blob/master/docs/concepts/resource-manager.md#networkpolicy-controller)). by @rfranzke [#8883]
 ## 📰 Noteworthy
 
-- `[DEVELOPER]` The extension webhook registration does now differentiate between mutating and validating actions and creates matching `ValidatingWebhookConfigration` or `MutatingWebhookConfiguration` objects. Earlier, only `MutatingWebhookConfiguration`s were created. by @timuthy [#8725]
-- `[DEVELOPER]` The `UseGardenerNodeAgent` feature gate is now enabled for the local development scenario. You can read more about `gardener-node-agent` [here](https://github.com/gardener/gardener/blob/master/docs/concepts/node-agent.md). by @rfranzke [#8847]
+- `[DEVELOPER]` The local Gardener environments for e2e tests running in Prow are now backed by the [`registry-cache`](https://github.com/gardener/gardener-extension-registry-cache/) extensions enabled in the Prow cluster. This should have a positive impact on the network I/O for image pulls and resulting costs. by @oliver-goetz [#8880]
+- `[OPERATOR]` The `WorkerlessShoots` has been promoted to GA and is now locked to "enabled by default". by @acumino [#8906]
 ## ✨ New Features
 
-- `[DEVELOPER]` Add full single-stack IPv6 support for gardener provider-local  by @nschad [#8574]
-- `[DEPENDENCY]` Webhook registration `webhookcmd.NewAddToManagerOptions` can now be used for admission controllers performing validation and mutation in the Garden cluster. This option automatically creates and maintains required `{Mutating,Validating}WebhookConfiguration` objects as well as comes with an automated management for CA and server certificates. by @timuthy [#8725]
-- `[OPERATOR]` `gardenlet'`s `Shoot` care controller now garbage-collects orphaned `Lease` objects related to no longer existing `Node`s - see [this upstream issue](https://github.com/kubernetes/kubernetes/issues/119660) for more details. by @rfranzke [#8817]
+- `[USER]` It is now possible to configure the resources encrypted in the ETCD for shoot clusters, see [this document](https://github.com/gardener/gardener/blob/master/docs/usage/etcd_encryption_config.md) for more details. by @shafeeqes [#8842]
+- `[USER]` The `shoots/viewerkubeconfig` subresource now also restricts viewer access to resources which are specified in the `spec.kubernetes.kubeAPIServer.encryptionConfig` in the Shoot in addition to `Secrets`. by @shafeeqes [#8966]
+- `[USER]` It is now possible to request a kubeconfig with read-only access (all APIs except `core/v1.Secret`) for shoot clusters by using the new `shoots/viewerkubeconfig` subresource. Read all about it [here](https://github.com/gardener/gardener/blob/master/docs/usage/shoot_access.md#shootsviewerkubeconfig-subresource). by @rfranzke [#8870]
+- `[OPERATOR]` The `vpn-seed-server` component now supports IPv4 seed clusters hosting IPv6 shoot clusters.  by @DockToFuture [#8830]
+- `[OPERATOR]` It is now possible to configure the resources encrypted in the ETCD for the virtual garden cluster, see [this document](https://github.com/gardener/gardener/blob/master/docs/concepts/operator.md#etcd-encryption-config) for more details. by @shafeeqes [#8842]
 ## 🐛 Bug Fixes
 
-- `[OPERATOR]` A bug has been fixed which prevented shoot reconciliations in case the old `system:machine-controller-manager-seed` `ClusterRole` was still referenced in the `RoleBinding` for `machine-controller`-manager`. by @himanshu-kun [#8816]
-- `[OPERATOR]` A bug causing `EveryNodeReady` condition to be added in workerless shoot status if gardenlet of the given shoot's seed becomes unhealthy is fixed. by @gardener-ci-robot [#8889]
-- `[OPERATOR]` A bug in the `Seed` care controller has been fixed which caused the `Seed` to remain in `NotReady` state when `vali` was disabled in `gardenlet`'s component config (via `.logging.vali.enabled=false`) while logging was enabled (`.logging.enabled=true`). by @rfranzke [#8840]
+- `[DEPENDENCY]` extension library: An issue causing the Worker restore operation to fail for hibernated Shoots is now fixed. by @ialidzhikov [#8943]
+- `[OPERATOR]` A bug causing the Shoot to use the wrong istio load balancer if the `ExposureClass` name and the exposureclass handler name are not the same is now fixed.  by @shafeeqes [#8926]
+- `[OPERATOR]` Fixed a bug where a Shoot with an expired machine image or Kubernetes version could be created.   
+  For machine images: only allow updating to a higher expired machine image version for an existing worker pool  
+  For Kubernetes versions: do not allow creation of a worker pool with an expired K8s version, but still allow updating an existing worker pool to a higher expired version. by @danielfoehrKn [#8854]
+- `[OPERATOR]` `gardener-node-agent`'s `OperatingSystemConfig` controller now respects the reconciliation timeout and aborts the reconciliation if it takes too long. by @rfranzke [#8907]
+- `[OPERATOR]` `gardener-node-agent` now creates temporary directories and files under `/var/lib/gardener-node-agent/tmp` instead of `/tmp`. This fixes issues during `OperatingSystemConfig` reconciliation which occur when `/var` and `/tmp` are backed by different file systems or devices. by @rfranzke [#8894]
+- `[OPERATOR]` `gardener-node-agent` now skips disablement and stop attempts of deleted units in case their unit files have already been cleaned up by third parties. by @rfranzke [#8898]
+- `[OPERATOR]` `gardener-node-agent` now converts the hostname to lower case to match `kubelet` behaviour when it maintains the `kubernetes.io/hostname` label on `Node`s. by @rfranzke [#8902]
 ## 🏃 Others
 
-- `[OPERATOR]` Federate non-namespaced metrics, e.g. kube_node_spec_taint, kube_node_spec_unschedulable.  by @adenitiu [#8850]
-- `[OPERATOR]` The Version of Istio is up-dated to 1.19.3 by @axel7born [#8723]
-- `[OPERATOR]` showing kubelet version and OS image version in Plutono Node/Worker Pool overview dashboard by @tedteng [#8757]
-- `[OPERATOR]` The `gardener-resource-manager` deployment procedure was improved. Earlier, GRM was unnecessarily rolled during shoot reconciliation if worker nodes contained custom taints. by @timuthy [#8835]
-- `[OPERATOR]` Update vertical-pod-autoscaler to 1.0.0. This introduces the `/status` subresource on VPA objects. by @voelzmo [#8852]
-## 📖 Documentation
+- `[OPERATOR]` `gardener-node-agent` now stops waiting for `systemd` command results if they don't respond back after `10s`. by @rfranzke [#8919]
+- `[OPERATOR]` Add unhealthy nodes dashboard. by @adenitiu [#8869]
+- `[OPERATOR]` Add `egressCIDRs` field to the infrastructureStatus resource. This allows provider-extensions to specify a list of stable CIDRs used as source IP for traffic generated by the shoot's worker nodes. by @kon-angelo [#8888]
+- `[DEVELOPER]` Add support for optional `SCRIPT_ROOT` environment var in `vgopath` enabled hack scripts by @afritzler [#8935]
+# [gardener/vpn2]
 
-- `[USER]` Document whether is an error in the `shoot.status` is a user error or not. by @hendrikKahl [#8758]
-# [gardener/etcd-druid]
+## ⚠️ Breaking Changes
+
+- `[OPERATOR]` Change OCI Image Registry from GCR (`eu.gcr.io/gardener-project`) to Artifact-Registry (`europe-docker.pkg.dev/gardener-project/releases`). Users should update their references. by @ccwienk [gardener/vpn2#62]
+## 📰 Noteworthy
+
+- `[OPERATOR]` added ipv6 single-stack support by @nschad [gardener/vpn2#45]
+- `[OPERATOR]`  Add iptables backend detection to firewall script. by @axel7born [gardener/vpn2#64]
+# [gardener/apiserver-proxy]
 
 ## 📰 Noteworthy
 
-- `[DEVELOPER]` Added e2e test for compaction. by @abdasgupta [gardener/etcd-druid#723]
-- `[OPERATOR]` Compaction job now reconciles on Job Status changes along with the holder identity changes in snapshot leases. by @abdasgupta [gardener/etcd-druid#711]
-## ✨ New Features
+- `[OPERATOR]` Remove the optional creation of iptables rules and the flag`--setup-iptables`. by @axel7born [gardener/apiserver-proxy#70]
+# [gardener/gardener-metrics-exporter]
 
-- `[DEVELOPER]` Added documentation and sample configurations for simplifying Localstack setup, making it easier for developers to create a local testing environment using a Kind cluster. by @seshachalam-yv [gardener/etcd-druid#713]
-## 🐛 Bug Fixes
-
-- `[OPERATOR]` Local storage provider for backups is now supported for snapshot compaction jobs. by @abdasgupta [gardener/etcd-druid#682]
 ## 🏃 Others
 
-- `[OPERATOR]` Update alpine image version to `3.18.4`. by @shreyas-s-rao [gardener/etcd-druid#724]
-## 📖 Documentation
-
-- `[OPERATOR]` Updated the recovery from permanent quorum loss ops guide. by @ishan16696 [gardener/etcd-druid#697]
+- `[OPERATOR]` Metrics are exported for pending shoots as well. by @timebertt [gardener/gardener-metrics-exporter#91]
 
 ## Docker Images
-- admission-controller: `eu.gcr.io/gardener-project/gardener/admission-controller:v1.85.0`
-- apiserver: `eu.gcr.io/gardener-project/gardener/apiserver:v1.85.0`
-- controller-manager: `eu.gcr.io/gardener-project/gardener/controller-manager:v1.85.0`
-- gardenlet: `eu.gcr.io/gardener-project/gardener/gardenlet:v1.85.0`
-- node-agent: `eu.gcr.io/gardener-project/gardener/node-agent:v1.85.0`
-- operator: `eu.gcr.io/gardener-project/gardener/operator:v1.85.0`
-- resource-manager: `eu.gcr.io/gardener-project/gardener/resource-manager:v1.85.0`
-- scheduler: `eu.gcr.io/gardener-project/gardener/scheduler:v1.85.0`
+- admission-controller: `eu.gcr.io/gardener-project/gardener/admission-controller:v1.86.0`
+- apiserver: `eu.gcr.io/gardener-project/gardener/apiserver:v1.86.0`
+- controller-manager: `eu.gcr.io/gardener-project/gardener/controller-manager:v1.86.0`
+- gardenlet: `eu.gcr.io/gardener-project/gardener/gardenlet:v1.86.0`
+- node-agent: `eu.gcr.io/gardener-project/gardener/node-agent:v1.86.0`
+- operator: `eu.gcr.io/gardener-project/gardener/operator:v1.86.0`
+- resource-manager: `eu.gcr.io/gardener-project/gardener/resource-manager:v1.86.0`
+- scheduler: `eu.gcr.io/gardener-project/gardener/scheduler:v1.86.0`
