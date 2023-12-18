@@ -2,7 +2,7 @@
 <rss version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/">
     <channel>
         <title>Yake | Yet another Kubernetes Engine Blog</title>
-        <link>https://23technologies.github.io/blog</link>
+        <link>https://23technologies.github.io/yake/blog</link>
         <description>Yake | Yet another Kubernetes Engine Blog</description>
         <lastBuildDate>Tue, 06 Jun 2023 00:00:00 GMT</lastBuildDate>
         <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
@@ -10,7 +10,7 @@
         <language>en</language>
         <item>
             <title><![CDATA[Gardener Hackathon - May 2023]]></title>
-            <link>https://23technologies.github.io/blog/Gardener Hackathon 2023</link>
+            <link>https://23technologies.github.io/yake/blog/Gardener Hackathon 2023</link>
             <guid>Gardener Hackathon 2023</guid>
             <pubDate>Tue, 06 Jun 2023 00:00:00 GMT</pubDate>
             <description><![CDATA[TLDR;]]></description>
@@ -21,7 +21,7 @@ Besides the bigger topics mentioned above, we brought the following task close t
         </item>
         <item>
             <title><![CDATA[Build Cluster with CAPH - the challanges when installing 23KE]]></title>
-            <link>https://23technologies.github.io/blog/build-cluster-with-caph</link>
+            <link>https://23technologies.github.io/yake/blog/build-cluster-with-caph</link>
             <guid>build-cluster-with-caph</guid>
             <pubDate>Fri, 12 May 2023 00:00:00 GMT</pubDate>
             <description><![CDATA[TLDR;]]></description>
@@ -32,7 +32,7 @@ Besides the bigger topics mentioned above, we brought the following task close t
         </item>
         <item>
             <title><![CDATA[Hack-The-Garden - the Remote Hackathon Experience]]></title>
-            <link>https://23technologies.github.io/blog/hack-the-garden</link>
+            <link>https://23technologies.github.io/yake/blog/hack-the-garden</link>
             <guid>hack-the-garden</guid>
             <pubDate>Thu, 06 Oct 2022 00:00:00 GMT</pubDate>
             <description><![CDATA[Thanks to everyone]]></description>
@@ -42,7 +42,7 @@ Besides the bigger topics mentioned above, we brought the following task close t
         </item>
         <item>
             <title><![CDATA[A Single Point of Truth for Gardener Helm Charts]]></title>
-            <link>https://23technologies.github.io/blog/gardener-chart-releaser</link>
+            <link>https://23technologies.github.io/yake/blog/gardener-chart-releaser</link>
             <guid>gardener-chart-releaser</guid>
             <pubDate>Mon, 19 Sep 2022 00:00:00 GMT</pubDate>
             <description><![CDATA[TLDR;]]></description>
@@ -85,7 +85,7 @@ This will ensure that we do not miss any important upstream change and the Helm 
         </item>
         <item>
             <title><![CDATA[Getting started with Gardener extension development]]></title>
-            <link>https://23technologies.github.io/blog/gardener-ext-dev</link>
+            <link>https://23technologies.github.io/yake/blog/gardener-ext-dev</link>
             <guid>gardener-ext-dev</guid>
             <pubDate>Wed, 08 Jun 2022 00:00:00 GMT</pubDate>
             <description><![CDATA[TLDR;]]></description>
@@ -177,7 +177,7 @@ We are always willing to improve our work.</p>]]></content:encoded>
         </item>
         <item>
             <title><![CDATA[A Gardener Extension for universal Shoot Configuration]]></title>
-            <link>https://23technologies.github.io/blog/gardener-ext-shoot-flux</link>
+            <link>https://23technologies.github.io/yake/blog/gardener-ext-shoot-flux</link>
             <guid>gardener-ext-shoot-flux</guid>
             <pubDate>Wed, 08 Jun 2022 00:00:00 GMT</pubDate>
             <description><![CDATA[TLDR;]]></description>
