@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://23technologies.github.io/blog</id>
-    <title>23KE Blog</title>
+    <title>Yake | Yet another Kubernetes Engine Blog</title>
     <updated>2023-06-06T00:00:00.000Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://23technologies.github.io/blog"/>
-    <subtitle>23KE Blog</subtitle>
+    <subtitle>Yake | Yet another Kubernetes Engine Blog</subtitle>
     <icon>https://23technologies.github.io/img/favicon.ico</icon>
     <entry>
         <title type="html"><![CDATA[Gardener Hackathon - May 2023]]></title>
