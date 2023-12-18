@@ -18,6 +18,8 @@ spec:
         name: gardener-community-charts
         namespace: flux-system
       interval: 1m
+  upgrade:
+    force: true
   install:
     remediation:
       retries: 3
