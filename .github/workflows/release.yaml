@@ -52,4 +52,5 @@ jobs:
         uses: softprops/action-gh-release@v1
         with:
           body_path: /tmp/release-body.md
-          tag_name: v{{ github.event.inputs.version }}
+          tag_name: v${{ github.event.inputs.version }}
+
