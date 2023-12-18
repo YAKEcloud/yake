@@ -40,7 +40,7 @@ const config = {
   title: "Yake | Yet another Kubernetes Engine",
   tagline: "The GitOps driven Gardener distribution",
   url: "https://23technologies.github.io",
-  baseUrl: "/",
+  baseUrl: "/yake/",
   onBrokenLinks: "ignore",
   onBrokenMarkdownLinks: "warn",
   favicon: "img/favicon.ico",
