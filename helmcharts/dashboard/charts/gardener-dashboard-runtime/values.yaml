@@ -4,6 +4,7 @@ global:
         deploymentAnnotations: {}
         deploymentLabels: {}
         enabled: true
+        experimentalUseWatchCacheForListShoots: never
         frontendConfig:
             defaultHibernationSchedule:
                 development:
@@ -13,6 +14,8 @@ global:
                     - start: 00 17 * * 1,2,3,4,5
                 production: null
             defaultNodesCIDR: 10.250.0.0/16
+            experimental:
+                throttleDelayPerCluster: 10
             features:
                 projectTerminalShortcutsEnabled: false
                 terminalEnabled: false
@@ -28,8 +31,8 @@ global:
             serviceAccountDefaultTokenExpiration: 7.776e+06
         image:
             pullPolicy: IfNotPresent
-            repository: eu.gcr.io/gardener-project/gardener/dashboard
-            tag: 1.70.1
+            repository: europe-docker.pkg.dev/gardener-project/releases/gardener/dashboard
+            tag: 1.71.0
         ingress:
             annotations:
                 nginx.ingress.kubernetes.io/ssl-redirect: "true"
@@ -45,6 +48,7 @@ global:
             successThreshold: 1
             timeoutSeconds: 5
         logLevel: debug
+        maxRequestBodySize: 100kb
         metricsContainerPort: 9050
         nodeOptions:
             - --max-old-space-size=920

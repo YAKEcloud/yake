@@ -8,8 +8,8 @@ createCRDs:
 fullnameOverride: cert-controller-manager
 image:
     pullPolicy: IfNotPresent
-    repository: eu.gcr.io/gardener-project/cert-controller-manager
-    tag: v0.11.3
+    repository: europe-docker.pkg.dev/gardener-project/public/cert-controller-manager
+    tag: v0.11.4
 nameOverride: ""
 nodeSelector: {}
 podLabels: {}

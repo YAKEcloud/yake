@@ -78,7 +78,7 @@ gardenlet:
         name: ingress-default-backend
         repository: eu.gcr.io/gardener-project/gardener/ingress-default-backend
         sourceRepository: github.com/gardener/ingress-default-backend
-        tag: 0.17.0
+        tag: 0.18.0
       - name: hyperkube
         repository: eu.gcr.io/gardener-project/hyperkube
         sourceRepository: github.com/gardener/hyperkube
@@ -128,9 +128,9 @@ gardenlet:
         tag: v1.24.3
         targetVersion: 1.24.x
       - name: vpn-seed-server
-        repository: eu.gcr.io/gardener-project/gardener/vpn-seed-server
+        repository: europe-docker.pkg.dev/gardener-project/releases/gardener/vpn-seed-server
         sourceRepository: github.com/gardener/vpn2
-        tag: 0.19.0
+        tag: 0.22.0
       - labels:
           - name: gardener.cloud/cve-categorisation
             value:
@@ -204,7 +204,7 @@ gardenlet:
         resourceId:
           name: metrics-exporter
         sourceRepository: github.com/gardener/gardener-metrics-exporter
-        tag: 0.27.0
+        tag: 0.28.0
       - labels:
           - name: gardener.cloud/cve-categorisation
             value:
@@ -276,9 +276,9 @@ gardenlet:
         sourceRepository: github.com/kubernetes-sigs/metrics-server
         tag: v0.6.4
       - name: vpn-shoot-client
-        repository: eu.gcr.io/gardener-project/gardener/vpn-shoot-client
+        repository: europe-docker.pkg.dev/gardener-project/releases/gardener/vpn-shoot-client
         sourceRepository: github.com/gardener/vpn2
-        tag: 0.19.0
+        tag: 0.22.0
       - labels:
           - name: gardener.cloud/cve-categorisation
             value:
@@ -635,7 +635,7 @@ gardenlet:
         resourceId:
           name: apiserver-proxy
         sourceRepository: github.com/gardener/apiserver-proxy
-        tag: v0.14.0
+        tag: v0.15.0
 provider-openstack:
   imageVectorOriginal:
     images:
