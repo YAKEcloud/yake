@@ -14,11 +14,11 @@ tests:
               admissionWebhooks:
                 patch:
                   labels:
-                    23ke.cloud/component: ingress-nginx
+                    yake.cloud/component: ingress-nginx
               podLabels:
                 app: nginx-ingress
                 component: controller
-                23ke.cloud/component: ingress-nginx
+                yake.cloud/component: ingress-nginx
               service:
                 annotations:
                   cert.gardener.cloud/class: base-cert-class

@@ -1,67 +1,24 @@
-# 23ke
+# Yake
 
-23ke consists of three layers:
- * 23ke "base" git repository
- * 23ke-"config"-<name> git repository to manage one or multiple configuration environments (like production, staging, testing)
- * An "env" folder inside 23ke-config-<name> which is meant to hold configuration for one gardener installation
+Yake is Yet Another Kubernetes Engine. Formerly it was developed as 23KE as inner source at 23 Technologies GmbH and serves a gitops-based[Gardener](https://gardener.cloud/) distribution. Conceptually, Yake not only installs Gardener itself but comes with some basic components for managing ingresses, certificates, dnsentries, and Gardener addons such as the dashboard as well es Gardener extensions.
 
-23ke makes use of established kubernetes tooling wherever possible:
- * Flux v2 to reconcile the desired state defined in a git repository
- * Kustomize (inside Flux)
- * Helm (inside Flux) for installation and upgrades of most components
- * Cert-Manager for selfsigned (inside of gardener) and LetsEncrypt Certificates
- * Cluster-API for creation and ugrades of the garden cluster and seed clusters
- * Nginx Ingress
- * KinD for bootstapping with Cluster-API, development and CI environments
+# Technology
 
-# Create config repository
+Yake is fully built around [Flux](https://fluxcd.io/) in order to enable the gitops approach. Moreover, [Helm](https://helm.sh/) charts are used for configuration/templating purposes. You can find all Gardener related helm charts releases separately in the [gardener-community/gardener-charts](https://github.com/gardener-community/gardener-charts) helm repository. These helm charts are also supplied in the `helmcharts` directory in this repository to keep the repository as self-contained as possible.
 
-# Initialize new environment
+# Getting started
 
+## Getting started locally
+If you just want to try out Yake and evaluate whether it is the right tool for you, you are invited to set up a local installation via the resources provided in `hack/ci/yake-local`. Just go ahead and execute
+```sh
+cd hack/ci/yake-local
+bash work.sh
 ```
-export $MYNAME=foo
-export $MYENV=development
-export $23KEVERSION
-mkdir 23ke-config-$MYNAME && cd 23ke-config-$MYNAME
-git init
-git submodule add -b $23KEVERSION git@github.com:23technologies/23ke.git
-mkdir $MYENV && cd $MYENV
-../23ke/init-new-env.sh  # copies and symlinks templates
+This will setup a KinD Kubernetes cluster on you local machine and install Yake into it. You can watch the installation by watching the Flux resources `Kustomization`s and `HelmReleases`. Of course you could also have a look at `Deployment`s and `Pod`s in order to see which processes are started.
 
-./bin/
-```
+### Local development and contribution
+If you want to experiment with new features or bug fixes for Yake, you can simply apply changes to resources in this repository. In order to reflect these changes in the locally running environment, you need to commit them and push them to the `local` remote. From there Flux's source-controller will reconcile the repository state and apply your changes to the cluster. This enables a smooth local development experience. Once you are satisfied with your changes, you should rebase all your commit into meaningful commits, push the branch to the upstream repository, and file a pull request.
 
+# Production Deployments
 
-# Bootstrap Garden Cluster
-
-23ke can be installed on top of any compatible kubernetes cluster, but ships with scripts to launch and configure a new cluster with cluster-api on many cloud providers.
-
-
-# Install on running cluster
-After creating and commiting the environment to the config repository you need to bootstrap flux into the cluster and give it read access to the config repository.
-
-# How to use the testbed
-
-## Setup your PATH
-As we use e.g. [flux](https://fluxcd.io/), [kubectl](https://kubernetes.io/docs/reference/kubectl/), and [yq](https://mikefarah.gitbook.io/yq/) in the testbed, it is important that we maintain a common base of these cli tools.In order to setup your path you can run:
-```shell
-make -f hack/tools/tools.mk all
-export PATH=hack/tools/bin:$PATH
-```
-and you should be good to go.
-
-## Get started with the testbed
-
-This repo contains a quick way to setup 23KE for testing and development. The scripts that bootstrap the testing environment are all located in `hack/ci`. The testbed itself runs as shoot on top of okeanos in the project 23ke-ci. To use the script you need the kubeconfig for a service account in that project and place it under `hack/secrets/gardener-kubeconfig.yaml`. After that you can start the deployment with a simple `bash hack/ci/setup_shoot.sh`. The script runs approximately 10 minutes and in the end you should have a working gardener. The script calls multiple scripts sequentially, all of them can be executed seperately as well. Here a brief description of each script:
-
-* 00-environment.sh:       Reserves a shoot, generates random passwords, tokens, names
-* 01-shoot.sh              Waits for the shoot to be in "Ready" state
-* 02-23ke-bucket.sh        Uploads the local state of 23ke to a minio bucket
-* 03-23ke-config-bucket.sh Uploads the local state of hack/ci/dev-env to a minio bucket
-* 04-23ke.sh               Configures and installs 23ke gardener in shoot
-* 05-secret.sh             Copy provider secret from base gardener to new gardener
-* 06-microservice-shoot.sh Create a new shoot in the new gardener
-
-The main goal is to iterate and test local changes before creating a PR or even a commit, and do so quickly. Nearly all of the time it should be sufficient to re-upload the local state with 02-23ke-bucket.sh/03-23ke-config-bucket.sh or/and re-run the 04-23ke.sh to watch flux reconcile the changes.
-
-To clean up you need to then run delete-microservice-shoot.sh and delete-shoot.sh
+For production deployments you can have a look at the local setup first and adjust the configuration files in `hack/ci/yake-local/config` to your needs. You will not need to install [Knot](https://www.knot-dns.cz/) and [Step-ca](https://smallstep.com/docs/step-ca/) as done in the local environment. However, you will need a domain and configured cloud dns provider for a real deployment. Please checkout the documentation for further information.

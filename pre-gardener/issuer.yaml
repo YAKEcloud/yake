@@ -21,7 +21,7 @@ spec:
       reconcileStrategy: Revision
       sourceRef:
         kind: GitRepository
-        name: 23ke
+        name: yake
         namespace: flux-system
       interval: 1m
   valuesFrom:

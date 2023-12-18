@@ -2,13 +2,13 @@
 set -eu
 
 if [[ $0 != './work.sh' ]]; then
-  echo "please run this from inside 23ke-local/"
+  echo "please run this from inside yake-local/"
   exit 1
 fi
 
 source ../../../hack/tools/install.sh
 
-CLUSTERNAME="23ke-local"
+CLUSTERNAME="yake-local"
 VGARDEN_KUBECONFIG="/tmp/$CLUSTERNAME-apiserver.yaml"
 
 _create_cluster () {
@@ -88,7 +88,7 @@ _create_flux () {
   ############# flux #################
   $KUBECTL apply -f ../../../flux-system/gotk-components.yaml
 
-  ############# 23ke config #################
+  ############# yake config #################
   export NODE_CIDR=$(docker network inspect kind | $YQ '.[0].IPAM.Config[0].Subnet' -r)
   for file in config/*; do
     $ENVSUBST "\$NODE_CIDR" < "$file" | $KUBECTL apply -f -
@@ -98,7 +98,7 @@ _create_flux () {
 apiVersion: source.toolkit.fluxcd.io/v1
 kind: GitRepository
 metadata:
-  name: 23ke
+  name: yake
   namespace: flux-system
 spec:
   interval: 10s
@@ -111,23 +111,16 @@ EOF
 apiVersion: kustomize.toolkit.fluxcd.io/v1beta2
 kind: Kustomization
 metadata:
-  name: 23ke
+  name: yake
   namespace: flux-system
 spec:
   interval: 10s
   sourceRef:
     kind: GitRepository
-    name: 23ke
+    name: yake
   path: ./
   prune: true
   patches:
-    - patch: |
-        - op: remove
-          path: /spec/dependsOn/0
-      target:
-        kind: Kustomization
-        name: configuration
-        namespace: flux-system
     - target:
         kind: Kustomization
         name: flux-system

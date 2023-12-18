@@ -4,7 +4,13 @@ hide_table_of_contents: true
 
 # Release Notes next
 
-## 23KE release notes and upgrade guide
+## Yake/23KE release notes and upgrade guide
+
+:::danger
+
+This update renames 23ke to yake. You need to rename the config secret and GitRepository resource as described.
+
+:::
 
 :::danger
 
@@ -12,19 +18,101 @@ This update definitely needs backups to be configured. If you are running a 23KE
 
 :::
 
+## Prerequisites
+### etcd downgrade
 
 In order to align the versions of `etcd` and `etcd-backup-restore` with gardener/etcd-druid, we perform a downgrade to etcd-3.4.26 and an upgrade to etcd-backup-restore-0.24.7. This is also expected to improve the stability of the backup process. For the upgrade, you need to
 - Make sure you have an up-to-date backup of the virtual garden `etcd`s. To perform a full backup you can use the following request:
-```sh
-kubectl -n garden exec -it etcd-0 curl localhost:8080/snapshot/full
-```
+  ```sh
+  kubectl -n garden exec -it etcd-0 curl localhost:8080/snapshot/full
+  ```
+
 - Delete the statefulset `etcd` and `etcd-events` in the `garden` namespace
-``` sh
-kubectl delete statefulset -n garden etcd
-kubectl delete statefulset -n garden etcd-events
-```
-- Perform the 23KE update. This will create new `persistentVolumes` for the virtual garden's `etcd`s. These volumes are prefixed by `virtual-garden-`.
-- (Optional) Delete the old `persistenVolumes` belonging to the already deleted statefulsets.
+  ```sh
+  kubectl delete statefulset -n garden etcd
+  kubectl delete statefulset -n garden etcd-events
+  ```
+
+During the upgrade helm will create new `persistentVolumes` for the virtual garden's `etcd`s. These volumes are prefixed by `virtual-garden-`.
+
+### Temporarily remove gardener-metrics-exporter
+
+To workaround an issue with how yake uses gardener-metrics-exporter's chart, delete its deployment
+
+  ```sh
+  kubectl delete -n garden deployment gardener-metrics-exporter
+  ```
+
+
+## Upgrade
+### Perform the migration from 23ke to yake execute the following steps.
+
+- Create copy of Secret `23ke-config` named `yake-config`
+  ```sh
+  kubectl get secret -n flux-system 23ke-config -o yaml | kubectl-neat | yq '.metadata.name="yake-config"' | kubectl apply -f -
+  ```
+
+- Create new GitRepository source named yake.
+  ```sh
+  cat <<EOF | kubectl apply -f -
+  apiVersion: source.toolkit.fluxcd.io/v1
+  kind: GitRepository
+  metadata:
+    name: yake
+    namespace: flux-system
+  spec:
+    interval: 1m
+    ref:
+      tag: v1.86.0-0
+    timeout: 60s
+    url: https://github.com/yakecloud/yake
+  EOF
+  ```
+
+- Suspend 23ke Kustomization
+  ```sh
+  flux suspend ks 23ke
+  ```
+
+- Relabel Kustomizations created by the main 23ke Kustomization
+  ```sh
+  kubectl label ks -n flux-system -l kustomize.toolkit.fluxcd.io/name=23ke kustomize.toolkit.fluxcd.io/name=yake --overwrite
+  ```
+
+- Recreate the main Kustomization with name yake
+  ```sh
+  kubectl get ks -n flux-system 23ke -o yaml | kubectl-neat | yq '.metadata.name="yake" | .spec.sourceRef.name="yake"' | kubectl apply -f -
+  ```
+
+- Resume the yake Kustomization
+  ```sh
+  flux resume ks yake
+  ```
+
+### Cleanup obsolete resources
+
+Once you confirmed everything's working correctly you can remove obsolete resources.
+
+- Delete the old 23ke Kustomization
+  ```sh
+  kubectl delete ks -n flux-system 23ke
+  ```
+
+- Delete the old GitRepository resource
+  ```sh
+  kubectl delete gitrepo -n flux-system 23ke
+  ```
+
+- Delete Secret `23ke-config`
+  ```sh
+  kubectl delete secret -n flux-system 23ke-config
+  ```
+
+- (Optional) Delete the old `persistentVolumeClaims` and their `persistentVolumes` belonging to the already deleted statefulsets of `etcd` and `etcd-events`.
+  ```sh
+  kubectl get pvc -n garden | grep '^etcd'
+  kubectl get pv | grep garden/etcd
+  ```
 
 ## Related upstream release notes / changelogs
 
@@ -57,7 +145,7 @@ kubectl delete statefulset -n garden etcd-events
 
 ## 🏃 Others
 
-- `[OPERATOR]` The following golang dependencies have been upgraded :  
+- `[OPERATOR]` The following golang dependencies have been upgraded :
   - `gardener/gardener`: `v1.81.6`->`v1.83.2` by @shafeeqes [#828]
 - `[OPERATOR]` Add documentation for the "flow" infrastructure reconciler. by @kon-angelo [#827]
 - `[DEVELOPER]` Add new unit tests. by @axel7born [#829]
@@ -83,19 +171,19 @@ kubectl delete statefulset -n garden etcd-events
 - `[USER]` `shoot-rsyslog-relp` extension now supports [Shoot Force Deletion](https://github.com/gardener/gardener/blob/master/docs/usage/shoot_operations.md#force-deletion).  by @acumino [#24]
 ## 🏃 Others
 
-- `[OPERATOR]` Metrics for the rsyslog service running on the shoot nodes are now exposed and collected according to the following:  
-    - The metrics are available on the `node-exporter`'s `/metrics` endpoint.   
-    - The names of the new metrics match the `rsyslog_pstat_.+` regex.  
-    - The metrics are scraped and collected in the shoot's prometheus instance.  
+- `[OPERATOR]` Metrics for the rsyslog service running on the shoot nodes are now exposed and collected according to the following:
+    - The metrics are available on the `node-exporter`'s `/metrics` endpoint.
+    - The names of the new metrics match the `rsyslog_pstat_.+` regex.
+    - The metrics are scraped and collected in the shoot's prometheus instance.
     - A dedicated plutono dashboard is added which displays the rsyslog metrics. by @plkokanov [#32]
 - `[OPERATOR]` Fixed an issue where the rsyslog systemd unit could become stuck in a failed state immediately after it is installed on the shoot's nodes, if the `shoot-rsyslog-relp` extension was enabled on the shoot before that. The `configure-rsyslog.sh` script which is responsible for configuring and restarting the rsyslog systemd unit will now wait for the `syslog.service` symlink to be created before attempting to configure and restart the rsyslog systemd unit. by @plkokanov [#34]
-- `[OPERATOR]` The shoot-rsyslog-relp extension is now aligned with Gardener's [component checklist](https://github.com/gardener/gardener/blob/v1.82.0/docs/development/component-checklist.md):  
-  - RBAC for the `shoot-rsyslog-relp` extension controller have been drastically reduced to only the required ones.  
-  - The deployment for the `shoot-rsyslog-relp` extension controller now contains the proper label for HA - `high-availability-config.resources.gardener.cloud/type: controller`  
-  - The `shoot-rsyslog-relp` admission pod no longer has a `SecurityContext`. This will be automatically added by the `seccomp-profile` webhook of the `gardener-resource-manager`   
-  - The `rsyslog-relp-configurator` and `rsyslog-relp-configuration-cleaner` pods now use the `RuntimeDefault` seccomp profile.  
-  - The init containers of the `rsyslog-relp-configurator` and `rsyslog-relp-configuration-cleaner` pods no longer run in privileged mode.  
-  - The `rsyslog-relp-configurator` and `rsyslog-relp-configuration-cleaner` now specify resource requests and limits.  
+- `[OPERATOR]` The shoot-rsyslog-relp extension is now aligned with Gardener's [component checklist](https://github.com/gardener/gardener/blob/v1.82.0/docs/development/component-checklist.md):
+  - RBAC for the `shoot-rsyslog-relp` extension controller have been drastically reduced to only the required ones.
+  - The deployment for the `shoot-rsyslog-relp` extension controller now contains the proper label for HA - `high-availability-config.resources.gardener.cloud/type: controller`
+  - The `shoot-rsyslog-relp` admission pod no longer has a `SecurityContext`. This will be automatically added by the `seccomp-profile` webhook of the `gardener-resource-manager`
+  - The `rsyslog-relp-configurator` and `rsyslog-relp-configuration-cleaner` pods now use the `RuntimeDefault` seccomp profile.
+  - The init containers of the `rsyslog-relp-configurator` and `rsyslog-relp-configuration-cleaner` pods no longer run in privileged mode.
+  - The `rsyslog-relp-configurator` and `rsyslog-relp-configuration-cleaner` now specify resource requests and limits.
   - `PodSecurityPolicy`s for the `rsyslog-relp-configurator` and `rsyslog-relp-configuration-cleaner` are now deployed in the shoot cluster, if its kubernetes version is `1.24.x`. by @plkokanov [#29]
 - `[OPERATOR]` The healthcheck controller is now removed. Starting [v1.65.0](https://github.com/gardener/gardener/releases/tag/v1.65.0), gardenlet perform health checks for all ManagedResources in the Shoot control plane in the Seed. There is no longer need of the custom healthcheck controller in the shoot-rsyslog-relp extension as it was doing the same job. It was performing health check for the ManagedResource it deploys. by @plkokanov [#28]
 - `[OPERATOR]` The `rsyslog-relp-configuration-cleaner` is no longer deployed on Shoot deletion with `shoot-rsyslog-relp` extension enabled. The Extension deletion occurs after the Worker deletion. There are no Nodes, hence there is no need to clean up registry configuration. by @plkokanov [#30]
@@ -195,7 +283,7 @@ no release notes available
 
 ## 🏃 Others
 
-- `[OPERATOR]` The following dependency is updated to adopt a cherry-pick of https://github.com/gardener/gardener/pull/8943:  
+- `[OPERATOR]` The following dependency is updated to adopt a cherry-pick of https://github.com/gardener/gardener/pull/8943:
   - github.com/gardener/gardener: v1.83.2 -> v1.83.3 by @ialidzhikov [#843]
 
 ## Docker Images
@@ -226,7 +314,7 @@ no release notes available
 
 ## ⚠️ Breaking Changes
 
-- `[USER]` `NS` records are not retrieved anymore for all accessible hosted zones to avoid reading all DNS record sets of all hosted zones periodically independently if they are used. Only hosted zones with active `DNSProviders` are synched, but without caring about consequences of `NS` records for subdomains. If there are many large hosted zones accessible for given credentials and there are only  `DNSProviders` using a few of these zones (either by domain or zone include), the period synchronisation of the zone state for all other hosted zones is avoided. This can result in a significant reduction of requests to the provider backend. As a downside of this change, applying a `DNSEntry` for a forwarded subdomain now results in a DNS record set in the parent hosted zone, if the real hosted zone is unknown to the controller. Formerly, applying such a `DNSEnty` resulted in an error state.   
+- `[USER]` `NS` records are not retrieved anymore for all accessible hosted zones to avoid reading all DNS record sets of all hosted zones periodically independently if they are used. Only hosted zones with active `DNSProviders` are synched, but without caring about consequences of `NS` records for subdomains. If there are many large hosted zones accessible for given credentials and there are only  `DNSProviders` using a few of these zones (either by domain or zone include), the period synchronisation of the zone state for all other hosted zones is avoided. This can result in a significant reduction of requests to the provider backend. As a downside of this change, applying a `DNSEntry` for a forwarded subdomain now results in a DNS record set in the parent hosted zone, if the real hosted zone is unknown to the controller. Formerly, applying such a `DNSEnty` resulted in an error state.
   No action is necessary from the users, this is only a "heads up" for the changed behaviour if `NS` records are used for subdomains. by @MartinWeindel [gardener/external-dns-management#336]
 ## 🏃 Others
 
@@ -265,8 +353,8 @@ no release notes available
 
 - `[DEPENDENCY]` extension library: An issue causing the Worker restore operation to fail for hibernated Shoots is now fixed. by @ialidzhikov [#8943]
 - `[OPERATOR]` A bug causing the Shoot to use the wrong istio load balancer if the `ExposureClass` name and the exposureclass handler name are not the same is now fixed.  by @shafeeqes [#8926]
-- `[OPERATOR]` Fixed a bug where a Shoot with an expired machine image or Kubernetes version could be created.   
-  For machine images: only allow updating to a higher expired machine image version for an existing worker pool  
+- `[OPERATOR]` Fixed a bug where a Shoot with an expired machine image or Kubernetes version could be created.
+  For machine images: only allow updating to a higher expired machine image version for an existing worker pool
   For Kubernetes versions: do not allow creation of a worker pool with an expired K8s version, but still allow updating an existing worker pool to a higher expired version. by @danielfoehrKn [#8854]
 - `[OPERATOR]` `gardener-node-agent`'s `OperatingSystemConfig` controller now respects the reconciliation timeout and aborts the reconciliation if it takes too long. by @rfranzke [#8907]
 - `[OPERATOR]` `gardener-node-agent` now creates temporary directories and files under `/var/lib/gardener-node-agent/tmp` instead of `/tmp`. This fixes issues during `OperatingSystemConfig` reconciliation which occur when `/var` and `/tmp` are backed by different file systems or devices. by @rfranzke [#8894]
@@ -335,8 +423,8 @@ no release notes available
 
 - `[DEPENDENCY]` extension library: An issue causing the Worker restore operation to fail for hibernated Shoots is now fixed. by @ialidzhikov [#8943]
 - `[OPERATOR]` A bug causing the Shoot to use the wrong istio load balancer if the `ExposureClass` name and the exposureclass handler name are not the same is now fixed.  by @shafeeqes [#8926]
-- `[OPERATOR]` Fixed a bug where a Shoot with an expired machine image or Kubernetes version could be created.   
-  For machine images: only allow updating to a higher expired machine image version for an existing worker pool  
+- `[OPERATOR]` Fixed a bug where a Shoot with an expired machine image or Kubernetes version could be created.
+  For machine images: only allow updating to a higher expired machine image version for an existing worker pool
   For Kubernetes versions: do not allow creation of a worker pool with an expired K8s version, but still allow updating an existing worker pool to a higher expired version. by @danielfoehrKn [#8854]
 - `[OPERATOR]` `gardener-node-agent`'s `OperatingSystemConfig` controller now respects the reconciliation timeout and aborts the reconciliation if it takes too long. by @rfranzke [#8907]
 - `[OPERATOR]` `gardener-node-agent` now creates temporary directories and files under `/var/lib/gardener-node-agent/tmp` instead of `/tmp`. This fixes issues during `OperatingSystemConfig` reconciliation which occur when `/var` and `/tmp` are backed by different file systems or devices. by @rfranzke [#8894]
@@ -405,8 +493,8 @@ no release notes available
 
 - `[DEPENDENCY]` extension library: An issue causing the Worker restore operation to fail for hibernated Shoots is now fixed. by @ialidzhikov [#8943]
 - `[OPERATOR]` A bug causing the Shoot to use the wrong istio load balancer if the `ExposureClass` name and the exposureclass handler name are not the same is now fixed.  by @shafeeqes [#8926]
-- `[OPERATOR]` Fixed a bug where a Shoot with an expired machine image or Kubernetes version could be created.   
-  For machine images: only allow updating to a higher expired machine image version for an existing worker pool  
+- `[OPERATOR]` Fixed a bug where a Shoot with an expired machine image or Kubernetes version could be created.
+  For machine images: only allow updating to a higher expired machine image version for an existing worker pool
   For Kubernetes versions: do not allow creation of a worker pool with an expired K8s version, but still allow updating an existing worker pool to a higher expired version. by @danielfoehrKn [#8854]
 - `[OPERATOR]` `gardener-node-agent`'s `OperatingSystemConfig` controller now respects the reconciliation timeout and aborts the reconciliation if it takes too long. by @rfranzke [#8907]
 - `[OPERATOR]` `gardener-node-agent` now creates temporary directories and files under `/var/lib/gardener-node-agent/tmp` instead of `/tmp`. This fixes issues during `OperatingSystemConfig` reconciliation which occur when `/var` and `/tmp` are backed by different file systems or devices. by @rfranzke [#8894]
@@ -457,7 +545,7 @@ no release notes available
 
 ## ⚠️ Breaking Changes
 
-- `[OPERATOR]` Change OCI Image Registry from GCR (`eu.gcr.io/gardener-project`) to Artifact-Registry (`europe-docker.pkg.dev/gardener-project/releases`). Users should update their references.  
+- `[OPERATOR]` Change OCI Image Registry from GCR (`eu.gcr.io/gardener-project`) to Artifact-Registry (`europe-docker.pkg.dev/gardener-project/releases`). Users should update their references.
    by @ccwienk [#156]
 ## 🏃 Others
 
@@ -484,29 +572,29 @@ no release notes available
 - `[OPERATOR]` Change OCI Image Registry from GCR (`eu.gcr.io/gardener-project`) to Artifact-Registry (`europe-docker.pkg.dev/gardener-project/releases`) by @ccwienk [#1645]
 ## ✨ New Features
 
-- `[USER]` Enhanced Client-Side Validation:  
-  Previously, if there was a validation error, the `submit` buttons on Dialogs and the Create Cluster page would be greyed out. Now, these buttons remain active even if there is a validation error.  
-  Clicking on the `submit` button in the presence of a validation error will not execute the submit logic. Instead, it will trigger the validation process to ensure that all validation error messages are clearly visible at the respective input fields.  
+- `[USER]` Enhanced Client-Side Validation:
+  Previously, if there was a validation error, the `submit` buttons on Dialogs and the Create Cluster page would be greyed out. Now, these buttons remain active even if there is a validation error.
+  Clicking on the `submit` button in the presence of a validation error will not execute the submit logic. Instead, it will trigger the validation process to ensure that all validation error messages are clearly visible at the respective input fields.
   In addition, we've made it easier to view all error messages. They are now collected and displayed in an alert, similar to how server-side error messages are shown. This enhancement ensures that users are fully aware of any errors that prevent to proceed with the action. by @grolu [#1633]
-- `[USER]` An improvement in performance and memory usage on the shoot list has been achieved when a large number of clusters are present. In the past, under heavy load, there were repeated instances where the dashboard became unresponsive due to very high memory consumption. This has been achieved by implementing the following two changes:  
-  * Throttling of shoot events in the frontend.   
-    Now, only the `uid` of the modified object is sent to the client, coupled with periodic synchronization of associated shoots.  
-  * Removal of the key property in the `g-shoot-list-row` component   
-  * Improved performance of sorting and filtering implementation  
-  * Faster response times for list shoot request (experimental: must be enabled by an operator)  
+- `[USER]` An improvement in performance and memory usage on the shoot list has been achieved when a large number of clusters are present. In the past, under heavy load, there were repeated instances where the dashboard became unresponsive due to very high memory consumption. This has been achieved by implementing the following two changes:
+  * Throttling of shoot events in the frontend.
+    Now, only the `uid` of the modified object is sent to the client, coupled with periodic synchronization of associated shoots.
+  * Removal of the key property in the `g-shoot-list-row` component
+  * Improved performance of sorting and filtering implementation
+  * Faster response times for list shoot request (experimental: must be enabled by an operator)
   * Reduced network traffic for invisible browser tabs  by @holgerkoser [#1637]
 - `[OPERATOR]` Added a configuration parameter `Values.global.dashboard.maxRequestBodySize` that specifies the maximum size of the request body. It's value defaults to `100kb`. by @holgerkoser [#1656]
-- `[OPERATOR]` Experimental Features:  
-  * Enhanced Watch Cache Control for List Shoots Requests.   
-    We've introduced a new feature to fine-tune caching behavior for list shoots requests. A new configuration option, `Values.global.dashboard.experimentalUseWatchCacheForListShoots`, has been added to the `gardener-dashboard` Helm chart. This allows for more precise control over caching with four settings: `never`, `no`, `yes`, and `always`. By default, this is set to `never`. As an experimental feature, we welcome feedback and suggest caution in production environments.  
-  * Fine-tune the throttle delay per cluster.  
+- `[OPERATOR]` Experimental Features:
+  * Enhanced Watch Cache Control for List Shoots Requests.
+    We've introduced a new feature to fine-tune caching behavior for list shoots requests. A new configuration option, `Values.global.dashboard.experimentalUseWatchCacheForListShoots`, has been added to the `gardener-dashboard` Helm chart. This allows for more precise control over caching with four settings: `never`, `no`, `yes`, and `always`. By default, this is set to `never`. As an experimental feature, we welcome feedback and suggest caution in production environments.
+  * Fine-tune the throttle delay per cluster.
     This option, found under `Values.global.dashboard.frontendConfig.experimental.throttleDelayPerCluster`, allows administrators to set the base number of milliseconds delay per cluster. This delay dynamically adjusts the synchronization throttle based on the number of active clusters, optimizing performance and resource utilization in environments with a varying number of clusters. by @holgerkoser [#1637]
 ## 🐛 Bug Fixes
 
 - `[OPERATOR]` Fixed  garden cluster terminals when the host cluster is a managed Seed by @petersutter [#1657]
 - `[OPERATOR]` Dashboard pods were not recreated after assets have been changed by @petersutter [#1627]
-- `[USER]` Fixed issues with the machine image input field:  
-  - image description was not shown  
+- `[USER]` Fixed issues with the machine image input field:
+  - image description was not shown
   - certain mache image hints were not shown when editing the worker for an existing shoot by @petersutter [#1635]
 - `[USER]` Fxed issue where the kubernetes dashboard was not shown on cluster details page in case the addon was enabled. The issue occurs when static token kubeconfig is disabled. by @petersutter [#1658]
 - `[USER]` Fixed the owner selection via mouse click on the project administration page. by @holgerkoser [#1632]
@@ -531,29 +619,29 @@ no release notes available
 - `[OPERATOR]` Change OCI Image Registry from GCR (`eu.gcr.io/gardener-project`) to Artifact-Registry (`europe-docker.pkg.dev/gardener-project/releases`) by @ccwienk [#1645]
 ## ✨ New Features
 
-- `[USER]` Enhanced Client-Side Validation:  
-  Previously, if there was a validation error, the `submit` buttons on Dialogs and the Create Cluster page would be greyed out. Now, these buttons remain active even if there is a validation error.  
-  Clicking on the `submit` button in the presence of a validation error will not execute the submit logic. Instead, it will trigger the validation process to ensure that all validation error messages are clearly visible at the respective input fields.  
+- `[USER]` Enhanced Client-Side Validation:
+  Previously, if there was a validation error, the `submit` buttons on Dialogs and the Create Cluster page would be greyed out. Now, these buttons remain active even if there is a validation error.
+  Clicking on the `submit` button in the presence of a validation error will not execute the submit logic. Instead, it will trigger the validation process to ensure that all validation error messages are clearly visible at the respective input fields.
   In addition, we've made it easier to view all error messages. They are now collected and displayed in an alert, similar to how server-side error messages are shown. This enhancement ensures that users are fully aware of any errors that prevent to proceed with the action. by @grolu [#1633]
-- `[USER]` An improvement in performance and memory usage on the shoot list has been achieved when a large number of clusters are present. In the past, under heavy load, there were repeated instances where the dashboard became unresponsive due to very high memory consumption. This has been achieved by implementing the following two changes:  
-  * Throttling of shoot events in the frontend.   
-    Now, only the `uid` of the modified object is sent to the client, coupled with periodic synchronization of associated shoots.  
-  * Removal of the key property in the `g-shoot-list-row` component   
-  * Improved performance of sorting and filtering implementation  
-  * Faster response times for list shoot request (experimental: must be enabled by an operator)  
+- `[USER]` An improvement in performance and memory usage on the shoot list has been achieved when a large number of clusters are present. In the past, under heavy load, there were repeated instances where the dashboard became unresponsive due to very high memory consumption. This has been achieved by implementing the following two changes:
+  * Throttling of shoot events in the frontend.
+    Now, only the `uid` of the modified object is sent to the client, coupled with periodic synchronization of associated shoots.
+  * Removal of the key property in the `g-shoot-list-row` component
+  * Improved performance of sorting and filtering implementation
+  * Faster response times for list shoot request (experimental: must be enabled by an operator)
   * Reduced network traffic for invisible browser tabs  by @holgerkoser [#1637]
 - `[OPERATOR]` Added a configuration parameter `Values.global.dashboard.maxRequestBodySize` that specifies the maximum size of the request body. It's value defaults to `100kb`. by @holgerkoser [#1656]
-- `[OPERATOR]` Experimental Features:  
-  * Enhanced Watch Cache Control for List Shoots Requests.   
-    We've introduced a new feature to fine-tune caching behavior for list shoots requests. A new configuration option, `Values.global.dashboard.experimentalUseWatchCacheForListShoots`, has been added to the `gardener-dashboard` Helm chart. This allows for more precise control over caching with four settings: `never`, `no`, `yes`, and `always`. By default, this is set to `never`. As an experimental feature, we welcome feedback and suggest caution in production environments.  
-  * Fine-tune the throttle delay per cluster.  
+- `[OPERATOR]` Experimental Features:
+  * Enhanced Watch Cache Control for List Shoots Requests.
+    We've introduced a new feature to fine-tune caching behavior for list shoots requests. A new configuration option, `Values.global.dashboard.experimentalUseWatchCacheForListShoots`, has been added to the `gardener-dashboard` Helm chart. This allows for more precise control over caching with four settings: `never`, `no`, `yes`, and `always`. By default, this is set to `never`. As an experimental feature, we welcome feedback and suggest caution in production environments.
+  * Fine-tune the throttle delay per cluster.
     This option, found under `Values.global.dashboard.frontendConfig.experimental.throttleDelayPerCluster`, allows administrators to set the base number of milliseconds delay per cluster. This delay dynamically adjusts the synchronization throttle based on the number of active clusters, optimizing performance and resource utilization in environments with a varying number of clusters. by @holgerkoser [#1637]
 ## 🐛 Bug Fixes
 
 - `[OPERATOR]` Fixed  garden cluster terminals when the host cluster is a managed Seed by @petersutter [#1657]
 - `[OPERATOR]` Dashboard pods were not recreated after assets have been changed by @petersutter [#1627]
-- `[USER]` Fixed issues with the machine image input field:  
-  - image description was not shown  
+- `[USER]` Fixed issues with the machine image input field:
+  - image description was not shown
   - certain mache image hints were not shown when editing the worker for an existing shoot by @petersutter [#1635]
 - `[USER]` Fxed issue where the kubernetes dashboard was not shown on cluster details page in case the addon was enabled. The issue occurs when static token kubeconfig is disabled. by @petersutter [#1658]
 - `[USER]` Fixed the owner selection via mouse click on the project administration page. by @holgerkoser [#1632]

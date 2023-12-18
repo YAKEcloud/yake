@@ -3,7 +3,7 @@ sidebar_position: 4
 ---
 
 # Gardener Extensions Configuration
-Other than the core Gardener components, Gardener extensions are configured through a 23KE internal helm chart. Consequently, you cannot retrieve any information about possible values via e.g. the [helm](https://helm.sh) cli. For this reason the `extension-values` Secret is documented here. As the other configuration secrets, the secret's header looks like the following:
+Other than the core Gardener components, Gardener extensions are configured through a Yake internal helm chart. Consequently, you cannot retrieve any information about possible values via e.g. the [helm](https://helm.sh) cli. For this reason the `extension-values` Secret is documented here. As the other configuration secrets, the secret's header looks like the following:
 ```yaml
 apiVersion: v1
 kind: Secret

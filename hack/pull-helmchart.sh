@@ -40,7 +40,7 @@ if ! $HELM show chart $curHelmRepo/$depName >/dev/null 2>&1; then
 	 exit 0
 fi
 
-# keep the templates/tests folder as it's not from upstream but part of 23ke.
+# keep the templates/tests folder as it's not from upstream but part of yake.
 mkdir -p "helmcharts/$depName"
 find "helmcharts/$depName" \
   -not \( -path "helmcharts/$depName/templates/tests" -prune \) \

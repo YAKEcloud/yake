@@ -1,7 +1,7 @@
 apiVersion: networking.k8s.io/v1
 kind: NetworkPolicy
 metadata:
-  name: 23ke-gardener-metrics-exporter
+  name: yake-gardener-metrics-exporter
   namespace: garden
 spec:
   podSelector:

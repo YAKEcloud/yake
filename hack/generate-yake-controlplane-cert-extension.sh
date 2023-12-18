@@ -20,8 +20,8 @@ source hack/tools/install.sh
 
 install_helm
 
-NAME=23ke-controlplane-cert
-CHART_DIR=${BASH_SOURCE%/*}/23ke-controlplane-cert-extension
+NAME=yake-controlplane-cert
+CHART_DIR=${BASH_SOURCE%/*}/yake-controlplane-cert-extension
 VERSION=0.0.1
 
 # The following code is to make `helm package` idempotent: Usually, everytime `helm package` is invoked,
@@ -65,5 +65,5 @@ spec:
     policy: Always
     seedSelector:
       matchLabels:
-        23ke.cloud/generate-controlplane-cert: "true"
+        yake.cloud/generate-controlplane-cert: "true"
 EOM

@@ -8,6 +8,6 @@ spec:
   interval: 1m
   sourceRef:
     kind: GitRepository
-    name: 23ke
+    name: yake
   path: ./flux-system
   prune: false

@@ -11,20 +11,16 @@ rules:
 
 ignore: |
   .github/workflows/
-  23ke-local/
+  addons/addons/templates/
+  configuration/configuration/templates/
+  configuration/generated-secrets/templates/
+  docs/
   flux-system/gotk-components.yaml
   gardener/certificates/templates/
   gardener/extensions/templates/
   gardener/garden-content/templates/
-  hack/ci/secrets/
-  hack/ci/dev-env/config/charts
-  addons/addons/templates/
-  configuration/configuration/templates/
+  hack/yake-controlplane-cert-extension/
+  helmcharts/
   pre-gardener/dnsprovider/templates/
-  configuration/generated-secrets/templates/
   pre-gardener/issuer/templates/
-  hack/go/23kectl/pkg/install/v1/__fixture__/
-  hack/go/23kectl/pkg/install/v1/__embed__/
-  hack/23ke-controlplane-cert-extension/
-  helmcharts
-  docs
+  yake-local/

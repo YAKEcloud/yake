@@ -46,7 +46,7 @@ func ImportImageVectors(config Configuration) {
 		outBytes = append(outBytes, tmp...)
 	}
 
-	// Process the elements for which we do  not have a version specified in 23ke.
+	// Process the elements for which we do  not have a version specified in yake.
 	// THe idea is as follows: The version is specified in the already contructed image
 	// vector or will be present in one of the "future" image vectors. Therefore, iterate
 	//over the ring of configs and try to construct the image vector. At least one config

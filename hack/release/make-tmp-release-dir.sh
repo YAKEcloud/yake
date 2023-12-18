@@ -11,7 +11,6 @@ sourceType=$1
 
 tmpDir=$(mktemp -d)
 
-cp -r 23kectl.yaml $tmpDir
 cp -r kustomization.yaml $tmpDir
 cp -r flux $tmpDir
 cp -r configuration $tmpDir
@@ -24,7 +23,7 @@ cp -r helmcharts $tmpDir
 cwd=$(pwd)
 cd $tmpDir
 
-# replace GitRepository with $sourceType in 23ke-directories
+# replace GitRepository with $sourceType in yake-directories
 for file in $(grep -lr GitRepository configuration addons pre-gardener gardener flux | sed 's/^\.\///'); do
 		sed -i s/GitRepository/$sourceType/ $file
 done
@@ -44,7 +43,7 @@ do
 		# delete the 3 consecutive lines of sourceRef
 		sed -i -E "/sourceRef:/{n;N;N;d}" $file
 		# add new sourceRef as $sourceType
-		sed -i -E  "s/      sourceRef:/      sourceRef:\n        kind: $sourceType\n        name: 23ke/" $file
+		sed -i -E  "s/      sourceRef:/      sourceRef:\n        kind: $sourceType\n        name: yake/" $file
 done
 
 cd $cwd
