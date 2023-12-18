@@ -18,76 +18,101 @@ This update definitely needs backups to be configured. If you are running a 23KE
 
 :::
 
+## Prerequisites
+### etcd downgrade
 
 In order to align the versions of `etcd` and `etcd-backup-restore` with gardener/etcd-druid, we perform a downgrade to etcd-3.4.26 and an upgrade to etcd-backup-restore-0.24.7. This is also expected to improve the stability of the backup process. For the upgrade, you need to
 - Make sure you have an up-to-date backup of the virtual garden `etcd`s. To perform a full backup you can use the following request:
-```sh
-kubectl -n garden exec -it etcd-0 curl localhost:8080/snapshot/full
-```
+  ```sh
+  kubectl -n garden exec -it etcd-0 curl localhost:8080/snapshot/full
+  ```
+
 - Delete the statefulset `etcd` and `etcd-events` in the `garden` namespace
-``` sh
-kubectl delete statefulset -n garden etcd
-kubectl delete statefulset -n garden etcd-events
-```
-- Perform the 23KE update. This will create new `persistentVolumes` for the virtual garden's `etcd`s. These volumes are prefixed by `virtual-garden-`.
-- (Optional) Delete the old `persistenVolumes` belonging to the already deleted statefulsets.
+  ```sh
+  kubectl delete statefulset -n garden etcd
+  kubectl delete statefulset -n garden etcd-events
+  ```
 
-# Moving from 23ke to yake
+During the upgrade helm will create new `persistentVolumes` for the virtual garden's `etcd`s. These volumes are prefixed by `virtual-garden-`.
 
-Create copy of Secret `23ke-config` named `yake-config`
-```
-kubectl get secret -n flux-system 23ke-config -o yaml | kubectl-neat | yq '.metadata.name="yake-config"' | kubectl apply -f -
-```
+### Temporarily remove gardener-metrics-exporter
 
-Create new GitRepository source named yake.
-```
-apiVersion: source.toolkit.fluxcd.io/v1
-kind: GitRepository
-metadata:
-  name: yake
-  namespace: flux-system
-spec:
-  interval: 1m
-  ref:
-    tag: v1.86.0
-  timeout: 60s
-  url: https://github.com/yakecloud/yake
-```
+To workaround an issue with how yake uses gardener-metrics-exporter's chart, delete its deployment
 
-Suspend 23ke Kustomization
-```
-flux suspend ks 23ke
-```
+  ```sh
+  kubectl delete -n garden deployment gardener-metrics-exporter
+  ```
 
-Relabel Kustomizations created by the main 23ke Kustomization
-```
-kubectl label ks -n flux-system -l kustomize.toolkit.fluxcd.io/name=23ke kustomize.toolkit.fluxcd.io/name=yake --overwrite
-```
 
-Recreate the main Kustomization with name yake
-```
-kubectl get ks -n flux-system 23ke -o yaml | kubectl-neat | yq '.metadata.name="yake" | .spec.sourceRef.name="yake"' | kubectl apply -f -
-```
+## Upgrade
+### Perform the migration from 23ke to yake execute the following steps.
 
-Unsuspend the yake Kustomization
-```
-flux resume ks yake
-```
+- Create copy of Secret `23ke-config` named `yake-config`
+  ```sh
+  kubectl get secret -n flux-system 23ke-config -o yaml | kubectl-neat | yq '.metadata.name="yake-config"' | kubectl apply -f -
+  ```
 
-Delete the old 23ke Kustomization
-```
-kubectl delete ks -n flux-system 23ke
-```
+- Create new GitRepository source named yake.
+  ```sh
+  cat <<EOF | kubectl apply -f -
+  apiVersion: source.toolkit.fluxcd.io/v1
+  kind: GitRepository
+  metadata:
+    name: yake
+    namespace: flux-system
+  spec:
+    interval: 1m
+    ref:
+      tag: v1.86.0-0
+    timeout: 60s
+    url: https://github.com/yakecloud/yake
+  EOF
+  ```
 
-Delete the old GitRepository resource
-```
-kubectl delete gitrepo -n flux-system 23ke
-```
+- Suspend 23ke Kustomization
+  ```sh
+  flux suspend ks 23ke
+  ```
 
-Delete Secret `23ke-config`
-```
-kubectl delete secret -n flux-system 23ke-config
-```
+- Relabel Kustomizations created by the main 23ke Kustomization
+  ```sh
+  kubectl label ks -n flux-system -l kustomize.toolkit.fluxcd.io/name=23ke kustomize.toolkit.fluxcd.io/name=yake --overwrite
+  ```
+
+- Recreate the main Kustomization with name yake
+  ```sh
+  kubectl get ks -n flux-system 23ke -o yaml | kubectl-neat | yq '.metadata.name="yake" | .spec.sourceRef.name="yake"' | kubectl apply -f -
+  ```
+
+- Resume the yake Kustomization
+  ```sh
+  flux resume ks yake
+  ```
+
+### Cleanup obsolete resources
+
+Once you confirmed everything's working correctly you can remove obsolete resources.
+
+- Delete the old 23ke Kustomization
+  ```sh
+  kubectl delete ks -n flux-system 23ke
+  ```
+
+- Delete the old GitRepository resource
+  ```sh
+  kubectl delete gitrepo -n flux-system 23ke
+  ```
+
+- Delete Secret `23ke-config`
+  ```sh
+  kubectl delete secret -n flux-system 23ke-config
+  ```
+
+- (Optional) Delete the old `persistentVolumeClaims` and their `persistentVolumes` belonging to the already deleted statefulsets of `etcd` and `etcd-events`.
+  ```sh
+  kubectl get pvc -n garden | grep '^etcd'
+  kubectl get pv | grep garden/etcd
+  ```
 
 ## Related upstream release notes / changelogs
 
