@@ -17,7 +17,7 @@ We host a demo instance named [Okeanos](https://dashboard.okeanos.dev), which is
 ## Getting Started
 
 ### Locally
-Checkout the the Readme in the repository for getting started locally.
+Checkout the [Readme](https://github.com/YAKEcloud/yake/blob/main/README.md) in the repository for getting started locally.
 
 ### In the cloud (production scenario)
 First, make sure that you satisfy the requirements below and then follow the installtion guide.

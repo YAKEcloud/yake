@@ -8,8 +8,8 @@ const FeatureList = [
     description: (
       <>
         Yake was designed to get you up and running with your self hosted
-        Gardener installation as quick as possible. Our helper tools 23kectl
-        helps you templating a basic configuration within minutes.
+        Gardener installation as quick as possible. Our helper scripts
+        help you templating a basic configuration within minutes.
       </>
     ),
   },
