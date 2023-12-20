@@ -106,8 +106,9 @@
     "commands": [
       "./hack/import-imagevectors.sh",
       "./hack/pull-helmchart.sh {{{depName}}} {{{newVersion}}}",
+      "./hack/ci/yake-local/update-extension-provider-local-image.sh {{{depName}}} {{{newVersion}}}",
     ],
-    "fileFilters": ["configuration/configuration/images.yaml", "helmcharts/**/**", "docs/release-notes/next.md"],
+    "fileFilters": ["configuration/configuration/images.yaml", "helmcharts/**/**", "docs/release-notes/next.md", "hack/ci/yake-local/garden-content/controller-registrations.yaml"],
     "executionMode": "update"
   }
 }

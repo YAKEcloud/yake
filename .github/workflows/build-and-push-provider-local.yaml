@@ -1,0 +1,19 @@
+name: Build and Push gardener-extension-provider-local
+
+on:
+  workflow_dispatch:
+  pull_request:
+    paths:
+      - 'gardener/gardener.yaml'
+
+jobs:
+  buildAndPush:
+    name: Build and push extension-provider-local to ghcr
+    runs-on: self-hosted
+    steps:
+      - name: Checkout the repository
+        uses: actions/checkout@v3
+      - name: Login to ghcr
+        run: echo "${{ secrets.GITHUB_TOKEN }}" | docker login ghcr.io -u $ --password-stdin
+      - name: Build and push
+        run: ./hack/ci/yake-local/build-extension-provider-local.sh
