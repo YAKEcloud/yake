@@ -12,7 +12,8 @@ CLUSTERNAME="yake-local"
 VGARDEN_KUBECONFIG="/tmp/$CLUSTERNAME-apiserver.yaml"
 
 _create_cluster () {
-  $KIND create cluster --config kind-config.yaml --name $CLUSTERNAME --image=kindest/node:v1.26.6
+  # If export kubeconfig fails, the cluster does not yet exist and we need to create it
+  $KIND export kubeconfig -n $CLUSTERNAME > /dev/null 2>&1  || $KIND create cluster --config kind-config.yaml --name $CLUSTERNAME --image=kindest/node:v1.26.6
 	$KIND export kubeconfig -n $CLUSTERNAME
 	$KUBECTL config set-context --current --namespace=default
 }
@@ -196,10 +197,9 @@ _ensure_hosts() {
     printf .
     sleep 3
   done
-  echo " ok"
 
   $KUBECTL wait --for=condition=ready -n flux-system hr gardener-runtime --timeout=10m
-
+  echo " ok"
 
   garden_ingress_ip=$($KUBECTL get svc -n garden garden-ingress-nginx-controller -o jsonpath="{.status.loadBalancer.ingress[0].ip}")
 
