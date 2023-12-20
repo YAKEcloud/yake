@@ -280,7 +280,6 @@ install_helm
 install_kind
 install_kubectl
 install_yq
-install_sipcalc
 install_envsubst
 
 _create_cluster
