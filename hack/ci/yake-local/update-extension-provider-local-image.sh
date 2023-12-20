@@ -8,6 +8,8 @@ fi
 
 source hack/tools/install.sh
 
+install_yq
+
 git clone https://github.com/gardener/gardener gardener-upstream
 
 cd gardener-upstream || exit 1
@@ -16,7 +18,7 @@ cd ..
 
 export newChart=$(tar -C gardener-upstream/charts/gardener/provider-local -czf - . | base64 -w0 -)
 
-yq -i 'select(document_index == 0).providerConfig.values.image=("ghcr.io/yakecloud/gardener-extension-provider-local:" + env(newVersion)) ' hack/ci/yake-local/garden-content/controller-registrations.yaml
-yq -i 'select(document_index == 0).providerConfig.chart=env(newChart) ' hack/ci/yake-local/garden-content/controller-registrations.yaml
+$YQ -i 'select(document_index == 0).providerConfig.values.image=("ghcr.io/yakecloud/gardener-extension-provider-local:" + env(newVersion)) ' hack/ci/yake-local/garden-content/controller-registrations.yaml
+$YQ -i 'select(document_index == 0).providerConfig.chart=env(newChart) ' hack/ci/yake-local/garden-content/controller-registrations.yaml
 
 

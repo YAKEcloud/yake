@@ -2,7 +2,9 @@
 
 source hack/tools/install.sh
 
-tag=$(yq '.spec.chart.spec.version' gardener/gardener.yaml | head -1)
+install_yq
+
+tag=$($YQ '.spec.chart.spec.version' gardener/gardener.yaml | head -1)
 
 git clone https://github.com/gardener/gardener gardener-upstream
 
