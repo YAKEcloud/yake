@@ -3,7 +3,7 @@
 {{- if $v.enabled }}
 {{- if ($v.admission).enabled }}
 ---
-apiVersion: helm.toolkit.fluxcd.io/v2beta1
+apiVersion: helm.toolkit.fluxcd.io/v2beta2
 kind: HelmRelease
 metadata:
   name: admission-{{ $k }}-application
@@ -42,7 +42,7 @@ spec:
       targetPath: global.webhookConfig.caBundle
       optional: false
 ---
-apiVersion: helm.toolkit.fluxcd.io/v2beta1
+apiVersion: helm.toolkit.fluxcd.io/v2beta2
 kind: HelmRelease
 metadata:
   name: admission-{{ $k }}-runtime

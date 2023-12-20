@@ -1,5 +1,5 @@
 ---
-apiVersion: helm.toolkit.fluxcd.io/v2beta1
+apiVersion: helm.toolkit.fluxcd.io/v2beta2
 kind: HelmRelease
 metadata:
   name: terminal-controller-manager-runtime
@@ -33,7 +33,7 @@ spec:
       valuesKey: enabled
       targetPath: terminal-controller-manager-runtime.enabled
 ---
-apiVersion: helm.toolkit.fluxcd.io/v2beta1
+apiVersion: helm.toolkit.fluxcd.io/v2beta2
 kind: HelmRelease
 metadata:
   name: terminal-controller-manager-application
