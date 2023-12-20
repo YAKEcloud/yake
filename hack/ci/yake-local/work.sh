@@ -8,6 +8,8 @@ fi
 
 source ../../../hack/tools/install.sh
 
+alias yq=$YQ
+
 CLUSTERNAME="yake-local"
 VGARDEN_KUBECONFIG="/tmp/$CLUSTERNAME-apiserver.yaml"
 
