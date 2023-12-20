@@ -6,7 +6,5 @@ metadata:
 type: Opaque
 stringData:
   values.yaml: |
-    backups:
-      enabled: false
     vpa:
       enabled: true
