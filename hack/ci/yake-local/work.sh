@@ -126,6 +126,11 @@ _create_flux () {
     $ENVSUBST "\$NODE_CIDR" < "$file" | $KUBECTL apply -f -
   done
 
+  ## M1 Mac workaround
+  if [[ "$(uname -s)-$(uname -m)" == "Darwin-arm64" ]]; then
+    $KUBECTL apply -f m1-mac-etcd-values.yaml
+  fi
+
   cat <<EOF | $KUBECTL apply -f -
 apiVersion: source.toolkit.fluxcd.io/v1
 kind: GitRepository
