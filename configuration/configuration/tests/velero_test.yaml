@@ -47,4 +47,12 @@ tests:
                     includedNamespaces:
                       - '*'
 
+            # TODO: Remove upgradeJobResources once https://github.com/vmware-tanzu/helm-charts/issues/515 is resolved
+            upgradeJobResources:
+              requests:
+                cpu: 50m
+                memory: 256Mi
+              limits:
+                cpu: 100m
+                memory: 512Mi
 ## TODO: check for backup provider variations and their credentials

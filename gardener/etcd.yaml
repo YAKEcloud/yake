@@ -1,4 +1,4 @@
-apiVersion: helm.toolkit.fluxcd.io/v2beta1
+apiVersion: helm.toolkit.fluxcd.io/v2beta2
 kind: HelmRelease
 metadata:
   name: etcd
@@ -65,13 +65,14 @@ spec:
       targetPath: tls.client.key
   postRenderers:
     - kustomize:
-        patchesStrategicMerge:
-          - kind: StatefulSet
-            apiVersion: apps/v1
-            metadata:
+        patches:
+          - target:
+              kind: StatefulSet
+              group: apps
+              version: v1
               name: etcd
               namespace: garden
-            spec:
-              template:
-                spec:
-                  priorityClassName: gardener-kubernetes
+            patch: |
+              - op: add
+                path: /spec/template/spec/priorityClassName
+                value: gardener-kubernetes

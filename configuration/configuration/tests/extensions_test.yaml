@@ -158,13 +158,14 @@ tests:
                   images:
                   - name: network-problem-detector-agent
                     repository: myregistry.example.org/gardener-project/gardener/network-problem-detector
-  - it: should rendershoot-rsyslog-relp with registryOverwrite
+  - it: should render shoot-rsyslog-relp with registryOverwrite
     values:
       - ../values-test.yaml
       - ../images.yaml
     set:
       registryOverwrite:
         eu.gcr.io: myregistry.example.org
+        registry.k8s.io: myregistry.example.org/k8s
     asserts:
       - matchRegex:
           path: stringData['values.yaml']
@@ -175,9 +176,10 @@ tests:
                 image:
                   repository: myregistry.example.org/gardener-project/gardener/extensions/shoot-rsyslog-relp
                 imageVectorOverwrite: \|
-                  images:
-                  - name: alpine
+                  [\s\S]*
                     repository: myregistry.example.org/gardener-project/3rd/alpine
+                  [\s\S]*
+                    repository: myregistry.example.org/k8s/pause
   - it: should render os-coreos with registryOverwrite
     values:
       - ../values-test.yaml

@@ -17,25 +17,25 @@ tests:
           enabled: true
     asserts:
       - containsDocument:
-          apiVersion: helm.toolkit.fluxcd.io/v2beta1
+          apiVersion: helm.toolkit.fluxcd.io/v2beta2
           kind: HelmRelease
           name: admission-os-exampleos-application
           namespace: flux-system
         documentIndex: 0
       - containsDocument:
-          apiVersion: helm.toolkit.fluxcd.io/v2beta1
+          apiVersion: helm.toolkit.fluxcd.io/v2beta2
           kind: HelmRelease
           name: admission-os-exampleos-runtime
           namespace: flux-system
         documentIndex: 1
       - containsDocument:
-          apiVersion: helm.toolkit.fluxcd.io/v2beta1
+          apiVersion: helm.toolkit.fluxcd.io/v2beta2
           kind: HelmRelease
           name: admission-provider-example-application
           namespace: flux-system
         documentIndex: 2
       - containsDocument:
-          apiVersion: helm.toolkit.fluxcd.io/v2beta1
+          apiVersion: helm.toolkit.fluxcd.io/v2beta2
           kind: HelmRelease
           name: admission-provider-example-runtime
           namespace: flux-system

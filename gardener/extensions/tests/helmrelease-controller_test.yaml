@@ -17,13 +17,13 @@ tests:
           enabled: true
     asserts:
       - containsDocument:
-          apiVersion: helm.toolkit.fluxcd.io/v2beta1
+          apiVersion: helm.toolkit.fluxcd.io/v2beta2
           kind: HelmRelease
           name: os-exampleos
           namespace: flux-system
         documentIndex: 0
       - containsDocument:
-          apiVersion: helm.toolkit.fluxcd.io/v2beta1
+          apiVersion: helm.toolkit.fluxcd.io/v2beta2
           kind: HelmRelease
           name: provider-example
           namespace: flux-system
