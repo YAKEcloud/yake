@@ -9,7 +9,7 @@ stringData:
     global:
       deployment:
         virtualGarden:
-          clusterIP: 10.96.0.100
+          clusterIP: 10.2.0.42
       scheduler:
         config:
           schedulers:

@@ -133,31 +133,11 @@ install_kind() {
   fi
 }
 
-
-install_sipcalc() {
-  # not under renovate control
-  VERSION=1.1.6
-
-  if _isStale "$SIPCALC" "$VERSION"; then
-		TAR="sipcalc-${VERSION}.tar.gz"
-		curl -L -o "$TAR" "http://www.routemeister.net/projects/sipcalc/files/${TAR}"
-	  tar -xvf $TAR
-		cd sipcalc-${VERSION}
-		./configure --prefix="$TOOLS_DIR"
-		make install
-		cd ..
-		rm -rf sipcalc-${VERSION}
-		rm $TAR
-
-    _setVersion "$SIPCALC" "$VERSION"
-  fi
-}
-
 install_envsubst() {
 		# not under renovate control
 		VERSION=v1.2.0
 
-		if _isStale "$SIPCALC" "$VERSION"; then
+		if _isStale "$ENVSUBST" "$VERSION"; then
 				curl -L https://github.com/a8m/envsubst/releases/download/${VERSION}/envsubst-`uname -s`-`uname -m` -o $ENVSUBST
 				chmod +x $ENVSUBST
 

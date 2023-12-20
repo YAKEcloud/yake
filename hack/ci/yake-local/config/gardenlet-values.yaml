@@ -15,12 +15,12 @@ stringData:
             provider:
               type: local
           networks:
-            nodes: ${NODE_CIDR}
-            pods: 10.244.0.0/16
-            services: 10.96.0.0/13
+            nodes: 172.18.0.0/16
+            pods: 10.1.0.0/16
+            services: 10.2.0.0/16
             shootDefaults:
-              pods: 100.100.0.0/16
-              services: 100.101.0.0/16
+              pods: 10.3.0.0/16
+              services: 10.4.0.0/16
           provider:
             region: local
             type: local
