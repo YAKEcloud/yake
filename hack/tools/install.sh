@@ -157,7 +157,7 @@ install_envsubst() {
 		# not under renovate control
 		VERSION=v1.2.0
 
-		if _isStale "$SIPCALC" "$VERSION"; then
+		if _isStale "$ENVSUBST" "$VERSION"; then
 				curl -L https://github.com/a8m/envsubst/releases/download/${VERSION}/envsubst-`uname -s`-`uname -m` -o $ENVSUBST
 				chmod +x $ENVSUBST
 
