@@ -53,7 +53,6 @@ _create_loadbalancer () {
   $KUBECTL apply -f https://raw.githubusercontent.com/metallb/metallb/v0.13.12/config/manifests/metallb-native.yaml
   $KUBECTL wait --namespace metallb-system --for=condition=ready pod --all --timeout=90s
 
-  lbrange=$(docker network inspect kind | $YQ '.[0].IPAM.Config[0].Subnet' | $SIPCALC -s24 - | head -n 10 | tail -n 1 | awk '{print $3"-"$5}')
   cat <<EOF | $KUBECTL apply -f -
 apiVersion: metallb.io/v1beta1
 kind: IPAddressPool
@@ -62,7 +61,7 @@ metadata:
   namespace: metallb-system
 spec:
   addresses:
-  - "$lbrange"
+  - "172.18.0.23-172.18.0.42"
 ---
 apiVersion: metallb.io/v1beta1
 kind: L2Advertisement
@@ -121,7 +120,7 @@ _create_flux () {
   $KUBECTL apply -f ../../../flux-system/gotk-components.yaml
 
   ############# yake config #################
-  export NODE_CIDR=$(docker network inspect kind | $YQ '.[0].IPAM.Config[0].Subnet' -r)
+  export NODE_CIDR="172.18.0.0/16"
   for file in config/*; do
     $ENVSUBST "\$NODE_CIDR" < "$file" | $KUBECTL apply -f -
   done
