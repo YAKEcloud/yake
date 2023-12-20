@@ -8,8 +8,6 @@ fi
 
 source ../../../hack/tools/install.sh
 
-alias yq=$YQ
-
 CLUSTERNAME="yake-local"
 VGARDEN_KUBECONFIG="/tmp/$CLUSTERNAME-apiserver.yaml"
 
@@ -31,9 +29,9 @@ setup_kind_network() {
   if [ -n "$existing_network_id" ] ; then
     # ensure the network is configured correctly
     local network network_options network_ipam expected_network_ipam
-    network="$(docker network inspect $existing_network_id | yq '.[]')"
-    network_options="$(echo "$network" | yq '.EnableIPv6 + "," + .Options["com.docker.network.bridge.enable_ip_masquerade"]')"
-    network_ipam="$(echo "$network" | yq '.IPAM.Config' -o=json -I=0)"
+    network="$(docker network inspect $existing_network_id | $YQ '.[]')"
+    network_options="$(echo "$network" | $YQ '.EnableIPv6 + "," + .Options["com.docker.network.bridge.enable_ip_masquerade"]')"
+    network_ipam="$(echo "$network" | $YQ '.IPAM.Config' -o=json -I=0)"
     expected_network_ipam='[{"Subnet":"172.18.0.0/16","Gateway":"172.18.0.1"},{"Subnet":"fd00:10::/64","Gateway":"fd00:10::1"}]'
 
     if [ "$network_options" = 'true,true' ] && [ "$network_ipam" = "$expected_network_ipam" ] ; then
