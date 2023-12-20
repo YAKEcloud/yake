@@ -280,8 +280,8 @@ install_kubectl
 install_yq
 install_envsubst
 
-_create_cluster
 setup_kind_network
+_create_cluster
 _create_loadbalancer
 _create_local_git
 _create_step_ca
