@@ -1,5 +1,7 @@
 name: Release
 run-name: Release "${{ inputs.version || github.event.head_commit.message }}" by @${{ github.actor }}
+permissions:
+  contents: write
 on:
   workflow_dispatch:
     inputs:
