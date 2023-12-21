@@ -1004,7 +1004,7 @@ provider-azure:
               network_exposure: protected
               user_interaction: gardener-operator
         name: terraformer
-        repository: eu.gcr.io/gardener-project/gardener/terraformer-azure
+        repository: europe-docker.pkg.dev/gardener-project/releases/gardener/terraformer-azure
         sourceRepository: github.com/gardener/terraformer
         tag: v2.23.0
       - labels:
@@ -1157,9 +1157,9 @@ provider-azure:
               network_exposure: protected
               user_interaction: gardener-operator
         name: machine-controller-manager
-        repository: eu.gcr.io/gardener-project/gardener/machine-controller-manager
+        repository: europe-docker.pkg.dev/gardener-project/releases/gardener/machine-controller-manager
         sourceRepository: github.com/gardener/machine-controller-manager
-        tag: v0.50.0
+        tag: v0.50.1
       - labels:
           - name: gardener.cloud/cve-categorisation
             value:
@@ -1170,7 +1170,7 @@ provider-azure:
               network_exposure: protected
               user_interaction: gardener-operator
         name: machine-controller-manager-provider-azure
-        repository: eu.gcr.io/gardener-project/gardener/machine-controller-manager-provider-azure
+        repository: europe-docker.pkg.dev/gardener-project/releases/gardener/machine-controller-manager-provider-azure
         sourceRepository: github.com/gardener/machine-controller-manager-provider-azure
         tag: v0.11.1
       - labels:
@@ -1198,7 +1198,7 @@ provider-azure:
         name: csi-driver-file
         repository: mcr.microsoft.com/oss/kubernetes-csi/azurefile-csi
         sourceRepository: github.com/kubernetes-sigs/azurefile-csi-driver
-        tag: v1.29.1
+        tag: v1.29.2
       - labels:
           - name: gardener.cloud/cve-categorisation
             value:
@@ -1313,7 +1313,7 @@ provider-azure:
               network_exposure: protected
               user_interaction: gardener-operator
         name: remedy-controller-azure
-        repository: eu.gcr.io/gardener-project/gardener/remedy-controller/remedy-controller-azure
+        repository: europe-docker.pkg.dev/gardener-project/releases/gardener/remedy-controller/remedy-controller-azure
         resourceId:
           name: remedy-controller-image
         sourceRepository: github.com/gardener/remedy-controller
