@@ -88,3 +88,10 @@ hide_table_of_contents: true
 - `[DEVELOPER]` Remove vendoring from project by @MartinWeindel [#268]
 
 </details>
+
+<details>
+<summary><b>Update cloudprofiles to <code>0.6.10</code></b></summary>
+
+**Full Changelog**: https://github.com/gardener-community/cloudprofiles/compare/0.6.9...0.6.10
+
+</details>
