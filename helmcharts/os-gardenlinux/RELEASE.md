@@ -1,5 +1,9 @@
 # [gardener/gardener-extension-os-gardenlinux]
 
+## ⚠️ Breaking Changes
+
+- `[OPERATOR]` Change OCI Image Registry from GCR (`eu.gcr.io/gardener-project`) to Artifact-Registry (`europe-docker.pkg.dev/gardener-project/releases`) by @ccwienk [#134]
+- `[OPERATOR]` hardcoded cgroup driver for containerd and kubelet to systemd for ALL new nodes. Requires the Gardener installation to only have Gardenlinux versions with cgroups-v2 only. This includes GL 934 and up. by @danielfoehrKn [#133]
 ## 📰 Noteworthy
 
 - `[OPERATOR]` This extension is now prepared to run with an enabled `UseGardenerNodeAgent` feature gate. by @rfranzke [#130]
@@ -14,4 +18,4 @@
   - sigs.k8s.io/controller-runtime: v0.14.6-> v0.16.2 by @acumino [#127]
 
 ## Docker Images
-- gardener-extension-os-gardenlinux: `eu.gcr.io/gardener-project/gardener/extensions/os-gardenlinux:v0.22.0`
+- gardener-extension-os-gardenlinux: `europe-docker.pkg.dev/gardener-project/releases/gardener/extensions/os-gardenlinux:v0.23.0`
