@@ -7,6 +7,9 @@ on:
       - 'docs/**'
 jobs:
   install:
+    strategy:
+      matrix:
+        version: [ v1.26.6, v1.27.4 ]
     runs-on: self-hosted
     name: "Yake install testrun"
     steps:
@@ -16,6 +19,7 @@ jobs:
           fetch-depth: 0
           ref: ${{ github.head_ref }}
       - name: install
-        run: |
-          cd hack/ci/yake-local
-          ./work.sh
+        env:
+          K8S_VERSION: ${{ matrix.version }}
+        working-directory: hack/ci/yake-local
+        run: ./work.sh

@@ -11,6 +11,8 @@ source ../../../hack/tools/install.sh
 CLUSTERNAME="yake-local"
 VGARDEN_KUBECONFIG="/tmp/$CLUSTERNAME-apiserver.yaml"
 
+K8S_VERSION="${K8S_VERSION:-v1.26.6}"
+
 # from gardener/gardener hack/kind-up.sh
 # setup_kind_network is similar to kind's network creation logic, ref https://github.com/kubernetes-sigs/kind/blob/23d2ac0e9c41028fa252dd1340411d70d46e2fd4/pkg/cluster/internal/providers/docker/network.go#L50
 # In addition to kind's logic, we ensure stable CIDRs that we can rely on in our local setup manifests and code.
@@ -45,7 +47,7 @@ _setup_kind_network() {
 
 _create_cluster () {
   # If export kubeconfig fails, the cluster does not yet exist and we need to create it
-  $KIND export kubeconfig -n $CLUSTERNAME > /dev/null 2>&1  || $KIND create cluster --config kind-config.yaml --name $CLUSTERNAME --image=kindest/node:v1.27.3
+  $KIND export kubeconfig -n $CLUSTERNAME > /dev/null 2>&1  || $KIND create cluster --config kind-config.yaml --name $CLUSTERNAME --image="kindest/node:$K8S_VERSION"
 	$KIND export kubeconfig -n $CLUSTERNAME
 	$KUBECTL config set-context --current --namespace=default
 }
