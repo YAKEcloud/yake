@@ -45,7 +45,7 @@ _setup_kind_network() {
 
 _create_cluster () {
   # If export kubeconfig fails, the cluster does not yet exist and we need to create it
-  $KIND export kubeconfig -n $CLUSTERNAME > /dev/null 2>&1  || $KIND create cluster --config kind-config.yaml --name $CLUSTERNAME --image=kindest/node:v1.26.6
+  $KIND export kubeconfig -n $CLUSTERNAME > /dev/null 2>&1  || $KIND create cluster --config kind-config.yaml --name $CLUSTERNAME --image=kindest/node:v1.27.3
 	$KIND export kubeconfig -n $CLUSTERNAME
 	$KUBECTL config set-context --current --namespace=default
 }
