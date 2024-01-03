@@ -151,3 +151,14 @@ hide_table_of_contents: true
 
 
 </details>
+
+<details>
+<summary><b>Update shoot-dns-service to <code>1.42.1</code></b></summary>
+
+# [gardener/gardener-extension-shoot-dns-service]
+
+## 🐛 Bug Fixes
+
+- `[OPERATOR]` An issue has been fixed that led to invalid webhook configurations after the admission controller rotated the CA and server certificates. by @timuthy [#278]
+
+</details>
