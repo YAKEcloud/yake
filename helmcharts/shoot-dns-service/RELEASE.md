@@ -1,5 +1,5 @@
 # [gardener/gardener-extension-shoot-dns-service]
 
-## 🐛 Bug Fixes
+## 🏃 Others
 
-- `[OPERATOR]` An issue has been fixed that led to invalid webhook configurations after the admission controller rotated the CA and server certificates. by @timuthy [#278]
+- `[OPERATOR]` Downgrade dns-controller-manager from `v0.16.1` to `v0.16.0` to disable newly introduced feature "Create alias AAAA records for load balancers if target domain name has an IPv6 address" because of leaking `AAAA` under some circumstances. by @MartinWeindel [#279]
