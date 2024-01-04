@@ -162,3 +162,14 @@ hide_table_of_contents: true
 - `[OPERATOR]` An issue has been fixed that led to invalid webhook configurations after the admission controller rotated the CA and server certificates. by @timuthy [#278]
 
 </details>
+
+<details>
+<summary><b>Update shoot-dns-service to <code>1.42.2</code></b></summary>
+
+# [gardener/gardener-extension-shoot-dns-service]
+
+## 🏃 Others
+
+- `[OPERATOR]` Downgrade dns-controller-manager from `v0.16.1` to `v0.16.0` to disable newly introduced feature "Create alias AAAA records for load balancers if target domain name has an IPv6 address" because of leaking `AAAA` under some circumstances. by @MartinWeindel [#279]
+
+</details>
