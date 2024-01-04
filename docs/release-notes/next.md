@@ -173,3 +173,19 @@ hide_table_of_contents: true
 - `[OPERATOR]` Downgrade dns-controller-manager from `v0.16.1` to `v0.16.0` to disable newly introduced feature "Create alias AAAA records for load balancers if target domain name has an IPv6 address" because of leaking `AAAA` under some circumstances. by @MartinWeindel [#279]
 
 </details>
+
+<details>
+<summary><b>Update provider-azure to <code>1.40.1</code></b></summary>
+
+# [gardener/gardener-extension-provider-azure]
+
+## 🐛 Bug Fixes
+
+- `[USER]` Disk detachment step is skipped while terminating terminal state vms. Terminal state vms have `provisioningState` as `Failed` by @himanshu-kun [#773]
+
+## Docker Images
+- gardener-extension-admission-azure: `europe-docker.pkg.dev/gardener-project/releases/gardener/extensions/admission-azure:v1.40.1`
+- gardener-extension-provider-azure: `europe-docker.pkg.dev/gardener-project/releases/gardener/extensions/provider-azure:v1.40.1`
+
+
+</details>
