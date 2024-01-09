@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: Secret
+metadata:
+  name: cert-management-values
+  namespace: flux-system
+type: Opaque
+stringData:
+  values.yaml: |
+    configuration:
+      issuerPrecheckNameservers: kube-dns.kube-system.svc.cluster.local
+      precheckNameservers: kube-dns.kube-system.svc.cluster.local

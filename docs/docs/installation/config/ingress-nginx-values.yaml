@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: Secret
+metadata:
+  name: ingress-nginx-values
+  namespace: flux-system
+type: Opaque
+stringData:
+  values.yaml: |-
+    controller:
+      service:
+        externalTrafficPolicy: Local

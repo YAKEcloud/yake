@@ -1,0 +1,42 @@
+---
+apiVersion: core.gardener.cloud/v1beta1
+kind: Project
+metadata:
+  name: garden
+spec:
+  namespace: garden
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: garden-myproject
+  labels:
+    gardener.cloud/role: project
+    project.gardener.cloud/name: myproject
+---
+apiVersion: core.gardener.cloud/v1beta1
+kind: Project
+metadata:
+  name: myproject
+spec:
+  namespace: garden-myproject
+  members:
+    - apiGroup: rbac.authorization.k8s.io
+      kind: User
+      name: operations@example.org
+      role: admin
+      roles:
+        - serviceaccountmanager
+---
+apiVersion: core.gardener.cloud/v1beta1
+kind: SecretBinding
+metadata:
+  name: my-azure-secret
+  namespace: garden-myproject
+  labels:
+    cloudprofile.garden.sapcloud.io/name: azure
+provider:
+  type: azure
+secretRef:
+  name: my-azure-secret
+  namespace: garden

@@ -1,0 +1,40 @@
+apiVersion: v1
+kind: Secret
+metadata:
+  name: cloudprofiles-values
+  namespace: flux-system
+type: Opaque
+stringData:
+  values.yaml: |
+    azure:
+      enabled: true
+      machineImages:
+      - name: gardenlinux
+        versions:
+        - version: 934.11.0
+          cri:
+          - name: containerd
+          - name: docker
+        - version: 1312.0.0
+          cri:
+          - name: containerd
+          - name: docker
+      providerConfig:
+        machineImages:
+        - name: gardenlinux
+          versions:
+          - urn: sap:gardenlinux:greatest:934.11.0
+            version: 934.11.0
+          - urn: sap:gardenlinux:greatest:1312.0.0
+            version: 1312.0.0
+
+    global:
+      kubernetes:
+        versions:
+          1.24.12:
+            classification: preview
+      seedSelector:
+        enabled: true
+        selector:
+          providerTypes:
+            - azure

@@ -1,0 +1,17 @@
+apiVersion: v1
+kind: Secret
+metadata:
+  name: gardener-values
+  namespace: flux-system
+type: Opaque
+stringData:
+  values.yaml: |
+    global:
+      deployment:
+        virtualGarden:
+          clusterIP: 10.0.0.100
+      scheduler:
+        config:
+          schedulers:
+            shoot:
+              candidateDeterminationStrategy: MinimalDistance

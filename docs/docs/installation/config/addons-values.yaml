@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: Secret
+metadata:
+  name: addons-values
+  namespace: flux-system
+type: Opaque
+stringData:
+  values.yaml: |
+    backups:
+      enabled: false
+    vpa:
+      enabled: true
