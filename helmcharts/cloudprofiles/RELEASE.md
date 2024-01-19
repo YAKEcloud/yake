@@ -1,1 +1,1 @@
-**Full Changelog**: https://github.com/gardener-community/cloudprofiles/compare/0.6.9...0.6.10
+**Full Changelog**: https://github.com/gardener-community/cloudprofiles/compare/0.6.10...0.6.11
