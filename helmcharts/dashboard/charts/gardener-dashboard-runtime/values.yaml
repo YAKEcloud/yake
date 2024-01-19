@@ -29,10 +29,13 @@ global:
             landingPageUrl: https://github.com/gardener
             seedCandidateDeterminationStrategy: SameRegion
             serviceAccountDefaultTokenExpiration: 7.776e+06
+            shootAdminKubeconfig:
+                enabled: false
+                maxExpirationSeconds: 86400
         image:
             pullPolicy: IfNotPresent
             repository: europe-docker.pkg.dev/gardener-project/releases/gardener/dashboard
-            tag: 1.71.1
+            tag: 1.72.0
         ingress:
             annotations:
                 nginx.ingress.kubernetes.io/ssl-redirect: "true"
