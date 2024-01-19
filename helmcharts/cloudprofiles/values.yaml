@@ -54,6 +54,8 @@ global:
                 1.26.11:
                     classification: deprecated
                 1.26.12:
+                    classification: deprecated
+                1.26.13:
                     classification: supported
         versions: {}
     seedSelector:

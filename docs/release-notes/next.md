@@ -313,3 +313,10 @@ hide_table_of_contents: true
 
 
 </details>
+
+<details>
+<summary><b>Update cloudprofiles to <code>0.6.11</code></b></summary>
+
+**Full Changelog**: https://github.com/gardener-community/cloudprofiles/compare/0.6.10...0.6.11
+
+</details>
