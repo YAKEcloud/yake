@@ -45,9 +45,9 @@ gardenlet:
         sourceRepository: github.com/kubernetes/kubernetes/blob/master/build/pause/Dockerfile
         tag: "3.7"
       - name: etcd-druid
-        repository: eu.gcr.io/gardener-project/gardener/etcd-druid
+        repository: europe-docker.pkg.dev/gardener-project/releases/gardener/etcd-druid
         sourceRepository: github.com/gardener/etcd-druid
-        tag: v0.21.0
+        tag: v0.21.1
       - name: dependency-watchdog
         repository: eu.gcr.io/gardener-project/gardener/dependency-watchdog
         sourceRepository: github.com/gardener/dependency-watchdog
@@ -2261,26 +2261,26 @@ etcd-druid:
   imageVectorOriginal:
     images:
       - name: etcd-backup-restore
-        repository: eu.gcr.io/gardener-project/gardener/etcdbrctl
+        repository: europe-docker.pkg.dev/gardener-project/public/gardener/etcdbrctl
         resourceId:
           name: etcdbrctl
         sourceRepository: github.com/gardener/etcd-backup-restore
-        tag: v0.24.7
+        tag: v0.24.8
       - name: etcd
-        repository: eu.gcr.io/gardener-project/gardener/etcd
+        repository: europe-docker.pkg.dev/gardener-project/public/gardener/etcd
         sourceRepository: github.com/gardener/etcd-custom-image
         tag: v3.4.26-3
       - name: etcd-backup-restore-distroless
-        repository: eu.gcr.io/gardener-project/gardener/etcdbrctl
+        repository: europe-docker.pkg.dev/gardener-project/public/gardener/etcdbrctl
         resourceId:
           name: etcdbrctl
         sourceRepository: github.com/gardener/etcd-backup-restore
-        tag: v0.27.0
+        tag: v0.28.0
       - name: etcd-wrapper
-        repository: eu.gcr.io/gardener-project/gardener/etcd-wrapper
+        repository: europe-docker.pkg.dev/gardener-project/public/gardener/etcd-wrapper
         sourceRepository: github.com/gardener/etcd-wrapper
         tag: v0.1.0
       - name: alpine
-        repository: eu.gcr.io/gardener-project/3rd/alpine
+        repository: europe-docker.pkg.dev/gardener-project/public/3rd/alpine
         tag: 3.18.4
 
