@@ -5,6 +5,7 @@ on:
       - "main"
     paths-ignore:
       - 'docs/**'
+      - '**.md'
 jobs:
   install:
     strategy:
