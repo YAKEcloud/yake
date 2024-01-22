@@ -44,7 +44,6 @@ const config = {
   onBrokenLinks: "ignore",
   onBrokenMarkdownLinks: "warn",
   favicon: "img/favicon.ico",
-
   // GitHub pages deployment config.
   // If you aren't using GitHub pages, you don't need these.
   organizationName: "yakecloud", // Usually your GitHub org/user name.
@@ -104,116 +103,116 @@ const config = {
   ],
   themeConfig:
     /** @type {import('@docusaurus/preset-classic').ThemeConfig} */
-    ({
+    {
       metadata: [
         {
           name: "gardener",
           content: "installation, production, operations, maintenance",
         },
       ],
-      navbar: {
-        title: "YAKE",
-        logo: {
-          alt: "23|",
-          src: "img/logo.svg",
-          srcDark: "img/logo_dark.svg",
+        navbar: {
+            title: "YAKE",
+            logo: {
+                alt: "YAKE",
+                src: "img/logo.svg",
+                srcDark: "img/logo_dark.svg",
+            },
+            items: [
+                {
+                    type: "doc",
+                    docId: "overview",
+                    position: "left",
+                    label: "Docs",
+                },
+                {
+                    to: "/release-notes/" + getLatestReleaseNotes(),
+                    label: "Release Notes",
+                    position: "left",
+                    activeBaseRegex: `/release-notes/`,
+                },
+                {
+                    type: "docsVersionDropdown",
+                    position: "right",
+                    dropdownItemsAfter: [],
+                    dropdownActiveClassDisabled: true,
+                },
+                {to: "/blog", label: "Blog", position: "left"},
+                {
+                    href: "https://github.com/23technologies",
+                    label: "GitHub",
+                    position: "right",
+                },
+            ],
         },
-        items: [
-          {
-            type: "doc",
-            docId: "overview",
-            position: "left",
-            label: "Docs",
-          },
-          {
-            to: "/release-notes/" + getLatestReleaseNotes(),
-            label: "Release Notes",
-            position: "left",
-            activeBaseRegex: `/release-notes/`,
-          },
-          {
-            type: "docsVersionDropdown",
-            position: "right",
-            dropdownItemsAfter: [],
-            dropdownActiveClassDisabled: true,
-          },
-          { to: "/blog", label: "Blog", position: "left" },
-          {
-            href: "https://github.com/23technologies",
-            label: "GitHub",
-            position: "right",
-          },
+        footer: {
+            style: "dark",
+            links: [
+                {
+                    title: "Docs",
+                    items: [
+                        {
+                            label: "Docs",
+                            to: "/docs/overview",
+                        },
+                    ],
+                },
+                {
+                    title: "Community",
+                    items: [
+                        {
+                            label: "GitHub",
+                            href: "https://github.com/yakecloud",
+                        },
+                        {
+                            label: "Gardener Community",
+                            href: "https://github.com/gardener-community",
+                        },
+                        {
+                            label: "Slack",
+                            href: "https://gardener-cloud.slack.com",
+                        },
+                    ],
+                },
+                {
+                    title: "More",
+                    items: [
+                        {
+                            label: "Blog",
+                            to: "/blog",
+                        },
+                        {
+                            label: "Legals",
+                            to: "/legals",
+                        },
+                        {
+                            label: "Privacy policy",
+                            to: "/privacy-policy",
+                        },
+                    ],
+                },
+            ],
+            copyright: `Copyright © ${new Date().getFullYear()} 23 Technologies GmbH`,
+        },
+        prism: {
+            theme: lightCodeTheme,
+            darkTheme: darkCodeTheme,
+        },
+    },
+    themes: [
+        [
+            require.resolve("@easyops-cn/docusaurus-search-local"),
+            /** @type {import("@easyops-cn/docusaurus-search-local").PluginOptions} */
+            ({
+                // ... Your options.
+                // `hashed` is recommended as long-term-cache of index file is possible.
+                hashed: true,
+                // For Docs using Chinese, The `language` is recommended to set to:
+                // ```
+                // language: ["en", "zh"],
+                // ```
+            }),
         ],
-      },
-      footer: {
-        style: "dark",
-        links: [
-          {
-            title: "Docs",
-            items: [
-              {
-                label: "Docs",
-                to: "/docs/overview",
-              },
-            ],
-          },
-          {
-            title: "Community",
-            items: [
-              {
-                label: "GitHub",
-                href: "https://github.com/yakecloud",
-              },
-              {
-                label: "Gardener Community",
-                href: "https://github.com/gardener-community",
-              },
-              {
-                label: "Slack",
-                href: "https://gardener-cloud.slack.com",
-              },
-            ],
-          },
-          {
-            title: "More",
-            items: [
-              {
-                label: "Blog",
-                to: "/blog",
-              },
-              {
-                label: "Legals",
-                to: "/legals",
-              },
-              {
-                label: "Privacy policy",
-                to: "/privacy-policy",
-              },
-            ],
-          },
-        ],
-        copyright: `Copyright © ${new Date().getFullYear()} 23 Technologies GmbH`,
-      },
-      prism: {
-        theme: lightCodeTheme,
-        darkTheme: darkCodeTheme,
-      },
-    }),
-  themes: [
-    [
-      require.resolve("@easyops-cn/docusaurus-search-local"),
-      /** @type {import("@easyops-cn/docusaurus-search-local").PluginOptions} */
-      ({
-        // ... Your options.
-        // `hashed` is recommended as long-term-cache of index file is possible.
-        hashed: true,
-        // For Docs using Chinese, The `language` is recommended to set to:
-        // ```
-        // language: ["en", "zh"],
-        // ```
-      }),
     ],
-  ],
 };
 
 module.exports = config;
