@@ -4,10 +4,10 @@ sidebar_position: 3
 
 # Scaling out with Managed Seeds
 
-## Deployment of `ManagedSeeds` in Yake
+## Deployment of `ManagedSeeds` in YAKE
 
 Conceptually, a [managed seed](https://gardener.cloud/docs/gardener/usage/managed_seed/) is a `Shoot` cluster which is registered as `Seed` cluster. Thus, an operator has to deploy two resources to the virtual garden: a `Shoot` and a `ManagedSeed`. In consequence, Gardener will take care for the `Shoot` and register it as `Seed`.
-In Yake, you can maintain managed seeds via the GitOps approach. For this, two `Kustomization`s are required. One is responsible for the creation of `Shoot` Clusters and the other one for the creation of `ManagedSeed` resources. Examples for these `Kustomization`s are given below.
+In YAKE, you can maintain managed seeds via the GitOps approach. For this, two `Kustomization`s are required. One is responsible for the creation of `Shoot` Clusters and the other one for the creation of `ManagedSeed` resources. Examples for these `Kustomization`s are given below.
 
 ```yaml
 apiVersion: kustomize.toolkit.fluxcd.io/v1beta2
@@ -48,7 +48,7 @@ spec:
   prune: false
 ```
 
-In this example, the `Kustomization`s point to a directory called `seeds` (and the subdirectory `seeds/shoots`) in the repository root. Consequently, all required manifests have to be stored in these directories. As the directory names already indicate, the `Shoot` manifests are organized in the `seeds/shoots` directory and the `ManagedSeed` manifests in the seeds directory, respectively. The easiest option to obtain a valid `Shoot` manifest for your Yake environment is to configure a shoot via the Gardener dashboard and just copy over the corresponding yaml manifest.
+In this example, the `Kustomization`s point to a directory called `seeds` (and the subdirectory `seeds/shoots`) in the repository root. Consequently, all required manifests have to be stored in these directories. As the directory names already indicate, the `Shoot` manifests are organized in the `seeds/shoots` directory and the `ManagedSeed` manifests in the seeds directory, respectively. The easiest option to obtain a valid `Shoot` manifest for your YAKE environment is to configure a shoot via the Gardener dashboard and just copy over the corresponding yaml manifest.
 :::tip
 It is recommended to use a dedicated cloud provider secret for the `Shoots` to be registered as `Seeds`. Therefore, you might need to create a corresponding secret. Also here, the easiest way to create it is via the Gardener Dashboard.
 :::
@@ -119,7 +119,7 @@ You will need to provide a `Secret` for your backup provider in advance, if you 
 
 ## Deployment of wildcard certificate for Grafana/Prometheus dashboards
 
-We prepared everything in Yake so that the only thing you need to do is to set a label in the `SeedConfig` in your `managedSeed` resource with `yake.cloud/generate-controlplane-cert="true"`:
+We prepared everything in YAKE so that the only thing you need to do is to set a label in the `SeedConfig` in your `managedSeed` resource with `yake.cloud/generate-controlplane-cert="true"`:
 ``` yaml
 apiVersion: seedmanagement.gardener.cloud/v1alpha1
 kind: ManagedSeed

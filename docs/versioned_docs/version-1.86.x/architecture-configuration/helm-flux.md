@@ -4,11 +4,11 @@ sidebar_position: 4
 
 # Working with Helm and Flux
 
-On this page, you'll find some useful information on how to work with the commandline interfaces for [helm](https://helm.sh/) and [flux](https://fluxcd.io/) in the context of your Yake-based Gardener installation.
+On this page, you'll find some useful information on how to work with the commandline interfaces for [helm](https://helm.sh/) and [flux](https://fluxcd.io/) in the context of your YAKE-based Gardener installation.
 
 ## Useful Helm Commands
 
-First things first. As already introduced in the [architecture description](./architecture.md), most of the Yake helm charts stem from a helm repository hosted at `gardener.community.github.io/gardener-charts`. Consider adding this helm repository to your local repository cache by
+First things first. As already introduced in the [architecture description](./architecture.md), most of the YAKE helm charts stem from a helm repository hosted at `gardener.community.github.io/gardener-charts`. Consider adding this helm repository to your local repository cache by
 
 ```sh
 helm repo add gardener-charts https://gardener-community.github.io/gardener-charts
@@ -37,13 +37,13 @@ helm show values gardener-charts/cloudprofiles
 
 ### Check flux versions
 
-The flux controllers running in the basecluster are maintained by Yake itself, i.e. the flux controllers will be updated with Yake updates. You can check the state of your cli version and the version of the cluster side components by
+The flux controllers running in the basecluster are maintained by YAKE itself, i.e. the flux controllers will be updated with YAKE updates. You can check the state of your cli version and the version of the cluster side components by
 
 ```sh
 flux version
 ```
 
-If you feel like your cli version is outdated. Go ahead and download a recent version from [the Github release page](https://github.com/fluxcd/flux2/releases). If you feel like your in-cluster components are outdated, think about updating Yake.
+If you feel like your cli version is outdated. Go ahead and download a recent version from [the Github release page](https://github.com/fluxcd/flux2/releases). If you feel like your in-cluster components are outdated, think about updating YAKE.
 
 ### Reconcile of a resource
 

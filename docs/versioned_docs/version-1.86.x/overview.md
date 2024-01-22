@@ -4,11 +4,11 @@ sidebar_position: 1
 
 # Overview
 
-Yake is a GitOps driven [Gardener](https://gardener.cloud/) distribution. It helps you to deploy your gardener setup fast and reliably. It is also your companion, when it comes to upgrading and maintaining your setup. All Yake releases are carefully selected and tested sets of upstream gardener components. With Yake you can run and configure your complete gardener setup through your git config-repository. Based on [Flux](https://fluxcd.io/), the actual state of the system is always reconciled to the declarative configuration from your gitrepository which results in full control of your Gardener installation.
+YAKE is a GitOps driven [Gardener](https://gardener.cloud/) distribution. It helps you to deploy your gardener setup fast and reliably. It is also your companion, when it comes to upgrading and maintaining your setup. All YAKE releases are carefully selected and tested sets of upstream gardener components. With YAKE you can run and configure your complete gardener setup through your git config-repository. Based on [Flux](https://fluxcd.io/), the actual state of the system is always reconciled to the declarative configuration from your gitrepository which results in full control of your Gardener installation.
 
 ## Support
 
-When you decide to build your productive Gardener environment based on Yake, you will also get support from the 23T engineers. We tackle all kinds of issues. From simple configuration questions to advanced Gardener operation topics... We'll be by your side 🙂.
+When you decide to build your productive Gardener environment based on YAKE, you will also get support from the 23T engineers. We tackle all kinds of issues. From simple configuration questions to advanced Gardener operation topics... We'll be by your side 🙂.
 
 ## Demo instance
 

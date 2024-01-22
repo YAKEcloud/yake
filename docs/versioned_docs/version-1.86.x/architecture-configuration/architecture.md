@@ -5,28 +5,28 @@ sidebar_position: 1
 # Architecture
 
 ## High Level Overview
-![Yake High Level Overview](high-level-overview.excalidraw.png "Yake High Level Overview")
+![YAKE High Level Overview](high-level-overview.excalidraw.png "YAKE High Level Overview")
 
-Let's start off with the very high level overview in the block diagram above. The most important aspect to note is that all deployments needed for the [Gardener](https://gardener.cloud/) installation are based on helm charts. Since the helm charts developed in the Gardener upstream are distributed over several repositories in the Gardener [Github organization](https://github.com/gardener/external-dns-management), we consolidated the relevant charts in another [repository](https://github.com/gardener-community/gardener-charts) hosted on Github. Consequently, Yake fetches helm charts from several helm repositories and deploys the components for the Gardener installation into the base cluster.
+Let's start off with the very high level overview in the block diagram above. The most important aspect to note is that all deployments needed for the [Gardener](https://gardener.cloud/) installation are based on helm charts. Since the helm charts developed in the Gardener upstream are distributed over several repositories in the Gardener [Github organization](https://github.com/gardener/external-dns-management), we consolidated the relevant charts in another [repository](https://github.com/gardener-community/gardener-charts) hosted on Github. Consequently, YAKE fetches helm charts from several helm repositories and deploys the components for the Gardener installation into the base cluster.
 
 ## Detailed Architecture
 
-A more detailed view of the Yake architecture is depicted in the block diagram below.
+A more detailed view of the YAKE architecture is depicted in the block diagram below.
 
-![Yake architecture](yake-architecture.png "Yake architecture")
+![YAKE architecture](yake-architecture.png "YAKE architecture")
 
 ### Main entry points
 
 Conceptually, there are two entry points for Gardener operators to interact with the configuration:
 
 1. The `yake-config` secret in the base cluster
-2. The yake configuration git repository
+2. The YAKE configuration git repository
 
 The reason for having a dedicated `yake-config` secret lies in the assumption that an operator does not want to store credentials such as dnsprovider credentials in a git repository. Of course, this could also be handled by solutions like [sops](https://github.com/mozilla/sops), but we wanted to let the operator decide where to store the `yake-config` secret in the end.
 
 ### General Concepts
 
-As observed from the figure, the Yake concept divides the installation process into tree separate stages: The `configuration`, `pre-gardener` stage and the `gardener` stage. The configuration stages transfer the content of the `yake-config` secret into separate secrets serving as values for the eventually deployed helm charts. Consequently, the default values given in the upstream values files for the helm charts are extended by the `*-base-values` secrets, so that all components come with a meaningful base configuration. This base configuration is assumed to be homogeneous across many Gardener environments. For the parts which are environment specific, another set of secrets stores another set of values for the helm charts. These secrets are pulled in from the Yake configuration git repository and managed by a GitOps workflow.
+As observed from the figure, the YAKE concept divides the installation process into tree separate stages: The `configuration`, `pre-gardener` stage and the `gardener` stage. The configuration stages transfer the content of the `yake-config` secret into separate secrets serving as values for the eventually deployed helm charts. Consequently, the default values given in the upstream values files for the helm charts are extended by the `*-base-values` secrets, so that all components come with a meaningful base configuration. This base configuration is assumed to be homogeneous across many Gardener environments. For the parts which are environment specific, another set of secrets stores another set of values for the helm charts. These secrets are pulled in from the YAKE configuration git repository and managed by a GitOps workflow.
 
 As we assume that the underlying base cluster does not come with any services installed, the `pre-gardener` stage ensures that the required services are deployed to the cluster. In more detail, the following services and resources are deployed:
 

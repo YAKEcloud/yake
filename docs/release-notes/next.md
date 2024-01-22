@@ -4,7 +4,7 @@ hide_table_of_contents: true
 
 # Release Notes next
 
-## Yake release notes and upgrade guide
+## YAKE release notes and upgrade guide
 
 ## Related upstream release notes / changelogs
 
@@ -46,7 +46,7 @@ hide_table_of_contents: true
 
 ## ⚠️ Breaking Changes
 
-- `[OPERATOR]` Change OCI Image Registry from GCR (`eu.gcr.io/gardener-project`) to Artifact-Registry (`europe-docker.pkg.dev/gardener-project/releases`). Users should update their references.  
+- `[OPERATOR]` Change OCI Image Registry from GCR (`eu.gcr.io/gardener-project`) to Artifact-Registry (`europe-docker.pkg.dev/gardener-project/releases`). Users should update their references.
    by @ccwienk [#342]
 - `[OPERATOR]` rfc2136 provider expects TSIGSecret in base64 encoded format (previously base64 decoded was expected) by @Avarei [#347]
 ## ✨ New Features
@@ -71,7 +71,7 @@ hide_table_of_contents: true
 ## ⚠️ Breaking Changes
 
 - `[OPERATOR]` rfc2136 provider expects TSIGSecret in base64 encoded format (previously base64 decoded was expected) by @Avarei [gardener/external-dns-management#347]
-- `[OPERATOR]` Change OCI Image Registry from GCR (`eu.gcr.io/gardener-project`) to Artifact-Registry (`europe-docker.pkg.dev/gardener-project/releases`). Users should update their references.  
+- `[OPERATOR]` Change OCI Image Registry from GCR (`eu.gcr.io/gardener-project`) to Artifact-Registry (`europe-docker.pkg.dev/gardener-project/releases`). Users should update their references.
    by @ccwienk [gardener/external-dns-management#342]
 ## ✨ New Features
 
@@ -103,7 +103,7 @@ hide_table_of_contents: true
 
 ## ⚠️ Breaking Changes
 
-- `[OPERATOR]` Change OCI Image Registry from GCR (`eu.gcr.io/gardener-project`) to Artifact-Registry (`europe-docker.pkg.dev/gardener-project/releases`). Users should update their references.  
+- `[OPERATOR]` Change OCI Image Registry from GCR (`eu.gcr.io/gardener-project`) to Artifact-Registry (`europe-docker.pkg.dev/gardener-project/releases`). Users should update their references.
    by @ccwienk [#762]
 ## 🐛 Bug Fixes
 
@@ -141,9 +141,9 @@ hide_table_of_contents: true
 - `[USER]` `os-gardenlinux` extension now supports [Shoot Force Deletion](https://github.com/gardener/gardener/blob/master/docs/usage/shoot_operations.md#force-deletion).  by @acumino [#131]
 ## 🏃 Others
 
-- `[OPERATOR]` The following dependency is updated:  
-  - github.com/gardener/gardener: v1.77.1-> v1.80.0  
-  - k8s.io/* : v0.26.3 -> v0.28.2  
+- `[OPERATOR]` The following dependency is updated:
+  - github.com/gardener/gardener: v1.77.1-> v1.80.0
+  - k8s.io/* : v0.26.3 -> v0.28.2
   - sigs.k8s.io/controller-runtime: v0.14.6-> v0.16.2 by @acumino [#127]
 
 ## Docker Images
@@ -197,7 +197,7 @@ hide_table_of_contents: true
 
 ## ⚠️ Breaking Changes
 
-- `[OPERATOR]` Change OCI Image Registry from GCR (`eu.gcr.io/gardener-project`) to Artifact-Registry (`europe-docker.pkg.dev/gardener-project/releases`). Users should update their references.  
+- `[OPERATOR]` Change OCI Image Registry from GCR (`eu.gcr.io/gardener-project`) to Artifact-Registry (`europe-docker.pkg.dev/gardener-project/releases`). Users should update their references.
    by @ccwienk [gardener/network-problem-detector#53]
 ## 🏃 Others
 
@@ -328,8 +328,8 @@ hide_table_of_contents: true
 
 ## ⚠️ Breaking Changes
 
-- `[USER]` Removed support for deprecated annotations. These annotations have been deprecated long time ago:  
-  - `garden.sapcloud.io/createdBy`. If you still have a cluster using this annotation, you can migrate it manually to `dashboard.gardener.cloud/created-by` if you need to  
+- `[USER]` Removed support for deprecated annotations. These annotations have been deprecated long time ago:
+  - `garden.sapcloud.io/createdBy`. If you still have a cluster using this annotation, you can migrate it manually to `dashboard.gardener.cloud/created-by` if you need to
   - `shoot.garden.sapcloud.io/ignore`: If you still have a cluster using this annotation, you can migrate it manually to `shoot.gardener.cloud/ignore` if you need to by @grolu [#1669]
 ## ✨ New Features
 
@@ -367,8 +367,8 @@ hide_table_of_contents: true
 
 ## ⚠️ Breaking Changes
 
-- `[USER]` Removed support for deprecated annotations. These annotations have been deprecated long time ago:  
-  - `garden.sapcloud.io/createdBy`. If you still have a cluster using this annotation, you can migrate it manually to `dashboard.gardener.cloud/created-by` if you need to  
+- `[USER]` Removed support for deprecated annotations. These annotations have been deprecated long time ago:
+  - `garden.sapcloud.io/createdBy`. If you still have a cluster using this annotation, you can migrate it manually to `dashboard.gardener.cloud/created-by` if you need to
   - `shoot.garden.sapcloud.io/ignore`: If you still have a cluster using this annotation, you can migrate it manually to `shoot.gardener.cloud/ignore` if you need to by @grolu [#1669]
 ## ✨ New Features
 
