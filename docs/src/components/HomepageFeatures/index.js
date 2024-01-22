@@ -7,7 +7,7 @@ const FeatureList = [
     title: "Easy Bootstrapping",
     description: (
       <>
-        Yake was designed to get you up and running with your self hosted
+        YAKE was designed to get you up and running with your self hosted
         Gardener installation as quick as possible. Our helper scripts
         help you templating a basic configuration within minutes.
       </>

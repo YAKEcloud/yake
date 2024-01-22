@@ -37,9 +37,9 @@ function getLatestReleaseNotes() {
 
 /** @type {import('@docusaurus/types').Config} */
 const config = {
-  title: "Yake | Yet another Kubernetes Engine",
-  tagline: "The GitOps driven Gardener distribution",
-  url: "https://23technologies.github.io",
+  title: "Yet another Kubernetes Engine",
+  tagline: "The Lifecycle Management Tool for Gardener",
+  url: "https://yakecloud.github.io",
   baseUrl: "/yake/",
   onBrokenLinks: "ignore",
   onBrokenMarkdownLinks: "warn",
@@ -112,7 +112,7 @@ const config = {
         },
       ],
       navbar: {
-        title: "Yake",
+        title: "YAKE",
         logo: {
           alt: "23|",
           src: "img/logo.svg",
@@ -162,15 +162,15 @@ const config = {
             items: [
               {
                 label: "GitHub",
-                href: "https://github.com/23technologies",
+                href: "https://github.com/yakecloud",
+              },
+              {
+                label: "Gardener Community",
+                href: "https://github.com/gardener-community",
               },
               {
                 label: "Slack",
                 href: "https://gardener-cloud.slack.com",
-              },
-              {
-                label: "Twitter",
-                href: "https://twitter.com/23t10s",
               },
             ],
           },

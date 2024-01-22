@@ -2,7 +2,7 @@
 sidebar_position: 3
 ---
 
-# The Yake config git repository
+# The YAKE config git repository
 As already introduced in the [architecture diagram](./architecture.md), values for the helm charts deployed for the Gardener installation are configured and maintained in a GitOps workflow. For instance, your repository tree looks like this:
 ```
 .
@@ -45,7 +45,7 @@ stringData:
 Below of the key `stringData.values.yaml` you can insert your configuration.
 
 :::tip
-As the upstream helm charts are distributed over several repositories, there is no single documentation page for possible helm chart values. You can get information on the default values by e.g. 
+As the upstream helm charts are distributed over several repositories, there is no single documentation page for possible helm chart values. You can get information on the default values by e.g.
 ```sh
 helm repo add gardener-charts https://gardener-community.github.io/gardener-charts
 helm repo update

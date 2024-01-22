@@ -5,7 +5,7 @@ import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
 import Layout from '@theme/Layout';
 import HomepageFeatures from '@site/src/components/HomepageFeatures';
 
-import overviewImage from './23ke-overview.png';
+import overviewImage from './yake-overview.png';
 
 import styles from './index.module.css';
 
@@ -16,7 +16,7 @@ function HomepageHeader() {
       <div className="container">
         <h1 className="hero__title">{siteConfig.title}</h1>
         <p className="hero__subtitle">{siteConfig.tagline}</p>
-					<img src={overviewImage} scale={0.3} alt="23KE Overview" />
+					<img src={overviewImage} scale={0.3} alt="YAKE Overview" />
       </div>
     </header>
   );

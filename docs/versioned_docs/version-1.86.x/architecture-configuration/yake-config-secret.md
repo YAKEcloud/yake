@@ -2,7 +2,7 @@
 sidebar_position: 2
 ---
 
-# The Yake config secret
+# The YAKE config secret
 Via the `yake-config` secret, some basic parameters for the resulting Gardener installation are configured. In particular, values which should be kept secret such as dnsprovider credentials are set in `yake-config`.
 As the `yake-config` secret serves as input values for the `configuration` helm chart (see [architecture](./architecture.md)), the secret is defined as
 
