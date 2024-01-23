@@ -1,1 +1,0 @@
-"use strict";(self.webpackChunkwebsite=self.webpackChunkwebsite||[]).push([[36205],{20210:e=>{e.exports=JSON.parse('{"label":"caph","permalink":"/yake/blog/tags/caph","allTagsPath":"/yake/blog/tags","count":1}')}}]);

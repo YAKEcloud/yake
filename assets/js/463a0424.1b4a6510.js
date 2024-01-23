@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkwebsite=self.webpackChunkwebsite||[]).push([[59901],{74402:a=>{a.exports=JSON.parse('{"label":"hackathon","permalink":"/yake/blog/tags/hackathon","allTagsPath":"/yake/blog/tags","count":1,"unlisted":false}')}}]);
