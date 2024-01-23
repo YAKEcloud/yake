@@ -16,11 +16,6 @@ in full control of your Gardener installation.
 When you decide to build your productive Gardener environment based on YAKE, you will also get support from the 23T engineers.
 We tackle all kinds of issues. From simple configuration questions to advanced Gardener operation topics... We'll be by your side 🙂.
 
-## Demo instance
-
-We host a demo instance named [Okeanos](https://dashboard.okeanos.dev), which is kept up-to-date with a very recent version of
-the Gardener upstream. You can convince yourself from the Gardener experience after logging in with your Github account.
-
 ## Getting Started
 
 ### Locally
