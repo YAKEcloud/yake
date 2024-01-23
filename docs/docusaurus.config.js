@@ -59,6 +59,7 @@ const config = {
   },
 
   markdown: {
+    format: "detect",
     mermaid: true,
   },
 
