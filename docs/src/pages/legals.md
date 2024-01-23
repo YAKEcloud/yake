@@ -21,7 +21,7 @@ Represented by the management:<br />
 
 Phone: [+49 (0) 711-21957006](tel:+4971121957006)<br />
 Fax: +49 (0) 711-21957009<br />
-E-Mail: <info@23technologies.cloud>
+E-Mail: info@23technologies.cloud
 
 ## VAT-ID
 
@@ -47,4 +47,4 @@ Germany
 
 ## Dispute settlement
 
-The European Commission provides a platform for online dispute resolution (OS): <https://ec.europa.eu/consumers/odr>. We are neither willing nor obliged to participate in dispute settlement proceedings before a consumer arbitration board.
+The European Commission provides a platform for online dispute resolution (OS): https://ec.europa.eu/consumers/odr. We are neither willing nor obliged to participate in dispute settlement proceedings before a consumer arbitration board.
