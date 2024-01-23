@@ -39,7 +39,7 @@ function getLatestReleaseNotes() {
 /** @type {import('@docusaurus/types').Config} */
 const config = {
   title: "Yet another Kubernetes Engine",
-  tagline: "The Lifecycle Management Tool for Gardener",
+  tagline: "The Installer & Lifecycle Management Tool for Gardener",
   url: "https://yakecloud.github.io",
   baseUrl: "/yake/",
   onBrokenLinks: "ignore",
