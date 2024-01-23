@@ -1,8 +1,14 @@
 import React from 'react';
 import clsx from 'clsx';
 import styles from './styles.module.css';
+import {useColorMode} from '@docusaurus/theme-common';
+
 
 export default function Alasca() {
+  const {colorMode} = useColorMode();
+
+  const alascaLogoSrc = colorMode === "light" ? "img/logo-alasca.png" : "img/logo-alasca_dark.png";
+
   return (
     <section className={styles.editions}>
       <div className="container">
@@ -27,7 +33,7 @@ export default function Alasca() {
             </p>
           </div>
           <div className={clsx('col col--4')} style={{display: "flex", justifyContent: "center"}}>
-            <img src="img/logo-alasca.png" alt="ALASCA" style={{maxWidth: "400px"}}/>
+            <img src={alascaLogoSrc} alt="ALASCA" style={{maxWidth: "400px"}}/>
           </div>
         </div>
       </div>
