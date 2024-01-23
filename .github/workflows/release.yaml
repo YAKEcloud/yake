@@ -19,7 +19,7 @@ concurrency:
 
 jobs:
   prepare:
-    runs-on: ubuntu-22
+    runs-on: ubuntu-22.04
     name: Prepare
     env:
       version: ${{ github.event.inputs.version }}
