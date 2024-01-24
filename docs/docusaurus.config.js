@@ -40,8 +40,8 @@ function getLatestReleaseNotes() {
 const config = {
   title: "Yet another Kubernetes Engine",
   tagline: "The Installer & Lifecycle Management Tool for Gardener",
-  url: "https://yakecloud.github.io",
-  baseUrl: "/yake/",
+  url: "https://yake.cloud",
+  baseUrl: "/",
   onBrokenLinks: "ignore",
   onBrokenMarkdownLinks: "warn",
   favicon: "img/favicon.ico",
