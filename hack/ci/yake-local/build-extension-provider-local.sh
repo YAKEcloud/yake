@@ -1,5 +1,1 @@
-#!/usr/bin/env bash
-
-cd ../23ke-local || exit 1
-
-./build-extension-provider-local.sh "$@"
+../23ke-local/build-extension-provider-local.sh
