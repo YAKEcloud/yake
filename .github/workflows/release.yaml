@@ -43,9 +43,11 @@ jobs:
           git config user.email "${GITHUB_ACTOR}@users.noreply.github.com"
       - name: Configure version to release
         id: version
+        env:
+          COMMIT_MESSAGE: "${{ github.event.head_commit.message }}"
         run: |
           if [[ -z "$version" ]]; then
-            version=$(echo ${{ github.event.head_commit.message }} | grep -oP "Update gardener-controlplane to v\K([0-9]{1,}[.][0-9]{1,}[.][0-9]{1,})")-0
+            version=$(echo "$COMMIT_MESSAGE" | grep -oP "Update gardener-controlplane to v\K([0-9]{1,}[.][0-9]{1,}[.][0-9]{1,})")-0
           fi
           echo "version=$version" | tee $GITHUB_ENV | tee $GITHUB_OUTPUT
       - name: Prepare release
