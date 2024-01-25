@@ -8,7 +8,6 @@ KIND="$TOOLS_BIN_DIR/kind"
 KUBECTL="$TOOLS_BIN_DIR/kubectl"
 MC="$TOOLS_BIN_DIR/mc"
 YQ="$TOOLS_BIN_DIR/yq"
-SIPCALC="$TOOLS_BIN_DIR/sipcalc"
 ENVSUBST="$TOOLS_BIN_DIR/envsubst"
 
 TOOLS_KERNEL="$(uname -s | tr '[:upper:]' '[:lower:]')"
