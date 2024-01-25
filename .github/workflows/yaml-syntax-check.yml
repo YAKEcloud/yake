@@ -9,7 +9,7 @@ on:
 
 jobs:
   check-yaml-syntax:
-    runs-on: self-hosted
+    runs-on: 23ke-default
     steps:
       - uses: actions/checkout@v3.1.0
       - uses: actions/setup-python@v2
