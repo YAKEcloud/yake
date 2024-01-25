@@ -1,7 +1,5 @@
 name: Release
-run-name: Release "${{ inputs.version || github.event.head_commit.message }}" by @${{ github.actor }}
-permissions:
-  contents: write
+run-name: Release "${{ inputs.version || github.event.head_commit.message }}" by @${{ github.actor }} ${{ inputs.runReleaseTest && 'with' || 'without' }} tests
 on:
   workflow_dispatch:
     inputs:
@@ -9,6 +7,11 @@ on:
         description: 'New version to be released. Format: 1.3.3-7'
         required: true
         type: string
+      runReleaseTest:
+        description: 'Run tests'
+        required: true
+        type: boolean
+        default: true
   push:
     branches:
       - 'release-v*'
@@ -18,9 +21,112 @@ concurrency:
   cancel-in-progress: false
 
 jobs:
+  release-test:
+    if:  ${{ inputs.runReleaseTest && github.event_name != 'push' }}
+    runs-on: 23ke-runner
+    name: "23KE shoot testrun"
+    env:
+      PROVIDER: ${{ github.event.inputs.provider }}
+      ZONE: ${{ github.event.inputs.zone }}
+    steps:
+      - name: Checkout source
+        uses: actions/checkout@v3.4.0
+        with:
+          fetch-depth: 0
+      - name: Install Dependencies
+        run: sudo apt-get update && sudo apt-get install -y gettext-base
+      - uses: actions/setup-go@v3
+        with:
+          go-version: ">=1.19.0"
+      - name: Setup Environment
+        uses: nick-fields/retry@v2
+        with:
+          timeout_minutes: 5
+          max_attempts: 3
+          retry_wait_seconds: 30
+          retry_on: error
+          command: |
+            # actually defeats the purpose of host keys
+            # including the actual keys would be more secure
+            mkdir -p ~/.ssh
+            ssh-keyscan github.com >> ~/.ssh/known_hosts
+
+            echo "${{ secrets.TOKEN_OKEANOS_23KE_CI }}" \
+              > hack/ci/secrets/gardener-kubeconfig.yaml
+            bash hack/ci/00-environment.sh
+      - name: Setup shoot
+        uses: nick-fields/retry@v2
+        with:
+          timeout_minutes: 30
+          max_attempts: 2
+          retry_wait_seconds: 30
+          retry_on: error
+          command: bash hack/ci/01-shoot.sh
+      - name: Upload 23ke bucket
+        uses: nick-fields/retry@v2
+        with:
+          timeout_minutes: 5
+          max_attempts: 3
+          retry_wait_seconds: 30
+          retry_on: error
+          command: bash hack/ci/02-23ke-bucket.sh
+      - name: Upload 23ke-config bucket
+        uses: nick-fields/retry@v2
+        with:
+          timeout_minutes: 5
+          max_attempts: 3
+          retry_wait_seconds: 30
+          retry_on: error
+          command: bash hack/ci/03-backup-bucket.sh
+      - name: Install 23KE
+        uses: nick-fields/retry@v2
+        with:
+          timeout_minutes: 15
+          max_attempts: 3
+          retry_wait_seconds: 30
+          retry_on: error
+          command: bash hack/ci/04-23ke.sh
+      - name: Copy provider secret
+        uses: nick-fields/retry@v2
+        with:
+          timeout_minutes: 5
+          max_attempts: 3
+          retry_wait_seconds: 30
+          retry_on: error
+          command: bash hack/ci/05-project.sh
+      - name: Create demo shoot with demo app
+        uses: nick-fields/retry@v2
+        with:
+          timeout_minutes: 30
+          max_attempts: 3
+          retry_wait_seconds: 30
+          retry_on: error
+          command: bash hack/ci/06-tests.sh
+      - name: Delete demo shoot
+        if: ${{ always() }}
+        uses: nick-fields/retry@v2
+        with:
+          timeout_minutes: 30
+          max_attempts: 3
+          retry_wait_seconds: 30
+          retry_on: error
+          command: bash hack/ci/delete-microservice-shoot.sh
+      - name: Delete shoot
+        if: ${{ always() }}
+        uses: nick-fields/retry@v2
+        with:
+          timeout_minutes: 5
+          max_attempts: 3
+          retry_wait_seconds: 30
+          retry_on: error
+          command: bash hack/ci/delete-shoot.sh
+
   prepare:
     runs-on: self-hosted
     name: Prepare
+    if:  ${{ ! failure() || ! inputs.runReleaseTest }}
+    needs:
+      - release-test
     env:
       version: ${{ github.event.inputs.version }}
     outputs:
@@ -50,9 +156,65 @@ jobs:
           echo "version=$version" | tee $GITHUB_ENV | tee $GITHUB_OUTPUT
       - name: Prepare release
         run: "hack/release/prepare.sh $version"
-      - name: Github Release
-        uses: softprops/action-gh-release@v1
-        with:
-          body_path: /tmp/release-body.md
-          tag_name: v${{ github.event.inputs.version }}
 
+  upload-bucket:
+    runs-on: self-hosted
+    name: Upload Bucket
+    if: success('prepare')
+    needs:
+      - prepare
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          token: "${{ secrets.GH_TOKEN_23T_MACHINE_USER }}"
+          ref: "v${{ needs.prepare.outputs.version }}"
+
+      - name: Upload to release bucket
+        env:
+          MINIO_HOSTNAME: ${{ secrets.MINIOHOSTNAME }}
+          MINIO_URL: ${{ secrets.MINIOURL }}
+          MINIO_PW: ${{ secrets.MINIOPASSWORD }}
+          MC_ALIAS: releases
+          tag: v${{ needs.prepare.outputs.version }}
+        run: hack/release/upload-bucket.sh
+
+  upload-oci:
+    runs-on: self-hosted
+    name: Upload OCI
+    if: success('prepare')
+    needs:
+      - prepare
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          token: "${{ secrets.GH_TOKEN_23T_MACHINE_USER }}"
+          ref: "v${{ needs.prepare.outputs.version }}"
+
+      - name: Upload to harbor container registry
+        env:
+          tag: v${{ needs.prepare.outputs.version }}
+          creds: ${{ secrets.HARBORCREDENTIALS }}
+        run: hack/release/upload-oci.sh
+
+  upload-git:
+    runs-on: self-hosted
+    name: Upload Git
+    if: success('prepare')
+    needs:
+      - prepare
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          token: "${{ secrets.GH_TOKEN_23T_MACHINE_USER }}"
+          ref: "v${{ needs.prepare.outputs.version }}"
+      - name: Checkout 23ke-releases repo
+        uses: actions/checkout@v3
+        with:
+          repository: 23technologies/23ke-releases
+          path: 23ke-releases
+          token: "${{ secrets.GH_TOKEN_23T_MACHINE_USER }}"
+          ref: main
+      - name: Upload to release git repository
+        env:
+          tag: v${{ needs.prepare.outputs.version }}
+        run: hack/release/upload-git.sh
