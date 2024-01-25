@@ -275,7 +275,6 @@ _wait_for_initial_seed_ready () {
 
 ###
 
-install_flux
 install_helm
 install_kind
 install_kubectl
