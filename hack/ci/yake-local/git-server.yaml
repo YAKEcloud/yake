@@ -18,7 +18,7 @@ spec:
     spec:
       containers:
         - name: git-server
-          image: pascalgn/git-server-docker:latest # TODO: build locally
+          image: ghcr.io/yakecloud/git-server-docker:v0.0.1 # TODO: build locally
           ports:
             - containerPort: 3000
 ---
