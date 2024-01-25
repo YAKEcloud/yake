@@ -36,7 +36,7 @@ spec:
     spec:
       containers:
         - name: knot
-          image: cznic/knot
+          image: registry.regio.digital/proxy_cache/cznic/knot
           command:
             - bash
             - -c

@@ -1,3 +1,6 @@
+image:
+  repository: registry.regio.digital/proxy_cache/smallstep/step-ca
+
 # Helm template
 inject:
   enabled: true
