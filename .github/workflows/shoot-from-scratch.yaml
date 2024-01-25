@@ -22,7 +22,7 @@ on:
       - 'docs/**'
 jobs:
   ci:
-    runs-on: 23ke-runner
+    runs-on: self-hosted
     name: "23KE shoot testrun"
     env:
       PROVIDER: ${{ github.event.inputs.provider }}
