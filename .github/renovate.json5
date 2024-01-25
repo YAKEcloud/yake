@@ -108,7 +108,13 @@
       "./hack/pull-helmchart.sh {{{depName}}} {{{newVersion}}}",
       "./hack/ci/yake-local/update-extension-provider-local-image.sh {{{depName}}} {{{newVersion}}}",
     ],
-    "fileFilters": ["configuration/configuration/images.yaml", "helmcharts/**/**", "docs/release-notes/next.md", "hack/ci/yake-local/garden-content/controller-registrations.yaml"],
+    "fileFilters": [
+      "configuration/configuration/images.yaml",
+      "helmcharts/**/**",
+      "docs/release-notes/next.md",
+      "hack/ci/yake-local/garden-content/controller-registrations.yaml",
+      "hack/ci/23ke-local/garden-content/controller-registrations.yaml", // todo (1.88): remove
+    ],
     "executionMode": "update"
   }
 }
