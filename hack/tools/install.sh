@@ -106,7 +106,7 @@ install_helm() {
 
 install_rclone() {
   # renovate: datasource=github-tags depName=rclone/rclone
-  VERSION=v1.65.1
+  VERSION=v1.65.2
 
   if _isStale $RCLONE $VERSION; then
     ZIP="$RCLONE.zip"
