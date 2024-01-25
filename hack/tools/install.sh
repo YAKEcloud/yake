@@ -3,7 +3,6 @@
 TOOLS_DIR=$(dirname "$(pwd)/${BASH_SOURCE[0]}")
 TOOLS_BIN_DIR="$TOOLS_DIR/bin"
 
-FLUX="$TOOLS_BIN_DIR/flux"
 HELM="$TOOLS_BIN_DIR/helm"
 KIND="$TOOLS_BIN_DIR/kind"
 KUBECTL="$TOOLS_BIN_DIR/kubectl"
@@ -41,18 +40,6 @@ _setVersion() {
   local versionFile=$(_versionFile $dep)
 
   echo -n "$ver" > "$versionFile"
-}
-
-install_flux() {
-  # renovate: datasource=github-releases depName=fluxcd/flux2
-  VERSION=v2.2.2
-
-  if _isStale $FLUX $VERSION; then
-    curl -L "https://github.com/fluxcd/flux2/releases/download/$VERSION/flux_${VERSION/v/}_${TOOLS_KERNEL}_$TOOLS_ARCH.tar.gz" | tar -xzm -C "$TOOLS_BIN_DIR"
-    chmod +x $FLUX
-
-    _setVersion $FLUX $VERSION
-  fi
 }
 
 install_kubectl() {
