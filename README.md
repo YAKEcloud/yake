@@ -1,7 +1,7 @@
 # YAKE
 
 YAKE is Yet Another Kubernetes Engine. Formerly it was developed as 23KE as inner source at
-23 Technologies GmbH and serves a gitops-based[Gardener](https://gardener.cloud/) distribution.
+23 Technologies GmbH and serves a gitops-based [Gardener](https://gardener.cloud/) distribution.
 Conceptually, YAKE not only installs Gardener itself but comes with some basic components
 for managing ingresses, certificates, dnsentries, and Gardener addons such as the dashboard as
 well es Gardener extensions.
