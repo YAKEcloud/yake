@@ -77,3 +77,19 @@ hide_table_of_contents: true
 
 
 </details>
+
+<details>
+<summary><b>Update external-dns-management to <code>0.17.1</code></b></summary>
+
+# [gardener/external-dns-management]
+
+## 🏃 Others
+
+- `[OPERATOR]` Bumps golang from 1.21.5 to 1.21.6. by @MartinWeindel [#353]
+- `[USER]` Merge `dns.gardener.cloud/dnsnames` annotations from multiple DNSAnnotation objects. by @MartinWeindel [#352]
+
+## Docker Images
+- dns-controller-manager: `europe-docker.pkg.dev/gardener-project/releases/dns-controller-manager:v0.17.1`
+
+
+</details>
