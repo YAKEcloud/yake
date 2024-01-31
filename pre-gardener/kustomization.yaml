@@ -9,3 +9,4 @@ resources:
   - ingress-nginx.yaml
   - issuer.yaml
   - namespace.yaml
+  - networkpolicies
