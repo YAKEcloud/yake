@@ -65,18 +65,6 @@ install_yq() {
   fi
 }
 
-install_mc() {
-  # renovate: datasource=github-tags depName=minio/mc versioning=regex:^(?<compatibility>RELEASE\.)(?<major>\d+)-(?<minor>\d+)-(?<patch>\d+)T(?<build>\d+)-\d+-\d+Z$
-  VERSION=RELEASE.2024-01-31T08-59-40Z
-
-  if _isStale $MC $VERSION; then
-    curl -L -o "$MC" "https://dl.min.io/client/mc/release/$TOOLS_KERNEL-$TOOLS_ARCH/archive/mc.$VERSION"
-    chmod +x "$MC"
-
-    _setVersion $MC $VERSION
-  fi
-}
-
 install_helm() {
   # renovate: datasource=github-tags depName=helm/helm
   VERSION=v3.14.0
