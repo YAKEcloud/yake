@@ -2208,7 +2208,7 @@ runtime-gvisor:
   imageVectorOriginal:
     images:
       - name: runtime-gvisor-installation
-        repository: eu.gcr.io/gardener-project/gardener/extensions/runtime-gvisor-installation
+        repository: europe-docker.pkg.dev/gardener-project/releases/gardener/extensions/runtime-gvisor-installation
         sourceRepository: github.com/gardener/gardener-extension-runtime-gvisor
 shoot-oidc-service:
   imageVectorOriginal:
