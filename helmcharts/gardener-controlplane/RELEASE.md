@@ -2,14 +2,22 @@
 
 ## 🐛 Bug Fixes
 
-- `[OPERATOR]` A regression is fixed that led to unnecessary and repetitive updates in the `status.constraints[].last{Update,Transition}Time` fields of the shoot. In larger Gardener installations, these superfluous updates could have resulted in significant excess network traffic, particularly between the `gardener-apiserver` and the `gardenlet`s in the seeds. by @istvanballok [#9088]
+- `[USER]` The `worker.gardener.cloud/kubernetes-version` is now correctly maintained as label on `Node`s (instead of an annotation) when the `UseGardenerNodeAgent` feature gate is turned on. by @rfranzke [#9113]
 
 ## Docker Images
-- admission-controller: `eu.gcr.io/gardener-project/gardener/admission-controller:v1.85.3`
-- apiserver: `eu.gcr.io/gardener-project/gardener/apiserver:v1.85.3`
-- controller-manager: `eu.gcr.io/gardener-project/gardener/controller-manager:v1.85.3`
-- gardenlet: `eu.gcr.io/gardener-project/gardener/gardenlet:v1.85.3`
-- node-agent: `eu.gcr.io/gardener-project/gardener/node-agent:v1.85.3`
-- operator: `eu.gcr.io/gardener-project/gardener/operator:v1.85.3`
-- resource-manager: `eu.gcr.io/gardener-project/gardener/resource-manager:v1.85.3`
-- scheduler: `eu.gcr.io/gardener-project/gardener/scheduler:v1.85.3`
+- gardener: `eu.gcr.io/gardener-project/gardener/admission-controller:v1.85.4`
+- gardener: `eu.gcr.io/gardener-project/gardener/apiserver:v1.85.4`
+- gardener: `eu.gcr.io/gardener-project/gardener/controller-manager:v1.85.4`
+- gardener: `eu.gcr.io/gardener-project/gardener/gardenlet:v1.85.4`
+- gardener: `eu.gcr.io/gardener-project/gardener/node-agent:v1.85.4`
+- gardener: `eu.gcr.io/gardener-project/gardener/operator:v1.85.4`
+- gardener: `eu.gcr.io/gardener-project/gardener/resource-manager:v1.85.4`
+- gardener: `eu.gcr.io/gardener-project/gardener/scheduler:v1.85.4`
+- gardener: `europe-docker.pkg.dev/gardener-project/releases/gardener/admission-controller:v1.85.4`
+- gardener: `europe-docker.pkg.dev/gardener-project/releases/gardener/apiserver:v1.85.4`
+- gardener: `europe-docker.pkg.dev/gardener-project/releases/gardener/controller-manager:v1.85.4`
+- gardener: `europe-docker.pkg.dev/gardener-project/releases/gardener/gardenlet:v1.85.4`
+- gardener: `europe-docker.pkg.dev/gardener-project/releases/gardener/node-agent:v1.85.4`
+- gardener: `europe-docker.pkg.dev/gardener-project/releases/gardener/operator:v1.85.4`
+- gardener: `europe-docker.pkg.dev/gardener-project/releases/gardener/resource-manager:v1.85.4`
+- gardener: `europe-docker.pkg.dev/gardener-project/releases/gardener/scheduler:v1.85.4`
