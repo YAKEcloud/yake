@@ -16,6 +16,9 @@ metadata:
   {{- end }}
 spec:
   replicas: {{ .Values.cainjector.replicaCount }}
+  {{- if ne (quote .Values.global.revisionHistoryLimit) (quote "") }}
+  revisionHistoryLimit: {{ .Values.global.revisionHistoryLimit }}
+  {{- end }}
   selector:
     matchLabels:
       app.kubernetes.io/name: {{ include "cainjector.name" . }}
@@ -55,12 +58,10 @@ spec:
       {{- end }}
       containers:
         - name: {{ .Chart.Name }}-cainjector
-          {{- with .Values.cainjector.image }}
-          image: "{{- if .registry -}}{{ .registry }}/{{- end -}}{{ .repository }}{{- if (.digest) -}} @{{ .digest }}{{- else -}}:{{ default $.Chart.AppVersion .tag }} {{- end -}}"
-          {{- end }}
+          image: "{{ template "image" (tuple .Values.cainjector.image $.Chart.AppVersion) }}"
           imagePullPolicy: {{ .Values.cainjector.image.pullPolicy }}
           args:
-          {{- if .Values.global.logLevel }}
+          {{- if ne (quote .Values.global.logLevel) (quote "") }}
           - --v={{ .Values.global.logLevel }}
           {{- end }}
           {{- with .Values.global.leaderElection }}
@@ -75,6 +76,9 @@ spec:
           - --leader-election-retry-period={{ .retryPeriod }}
           {{- end }}
           {{- end }}
+          {{- with .Values.cainjector.featureGates}}
+          - --feature-gates={{ . }}
+          {{- end}}
           {{- with .Values.cainjector.extraArgs }}
           {{- toYaml . | nindent 10 }}
           {{- end }}
