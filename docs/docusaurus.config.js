@@ -72,13 +72,13 @@ const config = {
           sidebarPath: require.resolve("./sidebars.js"),
           // Please change this to your repo.
           // Remove this to remove the "edit this page" links.
-          editUrl: "https://github.com/23technologies/23ke-docs/tree/main/",
+          editUrl: "https://github.com/yakecloud/yake/tree/main/docs/",
         },
         blog: {
           showReadingTime: true,
           // Please change this to your repo.
           // Remove this to remove the "edit this page" links.
-          editUrl: "https://github.com/23technologies/23ke-docs/tree/main/",
+          editUrl: "https://github.com/yakecloud/yake/tree/main/docs/",
         },
         theme: {
           customCss: require.resolve("./src/css/custom.css"),
@@ -140,7 +140,7 @@ const config = {
                 },
                 {to: "/blog", label: "Blog", position: "left"},
                 {
-                    href: "https://github.com/23technologies",
+                    href: "https://github.com/yakecloud/yake",
                     label: "GitHub",
                     position: "right",
                 },
