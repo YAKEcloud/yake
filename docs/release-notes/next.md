@@ -304,3 +304,15 @@ hide_table_of_contents: true
 
 
 </details>
+
+<details>
+<summary><b>Update networking-cilium to <code>1.32.1</code></b></summary>
+
+no release notes available
+
+## Docker Images
+- gardener-extension-admission-cilium: `europe-docker.pkg.dev/gardener-project/releases/gardener/extensions/admission-cilium:v1.32.1`
+- gardener-extension-networking-cilium: `europe-docker.pkg.dev/gardener-project/releases/gardener/extensions/networking-cilium:v1.32.1`
+
+
+</details>
