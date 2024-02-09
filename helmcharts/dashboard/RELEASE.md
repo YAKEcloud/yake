@@ -1,32 +1,23 @@
 # [gardener/dashboard]
 
-## ⚠️ Breaking Changes
-
-- `[USER]` Removed support for deprecated annotations. These annotations have been deprecated long time ago:  
-  - `garden.sapcloud.io/createdBy`. If you still have a cluster using this annotation, you can migrate it manually to `dashboard.gardener.cloud/created-by` if you need to  
-  - `shoot.garden.sapcloud.io/ignore`: If you still have a cluster using this annotation, you can migrate it manually to `shoot.gardener.cloud/ignore` if you need to by @grolu [#1669]
 ## ✨ New Features
 
-- `[USER]` Streamlined Kubernetes cluster upgrades for enhanced user experience. We've removed non-eligible versions from the upgrade selection, replacing them with a hint to indicate the existence of more versions. Additionally, only supported versions are now highlighted on the version chip. To aid in version management, chips for deprecated versions will now display in a warning color, alerting users to the need for an upgrade by @grolu [#1683]
-- `[USER]` Hidden GitHub comments will no longer be displayed on the Cluster Details page. by @holgerkoser [#1675]
-- `[USER]` Added support to request a time-limited kubeconfig on the cluster details page. The lifetime can be configured on the settings page. This feature is disabled by default and can be enabled by the gardener dashboard operator. by @grolu [#1666]
-- `[OPERATOR]` The feature to request a time-limited kubeconfig is disabled by default. You can enabled it via `.Values.global.dashboard.frontendConfig.shootAdminKubeconfig.enabled`. The maximum expiration seconds can be controlled via `.Values.global.dashboard.frontendConfig.shootAdminKubeconfig.maxExpirationSeconds`. by @grolu [#1666]
+- `[USER]` You can now force delete clusters via the dashboard if they are stuck in deletion by @grolu [#1665]
+- `[USER]` Improved cluster messages:  
+  - Show icons always next to title on cluster details page  
+  - Fixed overall severity sometimes not correct by @grolu [#1665]
+- `[USER]` Users with the `Project` `viewer` role are now able to to download the `gardenlogin` kubeconfig by fetching the cluster CA via `ConfigMap`. This feature is anticipated to be supported with Gardener `v1.89` and requires `gardenlogin` `v0.5` or higher. by @petersutter [#1708]
+- `[OPERATOR]` Add support for IronCore as infrastructure provider by @afritzler [#1700]
 ## 🐛 Bug Fixes
 
-- `[USER]` The broken link to the permission configuration documentation for Azure secrets was fixed. by @MrBatschner [#1667]
-- `[USER]` Fixed an issue on the member management page. Update members and service account dialog did not render correctly because of an issue with the input validation by @grolu [#1686]
-- `[USER]` Project list: fixed issue where the second entry is highlighted on key-down in some cases by @petersutter [#1687]
-- `[USER]` Fixed email check for account names: Non email user accounts are no longer converted to a `mailto` link by @grolu [#1669]
-- `[USER]` Resolved an issue from Dashboard version `1.70` that prevented the display of descriptions in the 'Update Cluster Version' dropdown selection by @grolu [#1672]
-- `[USER]` Improved Navigation in project list filter: Disabled spell check to enhance arrow key navigation reliability. This update addresses an issue where spell check functionality occasionally interfered with keyboard navigation by @grolu [#1696]
-- `[USER]` Resolved a styling issue that affected the hover functionality in the Safari browser by @grolu [#1696]
-## 🏃 Others
-
-- `[USER]` Introduced tonal variations to our chips and alert designs, previously defined with outline styles by @grolu [#1681]
-## 📖 Documentation
-
-- `[USER]` Enhanced the `Connect Kubectl` documentation by @petersutter [#1679]
-- `[DEVELOPER]` Updated the `Project Operations` kubeconfig documentation by @n-boshnakov [#1673]
+- `[USER]` Fixed invalid default minimum volume size limits for clusters without a limit defined in the cloud profile. Also improved handling for machine types without storage or volume defined in the cloud profile by @grolu [#1701]
+- `[USER]` Terminal: fixed an issue where the loading spinner would not disappear, even though the terminal pod is `running` and the terminal connection shows as `connected` by @petersutter [#1702]
+- `[USER]` Fixed an issue that caused `dark` theme color to be applied to some alert messages by @grolu [#1665]
+- `[USER]` Action dialogs fixes:  
+  - We've addressed an issue where tooltips were missing for some disabled cluster action buttons. Users will now see helpful tooltips providing more context on why these actions are currently unavailable  
+  - Fixed issues with line breaks in the tooltips for certain buttons, ensuring that the tooltip text is now displayed correctly and is easier to read  
+  - Resolved problems related to the display of precondition constraint failure messages during maintenance operations  
+  - Fixed an issue where some action buttons were visible to users who did not have permission to perform those actions. This update ensures that the interface correctly reflects available actions based on user rights by @grolu [#1697]
 
 ## Docker Images
-- dashboard: `europe-docker.pkg.dev/gardener-project/releases/gardener/dashboard:1.72.0`
+- dashboard: `europe-docker.pkg.dev/gardener-project/releases/gardener/dashboard:1.73.0`
