@@ -64,7 +64,7 @@ gardenlet:
         name: nginx-ingress-controller
         repository: registry.k8s.io/ingress-nginx/controller-chroot
         sourceRepository: github.com/kubernetes/ingress-nginx
-        tag: v1.9.5
+        tag: v1.9.6
       - labels:
           - name: gardener.cloud/cve-categorisation
             value:
@@ -78,7 +78,7 @@ gardenlet:
         name: ingress-default-backend
         repository: europe-docker.pkg.dev/gardener-project/releases/gardener/ingress-default-backend
         sourceRepository: github.com/gardener/ingress-default-backend
-        tag: 0.18.0
+        tag: 0.19.0
       - name: hyperkube
         repository: europe-docker.pkg.dev/gardener-project/releases/hyperkube
         sourceRepository: github.com/gardener/hyperkube
@@ -106,12 +106,17 @@ gardenlet:
         name: machine-controller-manager
         repository: europe-docker.pkg.dev/gardener-project/releases/gardener/machine-controller-manager
         sourceRepository: github.com/gardener/machine-controller-manager
-        tag: v0.50.1
+        tag: v0.52.0
+      - name: cluster-autoscaler
+        repository: europe-docker.pkg.dev/gardener-project/releases/gardener/autoscaler/cluster-autoscaler
+        sourceRepository: github.com/gardener/autoscaler
+        tag: v1.28.0
+        targetVersion: '>= 1.28'
       - name: cluster-autoscaler
         repository: europe-docker.pkg.dev/gardener-project/releases/gardener/autoscaler/cluster-autoscaler
         sourceRepository: github.com/gardener/autoscaler
         tag: v1.27.1
-        targetVersion: '>= 1.27'
+        targetVersion: 1.27.x
       - name: cluster-autoscaler
         repository: europe-docker.pkg.dev/gardener-project/releases/gardener/autoscaler/cluster-autoscaler
         sourceRepository: github.com/gardener/autoscaler
@@ -130,7 +135,24 @@ gardenlet:
       - name: vpn-seed-server
         repository: europe-docker.pkg.dev/gardener-project/releases/gardener/vpn-seed-server
         sourceRepository: github.com/gardener/vpn2
-        tag: 0.23.1
+        tag: 0.23.2
+      - labels:
+          - name: gardener.cloud/cve-categorisation
+            value:
+              authentication_enforced: false
+              availability_requirement: low
+              confidentiality_requirement: low
+              integrity_requirement: low
+              network_exposure: private
+              user_interaction: gardener-operator
+          - name: cloud.gardener.cnudie/responsibles
+            value:
+              - teamname: gardener/monitoring-maintainers
+                type: githubTeam
+        name: prometheus-operator
+        repository: quay.io/prometheus-operator/prometheus-operator
+        sourceRepository: github.com/prometheus-operator/prometheus-operator
+        tag: v0.71.0
       - labels:
           - name: gardener.cloud/cve-categorisation
             value:
@@ -278,7 +300,7 @@ gardenlet:
       - name: vpn-shoot-client
         repository: europe-docker.pkg.dev/gardener-project/releases/gardener/vpn-shoot-client
         sourceRepository: github.com/gardener/vpn2
-        tag: 0.23.1
+        tag: 0.23.2
       - labels:
           - name: gardener.cloud/cve-categorisation
             value:
@@ -343,7 +365,7 @@ gardenlet:
       - name: alpine-conntrack
         repository: europe-docker.pkg.dev/gardener-project/releases/gardener/alpine-conntrack
         sourceRepository: github.com/gardener/alpine-conntrack
-        tag: 3.19.0
+        tag: 3.19.1
       - labels:
           - name: gardener.cloud/cve-categorisation
             value:
@@ -377,7 +399,7 @@ gardenlet:
         name: fluent-bit
         repository: europe-docker.pkg.dev/gardener-project/releases/3rd/kubesphere/fluent-bit
         sourceRepository: github.com/fluent/fluent-operator
-        tag: v2.2.0
+        tag: v2.2.2
       - labels:
           - name: gardener.cloud/cve-categorisation
             value:
@@ -639,7 +661,7 @@ gardenlet:
         resourceId:
           name: apiserver-proxy
         sourceRepository: github.com/gardener/apiserver-proxy
-        tag: v0.15.0
+        tag: v0.16.0
 provider-openstack:
   imageVectorOriginal:
     images:
