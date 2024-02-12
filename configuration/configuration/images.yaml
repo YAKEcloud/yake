@@ -1061,7 +1061,7 @@ provider-azure:
         name: terraformer
         repository: europe-docker.pkg.dev/gardener-project/releases/gardener/terraformer-azure
         sourceRepository: github.com/gardener/terraformer
-        tag: v2.23.0
+        tag: v2.24.0
       - labels:
           - name: gardener.cloud/cve-categorisation
             value:
@@ -1088,7 +1088,7 @@ provider-azure:
         name: cloud-controller-manager
         repository: mcr.microsoft.com/oss/kubernetes/azure-cloud-controller-manager
         sourceRepository: github.com/kubernetes-sigs/cloud-provider-azure
-        tag: v1.25.20
+        tag: v1.25.24
         targetVersion: 1.25.x
       - labels:
           - name: gardener.cloud/cve-categorisation
@@ -1102,7 +1102,7 @@ provider-azure:
         name: cloud-controller-manager
         repository: mcr.microsoft.com/oss/kubernetes/azure-cloud-controller-manager
         sourceRepository: github.com/kubernetes-sigs/cloud-provider-azure
-        tag: v1.26.16
+        tag: v1.26.19
         targetVersion: 1.26.x
       - labels:
           - name: gardener.cloud/cve-categorisation
@@ -1116,7 +1116,7 @@ provider-azure:
         name: cloud-controller-manager
         repository: mcr.microsoft.com/oss/kubernetes/azure-cloud-controller-manager
         sourceRepository: github.com/kubernetes-sigs/cloud-provider-azure
-        tag: v1.27.10
+        tag: v1.27.13
         targetVersion: 1.27.x
       - labels:
           - name: gardener.cloud/cve-categorisation
@@ -1130,8 +1130,22 @@ provider-azure:
         name: cloud-controller-manager
         repository: mcr.microsoft.com/oss/kubernetes/azure-cloud-controller-manager
         sourceRepository: github.com/kubernetes-sigs/cloud-provider-azure
-        tag: v1.28.2
-        targetVersion: '>= 1.28'
+        tag: v1.28.5
+        targetVersion: 1.28.x
+      - labels:
+          - name: gardener.cloud/cve-categorisation
+            value:
+              authentication_enforced: false
+              availability_requirement: low
+              confidentiality_requirement: high
+              integrity_requirement: high
+              network_exposure: protected
+              user_interaction: gardener-operator
+        name: cloud-controller-manager
+        repository: mcr.microsoft.com/oss/kubernetes/azure-cloud-controller-manager
+        sourceRepository: github.com/kubernetes-sigs/cloud-provider-azure
+        tag: v1.29.0
+        targetVersion: '>= 1.29'
       - labels:
           - name: gardener.cloud/cve-categorisation
             value:
@@ -1158,7 +1172,7 @@ provider-azure:
         name: cloud-node-manager
         repository: mcr.microsoft.com/oss/kubernetes/azure-cloud-node-manager
         sourceRepository: github.com/kubernetes-sigs/cloud-provider-azure
-        tag: v1.25.20
+        tag: v1.25.24
         targetVersion: 1.25.x
       - labels:
           - name: gardener.cloud/cve-categorisation
@@ -1172,7 +1186,7 @@ provider-azure:
         name: cloud-node-manager
         repository: mcr.microsoft.com/oss/kubernetes/azure-cloud-node-manager
         sourceRepository: github.com/kubernetes-sigs/cloud-provider-azure
-        tag: v1.26.16
+        tag: v1.26.19
         targetVersion: 1.26.x
       - labels:
           - name: gardener.cloud/cve-categorisation
@@ -1186,7 +1200,7 @@ provider-azure:
         name: cloud-node-manager
         repository: mcr.microsoft.com/oss/kubernetes/azure-cloud-node-manager
         sourceRepository: github.com/kubernetes-sigs/cloud-provider-azure
-        tag: v1.27.10
+        tag: v1.27.13
         targetVersion: 1.27.x
       - labels:
           - name: gardener.cloud/cve-categorisation
@@ -1200,8 +1214,8 @@ provider-azure:
         name: cloud-node-manager
         repository: mcr.microsoft.com/oss/kubernetes/azure-cloud-node-manager
         sourceRepository: github.com/kubernetes-sigs/cloud-provider-azure
-        tag: v1.28.2
-        targetVersion: '>= 1.28'
+        tag: v1.28.5
+        targetVersion: 1.28.x
       - labels:
           - name: gardener.cloud/cve-categorisation
             value:
@@ -1211,10 +1225,11 @@ provider-azure:
               integrity_requirement: high
               network_exposure: protected
               user_interaction: gardener-operator
-        name: machine-controller-manager
-        repository: europe-docker.pkg.dev/gardener-project/releases/gardener/machine-controller-manager
-        sourceRepository: github.com/gardener/machine-controller-manager
-        tag: v0.50.1
+        name: cloud-node-manager
+        repository: mcr.microsoft.com/oss/kubernetes/azure-cloud-node-manager
+        sourceRepository: github.com/kubernetes-sigs/cloud-provider-azure
+        tag: v1.29.0
+        targetVersion: '>= 1.29'
       - labels:
           - name: gardener.cloud/cve-categorisation
             value:
@@ -1240,7 +1255,7 @@ provider-azure:
         name: csi-driver-disk
         repository: mcr.microsoft.com/oss/kubernetes-csi/azuredisk-csi
         sourceRepository: github.com/kubernetes-sigs/azuredisk-csi-driver
-        tag: v1.29.1
+        tag: v1.29.3
       - labels:
           - name: gardener.cloud/cve-categorisation
             value:
@@ -1253,7 +1268,7 @@ provider-azure:
         name: csi-driver-file
         repository: mcr.microsoft.com/oss/kubernetes-csi/azurefile-csi
         sourceRepository: github.com/kubernetes-sigs/azurefile-csi-driver
-        tag: v1.29.2
+        tag: v1.29.3
       - labels:
           - name: gardener.cloud/cve-categorisation
             value:
@@ -1372,7 +1387,7 @@ provider-azure:
         resourceId:
           name: remedy-controller-image
         sourceRepository: github.com/gardener/remedy-controller
-        tag: v0.10.0
+        tag: v0.11.0
 provider-aws:
   imageVectorOriginal:
     images:
