@@ -2,8 +2,8 @@ global:
     healthPort: 8081
     image:
         pullPolicy: IfNotPresent
-        repository: eu.gcr.io/gardener-project/gardener/extensions/admission-aws
-        tag: v1.51.1
+        repository: europe-docker.pkg.dev/gardener-project/public/gardener/extensions/admission-aws
+        tag: v1.52.0
     kubeconfig: null
     metricsPort: 8080
     replicaCount: 1
@@ -27,18 +27,4 @@ global:
         updatePolicy:
             updateMode: Auto
     webhookConfig:
-        caBundle: |
-            -----BEGIN CERTIFICATE-----
-            ...
-            -----END CERTIFICATE-----
         serverPort: 10250
-        tls:
-            crt: |
-                -----BEGIN CERTIFICATE-----
-                ...
-                -----END CERTIFICATE-----
-            key: |
-                -----BEGIN RSA PRIVATE KEY-----
-                ...
-                -----END RSA PRIVATE KEY-----
-        useObjectSelector: false
