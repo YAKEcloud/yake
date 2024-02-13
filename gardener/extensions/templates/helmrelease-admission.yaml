@@ -65,6 +65,16 @@ spec:
     remediation:
       retries: 3
     createNamespace: true
+  postRenderers:
+    - kustomize:
+        patches:
+          - patch: |
+              - op: replace
+                path: /spec/template/spec/automountServiceAccountToken
+                value: true
+            target:
+              kind: Deployment
+              name: gardener-extension-admission-{{ $extShortName }}
   values:
     global:
 {{ include "admission.values" $v | indent 6 }}
