@@ -1,9 +1,9 @@
 # [gardener/external-dns-management]
 
-## ✨ New Features
+## 🐛 Bug Fixes
 
-- `[USER]` The Istio resource `Gateway` can now be annotated with `dns.gardener.cloud/dnsnames='*'` to enable the automatic creation of `DNSEntries` for domain names extracted from hosts fields in this resource or related `VirtualServices` resources.  
-  The `Gateway` and `HTTPRoute` resources from the Gateway API are supported in a similar way. by @MartinWeindel [#354]
+- `[OPERATOR]` Uncached listing of virtual services and httproutes by @MartinWeindel [#355]
+- `[OPERATOR]` Ignore generated load balancer services of gateways. by @MartinWeindel [#355]
 
 ## Docker Images
-- dns-controller-manager: `europe-docker.pkg.dev/gardener-project/releases/dns-controller-manager:v0.18.0`
+- dns-controller-manager: `europe-docker.pkg.dev/gardener-project/releases/dns-controller-manager:v0.18.1`
