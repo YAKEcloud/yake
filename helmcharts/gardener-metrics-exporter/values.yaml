@@ -3,8 +3,8 @@ application:
 global:
     image:
         pullPolicy: IfNotPresent
-        repository: eu.gcr.io/gardener-project/gardener/metrics-exporter
-        tag: 0.28.0
+        repository: europe-docker.pkg.dev/gardener-project/public/gardener/metrics-exporter
+        tag: 0.29.0
     resources:
         requests:
             cpu: 100m

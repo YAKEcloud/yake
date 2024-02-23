@@ -13,7 +13,6 @@ spec:
     matchLabels:
       app: gardener
       role: metrics-exporter
-      chart: "{{ .Chart.Name }}-{{ .Chart.Version }}"
       release: "{{ .Release.Name }}"
       heritage: "{{ .Release.Service }}"
   template:
