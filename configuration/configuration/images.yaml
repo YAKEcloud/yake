@@ -2276,7 +2276,7 @@ shoot-networking-filter:
   imageVectorOriginal:
     images:
       - name: egress-filter
-        repository: eu.gcr.io/gardener-project/gardener/egress-filter
+        repository: europe-docker.pkg.dev/gardener-project/releases/gardener/egress-filter
         sourceRepository: github.com/gardener/egress-filter-refresher
         tag: 0.14.0
 shoot-networking-problemdetector:
