@@ -1892,9 +1892,9 @@ provider-alicloud:
   imageVectorOriginal:
     images:
       - name: terraformer
-        repository: eu.gcr.io/gardener-project/gardener/terraformer-alicloud
+        repository: europe-docker.pkg.dev/gardener-project/releases/gardener/terraformer-alicloud
         sourceRepository: github.com/gardener/terraformer
-        tag: v2.23.0
+        tag: v2.24.0
       - labels:
           - name: gardener.cloud/cve-categorisation
             value:
@@ -1905,7 +1905,7 @@ provider-alicloud:
               network_exposure: protected
               user_interaction: gardener-operator
         name: machine-controller-manager
-        repository: eu.gcr.io/gardener-project/gardener/machine-controller-manager
+        repository: europe-docker.pkg.dev/gardener-project/releases/gardener/machine-controller-manager
         sourceRepository: github.com/gardener/machine-controller-manager
         tag: v0.50.1
       - labels:
@@ -1918,7 +1918,7 @@ provider-alicloud:
               network_exposure: protected
               user_interaction: gardener-operator
         name: machine-controller-manager-provider-alicloud
-        repository: eu.gcr.io/gardener-project/gardener/machine-controller-manager-provider-alicloud
+        repository: europe-docker.pkg.dev/gardener-project/releases/gardener/machine-controller-manager-provider-alicloud
         sourceRepository: github.com/gardener/machine-controller-manager-provider-alicloud
         tag: v0.10.1
       - name: alicloud-controller-manager
