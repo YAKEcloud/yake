@@ -127,3 +127,10 @@ hide_table_of_contents: true
 
 
 </details>
+
+<details>
+<summary><b>Update shoot-networking-filter to <code>0.17.1</code></b></summary>
+
+no release notes available
+
+</details>
