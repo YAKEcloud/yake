@@ -1,11 +1,13 @@
-name: "Yake install"
-on:
+---
+name: Yake install
+
+"on":
   pull_request:
     branches:
-      - "main"
+      - main
     paths-ignore:
-      - 'docs/**'
-      - '**.md'
+      - docs/**
+      - "**.md"
 jobs:
   install:
     strategy:
