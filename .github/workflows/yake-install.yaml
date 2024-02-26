@@ -11,9 +11,7 @@ jobs:
     strategy:
       matrix:
         version:
-          - v1.26.14
-          - v1.27.11
-          - v1.28.7
+          - v1.29.2
     runs-on: self-hosted
     timeout-minutes: 60
     name: "Yake install testrun"
