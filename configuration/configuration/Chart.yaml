@@ -3,5 +3,5 @@ name: configuration
 description: A Helm chart for the yake configuration files
 
 type: application
-kubeVersion: ">= 1.24.0 < 1.28.0"
+kubeVersion: ">= 1.24.0 < 1.29.0"
 version: 0.0.1
