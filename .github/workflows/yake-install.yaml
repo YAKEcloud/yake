@@ -15,6 +15,7 @@ jobs:
           - v1.27.11
           - v1.28.7
     runs-on: self-hosted
+    timeout-minutes: 60
     name: "Yake install testrun"
     steps:
       - name: Checkout source
