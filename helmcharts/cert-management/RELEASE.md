@@ -1,17 +1,13 @@
 # [gardener/cert-management]
 
-## ⚠️ Breaking Changes
+## ✨ New Features
 
-- `[OPERATOR]` Change OCI Image Registry from GCR (`eu.gcr.io/gardener-project`) to Artifact-Registry (`europe-docker.pkg.dev/gardener-project/releases`). Users should update their references.  
-   by @ccwienk [#156]
+- `[USER]` Allow certificates without common name. As the common name is restricted to 64 characters, this means it is now possible to create certificates for domains longer than 64 characters without needing to set the common name to a shorter domain name. by @MartinWeindel [#150]
 ## 🏃 Others
 
-- `[OPERATOR]` Update expirationDate if secret is shared between certs by @MartinWeindel [#152]
-- `[OPERATOR]` Updated dependencies controller-manager-library and kubernetes from `v1.28.2` to `v1.28.3` by @MartinWeindel [#149]
-- `[OPERATOR]` Bumps golang from 1.21.3 to 1.21.4. by @dependabot[bot] [#148]
-- `[OPERATOR]` Bumps golang from 1.21.4 to 1.21.5. by @dependabot[bot] [#154]
-- `[USER]` Improve message if DNS entry is not getting ready. by @MartinWeindel [#151]
-- `[DEVELOPER]` Remove vendoring by @MartinWeindel [#157]
+- `[OPERATOR]` Bumps golang from 1.21.6 to 1.22.0. by @dependabot[bot] [#161]
+- `[OPERATOR]` Bumps golang from 1.21.5 to 1.21.6. by @dependabot[bot] [#159]
+- `[OPERATOR]` Bump golang.org/x/crypto from 0.14.0 to 0.17.0 by @dependabot[bot] [#158]
 
 ## Docker Images
-- cert-management: `europe-docker.pkg.dev/gardener-project/releases/cert-controller-manager:v0.11.4`
+- cert-management: `europe-docker.pkg.dev/gardener-project/releases/cert-controller-manager:v0.12.0`
