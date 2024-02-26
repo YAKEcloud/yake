@@ -10,7 +10,6 @@ rules:
     indent-sequences: whatever
 
 ignore: |
-  .github/workflows/
   addons/addons/templates/
   configuration/configuration/templates/
   configuration/generated-secrets/templates/

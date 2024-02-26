@@ -1,3 +1,4 @@
+---
 name: Build and Push gardener-extension-provider-local
 
 permissions:
@@ -9,7 +10,7 @@ on:
     branches:
       - main
     paths:
-      - 'gardener/gardener.yaml'
+      - gardener/gardener.yaml
 
 jobs:
   buildAndPush:
