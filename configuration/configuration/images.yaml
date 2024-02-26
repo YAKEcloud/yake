@@ -226,7 +226,7 @@ gardenlet:
         resourceId:
           name: metrics-exporter
         sourceRepository: github.com/gardener/gardener-metrics-exporter
-        tag: 0.28.0
+        tag: 0.29.0
       - labels:
           - name: gardener.cloud/cve-categorisation
             value:
