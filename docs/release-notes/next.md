@@ -417,3 +417,16 @@ no release notes available
 
 
 </details>
+
+<details>
+<summary><b>Update cloudprofiles to <code>0.7.0</code></b></summary>
+
+## What's Changed
+* Remove "Docker" CRI by @j2L4e in https://github.com/gardener-community/cloudprofiles/pull/26
+
+## New Contributors
+* @j2L4e made their first contribution in https://github.com/gardener-community/cloudprofiles/pull/26
+
+**Full Changelog**: https://github.com/gardener-community/cloudprofiles/compare/0.6.12...0.7.0
+
+</details>

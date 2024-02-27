@@ -11,17 +11,14 @@ machineImages:
       versions:
         - cri:
             - name: containerd
-            - name: docker
           version: 576.12.0
     - name: ubuntu
       versions:
         - cri:
             - name: containerd
-            - name: docker
           version: 20.4.0
         - cri:
             - name: containerd
-            - name: docker
           version: 22.4.0
 machineTypes:
     - cpu: 8
