@@ -11,7 +11,6 @@ machineImages:
       versions:
         - cri:
             - name: containerd
-            - name: docker
           version: 934.6.0
 machineTypes:
     - cpu: "2"
