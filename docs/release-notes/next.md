@@ -430,3 +430,18 @@ no release notes available
 **Full Changelog**: https://github.com/gardener-community/cloudprofiles/compare/0.6.12...0.7.0
 
 </details>
+
+<details>
+<summary><b>Update external-dns-management to <code>0.18.3</code></b></summary>
+
+# [gardener/external-dns-management]
+
+## 🐛 Bug Fixes
+
+- `[OPERATOR]` Registry `gateway.networking.k8s.io` in version v1beta1 by @MartinWeindel [#358]
+
+## Docker Images
+- dns-controller-manager: `europe-docker.pkg.dev/gardener-project/releases/dns-controller-manager:v0.18.3`
+
+
+</details>
