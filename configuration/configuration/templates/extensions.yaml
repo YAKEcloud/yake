@@ -97,7 +97,7 @@ stringData:
 {{- end }}
 
     shoot-dns-service:
-      version: 1.45.0
+      version: 1.45.1
       values:
         dnsControllerManager:
           deploy: true
