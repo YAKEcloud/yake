@@ -24,7 +24,7 @@ stringData:
 {{- end }}
 
     os-coreos:
-      version: 1.19.0
+      version: 1.20.0
 {{- if .Values.registryOverwrite }}
       values:
         image:
