@@ -1,0 +1,11 @@
+apiVersion: v2
+dependencies:
+- condition: controller.enabled
+  name: controller
+  repository: ""
+- condition: gardener-extension-shoot-flux.enabled
+  name: gardener-extension-shoot-flux
+  repository: ""
+description: A helmchart for shoot-flux-controller
+name: shoot-flux-controller
+version: 1.0.0
