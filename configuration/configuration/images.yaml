@@ -1657,6 +1657,19 @@ provider-aws:
         repository: registry.k8s.io/sig-storage/livenessprobe
         sourceRepository: github.com/kubernetes-csi/livenessprobe
         tag: v2.12.0
+      - labels:
+          - name: gardener.cloud/cve-categorisation
+            value:
+              authentication_enforced: false
+              availability_requirement: low
+              confidentiality_requirement: high
+              integrity_requirement: high
+              network_exposure: protected
+              user_interaction: end-user
+        name: ecr-credential-provider
+        repository: europe-docker.pkg.dev/gardener-project/releases/gardener/extensions/ecr-credential-provider
+        sourceRepository: github.com/gardener/ecr-credential-provider
+        tag: v1.29.0
 provider-gcp:
   imageVectorOriginal:
     images:
