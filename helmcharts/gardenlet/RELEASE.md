@@ -1,56 +1,58 @@
-# [gardener/gardener-metrics-exporter]
-
-## ⚠️ Breaking Changes
-
-- `[OPERATOR]` Change OCI Image Registry from GCR (`eu.gcr.io/gardener-project`) to Artifact-Registry (`europe-docker.pkg.dev/gardener-project/releases`). Users should update their references.  
-   by @ccwienk [gardener/gardener-metrics-exporter#92]
-## 🐛 Bug Fixes
-
-- `[OPERATOR]` Helm chart upgrades no longer fail due to the immutable `Deployment.spec.selector` field. In order to upgrade to this version, the `gardener-metrics-exporter` Deployment needs to be deleted first. by @timebertt [gardener/gardener-metrics-exporter#94]
-## 🏃 Others
-
-- `[OPERATOR]` Upgrade go to 1.22, update base image to distroless based on Debian 12, and exchange the linter. by @rickardsjp [gardener/gardener-metrics-exporter#97]
-- `[OPERATOR]` Upgrade dependencies  
-  Upgrade golang to 1.22 by @rickardsjp [gardener/gardener-metrics-exporter#96]
-- `[OPERATOR]` Adds: garden_shoot_worker_node_max_total and garden_shoot_worker_node_min_total. Also gives insight into the worker type (for example for OpenStack the Flavor name). by @Sinscerly [gardener/gardener-metrics-exporter#95]
 # [gardener/gardener]
 
 ## ⚠️ Breaking Changes
 
-- `[DEVELOPER]` The util function `pkg/utils/gardener.ComputeShootProjectSecretName` has been renamed to `pkg/utils/gardener.ComputeShootProjectResourceName`. by @petersutter [#9123]
-- `[DEPENDENCY]` There are several breaking changes in the `github.com/gardener/gardener/extensions/pkg/webhook` package:  
-  - `EnsureNoStringWithPrefix`, `EnsureNoStringWithPrefixContains`, `EnsureNoEnvVarWithName`, `EnsureNoVolumeMountWithName`, `EnsureNoVolumeWithName`, `EnsureNoContainerWithName`, `EnsureNoPVCWithName` now delete all matching entries. Previously they were deleting only the first occurrence.  
-  - `EnsureStringWithPrefix`, `EnsureStringWithPrefixContains` now act on all prefix matches.  
-  - `StringIndex` is removed. instead, use `slices.Index`. by @Kostov6 [#9007]
-- `[OPERATOR]` The `UseGardenerNodeAgent` feature gate has been promoted to beta and is now turned on by default.  by @rfranzke [#9161]
+- `[OPERATOR]` The `UseGardenerNodeAgent` feature gate has been promoted to GA. It was already enabled by default and can now no longer be turned off. The feature gate will be removed in a future release. by @rfranzke [#9208]
+- `[OPERATOR]` ⚠️ Gardener does no longer support garden, seed, or shoot clusters with Kubernetes versions == 1.24. Make sure to upgrade all existing clusters before upgrading to this Gardener version. by @shafeeqes [#8989]
+- `[OPERATOR]` The `APIServerFastRollout` feature gate has been promoted to GA. It was already enabled by default and can now no longer be turned off. The feature gate will be removed in a future release. by @oliver-goetz [#9214]
+- `[DEVELOPER]` The `pkg/envtest` package has been moved to `test/envtest`. Most component packages in `pkg/component` have been moved. The `pkg/openapi` and `pkg/registry` packages have been moved to `pkg/apiserver/*`. by @rfranzke [#9217]
+- `[DEVELOPER]` Function signature of infrastructure controller `NewReconciler` has changed from `NewReconciler(manager.Manager, Actuator, ConfigValidator)` to NewReconciler(manager.Manager, Actuator, ConfigValidator, map[gardencorev1beta1.ErrorCode]func(string) bool). by @acumino [#9321]
+- `[USER]` The `spec.kubernetes.allowPrivilegedContainers` field in the Shoot API is deprecated and will be removed in a future version. This field is not relevant to Shoots with kubernetes versions >= 1.25. Please adapt your controllers accordingly. by @shafeeqes [#8989]
 ## 📰 Noteworthy
 
-- `[USER]` The shoot cluster CA bundle is now stored in a `ConfigMap` in the project namespace of the garden cluster, in addition to storing it in a `Secret`. This `ConfigMap` shares the same name as the pre-existing `Secret`, which is `<shoot-name>.ca-cluster`. The `Secret` will be removed in a future Gardener release. Therefore, if your tooling relies on this `Secret`, you should update it to fetch the `ConfigMap` instead. by @petersutter [#9123]
-- `[USER]` It is now possible to skip a minor Kubernetes version for worker pool Kubernetes version upgrades as long as the version remains equal to or less than the control plane version. by @shafeeqes [#9185]
-- `[OPERATOR]` A new field `.spec.runtimeCluster.ingress.domains` was added to the `Garden` API. This field allows to use multiple ingress domains for components of the runtime cluster. All domains are assumed to be wildcard domains. Earlier, the API only accepted one domain name via `.spec.runtimeCluster.ingress.domain`.  
-  ⚠️ With this change `.spec.runtimeCluster.ingress.domain` is deprecated and will be removed in the next release. Please update your `Garden` resource to the new `.spec.runtimeCluster.ingress.domains` field by removing the existing domain configuration from `ingress.domain` and add it as the first entry of `ingress.domains`. by @ScheererJ [#9038]
+- `[USER]` It is no longer possible to add or change the `.spec.seedSelector` field in `Shoot`s when `spec.seedName` is already set. by @rfranzke [#9212]
 ## ✨ New Features
 
-- `[OPERATOR]` `gardener-resource-manager` now considers the health and the progressing status for `Prometheus` and `Alertmanager` resources managed via `ManagedResource`s. by @rfranzke [#9163]
-- `[DEVELOPER]` It is now possible to provide configuration for the cache Prometheus running in seed clusters' `garden` namespaces. Read all about it [here](https://github.com/gardener/gardener/tree/master/docs/extensions/logging-and-monitoring.md#cache-prometheus). by @rfranzke [#9128]
-- `[DEVELOPER]` It is now possible to provide configuration for the seed Prometheus running in seed clusters' `garden` namespaces. Read all about it [here](https://github.com/gardener/gardener/tree/master/docs/extensions/logging-and-monitoring.md#seed-prometheus). by @rfranzke [#9180]
-- `[DEVELOPER]` The `WaitUntilObjectReadyWithHealthFunction` function was enhanced to log the object's kind. by @timuthy [#9177]
+- `[OPERATOR]` `DNSRecord` resources for seed and shoot clusters now have an annotation indicating their target ip stack (`dns.gardener.cloud/ip-stack` set to either `ipv4`, `ipv6`, or `dual-stack`). by @ScheererJ [#9289]
+- `[OPERATOR]` `gardener-resource-manager`'s health check controller now checks whether `VerticalPodAutoscaler`s report the `ConfigUnsupported` condition. by @rfranzke [#9211]
+- `[USER]` It is now possibleto specify some `cluster-autoscaler` related options per worker pool `in Shoot`s via `spec.provider.workers[].clusterAutoscaler`. Read more about it [here](https://github.com/gardener/gardener/blob/master/docs/usage/shoot_autoscaling.md). by @aaronfern [#9245]
+- `[USER]` In order to fine-tune VPA CPU recommendations, the CPU target percentile parameter for `vpa-recommender` can now be configured in the `Shoot` specification via the `.spec.kubernetes.verticalPodAutoscaler.targetCPUPercentile` field. by @voelzmo [#9279]
+- `[DEVELOPER]` It is now possible to provide configuration for the aggregate Prometheus running in seed clusters' `garden` namespaces. Read all about it [here](https://github.com/gardener/gardener/tree/master/docs/extensions/logging-and-monitoring.md#aggregate-prometheus). by @rfranzke [#9200]
+## 🐛 Bug Fixes
+
+- `[DEPENDENCY]` An issue was fixed that sometimes led to leaked `extension-controlplane-shoot-webhooks` which blocked the shoot deletion. by @timuthy [#9209]
+- `[DEPENDENCY]` `hack/hook-me.sh` now ensures the required network connectivity so that the quic tunnel can be successfully established.  by @vpnachev [#8909]
+- `[USER]` A bug causing shoot force-deletion to get stuck in case the secrets referred by the DNS Records are outdated is now fixed. by @acumino [#9324]
 ## 🏃 Others
 
-- `[DEVELOPER]` An issue with the `FallbackClient` was resolved. If used in external projects, the client threw scheme related errors belonging to GVKs that are not registered in the `GardenScheme`.  by @timuthy [#9177]
-- `[OPERATOR]` Add Prometheus alert for unhealthy seed node. by @adenitiu [#9127]
-- `[OPERATOR]` Istio is now used as the single entry point on seed clusters. The load balancer of nginx-ingress is removed and traffic goes through istio before being handled by nginx if necessary. by @ScheererJ [#9038]
-- `[OPERATOR]` Add condition type `ObservabilityComponentsHealthy` for extension health check, it will allow extensions to register with this type.  by @Sallyan [#9092]
-- `[OPERATOR]` Multiple ingress domains in `.spec.runtimeCluster.ingress.domains` can now overlap without triggering reconciliation issues. by @ScheererJ [#9183]
-- `[OPERATOR]` Update configure-admission.sh for extensions using gardener certificate management for webhooks by @kon-angelo [#9168]
-- `[OPERATOR]` The side car container of kube-apiserver for the HA VPN now have minimum memory resources that VPA will respect. by @ScheererJ [#9173]
+- `[OPERATOR]` Update Istio to v1.19.7 by @axel7born [#9215]
+- `[OPERATOR]` Bump alpine to 3.19.1 by @ary1992 [#9315]
+- `[OPERATOR]` Enhance `NodeNotHealthy` Prometheus alert to fire immediately. by @adenitiu [#9314]
+- `[OPERATOR]` `gardener-node-agent` now terminates itself (leading to a restart of its `systemd` unit) in case it determines that the hostname of its node has changed. by @rfranzke [#9280]
+- `[OPERATOR]` Resource requests of istio ingress gateway are reduced and its horizontal autoscaling behaviour specified in more detail, including scale-up under memory pressure by @ScheererJ [#9250]
+- `[OPERATOR]` The `VerticalPodAutoscaler` object for the shoot Prometheus is now labeled with `app=prometheus,role=monitoring`, similar to the corresponding `StatefulSet`. by @nickytd [#9244]
+- `[OPERATOR]` Set `reinvocationPolicy: IfNeeded` for VPA admission-controller webhook to ensure that webhooks injecting sidecar containers will not trigger and endless eviction loop. by @voelzmo [#9191]
+- `[DEPENDENCY]` The following dependencies are updated:  
+  - `k8s.io/*` : `v0.28.4` -> `v0.29.2`  
+  - `sigs.k8s.io/controller-runtime`: `v0.16.3` -> `v0.17.2` by @shafeeqes [#9174]
+- `[USER]` The validation error shown when a user tries to change the `.spec.seedName` field of a Shoot will now also display the old and new values to better indicate that a change was attempted. by @plkokanov [#9294]
+# [gardener/dependency-watchdog]
+
+## ⚠️ Breaking Changes
+
+- `[OPERATOR]` Change OCI Image Registry from GCR (`eu.gcr.io/gardener-project`) to Artifact-Registry (`europe-docker.pkg.dev/gardener-project/releases`). Users should update their references. by @ccwienk [gardener/dependency-watchdog#93]
+- `[OPERATOR]` DWD no longer depends on checking the reachability of Kube-API server via external load-balancer as kube-proxy path optimizations makes that impossible on infrastructures which have a static IP for the LB. Instead it now depends on node leases that are periodically renewed by each node running in the shoot cluster to determine its scaling action (scale-down/up). by @rishabh-11 [gardener/dependency-watchdog#94]
+## 🏃 Others
+
+- `[OPERATOR]` Make `kcmNodeMonitorGraceDuration` optional in the prober config and use a default value of `40s` if not specified in the shoot and the config. by @rishabh-11 [gardener/dependency-watchdog#101]
+- `[DEVELOPER]` Use `ginkgolinter` instead of self baked `gomegacheck` by @himanshu-kun [gardener/dependency-watchdog#95]
 
 ## Docker Images
-- admission-controller: `europe-docker.pkg.dev/gardener-project/releases/gardener/admission-controller:v1.89.0`
-- apiserver: `europe-docker.pkg.dev/gardener-project/releases/gardener/apiserver:v1.89.0`
-- controller-manager: `europe-docker.pkg.dev/gardener-project/releases/gardener/controller-manager:v1.89.0`
-- gardenlet: `europe-docker.pkg.dev/gardener-project/releases/gardener/gardenlet:v1.89.0`
-- node-agent: `europe-docker.pkg.dev/gardener-project/releases/gardener/node-agent:v1.89.0`
-- operator: `europe-docker.pkg.dev/gardener-project/releases/gardener/operator:v1.89.0`
-- resource-manager: `europe-docker.pkg.dev/gardener-project/releases/gardener/resource-manager:v1.89.0`
-- scheduler: `europe-docker.pkg.dev/gardener-project/releases/gardener/scheduler:v1.89.0`
+- admission-controller: `europe-docker.pkg.dev/gardener-project/releases/gardener/admission-controller:v1.90.0`
+- apiserver: `europe-docker.pkg.dev/gardener-project/releases/gardener/apiserver:v1.90.0`
+- controller-manager: `europe-docker.pkg.dev/gardener-project/releases/gardener/controller-manager:v1.90.0`
+- gardenlet: `europe-docker.pkg.dev/gardener-project/releases/gardener/gardenlet:v1.90.0`
+- node-agent: `europe-docker.pkg.dev/gardener-project/releases/gardener/node-agent:v1.90.0`
+- operator: `europe-docker.pkg.dev/gardener-project/releases/gardener/operator:v1.90.0`
+- resource-manager: `europe-docker.pkg.dev/gardener-project/releases/gardener/resource-manager:v1.90.0`
+- scheduler: `europe-docker.pkg.dev/gardener-project/releases/gardener/scheduler:v1.90.0`
