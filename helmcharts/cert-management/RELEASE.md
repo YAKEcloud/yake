@@ -1,13 +1,11 @@
 # [gardener/cert-management]
 
-## ✨ New Features
+## 🐛 Bug Fixes
 
-- `[USER]` Allow certificates without common name. As the common name is restricted to 64 characters, this means it is now possible to create certificates for domains longer than 64 characters without needing to set the common name to a shorter domain name. by @MartinWeindel [#150]
+- `[USER]` Updating certificates from source objects (like Ingress or Service) with first domain name longer than 64 character failed, as the commonName field was filled. It must be left empty in this case. by @MartinWeindel [#164]
 ## 🏃 Others
 
-- `[OPERATOR]` Bumps golang from 1.21.6 to 1.22.0. by @dependabot[bot] [#161]
-- `[OPERATOR]` Bumps golang from 1.21.5 to 1.21.6. by @dependabot[bot] [#159]
-- `[OPERATOR]` Bump golang.org/x/crypto from 0.14.0 to 0.17.0 by @dependabot[bot] [#158]
+- `[OPERATOR]` Bump golang from 1.22.0 to 1.22.1 by @MartinWeindel [#165]
 
 ## Docker Images
-- cert-management: `europe-docker.pkg.dev/gardener-project/releases/cert-controller-manager:v0.12.0`
+- cert-management: `europe-docker.pkg.dev/gardener-project/releases/cert-controller-manager:v0.12.1`
