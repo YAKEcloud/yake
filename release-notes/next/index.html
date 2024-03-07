@@ -5,7 +5,7 @@
 <meta name="generator" content="Docusaurus v3.1.0">
 <title data-rh="true">Release Notes next | Yet another Kubernetes Engine</title><meta data-rh="true" name="viewport" content="width=device-width,initial-scale=1"><meta data-rh="true" name="twitter:card" content="summary_large_image"><meta data-rh="true" property="og:url" content="https://yake.cloud/release-notes/next"><meta data-rh="true" property="og:locale" content="en"><meta data-rh="true" name="docusaurus_locale" content="en"><meta data-rh="true" name="docsearch:language" content="en"><meta data-rh="true" name="gardener" content="installation, production, operations, maintenance"><meta data-rh="true" name="docusaurus_version" content="current"><meta data-rh="true" name="docusaurus_tag" content="docs-release-notes-current"><meta data-rh="true" name="docsearch:version" content="current"><meta data-rh="true" name="docsearch:docusaurus_tag" content="docs-release-notes-current"><meta data-rh="true" property="og:title" content="Release Notes next | Yet another Kubernetes Engine"><meta data-rh="true" name="description" content="Yake release notes and upgrade guide"><meta data-rh="true" property="og:description" content="Yake release notes and upgrade guide"><link data-rh="true" rel="icon" href="/img/favicon.ico"><link data-rh="true" rel="canonical" href="https://yake.cloud/release-notes/next"><link data-rh="true" rel="alternate" href="https://yake.cloud/release-notes/next" hreflang="en"><link data-rh="true" rel="alternate" href="https://yake.cloud/release-notes/next" hreflang="x-default"><link rel="alternate" type="application/rss+xml" href="/blog/rss.xml" title="Yet another Kubernetes Engine RSS Feed">
 <link rel="alternate" type="application/atom+xml" href="/blog/atom.xml" title="Yet another Kubernetes Engine Atom Feed"><link rel="stylesheet" href="/assets/css/styles.447c22af.css">
-<script src="/assets/js/runtime~main.4534e88d.js" defer="defer"></script>
+<script src="/assets/js/runtime~main.ef052914.js" defer="defer"></script>
 <script src="/assets/js/main.d07a41dd.js" defer="defer"></script>
 </head>
 <body class="navigation-with-keyboard">
@@ -601,6 +601,216 @@ by @ccwienk [#82]</li>
 <details class="details_lb9f alert alert--info details_b_Ee" data-collapsed="true"><summary><b>Update garden-kube-apiserver to <code>5.0.0</code></b></summary><div><div class="collapsibleContent_i85q">
 <!-- -->
 <p><strong>Full Changelog</strong>: <a href="https://github.com/gardener-community/garden-kube-apiserver/compare/4.2.0...5.0.0" target="_blank" rel="noopener noreferrer">https://github.com/gardener-community/garden-kube-apiserver/compare/4.2.0...5.0.0</a></p>
+</div></div></details>
+<details class="details_lb9f alert alert--info details_b_Ee" data-collapsed="true"><summary><b>Update gardener-controlplane to <code>1.90.0</code></b></summary><div><div class="collapsibleContent_i85q">
+<!-- -->
+<h1>[gardener/gardener]</h1>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="️-breaking-changes-12">⚠️ Breaking Changes<a href="#️-breaking-changes-12" class="hash-link" aria-label="Direct link to ⚠️ Breaking Changes" title="Direct link to ⚠️ Breaking Changes">​</a></h2>
+<ul>
+<li><code>[OPERATOR]</code> The <code>UseGardenerNodeAgent</code> feature gate has been promoted to GA. It was already enabled by default and can now no longer be turned off. The feature gate will be removed in a future release. by @rfranzke [#9208]</li>
+<li><code>[OPERATOR]</code> ⚠️ Gardener does no longer support garden, seed, or shoot clusters with Kubernetes versions == 1.24. Make sure to upgrade all existing clusters before upgrading to this Gardener version. by @shafeeqes [#8989]</li>
+<li><code>[OPERATOR]</code> The <code>APIServerFastRollout</code> feature gate has been promoted to GA. It was already enabled by default and can now no longer be turned off. The feature gate will be removed in a future release. by @oliver-goetz [#9214]</li>
+<li><code>[DEVELOPER]</code> The <code>pkg/envtest</code> package has been moved to <code>test/envtest</code>. Most component packages in <code>pkg/component</code> have been moved. The <code>pkg/openapi</code> and <code>pkg/registry</code> packages have been moved to <code>pkg/apiserver/*</code>. by @rfranzke [#9217]</li>
+<li><code>[DEVELOPER]</code> Function signature of infrastructure controller <code>NewReconciler</code> has changed from <code>NewReconciler(manager.Manager, Actuator, ConfigValidator)</code> to NewReconciler(manager.Manager, Actuator, ConfigValidator, map[gardencorev1beta1.ErrorCode]func(string) bool). by @acumino [#9321]</li>
+<li><code>[USER]</code> The <code>spec.kubernetes.allowPrivilegedContainers</code> field in the Shoot API is deprecated and will be removed in a future version. This field is not relevant to Shoots with kubernetes versions &gt;= 1.25. Please adapt your controllers accordingly. by @shafeeqes [#8989]</li>
+</ul>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="-noteworthy-7">📰 Noteworthy<a href="#-noteworthy-7" class="hash-link" aria-label="Direct link to 📰 Noteworthy" title="Direct link to 📰 Noteworthy">​</a></h2>
+<ul>
+<li><code>[USER]</code> It is no longer possible to add or change the <code>.spec.seedSelector</code> field in <code>Shoot</code>s when <code>spec.seedName</code> is already set. by @rfranzke [#9212]</li>
+</ul>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="-new-features-9">✨ New Features<a href="#-new-features-9" class="hash-link" aria-label="Direct link to ✨ New Features" title="Direct link to ✨ New Features">​</a></h2>
+<ul>
+<li><code>[OPERATOR]</code> <code>DNSRecord</code> resources for seed and shoot clusters now have an annotation indicating their target ip stack (<code>dns.gardener.cloud/ip-stack</code> set to either <code>ipv4</code>, <code>ipv6</code>, or <code>dual-stack</code>). by @ScheererJ [#9289]</li>
+<li><code>[OPERATOR]</code> <code>gardener-resource-manager</code>&#x27;s health check controller now checks whether <code>VerticalPodAutoscaler</code>s report the <code>ConfigUnsupported</code> condition. by @rfranzke [#9211]</li>
+<li><code>[USER]</code> It is now possibleto specify some <code>cluster-autoscaler</code> related options per worker pool <code>in Shoot</code>s via <code>spec.provider.workers[].clusterAutoscaler</code>. Read more about it <a href="https://github.com/gardener/gardener/blob/master/docs/usage/shoot_autoscaling.md" target="_blank" rel="noopener noreferrer">here</a>. by @aaronfern [#9245]</li>
+<li><code>[USER]</code> In order to fine-tune VPA CPU recommendations, the CPU target percentile parameter for <code>vpa-recommender</code> can now be configured in the <code>Shoot</code> specification via the <code>.spec.kubernetes.verticalPodAutoscaler.targetCPUPercentile</code> field. by @voelzmo [#9279]</li>
+<li><code>[DEVELOPER]</code> It is now possible to provide configuration for the aggregate Prometheus running in seed clusters&#x27; <code>garden</code> namespaces. Read all about it <a href="https://github.com/gardener/gardener/tree/master/docs/extensions/logging-and-monitoring.md#aggregate-prometheus" target="_blank" rel="noopener noreferrer">here</a>. by @rfranzke [#9200]</li>
+</ul>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="-bug-fixes-9">🐛 Bug Fixes<a href="#-bug-fixes-9" class="hash-link" aria-label="Direct link to 🐛 Bug Fixes" title="Direct link to 🐛 Bug Fixes">​</a></h2>
+<ul>
+<li><code>[DEPENDENCY]</code> An issue was fixed that sometimes led to leaked <code>extension-controlplane-shoot-webhooks</code> which blocked the shoot deletion. by @timuthy [#9209]</li>
+<li><code>[DEPENDENCY]</code> <code>hack/hook-me.sh</code> now ensures the required network connectivity so that the quic tunnel can be successfully established.  by @vpnachev [#8909]</li>
+<li><code>[USER]</code> A bug causing shoot force-deletion to get stuck in case the secrets referred by the DNS Records are outdated is now fixed. by @acumino [#9324]</li>
+</ul>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="-others-23">🏃 Others<a href="#-others-23" class="hash-link" aria-label="Direct link to 🏃 Others" title="Direct link to 🏃 Others">​</a></h2>
+<ul>
+<li><code>[OPERATOR]</code> Update Istio to v1.19.7 by @axel7born [#9215]</li>
+<li><code>[OPERATOR]</code> Bump alpine to 3.19.1 by @ary1992 [#9315]</li>
+<li><code>[OPERATOR]</code> Enhance <code>NodeNotHealthy</code> Prometheus alert to fire immediately. by @adenitiu [#9314]</li>
+<li><code>[OPERATOR]</code> <code>gardener-node-agent</code> now terminates itself (leading to a restart of its <code>systemd</code> unit) in case it determines that the hostname of its node has changed. by @rfranzke [#9280]</li>
+<li><code>[OPERATOR]</code> Resource requests of istio ingress gateway are reduced and its horizontal autoscaling behaviour specified in more detail, including scale-up under memory pressure by @ScheererJ [#9250]</li>
+<li><code>[OPERATOR]</code> The <code>VerticalPodAutoscaler</code> object for the shoot Prometheus is now labeled with <code>app=prometheus,role=monitoring</code>, similar to the corresponding <code>StatefulSet</code>. by @nickytd [#9244]</li>
+<li><code>[OPERATOR]</code> Set <code>reinvocationPolicy: IfNeeded</code> for VPA admission-controller webhook to ensure that webhooks injecting sidecar containers will not trigger and endless eviction loop. by @voelzmo [#9191]</li>
+<li><code>[DEPENDENCY]</code> The following dependencies are updated:
+<ul>
+<li><code>k8s.io/*</code> : <code>v0.28.4</code> -&gt; <code>v0.29.2</code></li>
+<li><code>sigs.k8s.io/controller-runtime</code>: <code>v0.16.3</code> -&gt; <code>v0.17.2</code> by @shafeeqes [#9174]</li>
+</ul>
+</li>
+<li><code>[USER]</code> The validation error shown when a user tries to change the <code>.spec.seedName</code> field of a Shoot will now also display the old and new values to better indicate that a change was attempted. by @plkokanov [#9294]</li>
+</ul>
+<h1>[gardener/dependency-watchdog]</h1>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="️-breaking-changes-13">⚠️ Breaking Changes<a href="#️-breaking-changes-13" class="hash-link" aria-label="Direct link to ⚠️ Breaking Changes" title="Direct link to ⚠️ Breaking Changes">​</a></h2>
+<ul>
+<li><code>[OPERATOR]</code> Change OCI Image Registry from GCR (<code>eu.gcr.io/gardener-project</code>) to Artifact-Registry (<code>europe-docker.pkg.dev/gardener-project/releases</code>). Users should update their references. by @ccwienk [gardener/dependency-watchdog#93]</li>
+<li><code>[OPERATOR]</code> DWD no longer depends on checking the reachability of Kube-API server via external load-balancer as kube-proxy path optimizations makes that impossible on infrastructures which have a static IP for the LB. Instead it now depends on node leases that are periodically renewed by each node running in the shoot cluster to determine its scaling action (scale-down/up). by @rishabh-11 [gardener/dependency-watchdog#94]</li>
+</ul>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="-others-24">🏃 Others<a href="#-others-24" class="hash-link" aria-label="Direct link to 🏃 Others" title="Direct link to 🏃 Others">​</a></h2>
+<ul>
+<li><code>[OPERATOR]</code> Make <code>kcmNodeMonitorGraceDuration</code> optional in the prober config and use a default value of <code>40s</code> if not specified in the shoot and the config. by @rishabh-11 [gardener/dependency-watchdog#101]</li>
+<li><code>[DEVELOPER]</code> Use <code>ginkgolinter</code> instead of self baked <code>gomegacheck</code> by @himanshu-kun [gardener/dependency-watchdog#95]</li>
+</ul>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="docker-images-20">Docker Images<a href="#docker-images-20" class="hash-link" aria-label="Direct link to Docker Images" title="Direct link to Docker Images">​</a></h2>
+<ul>
+<li>admission-controller: <code>europe-docker.pkg.dev/gardener-project/releases/gardener/admission-controller:v1.90.0</code></li>
+<li>apiserver: <code>europe-docker.pkg.dev/gardener-project/releases/gardener/apiserver:v1.90.0</code></li>
+<li>controller-manager: <code>europe-docker.pkg.dev/gardener-project/releases/gardener/controller-manager:v1.90.0</code></li>
+<li>gardenlet: <code>europe-docker.pkg.dev/gardener-project/releases/gardener/gardenlet:v1.90.0</code></li>
+<li>node-agent: <code>europe-docker.pkg.dev/gardener-project/releases/gardener/node-agent:v1.90.0</code></li>
+<li>operator: <code>europe-docker.pkg.dev/gardener-project/releases/gardener/operator:v1.90.0</code></li>
+<li>resource-manager: <code>europe-docker.pkg.dev/gardener-project/releases/gardener/resource-manager:v1.90.0</code></li>
+<li>scheduler: <code>europe-docker.pkg.dev/gardener-project/releases/gardener/scheduler:v1.90.0</code></li>
+</ul>
+</div></div></details>
+<details class="details_lb9f alert alert--info details_b_Ee" data-collapsed="true"><summary><b>Update gardener-controlplane to <code>1.90.0</code></b></summary><div><div class="collapsibleContent_i85q">
+<!-- -->
+<h1>[gardener/gardener]</h1>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="️-breaking-changes-14">⚠️ Breaking Changes<a href="#️-breaking-changes-14" class="hash-link" aria-label="Direct link to ⚠️ Breaking Changes" title="Direct link to ⚠️ Breaking Changes">​</a></h2>
+<ul>
+<li><code>[OPERATOR]</code> The <code>UseGardenerNodeAgent</code> feature gate has been promoted to GA. It was already enabled by default and can now no longer be turned off. The feature gate will be removed in a future release. by @rfranzke [#9208]</li>
+<li><code>[OPERATOR]</code> ⚠️ Gardener does no longer support garden, seed, or shoot clusters with Kubernetes versions == 1.24. Make sure to upgrade all existing clusters before upgrading to this Gardener version. by @shafeeqes [#8989]</li>
+<li><code>[OPERATOR]</code> The <code>APIServerFastRollout</code> feature gate has been promoted to GA. It was already enabled by default and can now no longer be turned off. The feature gate will be removed in a future release. by @oliver-goetz [#9214]</li>
+<li><code>[DEVELOPER]</code> The <code>pkg/envtest</code> package has been moved to <code>test/envtest</code>. Most component packages in <code>pkg/component</code> have been moved. The <code>pkg/openapi</code> and <code>pkg/registry</code> packages have been moved to <code>pkg/apiserver/*</code>. by @rfranzke [#9217]</li>
+<li><code>[DEVELOPER]</code> Function signature of infrastructure controller <code>NewReconciler</code> has changed from <code>NewReconciler(manager.Manager, Actuator, ConfigValidator)</code> to NewReconciler(manager.Manager, Actuator, ConfigValidator, map[gardencorev1beta1.ErrorCode]func(string) bool). by @acumino [#9321]</li>
+<li><code>[USER]</code> The <code>spec.kubernetes.allowPrivilegedContainers</code> field in the Shoot API is deprecated and will be removed in a future version. This field is not relevant to Shoots with kubernetes versions &gt;= 1.25. Please adapt your controllers accordingly. by @shafeeqes [#8989]</li>
+</ul>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="-noteworthy-8">📰 Noteworthy<a href="#-noteworthy-8" class="hash-link" aria-label="Direct link to 📰 Noteworthy" title="Direct link to 📰 Noteworthy">​</a></h2>
+<ul>
+<li><code>[USER]</code> It is no longer possible to add or change the <code>.spec.seedSelector</code> field in <code>Shoot</code>s when <code>spec.seedName</code> is already set. by @rfranzke [#9212]</li>
+</ul>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="-new-features-10">✨ New Features<a href="#-new-features-10" class="hash-link" aria-label="Direct link to ✨ New Features" title="Direct link to ✨ New Features">​</a></h2>
+<ul>
+<li><code>[OPERATOR]</code> <code>DNSRecord</code> resources for seed and shoot clusters now have an annotation indicating their target ip stack (<code>dns.gardener.cloud/ip-stack</code> set to either <code>ipv4</code>, <code>ipv6</code>, or <code>dual-stack</code>). by @ScheererJ [#9289]</li>
+<li><code>[OPERATOR]</code> <code>gardener-resource-manager</code>&#x27;s health check controller now checks whether <code>VerticalPodAutoscaler</code>s report the <code>ConfigUnsupported</code> condition. by @rfranzke [#9211]</li>
+<li><code>[USER]</code> It is now possibleto specify some <code>cluster-autoscaler</code> related options per worker pool <code>in Shoot</code>s via <code>spec.provider.workers[].clusterAutoscaler</code>. Read more about it <a href="https://github.com/gardener/gardener/blob/master/docs/usage/shoot_autoscaling.md" target="_blank" rel="noopener noreferrer">here</a>. by @aaronfern [#9245]</li>
+<li><code>[USER]</code> In order to fine-tune VPA CPU recommendations, the CPU target percentile parameter for <code>vpa-recommender</code> can now be configured in the <code>Shoot</code> specification via the <code>.spec.kubernetes.verticalPodAutoscaler.targetCPUPercentile</code> field. by @voelzmo [#9279]</li>
+<li><code>[DEVELOPER]</code> It is now possible to provide configuration for the aggregate Prometheus running in seed clusters&#x27; <code>garden</code> namespaces. Read all about it <a href="https://github.com/gardener/gardener/tree/master/docs/extensions/logging-and-monitoring.md#aggregate-prometheus" target="_blank" rel="noopener noreferrer">here</a>. by @rfranzke [#9200]</li>
+</ul>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="-bug-fixes-10">🐛 Bug Fixes<a href="#-bug-fixes-10" class="hash-link" aria-label="Direct link to 🐛 Bug Fixes" title="Direct link to 🐛 Bug Fixes">​</a></h2>
+<ul>
+<li><code>[DEPENDENCY]</code> An issue was fixed that sometimes led to leaked <code>extension-controlplane-shoot-webhooks</code> which blocked the shoot deletion. by @timuthy [#9209]</li>
+<li><code>[DEPENDENCY]</code> <code>hack/hook-me.sh</code> now ensures the required network connectivity so that the quic tunnel can be successfully established.  by @vpnachev [#8909]</li>
+<li><code>[USER]</code> A bug causing shoot force-deletion to get stuck in case the secrets referred by the DNS Records are outdated is now fixed. by @acumino [#9324]</li>
+</ul>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="-others-25">🏃 Others<a href="#-others-25" class="hash-link" aria-label="Direct link to 🏃 Others" title="Direct link to 🏃 Others">​</a></h2>
+<ul>
+<li><code>[OPERATOR]</code> Update Istio to v1.19.7 by @axel7born [#9215]</li>
+<li><code>[OPERATOR]</code> Bump alpine to 3.19.1 by @ary1992 [#9315]</li>
+<li><code>[OPERATOR]</code> Enhance <code>NodeNotHealthy</code> Prometheus alert to fire immediately. by @adenitiu [#9314]</li>
+<li><code>[OPERATOR]</code> <code>gardener-node-agent</code> now terminates itself (leading to a restart of its <code>systemd</code> unit) in case it determines that the hostname of its node has changed. by @rfranzke [#9280]</li>
+<li><code>[OPERATOR]</code> Resource requests of istio ingress gateway are reduced and its horizontal autoscaling behaviour specified in more detail, including scale-up under memory pressure by @ScheererJ [#9250]</li>
+<li><code>[OPERATOR]</code> The <code>VerticalPodAutoscaler</code> object for the shoot Prometheus is now labeled with <code>app=prometheus,role=monitoring</code>, similar to the corresponding <code>StatefulSet</code>. by @nickytd [#9244]</li>
+<li><code>[OPERATOR]</code> Set <code>reinvocationPolicy: IfNeeded</code> for VPA admission-controller webhook to ensure that webhooks injecting sidecar containers will not trigger and endless eviction loop. by @voelzmo [#9191]</li>
+<li><code>[DEPENDENCY]</code> The following dependencies are updated:
+<ul>
+<li><code>k8s.io/*</code> : <code>v0.28.4</code> -&gt; <code>v0.29.2</code></li>
+<li><code>sigs.k8s.io/controller-runtime</code>: <code>v0.16.3</code> -&gt; <code>v0.17.2</code> by @shafeeqes [#9174]</li>
+</ul>
+</li>
+<li><code>[USER]</code> The validation error shown when a user tries to change the <code>.spec.seedName</code> field of a Shoot will now also display the old and new values to better indicate that a change was attempted. by @plkokanov [#9294]</li>
+</ul>
+<h1>[gardener/dependency-watchdog]</h1>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="️-breaking-changes-15">⚠️ Breaking Changes<a href="#️-breaking-changes-15" class="hash-link" aria-label="Direct link to ⚠️ Breaking Changes" title="Direct link to ⚠️ Breaking Changes">​</a></h2>
+<ul>
+<li><code>[OPERATOR]</code> Change OCI Image Registry from GCR (<code>eu.gcr.io/gardener-project</code>) to Artifact-Registry (<code>europe-docker.pkg.dev/gardener-project/releases</code>). Users should update their references. by @ccwienk [gardener/dependency-watchdog#93]</li>
+<li><code>[OPERATOR]</code> DWD no longer depends on checking the reachability of Kube-API server via external load-balancer as kube-proxy path optimizations makes that impossible on infrastructures which have a static IP for the LB. Instead it now depends on node leases that are periodically renewed by each node running in the shoot cluster to determine its scaling action (scale-down/up). by @rishabh-11 [gardener/dependency-watchdog#94]</li>
+</ul>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="-others-26">🏃 Others<a href="#-others-26" class="hash-link" aria-label="Direct link to 🏃 Others" title="Direct link to 🏃 Others">​</a></h2>
+<ul>
+<li><code>[OPERATOR]</code> Make <code>kcmNodeMonitorGraceDuration</code> optional in the prober config and use a default value of <code>40s</code> if not specified in the shoot and the config. by @rishabh-11 [gardener/dependency-watchdog#101]</li>
+<li><code>[DEVELOPER]</code> Use <code>ginkgolinter</code> instead of self baked <code>gomegacheck</code> by @himanshu-kun [gardener/dependency-watchdog#95]</li>
+</ul>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="docker-images-21">Docker Images<a href="#docker-images-21" class="hash-link" aria-label="Direct link to Docker Images" title="Direct link to Docker Images">​</a></h2>
+<ul>
+<li>admission-controller: <code>europe-docker.pkg.dev/gardener-project/releases/gardener/admission-controller:v1.90.0</code></li>
+<li>apiserver: <code>europe-docker.pkg.dev/gardener-project/releases/gardener/apiserver:v1.90.0</code></li>
+<li>controller-manager: <code>europe-docker.pkg.dev/gardener-project/releases/gardener/controller-manager:v1.90.0</code></li>
+<li>gardenlet: <code>europe-docker.pkg.dev/gardener-project/releases/gardener/gardenlet:v1.90.0</code></li>
+<li>node-agent: <code>europe-docker.pkg.dev/gardener-project/releases/gardener/node-agent:v1.90.0</code></li>
+<li>operator: <code>europe-docker.pkg.dev/gardener-project/releases/gardener/operator:v1.90.0</code></li>
+<li>resource-manager: <code>europe-docker.pkg.dev/gardener-project/releases/gardener/resource-manager:v1.90.0</code></li>
+<li>scheduler: <code>europe-docker.pkg.dev/gardener-project/releases/gardener/scheduler:v1.90.0</code></li>
+</ul>
+</div></div></details>
+<details class="details_lb9f alert alert--info details_b_Ee" data-collapsed="true"><summary><b>Update gardenlet to <code>1.90.0</code></b></summary><div><div class="collapsibleContent_i85q">
+<!-- -->
+<h1>[gardener/gardener]</h1>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="️-breaking-changes-16">⚠️ Breaking Changes<a href="#️-breaking-changes-16" class="hash-link" aria-label="Direct link to ⚠️ Breaking Changes" title="Direct link to ⚠️ Breaking Changes">​</a></h2>
+<ul>
+<li><code>[OPERATOR]</code> The <code>UseGardenerNodeAgent</code> feature gate has been promoted to GA. It was already enabled by default and can now no longer be turned off. The feature gate will be removed in a future release. by @rfranzke [#9208]</li>
+<li><code>[OPERATOR]</code> ⚠️ Gardener does no longer support garden, seed, or shoot clusters with Kubernetes versions == 1.24. Make sure to upgrade all existing clusters before upgrading to this Gardener version. by @shafeeqes [#8989]</li>
+<li><code>[OPERATOR]</code> The <code>APIServerFastRollout</code> feature gate has been promoted to GA. It was already enabled by default and can now no longer be turned off. The feature gate will be removed in a future release. by @oliver-goetz [#9214]</li>
+<li><code>[DEVELOPER]</code> The <code>pkg/envtest</code> package has been moved to <code>test/envtest</code>. Most component packages in <code>pkg/component</code> have been moved. The <code>pkg/openapi</code> and <code>pkg/registry</code> packages have been moved to <code>pkg/apiserver/*</code>. by @rfranzke [#9217]</li>
+<li><code>[DEVELOPER]</code> Function signature of infrastructure controller <code>NewReconciler</code> has changed from <code>NewReconciler(manager.Manager, Actuator, ConfigValidator)</code> to NewReconciler(manager.Manager, Actuator, ConfigValidator, map[gardencorev1beta1.ErrorCode]func(string) bool). by @acumino [#9321]</li>
+<li><code>[USER]</code> The <code>spec.kubernetes.allowPrivilegedContainers</code> field in the Shoot API is deprecated and will be removed in a future version. This field is not relevant to Shoots with kubernetes versions &gt;= 1.25. Please adapt your controllers accordingly. by @shafeeqes [#8989]</li>
+</ul>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="-noteworthy-9">📰 Noteworthy<a href="#-noteworthy-9" class="hash-link" aria-label="Direct link to 📰 Noteworthy" title="Direct link to 📰 Noteworthy">​</a></h2>
+<ul>
+<li><code>[USER]</code> It is no longer possible to add or change the <code>.spec.seedSelector</code> field in <code>Shoot</code>s when <code>spec.seedName</code> is already set. by @rfranzke [#9212]</li>
+</ul>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="-new-features-11">✨ New Features<a href="#-new-features-11" class="hash-link" aria-label="Direct link to ✨ New Features" title="Direct link to ✨ New Features">​</a></h2>
+<ul>
+<li><code>[OPERATOR]</code> <code>DNSRecord</code> resources for seed and shoot clusters now have an annotation indicating their target ip stack (<code>dns.gardener.cloud/ip-stack</code> set to either <code>ipv4</code>, <code>ipv6</code>, or <code>dual-stack</code>). by @ScheererJ [#9289]</li>
+<li><code>[OPERATOR]</code> <code>gardener-resource-manager</code>&#x27;s health check controller now checks whether <code>VerticalPodAutoscaler</code>s report the <code>ConfigUnsupported</code> condition. by @rfranzke [#9211]</li>
+<li><code>[USER]</code> It is now possibleto specify some <code>cluster-autoscaler</code> related options per worker pool <code>in Shoot</code>s via <code>spec.provider.workers[].clusterAutoscaler</code>. Read more about it <a href="https://github.com/gardener/gardener/blob/master/docs/usage/shoot_autoscaling.md" target="_blank" rel="noopener noreferrer">here</a>. by @aaronfern [#9245]</li>
+<li><code>[USER]</code> In order to fine-tune VPA CPU recommendations, the CPU target percentile parameter for <code>vpa-recommender</code> can now be configured in the <code>Shoot</code> specification via the <code>.spec.kubernetes.verticalPodAutoscaler.targetCPUPercentile</code> field. by @voelzmo [#9279]</li>
+<li><code>[DEVELOPER]</code> It is now possible to provide configuration for the aggregate Prometheus running in seed clusters&#x27; <code>garden</code> namespaces. Read all about it <a href="https://github.com/gardener/gardener/tree/master/docs/extensions/logging-and-monitoring.md#aggregate-prometheus" target="_blank" rel="noopener noreferrer">here</a>. by @rfranzke [#9200]</li>
+</ul>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="-bug-fixes-11">🐛 Bug Fixes<a href="#-bug-fixes-11" class="hash-link" aria-label="Direct link to 🐛 Bug Fixes" title="Direct link to 🐛 Bug Fixes">​</a></h2>
+<ul>
+<li><code>[DEPENDENCY]</code> An issue was fixed that sometimes led to leaked <code>extension-controlplane-shoot-webhooks</code> which blocked the shoot deletion. by @timuthy [#9209]</li>
+<li><code>[DEPENDENCY]</code> <code>hack/hook-me.sh</code> now ensures the required network connectivity so that the quic tunnel can be successfully established.  by @vpnachev [#8909]</li>
+<li><code>[USER]</code> A bug causing shoot force-deletion to get stuck in case the secrets referred by the DNS Records are outdated is now fixed. by @acumino [#9324]</li>
+</ul>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="-others-27">🏃 Others<a href="#-others-27" class="hash-link" aria-label="Direct link to 🏃 Others" title="Direct link to 🏃 Others">​</a></h2>
+<ul>
+<li><code>[OPERATOR]</code> Update Istio to v1.19.7 by @axel7born [#9215]</li>
+<li><code>[OPERATOR]</code> Bump alpine to 3.19.1 by @ary1992 [#9315]</li>
+<li><code>[OPERATOR]</code> Enhance <code>NodeNotHealthy</code> Prometheus alert to fire immediately. by @adenitiu [#9314]</li>
+<li><code>[OPERATOR]</code> <code>gardener-node-agent</code> now terminates itself (leading to a restart of its <code>systemd</code> unit) in case it determines that the hostname of its node has changed. by @rfranzke [#9280]</li>
+<li><code>[OPERATOR]</code> Resource requests of istio ingress gateway are reduced and its horizontal autoscaling behaviour specified in more detail, including scale-up under memory pressure by @ScheererJ [#9250]</li>
+<li><code>[OPERATOR]</code> The <code>VerticalPodAutoscaler</code> object for the shoot Prometheus is now labeled with <code>app=prometheus,role=monitoring</code>, similar to the corresponding <code>StatefulSet</code>. by @nickytd [#9244]</li>
+<li><code>[OPERATOR]</code> Set <code>reinvocationPolicy: IfNeeded</code> for VPA admission-controller webhook to ensure that webhooks injecting sidecar containers will not trigger and endless eviction loop. by @voelzmo [#9191]</li>
+<li><code>[DEPENDENCY]</code> The following dependencies are updated:
+<ul>
+<li><code>k8s.io/*</code> : <code>v0.28.4</code> -&gt; <code>v0.29.2</code></li>
+<li><code>sigs.k8s.io/controller-runtime</code>: <code>v0.16.3</code> -&gt; <code>v0.17.2</code> by @shafeeqes [#9174]</li>
+</ul>
+</li>
+<li><code>[USER]</code> The validation error shown when a user tries to change the <code>.spec.seedName</code> field of a Shoot will now also display the old and new values to better indicate that a change was attempted. by @plkokanov [#9294]</li>
+</ul>
+<h1>[gardener/dependency-watchdog]</h1>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="️-breaking-changes-17">⚠️ Breaking Changes<a href="#️-breaking-changes-17" class="hash-link" aria-label="Direct link to ⚠️ Breaking Changes" title="Direct link to ⚠️ Breaking Changes">​</a></h2>
+<ul>
+<li><code>[OPERATOR]</code> Change OCI Image Registry from GCR (<code>eu.gcr.io/gardener-project</code>) to Artifact-Registry (<code>europe-docker.pkg.dev/gardener-project/releases</code>). Users should update their references. by @ccwienk [gardener/dependency-watchdog#93]</li>
+<li><code>[OPERATOR]</code> DWD no longer depends on checking the reachability of Kube-API server via external load-balancer as kube-proxy path optimizations makes that impossible on infrastructures which have a static IP for the LB. Instead it now depends on node leases that are periodically renewed by each node running in the shoot cluster to determine its scaling action (scale-down/up). by @rishabh-11 [gardener/dependency-watchdog#94]</li>
+</ul>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="-others-28">🏃 Others<a href="#-others-28" class="hash-link" aria-label="Direct link to 🏃 Others" title="Direct link to 🏃 Others">​</a></h2>
+<ul>
+<li><code>[OPERATOR]</code> Make <code>kcmNodeMonitorGraceDuration</code> optional in the prober config and use a default value of <code>40s</code> if not specified in the shoot and the config. by @rishabh-11 [gardener/dependency-watchdog#101]</li>
+<li><code>[DEVELOPER]</code> Use <code>ginkgolinter</code> instead of self baked <code>gomegacheck</code> by @himanshu-kun [gardener/dependency-watchdog#95]</li>
+</ul>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="docker-images-22">Docker Images<a href="#docker-images-22" class="hash-link" aria-label="Direct link to Docker Images" title="Direct link to Docker Images">​</a></h2>
+<ul>
+<li>admission-controller: <code>europe-docker.pkg.dev/gardener-project/releases/gardener/admission-controller:v1.90.0</code></li>
+<li>apiserver: <code>europe-docker.pkg.dev/gardener-project/releases/gardener/apiserver:v1.90.0</code></li>
+<li>controller-manager: <code>europe-docker.pkg.dev/gardener-project/releases/gardener/controller-manager:v1.90.0</code></li>
+<li>gardenlet: <code>europe-docker.pkg.dev/gardener-project/releases/gardener/gardenlet:v1.90.0</code></li>
+<li>node-agent: <code>europe-docker.pkg.dev/gardener-project/releases/gardener/node-agent:v1.90.0</code></li>
+<li>operator: <code>europe-docker.pkg.dev/gardener-project/releases/gardener/operator:v1.90.0</code></li>
+<li>resource-manager: <code>europe-docker.pkg.dev/gardener-project/releases/gardener/resource-manager:v1.90.0</code></li>
+<li>scheduler: <code>europe-docker.pkg.dev/gardener-project/releases/gardener/scheduler:v1.90.0</code></li>
+</ul>
 </div></div></details></div></article><nav class="pagination-nav docusaurus-mt-lg" aria-label="Docs pages"></nav></div></div></div></div></main></div></div></div><footer class="footer footer--dark"><div class="container container-fluid"><div class="row footer__links"><div class="col footer__col"><div class="footer__title">Docs</div><ul class="footer__items clean-list"><li class="footer__item"><a class="footer__link-item" href="/docs/overview">Docs</a></li></ul></div><div class="col footer__col"><div class="footer__title">Community</div><ul class="footer__items clean-list"><li class="footer__item"><a href="https://github.com/yakecloud" target="_blank" rel="noopener noreferrer" class="footer__link-item">GitHub<svg width="13.5" height="13.5" aria-hidden="true" viewBox="0 0 24 24" class="iconExternalLink_nPIU"><path fill="currentColor" d="M21 13v10h-21v-19h12v2h-10v15h17v-8h2zm3-12h-10.988l4.035 4-6.977 7.07 2.828 2.828 6.977-7.07 4.125 4.172v-11z"></path></svg></a></li><li class="footer__item"><a href="https://github.com/gardener-community" target="_blank" rel="noopener noreferrer" class="footer__link-item">Gardener Community<svg width="13.5" height="13.5" aria-hidden="true" viewBox="0 0 24 24" class="iconExternalLink_nPIU"><path fill="currentColor" d="M21 13v10h-21v-19h12v2h-10v15h17v-8h2zm3-12h-10.988l4.035 4-6.977 7.07 2.828 2.828 6.977-7.07 4.125 4.172v-11z"></path></svg></a></li><li class="footer__item"><a href="https://gardener-cloud.slack.com" target="_blank" rel="noopener noreferrer" class="footer__link-item">Slack<svg width="13.5" height="13.5" aria-hidden="true" viewBox="0 0 24 24" class="iconExternalLink_nPIU"><path fill="currentColor" d="M21 13v10h-21v-19h12v2h-10v15h17v-8h2zm3-12h-10.988l4.035 4-6.977 7.07 2.828 2.828 6.977-7.07 4.125 4.172v-11z"></path></svg></a></li></ul></div><div class="col footer__col"><div class="footer__title">More</div><ul class="footer__items clean-list"><li class="footer__item"><a class="footer__link-item" href="/blog">Blog</a></li><li class="footer__item"><a class="footer__link-item" href="/legals">Legals</a></li><li class="footer__item"><a class="footer__link-item" href="/privacy-policy">Privacy policy</a></li></ul></div></div><div class="footer__bottom text--center"><div class="footer__copyright">Copyright © 2024 23 Technologies GmbH</div></div></div></footer></div>
 </body>
 </html>
