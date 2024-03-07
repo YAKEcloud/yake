@@ -361,7 +361,7 @@ gardenlet:
         tag: v1.0.7
       - name: alpine
         repository: europe-docker.pkg.dev/gardener-project/releases/3rd/alpine
-        tag: 3.18.4
+        tag: 3.19.1
       - name: alpine-conntrack
         repository: europe-docker.pkg.dev/gardener-project/releases/gardener/alpine-conntrack
         sourceRepository: github.com/gardener/alpine-conntrack
