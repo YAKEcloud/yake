@@ -1398,7 +1398,7 @@ provider-aws:
         name: terraformer
         repository: europe-docker.pkg.dev/gardener-project/releases/gardener/terraformer-aws
         sourceRepository: github.com/gardener/terraformer
-        tag: v2.24.0
+        tag: v2.25.0
       - labels:
           - name: gardener.cloud/cve-categorisation
             value:
