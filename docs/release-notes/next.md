@@ -609,3 +609,10 @@ no release notes available
 
 
 </details>
+
+<details>
+<summary><b>Update garden-kube-apiserver to <code>5.0.0</code></b></summary>
+
+**Full Changelog**: https://github.com/gardener-community/garden-kube-apiserver/compare/4.2.0...5.0.0
+
+</details>
