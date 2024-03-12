@@ -10,7 +10,7 @@ machineImages:
     - name: coreos
       versions:
         - cri:
-            - name: docker
+            - name: containerd
           version: 2023.4.0
 machineTypes:
     - cpu: "2"

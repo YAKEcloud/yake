@@ -12,11 +12,9 @@ machineImages:
         - classification: preview
           cri:
             - name: containerd
-            - name: docker
           version: 20.4.20210616
         - cri:
             - name: containerd
-            - name: docker
           version: 20.4.20200423
 machineTypes:
     - cpu: "2"

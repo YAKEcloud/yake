@@ -13,7 +13,7 @@ _fail() {
   exit 1
 }
 
-minorPattern='^[0-9]{1,}[.][0-9]{1,}'
+majorAndMinorPattern='^[0-9]{1,}[.][0-9]{1,}'
 versionPattern='^[0-9]{1,}[.][0-9]{1,}[.][0-9]{1,}-[0-9]{1,}$'
 
 version=${version:-$1}
@@ -26,10 +26,11 @@ if [[ ! $version =~ $versionPattern ]]; then
   _fail "usage: $0 1.2.3-4"
 fi
 
-minor=$(echo "$version" | grep -oE "$minorPattern")
+majorAndMinor=$(echo "$version" | grep -oE "$majorAndMinorPattern")
+
 
 tag="v$version"
-branch="release-v$minor"
+branch="release-v$majorAndMinor"
 
 git fetch
 git fetch --tags
@@ -38,14 +39,25 @@ if [[ -e ".git/refs/tags/$tag" ]]; then
   echo "Warning: tag: $tag already exists"
 fi
 
+# check if there's a release branch of a higher version than what we want to release
+minor=$(echo "$version" | grep -oE '[0-9]{1,}$')
+nextMinor=$((minor + 1))
+nextMinorBranch="release-v$nextMinor"
+
+if [[ -e ".git/refs/tags/$nextMinorBranch" ]]; then
+  echo "RELEASE_AS_LATEST=false" | tee -a "$GITHUB_ENV"
+else
+  echo "RELEASE_AS_LATEST=true" | tee -a "$GITHUB_ENV"
+fi
+
 if [[ $(grep "$branch" .github/renovate.json5 | wc -l) == "0" ]]; then
   echo Updating .github/renovate.json5
 
   assignee=$GITHUB_ACTOR
   sed -i 's;"assignees": .*,$;"assignees": ["'$assignee'"],;' .github/renovate.json5
 
-  maj=$(echo "$minor" | grep -oE "^[0-9]{1,}")
-  min=$(echo "$minor" | grep -oE "[0-9]{1,}$")
+  maj=$(echo "$majorAndMinor" | grep -oE "^[0-9]{1,}")
+  min=$(echo "$majorAndMinor" | grep -oE "[0-9]{1,}$")
 
   sed -i "/\/\/ template/ {
     p
@@ -65,8 +77,8 @@ if [[ -e ".git/refs/remotes/origin/$branch" ]]; then
   git pull
 else
   touch docs/release-notes/next.md
-  mv docs/release-notes/next.md docs/release-notes/v$minor.md
-  sed -i "s;# Release Notes next;# Release Notes v$minor;" "docs/release-notes/v$minor.md"
+  mv docs/release-notes/next.md docs/release-notes/v$majorAndMinor.md
+  sed -i "s;# Release Notes next;# Release Notes v$majorAndMinor;" "docs/release-notes/v$majorAndMinor.md"
 	echo "---" > docs/release-notes/next.md
   echo "hide_table_of_contents: true" >> docs/release-notes/next.md
   echo "---" >> docs/release-notes/next.md
@@ -77,14 +89,14 @@ else
   echo "" >> docs/release-notes/next.md
   echo "## Related upstream release notes / changelogs" >> docs/release-notes/next.md
   echo "" >> docs/release-notes/next.md
-	if [ ! -d docs/versioned_docs/version-$minor.x ]; then
+	if [ ! -d docs/versioned_docs/version-$majorAndMinor.x ]; then
 		 cd docs
 		 yarn install
-		 yarn docusaurus docs:version $minor.x
+		 yarn docusaurus docs:version $majorAndMinor.x
 		 cd ..
 	fi
   git add .
-  git commit -m "Add documentation for $minor"
+  git commit -m "Add documentation for $majorAndMinor"
   git push
 
   git switch -c "$branch"
@@ -97,4 +109,4 @@ git push -u origin "$branch"
 git push -u origin "$tag" -f
 
 # copy release notes to reuse in github release, cut frontmatter
-tail -n +5 "docs/release-notes/v$minor.md" > /tmp/release-body.md
+tail -n +5 "docs/release-notes/v$majorAndMinor.md" > /tmp/release-body.md

@@ -1,5 +1,1 @@
-This release now requires at least k8s version >= 1.21.
-
-This release is deployable to k8s > 1.24
-
-This is due to the poddisruptionpolicy yaml now is using v1 instead of v1beta1****
+**Full Changelog**: https://github.com/gardener-community/garden-kube-apiserver/compare/4.2.0...5.0.0

@@ -51,7 +51,7 @@ gardenlet:
       - name: dependency-watchdog
         repository: europe-docker.pkg.dev/gardener-project/releases/gardener/dependency-watchdog
         sourceRepository: github.com/gardener/dependency-watchdog
-        tag: v1.1.2
+        tag: v1.2.1
       - labels:
           - name: gardener.cloud/cve-categorisation
             value:
@@ -127,11 +127,6 @@ gardenlet:
         sourceRepository: github.com/gardener/autoscaler
         tag: v1.25.3
         targetVersion: 1.25.x
-      - name: cluster-autoscaler
-        repository: europe-docker.pkg.dev/gardener-project/releases/gardener/autoscaler/cluster-autoscaler
-        sourceRepository: github.com/gardener/autoscaler
-        tag: v1.24.3
-        targetVersion: 1.24.x
       - name: vpn-seed-server
         repository: europe-docker.pkg.dev/gardener-project/releases/gardener/vpn-seed-server
         sourceRepository: github.com/gardener/vpn2
@@ -361,7 +356,7 @@ gardenlet:
         tag: v1.0.7
       - name: alpine
         repository: europe-docker.pkg.dev/gardener-project/releases/3rd/alpine
-        tag: 3.18.4
+        tag: 3.19.1
       - name: alpine-conntrack
         repository: europe-docker.pkg.dev/gardener-project/releases/gardener/alpine-conntrack
         sourceRepository: github.com/gardener/alpine-conntrack
@@ -617,7 +612,7 @@ gardenlet:
         name: istio-proxy
         repository: gcr.io/istio-release/proxyv2
         sourceRepository: github.com/istio/istio
-        tag: 1.19.3-distroless
+        tag: 1.19.7-distroless
       - labels:
           - name: gardener.cloud/cve-categorisation
             value:
@@ -634,7 +629,7 @@ gardenlet:
         name: istio-istiod
         repository: gcr.io/istio-release/pilot
         sourceRepository: github.com/istio/istio
-        tag: 1.19.3-distroless
+        tag: 1.19.7-distroless
       - name: ext-authz-server
         repository: europe-docker.pkg.dev/gardener-project/releases/gardener/ext-authz-server
         sourceRepository: github.com/gardener/ext-authz-server
@@ -655,7 +650,7 @@ gardenlet:
         name: apiserver-proxy
         repository: europe-docker.pkg.dev/gardener-project/releases/3rd/envoyproxy/envoy-distroless
         sourceRepository: github.com/envoyproxy/envoy
-        tag: v1.26.4
+        tag: v1.26.7
       - name: apiserver-proxy-sidecar
         repository: europe-docker.pkg.dev/gardener-project/releases/gardener/apiserver-proxy
         resourceId:
@@ -677,7 +672,7 @@ provider-openstack:
         name: terraformer
         repository: europe-docker.pkg.dev/gardener-project/releases/gardener/terraformer-openstack
         sourceRepository: github.com/gardener/terraformer
-        tag: v2.24.0
+        tag: v2.25.0
       - labels:
           - name: gardener.cloud/cve-categorisation
             value:
@@ -1061,7 +1056,7 @@ provider-azure:
         name: terraformer
         repository: europe-docker.pkg.dev/gardener-project/releases/gardener/terraformer-azure
         sourceRepository: github.com/gardener/terraformer
-        tag: v2.24.0
+        tag: v2.25.0
       - labels:
           - name: gardener.cloud/cve-categorisation
             value:
@@ -1403,7 +1398,7 @@ provider-aws:
         name: terraformer
         repository: europe-docker.pkg.dev/gardener-project/releases/gardener/terraformer-aws
         sourceRepository: github.com/gardener/terraformer
-        tag: v2.24.0
+        tag: v2.25.0
       - labels:
           - name: gardener.cloud/cve-categorisation
             value:
@@ -1657,6 +1652,19 @@ provider-aws:
         repository: registry.k8s.io/sig-storage/livenessprobe
         sourceRepository: github.com/kubernetes-csi/livenessprobe
         tag: v2.12.0
+      - labels:
+          - name: gardener.cloud/cve-categorisation
+            value:
+              authentication_enforced: false
+              availability_requirement: low
+              confidentiality_requirement: high
+              integrity_requirement: high
+              network_exposure: protected
+              user_interaction: end-user
+        name: ecr-credential-provider
+        repository: europe-docker.pkg.dev/gardener-project/releases/gardener/extensions/ecr-credential-provider
+        sourceRepository: github.com/gardener/ecr-credential-provider
+        tag: v1.29.0
 provider-gcp:
   imageVectorOriginal:
     images:
@@ -1672,7 +1680,7 @@ provider-gcp:
         name: terraformer
         repository: europe-docker.pkg.dev/gardener-project/releases/gardener/terraformer-gcp
         sourceRepository: github.com/gardener/terraformer
-        tag: v2.24.0
+        tag: v2.25.0
       - labels:
           - name: gardener.cloud/cve-categorisation
             value:
@@ -1894,7 +1902,7 @@ provider-alicloud:
       - name: terraformer
         repository: europe-docker.pkg.dev/gardener-project/releases/gardener/terraformer-alicloud
         sourceRepository: github.com/gardener/terraformer
-        tag: v2.24.0
+        tag: v2.25.0
       - labels:
           - name: gardener.cloud/cve-categorisation
             value:
@@ -2251,14 +2259,14 @@ shoot-cert-service:
       - name: cert-management
         repository: europe-docker.pkg.dev/gardener-project/releases/cert-controller-manager
         sourceRepository: github.com/gardener/cert-management
-        tag: v0.12.0
+        tag: v0.12.1
 shoot-dns-service:
   imageVectorOriginal:
     images:
       - name: dns-controller-manager
         repository: europe-docker.pkg.dev/gardener-project/releases/dns-controller-manager
         sourceRepository: github.com/gardener/external-dns-management
-        tag: v0.18.2
+        tag: v0.18.3
 runtime-gvisor:
   imageVectorOriginal:
     images:
