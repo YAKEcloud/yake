@@ -1,8 +1,8 @@
 # [gardener/external-dns-management]
 
-## 🏃 Others
+## 🐛 Bug Fixes
 
-- `[USER]` Ignore empty targets for slave entries on update. More concretely, if an ingress resource lose their load balancer addresses during an update, the old targets are kept until new targets are set. by @MartinWeindel [#357]
+- `[OPERATOR]` Registry `gateway.networking.k8s.io` in version v1beta1 by @MartinWeindel [#358]
 
 ## Docker Images
-- dns-controller-manager: `europe-docker.pkg.dev/gardener-project/releases/dns-controller-manager:v0.18.2`
+- dns-controller-manager: `europe-docker.pkg.dev/gardener-project/releases/dns-controller-manager:v0.18.3`
