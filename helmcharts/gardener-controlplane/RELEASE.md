@@ -1,16 +1,22 @@
 # [gardener/gardener]
 
+## 🐛 Bug Fixes
+
+- `[OPERATOR]` An issue causing the reconciliation of backupentries to be stuck when the extension fails to populate the status is now fixed. by @shafeeqes [#9371]
+- `[USER]` An issue has been fixed which was causing scale-downs of `kube-controller-manager` and similar controllers due to prevented deletion of orphaned node `Lease`s. by @rfranzke [#9353]
+- `[USER]` An issue has been fixed which caused `Shoot` reconciliation to get stuck because the API discovery used to generate the read-only `ClusterRole` for `shoots/viewerkubeconfig` subresource failed. by @rfranzke [#9362]
+# [gardener/autoscaler]
+
 ## 🏃 Others
 
-- `[OPERATOR]` Bump alpine to 3.19.1 by @ary1992 [#9316]
-- `[OPERATOR]` `gardener-node-agent` now terminates itself (leading to a restart of its `systemd` unit) in case it determines that the hostname of its node has changed. by @rfranzke [#9286]
+- `[OPERATOR]` Add logging for mcm cloud-provider methods for better traceability by @rishabh-11 [gardener/autoscaler#301]
 
 ## Docker Images
-- admission-controller: `europe-docker.pkg.dev/gardener-project/releases/gardener/admission-controller:v1.89.1`
-- apiserver: `europe-docker.pkg.dev/gardener-project/releases/gardener/apiserver:v1.89.1`
-- controller-manager: `europe-docker.pkg.dev/gardener-project/releases/gardener/controller-manager:v1.89.1`
-- gardenlet: `europe-docker.pkg.dev/gardener-project/releases/gardener/gardenlet:v1.89.1`
-- node-agent: `europe-docker.pkg.dev/gardener-project/releases/gardener/node-agent:v1.89.1`
-- operator: `europe-docker.pkg.dev/gardener-project/releases/gardener/operator:v1.89.1`
-- resource-manager: `europe-docker.pkg.dev/gardener-project/releases/gardener/resource-manager:v1.89.1`
-- scheduler: `europe-docker.pkg.dev/gardener-project/releases/gardener/scheduler:v1.89.1`
+- admission-controller: `europe-docker.pkg.dev/gardener-project/releases/gardener/admission-controller:v1.89.2`
+- apiserver: `europe-docker.pkg.dev/gardener-project/releases/gardener/apiserver:v1.89.2`
+- controller-manager: `europe-docker.pkg.dev/gardener-project/releases/gardener/controller-manager:v1.89.2`
+- gardenlet: `europe-docker.pkg.dev/gardener-project/releases/gardener/gardenlet:v1.89.2`
+- node-agent: `europe-docker.pkg.dev/gardener-project/releases/gardener/node-agent:v1.89.2`
+- operator: `europe-docker.pkg.dev/gardener-project/releases/gardener/operator:v1.89.2`
+- resource-manager: `europe-docker.pkg.dev/gardener-project/releases/gardener/resource-manager:v1.89.2`
+- scheduler: `europe-docker.pkg.dev/gardener-project/releases/gardener/scheduler:v1.89.2`
