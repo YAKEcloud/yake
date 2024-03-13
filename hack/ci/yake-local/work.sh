@@ -12,6 +12,24 @@ CLUSTERNAME="yake-local"
 VGARDEN_KUBECONFIG="/tmp/$CLUSTERNAME-apiserver.yaml"
 
 K8S_VERSION="${K8S_VERSION:-v1.26.6}"
+CNI="${CNI:-default}"
+
+if [[ $CNI == "default" ]]; then
+  kindConfig="kind-config.yaml"
+  useCilium=""
+  useCalico=""
+elif [[ $CNI == "cilium" ]]; then
+  kindConfig="kind-config-no-cni.yaml"
+  useCilium="true"
+  useCalico=""
+elif [[ $CNI == "calico" ]]; then
+  kindConfig="kind-config-no-cni.yaml"
+  useCilium=""
+  useCalico="true"
+else
+  echo "unknown CNI '$CNI', use 'default', 'calico' or 'cilium'"
+  exit 1
+fi
 
 # from gardener/gardener hack/kind-up.sh
 # setup_kind_network is similar to kind's network creation logic, ref https://github.com/kubernetes-sigs/kind/blob/23d2ac0e9c41028fa252dd1340411d70d46e2fd4/pkg/cluster/internal/providers/docker/network.go#L50
@@ -47,12 +65,44 @@ _setup_kind_network() {
 
 _create_cluster () {
   # If export kubeconfig fails, the cluster does not yet exist and we need to create it
-  $KIND export kubeconfig -n $CLUSTERNAME > /dev/null 2>&1  || $KIND create cluster --config kind-config.yaml --name $CLUSTERNAME --image="kindest/node:$K8S_VERSION"
+  $KIND export kubeconfig -n $CLUSTERNAME > /dev/null 2>&1  || $KIND create cluster --config "$kindConfig" --name $CLUSTERNAME --image="kindest/node:$K8S_VERSION"
 	$KIND export kubeconfig -n $CLUSTERNAME
 	$KUBECTL config set-context --current --namespace=default
 }
 
+_create_cni () {
+  if [[ $useCilium == "true" ]]; then
+      _create_cilium
+  elif [[ $useCalico == "true" ]]; then
+      _create_calico
+  fi
+}
+
+_create_cilium () {
+  local VERSION="1.15.1"
+  $HELM repo add cilium https://helm.cilium.io/
+  $HELM repo update cilium
+
+  docker pull "quay.io/cilium/cilium:v$VERSION"
+  $KIND load docker-image "quay.io/cilium/cilium:v$VERSION" -n $CLUSTERNAME
+
+  $HELM install cilium cilium/cilium --version "$VERSION" \
+     --namespace kube-system \
+     --set image.pullPolicy=IfNotPresent \
+     --set ipam.mode=kubernetes
+}
+
+_create_calico () {
+  VERSION="v3.27.2"
+  $KUBECTL apply -f https://raw.githubusercontent.com/projectcalico/calico/$VERSION/manifests/calico.yaml
+}
+
+_wait_for_nodes_ready () {
+  kubectl wait --for=condition=ready nodes --all --timeout=5m
+}
+
 _create_loadbalancer () {
+  local VERSION=
   $KUBECTL apply -f https://raw.githubusercontent.com/metallb/metallb/v0.13.12/config/manifests/metallb-native.yaml
   $KUBECTL wait --namespace metallb-system --for=condition=ready pod --all --timeout=90s
 
@@ -280,9 +330,10 @@ install_kind
 install_kubectl
 install_yq
 install_envsubst
-
 _setup_kind_network
 _create_cluster
+_create_cni
+_wait_for_nodes_ready
 _create_loadbalancer
 _create_local_git
 _create_step_ca
