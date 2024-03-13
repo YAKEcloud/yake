@@ -98,7 +98,7 @@ _create_calico () {
 }
 
 _wait_for_nodes_ready () {
-  kubectl wait --for=condition=ready nodes --all --timeout=5m
+  $KUBECTL wait --for=condition=ready nodes --all --timeout=5m
 }
 
 _create_loadbalancer () {
