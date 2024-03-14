@@ -116,7 +116,7 @@ _create_loadbalancer () {
   _print_heading "Create Loadbalancer"
   local VERSION=
   $KUBECTL apply -f https://raw.githubusercontent.com/metallb/metallb/v0.13.12/config/manifests/metallb-native.yaml
-  $KUBECTL wait --namespace metallb-system --for=condition=ready pod --all --timeout=90s
+  $KUBECTL wait --namespace metallb-system --for=condition=ready pod --all --timeout=3m
 
   cat <<EOF | $KUBECTL apply -f -
 apiVersion: metallb.io/v1beta1
@@ -141,7 +141,7 @@ _create_local_git () {
   $KUBECTL apply -f git-server.yaml
 
   printf ">>> waiting for git server "
-  $KUBECTL wait --namespace default --for=condition=ready pod --selector=app=git-server --timeout=90s
+  $KUBECTL wait --namespace default --for=condition=ready pod --selector=app=git-server --timeout=3m
   gitUrl="http://$($KUBECTL get svc git-server -o jsonpath="{.status.loadBalancer.ingress[0].ip}")/repository.git"
   git remote add local "$gitUrl" 2>/dev/null || git remote set-url local "$gitUrl"
   until git fetch local; do
