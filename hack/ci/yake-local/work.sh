@@ -94,10 +94,11 @@ _create_cilium () {
   docker pull "quay.io/cilium/cilium:v$VERSION"
   $KIND load docker-image "quay.io/cilium/cilium:v$VERSION" -n $CLUSTERNAME
 
-  $HELM install cilium cilium/cilium --version "$VERSION" \
+  $HELM upgrade -i cilium cilium/cilium --version "$VERSION" \
      --namespace kube-system \
      --set image.pullPolicy=IfNotPresent \
-     --set ipam.mode=kubernetes
+     --set ipam.mode=kubernetes \
+     --set policyCIDRMatchMode=nodes
 }
 
 _create_calico () {
