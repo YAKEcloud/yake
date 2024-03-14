@@ -100,3 +100,27 @@ hide_table_of_contents: true
 **Full Changelog**: https://github.com/gardener-community/etcd/compare/6.0.0...6.1.0
 
 </details>
+
+<details>
+<summary><b>Update gardener-controlplane to <code>1.90.3</code></b></summary>
+
+The release-notes for component **github.com/gardener/gardener** in version **v1.90.3** exceeded the maximum length of 25000 characters allowed by GitHub for release-bodies.
+They have been uploaded as release-asset and can be found at https://github.com/gardener/gardener/releases/download/v1.90.3/release_notes.md.
+
+</details>
+
+<details>
+<summary><b>Update gardener-controlplane to <code>1.90.3</code></b></summary>
+
+The release-notes for component **github.com/gardener/gardener** in version **v1.90.3** exceeded the maximum length of 25000 characters allowed by GitHub for release-bodies.
+They have been uploaded as release-asset and can be found at https://github.com/gardener/gardener/releases/download/v1.90.3/release_notes.md.
+
+</details>
+
+<details>
+<summary><b>Update gardenlet to <code>1.90.3</code></b></summary>
+
+The release-notes for component **github.com/gardener/gardener** in version **v1.90.3** exceeded the maximum length of 25000 characters allowed by GitHub for release-bodies.
+They have been uploaded as release-asset and can be found at https://github.com/gardener/gardener/releases/download/v1.90.3/release_notes.md.
+
+</details>
