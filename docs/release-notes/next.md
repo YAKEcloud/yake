@@ -124,3 +124,15 @@ The release-notes for component **github.com/gardener/gardener** in version **v1
 They have been uploaded as release-asset and can be found at https://github.com/gardener/gardener/releases/download/v1.90.3/release_notes.md.
 
 </details>
+
+<details>
+<summary><b>Update provider-alicloud to <code>1.51.2</code></b></summary>
+
+no release notes available
+
+## Docker Images
+- gardener-extension-admission-alicloud: `europe-docker.pkg.dev/gardener-project/releases/gardener/extensions/admission-alicloud:v1.51.2`
+- gardener-extension-provider-alicloud: `europe-docker.pkg.dev/gardener-project/releases/gardener/extensions/provider-alicloud:v1.51.2`
+
+
+</details>
