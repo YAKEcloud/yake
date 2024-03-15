@@ -1,0 +1,46 @@
+templates:
+  - statefulset-etcd.yaml
+tests:
+  - it: should use the default values images
+    values:
+      - ../../../test-values.yaml
+    asserts:
+      - equal:
+          path: spec.template.spec.containers[0].image
+          value: europe-docker.pkg.dev/gardener-project/public/gardener/etcd:v3.4.26-3
+      - equal:
+          path: spec.template.spec.containers[1].image
+          value: europe-docker.pkg.dev/gardener-project/public/gardener/etcdbrctl:v0.24.8
+  - it: should allow overwriting the images
+    values:
+      - ../../../test-values.yaml
+    set:
+      etcd:
+        image:
+          repository: foo/bar
+          tag: baz
+      etcd-backup-restore: 
+        image:
+          repository: baz/foo
+          tag: bar
+    asserts:
+      - equal:
+          path: spec.template.spec.containers[0].image
+          value: foo/bar:baz
+      - equal:
+          path: spec.template.spec.containers[1].image
+          value: baz/foo:bar
+  - it: should include the old style image repo:tag when provided
+    values:
+      - ../../../test-values.yaml
+    set:
+      images:
+        etcd: foo/bar:baz
+        etcd-backup-restore: baz/foo:bar
+    asserts:
+      - equal:
+          path: spec.template.spec.containers[0].image
+          value: foo/bar:baz
+      - equal:
+          path: spec.template.spec.containers[1].image
+          value: baz/foo:bar
