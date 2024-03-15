@@ -16,3 +16,13 @@ domains:
 issuer:
   acme:
     email: mail@example.org
+
+# FIXME document new fields in yake-config secret
+runtimeCluster:
+  networking:
+    nodes: 172.18.0.0/16
+    pods: 10.1.0.0/16
+    services: 10.2.0.0/16
+virtualCluster:
+  networking:
+    services: 100.64.0.0/13

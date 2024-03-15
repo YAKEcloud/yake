@@ -7,9 +7,12 @@ type: Opaque
 stringData:
   values.yaml: |-
   {{- if .Values.registryOverwrite }}
-        images:
-          etcd: {{ include "replaceRegistry" (dict "eu.gcr.io/gardener-project/gardener/etcd:v3.5.2" .Values.registryOverwrite) }}
-          etcd-backup-restore: {{ include "replaceRegistry" (dict "eu.gcr.io/gardener-project/gardener/etcdbrctl:v0.19.0" .Values.registryOverwrite) }}
+        etcd:
+          image:
+            repository: {{ include "replaceRegistry" (dict "europe-docker.pkg.dev/gardener-project/public/gardener/etcd" .Values.registryOverwrite) }}
+        etcd-backup-restore:
+          image:
+            repository: {{ include "replaceRegistry" (dict "europe-docker.pkg.dev/gardener-project/public/gardener/etcdbrctl" .Values.registryOverwrite) }}
 {{- end }}
 {{- if .Values.backups.enabled }}
 {{- if eq .Values.backups.provider "azure" }}

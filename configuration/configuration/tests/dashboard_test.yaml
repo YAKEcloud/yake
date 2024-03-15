@@ -39,11 +39,11 @@ tests:
       - ../images.yaml
     set:
       registryOverwrite:
-        eu.gcr.io: myregistry.example.org
+        europe-docker.pkg.dev: myregistry.example.org/europe-docker.pkg.dev
     asserts:
       - matchRegex:
           path: stringData['values.yaml']
-          pattern: "repository: myregistry.example.org/gardener-project/gardener/dashboard\n"
+          pattern: "repository: myregistry.example.org/europe-docker.pkg.dev/gardener-project/releases/gardener/dashboard\n"
   - it: should not set cert annotations if issuer is disabled
     values:
       - ../values-test.yaml

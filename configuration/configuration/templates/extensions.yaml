@@ -12,7 +12,7 @@ stringData:
 {{- if .Values.registryOverwrite }}
       values:
         image:
-          repository: {{ include "replaceRegistry" (dict "eu.gcr.io/gardener-project/gardener/extensions/os-ubuntu" .Values.registryOverwrite) }}
+          repository: {{ include "replaceRegistry" (dict "europe-docker.pkg.dev/gardener-project/releases/extensions/os-ubuntu" .Values.registryOverwrite) }}
 {{- end }}
 
     os-gardenlinux:
@@ -20,7 +20,7 @@ stringData:
 {{- if .Values.registryOverwrite }}
       values:
         image:
-          repository: {{ include "replaceRegistry" (dict "eu.gcr.io/gardener-project/gardener/extensions/os-gardenlinux" .Values.registryOverwrite) }}
+          repository: {{ include "replaceRegistry" (dict "europe-docker.pkg.dev/gardener-project/releases/extensions/os-gardenlinux" .Values.registryOverwrite) }}
 {{- end }}
 
     os-coreos:
@@ -28,7 +28,7 @@ stringData:
 {{- if .Values.registryOverwrite }}
       values:
         image:
-          repository: {{ include "replaceRegistry" (dict "eu.gcr.io/gardener-project/gardener/extensions/os-coreos" .Values.registryOverwrite) }}
+          repository: {{ include "replaceRegistry" (dict "europe-docker.pkg.dev/gardener-project/releases/extensions/os-coreos" .Values.registryOverwrite) }}
 {{- end }}
 
     provider-hcloud:
@@ -53,10 +53,10 @@ stringData:
 {{- if .Values.registryOverwrite }}
         values:
           image:
-            repository: {{ include "replaceRegistry" (dict "eu.gcr.io/gardener-project/gardener/extensions/admission-azure" .Values.registryOverwrite) }}
+            repository: {{ include "replaceRegistry" (dict "europe-docker.pkg.dev/gardener-project/releases/extensions/admission-azure" .Values.registryOverwrite) }}
       values:
         image:
-          repository: {{ include "replaceRegistry" (dict "eu.gcr.io/gardener-project/gardener/extensions/provider-azure" .Values.registryOverwrite) }}
+          repository: {{ include "replaceRegistry" (dict "europe-docker.pkg.dev/gardener-project/releases/extensions/provider-azure" .Values.registryOverwrite) }}
         imageVectorOverwrite: |
 {{ include "provider-azure.imageVectorOverwrite" . | indent 10 }}
 {{- end }}
@@ -68,10 +68,10 @@ stringData:
 {{- if .Values.registryOverwrite }}
         values:
           image:
-            repository: {{ include "replaceRegistry" (dict "eu.gcr.io/gardener-project/gardener/extensions/admission-openstack" .Values.registryOverwrite) }}
+            repository: {{ include "replaceRegistry" (dict "europe-docker.pkg.dev/gardener-project/releases/extensions/admission-openstack" .Values.registryOverwrite) }}
       values:
         image:
-          repository: {{ include "replaceRegistry" (dict "eu.gcr.io/gardener-project/gardener/extensions/provider-openstack" .Values.registryOverwrite) }}
+          repository: {{ include "replaceRegistry" (dict "europe-docker.pkg.dev/gardener-project/releases/extensions/provider-openstack" .Values.registryOverwrite) }}
         imageVectorOverwrite: |
 {{ include "provider-openstack.imageVectorOverwrite" . | indent 10 }}
 {{- end }}
@@ -81,7 +81,7 @@ stringData:
 {{- if .Values.registryOverwrite }}
       values:
         image:
-          repository: {{ include "replaceRegistry" (dict "eu.gcr.io/gardener-project/gardener/extensions/networking-calico" .Values.registryOverwrite) }}
+          repository: {{ include "replaceRegistry" (dict "europe-docker.pkg.dev/gardener-project/releases/extensions/networking-calico" .Values.registryOverwrite) }}
         imageVectorOverwrite: |
 {{ include "networking-calico.imageVectorOverwrite" . | indent 10 }}
 {{- end }}
@@ -91,7 +91,7 @@ stringData:
 {{- if .Values.registryOverwrite }}
       values:
         image:
-          repository: {{ include "replaceRegistry" (dict "eu.gcr.io/gardener-project/gardener/extensions/shoot-cert-service" .Values.registryOverwrite) }}
+          repository: {{ include "replaceRegistry" (dict "europe-docker.pkg.dev/gardener-project/releases/extensions/shoot-cert-service" .Values.registryOverwrite) }}
         imageVectorOverwrite: |
 {{ include "shoot-cert-service.imageVectorOverwrite" . | indent 10 }}
 {{- end }}
@@ -105,9 +105,9 @@ stringData:
           deploy: true
           image:
 {{- if .Values.registryOverwrite }}
-            repository: {{ include "replaceRegistry" (dict "eu.gcr.io/gardener-project/dns-controller-manager" .Values.registryOverwrite) }}
+            repository: {{ include "replaceRegistry" (dict "europe-docker.pkg.dev/gardener-project/releases/dns-controller-manager" .Values.registryOverwrite) }}
 {{- else }}
-            repository: eu.gcr.io/gardener-project/dns-controller-manager
+            repository: europe-docker.pkg.dev/gardener-project/releases/dns-controller-manager
 {{- end }}
             tag: v0.13.3
           configuration:
@@ -117,7 +117,7 @@ stringData:
             serverPortHttp: 8080
 {{- if .Values.registryOverwrite }}
         image:
-          repository: {{ include "replaceRegistry" (dict "eu.gcr.io/gardener-project/gardener/extensions/shoot-dns-service" .Values.registryOverwrite) }}
+          repository: {{ include "replaceRegistry" (dict "europe-docker.pkg.dev/gardener-project/releases/extensions/shoot-dns-service" .Values.registryOverwrite) }}
         imageVectorOverwrite: |
 {{ include "shoot-dns-service.imageVectorOverwrite" . | indent 10 }}
 {{- end }}
@@ -127,7 +127,7 @@ stringData:
 {{- if .Values.registryOverwrite }}
       values:
         image:
-          repository: {{ include "replaceRegistry" (dict "eu.gcr.io/gardener-project/gardener/extensions/shoot-oidc-service" .Values.registryOverwrite) }}
+          repository: {{ include "replaceRegistry" (dict "europe-docker.pkg.dev/gardener-project/releases/extensions/shoot-oidc-service" .Values.registryOverwrite) }}
         imageVectorOverwrite: |
 {{ include "shoot-oidc-service.imageVectorOverwrite" . | indent 10 }}
 {{- end }}
@@ -137,7 +137,7 @@ stringData:
 {{- if .Values.registryOverwrite }}
       values:
         image:
-          repository: {{ include "replaceRegistry" (dict "eu.gcr.io/gardener-project/gardener/extensions/shoot-networking-filter" .Values.registryOverwrite) }}
+          repository: {{ include "replaceRegistry" (dict "europe-docker.pkg.dev/gardener-project/releases/extensions/shoot-networking-filter" .Values.registryOverwrite) }}
         imageVectorOverwrite: |
 {{ include "shoot-networking-filter.imageVectorOverwrite" . | indent 10 }}
 {{- end }}
@@ -147,7 +147,7 @@ stringData:
 {{- if .Values.registryOverwrite }}
       values:
         image:
-          repository: {{ include "replaceRegistry" (dict "eu.gcr.io/gardener-project/gardener/extensions/shoot-networking-problemdetector" .Values.registryOverwrite) }}
+          repository: {{ include "replaceRegistry" (dict "europe-docker.pkg.dev/gardener-project/releases/gardener/extensions/shoot-networking-problemdetector" .Values.registryOverwrite) }}
         imageVectorOverwrite: |
 {{ include "shoot-networking-problemdetector.imageVectorOverwrite" . | indent 10 }}
 {{- end }}
@@ -175,7 +175,7 @@ stringData:
 {{- if .Values.registryOverwrite }}
       values:
         image:
-          repository: {{ include "replaceRegistry" (dict "eu.gcr.io/gardener-project/gardener/extensions/provider-alicloud" .Values.registryOverwrite) }}
+          repository: {{ include "replaceRegistry" (dict "europe-docker.pkg.dev/gardener-project/releases/extensions/provider-alicloud" .Values.registryOverwrite) }}
         imageVectorOverwrite: |
 {{ include "provider-alicloud.imageVectorOverwrite" . | indent 10 }}
 {{- end }}
@@ -187,10 +187,10 @@ stringData:
 {{- if .Values.registryOverwrite }}
         values:
           image:
-            repository: {{ include "replaceRegistry" (dict "eu.gcr.io/gardener-project/gardener/extensions/admission-aws" .Values.registryOverwrite) }}
+            repository: {{ include "replaceRegistry" (dict "europe-docker.pkg.dev/gardener-project/releases/extensions/admission-aws" .Values.registryOverwrite) }}
       values:
         image:
-          repository: {{ include "replaceRegistry" (dict "eu.gcr.io/gardener-project/gardener/extensions/provider-aws" .Values.registryOverwrite) }}
+          repository: {{ include "replaceRegistry" (dict "europe-docker.pkg.dev/gardener-project/releases/extensions/provider-aws" .Values.registryOverwrite) }}
         imageVectorOverwrite: |
 {{ include "provider-aws.imageVectorOverwrite" . | indent 10 }}
 {{- end }}
@@ -202,10 +202,10 @@ stringData:
 {{- if .Values.registryOverwrite }}
         values:
           image:
-            repository: {{ include "replaceRegistry" (dict "eu.gcr.io/gardener-project/gardener/extensions/admission-gcp" .Values.registryOverwrite) }}
+            repository: {{ include "replaceRegistry" (dict "europe-docker.pkg.dev/gardener-project/releases/extensions/admission-gcp" .Values.registryOverwrite) }}
       values:
         image:
-          repository: {{ include "replaceRegistry" (dict "eu.gcr.io/gardener-project/gardener/extensions/provider-gcp" .Values.registryOverwrite) }}
+          repository: {{ include "replaceRegistry" (dict "europe-docker.pkg.dev/gardener-project/releases/extensions/provider-gcp" .Values.registryOverwrite) }}
         imageVectorOverwrite: |
 {{ include "provider-gcp.imageVectorOverwrite" . | indent 10 }}
 {{- end }}
@@ -215,7 +215,7 @@ stringData:
 {{- if .Values.registryOverwrite }}
       values:
         image:
-          repository: {{ include "replaceRegistry" (dict "eu.gcr.io/gardener-project/gardener/extensions/runtime-gvisor" .Values.registryOverwrite) }}
+          repository: {{ include "replaceRegistry" (dict "europe-docker.pkg.dev/gardener-project/releases/extensions/runtime-gvisor" .Values.registryOverwrite) }}
         imageVectorOverwrite: |
 {{ include "runtime-gvisor.imageVectorOverwrite" . | indent 10 }}
 {{- end }}
