@@ -50,7 +50,7 @@ stringData:
           namespace: garden
 {{- if .Values.registryOverwrite }}
     image:
-      repository: {{ include "replaceRegistry" (dict "eu.gcr.io/gardener-project/gardener/gardenlet" .Values.registryOverwrite) }}
+      repository: {{ include "replaceRegistry" (dict "europe-docker.pkg.dev/gardener-project/releases/gardener/gardenlet" .Values.registryOverwrite) }}
     imageVectorOverwrite: |
 {{ include "gardenlet.imageVectorOverwrite" . | indent 6 }}
     componentImageVectorOverwrites: |

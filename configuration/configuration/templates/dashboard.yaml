@@ -12,7 +12,7 @@ stringData:
       dashboard:
 {{- if .Values.registryOverwrite }}
         image:
-          repository: {{ include "replaceRegistry" (dict "eu.gcr.io/gardener-project/gardener/dashboard" .Values.registryOverwrite) }}
+          repository: {{ include "replaceRegistry" (dict "europe-docker.pkg.dev/gardener-project/releases/gardener/dashboard" .Values.registryOverwrite) }}
 {{- end }}
         apiServerUrl: https://{{ include "api.domain" . }}/
         sessionSecret: {{ .Values.dashboard.sessionSecret }}

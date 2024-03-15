@@ -88,27 +88,42 @@ tests:
     asserts:
       - matchRegex:
           path: stringData['values.yaml']
-          pattern: |-
+          pattern: |-2
             shoot-dns-service:
               version: .+
+              admission:
+                enabled: true
               values:
                 dnsControllerManager:
                   deploy: true
                   image:
-                    repository: eu.gcr.io/gardener-project/dns-controller-manager
+                    repository: europe-docker.pkg.dev/gardener-project/releases/dns-controller-manager
                     tag: .+
                   configuration:
                     cacheTtl: 300
                     controllers: dnscontrollers,dnssources
                     dnsPoolResyncPeriod: 30m
                     serverPortHttp: 8080
+  - it: should deploy dnsControllerManager in shoot-dns-service with registryOverwrite
+    values:
+      - ../values-test.yaml
+      - ../images.yaml
+    set:
+      registryOverwrite:
+        europe-docker.pkg.dev: myregistry.example.org/europe-docker.pkg.dev
+    asserts:
+      - matchRegex:
+          path: stringData['values.yaml']
+          pattern: |-2
+                  image:
+                    repository: myregistry.example.org/europe-docker.pkg.dev/gardener-project/releases/dns-controller-manager
   - it: should render os-coreos with registryOverwrite
     values:
       - ../values-test.yaml
       - ../images.yaml
     set:
       registryOverwrite:
-        eu.gcr.io: myregistry.example.org
+        europe-docker.pkg.dev: myregistry.example.org/europe-docker.pkg.dev
     asserts:
       - matchRegex:
           path: stringData['values.yaml']
@@ -117,14 +132,14 @@ tests:
               version: .+
               values:
                 image:
-                  repository: myregistry.example.org/gardener-project/gardener/extensions/os-coreos
+                  repository: myregistry.example.org/europe-docker.pkg.dev/gardener-project/releases/extensions/os-coreos
   - it: should render networking-filter with registryOverwrite
     values:
       - ../values-test.yaml
       - ../images.yaml
     set:
       registryOverwrite:
-        eu.gcr.io: myregistry.example.org
+        europe-docker.pkg.dev: myregistry.example.org/europe-docker.pkg.dev
     asserts:
       - matchRegex:
           path: stringData['values.yaml']
@@ -133,18 +148,18 @@ tests:
               version: .+
               values:
                 image:
-                  repository: myregistry.example.org/gardener-project/gardener/extensions/shoot-networking-filter
+                  repository: myregistry.example.org/europe-docker.pkg.dev/gardener-project/releases/extensions/shoot-networking-filter
                 imageVectorOverwrite: \|
                   images:
                   - name: egress-filter
-                    repository: myregistry.example.org/gardener-project/gardener/egress-filter
+                    repository: myregistry.example.org/europe-docker.pkg.dev/gardener-project/releases/gardener/egress-filter
   - it: should render networking-problemdetector with registryOverwrite
     values:
       - ../values-test.yaml
       - ../images.yaml
     set:
       registryOverwrite:
-        eu.gcr.io: myregistry.example.org
+        europe-docker.pkg.dev: myregistry.example.org/europe-docker.pkg.dev
     asserts:
       - matchRegex:
           path: stringData['values.yaml']
@@ -153,19 +168,19 @@ tests:
               version: .+
               values:
                 image:
-                  repository: myregistry.example.org/gardener-project/gardener/extensions/shoot-networking-problemdetector
+                  repository: myregistry.example.org/europe-docker.pkg.dev/gardener-project/releases/gardener/extensions/shoot-networking-problemdetector
                 imageVectorOverwrite: \|
                   images:
                   - name: network-problem-detector-agent
-                    repository: myregistry.example.org/gardener-project/gardener/network-problem-detector
+                    repository: myregistry.example.org/europe-docker.pkg.dev/gardener-project/releases/gardener/network-problem-detector
   - it: should render shoot-rsyslog-relp with registryOverwrite
     values:
       - ../values-test.yaml
       - ../images.yaml
     set:
       registryOverwrite:
-        eu.gcr.io: myregistry.example.org
-        registry.k8s.io: myregistry.example.org/k8s
+        eu.gcr.io: myregistry.example.org/eu.gcr.io
+        registry.k8s.io: myregistry.example.org/registry.k8s.io
     asserts:
       - matchRegex:
           path: stringData['values.yaml']
@@ -174,19 +189,19 @@ tests:
               version: .+
               values:
                 image:
-                  repository: myregistry.example.org/gardener-project/gardener/extensions/shoot-rsyslog-relp
+                  repository: myregistry.example.org/eu.gcr.io/gardener-project/gardener/extensions/shoot-rsyslog-relp
                 imageVectorOverwrite: \|
                   [\s\S]*
-                    repository: myregistry.example.org/gardener-project/3rd/alpine
+                    repository: myregistry.example.org/eu.gcr.io/gardener-project/3rd/alpine
                   [\s\S]*
-                    repository: myregistry.example.org/k8s/pause
+                    repository: myregistry.example.org/registry.k8s.io/pause
   - it: should render os-coreos with registryOverwrite
     values:
       - ../values-test.yaml
       - ../images.yaml
     set:
       registryOverwrite:
-        eu.gcr.io: myregistry.example.org
+        europe-docker.pkg.dev: myregistry.example.org/europe-docker.pkg.dev
     asserts:
       - matchRegex:
           path: stringData['values.yaml']
@@ -195,4 +210,4 @@ tests:
               version: .+
               values:
                 image:
-                  repository: myregistry.example.org/gardener-project/gardener/extensions/os-coreos
+                  repository: myregistry.example.org/europe-docker.pkg.dev/gardener-project/releases/extensions/os-coreos
