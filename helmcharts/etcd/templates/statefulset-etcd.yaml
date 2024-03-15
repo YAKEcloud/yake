@@ -47,7 +47,7 @@ spec:
     spec:
       containers:
       - name: etcd
-        image: {{ index .Values.images "etcd" }}
+        image: {{ template "image-etcd" . }}
         imagePullPolicy: IfNotPresent
         command:
         - /bootstrap/bootstrap.sh
@@ -123,7 +123,7 @@ spec:
         - --service-endpoints=https://{{ .Values.name }}-0:2379
         - --etcd-connection-timeout=300s
         - --delta-snapshot-period=300s
-        image: {{ index .Values.images "etcd-backup-restore" }}
+        image: {{ template "image-etcd-backup-restore" . }}
         imagePullPolicy: IfNotPresent
         ports:
         - containerPort: 8080

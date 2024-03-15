@@ -143,3 +143,29 @@ no release notes available
 **Full Changelog**: https://github.com/gardener-community/cloudprofiles/compare/0.7.0...0.7.1
 
 </details>
+
+<details>
+<summary><b>Update etcd to <code>6.2.0</code></b></summary>
+
+## What's Changed
+* Define images repository and tag as seperate keys, fallback to old style by @lotharbach in https://github.com/gardener-community/etcd/pull/16
+* Switch to new upstream registry
+
+
+
+**Full Changelog**: https://github.com/gardener-community/etcd/compare/6.1.0...6.2.0
+
+</details>
+
+<details>
+<summary><b>Update etcd to <code>6.2.0</code></b></summary>
+
+## What's Changed
+* Define images repository and tag as seperate keys, fallback to old style by @lotharbach in https://github.com/gardener-community/etcd/pull/16
+* Switch to new upstream registry
+
+
+
+**Full Changelog**: https://github.com/gardener-community/etcd/compare/6.1.0...6.2.0
+
+</details>
