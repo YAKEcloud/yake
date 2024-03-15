@@ -1,2 +1,4 @@
 controller:
     enabled: false
+gardener-extension-admission-shoot-dns-service:
+    enabled: false

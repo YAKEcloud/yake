@@ -98,6 +98,8 @@ stringData:
 
     shoot-dns-service:
       version: 1.45.1
+      admission:
+        enabled: true
       values:
         dnsControllerManager:
           deploy: true
