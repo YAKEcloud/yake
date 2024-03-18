@@ -12,11 +12,34 @@ CLUSTERNAME="yake-local"
 VGARDEN_KUBECONFIG="/tmp/$CLUSTERNAME-apiserver.yaml"
 
 K8S_VERSION="${K8S_VERSION:-v1.26.6}"
+CNI="${CNI:-default}"
+
+if [[ $CNI == "default" ]]; then
+  kindConfig="kind-config.yaml"
+  useCilium=""
+  useCalico=""
+elif [[ $CNI == "cilium" ]]; then
+  kindConfig="kind-config-no-cni.yaml"
+  useCilium="true"
+  useCalico=""
+elif [[ $CNI == "calico" ]]; then
+  kindConfig="kind-config-no-cni.yaml"
+  useCilium=""
+  useCalico="true"
+else
+  echo "unknown CNI '$CNI', use 'default', 'calico' or 'cilium'"
+  exit 1
+fi
+
+_print_heading() {
+  echo -e "\033[34m$1\033[0m"
+}
 
 # from gardener/gardener hack/kind-up.sh
 # setup_kind_network is similar to kind's network creation logic, ref https://github.com/kubernetes-sigs/kind/blob/23d2ac0e9c41028fa252dd1340411d70d46e2fd4/pkg/cluster/internal/providers/docker/network.go#L50
 # In addition to kind's logic, we ensure stable CIDRs that we can rely on in our local setup manifests and code.
 _setup_kind_network() {
+  _print_heading "Setup Kind Network"
   # check if network already exists
   local existing_network_id
   existing_network_id="$(docker network list --filter=name=^kind$ --format='{{.ID}}')"
@@ -46,15 +69,55 @@ _setup_kind_network() {
 }
 
 _create_cluster () {
+  _print_heading "Create Cluster"
   # If export kubeconfig fails, the cluster does not yet exist and we need to create it
-  $KIND export kubeconfig -n $CLUSTERNAME > /dev/null 2>&1  || $KIND create cluster --config kind-config.yaml --name $CLUSTERNAME --image="kindest/node:$K8S_VERSION"
+  $KIND export kubeconfig -n $CLUSTERNAME > /dev/null 2>&1  || $KIND create cluster --config "$kindConfig" --name $CLUSTERNAME --image="kindest/node:$K8S_VERSION"
 	$KIND export kubeconfig -n $CLUSTERNAME
 	$KUBECTL config set-context --current --namespace=default
 }
 
+_create_cni () {
+  _print_heading "Create Cni"
+  if [[ $useCilium == "true" ]]; then
+      _create_cilium
+  elif [[ $useCalico == "true" ]]; then
+      _create_calico
+  fi
+}
+
+_create_cilium () {
+  _print_heading "Create Cilium"
+  local VERSION="1.15.1"
+  $HELM repo add cilium https://helm.cilium.io/
+  $HELM repo update cilium
+
+  docker pull "quay.io/cilium/cilium:v$VERSION"
+  $KIND load docker-image "quay.io/cilium/cilium:v$VERSION" -n $CLUSTERNAME
+
+  $HELM upgrade -i cilium cilium/cilium --version "$VERSION" \
+     --namespace kube-system \
+     --set image.pullPolicy=IfNotPresent \
+     --set ipam.mode=kubernetes \
+     --set policyCIDRMatchMode=nodes
+}
+
+_create_calico () {
+  _print_heading "Create Calico"
+  VERSION="v3.27.2"
+  $KUBECTL apply -f https://raw.githubusercontent.com/projectcalico/calico/$VERSION/manifests/calico.yaml
+}
+
+_wait_for_nodes_ready () {
+  _print_heading "Wait For Nodes Ready"
+
+  $KUBECTL wait --for=condition=ready nodes --all --timeout=15m
+}
+
 _create_loadbalancer () {
+  _print_heading "Create Loadbalancer"
+  local VERSION=
   $KUBECTL apply -f https://raw.githubusercontent.com/metallb/metallb/v0.13.12/config/manifests/metallb-native.yaml
-  $KUBECTL wait --namespace metallb-system --for=condition=ready pod --all --timeout=90s
+  $KUBECTL wait --namespace metallb-system --for=condition=ready pod --all --timeout=3m
 
   cat <<EOF | $KUBECTL apply -f -
 apiVersion: metallb.io/v1beta1
@@ -75,10 +138,11 @@ EOF
 }
 
 _create_local_git () {
+  _print_heading "Create Local Git"
   $KUBECTL apply -f git-server.yaml
 
   printf ">>> waiting for git server "
-  $KUBECTL wait --namespace default --for=condition=ready pod --selector=app=git-server --timeout=90s
+  $KUBECTL wait --namespace default --for=condition=ready pod --selector=app=git-server --timeout=3m
   gitUrl="http://$($KUBECTL get svc git-server -o jsonpath="{.status.loadBalancer.ingress[0].ip}")/repository.git"
   git remote add local "$gitUrl" 2>/dev/null || git remote set-url local "$gitUrl"
   until git fetch local; do
@@ -91,6 +155,7 @@ _create_local_git () {
 }
 
 _create_step_ca () {
+  _print_heading "Create Step Ca"
   ############# step ca for acme server in kind cluster #################
   $HELM repo add smallstep https://smallstep.github.io/helm-charts/
 
@@ -106,6 +171,7 @@ _create_step_ca () {
 }
 
 _create_local_dns () {
+  _print_heading "Create Local Dns"
   ############# knot #################
   $KUBECTL apply -f knot.yaml
 
@@ -119,6 +185,7 @@ _create_local_dns () {
 }
 
 _create_flux () {
+  _print_heading "Create Flux"
   ############# flux #################
   $KUBECTL apply -f ../../../flux-system/gotk-components.yaml
 
@@ -188,6 +255,7 @@ EOF
 }
 
 _patch_ccm() {
+  _print_heading "Patch Ccm"
   printf ">>> waiting for deployment cert-controller-manager "
   until $KUBECTL get deployment cert-controller-manager -n garden >/dev/null 2>&1; do
     printf .
@@ -199,6 +267,7 @@ _patch_ccm() {
 }
 
 _ensure_hosts() {
+  _print_heading "Ensure Hosts"
   printf ">>> waiting for hr gardener-runtime "
   until $KUBECTL get hr gardener-runtime -n flux-system >/dev/null 2>&1; do
     printf .
@@ -233,6 +302,7 @@ _ensure_hosts() {
 }
 
 _create_rbac () {
+  _print_heading "Create Rbac"
   $KUBECTL get secrets -n garden garden-kubeconfig-for-admin -o go-template='{{.data.kubeconfig | base64decode }}' > "$VGARDEN_KUBECONFIG"
 
   KUBECONFIG="$VGARDEN_KUBECONFIG" $KUBECTL apply -f garden-content/cloudprofile-local.yaml
@@ -263,6 +333,7 @@ EOF
 }
 
 _wait_for_initial_seed_ready () {
+  _print_heading "Wait For Initial Seed Ready"
 
   printf ">>> waiting for initial seed to become ready "
   until providerLocalSAName=$(KUBECONFIG="$VGARDEN_KUBECONFIG" $KUBECTL get seed initial-seed); do
@@ -280,9 +351,10 @@ install_kind
 install_kubectl
 install_yq
 install_envsubst
-
 _setup_kind_network
 _create_cluster
+_create_cni
+_wait_for_nodes_ready
 _create_loadbalancer
 _create_local_git
 _create_step_ca

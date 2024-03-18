@@ -9,7 +9,11 @@ on:
 jobs:
   install:
     strategy:
+      fail-fast: false
       matrix:
+        cni:
+          - calico
+          - cilium
         version:
           - v1.26.14
           - v1.27.11
@@ -26,5 +30,6 @@ jobs:
       - name: install
         env:
           K8S_VERSION: ${{ matrix.version }}
+          CNI: ${{ matrix.cni }}
         working-directory: hack/ci/yake-local
         run: ./work.sh
