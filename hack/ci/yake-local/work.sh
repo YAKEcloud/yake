@@ -13,6 +13,7 @@ VGARDEN_KUBECONFIG="/tmp/$CLUSTERNAME-apiserver.yaml"
 
 K8S_VERSION="${K8S_VERSION:-v1.26.6}"
 CNI="${CNI:-default}"
+REGISTRY_OVERWRITE="${REGISTRY_OVERWRITE:-false}"
 
 if [[ $CNI == "default" ]]; then
   kindConfig="kind-config.yaml"
@@ -215,8 +216,22 @@ _create_flux () {
 
   ############# yake config #################
   export NODE_CIDR="172.18.0.0/16"
+  if [[ $REGISTRY_OVERWRITE != "false" ]]; then
+    export REGISTRY_OVERWRITE_CONFIG="""
+    registryOverwrite:
+      docker.io: ${REGISTRY_OVERWRITE}/docker.io
+      europe-docker.pkg.dev: ${REGISTRY_OVERWRITE}/europe-docker.pkg.dev
+      ghcr.io: ${REGISTRY_OVERWRITE}/ghcr.io
+      eu.gcr.io: ${REGISTRY_OVERWRITE}/eu.gcr.io
+      gcr.io: ${REGISTRY_OVERWRITE}/gcr.io
+      quay.io: ${REGISTRY_OVERWRITE}/quay.io
+      registry.k8s.io: ${REGISTRY_OVERWRITE}/registry.k8s.io"""
+  else
+    unset REGISTRY_OVERWRITE_CONFIG
+  fi
+
   for file in config/*; do
-    $ENVSUBST "\$NODE_CIDR" < "$file" | $KUBECTL apply -f -
+    $ENVSUBST "\$NODE_CIDR \$REGISTRY_OVERWRITE_CONFIG" < "$file" | $KUBECTL apply -f -
   done
 
   ## M1 Mac workaround
