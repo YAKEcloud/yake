@@ -65,7 +65,8 @@ _setup_kind_network() {
   docker network create kind --driver=bridge \
     --subnet 172.18.0.0/16 --gateway 172.18.0.1 \
     --ipv6 --subnet fd00:10::/64 --gateway fd00:10::1 \
-    --opt com.docker.network.bridge.enable_ip_masquerade=true
+    --opt com.docker.network.bridge.enable_ip_masquerade=true \
+    --opt com.docker.network.driver.mtu=1400
 }
 
 _create_cluster () {
