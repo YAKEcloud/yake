@@ -106,6 +106,7 @@ _create_calico () {
   _print_heading "Create Calico"
   VERSION="v3.27.2"
   $KUBECTL create -f https://raw.githubusercontent.com/projectcalico/calico/$VERSION/manifests/tigera-operator.yaml
+  $KUBECTL wait --for condition=established --timeout=60s crd/installations.operator.tigera.io
   cat <<EOF | $KUBECTL apply -f -
 apiVersion: operator.tigera.io/v1
 kind: Installation
