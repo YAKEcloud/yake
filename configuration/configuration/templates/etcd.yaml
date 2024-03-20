@@ -33,15 +33,45 @@ stringData:
           storageContainer: {{ .Values.backups.bucketName }}
 {{- end }}
 {{- if eq .Values.backups.provider "openstack" }}
+        {{- $c := .Values.backups.credentials }}
         backup:
           storageProvider: Swift
           secretData:
-            authUrl: {{ .Values.backups.credentials.authURL }}
-            password: {{ .Values.backups.credentials.password }}
-            username: {{ .Values.backups.credentials.username }}
-            projectName: {{ .Values.backups.credentials.tenantName }}
-            regionName: {{ .Values.backups.credentials.region }}
-            domainName: {{ .Values.backups.credentials.domainName }}
+            {{- if $c.authURL }}
+            authUrl: {{ $c.authURL }}
+            {{- end }}
+
+            {{- if $c.password }}
+            password: {{ $c.password }}
+            {{- end }}
+
+            {{- if $c.username }}
+            username: {{ $c.username }}
+            {{- end }}
+
+            {{- if $c.tenantName }}
+            projectName: {{ $c.tenantName }}
+            {{- end }}
+
+            {{- if $c.region }}
+            regionName: {{ $c.region }}
+            {{- end }}
+
+            {{- if $c.domainName }}
+            domainName: {{ $c.domainName }}
+            {{- end }}
+
+            {{- if $c.applicationCredentialID }}
+            applicationCredentialID: {{ $c.applicationCredentialID }}
+            {{- end }}
+
+            {{- if $c.applicationCredentialName }}
+            applicationCredentialName: {{ $c.applicationCredentialName }}
+            {{- end }}
+
+            {{- if $c.applicationCredentialSecret }}
+            applicationCredentialSecret: {{ $c.applicationCredentialSecret }}
+            {{- end }}
           storageContainer: {{ .Values.backups.bucketName }}
 {{- end }}
 {{- end }}
