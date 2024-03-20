@@ -33,10 +33,10 @@ stringData:
           storageContainer: {{ .Values.backups.bucketName }}
 {{- end }}
 {{- if eq .Values.backups.provider "openstack" }}
-        {{- $c := .Values.backups.credentials }}
         backup:
           storageProvider: Swift
           secretData:
+            {{- $c := .Values.backups.credentials }}
             {{- if $c.authURL }}
             authUrl: {{ $c.authURL }}
             {{- end }}
