@@ -105,7 +105,7 @@ _create_cilium () {
 _create_calico () {
   _print_heading "Create Calico"
   VERSION="v3.27.2"
-  $KUBECTL apply -f https://raw.githubusercontent.com/projectcalico/calico/$VERSION/manifests/tigera-operator.yaml
+  $KUBECTL create -f https://raw.githubusercontent.com/projectcalico/calico/$VERSION/manifests/tigera-operator.yaml
   cat <<EOF | $KUBECTL apply -f -
 apiVersion: operator.tigera.io/v1
 kind: Installation
