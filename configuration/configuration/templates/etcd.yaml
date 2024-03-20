@@ -19,8 +19,8 @@ stringData:
         backup:
           storageProvider: ABS
           secretData:
-            storage-account: {{ .Values.backups.credentials.storageAccount }}
-            storage-key: {{ .Values.backups.credentials.storageAccountAccessKey }}
+            storageAccount: {{ .Values.backups.credentials.storageAccount }}
+            storageKey: {{ .Values.backups.credentials.storageAccountAccessKey }}
           storageContainer: {{ .Values.backups.bucketName }}
 {{- end }}
 {{- if eq .Values.backups.provider "aws" }}
@@ -28,20 +28,20 @@ stringData:
           storageProvider: S3
           secretData:
             region: {{ .Values.backups.region }}
-            access-key-id: {{ .Values.backups.credentials.accessKeyID }}
-            secret-access-key: {{ .Values.backups.credentials.secretAccessKey }}
+            accessKeyId: {{ .Values.backups.credentials.accessKeyID }}
+            secretAccessKey: {{ .Values.backups.credentials.secretAccessKey }}
           storageContainer: {{ .Values.backups.bucketName }}
 {{- end }}
 {{- if eq .Values.backups.provider "openstack" }}
         backup:
           storageProvider: Swift
           secretData:
-            auth-url: {{ .Values.backups.credentials.authURL }}
+            authUrl: {{ .Values.backups.credentials.authURL }}
             password: {{ .Values.backups.credentials.password }}
             username: {{ .Values.backups.credentials.username }}
-            project-name: {{ .Values.backups.credentials.tenantName }}
-            region-name: {{ .Values.backups.credentials.region }}
-            domain-name: {{ .Values.backups.credentials.domainName }}
+            projectName: {{ .Values.backups.credentials.tenantName }}
+            regionName: {{ .Values.backups.credentials.region }}
+            domainName: {{ .Values.backups.credentials.domainName }}
           storageContainer: {{ .Values.backups.bucketName }}
 {{- end }}
 {{- end }}
