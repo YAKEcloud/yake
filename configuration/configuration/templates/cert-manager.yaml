@@ -18,5 +18,8 @@ stringData:
     startupapicheck:
       image:
         repository: {{ include "replaceRegistry" (dict "quay.io/jetstack/cert-manager-ctl" .Values.registryOverwrite) }}
+    webhook:
+      image:
+        repository: {{ include "replaceRegistry" (dict "quay.io/jetstack/cert-manager-webhook" .Values.registryOverwrite) }}
 {{- end }}
     installCRDs: true
