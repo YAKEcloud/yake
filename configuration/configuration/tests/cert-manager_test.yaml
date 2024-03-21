@@ -35,7 +35,4 @@ tests:
             startupapicheck:
               image:
                 repository: myregistry.example.org/jetstack/cert-manager-ctl
-            webhook:
-              image:
-                repository: myregistry.example.org/jetstack/cert-manager-webhook
             installCRDs: true
