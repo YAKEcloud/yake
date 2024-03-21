@@ -1,0 +1,27 @@
+name: Helm Unittests
+
+on:
+  pull_request:
+    paths:
+      - ./addons
+      - ./configuration
+      - ./gardener
+      - ./pre-gardener
+
+jobs:
+  check-yaml-syntax:
+    runs-on: ubuntu-22.04
+    steps:
+      - uses: actions/checkout@v3.1.0
+      - name: Install
+        run: |
+          apt update
+          apt install -y curl git
+          curl https://raw.githubusercontent.com/helm/helm/main/scripts/get-helm-3 | bash
+          helm plugin install https://github.com/helm-unittest/helm-unittest.git
+      - name: Test
+        run: |
+          find ./addons ./configuration ./gardener ./pre-gardener \
+            -type f \
+            -name "Chart.yaml" \
+            -exec bash -c 'helm unittest $(dirname $1)' shell {} \;
