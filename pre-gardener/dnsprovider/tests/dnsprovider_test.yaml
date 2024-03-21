@@ -2,10 +2,6 @@ templates:
   - dnsprovider.yaml
 tests:
   - it: should create DNSProvider with default values
-    set:
-      domains:
-        - mydomain.example.org
-      provider: example
     asserts:
       - containsDocument:
           apiVersion: dns.gardener.cloud/v1alpha1
