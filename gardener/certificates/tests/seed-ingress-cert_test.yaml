@@ -2,8 +2,6 @@ templates:
   - seed-ingress-cert.yaml
 tests:
   - it: should create Certificate with default values
-    set:
-      seed-ingress: internal.mydomain.example.org
     documentIndex: 0  # order in template is not actually important, but for this test to work it is
     asserts:
       - containsDocument:
@@ -26,8 +24,6 @@ tests:
               name: seed-ingress-certificate
               namespace: garden
   - it: should create empty Secret with default values
-    set:
-      seed-ingress: internal.mydomain.example.org
     documentIndex: 1  # order in template is not actually important, but for this test to work it is
     asserts:
       - containsDocument:
