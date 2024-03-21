@@ -23,7 +23,7 @@ spec:
                 - gardener-extension-admission-shoot-dns-service
       - podSelector:
           matchLabels:
-            app: nginx-ingress
+            yake.cloud/app: ingress-nginx
             app.kubernetes.io/component: controller
             yake.cloud/component: ingress-nginx
       - podSelector:

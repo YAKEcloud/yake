@@ -6,7 +6,7 @@ metadata:
 spec:
   podSelector:
     matchLabels:
-      app: nginx-ingress
+      yake.cloud/app: ingress-nginx
       app.kubernetes.io/component: controller
       yake.cloud/component: ingress-nginx
   ingress:
