@@ -19,8 +19,8 @@ stringData:
         backup:
           storageProvider: ABS
           secretData:
-            storage-account: {{ .Values.backups.credentials.storageAccount }}
-            storage-key: {{ .Values.backups.credentials.storageAccountAccessKey }}
+            storageAccount: {{ .Values.backups.credentials.storageAccount }}
+            storageKey: {{ .Values.backups.credentials.storageAccountAccessKey }}
           storageContainer: {{ .Values.backups.bucketName }}
 {{- end }}
 {{- if eq .Values.backups.provider "aws" }}
@@ -28,20 +28,50 @@ stringData:
           storageProvider: S3
           secretData:
             region: {{ .Values.backups.region }}
-            access-key-id: {{ .Values.backups.credentials.accessKeyID }}
-            secret-access-key: {{ .Values.backups.credentials.secretAccessKey }}
+            accessKeyId: {{ .Values.backups.credentials.accessKeyID }}
+            secretAccessKey: {{ .Values.backups.credentials.secretAccessKey }}
           storageContainer: {{ .Values.backups.bucketName }}
 {{- end }}
 {{- if eq .Values.backups.provider "openstack" }}
         backup:
           storageProvider: Swift
           secretData:
-            auth-url: {{ .Values.backups.credentials.authURL }}
-            password: {{ .Values.backups.credentials.password }}
-            username: {{ .Values.backups.credentials.username }}
-            project-name: {{ .Values.backups.credentials.tenantName }}
-            region-name: {{ .Values.backups.credentials.region }}
-            domain-name: {{ .Values.backups.credentials.domainName }}
+            {{- $c := .Values.backups.credentials }}
+            {{- if $c.authURL }}
+            authUrl: {{ $c.authURL }}
+            {{- end }}
+
+            {{- if $c.password }}
+            password: {{ $c.password }}
+            {{- end }}
+
+            {{- if $c.username }}
+            username: {{ $c.username }}
+            {{- end }}
+
+            {{- if $c.tenantName }}
+            projectName: {{ $c.tenantName }}
+            {{- end }}
+
+            {{- if $c.region }}
+            regionName: {{ $c.region }}
+            {{- end }}
+
+            {{- if $c.domainName }}
+            domainName: {{ $c.domainName }}
+            {{- end }}
+
+            {{- if $c.applicationCredentialID }}
+            applicationCredentialID: {{ $c.applicationCredentialID }}
+            {{- end }}
+
+            {{- if $c.applicationCredentialName }}
+            applicationCredentialName: {{ $c.applicationCredentialName }}
+            {{- end }}
+
+            {{- if $c.applicationCredentialSecret }}
+            applicationCredentialSecret: {{ $c.applicationCredentialSecret }}
+            {{- end }}
           storageContainer: {{ .Values.backups.bucketName }}
 {{- end }}
 {{- end }}
