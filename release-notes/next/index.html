@@ -5,7 +5,7 @@
 <meta name="generator" content="Docusaurus v3.1.0">
 <title data-rh="true">Release Notes next | Yet another Kubernetes Engine</title><meta data-rh="true" name="viewport" content="width=device-width,initial-scale=1"><meta data-rh="true" name="twitter:card" content="summary_large_image"><meta data-rh="true" property="og:url" content="https://yake.cloud/release-notes/next"><meta data-rh="true" property="og:locale" content="en"><meta data-rh="true" name="docusaurus_locale" content="en"><meta data-rh="true" name="docsearch:language" content="en"><meta data-rh="true" name="gardener" content="installation, production, operations, maintenance"><meta data-rh="true" name="docusaurus_version" content="current"><meta data-rh="true" name="docusaurus_tag" content="docs-release-notes-current"><meta data-rh="true" name="docsearch:version" content="current"><meta data-rh="true" name="docsearch:docusaurus_tag" content="docs-release-notes-current"><meta data-rh="true" property="og:title" content="Release Notes next | Yet another Kubernetes Engine"><meta data-rh="true" name="description" content="Yake release notes and upgrade guide"><meta data-rh="true" property="og:description" content="Yake release notes and upgrade guide"><link data-rh="true" rel="icon" href="/img/favicon.ico"><link data-rh="true" rel="canonical" href="https://yake.cloud/release-notes/next"><link data-rh="true" rel="alternate" href="https://yake.cloud/release-notes/next" hreflang="en"><link data-rh="true" rel="alternate" href="https://yake.cloud/release-notes/next" hreflang="x-default"><link rel="alternate" type="application/rss+xml" href="/blog/rss.xml" title="Yet another Kubernetes Engine RSS Feed">
 <link rel="alternate" type="application/atom+xml" href="/blog/atom.xml" title="Yet another Kubernetes Engine Atom Feed"><link rel="stylesheet" href="/assets/css/styles.447c22af.css">
-<script src="/assets/js/runtime~main.bdff78b1.js" defer="defer"></script>
+<script src="/assets/js/runtime~main.60fc9331.js" defer="defer"></script>
 <script src="/assets/js/main.065921d1.js" defer="defer"></script>
 </head>
 <body class="navigation-with-keyboard">
@@ -274,6 +274,153 @@ In the API following have been marked as deprecated:
 <ul>
 <li>gardener-extension-admission-azure: <code>europe-docker.pkg.dev/gardener-project/releases/gardener/extensions/admission-azure:v1.42.0</code></li>
 <li>gardener-extension-provider-azure: <code>europe-docker.pkg.dev/gardener-project/releases/gardener/extensions/provider-azure:v1.42.0</code></li>
+</ul>
+</div></div></details>
+<details class="details_lb9f alert alert--info details_b_Ee" data-collapsed="true"><summary><b>Update gardener-controlplane to <code>1.91.0</code></b></summary><div><div class="collapsibleContent_i85q">
+<!-- -->
+<h1>[gardener/gardener]</h1>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="️-breaking-changes-1">⚠️ Breaking Changes<a href="#️-breaking-changes-1" class="hash-link" aria-label="Direct link to   ⚠️ Breaking Changes" title="Direct link to ⚠️ Breaking Changes">​</a></h2>
+<ul>
+<li><code>[USER]</code> Deprecated <code>.spec.kubernetes.allowPrivilegedContainers</code> field in the Shoot API is now removed. by @shafeeqes [#9274]</li>
+<li><code>[USER]</code> The <code>.status.advertisedAddresses[]</code> list in a <code>Shoot</code>&#x27;s status now includes the <code>Shoot</code>&#x27;s service account issuer under the name <code>service-account-issuer</code>. Please revisit any logic that might depend on all advertised addresses being used for communication with the <code>kube-apiserver</code> of a shoot cluster. by @dimityrmirchev [#9196]</li>
+<li><code>[OPERATOR]</code> The <code>ShootForceDeletion</code> feature gate has been promoted to beta and is turned on by default.  by @acumino [#9325]</li>
+</ul>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="-new-features-1">✨ New Features<a href="#-new-features-1" class="hash-link" aria-label="Direct link to ✨ New Features" title="Direct link to ✨ New Features">​</a></h2>
+<ul>
+<li><code>[DEVELOPER]</code> The <code>{garden,seed,shoot}-care</code> controllers now incorporate <code>ManagedResource</code>s into all relevant conditions, and it is possible to override the condition type into which a <code>ManagedResource</code>&#x27;s status gets incorporated via the <code>care.gardener.cloud/condition-type</code> label. Please consult the respective documentation for more information (<a href="https://github.com/gardener/gardener/blob/master/docs/concepts/operator.md#care-reconciler" target="_blank" rel="noopener noreferrer"><code>garden-care</code></a>, <a href="https://github.com/gardener/gardener/blob/master/docs/concepts/gardenlet.md#care-reconciler-1" target="_blank" rel="noopener noreferrer"><code>seed-care</code></a>, <a href="https://github.com/gardener/gardener/blob/master/docs/concepts/gardenlet.md#care-reconciler-2" target="_blank" rel="noopener noreferrer"><code>shoot-care</code></a>). by @rfranzke [#9313]</li>
+<li><code>[OPERATOR]</code> The gardenlet now synchronizes the service account public keys of shoot clusters that have managed issuer enabled. The public keys are stored in a dedicated <code>gardener-system-shoot-issuer</code> namespace in the Garden cluster. by @dimityrmirchev [#9354]</li>
+<li><code>[OPERATOR]</code> <code>gardener-resource-manager</code> now considers the health and the progressing status for <code>Certificate</code> and <code>Issuer</code> resources (see <a href="https://github.com/gardener/cert-management/" target="_blank" rel="noopener noreferrer">cert-management</a>) managed via <code>ManagedResource</code>s. by @timuthy [#9326]</li>
+<li><code>[OPERATOR]</code> The Shoot maintenance controller now removes unsupported feature gates and admission plugins from the Shoot during force upgrades. by @shafeeqes [#9365]</li>
+<li><code>[OPERATOR]</code> <code>gardener-operator</code> now deploys two Alertmanager replicas into the <code>garden</code> namespace. They don&#x27;t come with any configuration by default. It is in the responsibility of the human operators to create <code>monitoring.coreos.com/v1alpha1.AlertmanagerConfig</code> resources with the proper configuration suitable for their needs. Read more about it <a href="https://github.com/gardener/gardener/blob/master/docs/concepts/operator.md#observability" target="_blank" rel="noopener noreferrer">here</a>. by @rfranzke [#9301]</li>
+<li><code>[OPERATOR]</code> The <code>ControlPlaneHealthy</code> condition in <code>Shoot</code>s now reports an issue when <code>{kube,machine}-controller-manager</code> or <code>cluster-autoscaler</code> are scaled down to <code>0</code> replicas. The <code>EveryNodeReady</code> condition in <code>Shoot</code>s now reports an issue when at least <code>20%</code> of the <code>Lease</code>s related to nodes in the <code>kube-node-lease</code> namespace are expired. by @rfranzke [#9376]</li>
+</ul>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="-bug-fixes-8">🐛 Bug Fixes<a href="#-bug-fixes-8" class="hash-link" aria-label="Direct link to 🐛 Bug Fixes" title="Direct link to 🐛 Bug Fixes">​</a></h2>
+<ul>
+<li><code>[DEVELOPER]</code> Function <code>NewClientFromBytes</code> in package <code>pkg/client/kubernetes/client.go</code> was fixed to consider <code>AllowedUserFields</code>. Earlier, it failed when creating a Kubernetes client with a special but allowed fields in the Kubeconfig (e.g. <code>auth-provider</code>). by @timuthy [#9333]</li>
+</ul>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="-others-4">🏃 Others<a href="#-others-4" class="hash-link" aria-label="Direct link to 🏃 Others" title="Direct link to 🏃 Others">​</a></h2>
+<ul>
+<li><code>[OPERATOR]</code> Update CoreDNS to v1.11.1. by @DockToFuture [#8945]</li>
+<li><code>[OPERATOR]</code> The gardener operator documentation now closes resembles the reality of the coding. by @ScheererJ [#9342]</li>
+<li><code>[OPERATOR]</code> The istio ingress gateway orphan namespace detection no longer interferes with the istio ingress gateway zone migration in case the target zone names are unknown and there is no active usage. by @ScheererJ [#9460]</li>
+<li><code>[OPERATOR]</code> The ingress domain of kube-apiserver should work again for single-zonal shoot control planes. by @ScheererJ [#9393]</li>
+<li><code>[OPERATOR]</code> There is a new plutono dashboard named <code>Container Images</code> that currently contains 2 panels for image pull durations. by @ialidzhikov [#9422]</li>
+<li><code>[OPERATOR]</code> Port 8132 of istio ingress gateway will respond to all ordinary http requests with a redirect (301) to the https port by @ScheererJ [#9332]</li>
+<li><code>[OPERATOR]</code> The operating system config reconciler of the <code>gardener-node-agent</code> now creates directories with <code>0755</code> permissions when it creates files listed in the corresponding <code>OperatingSystemConfig</code> on the node. Previously these directories were created with no permissions. by @plkokanov [#9443]</li>
+<li><code>[OPERATOR]</code> Seed clusters with a wildcard certificate no longer use <code>Ingress</code> resources to expose <code>kube-apiserver</code>. Instead, <code>Istio</code> resources are directly used now. by @ScheererJ [#9300]</li>
+<li><code>[OPERATOR]</code> Shoot clusters should stay accessible after istio ingress gateway migration via annotation alpha.istio-ingress.gardener.cloud/migrate-to was triggered. by @ScheererJ [#9423]</li>
+<li><code>[OPERATOR]</code> Operators can create duplicate istio ingress gateways for migration if the zone names should be changed in the seed specification by @ScheererJ [#9304]</li>
+<li><code>[DEVELOPER]</code> Now the observability applications which are also targets of the authentication &amp; authorization proxies share common label.  by @nickytd [#9385]</li>
+<li><code>[DEVELOPER]</code> Local dev setup can now deploy a cluster with volume resize support. by @dnaeon [#9363]</li>
+</ul>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="docker-images-8">Docker Images<a href="#docker-images-8" class="hash-link" aria-label="Direct link to Docker Images" title="Direct link to Docker Images">​</a></h2>
+<ul>
+<li>admission-controller: <code>europe-docker.pkg.dev/gardener-project/releases/gardener/admission-controller:v1.91.0</code></li>
+<li>apiserver: <code>europe-docker.pkg.dev/gardener-project/releases/gardener/apiserver:v1.91.0</code></li>
+<li>controller-manager: <code>europe-docker.pkg.dev/gardener-project/releases/gardener/controller-manager:v1.91.0</code></li>
+<li>gardenlet: <code>europe-docker.pkg.dev/gardener-project/releases/gardener/gardenlet:v1.91.0</code></li>
+<li>node-agent: <code>europe-docker.pkg.dev/gardener-project/releases/gardener/node-agent:v1.91.0</code></li>
+<li>operator: <code>europe-docker.pkg.dev/gardener-project/releases/gardener/operator:v1.91.0</code></li>
+<li>resource-manager: <code>europe-docker.pkg.dev/gardener-project/releases/gardener/resource-manager:v1.91.0</code></li>
+<li>scheduler: <code>europe-docker.pkg.dev/gardener-project/releases/gardener/scheduler:v1.91.0</code></li>
+</ul>
+</div></div></details>
+<details class="details_lb9f alert alert--info details_b_Ee" data-collapsed="true"><summary><b>Update gardener-controlplane to <code>1.91.0</code></b></summary><div><div class="collapsibleContent_i85q">
+<!-- -->
+<h1>[gardener/gardener]</h1>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="️-breaking-changes-2">⚠️ Breaking Changes<a href="#️-breaking-changes-2" class="hash-link" aria-label="Direct link to ⚠️ Breaking Changes" title="Direct link to ⚠️ Breaking Changes">​</a></h2>
+<ul>
+<li><code>[USER]</code> Deprecated <code>.spec.kubernetes.allowPrivilegedContainers</code> field in the Shoot API is now removed. by @shafeeqes [#9274]</li>
+<li><code>[USER]</code> The <code>.status.advertisedAddresses[]</code> list in a <code>Shoot</code>&#x27;s status now includes the <code>Shoot</code>&#x27;s service account issuer under the name <code>service-account-issuer</code>. Please revisit any logic that might depend on all advertised addresses being used for communication with the <code>kube-apiserver</code> of a shoot cluster. by @dimityrmirchev [#9196]</li>
+<li><code>[OPERATOR]</code> The <code>ShootForceDeletion</code> feature gate has been promoted to beta and is turned on by default.  by @acumino [#9325]</li>
+</ul>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="-new-features-2">✨ New Features<a href="#-new-features-2" class="hash-link" aria-label="Direct link to ✨ New Features" title="Direct link to ✨ New Features">​</a></h2>
+<ul>
+<li><code>[DEVELOPER]</code> The <code>{garden,seed,shoot}-care</code> controllers now incorporate <code>ManagedResource</code>s into all relevant conditions, and it is possible to override the condition type into which a <code>ManagedResource</code>&#x27;s status gets incorporated via the <code>care.gardener.cloud/condition-type</code> label. Please consult the respective documentation for more information (<a href="https://github.com/gardener/gardener/blob/master/docs/concepts/operator.md#care-reconciler" target="_blank" rel="noopener noreferrer"><code>garden-care</code></a>, <a href="https://github.com/gardener/gardener/blob/master/docs/concepts/gardenlet.md#care-reconciler-1" target="_blank" rel="noopener noreferrer"><code>seed-care</code></a>, <a href="https://github.com/gardener/gardener/blob/master/docs/concepts/gardenlet.md#care-reconciler-2" target="_blank" rel="noopener noreferrer"><code>shoot-care</code></a>). by @rfranzke [#9313]</li>
+<li><code>[OPERATOR]</code> The gardenlet now synchronizes the service account public keys of shoot clusters that have managed issuer enabled. The public keys are stored in a dedicated <code>gardener-system-shoot-issuer</code> namespace in the Garden cluster. by @dimityrmirchev [#9354]</li>
+<li><code>[OPERATOR]</code> <code>gardener-resource-manager</code> now considers the health and the progressing status for <code>Certificate</code> and <code>Issuer</code> resources (see <a href="https://github.com/gardener/cert-management/" target="_blank" rel="noopener noreferrer">cert-management</a>) managed via <code>ManagedResource</code>s. by @timuthy [#9326]</li>
+<li><code>[OPERATOR]</code> The Shoot maintenance controller now removes unsupported feature gates and admission plugins from the Shoot during force upgrades. by @shafeeqes [#9365]</li>
+<li><code>[OPERATOR]</code> <code>gardener-operator</code> now deploys two Alertmanager replicas into the <code>garden</code> namespace. They don&#x27;t come with any configuration by default. It is in the responsibility of the human operators to create <code>monitoring.coreos.com/v1alpha1.AlertmanagerConfig</code> resources with the proper configuration suitable for their needs. Read more about it <a href="https://github.com/gardener/gardener/blob/master/docs/concepts/operator.md#observability" target="_blank" rel="noopener noreferrer">here</a>. by @rfranzke [#9301]</li>
+<li><code>[OPERATOR]</code> The <code>ControlPlaneHealthy</code> condition in <code>Shoot</code>s now reports an issue when <code>{kube,machine}-controller-manager</code> or <code>cluster-autoscaler</code> are scaled down to <code>0</code> replicas. The <code>EveryNodeReady</code> condition in <code>Shoot</code>s now reports an issue when at least <code>20%</code> of the <code>Lease</code>s related to nodes in the <code>kube-node-lease</code> namespace are expired. by @rfranzke [#9376]</li>
+</ul>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="-bug-fixes-9">🐛 Bug Fixes<a href="#-bug-fixes-9" class="hash-link" aria-label="Direct link to 🐛 Bug Fixes" title="Direct link to 🐛 Bug Fixes">​</a></h2>
+<ul>
+<li><code>[DEVELOPER]</code> Function <code>NewClientFromBytes</code> in package <code>pkg/client/kubernetes/client.go</code> was fixed to consider <code>AllowedUserFields</code>. Earlier, it failed when creating a Kubernetes client with a special but allowed fields in the Kubeconfig (e.g. <code>auth-provider</code>). by @timuthy [#9333]</li>
+</ul>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="-others-5">🏃 Others<a href="#-others-5" class="hash-link" aria-label="Direct link to 🏃 Others" title="Direct link to 🏃 Others">​</a></h2>
+<ul>
+<li><code>[OPERATOR]</code> Update CoreDNS to v1.11.1. by @DockToFuture [#8945]</li>
+<li><code>[OPERATOR]</code> The gardener operator documentation now closes resembles the reality of the coding. by @ScheererJ [#9342]</li>
+<li><code>[OPERATOR]</code> The istio ingress gateway orphan namespace detection no longer interferes with the istio ingress gateway zone migration in case the target zone names are unknown and there is no active usage. by @ScheererJ [#9460]</li>
+<li><code>[OPERATOR]</code> The ingress domain of kube-apiserver should work again for single-zonal shoot control planes. by @ScheererJ [#9393]</li>
+<li><code>[OPERATOR]</code> There is a new plutono dashboard named <code>Container Images</code> that currently contains 2 panels for image pull durations. by @ialidzhikov [#9422]</li>
+<li><code>[OPERATOR]</code> Port 8132 of istio ingress gateway will respond to all ordinary http requests with a redirect (301) to the https port by @ScheererJ [#9332]</li>
+<li><code>[OPERATOR]</code> The operating system config reconciler of the <code>gardener-node-agent</code> now creates directories with <code>0755</code> permissions when it creates files listed in the corresponding <code>OperatingSystemConfig</code> on the node. Previously these directories were created with no permissions. by @plkokanov [#9443]</li>
+<li><code>[OPERATOR]</code> Seed clusters with a wildcard certificate no longer use <code>Ingress</code> resources to expose <code>kube-apiserver</code>. Instead, <code>Istio</code> resources are directly used now. by @ScheererJ [#9300]</li>
+<li><code>[OPERATOR]</code> Shoot clusters should stay accessible after istio ingress gateway migration via annotation alpha.istio-ingress.gardener.cloud/migrate-to was triggered. by @ScheererJ [#9423]</li>
+<li><code>[OPERATOR]</code> Operators can create duplicate istio ingress gateways for migration if the zone names should be changed in the seed specification by @ScheererJ [#9304]</li>
+<li><code>[DEVELOPER]</code> Now the observability applications which are also targets of the authentication &amp; authorization proxies share common label.  by @nickytd [#9385]</li>
+<li><code>[DEVELOPER]</code> Local dev setup can now deploy a cluster with volume resize support. by @dnaeon [#9363]</li>
+</ul>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="docker-images-9">Docker Images<a href="#docker-images-9" class="hash-link" aria-label="Direct link to Docker Images" title="Direct link to Docker Images">​</a></h2>
+<ul>
+<li>admission-controller: <code>europe-docker.pkg.dev/gardener-project/releases/gardener/admission-controller:v1.91.0</code></li>
+<li>apiserver: <code>europe-docker.pkg.dev/gardener-project/releases/gardener/apiserver:v1.91.0</code></li>
+<li>controller-manager: <code>europe-docker.pkg.dev/gardener-project/releases/gardener/controller-manager:v1.91.0</code></li>
+<li>gardenlet: <code>europe-docker.pkg.dev/gardener-project/releases/gardener/gardenlet:v1.91.0</code></li>
+<li>node-agent: <code>europe-docker.pkg.dev/gardener-project/releases/gardener/node-agent:v1.91.0</code></li>
+<li>operator: <code>europe-docker.pkg.dev/gardener-project/releases/gardener/operator:v1.91.0</code></li>
+<li>resource-manager: <code>europe-docker.pkg.dev/gardener-project/releases/gardener/resource-manager:v1.91.0</code></li>
+<li>scheduler: <code>europe-docker.pkg.dev/gardener-project/releases/gardener/scheduler:v1.91.0</code></li>
+</ul>
+</div></div></details>
+<details class="details_lb9f alert alert--info details_b_Ee" data-collapsed="true"><summary><b>Update gardenlet to <code>1.91.0</code></b></summary><div><div class="collapsibleContent_i85q">
+<!-- -->
+<h1>[gardener/gardener]</h1>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="️-breaking-changes-3">⚠️ Breaking Changes<a href="#️-breaking-changes-3" class="hash-link" aria-label="Direct link to ⚠️ Breaking Changes" title="Direct link to ⚠️ Breaking Changes">​</a></h2>
+<ul>
+<li><code>[USER]</code> Deprecated <code>.spec.kubernetes.allowPrivilegedContainers</code> field in the Shoot API is now removed. by @shafeeqes [#9274]</li>
+<li><code>[USER]</code> The <code>.status.advertisedAddresses[]</code> list in a <code>Shoot</code>&#x27;s status now includes the <code>Shoot</code>&#x27;s service account issuer under the name <code>service-account-issuer</code>. Please revisit any logic that might depend on all advertised addresses being used for communication with the <code>kube-apiserver</code> of a shoot cluster. by @dimityrmirchev [#9196]</li>
+<li><code>[OPERATOR]</code> The <code>ShootForceDeletion</code> feature gate has been promoted to beta and is turned on by default.  by @acumino [#9325]</li>
+</ul>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="-new-features-3">✨ New Features<a href="#-new-features-3" class="hash-link" aria-label="Direct link to ✨ New Features" title="Direct link to ✨ New Features">​</a></h2>
+<ul>
+<li><code>[DEVELOPER]</code> The <code>{garden,seed,shoot}-care</code> controllers now incorporate <code>ManagedResource</code>s into all relevant conditions, and it is possible to override the condition type into which a <code>ManagedResource</code>&#x27;s status gets incorporated via the <code>care.gardener.cloud/condition-type</code> label. Please consult the respective documentation for more information (<a href="https://github.com/gardener/gardener/blob/master/docs/concepts/operator.md#care-reconciler" target="_blank" rel="noopener noreferrer"><code>garden-care</code></a>, <a href="https://github.com/gardener/gardener/blob/master/docs/concepts/gardenlet.md#care-reconciler-1" target="_blank" rel="noopener noreferrer"><code>seed-care</code></a>, <a href="https://github.com/gardener/gardener/blob/master/docs/concepts/gardenlet.md#care-reconciler-2" target="_blank" rel="noopener noreferrer"><code>shoot-care</code></a>). by @rfranzke [#9313]</li>
+<li><code>[OPERATOR]</code> The gardenlet now synchronizes the service account public keys of shoot clusters that have managed issuer enabled. The public keys are stored in a dedicated <code>gardener-system-shoot-issuer</code> namespace in the Garden cluster. by @dimityrmirchev [#9354]</li>
+<li><code>[OPERATOR]</code> <code>gardener-resource-manager</code> now considers the health and the progressing status for <code>Certificate</code> and <code>Issuer</code> resources (see <a href="https://github.com/gardener/cert-management/" target="_blank" rel="noopener noreferrer">cert-management</a>) managed via <code>ManagedResource</code>s. by @timuthy [#9326]</li>
+<li><code>[OPERATOR]</code> The Shoot maintenance controller now removes unsupported feature gates and admission plugins from the Shoot during force upgrades. by @shafeeqes [#9365]</li>
+<li><code>[OPERATOR]</code> <code>gardener-operator</code> now deploys two Alertmanager replicas into the <code>garden</code> namespace. They don&#x27;t come with any configuration by default. It is in the responsibility of the human operators to create <code>monitoring.coreos.com/v1alpha1.AlertmanagerConfig</code> resources with the proper configuration suitable for their needs. Read more about it <a href="https://github.com/gardener/gardener/blob/master/docs/concepts/operator.md#observability" target="_blank" rel="noopener noreferrer">here</a>. by @rfranzke [#9301]</li>
+<li><code>[OPERATOR]</code> The <code>ControlPlaneHealthy</code> condition in <code>Shoot</code>s now reports an issue when <code>{kube,machine}-controller-manager</code> or <code>cluster-autoscaler</code> are scaled down to <code>0</code> replicas. The <code>EveryNodeReady</code> condition in <code>Shoot</code>s now reports an issue when at least <code>20%</code> of the <code>Lease</code>s related to nodes in the <code>kube-node-lease</code> namespace are expired. by @rfranzke [#9376]</li>
+</ul>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="-bug-fixes-10">🐛 Bug Fixes<a href="#-bug-fixes-10" class="hash-link" aria-label="Direct link to 🐛 Bug Fixes" title="Direct link to 🐛 Bug Fixes">​</a></h2>
+<ul>
+<li><code>[DEVELOPER]</code> Function <code>NewClientFromBytes</code> in package <code>pkg/client/kubernetes/client.go</code> was fixed to consider <code>AllowedUserFields</code>. Earlier, it failed when creating a Kubernetes client with a special but allowed fields in the Kubeconfig (e.g. <code>auth-provider</code>). by @timuthy [#9333]</li>
+</ul>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="-others-6">🏃 Others<a href="#-others-6" class="hash-link" aria-label="Direct link to 🏃 Others" title="Direct link to 🏃 Others">​</a></h2>
+<ul>
+<li><code>[OPERATOR]</code> Update CoreDNS to v1.11.1. by @DockToFuture [#8945]</li>
+<li><code>[OPERATOR]</code> The gardener operator documentation now closes resembles the reality of the coding. by @ScheererJ [#9342]</li>
+<li><code>[OPERATOR]</code> The istio ingress gateway orphan namespace detection no longer interferes with the istio ingress gateway zone migration in case the target zone names are unknown and there is no active usage. by @ScheererJ [#9460]</li>
+<li><code>[OPERATOR]</code> The ingress domain of kube-apiserver should work again for single-zonal shoot control planes. by @ScheererJ [#9393]</li>
+<li><code>[OPERATOR]</code> There is a new plutono dashboard named <code>Container Images</code> that currently contains 2 panels for image pull durations. by @ialidzhikov [#9422]</li>
+<li><code>[OPERATOR]</code> Port 8132 of istio ingress gateway will respond to all ordinary http requests with a redirect (301) to the https port by @ScheererJ [#9332]</li>
+<li><code>[OPERATOR]</code> The operating system config reconciler of the <code>gardener-node-agent</code> now creates directories with <code>0755</code> permissions when it creates files listed in the corresponding <code>OperatingSystemConfig</code> on the node. Previously these directories were created with no permissions. by @plkokanov [#9443]</li>
+<li><code>[OPERATOR]</code> Seed clusters with a wildcard certificate no longer use <code>Ingress</code> resources to expose <code>kube-apiserver</code>. Instead, <code>Istio</code> resources are directly used now. by @ScheererJ [#9300]</li>
+<li><code>[OPERATOR]</code> Shoot clusters should stay accessible after istio ingress gateway migration via annotation alpha.istio-ingress.gardener.cloud/migrate-to was triggered. by @ScheererJ [#9423]</li>
+<li><code>[OPERATOR]</code> Operators can create duplicate istio ingress gateways for migration if the zone names should be changed in the seed specification by @ScheererJ [#9304]</li>
+<li><code>[DEVELOPER]</code> Now the observability applications which are also targets of the authentication &amp; authorization proxies share common label.  by @nickytd [#9385]</li>
+<li><code>[DEVELOPER]</code> Local dev setup can now deploy a cluster with volume resize support. by @dnaeon [#9363]</li>
+</ul>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="docker-images-10">Docker Images<a href="#docker-images-10" class="hash-link" aria-label="Direct link to Docker Images" title="Direct link to Docker Images">​</a></h2>
+<ul>
+<li>admission-controller: <code>europe-docker.pkg.dev/gardener-project/releases/gardener/admission-controller:v1.91.0</code></li>
+<li>apiserver: <code>europe-docker.pkg.dev/gardener-project/releases/gardener/apiserver:v1.91.0</code></li>
+<li>controller-manager: <code>europe-docker.pkg.dev/gardener-project/releases/gardener/controller-manager:v1.91.0</code></li>
+<li>gardenlet: <code>europe-docker.pkg.dev/gardener-project/releases/gardener/gardenlet:v1.91.0</code></li>
+<li>node-agent: <code>europe-docker.pkg.dev/gardener-project/releases/gardener/node-agent:v1.91.0</code></li>
+<li>operator: <code>europe-docker.pkg.dev/gardener-project/releases/gardener/operator:v1.91.0</code></li>
+<li>resource-manager: <code>europe-docker.pkg.dev/gardener-project/releases/gardener/resource-manager:v1.91.0</code></li>
+<li>scheduler: <code>europe-docker.pkg.dev/gardener-project/releases/gardener/scheduler:v1.91.0</code></li>
 </ul>
 </div></div></details></div></article><nav class="pagination-nav docusaurus-mt-lg" aria-label="Docs pages"></nav></div></div></div></div></main></div></div></div><footer class="footer footer--dark"><div class="container container-fluid"><div class="row footer__links"><div class="col footer__col"><div class="footer__title">Docs</div><ul class="footer__items clean-list"><li class="footer__item"><a class="footer__link-item" href="/docs/overview">Docs</a></li></ul></div><div class="col footer__col"><div class="footer__title">Community</div><ul class="footer__items clean-list"><li class="footer__item"><a href="https://github.com/yakecloud" target="_blank" rel="noopener noreferrer" class="footer__link-item">GitHub<svg width="13.5" height="13.5" aria-hidden="true" viewBox="0 0 24 24" class="iconExternalLink_nPIU"><path fill="currentColor" d="M21 13v10h-21v-19h12v2h-10v15h17v-8h2zm3-12h-10.988l4.035 4-6.977 7.07 2.828 2.828 6.977-7.07 4.125 4.172v-11z"></path></svg></a></li><li class="footer__item"><a href="https://github.com/gardener-community" target="_blank" rel="noopener noreferrer" class="footer__link-item">Gardener Community<svg width="13.5" height="13.5" aria-hidden="true" viewBox="0 0 24 24" class="iconExternalLink_nPIU"><path fill="currentColor" d="M21 13v10h-21v-19h12v2h-10v15h17v-8h2zm3-12h-10.988l4.035 4-6.977 7.07 2.828 2.828 6.977-7.07 4.125 4.172v-11z"></path></svg></a></li><li class="footer__item"><a href="https://gardener-cloud.slack.com" target="_blank" rel="noopener noreferrer" class="footer__link-item">Slack<svg width="13.5" height="13.5" aria-hidden="true" viewBox="0 0 24 24" class="iconExternalLink_nPIU"><path fill="currentColor" d="M21 13v10h-21v-19h12v2h-10v15h17v-8h2zm3-12h-10.988l4.035 4-6.977 7.07 2.828 2.828 6.977-7.07 4.125 4.172v-11z"></path></svg></a></li></ul></div><div class="col footer__col"><div class="footer__title">More</div><ul class="footer__items clean-list"><li class="footer__item"><a class="footer__link-item" href="/blog">Blog</a></li><li class="footer__item"><a class="footer__link-item" href="/legals">Legals</a></li><li class="footer__item"><a class="footer__link-item" href="/privacy-policy">Privacy policy</a></li></ul></div></div><div class="footer__bottom text--center"><div class="footer__copyright">Copyright © 2024 23 Technologies GmbH</div></div></div></footer></div>
 </body>
