@@ -1,15 +1,16 @@
+---
 name: Build and Push gardener-extension-provider-local
 
 permissions:
   packages: write
 
-on:
+"on":
   workflow_dispatch:
   push:
     branches:
       - main
     paths:
-      - 'gardener/gardener.yaml'
+      - gardener/gardener.yaml
 
 jobs:
   buildAndPush:

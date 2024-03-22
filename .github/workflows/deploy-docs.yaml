@@ -1,12 +1,13 @@
+---
 name: Deploy to Docs GitHub Pages
 
-on:
+"on":
   workflow_dispatch:
   push:
     branches:
       - main
     paths:
-      - 'docs/**'
+      - docs/**
 
 permissions:
   contents: write
