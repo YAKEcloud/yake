@@ -511,3 +511,10 @@ no release notes available
 # [gardener-extension-provider-hcloud] v0.6.26
 
 </details>
+
+<details>
+<summary><b>Update provider-hcloud to <code>0.6.27</code></b></summary>
+
+# [gardener-extension-provider-hcloud] v0.6.27
+
+</details>

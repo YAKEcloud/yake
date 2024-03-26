@@ -32,7 +32,7 @@ stringData:
 {{- end }}
 
     provider-hcloud:
-      version: 0.6.26
+      version: 0.6.27
       admission:
         enabled: false
 {{- if .Values.registryOverwrite }}
