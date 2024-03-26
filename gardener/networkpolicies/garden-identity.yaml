@@ -12,8 +12,8 @@ spec:
   ingress:
     - from:
         - podSelector:
-            - matchLabels:
-                yake.cloud/app: ingress-nginx
+            matchLabels:
+              yake.cloud/app: ingress-nginx
   policyTypes:
     - Egress
     - Ingress
