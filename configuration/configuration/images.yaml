@@ -51,7 +51,7 @@ gardenlet:
       - name: dependency-watchdog
         repository: europe-docker.pkg.dev/gardener-project/releases/gardener/dependency-watchdog
         sourceRepository: github.com/gardener/dependency-watchdog
-        tag: v1.2.1
+        tag: v1.2.2
       - labels:
           - name: gardener.cloud/cve-categorisation
             value:
