@@ -9,5 +9,11 @@ spec:
       app: identity
   egress:
     - {}
+  ingress:
+    - from:
+        - podSelector:
+            - matchLabels:
+                yake.cloud/app: ingress-nginx
   policyTypes:
-  - Egress
+    - Egress
+    - Ingress
