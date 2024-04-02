@@ -249,7 +249,7 @@ spec:
   interval: 10s
   url: http://git-server.default.svc.cluster.local/repository.git
   ref:
-    branch: $(git branch --show-current)
+    branch: "$(git branch --show-current)"
 EOF
 
   cat <<EOF | $KUBECTL apply -f -
