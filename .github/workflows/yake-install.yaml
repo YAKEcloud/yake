@@ -15,7 +15,6 @@ jobs:
           - calico
           - cilium
         version:
-          - v1.26.14
           - v1.27.11
           - v1.28.7
     runs-on: self-hosted
