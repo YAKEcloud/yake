@@ -1,7 +1,7 @@
 ## What's Changed
-* Downgrade to etcd 3.4.26, Upgrade to etcd-backup-restore 0.24.7 by @JensAc in https://github.com/gardener-community/etcd/pull/13
+* Define images repository and tag as seperate keys, fallback to old style by @lotharbach in https://github.com/gardener-community/etcd/pull/16
+* Switch to new upstream registry
 
-## New Contributors
-* @JensAc made their first contribution in https://github.com/gardener-community/etcd/pull/13
 
-**Full Changelog**: https://github.com/gardener-community/etcd/compare/5.3.2...6.0.0
+
+**Full Changelog**: https://github.com/gardener-community/etcd/compare/6.1.0...6.2.0

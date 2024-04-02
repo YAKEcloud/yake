@@ -2,4 +2,4 @@ apiVersion: v2
 appVersion: v3.4.26
 description: Helm chart for etcd
 name: etcd
-version: 6.0.0
+version: 6.2.0

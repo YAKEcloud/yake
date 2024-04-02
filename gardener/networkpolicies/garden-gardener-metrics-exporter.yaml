@@ -10,5 +10,11 @@ spec:
       role: metrics-exporter
   egress:
     - {}
+  ingress:
+    - from:
+        - podSelector:
+            matchLabels:
+              yake.cloud/app: ingress-nginx
   policyTypes:
   - Egress
+  - Ingress

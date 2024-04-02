@@ -14,9 +14,10 @@ stringData:
       admissionWebhooks:
         patch:
           labels:
+            yake.cloud/app: ingress-nginx
             yake.cloud/component: ingress-nginx
       podLabels:
-        app: nginx-ingress
+        yake.cloud/app: ingress-nginx
         component: controller
         yake.cloud/component: ingress-nginx
       service:

@@ -40,11 +40,11 @@ if [[ -e ".git/refs/tags/$tag" ]]; then
 fi
 
 # check if there's a release branch of a higher version than what we want to release
-minor=$(echo "$version" | grep -oE '[0-9]{1,}$')
-nextMinor=$((minor + 1))
-nextMinorBranch="release-v$nextMinor"
+major=$(echo "$majorAndMinor" | grep -oE '^[0-9]{1,}')
+minor=$(echo "$majorAndMinor" | grep -oE '[0-9]{1,}$')
+nextMinorBranch="release-v$major.$((minor + 1))"
 
-if [[ -e ".git/refs/tags/$nextMinorBranch" ]]; then
+if [[ -e ".git/refs/heads/$nextMinorBranch" ]]; then
   echo "RELEASE_AS_LATEST=false" | tee -a "$GITHUB_ENV"
 else
   echo "RELEASE_AS_LATEST=true" | tee -a "$GITHUB_ENV"

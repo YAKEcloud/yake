@@ -1,1 +1,1 @@
-# [gardener-extension-provider-hcloud] v0.6.24
+# [gardener-extension-provider-hcloud] v0.6.27

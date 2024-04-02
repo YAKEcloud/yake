@@ -68,12 +68,42 @@ stringData:
       useSecret: false
     configuration:
       extraEnvVars:
-        OS_AUTH_URL: {{ .Values.backups.credentials.authURL | b64dec }}
-        OS_PASSWORD: {{ .Values.backups.credentials.password | b64dec }}
-        OS_USERNAME: {{ .Values.backups.credentials.username | b64dec }}
-        OS_PROJECT_NAME: {{ .Values.backups.credentials.tenantName | b64dec }}
-        OS_REGION_NAME: {{ .Values.backups.credentials.region | b64dec }}
-        OS_DOMAIN_NAME: {{ .Values.backups.credentials.domainName | b64dec }}
+        {{- $c := .Values.backups.credentials }}
+        {{- if $c.authURL }}
+        OS_AUTH_URL: {{ $c.authURL | b64dec }}
+        {{- end }}
+
+        {{- if $c.password }}
+        OS_PASSWORD: {{ $c.password | b64dec }}
+        {{- end }}
+
+        {{- if $c.username }}
+        OS_USERNAME: {{ $c.username | b64dec }}
+        {{- end }}
+
+        {{- if $c.tenantName }}
+        OS_PROJECT_NAME: {{ $c.tenantName | b64dec }}
+        {{- end }}
+
+        {{- if $c.region }}
+        OS_REGION_NAME: {{ $c.region | b64dec }}
+        {{- end }}
+
+        {{- if $c.domainName }}
+        OS_DOMAIN_NAME: {{ $c.domainName | b64dec }}
+        {{- end }}
+
+        {{- if $c.applicationCredentialID }}
+        OS_APPLICATION_CREDENTIAL_ID: {{ $c.applicationCredentialID | b64dec }}
+        {{- end }}
+
+        {{- if $c.applicationCredentialName }}
+        OS_APPLICATION_CREDENTIAL_NAME: {{ $c.applicationCredentialName | b64dec }}
+        {{- end }}
+
+        {{- if $c.applicationCredentialSecret }}
+        OS_APPLICATION_CREDENTIAL_SECRET: {{ $c.applicationCredentialSecret | b64dec }}
+        {{- end }}
       backupStorageLocation:
         - bucket: {{ .Values.backups.bucketName }}
           provider: community.openstack.org/openstack

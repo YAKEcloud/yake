@@ -15,6 +15,7 @@ spec:
           - gardener-extension-admission-gcp
           - gardener-extension-admission-aws
           - gardener-extension-admission-alicloud
+          - gardener-extension-admission-shoot-dns-service
   ingress:
     - {}
   egress:

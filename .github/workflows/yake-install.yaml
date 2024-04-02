@@ -9,7 +9,11 @@ on:
 jobs:
   install:
     strategy:
+      fail-fast: false
       matrix:
+        cni:
+          - calico
+          - cilium
         version:
           - v1.29.2
     runs-on: self-hosted
@@ -24,5 +28,7 @@ jobs:
       - name: install
         env:
           K8S_VERSION: ${{ matrix.version }}
+          CNI: ${{ matrix.cni }}
+          REGISTRY_OVERWRITE: ${{ vars.REGISTRY_OVERWRITE }} # set as a repository variable so it will not be used in forks
         working-directory: hack/ci/yake-local
         run: ./work.sh

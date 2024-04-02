@@ -69,21 +69,21 @@ tests:
       - ../images.yaml
     set:
       registryOverwrite:
-        eu.gcr.io: myregistry.example.org
+        europe-docker.pkg.dev: myregistry.example.org/europe-docker.pkg.dev
     asserts:
       - matchRegex:
           path: stringData['values.yaml']
           pattern: |-2
             image:
-              repository: myregistry.example.org/gardener-project/gardener/gardenlet
+              repository: myregistry.example.org/europe-docker.pkg.dev/gardener-project/releases/gardener/gardenlet
             imageVectorOverwrite: \|
               images:[\s\S]*
               - name: gardenlet
-                repository: myregistry.example.org/gardener-project/gardener/gardenlet[\s\S]*
+                repository: myregistry.example.org/europe-docker.pkg.dev/gardener-project/releases/gardener/gardenlet[\s\S]*
             componentImageVectorOverwrites: \|
               components:
               - name: etcd-druid
                 imageVectorOverwrite: \|
                   images:[\s\S]*
                   - name: etcd-backup-restore
-                    repository: myregistry.example.org/gardener-project/gardener/etcd
+                    repository: myregistry.example.org/europe-docker.pkg.dev/gardener-project/public/gardener/etcdbrctl

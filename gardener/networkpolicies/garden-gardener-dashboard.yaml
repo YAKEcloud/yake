@@ -9,5 +9,11 @@ spec:
   podSelector:
     matchLabels:
       app.kubernetes.io/name: gardener-dashboard
+  ingress:
+    - from:
+        - podSelector:
+            matchLabels:
+              yake.cloud/app: ingress-nginx
   policyTypes:
     - Egress
+    - Ingress
