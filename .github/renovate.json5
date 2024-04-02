@@ -10,6 +10,7 @@
     "release-v1.87",
   ],
   "automerge": true,
+  "configMigration": true,
   "dependencyDashboard": true,
   "platformAutomerge": true,
   "prHourlyLimit": 0,
