@@ -1,11 +1,13 @@
-name: "Yake install"
+---
+name: Yake install
+
 on:
   pull_request:
     branches:
-      - "main"
+      - main
     paths-ignore:
-      - 'docs/**'
-      - '**.md'
+      - docs/**
+      - "**.md"
 jobs:
   install:
     strategy:
@@ -31,6 +33,6 @@ jobs:
         env:
           K8S_VERSION: ${{ matrix.version }}
           CNI: ${{ matrix.cni }}
-          REGISTRY_OVERWRITE: ${{ vars.REGISTRY_OVERWRITE }} # set as a repository variable so it will not be used in forks
+          REGISTRY_OVERWRITE: ${{ vars.REGISTRY_OVERWRITE }}  # set as a repository variable so it will not be used in forks
         working-directory: hack/ci/yake-local
         run: ./work.sh
