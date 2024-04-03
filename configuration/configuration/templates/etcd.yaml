@@ -38,7 +38,7 @@ stringData:
           secretData:
             {{- $c := .Values.backups.credentials }}
             {{- if $c.authURL }}
-            authUrl: {{ $c.authURL }}
+            authURL: {{ $c.authURL }}
             {{- end }}
 
             {{- if $c.password }}
@@ -50,11 +50,11 @@ stringData:
             {{- end }}
 
             {{- if $c.tenantName }}
-            projectName: {{ $c.tenantName }}
+            tenantName: {{ $c.tenantName }}
             {{- end }}
 
             {{- if $c.region }}
-            regionName: {{ $c.region }}
+            region: {{ $c.region }}
             {{- end }}
 
             {{- if $c.domainName }}
