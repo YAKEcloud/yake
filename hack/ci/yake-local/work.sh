@@ -32,6 +32,30 @@ else
   exit 1
 fi
 
+function _with_backoff {
+  local max_attempts=3
+  local wait_seconds=1
+  local attempt=1
+  local exitCode=0
+
+  while (( attempt < max_attempts ))
+  do
+    if "$@"
+    then
+      return 0
+    else
+      exitCode=$?
+    fi
+
+    echo "Retrying in ${wait_seconds}s" 1>&2
+    sleep $wait_seconds
+    attempt=$(( attempt + 1 ))
+    wait_seconds=$(( wait_seconds * 2 ))
+  done
+
+  return $exitCode
+}
+
 _print_heading() {
   echo -e "\033[34m$1\033[0m"
 }
@@ -392,9 +416,9 @@ install_yq
 install_envsubst
 _setup_kind_network
 _create_cluster
-_create_cni
+_with_backoff _create_cni
 _wait_for_nodes_ready
-_create_loadbalancer
+_with_backoff _create_loadbalancer
 _create_local_git
 _create_step_ca
 _create_local_dns
