@@ -27,14 +27,14 @@ jobs:
     outputs:
       version: ${{ steps.version.outputs.version }}
     steps:
-      - uses: actions/setup-node@v3
+      - uses: actions/setup-node@v4
         with:
           node-version: 18
       - name: Install yarn
         run: npm i -g yarn
 
       - name: Checkout source
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
         with:
           token: "${{ secrets.GH_TOKEN_23T_MACHINE_USER }}"
           fetch-depth: 0
@@ -54,9 +54,8 @@ jobs:
       - name: Prepare release
         run: "hack/release/prepare.sh $version"
       - name: Github Release
-        uses: softprops/action-gh-release@v1
+        uses: softprops/action-gh-release@v2
         with:
           body_path: /tmp/release-body.md
           tag_name: v${{ steps.version.outputs.version }}
           make_latest: v${{ env.RELEASE_AS_LATEST }}  # set in prepare.sh
-
