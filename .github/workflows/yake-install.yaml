@@ -30,9 +30,12 @@ jobs:
           fetch-depth: 0
           ref: ${{ github.head_ref }}
       - name: install
+        uses: nick-fields/retry@v3
         env:
           K8S_VERSION: ${{ matrix.version }}
           CNI: ${{ matrix.cni }}
           REGISTRY_OVERWRITE: ${{ vars.REGISTRY_OVERWRITE }}  # set as a repository variable so it will not be used in forks
-        working-directory: hack/ci/yake-local
-        run: ./work.sh
+        with:
+          timeout_minutes: 20
+          max_attempts: 3
+          command: cd hack/ci/yake-local && ./work.sh

@@ -106,7 +106,9 @@ _create_cilium () {
 _create_calico () {
   _print_heading "Create Calico"
   VERSION="v3.27.2"
-  $KUBECTL create -f https://raw.githubusercontent.com/projectcalico/calico/$VERSION/manifests/tigera-operator.yaml
+  if ! $KUBECTL get crd/installations.operator.tigera.io; then
+    $KUBECTL create -f https://raw.githubusercontent.com/projectcalico/calico/$VERSION/manifests/tigera-operator.yaml
+  fi
   $KUBECTL wait --for condition=established --timeout=60s crd/installations.operator.tigera.io
   cat <<EOF | $KUBECTL apply -f -
 apiVersion: operator.tigera.io/v1
@@ -140,8 +142,8 @@ _wait_for_nodes_ready () {
 
 _create_loadbalancer () {
   _print_heading "Create Loadbalancer"
-  local VERSION=
-  $KUBECTL apply -f https://raw.githubusercontent.com/metallb/metallb/v0.13.12/config/manifests/metallb-native.yaml
+  local VERSION=v0.13.12
+  $KUBECTL apply -f https://raw.githubusercontent.com/metallb/metallb/$VERSION/config/manifests/metallb-native.yaml
   $KUBECTL wait --namespace metallb-system --for=condition=ready pod --all --timeout=3m
 
   cat <<EOF | $KUBECTL apply -f -
