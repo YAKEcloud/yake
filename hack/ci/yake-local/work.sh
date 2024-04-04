@@ -337,7 +337,7 @@ _ensure_hosts() {
     sleep 3
   done
 
-  $KUBECTL wait --for=condition=ready -n flux-system hr gardener-runtime --timeout=10m
+  $KUBECTL wait --for=condition=ready -n flux-system hr gardener-runtime --timeout=20m
   echo " ok"
 
   garden_ingress_ip=$($KUBECTL get svc -n garden garden-ingress-nginx-controller -o jsonpath="{.status.loadBalancer.ingress[0].ip}")
