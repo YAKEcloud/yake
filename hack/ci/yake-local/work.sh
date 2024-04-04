@@ -32,30 +32,6 @@ else
   exit 1
 fi
 
-function _with_backoff {
-  local max_attempts=3
-  local wait_seconds=1
-  local attempt=1
-  local exitCode=0
-
-  while (( attempt <= max_attempts ))
-  do
-    if "$@"
-    then
-      return 0
-    else
-      exitCode=$?
-    fi
-
-    echo "Retrying in ${wait_seconds}s" 1>&2
-    sleep $wait_seconds
-    attempt=$(( attempt + 1 ))
-    wait_seconds=$(( wait_seconds * 2 ))
-  done
-
-  return $exitCode
-}
-
 _print_heading() {
   echo -e "\033[34m$1\033[0m"
 }
@@ -131,10 +107,10 @@ _create_calico () {
   _print_heading "Create Calico"
   VERSION="v3.27.2"
   if ! $KUBECTL get crd/installations.operator.tigera.io; then
-    $KUBECTL create -f https://raw.githubusercontent.com/projectcalico/calico/$VERSION/manifests/tigera-operator.yaml || return $?
+    $KUBECTL create -f https://raw.githubusercontent.com/projectcalico/calico/$VERSION/manifests/tigera-operator.yaml
   fi
-  $KUBECTL wait --for condition=established --timeout=60s crd/installations.operator.tigera.io || return $?
-  cat <<EOF | $KUBECTL apply -f - || return $?
+  $KUBECTL wait --for condition=established --timeout=60s crd/installations.operator.tigera.io
+  cat <<EOF | $KUBECTL apply -f -
 apiVersion: operator.tigera.io/v1
 kind: Installation
 metadata:
@@ -167,10 +143,10 @@ _wait_for_nodes_ready () {
 _create_loadbalancer () {
   _print_heading "Create Loadbalancer"
   local VERSION=v0.13.12
-  $KUBECTL apply -f https://raw.githubusercontent.com/metallb/metallb/$VERSION/config/manifests/metallb-native.yaml || return $?
-  $KUBECTL wait --namespace metallb-system --for=condition=ready pod --all --timeout=3m || return $?
+  $KUBECTL apply -f https://raw.githubusercontent.com/metallb/metallb/$VERSION/config/manifests/metallb-native.yaml
+  $KUBECTL wait --namespace metallb-system --for=condition=ready pod --all --timeout=3m
 
-  cat <<EOF | $KUBECTL apply -f - || return $?
+  cat <<EOF | $KUBECTL apply -f -
 apiVersion: metallb.io/v1beta1
 kind: IPAddressPool
 metadata:
@@ -339,7 +315,7 @@ _ensure_hosts() {
     sleep 3
   done
 
-  $KUBECTL wait --for=condition=ready -n flux-system hr gardener-runtime --timeout=20m
+  $KUBECTL wait --for=condition=ready -n flux-system hr gardener-runtime --timeout=10m
   echo " ok"
 
   garden_ingress_ip=$($KUBECTL get svc -n garden garden-ingress-nginx-controller -o jsonpath="{.status.loadBalancer.ingress[0].ip}")
@@ -418,9 +394,9 @@ install_yq
 install_envsubst
 _setup_kind_network
 _create_cluster
-_with_backoff _create_cni
+_create_cni
 _wait_for_nodes_ready
-_with_backoff _create_loadbalancer
+_create_loadbalancer
 _create_local_git
 _create_step_ca
 _create_local_dns
