@@ -130,7 +130,9 @@ _create_cilium () {
 _create_calico () {
   _print_heading "Create Calico"
   VERSION="v3.27.2"
-  $KUBECTL apply -f https://raw.githubusercontent.com/projectcalico/calico/$VERSION/manifests/tigera-operator.yaml || return $?
+  if ! $KUBECTL get crd/installations.operator.tigera.io; then
+    $KUBECTL create -f https://raw.githubusercontent.com/projectcalico/calico/$VERSION/manifests/tigera-operator.yaml || return $?
+  fi
   $KUBECTL wait --for condition=established --timeout=60s crd/installations.operator.tigera.io || return $?
   cat <<EOF | $KUBECTL apply -f - || return $?
 apiVersion: operator.tigera.io/v1
