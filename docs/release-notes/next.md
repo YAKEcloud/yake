@@ -230,3 +230,10 @@ hide_table_of_contents: true
 **Full Changelog**: https://github.com/gardener-community/cloudprofiles/compare/0.7.4...0.7.5
 
 </details>
+
+<details>
+<summary><b>Update provider-hcloud to <code>0.6.28</code></b></summary>
+
+# [gardener-extension-provider-hcloud] v0.6.28
+
+</details>
