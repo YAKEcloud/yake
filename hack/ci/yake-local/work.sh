@@ -38,7 +38,7 @@ function _with_backoff {
   local attempt=1
   local exitCode=0
 
-  while (( attempt < max_attempts ))
+  while (( attempt <= max_attempts ))
   do
     if "$@"
     then
