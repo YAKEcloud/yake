@@ -14,8 +14,7 @@
   dependencyDashboard: true,
   platformAutomerge: true,
   prHourlyLimit: 0,
-  prConcurrentLimit: 4,
-  branchConcurrentLimit: 1,
+  prConcurrentLimit: 1,
   flux: {
     fileMatch: [
       'pre-gardener/.*.yaml',
