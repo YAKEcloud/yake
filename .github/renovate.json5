@@ -73,7 +73,7 @@
     {
       customType: 'regex',
       fileMatch: [
-        '[.]yaml$',
+        '[.]ya?ml$',
       ],
       matchStrings: [
         '(?<currentValue>[^ ]+?) # renovate: datasource=(?<datasource>.+?) depName=(?<depName>.+?)( versioning=(?<versioning>.+?))?\n'
