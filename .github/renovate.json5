@@ -73,6 +73,15 @@
     {
       customType: 'regex',
       fileMatch: [
+        '[.]yaml$',
+      ],
+      matchStrings: [
+        '(?<currentValue>[^ ]+?) # renovate: datasource=(?<datasource>.+?) depName=(?<depName>.+?)( versioning=(?<versioning>.+?))?\n'
+      ],
+    },
+    {
+      customType: 'regex',
+      fileMatch: [
         '^addons/addons/templates/dashboard.yaml$',
       ],
       datasourceTemplate: 'helm',
