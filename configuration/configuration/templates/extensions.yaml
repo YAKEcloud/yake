@@ -107,7 +107,7 @@ stringData:
 {{- else }}
             repository: eu.gcr.io/gardener-project/dns-controller-manager
 {{- end }}
-            tag: v0.13.3
+            tag: v0.18.4 # renovate: datasource=github-releases depName=gardener/external-dns-management
           configuration:
             cacheTtl: 300
             controllers: dnscontrollers,dnssources
