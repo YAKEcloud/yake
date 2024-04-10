@@ -2330,7 +2330,7 @@ shoot-rsyslog-relp:
                 The alpine container is not accessible from outside k8s clusters and not interacted with from other containers or other systems.
               policy: skip
         name: alpine
-        repository: eu.gcr.io/gardener-project/3rd/alpine
+        repository: europe-docker.pkg.dev/gardener-project/releases/3rd/alpine
         tag: 3.18.4
       - labels:
           - name: cloud.gardener.cnudie/dso/scanning-hints/binary_id/v1
