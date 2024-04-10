@@ -5,7 +5,7 @@
 <meta name="generator" content="Docusaurus v3.1.0">
 <title data-rh="true">Release Notes next | Yet another Kubernetes Engine</title><meta data-rh="true" name="viewport" content="width=device-width,initial-scale=1"><meta data-rh="true" name="twitter:card" content="summary_large_image"><meta data-rh="true" property="og:url" content="https://yake.cloud/release-notes/next"><meta data-rh="true" property="og:locale" content="en"><meta data-rh="true" name="docusaurus_locale" content="en"><meta data-rh="true" name="docsearch:language" content="en"><meta data-rh="true" name="gardener" content="installation, production, operations, maintenance"><meta data-rh="true" name="docusaurus_version" content="current"><meta data-rh="true" name="docusaurus_tag" content="docs-release-notes-current"><meta data-rh="true" name="docsearch:version" content="current"><meta data-rh="true" name="docsearch:docusaurus_tag" content="docs-release-notes-current"><meta data-rh="true" property="og:title" content="Release Notes next | Yet another Kubernetes Engine"><meta data-rh="true" name="description" content="Yake release notes and upgrade guide"><meta data-rh="true" property="og:description" content="Yake release notes and upgrade guide"><link data-rh="true" rel="icon" href="/img/favicon.ico"><link data-rh="true" rel="canonical" href="https://yake.cloud/release-notes/next"><link data-rh="true" rel="alternate" href="https://yake.cloud/release-notes/next" hreflang="en"><link data-rh="true" rel="alternate" href="https://yake.cloud/release-notes/next" hreflang="x-default"><link rel="alternate" type="application/rss+xml" href="/blog/rss.xml" title="Yet another Kubernetes Engine RSS Feed">
 <link rel="alternate" type="application/atom+xml" href="/blog/atom.xml" title="Yet another Kubernetes Engine Atom Feed"><link rel="stylesheet" href="/assets/css/styles.447c22af.css">
-<script src="/assets/js/runtime~main.1343f2b4.js" defer="defer"></script>
+<script src="/assets/js/runtime~main.b059965d.js" defer="defer"></script>
 <script src="/assets/js/main.ec45f163.js" defer="defer"></script>
 </head>
 <body class="navigation-with-keyboard">
@@ -49,6 +49,79 @@
 <ul>
 <li>gardener-extension-admission-cilium: <code>europe-docker.pkg.dev/gardener-project/releases/gardener/extensions/admission-cilium:v1.33.0</code></li>
 <li>gardener-extension-networking-cilium: <code>europe-docker.pkg.dev/gardener-project/releases/gardener/extensions/networking-cilium:v1.33.0</code></li>
+</ul>
+</div></div></details>
+<details class="details_lb9f alert alert--info details_b_Ee" data-collapsed="true"><summary><b>Update shoot-rsyslog-relp to <code>0.4.0</code></b></summary><div><div class="collapsibleContent_i85q">
+<!-- -->
+<h1>[gardener/gardener-extension-shoot-rsyslog-relp]</h1>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="️-breaking-changes-2">⚠️ Breaking Changes<a href="#️-breaking-changes-2" class="hash-link" aria-label="Direct link to ⚠️ Breaking Changes" title="Direct link to ⚠️ Breaking Changes">​</a></h2>
+<ul>
+<li><code>[OPERATOR]</code> CA and server certificates for the admission component are managed automatically. Passing custom certificates via Helm values is not supported anymore. by @timuthy [#57]</li>
+<li><code>[OPERATOR]</code> Change OCI Image Registry from GCR (<code>eu.gcr.io/gardener-project</code>) to Artifact-Registry (<code>europe-docker.pkg.dev/gardener-project/releases</code>). Users should update their references. by @ccwienk [#47]</li>
+<li><code>[OPERATOR]</code> <code>extension-shoot-rsyslog-relp</code> no longer supports Shoots with Кubernetes version == 1.24. by @Kostov6 [#79]</li>
+</ul>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="-noteworthy">📰 Noteworthy<a href="#-noteworthy" class="hash-link" aria-label="Direct link to 📰 Noteworthy" title="Direct link to 📰 Noteworthy">​</a></h2>
+<ul>
+<li><code>[DEVELOPER]</code> The <code>charts/images.yaml</code> file was moved to <code>imagevector/images.yaml</code>. by @plkokanov [#66]</li>
+</ul>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="-bug-fixes">🐛 Bug Fixes<a href="#-bug-fixes" class="hash-link" aria-label="Direct link to 🐛 Bug Fixes" title="Direct link to 🐛 Bug Fixes">​</a></h2>
+<ul>
+<li><code>[OPERATOR]</code> Fixed an issue where the <code>extension-shoot-rsyslog-relp-configuration-cleaner</code> ManagedResource could block Shoot deletion if the <code>shoot-rsyslog-relp</code> was disabled before the Shoot deletion was triggered, and disabling the extension failed while trying to deploy the said ManagedResource and wait for it to become ready.  by @plkokanov [#80]</li>
+</ul>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="-others-2">🏃 Others<a href="#-others-2" class="hash-link" aria-label="Direct link to 🏃 Others" title="Direct link to 🏃 Others">​</a></h2>
+<ul>
+<li><code>[OPERATOR]</code> Bumped <code>github.com/gardener/gardener</code> to <code>v1.89.0.</code> by @plkokanov [#73]</li>
+<li><code>[OPERATOR]</code> The extension now deploys the <code>rsyslog</code> configuration files by mutating the <code>OperatingSystemConfig</code> resource via a mutating webhook. Cleanup of the <code>rsyslog</code> configuration files is still handled by the <code>rsyslog-relp-configuration-cleaner</code> daemonset. by @plkokanov [#41]</li>
+<li><code>[OPERATOR]</code> Bump github.com/gardener/gardener to 1.86.0. by @timuthy [#57]</li>
+<li><code>[OPERATOR]</code> Fixed an issue where <code>rsyslog.service</code> would never get enabled if it was not already enabled by default. by @plkokanov [#58]</li>
+<li><code>[OPERATOR]</code> The name of the <code>gardener-extension-shoot-rsyslog-relp-admission</code> chart is now correctly specified as <code>gardener-extension-shoot-rsysloog-relp-admission</code>. Previously it was <code>gardener-extension-shoot-rsyslog-relp</code>. This should not require anything to be done by operators when upgrading the chart. by @plkokanov [#39]</li>
+<li><code>[OPERATOR]</code> The repository is now compliant with the <a href="https://reuse.software/" target="_blank" rel="noopener noreferrer">REUSE</a> license format. by @plkokanov [#71]</li>
+<li><code>[DEVELOPER]</code> The <code>vendor</code> directory was removed in favor of the <code>go mod cache</code>. by @timuthy [#57]</li>
+<li><code>[DEVELOPER]</code> Bumped golang to <code>v1.22.0</code> by @plkokanov [#73]</li>
+</ul>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="docker-images-2">Docker Images<a href="#docker-images-2" class="hash-link" aria-label="Direct link to Docker Images" title="Direct link to Docker Images">​</a></h2>
+<ul>
+<li>gardener-extension-shoot-rsyslog-relp-admission: <code>europe-docker.pkg.dev/gardener-project/releases/gardener/extensions/shoot-rsyslog-relp-admission:v0.4.0</code></li>
+<li>gardener-extension-shoot-rsyslog-relp: <code>europe-docker.pkg.dev/gardener-project/releases/gardener/extensions/shoot-rsyslog-relp:v0.4.0</code></li>
+</ul>
+</div></div></details>
+<details class="details_lb9f alert alert--info details_b_Ee" data-collapsed="true"><summary><b>Update provider-aws to <code>1.54.0</code></b></summary><div><div class="collapsibleContent_i85q">
+<!-- -->
+<h1>[gardener/gardener-extension-provider-aws]</h1>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="️-breaking-changes-3">⚠️ Breaking Changes<a href="#️-breaking-changes-3" class="hash-link" aria-label="Direct link to ⚠️ Breaking Changes" title="Direct link to ⚠️ Breaking Changes">​</a></h2>
+<ul>
+<li><code>[OPERATOR]</code> <code>provider-aws</code> no longer supports Shoots with Кubernetes version == 1.24. by @shafeeqes [#849]</li>
+<li><code>[USER]</code> [csi-snapshotter] Enable prevent-volume-mode-conversion feature flag by default. Volume mode change can still be triggered with the respective annotations. You can read more in the <a href="https://github.com/kubernetes/enhancements/tree/master/keps/sig-storage/3141-prevent-volume-mode-conversion" target="_blank" rel="noopener noreferrer">KEP</a> by @AndreasBurger [#899]</li>
+</ul>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="-bug-fixes-1">🐛 Bug Fixes<a href="#-bug-fixes-1" class="hash-link" aria-label="Direct link to 🐛 Bug Fixes" title="Direct link to 🐛 Bug Fixes">​</a></h2>
+<ul>
+<li><code>[DEVELOPER]</code> <code>source-</code> prefix of <code>BackupEntry</code> name is being ignored when performing entry deletion by @Kostov6 [#892]</li>
+</ul>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="-others-3">🏃 Others<a href="#-others-3" class="hash-link" aria-label="Direct link to 🏃 Others" title="Direct link to 🏃 Others">​</a></h2>
+<ul>
+<li><code>[DEPENDENCY]</code> The following golang dependencies have been upgraded :
+<ul>
+<li><code>gardener/gardener</code>: <code>v1.87.0</code>-&gt;<code>v1.91.1</code></li>
+<li>k8s.io/* : v0.28.3 -&gt; v0.29.3</li>
+<li>sigs.k8s.io/controller-runtime: v0.16.3-&gt; v0.17.2 by @shafeeqes [#901]</li>
+</ul>
+</li>
+<li><code>[OPERATOR]</code> The following images are updated:
+<ul>
+<li>registry.k8s.io/provider-aws/cloud-controller-manager: v1.25.14 -&gt; v1.25.15</li>
+<li>registry.k8s.io/provider-aws/cloud-controller-manager: v1.26.10 -&gt; v1.26.11</li>
+<li>registry.k8s.io/provider-aws/cloud-controller-manager: v1.27.5 -&gt; v1.27.6</li>
+<li>registry.k8s.io/provider-aws/cloud-controller-manager: v1.28.4 -&gt; v1.28.5</li>
+<li>registry.k8s.io/provider-aws/cloud-controller-manager: v1.29.1 -&gt; v1.29.2 by @ialidzhikov [#900]</li>
+</ul>
+</li>
+<li><code>[OPERATOR]</code> add os information as labels in machine class objects. by @tedteng [#894]</li>
+<li><code>[OPERATOR]</code> NodeGroupAutoscalingOptions can now be specified per worker group via the worker through the field <code>worker.spec.pools.clusterAutoscaler</code> by @shafeeqes [#901]</li>
+</ul>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="docker-images-3">Docker Images<a href="#docker-images-3" class="hash-link" aria-label="Direct link to Docker Images" title="Direct link to Docker Images">​</a></h2>
+<ul>
+<li>gardener-extension-admission-aws: <code>europe-docker.pkg.dev/gardener-project/releases/gardener/extensions/admission-aws:v1.54.0</code></li>
+<li>gardener-extension-provider-aws: <code>europe-docker.pkg.dev/gardener-project/releases/gardener/extensions/provider-aws:v1.54.0</code></li>
 </ul>
 </div></div></details></div></article><nav class="pagination-nav docusaurus-mt-lg" aria-label="Docs pages"></nav></div></div></div></div></main></div></div></div><footer class="footer footer--dark"><div class="container container-fluid"><div class="row footer__links"><div class="col footer__col"><div class="footer__title">Docs</div><ul class="footer__items clean-list"><li class="footer__item"><a class="footer__link-item" href="/docs/overview">Docs</a></li></ul></div><div class="col footer__col"><div class="footer__title">Community</div><ul class="footer__items clean-list"><li class="footer__item"><a href="https://github.com/yakecloud" target="_blank" rel="noopener noreferrer" class="footer__link-item">GitHub<svg width="13.5" height="13.5" aria-hidden="true" viewBox="0 0 24 24" class="iconExternalLink_nPIU"><path fill="currentColor" d="M21 13v10h-21v-19h12v2h-10v15h17v-8h2zm3-12h-10.988l4.035 4-6.977 7.07 2.828 2.828 6.977-7.07 4.125 4.172v-11z"></path></svg></a></li><li class="footer__item"><a href="https://github.com/gardener-community" target="_blank" rel="noopener noreferrer" class="footer__link-item">Gardener Community<svg width="13.5" height="13.5" aria-hidden="true" viewBox="0 0 24 24" class="iconExternalLink_nPIU"><path fill="currentColor" d="M21 13v10h-21v-19h12v2h-10v15h17v-8h2zm3-12h-10.988l4.035 4-6.977 7.07 2.828 2.828 6.977-7.07 4.125 4.172v-11z"></path></svg></a></li><li class="footer__item"><a href="https://gardener-cloud.slack.com" target="_blank" rel="noopener noreferrer" class="footer__link-item">Slack<svg width="13.5" height="13.5" aria-hidden="true" viewBox="0 0 24 24" class="iconExternalLink_nPIU"><path fill="currentColor" d="M21 13v10h-21v-19h12v2h-10v15h17v-8h2zm3-12h-10.988l4.035 4-6.977 7.07 2.828 2.828 6.977-7.07 4.125 4.172v-11z"></path></svg></a></li></ul></div><div class="col footer__col"><div class="footer__title">More</div><ul class="footer__items clean-list"><li class="footer__item"><a class="footer__link-item" href="/blog">Blog</a></li><li class="footer__item"><a class="footer__link-item" href="/legals">Legals</a></li><li class="footer__item"><a class="footer__link-item" href="/privacy-policy">Privacy policy</a></li></ul></div></div><div class="footer__bottom text--center"><div class="footer__copyright">Copyright © 2024 23 Technologies GmbH</div></div></div></footer></div>
 </body>
