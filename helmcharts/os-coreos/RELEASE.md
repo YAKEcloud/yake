@@ -1,8 +1,8 @@
 # [gardener/gardener-extension-os-coreos]
 
-## ✨ New Features
+## 🐛 Bug Fixes
 
-- `[OPERATOR]` The extension now supports Flatcar >= 3815.2.0 by @MichaelEischer [#93]
+- `[OPERATOR]` Skipping filecontent collection for files with imageRef in OperatingSystemConfigs to prevent a panic. by @nitrocb [#103]
 
 ## Docker Images
-- gardener-extension-os-coreos: `europe-docker.pkg.dev/gardener-project/releases/extensions/os-coreos:v1.21.0`
+- gardener-extension-os-coreos: `europe-docker.pkg.dev/gardener-project/releases/extensions/os-coreos:v1.21.1`
