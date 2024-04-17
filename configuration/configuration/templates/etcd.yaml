@@ -27,9 +27,24 @@ stringData:
         backup:
           storageProvider: S3
           secretData:
-            region: {{ .Values.backups.region }}
-            accessKeyId: {{ .Values.backups.credentials.accessKeyID }}
+            region: {{ .Values.backups.region | b64enc }}
+            accessKeyID: {{ .Values.backups.credentials.accessKeyID }}
             secretAccessKey: {{ .Values.backups.credentials.secretAccessKey }}
+          storageContainer: {{ .Values.backups.bucketName }}
+{{- end }}
+{{- if eq .Values.backups.provider "S3" }}
+        backup:
+          storageProvider: S3
+          secretData:
+            region: {{ .Values.backups.region | b64enc }}
+            accessKeyID: {{ .Values.backups.credentials.accessKeyID }}
+            secretAccessKey: {{ .Values.backups.credentials.secretAccessKey }}
+            {{- if .Values.backups.endpoint }}
+            endpoint: {{ .Values.backups.endpoint | b64enc }}
+            {{- end }}
+            {{- if .Values.backups.s3ForcePathStyle }}
+            s3ForcePathStyle:  {{ .Values.backups.s3ForcePathStyle | b64enc }}
+            {{- end }}
           storageContainer: {{ .Values.backups.bucketName }}
 {{- end }}
 {{- if eq .Values.backups.provider "openstack" }}
