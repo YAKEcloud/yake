@@ -329,3 +329,19 @@ hide_table_of_contents: true
 **Full Changelog**: https://github.com/gardener-community/cloudprofiles/compare/0.7.5...0.7.6
 
 </details>
+
+<details>
+<summary><b>Update networking-cilium to <code>1.34.0</code></b></summary>
+
+# [gardener/gardener-extension-networking-cilium]
+
+## 🏃 Others
+
+- `[OPERATOR]` Update cilium to `v1.15.3`. by @DockToFuture [#282]
+
+## Docker Images
+- gardener-extension-admission-cilium: `europe-docker.pkg.dev/gardener-project/releases/gardener/extensions/admission-cilium:v1.34.0`
+- gardener-extension-networking-cilium: `europe-docker.pkg.dev/gardener-project/releases/gardener/extensions/networking-cilium:v1.34.0`
+
+
+</details>
