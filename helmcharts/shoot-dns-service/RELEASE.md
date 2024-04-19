@@ -1,26 +1,18 @@
-# [gardener/gardener-extension-shoot-dns-service]
-
-## ⚠️ Breaking Changes
-
-- `[OPERATOR]` `extension-shoot-dns-service` no longer supports Shoots with Кubernetes version == 1.24. by @shafeeqes [#276]
-## 🏃 Others
-
-- `[OPERATOR]` Bumps golang from 1.22.0 to 1.22.1. by @dependabot[bot] [#304]
-- `[OPERATOR]` Bumps golang from 1.22.1 to 1.22.2. by @dependabot[bot] [#317]
-- `[OPERATOR]` Add Gardener error codes on DNS deletion and "no domain matching" errors. by @MartinWeindel [#303]
-- `[OPERATOR]` Bumps github.com/gardener/gardener from 1.90.0 to 1.91.0. by @dependabot[bot] [#311]
-- `[OPERATOR]` An issue caused the test execution to fail due to outdated go version in the TestDefinition is now fixed. by @ialidzhikov [#302]
-- `[OPERATOR]` Bumps github.com/gardener/gardener from 1.89.0 to 1.90.0. by @dependabot[bot] [#306]
-- `[USER]` Allow DNS provider type `rfc2136` by @MartinWeindel [#313]
 # [gardener/external-dns-management]
 
 ## 🐛 Bug Fixes
 
-- `[USER]` Fix panic if source object referenced by a DNSAnnotation object has no annotations in its metadata. by @MartinWeindel [gardener/external-dns-management#363]
-## 📖 Documentation
+- `[USER]` Keep stale entries of other providers of the same zone untouched if all providers but one have invalid credentials and last valid provider is removed. by @MartinWeindel [gardener/external-dns-management#364]
+- `[OPERATOR]` As AWS "us-gov" zones do not support alias target records, they are excluded from the list of canonical hosted zones used to decide if `ALIAS` records are created instead of `CNAME` records. by @MartinWeindel [gardener/external-dns-management#365]
+## 🏃 Others
 
-- `[USER]` Revised Cloudflare External DNS Management document to no longer recommend base64 encoding of the token in the secret. by @SeanKilleen [gardener/external-dns-management#361]
+- `[OPERATOR]` Update golang from `1.21.6` to `1.22.2` by @MartinWeindel [gardener/external-dns-management#366]
+# [gardener/gardener-extension-shoot-dns-service]
+
+## 🏃 Others
+
+- `[OPERATOR]` Bumps github.com/gardener/gardener from 1.91.0 to 1.92.0. by @dependabot[bot] [#318]
 
 ## Docker Images
-- gardener-extension-admission-shoot-dns-service: `europe-docker.pkg.dev/gardener-project/releases/gardener/extensions/admission-shoot-dns-service:v1.46.0`
-- gardener-extension-shoot-dns-service: `europe-docker.pkg.dev/gardener-project/releases/gardener/extensions/shoot-dns-service:v1.46.0`
+- gardener-extension-admission-shoot-dns-service: `europe-docker.pkg.dev/gardener-project/releases/gardener/extensions/admission-shoot-dns-service:v1.47.0`
+- gardener-extension-shoot-dns-service: `europe-docker.pkg.dev/gardener-project/releases/gardener/extensions/shoot-dns-service:v1.47.0`
