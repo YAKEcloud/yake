@@ -224,7 +224,6 @@ stringData:
       version: 0.1.0
       values:
         image:
-          tag: v0.1.0 # renovate: datasource=helm depName=backup-s3 registryUrl=https://gardener-community.github.io/gardener-charts
           pullPolicy: IfNotPresent
 {{- if .Values.registryOverwrite }}
           repository: {{ include "replaceRegistry" (dict "ghcr.io/metal-stack/gardener-extension-backup-s3" .Values.registryOverwrite) }}

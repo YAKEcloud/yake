@@ -79,8 +79,7 @@
         '[.]ya?ml$',
       ],
       matchStrings: [
-        '(?<currentValue>[^ ]+?) # renovate: datasource=(?<datasource>helm) depName=(?<depName>.+?) registryUrl=(?<registryUrl>.+?)\n',
-        '(?<currentValue>[^ ]+?) # renovate: datasource=(?<datasource>github-releases|github-tags) depName=(?<depName>.+?)\n'
+        '(?<currentValue>[^ ]+?) # renovate: datasource=(?<datasource>.+?) depName=(?<depName>.+?)( versioning=(?<versioning>.+?))?\n'
       ],
     },
     {
