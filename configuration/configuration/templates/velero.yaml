@@ -63,6 +63,33 @@ stringData:
           - mountPath: /target
             name: plugins
 
+{{- else if eq .Values.backups.provider "S3" }}
+    credentials:
+      useSecret: false
+    configuration:
+      extraEnvVars:
+        AWS_ACCESS_KEY_ID: {{ .Values.backups.credentials.accessKeyID | b64dec }}
+        AWS_SECRET_ACCESS_KEY: {{ .Values.backups.credentials.secretAccessKey | b64dec }}
+      backupStorageLocation:
+        - bucket: {{ .Values.backups.bucketName }}
+          provider: aws
+          prefix: velero-backup
+          config:
+            region: {{ .Values.backups.region }}
+            s3ForcePathStyle: {{ .Values.backups.s3ForcePathStyle }}
+            s3Url: {{ .Values.backups.endpoint }}
+    initContainers:
+      - name: velero-plugin-for-aws
+{{- if .Values.registryOverwrite }}
+        image: {{ include "replaceRegistry" (dict "docker.io/velero/velero-plugin-for-aws:v1.6.0" .Values.registryOverwrite) }}
+{{- else }}
+        image: velero/velero-plugin-for-aws:v1.7.0
+{{- end }}
+        imagePullPolicy: IfNotPresent
+        volumeMounts:
+          - mountPath: /target
+            name: plugins
+
 {{- else if eq .Values.backups.provider "openstack" }}
     credentials:
       useSecret: false
