@@ -1,19 +1,21 @@
 # [gardener/gardener-extension-shoot-cert-service]
 
-## ⚠️ Breaking Changes
-
-- `[OPERATOR]` `extension-shoot-cert-service` no longer supports Shoots with Кubernetes version == 1.24. by @shafeeqes [#223]
 ## 🏃 Others
 
-- `[OPERATOR]` Bumps github.com/gardener/gardener from 1.90.0 to 1.91.0. by @dependabot[bot] [#244]
-- `[OPERATOR]` Bumps github.com/gardener/gardener from 1.89.0 to 1.90.0. by @dependabot[bot] [#238]
+- `[OPERATOR]` Bumps github.com/gardener/gardener from 1.91.0 to 1.92.0. by @dependabot[bot] [#249]
+- `[OPERATOR]` Bumps golang from 1.22.1 to 1.22.2. by @dependabot[bot] [#247]
+- `[OPERATOR]` Bumps github.com/gardener/gardener from 1.92.0 to 1.93.0. by @dependabot[bot] [#251]
+- `[USER]` The defaults for the private key of new certificates have been changed from `RSA 2048bit` to `RSA 3072bit`. Existing certificates will make use of these new defaults when they are renewed. by @gardener-robot-ci-3 [#253]
 # [gardener/cert-management]
 
 ## ✨ New Features
 
-- `[USER]` The algorithm and size for the private key can now be specified in the certificate spec section to override the default algorithm `RSA` with key size 2048.  
-  Supported algorithms are `RSA` and `ECDSA`. For `RSA` the allowed key sizes are `2048`, `3072`, and `4096` with `2048` as default is not specified explicitly. For `ECDSA` the allowed key sizes are `256` and `384` with `256` as default.  
-  These algorithms and key sizes are supported by Let's Encrypt. For other ACME servers please check their documentation for information about supported combinations. by @MartinWeindel [gardener/cert-management#168]
+- `[USER]` The Istio resource `Gateway` can now be annotated with `cert.gardener.cloud/purpose=managed` to enable the automatic creation of `Certificate` resources for domain names extracted from hosts fields in this resource or related `VirtualServices` resources.  
+  The `Gateway` and `HTTPRoute` resources from the Gateway API are supported in a similar way. by @MartinWeindel [gardener/cert-management#174]
+## 🏃 Others
+
+- `[OPERATOR]` Fix cluster configuration for new source controllers `istio-gateways-dns` and `k8s-gateways-dns`. by @MartinWeindel [gardener/cert-management#175]
+- `[OPERATOR]` Support deployment specific default values for private key algorithm and size with the new command line options `--default-private-key-algorithm`, `--default-rsa-private-key-size`, `--default-ecdsa-private-key-size` by @MartinWeindel [gardener/cert-management#171]
 
 ## Docker Images
-- gardener-extension-shoot-cert-service: `europe-docker.pkg.dev/gardener-project/releases/gardener/extensions/shoot-cert-service:v1.42.0`
+- gardener-extension-shoot-cert-service: `europe-docker.pkg.dev/gardener-project/releases/gardener/extensions/shoot-cert-service:v1.43.0`
