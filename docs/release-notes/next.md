@@ -164,3 +164,33 @@ hide_table_of_contents: true
 
 
 </details>
+
+<details>
+<summary><b>Update dashboard to <code>1.74.1</code></b></summary>
+
+# [gardener/dashboard]
+
+## 🐛 Bug Fixes
+
+- `[USER]` Ticket titles start with `[<projectName>/<shootName>]`, unless overridden by a Gardener administrator's configuration. by @petersutter [#1830]
+
+## Docker Images
+- dashboard: `europe-docker.pkg.dev/gardener-project/releases/gardener/dashboard:1.74.1`
+
+
+</details>
+
+<details>
+<summary><b>Update dashboard to <code>1.74.1</code></b></summary>
+
+# [gardener/dashboard]
+
+## 🐛 Bug Fixes
+
+- `[USER]` Ticket titles start with `[<projectName>/<shootName>]`, unless overridden by a Gardener administrator's configuration. by @petersutter [#1830]
+
+## Docker Images
+- dashboard: `europe-docker.pkg.dev/gardener-project/releases/gardener/dashboard:1.74.1`
+
+
+</details>
