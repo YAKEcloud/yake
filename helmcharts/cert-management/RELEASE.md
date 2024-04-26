@@ -1,8 +1,8 @@
 # [gardener/cert-management]
 
-## 🏃 Others
+## 🐛 Bug Fixes
 
-- `[OPERATOR]` Fix cluster configuration for new source controllers `istio-gateways-dns` and `k8s-gateways-dns`. by @MartinWeindel [#175]
+- `[USER]` Fix regression for annotations on ingress resources: `dns.gardener.cloud/dnsnames` annotation must be ignored. by @MartinWeindel [#176]
 
 ## Docker Images
-- cert-management: `europe-docker.pkg.dev/gardener-project/releases/cert-controller-manager:v0.14.1`
+- cert-management: `europe-docker.pkg.dev/gardener-project/releases/cert-controller-manager:v0.14.2`
