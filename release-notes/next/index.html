@@ -5,7 +5,7 @@
 <meta name="generator" content="Docusaurus v3.1.0">
 <title data-rh="true">Release Notes next | Yet another Kubernetes Engine</title><meta data-rh="true" name="viewport" content="width=device-width,initial-scale=1"><meta data-rh="true" name="twitter:card" content="summary_large_image"><meta data-rh="true" property="og:url" content="https://yake.cloud/release-notes/next"><meta data-rh="true" property="og:locale" content="en"><meta data-rh="true" name="docusaurus_locale" content="en"><meta data-rh="true" name="docsearch:language" content="en"><meta data-rh="true" name="gardener" content="installation, production, operations, maintenance"><meta data-rh="true" name="docusaurus_version" content="current"><meta data-rh="true" name="docusaurus_tag" content="docs-release-notes-current"><meta data-rh="true" name="docsearch:version" content="current"><meta data-rh="true" name="docsearch:docusaurus_tag" content="docs-release-notes-current"><meta data-rh="true" property="og:title" content="Release Notes next | Yet another Kubernetes Engine"><meta data-rh="true" name="description" content="Yake release notes and upgrade guide"><meta data-rh="true" property="og:description" content="Yake release notes and upgrade guide"><link data-rh="true" rel="icon" href="/img/favicon.ico"><link data-rh="true" rel="canonical" href="https://yake.cloud/release-notes/next"><link data-rh="true" rel="alternate" href="https://yake.cloud/release-notes/next" hreflang="en"><link data-rh="true" rel="alternate" href="https://yake.cloud/release-notes/next" hreflang="x-default"><link rel="alternate" type="application/rss+xml" href="/blog/rss.xml" title="Yet another Kubernetes Engine RSS Feed">
 <link rel="alternate" type="application/atom+xml" href="/blog/atom.xml" title="Yet another Kubernetes Engine Atom Feed"><link rel="stylesheet" href="/assets/css/styles.447c22af.css">
-<script src="/assets/js/runtime~main.621ed5ae.js" defer="defer"></script>
+<script src="/assets/js/runtime~main.05fc5efb.js" defer="defer"></script>
 <script src="/assets/js/main.d0253bd2.js" defer="defer"></script>
 </head>
 <body class="navigation-with-keyboard">
@@ -207,6 +207,47 @@ The <code>Gateway</code> and <code>HTTPRoute</code> resources from the Gateway A
 <ul>
 <li>gardener-extension-admission-alicloud: <code>europe-docker.pkg.dev/gardener-project/releases/gardener/extensions/admission-alicloud:v1.52.0</code></li>
 <li>gardener-extension-provider-alicloud: <code>europe-docker.pkg.dev/gardener-project/releases/gardener/extensions/provider-alicloud:v1.52.0</code></li>
+</ul>
+</div></div></details>
+<details class="details_lb9f alert alert--info details_b_Ee" data-collapsed="true"><summary><b>Update provider-gcp to <code>1.35.0</code></b></summary><div><div class="collapsibleContent_i85q">
+<!-- -->
+<h1>[gardener/gardener-extension-provider-gcp]</h1>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="️-breaking-changes-1">⚠️ Breaking Changes<a href="#️-breaking-changes-1" class="hash-link" aria-label="Direct link to ⚠️ Breaking Changes" title="Direct link to ⚠️ Breaking Changes">​</a></h2>
+<ul>
+<li><code>[USER]</code> [csi-snapshotter] Enable prevent-volume-mode-conversion feature flag by default. Volume mode change can still be triggered with the respective annotations. You can read more in the <a href="https://github.com/kubernetes/enhancements/tree/master/keps/sig-storage/3141-prevent-volume-mode-conversion" target="_blank" rel="noopener noreferrer">KEP</a> by @kon-angelo [#719]</li>
+<li><code>[OPERATOR]</code> <code>provider-gcp</code> no longer supports Shoots with Кubernetes version == 1.24. by @shafeeqes [#677]</li>
+</ul>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="-noteworthy">📰 Noteworthy<a href="#-noteworthy" class="hash-link" aria-label="Direct link to 📰 Noteworthy" title="Direct link to 📰 Noteworthy">​</a></h2>
+<ul>
+<li><code>[USER]</code> Added support for the <code>EnableDynamicPortAllocation</code> flag and the related configuration of the related <code>MaxPortsPerVM</code> value on cloudNATs.<br>
+<code>IcmpIdleTimeoutSec</code>, <code>TcpEstablishedIdleTimeoutSec</code>, <code>TcpTimeWaitTimeoutSec</code>, <code>TcpTransitoryIdleTimeoutSec</code>, and <code>UdpIdleTimeoutSec</code> can now be configured on cloudNATs.  by @AndreasBurger [#706]</li>
+<li><code>[USER]</code> <code>DisableGardenerServiceAccountCreation</code> feature gate has been promoted to beta and therefore is enabled by default. by @AndreasBurger [#711]</li>
+</ul>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="-new-features-1">✨ New Features<a href="#-new-features-1" class="hash-link" aria-label="Direct link to ✨ New Features" title="Direct link to ✨ New Features">​</a></h2>
+<ul>
+<li><code>[DEVELOPER]</code> Dependency update to <code>github.com/gardener/gardener@v1.90.4</code>. by @oliver-goetz [#714]</li>
+</ul>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="-bug-fixes-7">🐛 Bug Fixes<a href="#-bug-fixes-7" class="hash-link" aria-label="Direct link to 🐛 Bug Fixes" title="Direct link to 🐛 Bug Fixes">​</a></h2>
+<ul>
+<li><code>[DEVELOPER]</code> <code>source-</code> prefix of <code>BackupEntry</code> name is being ignored when performing entry deletion by @Kostov6 [#710]</li>
+</ul>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="-others-11">🏃 Others<a href="#-others-11" class="hash-link" aria-label="Direct link to 🏃 Others" title="Direct link to 🏃 Others">​</a></h2>
+<ul>
+<li><code>[OPERATOR]</code> [infrastructure] General stability flow reconciliation improvements. by @kon-angelo [#715]</li>
+<li><code>[OPERATOR]</code> add os information as labels in machine class objects. by @tedteng [#689]</li>
+<li><code>[OPERATOR]</code> NodeGroupAutoscalingOptions can now be specified per worker group via the worker through the field <code>worker.spec.pools.clusterAutoscaler</code> by @aaronfern [#733]</li>
+<li><code>[USER]</code> An error text which better indicates the reason for the failure is displayed when a user tries to create a <code>SecretBinding</code> resource which references a <code>Secret</code> with a <code>serviceaccount.json</code> field in invalid json format. by @plkokanov [#723]</li>
+</ul>
+<h1>[gardener/terraformer]</h1>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="-others-12">🏃 Others<a href="#-others-12" class="hash-link" aria-label="Direct link to 🏃 Others" title="Direct link to 🏃 Others">​</a></h2>
+<ul>
+<li><code>[OPERATOR]</code> Update go -&gt; v1.21.5 by @kon-angelo [gardener/terraformer#146]</li>
+<li><code>[OPERATOR]</code> Update alpine -&gt; v1.29.0 by @kon-angelo [gardener/terraformer#146]</li>
+</ul>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="docker-images-11">Docker Images<a href="#docker-images-11" class="hash-link" aria-label="Direct link to Docker Images" title="Direct link to Docker Images">​</a></h2>
+<ul>
+<li>gardener-extension-admission-gcp: <code>europe-docker.pkg.dev/gardener-project/releases/gardener/extensions/admission-gcp:v1.35.0</code></li>
+<li>gardener-extension-provider-gcp: <code>europe-docker.pkg.dev/gardener-project/releases/gardener/extensions/provider-gcp:v1.35.0</code></li>
 </ul>
 </div></div></details></div></article><nav class="pagination-nav docusaurus-mt-lg" aria-label="Docs pages"></nav></div></div></div></div></main></div></div></div><footer class="footer footer--dark"><div class="container container-fluid"><div class="row footer__links"><div class="col footer__col"><div class="footer__title">Docs</div><ul class="footer__items clean-list"><li class="footer__item"><a class="footer__link-item" href="/docs/overview">Docs</a></li></ul></div><div class="col footer__col"><div class="footer__title">Community</div><ul class="footer__items clean-list"><li class="footer__item"><a href="https://github.com/yakecloud" target="_blank" rel="noopener noreferrer" class="footer__link-item">GitHub<svg width="13.5" height="13.5" aria-hidden="true" viewBox="0 0 24 24" class="iconExternalLink_nPIU"><path fill="currentColor" d="M21 13v10h-21v-19h12v2h-10v15h17v-8h2zm3-12h-10.988l4.035 4-6.977 7.07 2.828 2.828 6.977-7.07 4.125 4.172v-11z"></path></svg></a></li><li class="footer__item"><a href="https://github.com/gardener-community" target="_blank" rel="noopener noreferrer" class="footer__link-item">Gardener Community<svg width="13.5" height="13.5" aria-hidden="true" viewBox="0 0 24 24" class="iconExternalLink_nPIU"><path fill="currentColor" d="M21 13v10h-21v-19h12v2h-10v15h17v-8h2zm3-12h-10.988l4.035 4-6.977 7.07 2.828 2.828 6.977-7.07 4.125 4.172v-11z"></path></svg></a></li><li class="footer__item"><a href="https://gardener-cloud.slack.com" target="_blank" rel="noopener noreferrer" class="footer__link-item">Slack<svg width="13.5" height="13.5" aria-hidden="true" viewBox="0 0 24 24" class="iconExternalLink_nPIU"><path fill="currentColor" d="M21 13v10h-21v-19h12v2h-10v15h17v-8h2zm3-12h-10.988l4.035 4-6.977 7.07 2.828 2.828 6.977-7.07 4.125 4.172v-11z"></path></svg></a></li></ul></div><div class="col footer__col"><div class="footer__title">More</div><ul class="footer__items clean-list"><li class="footer__item"><a class="footer__link-item" href="/blog">Blog</a></li><li class="footer__item"><a class="footer__link-item" href="/legals">Legals</a></li><li class="footer__item"><a class="footer__link-item" href="/privacy-policy">Privacy policy</a></li></ul></div></div><div class="footer__bottom text--center"><div class="footer__copyright">Copyright © 2024 23 Technologies GmbH</div></div></div></footer></div>
 </body>
