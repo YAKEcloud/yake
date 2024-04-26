@@ -1684,21 +1684,7 @@ provider-gcp:
         name: terraformer
         repository: europe-docker.pkg.dev/gardener-project/releases/gardener/terraformer-gcp
         sourceRepository: github.com/gardener/terraformer
-        tag: v2.25.0
-      - labels:
-          - name: gardener.cloud/cve-categorisation
-            value:
-              authentication_enforced: false
-              availability_requirement: low
-              confidentiality_requirement: high
-              integrity_requirement: high
-              network_exposure: protected
-              user_interaction: gardener-operator
-        name: cloud-controller-manager
-        repository: europe-docker.pkg.dev/gardener-project/releases/kubernetes/cloud-provider-gcp
-        sourceRepository: github.com/gardener/cloud-provider-gcp
-        tag: v1.24.13
-        targetVersion: 1.24.x
+        tag: v2.26.0
       - labels:
           - name: gardener.cloud/cve-categorisation
             value:
@@ -1794,7 +1780,7 @@ provider-gcp:
         name: csi-driver
         repository: registry.k8s.io/cloud-provider-gcp/gcp-compute-persistent-disk-csi-driver
         sourceRepository: github.com/kubernetes-sigs/gcp-compute-persistent-disk-csi-driver
-        tag: v1.13.0
+        tag: v1.13.2
       - labels:
           - name: gardener.cloud/cve-categorisation
             value:
@@ -1807,8 +1793,7 @@ provider-gcp:
         name: csi-provisioner
         repository: registry.k8s.io/sig-storage/csi-provisioner
         sourceRepository: github.com/kubernetes-csi/external-provisioner
-        tag: v3.6.1
-        targetVersion: '>= 1.24'
+        tag: v4.0.0
       - labels:
           - name: gardener.cloud/cve-categorisation
             value:
@@ -1821,7 +1806,7 @@ provider-gcp:
         name: csi-attacher
         repository: registry.k8s.io/sig-storage/csi-attacher
         sourceRepository: github.com/kubernetes-csi/external-attacher
-        tag: v4.4.1
+        tag: v4.5.0
       - labels:
           - name: gardener.cloud/cve-categorisation
             value:
@@ -1834,7 +1819,7 @@ provider-gcp:
         name: csi-resizer
         repository: registry.k8s.io/sig-storage/csi-resizer
         sourceRepository: github.com/kubernetes-csi/external-resizer
-        tag: v1.9.1
+        tag: v1.10.0
       - labels:
           - name: gardener.cloud/cve-categorisation
             value:
@@ -1847,7 +1832,7 @@ provider-gcp:
         name: csi-snapshotter
         repository: registry.k8s.io/sig-storage/csi-snapshotter
         sourceRepository: github.com/kubernetes-csi/external-snapshotter
-        tag: v6.3.1
+        tag: v7.0.1
       - labels:
           - name: gardener.cloud/cve-categorisation
             value:
@@ -1860,7 +1845,7 @@ provider-gcp:
         name: csi-snapshot-validation-webhook
         repository: registry.k8s.io/sig-storage/snapshot-validation-webhook
         sourceRepository: github.com/kubernetes-csi/external-snapshotter
-        tag: v6.3.1
+        tag: v7.0.1
       - labels:
           - name: gardener.cloud/cve-categorisation
             value:
@@ -1873,7 +1858,7 @@ provider-gcp:
         name: csi-snapshot-controller
         repository: registry.k8s.io/sig-storage/snapshot-controller
         sourceRepository: github.com/kubernetes-csi/external-snapshotter
-        tag: v6.3.1
+        tag: v7.0.1
       - labels:
           - name: gardener.cloud/cve-categorisation
             value:
@@ -1886,7 +1871,7 @@ provider-gcp:
         name: csi-node-driver-registrar
         repository: registry.k8s.io/sig-storage/csi-node-driver-registrar
         sourceRepository: github.com/kubernetes-csi/node-driver-registrar
-        tag: v2.9.0
+        tag: v2.10.0
       - labels:
           - name: gardener.cloud/cve-categorisation
             value:
@@ -1899,7 +1884,7 @@ provider-gcp:
         name: csi-liveness-probe
         repository: registry.k8s.io/sig-storage/livenessprobe
         sourceRepository: github.com/kubernetes-csi/livenessprobe
-        tag: v2.11.0
+        tag: v2.12.0
 provider-alicloud:
   imageVectorOriginal:
     images:
