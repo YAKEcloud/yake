@@ -19,7 +19,5 @@ cd ..
 export newChart=$(tar -C gardener-upstream/charts/gardener/provider-local -czf - . | base64 -w0 -)
 export newVersion
 
-$YQ -i 'select(document_index == 0).providerConfig.values.image=("ghcr.io/yakecloud/gardener-extension-provider-local:" + env(newVersion)) ' hack/ci/yake-local/garden-content/controller-registrations.yaml
+$YQ -i 'select(document_index == 0).providerConfig.values.image=("ghcr.io/yakecloud/gardener-extension-provider-local:v" + env(newVersion)) ' hack/ci/yake-local/garden-content/controller-registrations.yaml
 $YQ -i 'select(document_index == 0).providerConfig.chart=env(newChart) ' hack/ci/yake-local/garden-content/controller-registrations.yaml
-
-
