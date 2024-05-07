@@ -6,6 +6,10 @@ permissions:
 
 on:
   workflow_dispatch:
+    inputs:
+      version:
+        description: Valid version tag of gardener/gardener, including leading "v". Leave empty to read version from gardener/gardener.yaml
+        required: false
   push:
     branches:
       - main
@@ -22,4 +26,6 @@ jobs:
       - name: Login to ghcr
         run: echo "${{ secrets.GITHUB_TOKEN }}" | docker login ghcr.io -u $ --password-stdin
       - name: Build and push
+        env:
+          version: ${{ github.event.inputs.version }}
         run: ./hack/ci/yake-local/build-extension-provider-local.sh
