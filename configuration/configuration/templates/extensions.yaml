@@ -230,3 +230,14 @@ stringData:
 {{- else }}
           repository: ghcr.io/metal-stack/gardener-extension-backup-s3
 {{- end }}
+
+    shoot-flux:
+      version: 0.5.0
+      values:
+        imagePullPolicy:
+        image:
+{{- if .Values.registryOverwrite }}
+          repository: {{ include "replaceRegistry" (dict "ghcr.io/stackitcloud/gardener-extension-shoot-flux" .Values.registryOverwrite) }}
+{{- else }}
+          repository: ghcr.io/stackitcloud/gardener-extension-shoot-flux
+{{- end }}
