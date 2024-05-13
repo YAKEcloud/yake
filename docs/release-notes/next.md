@@ -151,7 +151,7 @@ hide_table_of_contents: true
 
 ## ✨ New Features
 
-- `[USER]` The Istio resource `Gateway` can now be annotated with `cert.gardener.cloud/purpose=managed` to enable the automatic creation of `Certificate` resources for domain names extracted from hosts fields in this resource or related `VirtualServices` resources.  
+- `[USER]` The Istio resource `Gateway` can now be annotated with `cert.gardener.cloud/purpose=managed` to enable the automatic creation of `Certificate` resources for domain names extracted from hosts fields in this resource or related `VirtualServices` resources.
   The `Gateway` and `HTTPRoute` resources from the Gateway API are supported in a similar way. by @MartinWeindel [gardener/cert-management#174]
 ## 🏃 Others
 
@@ -211,9 +211,9 @@ hide_table_of_contents: true
 - `[OPERATOR]` The code related to `machine-controller-manager` management has been cleaned up because `gardenlet` is responsible for it since `gardener/gardener@v1.83`. by @kevin-lacoo [#706]
 - `[OPERATOR]` add os information as labels in machine class objects. by @tedteng [#703]
 - `[DEVELOPER]` Add GetBucketInfo to OSS client interface. by @MartinWeindel [#694]
-- `[DEPENDENCY]` The following golang dependencies have been upgraded :  
-  - `gardener/gardener`: `v1.86.0`->`v1.91.1`  
-  - k8s.io/* : v0.28.3 -> v0.29.3  
+- `[DEPENDENCY]` The following golang dependencies have been upgraded :
+  - `gardener/gardener`: `v1.86.0`->`v1.91.1`
+  - k8s.io/* : v0.28.3 -> v0.29.3
   - sigs.k8s.io/controller-runtime: v0.16.3-> v0.17.2 by @shafeeqes [#704]
 # [gardener/terraformer]
 
@@ -240,7 +240,7 @@ hide_table_of_contents: true
 - `[OPERATOR]` `provider-gcp` no longer supports Shoots with Кubernetes version == 1.24. by @shafeeqes [#677]
 ## 📰 Noteworthy
 
-- `[USER]` Added support for the `EnableDynamicPortAllocation` flag and the related configuration of the related `MaxPortsPerVM` value on cloudNATs.  
+- `[USER]` Added support for the `EnableDynamicPortAllocation` flag and the related configuration of the related `MaxPortsPerVM` value on cloudNATs.
   `IcmpIdleTimeoutSec`, `TcpEstablishedIdleTimeoutSec`, `TcpTimeWaitTimeoutSec`, `TcpTransitoryIdleTimeoutSec`, and `UdpIdleTimeoutSec` can now be configured on cloudNATs.  by @AndreasBurger [#706]
 - `[USER]` `DisableGardenerServiceAccountCreation` feature gate has been promoted to beta and therefore is enabled by default. by @AndreasBurger [#711]
 ## ✨ New Features
@@ -277,7 +277,7 @@ hide_table_of_contents: true
 ## 🏃 Others
 
 - `[OPERATOR]` Fix a bug where the terraform-provider-azure would not properly delete shoot resource groups. The infrastructure-controller will issue an additional delete operation for the shoot's resource group. by @kon-angelo [#842]
-- `[OPERATOR]` The extension will now try to delete empty resource groups on infrastructure creation after an unsuccessful terraform-apply operation.   
+- `[OPERATOR]` The extension will now try to delete empty resource groups on infrastructure creation after an unsuccessful terraform-apply operation.
   A resource group may not be ready for some time after a successful create call returns. The azurerm terraform-provider on resource group does not respect that and the GET call may result in a NotFound error creating a deadlock. The extension will try to workaround this by deleting empty resource groups under the condition that this is a Create operation. by @AndreasBurger [#844]
 
 ## Docker Images
@@ -333,10 +333,10 @@ hide_table_of_contents: true
 - `[OPERATOR]` Deployment of the Remedy Controller can now additionally be controlled using the `DisableRemedyController` feature gate. by @AndreasBurger [#806]
 - `[OPERATOR]` The Azure instance to connect to can now be configured in the CloudProfile and BackupBucket/BackupEntry. by @AndreasBurger [#815]
 - `[OPERATOR]` NodeGroupAutoscalingOptions can now be specified per worker group via the worker through the field `worker.spec.pools.clusterAutoscaler` by @aaronfern [#831]
-- `[DEPENDENCY]` The following golang dependencies have been upgraded :  
-  - `gardener/gardener`: `v1.87.0`->`v1.91.1`  
-  - k8s.io/* : v0.28.3 -> v0.29.3  
-  - sigs.k8s.io/controller-runtime: v0.16.3-> v0.17.2  
+- `[DEPENDENCY]` The following golang dependencies have been upgraded :
+  - `gardener/gardener`: `v1.87.0`->`v1.91.1`
+  - k8s.io/* : v0.28.3 -> v0.29.3
+  - sigs.k8s.io/controller-runtime: v0.16.3-> v0.17.2
   - sigs.k8s.io/controller-tools v0.13.0-> v0.14.0  by @hebelsan [#814]
 # [gardener/machine-controller-manager-provider-azure]
 
@@ -449,6 +449,31 @@ hide_table_of_contents: true
 ## Docker Images
 - gardener-extension-shoot-networking-problemdetector: `europe-docker.pkg.dev/gardener-project/releases/gardener/extensions/shoot-networking-problemdetector:v0.21.0`
 
+
+</details>
+
+<details>
+<summary><b>Update shoot-flux to <code>0.5.0</code></b></summary>
+
+## ✨ New Features
+
+* Allow setting controller image repository and tag independently by @j2L4e in https://github.com/stackitcloud/gardener-extension-shoot-flux/pull/66
+
+## ℹ️ Other Changes
+* 🤖 Update ghcr.io/stackitcloud/gardener-extension-shoot-flux Docker tag to v0.4.0 by @renovate in https://github.com/stackitcloud/gardener-extension-shoot-flux/pull/54
+* 🤖 Update module github.com/onsi/ginkgo/v2 to v2.17.1 by @renovate in https://github.com/stackitcloud/gardener-extension-shoot-flux/pull/56
+* 🤖 Update k8s and gardener packages (patch) by @renovate in https://github.com/stackitcloud/gardener-extension-shoot-flux/pull/58
+* 🤖 Update module golang.org/x/tools to v0.21.0 by @renovate in https://github.com/stackitcloud/gardener-extension-shoot-flux/pull/57
+* 🤖 Update module github.com/onsi/gomega to v1.33.1 by @renovate in https://github.com/stackitcloud/gardener-extension-shoot-flux/pull/60
+* 🤖 Update module github.com/fluxcd/source-controller/api to v1.2.5 by @renovate in https://github.com/stackitcloud/gardener-extension-shoot-flux/pull/63
+* 🤖 Update module k8s.io/utils to v0.0.0-20240502163921-fe8a2dddb1d0 by @renovate in https://github.com/stackitcloud/gardener-extension-shoot-flux/pull/65
+* 🤖 Update module github.com/onsi/ginkgo/v2 to v2.17.3 by @renovate in https://github.com/stackitcloud/gardener-extension-shoot-flux/pull/64
+* 🤖 Update k8s and gardener packages (patch) by @renovate in https://github.com/stackitcloud/gardener-extension-shoot-flux/pull/61
+
+## New Contributors
+* @j2L4e made their first contribution in https://github.com/stackitcloud/gardener-extension-shoot-flux/pull/66
+
+**Full Changelog**: https://github.com/stackitcloud/gardener-extension-shoot-flux/compare/v0.4.0...v0.5.0
 
 </details>
 
