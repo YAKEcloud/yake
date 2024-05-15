@@ -60,6 +60,8 @@ global:
                 1.28.8:
                     classification: deprecated
                 1.28.9:
+                    classification: deprecated
+                1.28.10:
                     classification: supported
                 1.29.1:
                     classification: deprecated
