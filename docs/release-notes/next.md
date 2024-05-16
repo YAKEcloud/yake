@@ -530,3 +530,10 @@ no release notes available
 **Full Changelog**: https://github.com/gardener-community/cloudprofiles/compare/0.7.6...0.7.7
 
 </details>
+
+<details>
+<summary><b>Update cloudprofiles to <code>0.7.8</code></b></summary>
+
+**Full Changelog**: https://github.com/gardener-community/cloudprofiles/compare/0.7.7...0.7.8
+
+</details>
