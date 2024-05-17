@@ -1,6 +1,13 @@
 ---
 name: Yake install
 
+permissions:
+  actions: write
+  checks: write
+  contents: read
+  pull-requests: write
+  packages: write
+
 on:
   pull_request:
     branches:
