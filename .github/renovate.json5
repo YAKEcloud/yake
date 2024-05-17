@@ -126,6 +126,7 @@
   enabledManagers: [
     'flux',
     'custom.regex',
+    'github-actions',
   ],
   prCreation: 'immediate',
   semanticCommits: 'disabled',

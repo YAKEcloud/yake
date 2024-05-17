@@ -20,7 +20,7 @@ jobs:
           - v1.29.2
           - v1.28.7
           - v1.27.11
-    runs-on: self-hosted
+    runs-on: arc-runner-set
     timeout-minutes: 60
     name: "Yake install testrun"
     steps:
