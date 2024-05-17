@@ -1,0 +1,8 @@
+{
+  "label": "Architecture / Configuration",
+  "position": 2,
+  "link": {
+    "type": "generated-index",
+    "description": "Architecture description of the YAKE Gardener distribution"
+  }
+}
