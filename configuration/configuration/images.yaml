@@ -237,7 +237,7 @@ gardenlet:
                 type: githubTeam
         name: cortex
         repository: quay.io/cortexproject/cortex
-        tag: v1.15.3
+        tag: v1.17.0
       - labels:
           - name: gardener.cloud/cve-categorisation
             value:
@@ -312,7 +312,7 @@ gardenlet:
         name: plutono-dashboard-refresher
         repository: quay.io/kiwigrid/k8s-sidecar
         sourceRepository: github.com/kiwigrid/k8s-sidecar
-        tag: 1.26.1
+        tag: 1.27.1
       - labels:
           - name: gardener.cloud/cve-categorisation
             value:
@@ -386,7 +386,20 @@ gardenlet:
         repository: registry.k8s.io/dns/k8s-dns-node-cache
         sourceRepository: github.com/kubernetes/kubernetes/blob/master/cluster/addons/dns/nodelocaldns
         tag: 1.23.0
-      - name: node-problem-detector
+      - labels:
+          - name: gardener.cloud/cve-categorisation
+            value:
+              authentication_enforced: false
+              availability_requirement: low
+              confidentiality_requirement: low
+              integrity_requirement: high
+              network_exposure: private
+              user_interaction: end-user
+          - name: cloud.gardener.cnudie/responsibles
+            value:
+              - teamname: gardener/mcm-maintainers
+                type: githubTeam
+        name: node-problem-detector
         repository: registry.k8s.io/node-problem-detector/node-problem-detector
         sourceRepository: github.com/kubernetes/node-problem-detector
         tag: v0.8.18
@@ -522,7 +535,7 @@ gardenlet:
         name: kube-rbac-proxy
         repository: quay.io/brancz/kube-rbac-proxy
         sourceRepository: github.com/brancz/kube-rbac-proxy
-        tag: v0.17.0
+        tag: v0.17.1
       - labels:
           - name: gardener.cloud/cve-categorisation
             value:
