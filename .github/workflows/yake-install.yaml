@@ -1,13 +1,6 @@
 ---
 name: Yake install
 
-permissions:
-  actions: write
-  checks: write
-  contents: read
-  pull-requests: write
-  packages: write
-
 on:
   pull_request:
     branches:
@@ -33,11 +26,9 @@ jobs:
     steps:
       - name: Install dependencies
         run: sudo apt-get update && sudo apt-get install -y git curl make jq
-      - run: git --version
       - name: Checkout source
         uses: actions/checkout@v4
         with:
-          token: ${{ secrets.GH_TOKEN_23T_MACHINE_USER }}
           fetch-depth: 0
           ref: ${{ github.head_ref }}
       - name: install
