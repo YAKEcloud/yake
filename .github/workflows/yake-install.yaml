@@ -31,6 +31,8 @@ jobs:
     timeout-minutes: 60
     name: "Yake install testrun"
     steps:
+      - name: Install dependencies
+        run: sudo apt-get update && sudo apt-get install -y git curl make jq
       - run: git --version
       - name: Checkout source
         uses: actions/checkout@v4
@@ -38,8 +40,6 @@ jobs:
           token: ${{ secrets.GH_TOKEN_23T_MACHINE_USER }}
           fetch-depth: 0
           ref: ${{ github.head_ref }}
-      - name: Install dependencies
-        run: sudo apt-get update && sudo apt-get install -y git curl make jq
       - name: install
         uses: nick-fields/retry@v3
         env:
