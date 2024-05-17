@@ -5,7 +5,7 @@
 <meta name="generator" content="Docusaurus v3.1.0">
 <title data-rh="true">Release Notes next | Yet another Kubernetes Engine</title><meta data-rh="true" name="viewport" content="width=device-width,initial-scale=1"><meta data-rh="true" name="twitter:card" content="summary_large_image"><meta data-rh="true" property="og:url" content="https://yake.cloud/release-notes/next"><meta data-rh="true" property="og:locale" content="en"><meta data-rh="true" name="docusaurus_locale" content="en"><meta data-rh="true" name="docsearch:language" content="en"><meta data-rh="true" name="gardener" content="installation, production, operations, maintenance"><meta data-rh="true" name="docusaurus_version" content="current"><meta data-rh="true" name="docusaurus_tag" content="docs-release-notes-current"><meta data-rh="true" name="docsearch:version" content="current"><meta data-rh="true" name="docsearch:docusaurus_tag" content="docs-release-notes-current"><meta data-rh="true" property="og:title" content="Release Notes next | Yet another Kubernetes Engine"><meta data-rh="true" name="description" content="Yake release notes and upgrade guide"><meta data-rh="true" property="og:description" content="Yake release notes and upgrade guide"><link data-rh="true" rel="icon" href="/img/favicon.ico"><link data-rh="true" rel="canonical" href="https://yake.cloud/release-notes/next"><link data-rh="true" rel="alternate" href="https://yake.cloud/release-notes/next" hreflang="en"><link data-rh="true" rel="alternate" href="https://yake.cloud/release-notes/next" hreflang="x-default"><link rel="alternate" type="application/rss+xml" href="/blog/rss.xml" title="Yet another Kubernetes Engine RSS Feed">
 <link rel="alternate" type="application/atom+xml" href="/blog/atom.xml" title="Yet another Kubernetes Engine Atom Feed"><link rel="stylesheet" href="/assets/css/styles.447c22af.css">
-<script src="/assets/js/runtime~main.c04baa2d.js" defer="defer"></script>
+<script src="/assets/js/runtime~main.6ae8b5b0.js" defer="defer"></script>
 <script src="/assets/js/main.159cd74f.js" defer="defer"></script>
 </head>
 <body class="navigation-with-keyboard">
@@ -548,6 +548,144 @@ A resource group may not be ready for some time after a successful create call r
 <h2 class="anchor anchorWithStickyNavbar_LWe7" id="docker-images-24">Docker Images<a href="#docker-images-24" class="hash-link" aria-label="Direct link to Docker Images" title="Direct link to Docker Images">​</a></h2>
 <ul>
 <li>gardener-dashboard: <code>europe-docker.pkg.dev/gardener-project/releases/gardener/dashboard:1.75.0</code></li>
+</ul>
+</div></div></details>
+<details class="details_lb9f alert alert--info details_b_Ee" data-collapsed="true"><summary><b>Update gardener-controlplane to <code>1.95.0</code></b></summary><div><div class="collapsibleContent_i85q">
+<!-- -->
+<h1>[gardener/gardener]</h1>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="️-breaking-changes-5">⚠️ Breaking Changes<a href="#️-breaking-changes-5" class="hash-link" aria-label="Direct link to ⚠️ Breaking Changes" title="Direct link to ⚠️ Breaking Changes">​</a></h2>
+<ul>
+<li><code>[OPERATOR]</code> The <code>.monitoring.shoot.remoteWrite.queueConfig</code> field is no longer available in the <code>gardenlet</code> component configuration. If needed, you have to register a webhook for the <code>monitoring.coreos.com/v1.Prometheus</code> object named <code>shoot</code> in the shoot namespaces. The webhook can inject the needed configuration in <code>.spec.remoteWrite[0].queueConfig</code>. by @rfranzke [#9695]</li>
+</ul>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="-noteworthy-1">📰 Noteworthy<a href="#-noteworthy-1" class="hash-link" aria-label="Direct link to 📰 Noteworthy" title="Direct link to 📰 Noteworthy">​</a></h2>
+<ul>
+<li><code>[DEVELOPER]</code> The <code>extensions.gardener.cloud/v1alpha1.Worker</code> resource now has a new <code>.spec.pools[].userDataSecretRef</code> field which references a <code>Secret</code> containing the actual user data. the <code>.spec.pools[].userData</code> field is deprecated and will be removed in a future version. <code>Worker</code> extensions should fetch the user data from the secret and can use the <code>extensions/pkg/controller/worker.FetchUserData</code> helper function for it. by @rfranzke [#9722]</li>
+<li><code>[DEVELOPER]</code> The legacy method for extensions to provide observability configuration for shoot clusters (via <code>ConfigMap</code>s labelled with <code>extensions.gardener.cloud/configuration=monitoring</code>) is deprecated and will be removed in a future release. Please refer to <a href="https://github.com/gardener/gardener/blob/master/docs/extensions/logging-and-monitoring.md#extensions-monitoring-integration" target="_blank" rel="noopener noreferrer">this document</a> to get information about the new, recommended way, and start migrating to it. by @rfranzke [#9695]</li>
+</ul>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="-new-features-5">✨ New Features<a href="#-new-features-5" class="hash-link" aria-label="Direct link to ✨ New Features" title="Direct link to ✨ New Features">​</a></h2>
+<ul>
+<li><code>[OPERATOR]</code> Gardener can now support clusters with Kubernetes version 1.30. To allow creation/update of 1.30 clusters you will have to update the version of your provider extension(s) to a version that supports 1.30 as well. Please consult the respective releases and notes in the provider extension&#x27;s repository. by @shafeeqes [#9689]</li>
+<li><code>[OPERATOR]</code> A new feature gate named <code>VPAAndHPAForAPIServer</code> is introduced to gardenlet. When enabled, the Shoot Kubernetes API Server is scaled simultaneously by VPA and HPA on the same metric (CPU and memory usage). The new feature aims to replace the existing HVPA autoscaling mechanism for the Shoot Kubernetes API server. by @ialidzhikov [#9678]</li>
+<li><code>[USER]</code> It is now possible to configure <code>Project</code>s with the &quot;four-👀 approval concept for deletion&quot; concept. For now, this can only be applied to <code>Shoot</code>s. If configured, the user confirming a <code>Shoot</code> deletion (via the <code>confirmation.gardener.cloud/deletion</code> annotation) must not be the same user who is sending the DELETE request. This can help preventing accidental/unintentional <code>Shoot</code> deletion. Find all information about the feature in <a href="https://github.com/gardener/gardener/tree/master/docs/usage/projects.md#four-eyes-principle-for-resource-deletion" target="_blank" rel="noopener noreferrer">this document</a>. by @rfranzke [#9680]</li>
+<li><code>[DEVELOPER]</code> Gardener can now support clusters with Kubernetes version 1.30. Extension developers have to prepare individual extensions as well to work with 1.30. by @shafeeqes [#9689]</li>
+</ul>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="-bug-fixes-15">🐛 Bug Fixes<a href="#-bug-fixes-15" class="hash-link" aria-label="Direct link to 🐛 Bug Fixes" title="Direct link to 🐛 Bug Fixes">​</a></h2>
+<ul>
+<li><code>[OPERATOR]</code> A bug has been fixed which caused regeneration of <code>managedresource-shoot-core-system-*</code> <code>Secret</code>s on each <code>Shoot</code> reconciliation. by @rfranzke [#9718]</li>
+<li><code>[USER]</code> A bug has has been fixed which caused unneeded <code>gardener-node-agent</code> reconciliations after each <code>Shoot</code> reconciliation even if the underlying <code>OperatingSystemConfig</code> did not contain relevant changes. by @rfranzke [#9723]</li>
+</ul>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="-others-22">🏃 Others<a href="#-others-22" class="hash-link" aria-label="Direct link to 🏃 Others" title="Direct link to 🏃 Others">​</a></h2>
+<ul>
+<li><code>[OPERATOR]</code> e2e-kind tests can now run successfully in an IPv4-only environment by @ScheererJ [#9693]</li>
+<li><code>[OPERATOR]</code> Validation of DNSRecords: allow domain names starting with an underscore &quot;_&quot; by @MartinWeindel [#9714]</li>
+<li><code>[OPERATOR]</code> The istio ingress gateway access log now includes the connections initiated via apiserver-proxy, i.e. cluster-internal communication via kubernetes.default.svc.cluster.local. by @ScheererJ [#9686]</li>
+<li><code>[OPERATOR]</code> Replaced HVPA for the <code>vali</code> StatefulSet with VPA. Additionally, the <code>curator</code> <code>kube-rbac-proxy</code> and <code>telegraf</code> containers of the <code>vali</code> StatefulSet now specify CPU resource requests of <code>5m</code> each. by @plkokanov [#9611]</li>
+<li><code>[OPERATOR]</code> Updated <code>MCM</code> metrics list used to configure prometheus by @rishabh-11 [#9684]</li>
+<li><code>[OPERATOR]</code> The <code>kube-controller-manager</code> component is now scaled by VPA, instead of HVPA. by @andrerun [#9698]</li>
+<li><code>[OPERATOR]</code> Modified the CPU and memory resource requests for the <code>plutono</code> container to <code>5m</code> and <code>45Mi</code>, respectively. Additionally, reduced the <code>vali</code> container CPU resource requests to <code>20m</code>. by @plkokanov [#9754]</li>
+</ul>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="docker-images-25">Docker Images<a href="#docker-images-25" class="hash-link" aria-label="Direct link to Docker Images" title="Direct link to Docker Images">​</a></h2>
+<ul>
+<li>admission-controller: <code>europe-docker.pkg.dev/gardener-project/releases/gardener/admission-controller:v1.95.0</code></li>
+<li>apiserver: <code>europe-docker.pkg.dev/gardener-project/releases/gardener/apiserver:v1.95.0</code></li>
+<li>controller-manager: <code>europe-docker.pkg.dev/gardener-project/releases/gardener/controller-manager:v1.95.0</code></li>
+<li>gardenlet: <code>europe-docker.pkg.dev/gardener-project/releases/gardener/gardenlet:v1.95.0</code></li>
+<li>node-agent: <code>europe-docker.pkg.dev/gardener-project/releases/gardener/node-agent:v1.95.0</code></li>
+<li>operator: <code>europe-docker.pkg.dev/gardener-project/releases/gardener/operator:v1.95.0</code></li>
+<li>resource-manager: <code>europe-docker.pkg.dev/gardener-project/releases/gardener/resource-manager:v1.95.0</code></li>
+<li>scheduler: <code>europe-docker.pkg.dev/gardener-project/releases/gardener/scheduler:v1.95.0</code></li>
+</ul>
+</div></div></details>
+<details class="details_lb9f alert alert--info details_b_Ee" data-collapsed="true"><summary><b>Update gardener-controlplane to <code>1.95.0</code></b></summary><div><div class="collapsibleContent_i85q">
+<!-- -->
+<h1>[gardener/gardener]</h1>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="️-breaking-changes-6">⚠️ Breaking Changes<a href="#️-breaking-changes-6" class="hash-link" aria-label="Direct link to ⚠️ Breaking Changes" title="Direct link to ⚠️ Breaking Changes">​</a></h2>
+<ul>
+<li><code>[OPERATOR]</code> The <code>.monitoring.shoot.remoteWrite.queueConfig</code> field is no longer available in the <code>gardenlet</code> component configuration. If needed, you have to register a webhook for the <code>monitoring.coreos.com/v1.Prometheus</code> object named <code>shoot</code> in the shoot namespaces. The webhook can inject the needed configuration in <code>.spec.remoteWrite[0].queueConfig</code>. by @rfranzke [#9695]</li>
+</ul>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="-noteworthy-2">📰 Noteworthy<a href="#-noteworthy-2" class="hash-link" aria-label="Direct link to 📰 Noteworthy" title="Direct link to 📰 Noteworthy">​</a></h2>
+<ul>
+<li><code>[DEVELOPER]</code> The <code>extensions.gardener.cloud/v1alpha1.Worker</code> resource now has a new <code>.spec.pools[].userDataSecretRef</code> field which references a <code>Secret</code> containing the actual user data. the <code>.spec.pools[].userData</code> field is deprecated and will be removed in a future version. <code>Worker</code> extensions should fetch the user data from the secret and can use the <code>extensions/pkg/controller/worker.FetchUserData</code> helper function for it. by @rfranzke [#9722]</li>
+<li><code>[DEVELOPER]</code> The legacy method for extensions to provide observability configuration for shoot clusters (via <code>ConfigMap</code>s labelled with <code>extensions.gardener.cloud/configuration=monitoring</code>) is deprecated and will be removed in a future release. Please refer to <a href="https://github.com/gardener/gardener/blob/master/docs/extensions/logging-and-monitoring.md#extensions-monitoring-integration" target="_blank" rel="noopener noreferrer">this document</a> to get information about the new, recommended way, and start migrating to it. by @rfranzke [#9695]</li>
+</ul>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="-new-features-6">✨ New Features<a href="#-new-features-6" class="hash-link" aria-label="Direct link to ✨ New Features" title="Direct link to ✨ New Features">​</a></h2>
+<ul>
+<li><code>[OPERATOR]</code> Gardener can now support clusters with Kubernetes version 1.30. To allow creation/update of 1.30 clusters you will have to update the version of your provider extension(s) to a version that supports 1.30 as well. Please consult the respective releases and notes in the provider extension&#x27;s repository. by @shafeeqes [#9689]</li>
+<li><code>[OPERATOR]</code> A new feature gate named <code>VPAAndHPAForAPIServer</code> is introduced to gardenlet. When enabled, the Shoot Kubernetes API Server is scaled simultaneously by VPA and HPA on the same metric (CPU and memory usage). The new feature aims to replace the existing HVPA autoscaling mechanism for the Shoot Kubernetes API server. by @ialidzhikov [#9678]</li>
+<li><code>[USER]</code> It is now possible to configure <code>Project</code>s with the &quot;four-👀 approval concept for deletion&quot; concept. For now, this can only be applied to <code>Shoot</code>s. If configured, the user confirming a <code>Shoot</code> deletion (via the <code>confirmation.gardener.cloud/deletion</code> annotation) must not be the same user who is sending the DELETE request. This can help preventing accidental/unintentional <code>Shoot</code> deletion. Find all information about the feature in <a href="https://github.com/gardener/gardener/tree/master/docs/usage/projects.md#four-eyes-principle-for-resource-deletion" target="_blank" rel="noopener noreferrer">this document</a>. by @rfranzke [#9680]</li>
+<li><code>[DEVELOPER]</code> Gardener can now support clusters with Kubernetes version 1.30. Extension developers have to prepare individual extensions as well to work with 1.30. by @shafeeqes [#9689]</li>
+</ul>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="-bug-fixes-16">🐛 Bug Fixes<a href="#-bug-fixes-16" class="hash-link" aria-label="Direct link to 🐛 Bug Fixes" title="Direct link to 🐛 Bug Fixes">​</a></h2>
+<ul>
+<li><code>[OPERATOR]</code> A bug has been fixed which caused regeneration of <code>managedresource-shoot-core-system-*</code> <code>Secret</code>s on each <code>Shoot</code> reconciliation. by @rfranzke [#9718]</li>
+<li><code>[USER]</code> A bug has has been fixed which caused unneeded <code>gardener-node-agent</code> reconciliations after each <code>Shoot</code> reconciliation even if the underlying <code>OperatingSystemConfig</code> did not contain relevant changes. by @rfranzke [#9723]</li>
+</ul>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="-others-23">🏃 Others<a href="#-others-23" class="hash-link" aria-label="Direct link to 🏃 Others" title="Direct link to 🏃 Others">​</a></h2>
+<ul>
+<li><code>[OPERATOR]</code> e2e-kind tests can now run successfully in an IPv4-only environment by @ScheererJ [#9693]</li>
+<li><code>[OPERATOR]</code> Validation of DNSRecords: allow domain names starting with an underscore &quot;_&quot; by @MartinWeindel [#9714]</li>
+<li><code>[OPERATOR]</code> The istio ingress gateway access log now includes the connections initiated via apiserver-proxy, i.e. cluster-internal communication via kubernetes.default.svc.cluster.local. by @ScheererJ [#9686]</li>
+<li><code>[OPERATOR]</code> Replaced HVPA for the <code>vali</code> StatefulSet with VPA. Additionally, the <code>curator</code> <code>kube-rbac-proxy</code> and <code>telegraf</code> containers of the <code>vali</code> StatefulSet now specify CPU resource requests of <code>5m</code> each. by @plkokanov [#9611]</li>
+<li><code>[OPERATOR]</code> Updated <code>MCM</code> metrics list used to configure prometheus by @rishabh-11 [#9684]</li>
+<li><code>[OPERATOR]</code> The <code>kube-controller-manager</code> component is now scaled by VPA, instead of HVPA. by @andrerun [#9698]</li>
+<li><code>[OPERATOR]</code> Modified the CPU and memory resource requests for the <code>plutono</code> container to <code>5m</code> and <code>45Mi</code>, respectively. Additionally, reduced the <code>vali</code> container CPU resource requests to <code>20m</code>. by @plkokanov [#9754]</li>
+</ul>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="docker-images-26">Docker Images<a href="#docker-images-26" class="hash-link" aria-label="Direct link to Docker Images" title="Direct link to Docker Images">​</a></h2>
+<ul>
+<li>admission-controller: <code>europe-docker.pkg.dev/gardener-project/releases/gardener/admission-controller:v1.95.0</code></li>
+<li>apiserver: <code>europe-docker.pkg.dev/gardener-project/releases/gardener/apiserver:v1.95.0</code></li>
+<li>controller-manager: <code>europe-docker.pkg.dev/gardener-project/releases/gardener/controller-manager:v1.95.0</code></li>
+<li>gardenlet: <code>europe-docker.pkg.dev/gardener-project/releases/gardener/gardenlet:v1.95.0</code></li>
+<li>node-agent: <code>europe-docker.pkg.dev/gardener-project/releases/gardener/node-agent:v1.95.0</code></li>
+<li>operator: <code>europe-docker.pkg.dev/gardener-project/releases/gardener/operator:v1.95.0</code></li>
+<li>resource-manager: <code>europe-docker.pkg.dev/gardener-project/releases/gardener/resource-manager:v1.95.0</code></li>
+<li>scheduler: <code>europe-docker.pkg.dev/gardener-project/releases/gardener/scheduler:v1.95.0</code></li>
+</ul>
+</div></div></details>
+<details class="details_lb9f alert alert--info details_b_Ee" data-collapsed="true"><summary><b>Update gardenlet to <code>1.95.0</code></b></summary><div><div class="collapsibleContent_i85q">
+<!-- -->
+<h1>[gardener/gardener]</h1>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="️-breaking-changes-7">⚠️ Breaking Changes<a href="#️-breaking-changes-7" class="hash-link" aria-label="Direct link to ⚠️ Breaking Changes" title="Direct link to ⚠️ Breaking Changes">​</a></h2>
+<ul>
+<li><code>[OPERATOR]</code> The <code>.monitoring.shoot.remoteWrite.queueConfig</code> field is no longer available in the <code>gardenlet</code> component configuration. If needed, you have to register a webhook for the <code>monitoring.coreos.com/v1.Prometheus</code> object named <code>shoot</code> in the shoot namespaces. The webhook can inject the needed configuration in <code>.spec.remoteWrite[0].queueConfig</code>. by @rfranzke [#9695]</li>
+</ul>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="-noteworthy-3">📰 Noteworthy<a href="#-noteworthy-3" class="hash-link" aria-label="Direct link to 📰 Noteworthy" title="Direct link to 📰 Noteworthy">​</a></h2>
+<ul>
+<li><code>[DEVELOPER]</code> The <code>extensions.gardener.cloud/v1alpha1.Worker</code> resource now has a new <code>.spec.pools[].userDataSecretRef</code> field which references a <code>Secret</code> containing the actual user data. the <code>.spec.pools[].userData</code> field is deprecated and will be removed in a future version. <code>Worker</code> extensions should fetch the user data from the secret and can use the <code>extensions/pkg/controller/worker.FetchUserData</code> helper function for it. by @rfranzke [#9722]</li>
+<li><code>[DEVELOPER]</code> The legacy method for extensions to provide observability configuration for shoot clusters (via <code>ConfigMap</code>s labelled with <code>extensions.gardener.cloud/configuration=monitoring</code>) is deprecated and will be removed in a future release. Please refer to <a href="https://github.com/gardener/gardener/blob/master/docs/extensions/logging-and-monitoring.md#extensions-monitoring-integration" target="_blank" rel="noopener noreferrer">this document</a> to get information about the new, recommended way, and start migrating to it. by @rfranzke [#9695]</li>
+</ul>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="-new-features-7">✨ New Features<a href="#-new-features-7" class="hash-link" aria-label="Direct link to ✨ New Features" title="Direct link to ✨ New Features">​</a></h2>
+<ul>
+<li><code>[OPERATOR]</code> Gardener can now support clusters with Kubernetes version 1.30. To allow creation/update of 1.30 clusters you will have to update the version of your provider extension(s) to a version that supports 1.30 as well. Please consult the respective releases and notes in the provider extension&#x27;s repository. by @shafeeqes [#9689]</li>
+<li><code>[OPERATOR]</code> A new feature gate named <code>VPAAndHPAForAPIServer</code> is introduced to gardenlet. When enabled, the Shoot Kubernetes API Server is scaled simultaneously by VPA and HPA on the same metric (CPU and memory usage). The new feature aims to replace the existing HVPA autoscaling mechanism for the Shoot Kubernetes API server. by @ialidzhikov [#9678]</li>
+<li><code>[USER]</code> It is now possible to configure <code>Project</code>s with the &quot;four-👀 approval concept for deletion&quot; concept. For now, this can only be applied to <code>Shoot</code>s. If configured, the user confirming a <code>Shoot</code> deletion (via the <code>confirmation.gardener.cloud/deletion</code> annotation) must not be the same user who is sending the DELETE request. This can help preventing accidental/unintentional <code>Shoot</code> deletion. Find all information about the feature in <a href="https://github.com/gardener/gardener/tree/master/docs/usage/projects.md#four-eyes-principle-for-resource-deletion" target="_blank" rel="noopener noreferrer">this document</a>. by @rfranzke [#9680]</li>
+<li><code>[DEVELOPER]</code> Gardener can now support clusters with Kubernetes version 1.30. Extension developers have to prepare individual extensions as well to work with 1.30. by @shafeeqes [#9689]</li>
+</ul>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="-bug-fixes-17">🐛 Bug Fixes<a href="#-bug-fixes-17" class="hash-link" aria-label="Direct link to 🐛 Bug Fixes" title="Direct link to 🐛 Bug Fixes">​</a></h2>
+<ul>
+<li><code>[OPERATOR]</code> A bug has been fixed which caused regeneration of <code>managedresource-shoot-core-system-*</code> <code>Secret</code>s on each <code>Shoot</code> reconciliation. by @rfranzke [#9718]</li>
+<li><code>[USER]</code> A bug has has been fixed which caused unneeded <code>gardener-node-agent</code> reconciliations after each <code>Shoot</code> reconciliation even if the underlying <code>OperatingSystemConfig</code> did not contain relevant changes. by @rfranzke [#9723]</li>
+</ul>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="-others-24">🏃 Others<a href="#-others-24" class="hash-link" aria-label="Direct link to 🏃 Others" title="Direct link to 🏃 Others">​</a></h2>
+<ul>
+<li><code>[OPERATOR]</code> e2e-kind tests can now run successfully in an IPv4-only environment by @ScheererJ [#9693]</li>
+<li><code>[OPERATOR]</code> Validation of DNSRecords: allow domain names starting with an underscore &quot;_&quot; by @MartinWeindel [#9714]</li>
+<li><code>[OPERATOR]</code> The istio ingress gateway access log now includes the connections initiated via apiserver-proxy, i.e. cluster-internal communication via kubernetes.default.svc.cluster.local. by @ScheererJ [#9686]</li>
+<li><code>[OPERATOR]</code> Replaced HVPA for the <code>vali</code> StatefulSet with VPA. Additionally, the <code>curator</code> <code>kube-rbac-proxy</code> and <code>telegraf</code> containers of the <code>vali</code> StatefulSet now specify CPU resource requests of <code>5m</code> each. by @plkokanov [#9611]</li>
+<li><code>[OPERATOR]</code> Updated <code>MCM</code> metrics list used to configure prometheus by @rishabh-11 [#9684]</li>
+<li><code>[OPERATOR]</code> The <code>kube-controller-manager</code> component is now scaled by VPA, instead of HVPA. by @andrerun [#9698]</li>
+<li><code>[OPERATOR]</code> Modified the CPU and memory resource requests for the <code>plutono</code> container to <code>5m</code> and <code>45Mi</code>, respectively. Additionally, reduced the <code>vali</code> container CPU resource requests to <code>20m</code>. by @plkokanov [#9754]</li>
+</ul>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="docker-images-27">Docker Images<a href="#docker-images-27" class="hash-link" aria-label="Direct link to Docker Images" title="Direct link to Docker Images">​</a></h2>
+<ul>
+<li>admission-controller: <code>europe-docker.pkg.dev/gardener-project/releases/gardener/admission-controller:v1.95.0</code></li>
+<li>apiserver: <code>europe-docker.pkg.dev/gardener-project/releases/gardener/apiserver:v1.95.0</code></li>
+<li>controller-manager: <code>europe-docker.pkg.dev/gardener-project/releases/gardener/controller-manager:v1.95.0</code></li>
+<li>gardenlet: <code>europe-docker.pkg.dev/gardener-project/releases/gardener/gardenlet:v1.95.0</code></li>
+<li>node-agent: <code>europe-docker.pkg.dev/gardener-project/releases/gardener/node-agent:v1.95.0</code></li>
+<li>operator: <code>europe-docker.pkg.dev/gardener-project/releases/gardener/operator:v1.95.0</code></li>
+<li>resource-manager: <code>europe-docker.pkg.dev/gardener-project/releases/gardener/resource-manager:v1.95.0</code></li>
+<li>scheduler: <code>europe-docker.pkg.dev/gardener-project/releases/gardener/scheduler:v1.95.0</code></li>
 </ul>
 </div></div></details></div></article><nav class="pagination-nav docusaurus-mt-lg" aria-label="Docs pages"></nav></div></div></div></div></main></div></div></div><footer class="footer footer--dark"><div class="container container-fluid"><div class="row footer__links"><div class="col footer__col"><div class="footer__title">Docs</div><ul class="footer__items clean-list"><li class="footer__item"><a class="footer__link-item" href="/docs/overview">Docs</a></li></ul></div><div class="col footer__col"><div class="footer__title">Community</div><ul class="footer__items clean-list"><li class="footer__item"><a href="https://github.com/yakecloud" target="_blank" rel="noopener noreferrer" class="footer__link-item">GitHub<svg width="13.5" height="13.5" aria-hidden="true" viewBox="0 0 24 24" class="iconExternalLink_nPIU"><path fill="currentColor" d="M21 13v10h-21v-19h12v2h-10v15h17v-8h2zm3-12h-10.988l4.035 4-6.977 7.07 2.828 2.828 6.977-7.07 4.125 4.172v-11z"></path></svg></a></li><li class="footer__item"><a href="https://github.com/gardener-community" target="_blank" rel="noopener noreferrer" class="footer__link-item">Gardener Community<svg width="13.5" height="13.5" aria-hidden="true" viewBox="0 0 24 24" class="iconExternalLink_nPIU"><path fill="currentColor" d="M21 13v10h-21v-19h12v2h-10v15h17v-8h2zm3-12h-10.988l4.035 4-6.977 7.07 2.828 2.828 6.977-7.07 4.125 4.172v-11z"></path></svg></a></li><li class="footer__item"><a href="https://gardener-cloud.slack.com" target="_blank" rel="noopener noreferrer" class="footer__link-item">Slack<svg width="13.5" height="13.5" aria-hidden="true" viewBox="0 0 24 24" class="iconExternalLink_nPIU"><path fill="currentColor" d="M21 13v10h-21v-19h12v2h-10v15h17v-8h2zm3-12h-10.988l4.035 4-6.977 7.07 2.828 2.828 6.977-7.07 4.125 4.172v-11z"></path></svg></a></li></ul></div><div class="col footer__col"><div class="footer__title">More</div><ul class="footer__items clean-list"><li class="footer__item"><a class="footer__link-item" href="/blog">Blog</a></li><li class="footer__item"><a class="footer__link-item" href="/legals">Legals</a></li><li class="footer__item"><a class="footer__link-item" href="/privacy-policy">Privacy policy</a></li></ul></div></div><div class="footer__bottom text--center"><div class="footer__copyright">Copyright © 2024 23 Technologies GmbH</div></div></div></footer></div>
 </body>
