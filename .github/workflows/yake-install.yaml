@@ -29,6 +29,8 @@ jobs:
         with:
           fetch-depth: 0
           ref: ${{ github.head_ref }}
+      - name: Install dependencies
+        run: sudo apt-get update && sudo apt-get install -y git curl make jq
       - name: install
         uses: nick-fields/retry@v3
         env:
