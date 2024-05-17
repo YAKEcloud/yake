@@ -8,7 +8,6 @@ global:
         deploymentAnnotations: {}
         deploymentLabels: {}
         enabled: true
-        experimentalUseWatchCacheForListShoots: never
         frontendConfig:
             defaultHibernationSchedule:
                 development:
@@ -39,7 +38,7 @@ global:
         image:
             pullPolicy: IfNotPresent
             repository: europe-docker.pkg.dev/gardener-project/releases/gardener/dashboard
-            tag: 1.74.1
+            tag: 1.75.0
         ingress:
             annotations:
                 nginx.ingress.kubernetes.io/ssl-redirect: "true"
@@ -81,6 +80,7 @@ global:
         servicePort: 8080
         sessionAffinity: ClientIP
         sessionSecret: null
+        sessionSecretPrevious: null
     virtualGarden:
         dashboardUserName: null
         enabled: false
