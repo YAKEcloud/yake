@@ -2133,7 +2133,7 @@ networking-calico:
         name: calico-cni
         repository: quay.io/calico/cni
         sourceRepository: github.com/projectcalico/cni-plugin
-        tag: v3.27.3
+        tag: v3.27.0
       - labels:
           - name: cloud.gardener.cnudie/dso/scanning-hints/binary_id/v1
             value:
