@@ -2274,7 +2274,7 @@ networking-cilium:
         name: certgen
         repository: quay.io/cilium/certgen
         sourceRepository: github.com/cilium/certgen
-        tag: v0.1.11
+        tag: v0.1.12
       - name: kube-proxy
         repository: registry.k8s.io/kube-proxy
         sourceRepository: github.com/kubernetes/kubernetes
