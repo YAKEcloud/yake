@@ -9,7 +9,7 @@ fullnameOverride: cert-controller-manager
 image:
     pullPolicy: IfNotPresent
     repository: europe-docker.pkg.dev/gardener-project/public/cert-controller-manager
-    tag: v0.14.2
+    tag: v0.14.3
 nameOverride: ""
 nodeSelector: {}
 podLabels: {}
