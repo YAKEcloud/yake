@@ -11,7 +11,7 @@ source ../../../hack/tools/install.sh
 CLUSTERNAME="yake-local"
 VGARDEN_KUBECONFIG="/tmp/$CLUSTERNAME-apiserver.yaml"
 
-K8S_VERSION="${K8S_VERSION:-v1.26.6}"
+K8S_VERSION="${K8S_VERSION:-v1.29.4}"
 CNI="${CNI:-default}"
 REGISTRY_OVERWRITE="${REGISTRY_OVERWRITE:-false}"
 
@@ -405,4 +405,3 @@ _patch_ccm
 _ensure_hosts
 _create_rbac
 _wait_for_initial_seed_ready
-
