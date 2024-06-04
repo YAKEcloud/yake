@@ -30,8 +30,6 @@ cd hack/ci/yake-local
 
 This will set up a KinD Kubernetes cluster on you local machine and install YAKE into it. You can watch the installation by watching the Flux resources `Kustomization`s and `HelmReleases`. Of course, you could also have a look at `Deployment`s and `Pod`s in order to see which processes are started.
 
-If you run into errors, have a look at [kind-known-issues](https://kind.sigs.k8s.io/docs/user/known-issues).
-
 Using kind may have some pitfalls like [pod errors due to "too many open files"](https://kind.sigs.k8s.io/docs/user/known-issues/#pod-errors-due-to-too-many-open-files).
 If the local setup doesn't work for you, make sure to check [kind's documentation on known issues](https://kind.sigs.k8s.io/docs/user/known-issues).
 
