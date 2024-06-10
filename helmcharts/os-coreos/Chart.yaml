@@ -5,4 +5,4 @@ dependencies:
   repository: ""
 description: A helmchart for os-coreos
 name: os-coreos
-version: 1.21.1
+version: 1.22.0

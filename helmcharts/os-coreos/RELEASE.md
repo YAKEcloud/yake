@@ -1,8 +1,11 @@
 # [gardener/gardener-extension-os-coreos]
 
-## 🐛 Bug Fixes
+## ⚠️ Breaking Changes
 
-- `[OPERATOR]` Skipping filecontent collection for files with imageRef in OperatingSystemConfigs to prevent a panic. by @nitrocb [#103]
+- `[OPERATOR]` This extension is no longer able to run with Gardener versions lower than `v1.90` when the `UseGardenerNodeAgent` feature gate is disabled. by @rfranzke [#100]
+## 🏃 Others
+
+- `[DEVELOPER]` The `vendor` directory was removed in favor of the `go mod cache`. by @LucaBernstein [#107]
 
 ## Docker Images
-- gardener-extension-os-coreos: `europe-docker.pkg.dev/gardener-project/releases/extensions/os-coreos:v1.21.1`
+- gardener-extension-os-coreos: `europe-docker.pkg.dev/gardener-project/releases/extensions/os-coreos:v1.22.0`
