@@ -1,17 +1,18 @@
 # [gardener/gardener]
 
-## 🐛 Bug Fixes
+## ✨ New Features
 
-- `[OPERATOR]` A race condition has been fixed which could cause unrelated `Pod`s to claim the `PersistentVolume` of a Prometheus or Alertmanager deployment during migration to the management of `prometheus-operator`. by @rfranzke [#9841]
-- `[OPERATOR]` A bug has been fixed which prevented Plutono dashboards contributed from extensions to appear in the UI. by @rfranzke [#9809]
-- `[USER]` A bug has been fixed which prevented `Shoot` deletion in case it was still annotated with `maintenance.gardener.cloud/operation`. by @rfranzke [#9860]
+- `[OPERATOR]` `gardenlet`'s `Pod` garbage collector (part of its `shoot-care` controller) now considers `Pod`s with reason `NodeAffinity`, i.e., it auto-deletes such `Pod`s. by @rfranzke [#9951]
+## 🏃 Others
+
+- `[DEPENDENCY]` The `gardener/dashboard` image has been updated to `1.74.2`. [Release Notes](https://togithub.com/gardener/dashboard/releases/tag/1.74.2) by @ialidzhikov [#9948]
 
 ## Docker Images
-- admission-controller: `europe-docker.pkg.dev/gardener-project/releases/gardener/admission-controller:v1.94.3`
-- apiserver: `europe-docker.pkg.dev/gardener-project/releases/gardener/apiserver:v1.94.3`
-- controller-manager: `europe-docker.pkg.dev/gardener-project/releases/gardener/controller-manager:v1.94.3`
-- gardenlet: `europe-docker.pkg.dev/gardener-project/releases/gardener/gardenlet:v1.94.3`
-- node-agent: `europe-docker.pkg.dev/gardener-project/releases/gardener/node-agent:v1.94.3`
-- operator: `europe-docker.pkg.dev/gardener-project/releases/gardener/operator:v1.94.3`
-- resource-manager: `europe-docker.pkg.dev/gardener-project/releases/gardener/resource-manager:v1.94.3`
-- scheduler: `europe-docker.pkg.dev/gardener-project/releases/gardener/scheduler:v1.94.3`
+- admission-controller: `europe-docker.pkg.dev/gardener-project/releases/gardener/admission-controller:v1.94.4`
+- apiserver: `europe-docker.pkg.dev/gardener-project/releases/gardener/apiserver:v1.94.4`
+- controller-manager: `europe-docker.pkg.dev/gardener-project/releases/gardener/controller-manager:v1.94.4`
+- gardenlet: `europe-docker.pkg.dev/gardener-project/releases/gardener/gardenlet:v1.94.4`
+- node-agent: `europe-docker.pkg.dev/gardener-project/releases/gardener/node-agent:v1.94.4`
+- operator: `europe-docker.pkg.dev/gardener-project/releases/gardener/operator:v1.94.4`
+- resource-manager: `europe-docker.pkg.dev/gardener-project/releases/gardener/resource-manager:v1.94.4`
+- scheduler: `europe-docker.pkg.dev/gardener-project/releases/gardener/scheduler:v1.94.4`
