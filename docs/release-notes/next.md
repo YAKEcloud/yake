@@ -182,3 +182,14 @@ hide_table_of_contents: true
 **Full Changelog**: https://github.com/gardener-community/cloudprofiles/compare/0.7.8...0.7.9
 
 </details>
+
+<details>
+<summary><b>Update cloudprofiles to <code>0.7.10</code></b></summary>
+
+## What's Changed
+* hcloud: Add cx22-cx52 machine types by @j2L4e in https://github.com/gardener-community/cloudprofiles/pull/27
+
+
+**Full Changelog**: https://github.com/gardener-community/cloudprofiles/compare/0.7.9...0.7.10
+
+</details>
