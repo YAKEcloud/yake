@@ -2,11 +2,8 @@
 
 ## 🐛 Bug Fixes
 
-- `[OPERATOR]` Fixes a monitoring configuration issue that caused false CCM-down alerts to fire. by @kon-angelo [#776]
-## 🏃 Others
-
-- `[OPERATOR]` Fix an issue preventing the creation of NAT gateways on cloud routers with custom advertise mode by @kon-angelo [#777]
+- `[USER]` Fixed a bug that could occur when configuring GPU-nodes, resulting in an invalid scheduling configuration. by @AndreasBurger [#782]
 
 ## Docker Images
-- gardener-extension-admission-gcp: `europe-docker.pkg.dev/gardener-project/releases/gardener/extensions/admission-gcp:v1.36.1`
-- gardener-extension-provider-gcp: `europe-docker.pkg.dev/gardener-project/releases/gardener/extensions/provider-gcp:v1.36.1`
+- gardener-extension-admission-gcp: `europe-docker.pkg.dev/gardener-project/releases/gardener/extensions/admission-gcp:v1.36.2`
+- gardener-extension-provider-gcp: `europe-docker.pkg.dev/gardener-project/releases/gardener/extensions/provider-gcp:v1.36.2`
