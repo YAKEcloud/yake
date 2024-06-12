@@ -175,3 +175,10 @@ hide_table_of_contents: true
 
 
 </details>
+
+<details>
+<summary><b>Update cloudprofiles to <code>0.7.9</code></b></summary>
+
+**Full Changelog**: https://github.com/gardener-community/cloudprofiles/compare/0.7.8...0.7.9
+
+</details>
