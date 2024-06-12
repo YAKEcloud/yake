@@ -17,6 +17,10 @@ machineTypes:
       gpu: "0"
       memory: 4Gi
       name: cx21
+    - cpu: "2"
+      gpu: "0"
+      memory: 4Gi
+      name: cx22
     - cpu: "3"
       gpu: "0"
       memory: 4Gi
@@ -28,6 +32,10 @@ machineTypes:
     - cpu: "4"
       gpu: "0"
       memory: 8Gi
+      name: cx32
+    - cpu: "4"
+      gpu: "0"
+      memory: 8Gi
       name: cpx31
     - cpu: "4"
       gpu: "0"
@@ -36,11 +44,19 @@ machineTypes:
     - cpu: "8"
       gpu: "0"
       memory: 16Gi
+      name: cx42
+    - cpu: "8"
+      gpu: "0"
+      memory: 16Gi
       name: cpx41
     - cpu: "8"
       gpu: "0"
       memory: 32Gi
       name: cx51
+    - cpu: "16"
+      gpu: "0"
+      memory: 32Gi
+      name: cx52
     - cpu: "16"
       gpu: "0"
       memory: 32Gi
