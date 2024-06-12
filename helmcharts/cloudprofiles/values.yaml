@@ -44,6 +44,8 @@ global:
                 1.27.13:
                     classification: deprecated
                 1.27.14:
+                    classification: deprecated
+                1.27.15:
                     classification: supported
                 1.28.1:
                     classification: deprecated
@@ -64,6 +66,8 @@ global:
                 1.28.9:
                     classification: deprecated
                 1.28.10:
+                    classification: deprecated
+                1.28.11:
                     classification: supported
                 1.29.1:
                     classification: deprecated
@@ -74,6 +78,8 @@ global:
                 1.29.4:
                     classification: deprecated
                 1.29.5:
+                    classification: deprecated
+                1.29.6:
                     classification: supported
         versions: {}
     seedSelector:
