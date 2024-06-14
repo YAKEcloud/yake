@@ -45,7 +45,7 @@ gardenlet:
       - name: terminal-controller-manager
         repository: europe-docker.pkg.dev/gardener-project/releases/gardener/terminal-controller-manager
         sourceRepository: github.com/gardener/terminal-controller-manager
-        tag: v0.32.0
+        tag: v0.33.0
       - labels:
           - name: cloud.gardener.cnudie/dso/scanning-hints/binary_id/v1
             value:
@@ -162,7 +162,7 @@ gardenlet:
       - name: vpn-seed-server
         repository: europe-docker.pkg.dev/gardener-project/releases/gardener/vpn-seed-server
         sourceRepository: github.com/gardener/vpn2
-        tag: 0.24.0
+        tag: 0.25.0
       - labels:
           - name: gardener.cloud/cve-categorisation
             value:
@@ -321,7 +321,7 @@ gardenlet:
         name: plutono-dashboard-refresher
         repository: quay.io/kiwigrid/k8s-sidecar
         sourceRepository: github.com/kiwigrid/k8s-sidecar
-        tag: 1.27.2
+        tag: 1.27.4
       - labels:
           - name: gardener.cloud/cve-categorisation
             value:
@@ -360,7 +360,7 @@ gardenlet:
       - name: vpn-shoot-client
         repository: europe-docker.pkg.dev/gardener-project/releases/gardener/vpn-shoot-client
         sourceRepository: github.com/gardener/vpn2
-        tag: 0.24.0
+        tag: 0.25.0
       - labels:
           - name: gardener.cloud/cve-categorisation
             value:
@@ -394,7 +394,7 @@ gardenlet:
         name: node-local-dns
         repository: registry.k8s.io/dns/k8s-dns-node-cache
         sourceRepository: github.com/kubernetes/kubernetes/blob/master/cluster/addons/dns/nodelocaldns
-        tag: 1.23.0
+        tag: 1.23.1
       - labels:
           - name: gardener.cloud/cve-categorisation
             value:
@@ -544,7 +544,7 @@ gardenlet:
         name: kube-rbac-proxy
         repository: quay.io/brancz/kube-rbac-proxy
         sourceRepository: github.com/brancz/kube-rbac-proxy
-        tag: v0.17.1
+        tag: v0.18.0
       - labels:
           - name: gardener.cloud/cve-categorisation
             value:
@@ -746,7 +746,7 @@ gardenlet:
         name: apiserver-proxy
         repository: europe-docker.pkg.dev/gardener-project/releases/3rd/envoyproxy/envoy-distroless
         sourceRepository: github.com/envoyproxy/envoy
-        tag: v1.30.1
+        tag: v1.30.2
       - name: apiserver-proxy-sidecar
         repository: europe-docker.pkg.dev/gardener-project/releases/gardener/apiserver-proxy
         resourceId:

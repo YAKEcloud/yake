@@ -8,6 +8,8 @@ config:
             concurrentSyncs: 20
         bastion:
             concurrentSyncs: 20
+        gardenlet:
+            syncPeriod: 1h
         managedSeed:
             concurrentSyncs: 5
             jitterUpdates: false
@@ -89,7 +91,7 @@ env: []
 image:
     pullPolicy: IfNotPresent
     repository: europe-docker.pkg.dev/gardener-project/releases/gardener/gardenlet
-    tag: v1.96.4
+    tag: v1.97.0
 invalidateServiceAccountToken: true
 nodeToleration:
     defaultNotReadyTolerationSeconds: 60
