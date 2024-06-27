@@ -2,4 +2,4 @@ apiVersion: v2
 description: A Helm chart to deploy the gardener-extension-admission-aws runtime related
   resources
 name: runtime
-version: 1.55.1
+version: 1.56.0
