@@ -1,4 +1,4 @@
 apiVersion: v2
 description: A Helm chart to deploy the Gardener runtime related resources
 name: runtime
-version: 1.97.2
+version: 1.98.0
