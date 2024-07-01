@@ -5,7 +5,7 @@
 <meta name="generator" content="Docusaurus v3.1.0">
 <title data-rh="true">Release Notes next | Yet another Kubernetes Engine</title><meta data-rh="true" name="viewport" content="width=device-width,initial-scale=1"><meta data-rh="true" name="twitter:card" content="summary_large_image"><meta data-rh="true" property="og:url" content="https://yake.cloud/release-notes/next"><meta data-rh="true" property="og:locale" content="en"><meta data-rh="true" name="docusaurus_locale" content="en"><meta data-rh="true" name="docsearch:language" content="en"><meta data-rh="true" name="gardener" content="installation, production, operations, maintenance"><meta data-rh="true" name="docusaurus_version" content="current"><meta data-rh="true" name="docusaurus_tag" content="docs-release-notes-current"><meta data-rh="true" name="docsearch:version" content="current"><meta data-rh="true" name="docsearch:docusaurus_tag" content="docs-release-notes-current"><meta data-rh="true" property="og:title" content="Release Notes next | Yet another Kubernetes Engine"><meta data-rh="true" name="description" content="Yake release notes and upgrade guide"><meta data-rh="true" property="og:description" content="Yake release notes and upgrade guide"><link data-rh="true" rel="icon" href="/img/favicon.ico"><link data-rh="true" rel="canonical" href="https://yake.cloud/release-notes/next"><link data-rh="true" rel="alternate" href="https://yake.cloud/release-notes/next" hreflang="en"><link data-rh="true" rel="alternate" href="https://yake.cloud/release-notes/next" hreflang="x-default"><link rel="alternate" type="application/rss+xml" href="/blog/rss.xml" title="Yet another Kubernetes Engine RSS Feed">
 <link rel="alternate" type="application/atom+xml" href="/blog/atom.xml" title="Yet another Kubernetes Engine Atom Feed"><link rel="stylesheet" href="/assets/css/styles.447c22af.css">
-<script src="/assets/js/runtime~main.ce32f3a6.js" defer="defer"></script>
+<script src="/assets/js/runtime~main.a4e9dd79.js" defer="defer"></script>
 <script src="/assets/js/main.cba6f281.js" defer="defer"></script>
 </head>
 <body class="navigation-with-keyboard">
@@ -351,6 +351,192 @@
 <h2 class="anchor anchorWithStickyNavbar_LWe7" id="docker-images-13">Docker Images<a href="#docker-images-13" class="hash-link" aria-label="Direct link to Docker Images" title="Direct link to Docker Images">​</a></h2>
 <ul>
 <li>gardener-extension-os-coreos: <code>europe-docker.pkg.dev/gardener-project/releases/extensions/os-coreos:v1.22.1</code></li>
+</ul>
+</div></div></details>
+<details class="details_lb9f alert alert--info details_b_Ee" data-collapsed="true"><summary><b>Update gardener-controlplane to <code>1.98.0</code></b></summary><div><div class="collapsibleContent_i85q">
+<!-- -->
+<h1>[gardener/gardener]</h1>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="️-breaking-changes-4">⚠️ Breaking Changes<a href="#️-breaking-changes-4" class="hash-link" aria-label="Direct link to ⚠️ Breaking Changes" title="Direct link to ⚠️ Breaking Changes">​</a></h2>
+<ul>
+<li><code>[DEPENDENCY]</code> The <code>Registry</code> in <code>pkg/utils/managedresources/registry.go</code> was changed to return all objects as a compressed data chunk.<br>
+As soon as you update the <code>github.com/gardener/gardener</code> dependency to this version, <code>ManagedResource</code> secrets will be rewritten in a <a href="https://github.com/google/brotli" target="_blank" rel="noopener noreferrer">Brotli</a> compressed format (combined under data key <code>data.yaml.br</code>). by @timuthy [#9964]</li>
+<li><code>[DEPENDENCY]</code> The <code>github.com/gardener/gardener/extensions/pkg/webhook/cloudprovider.Args#EnableObjectSelector</code> field is now removed. The corresponding webhook&#x27;s object selector is now enforced unconditionally. by @ialidzhikov [#10027]</li>
+<li><code>[OPERATOR]</code> Provider extensions specifying a &quot;controlplane&quot; mutating webhook <code>ObjectSelector</code> are incompatible with gardenlet &lt; <code>v1.98.0</code>. by @LucaBernstein [#9981]</li>
+<li><code>[OPERATOR]</code> The <a href="https://github.com/gardener/gardener/blob/master/docs/concepts/admission-controller.md" target="_blank" rel="noopener noreferrer">Resource Size Validator</a> of the <code>gardener-admission-controller</code> ignores <code>status</code> subresource and <code>metadata.managedFields</code> for resource size limits. Please consider adjusting your configuration if you already increased the limits because of these now ignored sections. by @LucaBernstein [#10011]</li>
+<li><code>[USER]</code> Separately configuring resource reservations for system processes via <code>shoot.spec.kubernetes.kubelet.systemReserved</code> or <code>spec.provider.workers[].kubernetes.kubelet.systemReserved</code> is deprecated in Gardener and will be removed in a future release. Please merge existing resource reservations into the corresponding <code>kubeReserved</code> field. by @MichaelEischer [#9985]</li>
+<li><code>[DEVELOPER]</code> The function <code>github.com/gardener/gardener/extensions/pkg/controller/worker/WorkerPoolHash</code> now expects separate additional data for version 1 and 2 of the hash calculation. Version 2 does not include extension provider specific fields by default. Add those to the additional data for version 2 if necessary. by @MichaelEischer [#9865]</li>
+</ul>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="-noteworthy-2">📰 Noteworthy<a href="#-noteworthy-2" class="hash-link" aria-label="Direct link to 📰 Noteworthy" title="Direct link to 📰 Noteworthy">​</a></h2>
+<ul>
+<li><code>[DEVELOPER]</code> The resources mutated by the &quot;controlplane&quot; mutating webhooks are labeled with <code>provider.extensions.gardener.cloud/mutated-by-controlplane-webhook: true</code> by gardenlet. The provider extensions can add an object selector to their &quot;controlplane&quot; mutating webhooks to do not intercept requests for unrelated objects. by @LucaBernstein [#9981]</li>
+</ul>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="-new-features-4">✨ New Features<a href="#-new-features-4" class="hash-link" aria-label="Direct link to ✨ New Features" title="Direct link to ✨ New Features">​</a></h2>
+<ul>
+<li><code>[OPERATOR]</code> Version 2 of the WorkerPoolHash calculation now takes the current name of the OperatingSystemConfig into account. Its usage is controlled by the gardenlet feature gate <code>NewWorkerPoolHash</code>. All provider extension must be upgraded before enabling this feature gate. The new calculation also ensures that changes of the fields kubeReserved, evictionHard and cpuManagerPolicy in the kubelet config of a worker pool result in node rolls. by @MichaelEischer [#9865]</li>
+<li><code>[OPERATOR]</code> Failure of snapshot compaction jobs at a rate greater than 10% of shoots in a seed will raise alerts now. by @renormalize [#9739]</li>
+<li><code>[DEVELOPER]</code> <code>gosec</code> was introduced for Static Application Security Testing (SAST). by @oliver-goetz [#9959]</li>
+<li><code>[USER]</code> A new field <code>.spec.CredentialsBindingName</code> referencing a <code>CredentialsBinding</code> was introduced to shoot specification. It is meant to replace the existing <code>SecretBindingName</code>. As of now the field is guarded by a feature gate called <code>AllowCredentialsBinding</code>. by @dimityrmirchev [#9853]</li>
+</ul>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="-bug-fixes-9">🐛 Bug Fixes<a href="#-bug-fixes-9" class="hash-link" aria-label="Direct link to 🐛 Bug Fixes" title="Direct link to 🐛 Bug Fixes">​</a></h2>
+<ul>
+<li><code>[OPERATOR]</code> Fix a bug where the Reversed VPN OpenVPN Server (HA) doesn&#x27;t display any data. by @axel7born [#10035]</li>
+</ul>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="-others-13">🏃 Others<a href="#-others-13" class="hash-link" aria-label="Direct link to 🏃 Others" title="Direct link to 🏃 Others">​</a></h2>
+<ul>
+<li><code>[DEPENDENCY]</code> The <code>envoyproxy/envoy</code> image has been updated to <code>v1.30.3</code>. <a href="https://togithub.com/envoyproxy/envoy/releases/tag/v1.30.3" target="_blank" rel="noopener noreferrer">Release Notes</a> by @gardener-ci-robot [#10031]</li>
+<li><code>[DEPENDENCY]</code> The <code>gardener/alpine-conntrack</code> image has been updated to <code>3.20.1</code>. <a href="https://togithub.com/gardener/alpine-conntrack/releases/tag/3.20.1" target="_blank" rel="noopener noreferrer">Release Notes</a> by @gardener-ci-robot [#10010]</li>
+<li><code>[DEPENDENCY]</code> The <code>gcr.io/istio-release/pilot</code> image has been updated to <code>1.21.3</code>. by @gardener-ci-robot [#9914]</li>
+<li><code>[DEPENDENCY]</code> extensions lib: The shoot webhook does now support specifying an object selector. by @ialidzhikov [#10026]</li>
+<li><code>[DEPENDENCY]</code> The <code>credativ/vali</code> image has been updated to <code>v2.2.16</code>. <a href="https://togithub.com/credativ/vali/releases/tag/v2.2.16" target="_blank" rel="noopener noreferrer">Release Notes</a> by @gardener-ci-robot [#9976]</li>
+<li><code>[DEPENDENCY]</code> The <code>credativ/plutono</code> image has been updated to <code>v7.5.31</code>. <a href="https://togithub.com/credativ/plutono/releases/tag/v7.5.31" target="_blank" rel="noopener noreferrer">Release Notes</a> by @gardener-ci-robot [#9978]</li>
+<li><code>[DEVELOPER]</code> The &quot;remote local setup&quot; is enhanced e.g. to support multiple scenarios. by @istvanballok [#9980]</li>
+<li><code>[OPERATOR]</code> <code>machine-controller-manager-provider-xxx</code> container now exposes metrics that prometheus can scrapes by @aaronfern [#9933]</li>
+<li><code>[OPERATOR]</code> kube-apiserver HPA&#x27;s max replicas count from 3 to 6 in <code>VPAAndHPA</code> autoscaling mode to support very large control planes. by @ialidzhikov [#9971]</li>
+<li><code>[OPERATOR]</code> Gardener Enhancement Proposal for a bastion section in the CloudProfile by @hebelsan [#9935]</li>
+<li><code>[OPERATOR]</code> Introduce the operator <code>Extension</code> type. An <code>Extension</code> is responsible for installing the <code>ControllerRegistration</code> and <code>ControllerRuntime</code> in the garden cluster and also install any extensions necessary to manage infrastructure resources in the runtime cluster. This release contains the API only, further functionality will be released in future Gardener versions. by @kon-angelo [#9924]</li>
+<li><code>[OPERATOR]</code> The data in <code>ManagedResource</code> secrets is now compressed with <a href="https://github.com/google/brotli" target="_blank" rel="noopener noreferrer">Brotli</a> and stored under a single data key <code>data.yaml.br</code>. by @timuthy [#9964]</li>
+</ul>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="helm-charts">Helm Charts<a href="#helm-charts" class="hash-link" aria-label="Direct link to Helm Charts" title="Direct link to Helm Charts">​</a></h2>
+<ul>
+<li>controlplane: <code>europe-docker.pkg.dev/gardener-project/releases/charts/gardener/controlplane:v1.98.0</code></li>
+<li>gardenlet: <code>europe-docker.pkg.dev/gardener-project/releases/charts/gardener/gardenlet:v1.98.0</code></li>
+<li>operator: <code>europe-docker.pkg.dev/gardener-project/releases/charts/gardener/operator:v1.98.0</code></li>
+<li>resource-manager: <code>europe-docker.pkg.dev/gardener-project/releases/charts/gardener/resource-manager:v1.98.0</code></li>
+</ul>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="docker-images-14">Docker Images<a href="#docker-images-14" class="hash-link" aria-label="Direct link to Docker Images" title="Direct link to Docker Images">​</a></h2>
+<ul>
+<li>admission-controller: <code>europe-docker.pkg.dev/gardener-project/releases/gardener/admission-controller:v1.98.0</code></li>
+<li>apiserver: <code>europe-docker.pkg.dev/gardener-project/releases/gardener/apiserver:v1.98.0</code></li>
+<li>controller-manager: <code>europe-docker.pkg.dev/gardener-project/releases/gardener/controller-manager:v1.98.0</code></li>
+<li>gardenlet: <code>europe-docker.pkg.dev/gardener-project/releases/gardener/gardenlet:v1.98.0</code></li>
+<li>node-agent: <code>europe-docker.pkg.dev/gardener-project/releases/gardener/node-agent:v1.98.0</code></li>
+<li>operator: <code>europe-docker.pkg.dev/gardener-project/releases/gardener/operator:v1.98.0</code></li>
+<li>resource-manager: <code>europe-docker.pkg.dev/gardener-project/releases/gardener/resource-manager:v1.98.0</code></li>
+<li>scheduler: <code>europe-docker.pkg.dev/gardener-project/releases/gardener/scheduler:v1.98.0</code></li>
+</ul>
+</div></div></details>
+<details class="details_lb9f alert alert--info details_b_Ee" data-collapsed="true"><summary><b>Update gardener-controlplane to <code>1.98.0</code></b></summary><div><div class="collapsibleContent_i85q">
+<!-- -->
+<h1>[gardener/gardener]</h1>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="️-breaking-changes-5">⚠️ Breaking Changes<a href="#️-breaking-changes-5" class="hash-link" aria-label="Direct link to ⚠️ Breaking Changes" title="Direct link to ⚠️ Breaking Changes">​</a></h2>
+<ul>
+<li><code>[DEPENDENCY]</code> The <code>Registry</code> in <code>pkg/utils/managedresources/registry.go</code> was changed to return all objects as a compressed data chunk.<br>
+As soon as you update the <code>github.com/gardener/gardener</code> dependency to this version, <code>ManagedResource</code> secrets will be rewritten in a <a href="https://github.com/google/brotli" target="_blank" rel="noopener noreferrer">Brotli</a> compressed format (combined under data key <code>data.yaml.br</code>). by @timuthy [#9964]</li>
+<li><code>[DEPENDENCY]</code> The <code>github.com/gardener/gardener/extensions/pkg/webhook/cloudprovider.Args#EnableObjectSelector</code> field is now removed. The corresponding webhook&#x27;s object selector is now enforced unconditionally. by @ialidzhikov [#10027]</li>
+<li><code>[OPERATOR]</code> Provider extensions specifying a &quot;controlplane&quot; mutating webhook <code>ObjectSelector</code> are incompatible with gardenlet &lt; <code>v1.98.0</code>. by @LucaBernstein [#9981]</li>
+<li><code>[OPERATOR]</code> The <a href="https://github.com/gardener/gardener/blob/master/docs/concepts/admission-controller.md" target="_blank" rel="noopener noreferrer">Resource Size Validator</a> of the <code>gardener-admission-controller</code> ignores <code>status</code> subresource and <code>metadata.managedFields</code> for resource size limits. Please consider adjusting your configuration if you already increased the limits because of these now ignored sections. by @LucaBernstein [#10011]</li>
+<li><code>[USER]</code> Separately configuring resource reservations for system processes via <code>shoot.spec.kubernetes.kubelet.systemReserved</code> or <code>spec.provider.workers[].kubernetes.kubelet.systemReserved</code> is deprecated in Gardener and will be removed in a future release. Please merge existing resource reservations into the corresponding <code>kubeReserved</code> field. by @MichaelEischer [#9985]</li>
+<li><code>[DEVELOPER]</code> The function <code>github.com/gardener/gardener/extensions/pkg/controller/worker/WorkerPoolHash</code> now expects separate additional data for version 1 and 2 of the hash calculation. Version 2 does not include extension provider specific fields by default. Add those to the additional data for version 2 if necessary. by @MichaelEischer [#9865]</li>
+</ul>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="-noteworthy-3">📰 Noteworthy<a href="#-noteworthy-3" class="hash-link" aria-label="Direct link to 📰 Noteworthy" title="Direct link to 📰 Noteworthy">​</a></h2>
+<ul>
+<li><code>[DEVELOPER]</code> The resources mutated by the &quot;controlplane&quot; mutating webhooks are labeled with <code>provider.extensions.gardener.cloud/mutated-by-controlplane-webhook: true</code> by gardenlet. The provider extensions can add an object selector to their &quot;controlplane&quot; mutating webhooks to do not intercept requests for unrelated objects. by @LucaBernstein [#9981]</li>
+</ul>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="-new-features-5">✨ New Features<a href="#-new-features-5" class="hash-link" aria-label="Direct link to ✨ New Features" title="Direct link to ✨ New Features">​</a></h2>
+<ul>
+<li><code>[OPERATOR]</code> Version 2 of the WorkerPoolHash calculation now takes the current name of the OperatingSystemConfig into account. Its usage is controlled by the gardenlet feature gate <code>NewWorkerPoolHash</code>. All provider extension must be upgraded before enabling this feature gate. The new calculation also ensures that changes of the fields kubeReserved, evictionHard and cpuManagerPolicy in the kubelet config of a worker pool result in node rolls. by @MichaelEischer [#9865]</li>
+<li><code>[OPERATOR]</code> Failure of snapshot compaction jobs at a rate greater than 10% of shoots in a seed will raise alerts now. by @renormalize [#9739]</li>
+<li><code>[DEVELOPER]</code> <code>gosec</code> was introduced for Static Application Security Testing (SAST). by @oliver-goetz [#9959]</li>
+<li><code>[USER]</code> A new field <code>.spec.CredentialsBindingName</code> referencing a <code>CredentialsBinding</code> was introduced to shoot specification. It is meant to replace the existing <code>SecretBindingName</code>. As of now the field is guarded by a feature gate called <code>AllowCredentialsBinding</code>. by @dimityrmirchev [#9853]</li>
+</ul>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="-bug-fixes-10">🐛 Bug Fixes<a href="#-bug-fixes-10" class="hash-link" aria-label="Direct link to 🐛 Bug Fixes" title="Direct link to 🐛 Bug Fixes">​</a></h2>
+<ul>
+<li><code>[OPERATOR]</code> Fix a bug where the Reversed VPN OpenVPN Server (HA) doesn&#x27;t display any data. by @axel7born [#10035]</li>
+</ul>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="-others-14">🏃 Others<a href="#-others-14" class="hash-link" aria-label="Direct link to 🏃 Others" title="Direct link to 🏃 Others">​</a></h2>
+<ul>
+<li><code>[DEPENDENCY]</code> The <code>envoyproxy/envoy</code> image has been updated to <code>v1.30.3</code>. <a href="https://togithub.com/envoyproxy/envoy/releases/tag/v1.30.3" target="_blank" rel="noopener noreferrer">Release Notes</a> by @gardener-ci-robot [#10031]</li>
+<li><code>[DEPENDENCY]</code> The <code>gardener/alpine-conntrack</code> image has been updated to <code>3.20.1</code>. <a href="https://togithub.com/gardener/alpine-conntrack/releases/tag/3.20.1" target="_blank" rel="noopener noreferrer">Release Notes</a> by @gardener-ci-robot [#10010]</li>
+<li><code>[DEPENDENCY]</code> The <code>gcr.io/istio-release/pilot</code> image has been updated to <code>1.21.3</code>. by @gardener-ci-robot [#9914]</li>
+<li><code>[DEPENDENCY]</code> extensions lib: The shoot webhook does now support specifying an object selector. by @ialidzhikov [#10026]</li>
+<li><code>[DEPENDENCY]</code> The <code>credativ/vali</code> image has been updated to <code>v2.2.16</code>. <a href="https://togithub.com/credativ/vali/releases/tag/v2.2.16" target="_blank" rel="noopener noreferrer">Release Notes</a> by @gardener-ci-robot [#9976]</li>
+<li><code>[DEPENDENCY]</code> The <code>credativ/plutono</code> image has been updated to <code>v7.5.31</code>. <a href="https://togithub.com/credativ/plutono/releases/tag/v7.5.31" target="_blank" rel="noopener noreferrer">Release Notes</a> by @gardener-ci-robot [#9978]</li>
+<li><code>[DEVELOPER]</code> The &quot;remote local setup&quot; is enhanced e.g. to support multiple scenarios. by @istvanballok [#9980]</li>
+<li><code>[OPERATOR]</code> <code>machine-controller-manager-provider-xxx</code> container now exposes metrics that prometheus can scrapes by @aaronfern [#9933]</li>
+<li><code>[OPERATOR]</code> kube-apiserver HPA&#x27;s max replicas count from 3 to 6 in <code>VPAAndHPA</code> autoscaling mode to support very large control planes. by @ialidzhikov [#9971]</li>
+<li><code>[OPERATOR]</code> Gardener Enhancement Proposal for a bastion section in the CloudProfile by @hebelsan [#9935]</li>
+<li><code>[OPERATOR]</code> Introduce the operator <code>Extension</code> type. An <code>Extension</code> is responsible for installing the <code>ControllerRegistration</code> and <code>ControllerRuntime</code> in the garden cluster and also install any extensions necessary to manage infrastructure resources in the runtime cluster. This release contains the API only, further functionality will be released in future Gardener versions. by @kon-angelo [#9924]</li>
+<li><code>[OPERATOR]</code> The data in <code>ManagedResource</code> secrets is now compressed with <a href="https://github.com/google/brotli" target="_blank" rel="noopener noreferrer">Brotli</a> and stored under a single data key <code>data.yaml.br</code>. by @timuthy [#9964]</li>
+</ul>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="helm-charts-1">Helm Charts<a href="#helm-charts-1" class="hash-link" aria-label="Direct link to Helm Charts" title="Direct link to Helm Charts">​</a></h2>
+<ul>
+<li>controlplane: <code>europe-docker.pkg.dev/gardener-project/releases/charts/gardener/controlplane:v1.98.0</code></li>
+<li>gardenlet: <code>europe-docker.pkg.dev/gardener-project/releases/charts/gardener/gardenlet:v1.98.0</code></li>
+<li>operator: <code>europe-docker.pkg.dev/gardener-project/releases/charts/gardener/operator:v1.98.0</code></li>
+<li>resource-manager: <code>europe-docker.pkg.dev/gardener-project/releases/charts/gardener/resource-manager:v1.98.0</code></li>
+</ul>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="docker-images-15">Docker Images<a href="#docker-images-15" class="hash-link" aria-label="Direct link to Docker Images" title="Direct link to Docker Images">​</a></h2>
+<ul>
+<li>admission-controller: <code>europe-docker.pkg.dev/gardener-project/releases/gardener/admission-controller:v1.98.0</code></li>
+<li>apiserver: <code>europe-docker.pkg.dev/gardener-project/releases/gardener/apiserver:v1.98.0</code></li>
+<li>controller-manager: <code>europe-docker.pkg.dev/gardener-project/releases/gardener/controller-manager:v1.98.0</code></li>
+<li>gardenlet: <code>europe-docker.pkg.dev/gardener-project/releases/gardener/gardenlet:v1.98.0</code></li>
+<li>node-agent: <code>europe-docker.pkg.dev/gardener-project/releases/gardener/node-agent:v1.98.0</code></li>
+<li>operator: <code>europe-docker.pkg.dev/gardener-project/releases/gardener/operator:v1.98.0</code></li>
+<li>resource-manager: <code>europe-docker.pkg.dev/gardener-project/releases/gardener/resource-manager:v1.98.0</code></li>
+<li>scheduler: <code>europe-docker.pkg.dev/gardener-project/releases/gardener/scheduler:v1.98.0</code></li>
+</ul>
+</div></div></details>
+<details class="details_lb9f alert alert--info details_b_Ee" data-collapsed="true"><summary><b>Update gardenlet to <code>1.98.0</code></b></summary><div><div class="collapsibleContent_i85q">
+<!-- -->
+<h1>[gardener/gardener]</h1>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="️-breaking-changes-6">⚠️ Breaking Changes<a href="#️-breaking-changes-6" class="hash-link" aria-label="Direct link to ⚠️ Breaking Changes" title="Direct link to ⚠️ Breaking Changes">​</a></h2>
+<ul>
+<li><code>[DEPENDENCY]</code> The <code>Registry</code> in <code>pkg/utils/managedresources/registry.go</code> was changed to return all objects as a compressed data chunk.<br>
+As soon as you update the <code>github.com/gardener/gardener</code> dependency to this version, <code>ManagedResource</code> secrets will be rewritten in a <a href="https://github.com/google/brotli" target="_blank" rel="noopener noreferrer">Brotli</a> compressed format (combined under data key <code>data.yaml.br</code>). by @timuthy [#9964]</li>
+<li><code>[DEPENDENCY]</code> The <code>github.com/gardener/gardener/extensions/pkg/webhook/cloudprovider.Args#EnableObjectSelector</code> field is now removed. The corresponding webhook&#x27;s object selector is now enforced unconditionally. by @ialidzhikov [#10027]</li>
+<li><code>[OPERATOR]</code> Provider extensions specifying a &quot;controlplane&quot; mutating webhook <code>ObjectSelector</code> are incompatible with gardenlet &lt; <code>v1.98.0</code>. by @LucaBernstein [#9981]</li>
+<li><code>[OPERATOR]</code> The <a href="https://github.com/gardener/gardener/blob/master/docs/concepts/admission-controller.md" target="_blank" rel="noopener noreferrer">Resource Size Validator</a> of the <code>gardener-admission-controller</code> ignores <code>status</code> subresource and <code>metadata.managedFields</code> for resource size limits. Please consider adjusting your configuration if you already increased the limits because of these now ignored sections. by @LucaBernstein [#10011]</li>
+<li><code>[USER]</code> Separately configuring resource reservations for system processes via <code>shoot.spec.kubernetes.kubelet.systemReserved</code> or <code>spec.provider.workers[].kubernetes.kubelet.systemReserved</code> is deprecated in Gardener and will be removed in a future release. Please merge existing resource reservations into the corresponding <code>kubeReserved</code> field. by @MichaelEischer [#9985]</li>
+<li><code>[DEVELOPER]</code> The function <code>github.com/gardener/gardener/extensions/pkg/controller/worker/WorkerPoolHash</code> now expects separate additional data for version 1 and 2 of the hash calculation. Version 2 does not include extension provider specific fields by default. Add those to the additional data for version 2 if necessary. by @MichaelEischer [#9865]</li>
+</ul>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="-noteworthy-4">📰 Noteworthy<a href="#-noteworthy-4" class="hash-link" aria-label="Direct link to 📰 Noteworthy" title="Direct link to 📰 Noteworthy">​</a></h2>
+<ul>
+<li><code>[DEVELOPER]</code> The resources mutated by the &quot;controlplane&quot; mutating webhooks are labeled with <code>provider.extensions.gardener.cloud/mutated-by-controlplane-webhook: true</code> by gardenlet. The provider extensions can add an object selector to their &quot;controlplane&quot; mutating webhooks to do not intercept requests for unrelated objects. by @LucaBernstein [#9981]</li>
+</ul>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="-new-features-6">✨ New Features<a href="#-new-features-6" class="hash-link" aria-label="Direct link to ✨ New Features" title="Direct link to ✨ New Features">​</a></h2>
+<ul>
+<li><code>[OPERATOR]</code> Version 2 of the WorkerPoolHash calculation now takes the current name of the OperatingSystemConfig into account. Its usage is controlled by the gardenlet feature gate <code>NewWorkerPoolHash</code>. All provider extension must be upgraded before enabling this feature gate. The new calculation also ensures that changes of the fields kubeReserved, evictionHard and cpuManagerPolicy in the kubelet config of a worker pool result in node rolls. by @MichaelEischer [#9865]</li>
+<li><code>[OPERATOR]</code> Failure of snapshot compaction jobs at a rate greater than 10% of shoots in a seed will raise alerts now. by @renormalize [#9739]</li>
+<li><code>[DEVELOPER]</code> <code>gosec</code> was introduced for Static Application Security Testing (SAST). by @oliver-goetz [#9959]</li>
+<li><code>[USER]</code> A new field <code>.spec.CredentialsBindingName</code> referencing a <code>CredentialsBinding</code> was introduced to shoot specification. It is meant to replace the existing <code>SecretBindingName</code>. As of now the field is guarded by a feature gate called <code>AllowCredentialsBinding</code>. by @dimityrmirchev [#9853]</li>
+</ul>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="-bug-fixes-11">🐛 Bug Fixes<a href="#-bug-fixes-11" class="hash-link" aria-label="Direct link to 🐛 Bug Fixes" title="Direct link to 🐛 Bug Fixes">​</a></h2>
+<ul>
+<li><code>[OPERATOR]</code> Fix a bug where the Reversed VPN OpenVPN Server (HA) doesn&#x27;t display any data. by @axel7born [#10035]</li>
+</ul>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="-others-15">🏃 Others<a href="#-others-15" class="hash-link" aria-label="Direct link to 🏃 Others" title="Direct link to 🏃 Others">​</a></h2>
+<ul>
+<li><code>[DEPENDENCY]</code> The <code>envoyproxy/envoy</code> image has been updated to <code>v1.30.3</code>. <a href="https://togithub.com/envoyproxy/envoy/releases/tag/v1.30.3" target="_blank" rel="noopener noreferrer">Release Notes</a> by @gardener-ci-robot [#10031]</li>
+<li><code>[DEPENDENCY]</code> The <code>gardener/alpine-conntrack</code> image has been updated to <code>3.20.1</code>. <a href="https://togithub.com/gardener/alpine-conntrack/releases/tag/3.20.1" target="_blank" rel="noopener noreferrer">Release Notes</a> by @gardener-ci-robot [#10010]</li>
+<li><code>[DEPENDENCY]</code> The <code>gcr.io/istio-release/pilot</code> image has been updated to <code>1.21.3</code>. by @gardener-ci-robot [#9914]</li>
+<li><code>[DEPENDENCY]</code> extensions lib: The shoot webhook does now support specifying an object selector. by @ialidzhikov [#10026]</li>
+<li><code>[DEPENDENCY]</code> The <code>credativ/vali</code> image has been updated to <code>v2.2.16</code>. <a href="https://togithub.com/credativ/vali/releases/tag/v2.2.16" target="_blank" rel="noopener noreferrer">Release Notes</a> by @gardener-ci-robot [#9976]</li>
+<li><code>[DEPENDENCY]</code> The <code>credativ/plutono</code> image has been updated to <code>v7.5.31</code>. <a href="https://togithub.com/credativ/plutono/releases/tag/v7.5.31" target="_blank" rel="noopener noreferrer">Release Notes</a> by @gardener-ci-robot [#9978]</li>
+<li><code>[DEVELOPER]</code> The &quot;remote local setup&quot; is enhanced e.g. to support multiple scenarios. by @istvanballok [#9980]</li>
+<li><code>[OPERATOR]</code> <code>machine-controller-manager-provider-xxx</code> container now exposes metrics that prometheus can scrapes by @aaronfern [#9933]</li>
+<li><code>[OPERATOR]</code> kube-apiserver HPA&#x27;s max replicas count from 3 to 6 in <code>VPAAndHPA</code> autoscaling mode to support very large control planes. by @ialidzhikov [#9971]</li>
+<li><code>[OPERATOR]</code> Gardener Enhancement Proposal for a bastion section in the CloudProfile by @hebelsan [#9935]</li>
+<li><code>[OPERATOR]</code> Introduce the operator <code>Extension</code> type. An <code>Extension</code> is responsible for installing the <code>ControllerRegistration</code> and <code>ControllerRuntime</code> in the garden cluster and also install any extensions necessary to manage infrastructure resources in the runtime cluster. This release contains the API only, further functionality will be released in future Gardener versions. by @kon-angelo [#9924]</li>
+<li><code>[OPERATOR]</code> The data in <code>ManagedResource</code> secrets is now compressed with <a href="https://github.com/google/brotli" target="_blank" rel="noopener noreferrer">Brotli</a> and stored under a single data key <code>data.yaml.br</code>. by @timuthy [#9964]</li>
+</ul>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="helm-charts-2">Helm Charts<a href="#helm-charts-2" class="hash-link" aria-label="Direct link to Helm Charts" title="Direct link to Helm Charts">​</a></h2>
+<ul>
+<li>controlplane: <code>europe-docker.pkg.dev/gardener-project/releases/charts/gardener/controlplane:v1.98.0</code></li>
+<li>gardenlet: <code>europe-docker.pkg.dev/gardener-project/releases/charts/gardener/gardenlet:v1.98.0</code></li>
+<li>operator: <code>europe-docker.pkg.dev/gardener-project/releases/charts/gardener/operator:v1.98.0</code></li>
+<li>resource-manager: <code>europe-docker.pkg.dev/gardener-project/releases/charts/gardener/resource-manager:v1.98.0</code></li>
+</ul>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="docker-images-16">Docker Images<a href="#docker-images-16" class="hash-link" aria-label="Direct link to Docker Images" title="Direct link to Docker Images">​</a></h2>
+<ul>
+<li>admission-controller: <code>europe-docker.pkg.dev/gardener-project/releases/gardener/admission-controller:v1.98.0</code></li>
+<li>apiserver: <code>europe-docker.pkg.dev/gardener-project/releases/gardener/apiserver:v1.98.0</code></li>
+<li>controller-manager: <code>europe-docker.pkg.dev/gardener-project/releases/gardener/controller-manager:v1.98.0</code></li>
+<li>gardenlet: <code>europe-docker.pkg.dev/gardener-project/releases/gardener/gardenlet:v1.98.0</code></li>
+<li>node-agent: <code>europe-docker.pkg.dev/gardener-project/releases/gardener/node-agent:v1.98.0</code></li>
+<li>operator: <code>europe-docker.pkg.dev/gardener-project/releases/gardener/operator:v1.98.0</code></li>
+<li>resource-manager: <code>europe-docker.pkg.dev/gardener-project/releases/gardener/resource-manager:v1.98.0</code></li>
+<li>scheduler: <code>europe-docker.pkg.dev/gardener-project/releases/gardener/scheduler:v1.98.0</code></li>
 </ul>
 </div></div></details></div></article><nav class="pagination-nav docusaurus-mt-lg" aria-label="Docs pages"></nav></div></div></div></div></main></div></div></div><footer class="footer footer--dark"><div class="container container-fluid"><div class="row footer__links"><div class="col footer__col"><div class="footer__title">Docs</div><ul class="footer__items clean-list"><li class="footer__item"><a class="footer__link-item" href="/docs/overview">Docs</a></li></ul></div><div class="col footer__col"><div class="footer__title">Community</div><ul class="footer__items clean-list"><li class="footer__item"><a href="https://github.com/yakecloud" target="_blank" rel="noopener noreferrer" class="footer__link-item">GitHub<svg width="13.5" height="13.5" aria-hidden="true" viewBox="0 0 24 24" class="iconExternalLink_nPIU"><path fill="currentColor" d="M21 13v10h-21v-19h12v2h-10v15h17v-8h2zm3-12h-10.988l4.035 4-6.977 7.07 2.828 2.828 6.977-7.07 4.125 4.172v-11z"></path></svg></a></li><li class="footer__item"><a href="https://github.com/gardener-community" target="_blank" rel="noopener noreferrer" class="footer__link-item">Gardener Community<svg width="13.5" height="13.5" aria-hidden="true" viewBox="0 0 24 24" class="iconExternalLink_nPIU"><path fill="currentColor" d="M21 13v10h-21v-19h12v2h-10v15h17v-8h2zm3-12h-10.988l4.035 4-6.977 7.07 2.828 2.828 6.977-7.07 4.125 4.172v-11z"></path></svg></a></li><li class="footer__item"><a href="https://gardener-cloud.slack.com" target="_blank" rel="noopener noreferrer" class="footer__link-item">Slack<svg width="13.5" height="13.5" aria-hidden="true" viewBox="0 0 24 24" class="iconExternalLink_nPIU"><path fill="currentColor" d="M21 13v10h-21v-19h12v2h-10v15h17v-8h2zm3-12h-10.988l4.035 4-6.977 7.07 2.828 2.828 6.977-7.07 4.125 4.172v-11z"></path></svg></a></li></ul></div><div class="col footer__col"><div class="footer__title">More</div><ul class="footer__items clean-list"><li class="footer__item"><a class="footer__link-item" href="/blog">Blog</a></li><li class="footer__item"><a class="footer__link-item" href="/legals">Legals</a></li><li class="footer__item"><a class="footer__link-item" href="/privacy-policy">Privacy policy</a></li></ul></div></div><div class="footer__bottom text--center"><div class="footer__copyright">Copyright © 2024 23 Technologies GmbH</div></div></div></footer></div>
 </body>
