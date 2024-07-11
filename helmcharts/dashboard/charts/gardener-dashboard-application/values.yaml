@@ -16,6 +16,7 @@ global:
             experimental:
                 throttleDelayPerCluster: 10
             features:
+                oidcObservabilityUrlsEnabled: false
                 projectTerminalShortcutsEnabled: false
                 terminalEnabled: false
             helpMenuItems:
@@ -34,7 +35,7 @@ global:
         image:
             pullPolicy: IfNotPresent
             repository: europe-docker.pkg.dev/gardener-project/releases/gardener/dashboard
-            tag: 1.75.0
+            tag: 1.76.0
         ingress:
             annotations:
                 nginx.ingress.kubernetes.io/ssl-redirect: "true"
