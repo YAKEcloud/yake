@@ -5,4 +5,4 @@ dependencies:
   repository: ""
 description: A helmchart for shoot-networking-problemdetector
 name: shoot-networking-problemdetector
-version: 0.22.0
+version: 0.24.0
