@@ -2175,7 +2175,7 @@ networking-calico:
         name: calico-node
         repository: quay.io/calico/node
         sourceRepository: github.com/projectcalico/calico
-        tag: v3.27.3
+        tag: v3.27.4
       - labels:
           - name: gardener.cloud/cve-categorisation
             value:
@@ -2188,7 +2188,7 @@ networking-calico:
         name: calico-cni
         repository: quay.io/calico/cni
         sourceRepository: github.com/projectcalico/cni-plugin
-        tag: v3.27.0
+        tag: v3.27.4
       - labels:
           - name: cloud.gardener.cnudie/dso/scanning-hints/binary_id/v1
             value:
@@ -2205,7 +2205,7 @@ networking-calico:
         name: calico-typha
         repository: quay.io/calico/typha
         sourceRepository: github.com/projectcalico/typha
-        tag: v3.27.3
+        tag: v3.27.4
       - labels:
           - name: gardener.cloud/cve-categorisation
             value:
@@ -2218,7 +2218,7 @@ networking-calico:
         name: calico-kube-controllers
         repository: quay.io/calico/kube-controllers
         sourceRepository: github.com/projectcalico/kube-controllers
-        tag: v3.27.3
+        tag: v3.27.4
       - labels:
           - name: gardener.cloud/cve-categorisation
             value:
