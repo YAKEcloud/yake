@@ -76,7 +76,7 @@ gardenlet:
         name: nginx-ingress-controller
         repository: registry.k8s.io/ingress-nginx/controller-chroot
         sourceRepository: github.com/kubernetes/ingress-nginx
-        tag: v1.10.1
+        tag: v1.11.0
         targetVersion: '>= 1.26'
       - labels:
           - name: gardener.cloud/cve-categorisation
@@ -213,7 +213,7 @@ gardenlet:
         name: prometheus
         repository: quay.io/prometheus/prometheus
         sourceRepository: github.com/prometheus/prometheus
-        tag: v2.52.0
+        tag: v2.53.1
       - labels:
           - name: gardener.cloud/cve-categorisation
             value:
@@ -304,7 +304,7 @@ gardenlet:
         name: plutono
         repository: europe-docker.pkg.dev/gardener-project/releases/3rd/credativ/plutono
         sourceRepository: github.com/credativ/plutono
-        tag: v7.5.31
+        tag: v7.5.32
       - labels:
           - name: gardener.cloud/cve-categorisation
             value:
@@ -421,7 +421,7 @@ gardenlet:
         name: kubernetes-dashboard
         repository: europe-docker.pkg.dev/gardener-project/releases/3rd/kubernetesui/dashboard
         sourceRepository: github.com/kubernetes/dashboard
-        tag: v2.5.1
+        tag: v2.7.0
       - labels:
           - name: cloud.gardener.cnudie/dso/scanning-hints/binary_id/v1
             value:
@@ -431,10 +431,10 @@ gardenlet:
         name: kubernetes-dashboard-metrics-scraper
         repository: europe-docker.pkg.dev/gardener-project/releases/3rd/kubernetesui/metrics-scraper
         sourceRepository: github.com/kubernetes/dashboard
-        tag: v1.0.7
+        tag: v1.0.9
       - name: alpine
         repository: europe-docker.pkg.dev/gardener-project/releases/3rd/alpine
-        tag: 3.19.1
+        tag: 3.19.2
       - name: alpine-conntrack
         repository: europe-docker.pkg.dev/gardener-project/releases/gardener/alpine-conntrack
         sourceRepository: github.com/gardener/alpine-conntrack
@@ -453,9 +453,9 @@ gardenlet:
               - teamname: gardener/logging-maintainers
                 type: githubTeam
         name: fluent-operator
-        repository: europe-docker.pkg.dev/gardener-project/releases/3rd/kubesphere/fluent-operator
+        repository: europe-docker.pkg.dev/gardener-project/releases/3rd/fluent-operator/fluent-operator
         sourceRepository: github.com/fluent/fluent-operator
-        tag: v2.7.0
+        tag: v2.9.0
       - labels:
           - name: gardener.cloud/cve-categorisation
             value:
@@ -470,9 +470,9 @@ gardenlet:
               - teamname: gardener/logging-maintainers
                 type: githubTeam
         name: fluent-bit
-        repository: europe-docker.pkg.dev/gardener-project/releases/3rd/kubesphere/fluent-bit
-        sourceRepository: github.com/fluent/fluent-bit
-        tag: v2.2.2
+        repository: europe-docker.pkg.dev/gardener-project/releases/3rd/fluent-operator/fluent-bit
+        sourceRepository: github.com/fluent/fluent-operator
+        tag: v3.0.7
       - labels:
           - name: gardener.cloud/cve-categorisation
             value:
@@ -492,7 +492,7 @@ gardenlet:
         resourceId:
           name: fluent-bit-to-vali
         sourceRepository: github.com/gardener/logging
-        tag: v0.55.6
+        tag: v0.60.0
       - labels:
           - name: gardener.cloud/cve-categorisation
             value:
@@ -509,7 +509,7 @@ gardenlet:
         name: vali
         repository: europe-docker.pkg.dev/gardener-project/releases/3rd/credativ/vali
         sourceRepository: github.com/credativ/vali
-        tag: v2.2.16
+        tag: v2.2.17
       - labels:
           - name: gardener.cloud/cve-categorisation
             value:
@@ -526,7 +526,7 @@ gardenlet:
         name: vali-curator
         repository: europe-docker.pkg.dev/gardener-project/releases/gardener/vali-curator
         sourceRepository: github.com/gardener/logging
-        tag: v0.55.6
+        tag: v0.60.0
       - labels:
           - name: gardener.cloud/cve-categorisation
             value:
@@ -562,7 +562,7 @@ gardenlet:
         name: valitail
         repository: europe-docker.pkg.dev/gardener-project/releases/3rd/credativ/valitail
         sourceRepository: github.com/credativ/vali
-        tag: v2.2.16
+        tag: v2.2.17
       - labels:
           - name: gardener.cloud/cve-categorisation
             value:
@@ -583,7 +583,7 @@ gardenlet:
         resourceId:
           name: telegraf-iptables
         sourceRepository: github.com/gardener/logging
-        tag: v0.55.6
+        tag: v0.60.0
       - labels:
           - name: gardener.cloud/cve-categorisation
             value:
@@ -600,7 +600,7 @@ gardenlet:
         name: event-logger
         repository: europe-docker.pkg.dev/gardener-project/releases/gardener/event-logger
         sourceRepository: github.com/gardener/logging
-        tag: v0.55.6
+        tag: v0.60.0
       - labels:
           - name: gardener.cloud/cve-categorisation
             value:
@@ -617,7 +617,7 @@ gardenlet:
         name: tune2fs
         repository: europe-docker.pkg.dev/gardener-project/releases/gardener/tune2fs
         sourceRepository: github.com/gardener/logging
-        tag: v0.55.6
+        tag: v0.60.0
       - labels:
           - name: gardener.cloud/cve-categorisation
             value:
@@ -690,7 +690,7 @@ gardenlet:
         name: istio-proxy
         repository: gcr.io/istio-release/proxyv2
         sourceRepository: github.com/istio/istio
-        tag: 1.21.3-distroless
+        tag: 1.21.4-distroless
       - labels:
           - name: gardener.cloud/cve-categorisation
             value:
@@ -707,7 +707,7 @@ gardenlet:
         name: istio-istiod
         repository: gcr.io/istio-release/pilot
         sourceRepository: github.com/istio/istio
-        tag: 1.21.3-distroless
+        tag: 1.21.4-distroless
       - name: ext-authz-server
         repository: europe-docker.pkg.dev/gardener-project/releases/gardener/ext-authz-server
         sourceRepository: github.com/gardener/ext-authz-server
@@ -746,13 +746,17 @@ gardenlet:
         name: apiserver-proxy
         repository: europe-docker.pkg.dev/gardener-project/releases/3rd/envoyproxy/envoy-distroless
         sourceRepository: github.com/envoyproxy/envoy
-        tag: v1.30.3
+        tag: v1.30.4
       - name: apiserver-proxy-sidecar
         repository: europe-docker.pkg.dev/gardener-project/releases/gardener/apiserver-proxy
         resourceId:
           name: apiserver-proxy
         sourceRepository: github.com/gardener/apiserver-proxy
         tag: v0.16.0
+      - name: cert-management
+        repository: europe-docker.pkg.dev/gardener-project/releases/cert-controller-manager
+        sourceRepository: github.com/gardener/cert-management
+        tag: v0.15.0
 provider-openstack:
   imageVectorOriginal:
     images:
