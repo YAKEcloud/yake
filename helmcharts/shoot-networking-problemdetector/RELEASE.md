@@ -2,14 +2,16 @@
 
 ## 🏃 Others
 
-- `[OPERATOR]` Allow nodes without hostname by @MartinWeindel [gardener/network-problem-detector#66]
-- `[OPERATOR]` Bumps golang from 1.22.2 to 1.22.3. by @dependabot[bot] [gardener/network-problem-detector#65]
+- `[OPERATOR]` Bumps golang from 1.22.3 to 1.22.4. by @dependabot[bot] [gardener/network-problem-detector#67]
+- `[OPERATOR]` Bumps golang from 1.22.4 to 1.22.5. by @dependabot[bot] [gardener/network-problem-detector#69]
 # [gardener/gardener-extension-shoot-networking-problemdetector]
 
 ## 🏃 Others
 
-- `[OPERATOR]` This extension is now using the new way of providing monitoring configuration (ref [GEP-19](https://github.com/gardener/gardener/blob/master/docs/proposals/19-migrating-observability-stack-to-operators.md)) in case a shoot cluster's Prometheus has been migrated to management via `prometheus-operator`. by @rfranzke [#142]
-- `[OPERATOR]` Bumps github.com/gardener/gardener from 1.94.0 to 1.95.0. by @dependabot[bot] [#144]
+- `[OPERATOR]` Bumps github.com/gardener/gardener from 1.98.0 to 1.99.0. by @dependabot[bot] [#162]
+- `[OPERATOR]` Bumps github.com/gardener/gardener from 1.96.1 to 1.97.0. by @dependabot[bot] [#155]
+- `[OPERATOR]` Bumps github.com/gardener/gardener from 1.95.0 to 1.96.1. by @dependabot[bot] [#151]
+- `[OPERATOR]` Bumps github.com/gardener/gardener from 1.97.0 to 1.98.0. by @dependabot[bot] [#158]
 
 ## Docker Images
-- gardener-extension-shoot-networking-problemdetector: `europe-docker.pkg.dev/gardener-project/releases/gardener/extensions/shoot-networking-problemdetector:v0.22.0`
+- gardener-extension-shoot-networking-problemdetector: `europe-docker.pkg.dev/gardener-project/releases/gardener/extensions/shoot-networking-problemdetector:v0.24.0`
