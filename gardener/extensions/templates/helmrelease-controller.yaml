@@ -48,10 +48,20 @@ spec:
 {{- range $cur_k, $cur_v := $v.values }}
           - patch: |
               - op: add
+                path: /helm/values/{{ $cur_k }}
+                value:
+                  {{- toYaml $cur_v | nindent 18 }}
+            target:
+              version: v1
+              kind: ControllerDeployment
+              name: .*{{ $k }}.*
+          - patch: |
+              - op: add
                 path: /providerConfig/values/{{ $cur_k }}
                 value:
                   {{- toYaml $cur_v | nindent 18 }}
             target:
+              version: v1beta1
               kind: ControllerDeployment
               name: .*{{ $k }}.*
 {{- end }}
