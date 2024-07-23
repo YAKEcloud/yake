@@ -16,7 +16,7 @@ spec:
   chart:
     spec:
       chart: external-dns-management
-      version: 0.19.0
+      version: 0.20.0
       sourceRef:
         kind: HelmRepository
         name: gardener-community-charts
