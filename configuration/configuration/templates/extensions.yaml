@@ -109,7 +109,7 @@ stringData:
 {{- else }}
             repository: europe-docker.pkg.dev/gardener-project/releases/dns-controller-manager
 {{- end }}
-            tag: v0.19.0 # renovate: datasource=github-releases depName=gardener/external-dns-management
+            tag: v0.20.0 # renovate: datasource=github-releases depName=gardener/external-dns-management
           configuration:
             cacheTtl: 300
             controllers: dnscontrollers,dnssources
