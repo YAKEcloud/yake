@@ -2,6 +2,10 @@
 
 set -eo pipefail
 
+source hack/tools/install.sh
+
+install_yq
+
 _fail() {
   msg=$1
   prefix=""
@@ -50,24 +54,23 @@ else
   echo "RELEASE_AS_LATEST=true" | tee -a "$GITHUB_ENV"
 fi
 
-if [[ $(grep "$branch" .github/renovate.json5 | wc -l) == "0" ]]; then
-  echo Updating .github/renovate.json5
+if [[ $(grep "$branch" .github/renovate.json | wc -l) == "0" ]]; then
+  echo Updating .github/renovate.json
 
-  assignee=$GITHUB_ACTOR
-  sed -i 's;"assignees": .*,$;"assignees": ["'$assignee'"],;' .github/renovate.json5
+  ASSIGNEE=$GITHUB_ACTOR \
+  MAJOR=$(echo "$majorAndMinor" | grep -oE "^[0-9]{1,}") \
+  MINOR=$(echo "$majorAndMinor" | grep -oE "[0-9]{1,}$") \
+  BRANCH=$branch \
+  $YQ -o json -i '
+    .assignees = [strenv(ASSIGNEE)] |
+    .baseBranches += strenv(BRANCH) |
+    (.packageRules[] | select(.enabled == false) | .matchBaseBranches) += strenv(BRANCH) |
+    .packageRules += .packageRules[-1] |
+    .packageRules[-1].matchBaseBranches = [strenv(BRANCH)] |
+    .packageRules[-1].allowedVersions = "/^" + strenv(MAJOR) + "[.]" + strenv(MINOR) + "[.].*$/"
+  ' .github/renovate.json
 
-  maj=$(echo "$majorAndMinor" | grep -oE "^[0-9]{1,}")
-  min=$(echo "$majorAndMinor" | grep -oE "[0-9]{1,}$")
-
-  sed -i "/\/\/ template/ {
-    p
-    s;// template\s*;;
-    s;_BRANCH_;$branch;g
-    s;_MAJOR_;$maj;g
-    s;_MINOR_;$min;g
-  }" .github/renovate.json5
-
-  git add .github/renovate.json5
+  git add .github/renovate.json
   git commit -m "[skip ci] track $tag"
   git push
 fi
