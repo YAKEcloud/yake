@@ -173,7 +173,7 @@ func getGardenletClusterRole(labels map[string]string) *rbacv1.ClusterRole {
 			{
 				APIGroups: []string{""},
 				Resources: []string{"endpoints", "persistentvolumes"},
-				Verbs:     []string{"get", "list", "watch", "patch"},
+				Verbs:     []string{"get", "list", "watch"},
 			},
 			{
 				APIGroups: []string{""},
@@ -203,12 +203,12 @@ func getGardenletClusterRole(labels map[string]string) *rbacv1.ClusterRole {
 			{
 				APIGroups: []string{""},
 				Resources: []string{"persistentvolumeclaims"},
-				Verbs:     []string{"get", "list", "watch", "patch", "update", "create"},
+				Verbs:     []string{"get", "list", "watch", "patch", "update"},
 			},
 			{
 				APIGroups:     []string{""},
 				Resources:     []string{"persistentvolumeclaims"},
-				ResourceNames: []string{"vali-vali-0", "prometheus-db-prometheus-0"},
+				ResourceNames: []string{"vali-vali-0"},
 				Verbs:         []string{"delete"},
 			},
 			{
@@ -1142,12 +1142,12 @@ func ComputeExpectedGardenletDeploymentSpec(
 	if imageVectorOverwrite != nil {
 		deployment.Template.Spec.Containers[0].Env = append(deployment.Template.Spec.Containers[0].Env, corev1.EnvVar{
 			Name:  "IMAGEVECTOR_OVERWRITE",
-			Value: "/charts_overwrite/images_overwrite.yaml",
+			Value: "/imagevector_overwrite/images_overwrite.yaml",
 		})
 		deployment.Template.Spec.Containers[0].VolumeMounts = append(deployment.Template.Spec.Containers[0].VolumeMounts, corev1.VolumeMount{
 			Name:      "gardenlet-imagevector-overwrite",
 			ReadOnly:  true,
-			MountPath: "/charts_overwrite",
+			MountPath: "/imagevector_overwrite",
 		})
 		deployment.Template.Spec.Volumes = append(deployment.Template.Spec.Volumes, corev1.Volume{
 			Name: "gardenlet-imagevector-overwrite",
@@ -1164,12 +1164,12 @@ func ComputeExpectedGardenletDeploymentSpec(
 	if componentImageVectorOverwrites != nil {
 		deployment.Template.Spec.Containers[0].Env = append(deployment.Template.Spec.Containers[0].Env, corev1.EnvVar{
 			Name:  "IMAGEVECTOR_OVERWRITE_COMPONENTS",
-			Value: "/charts_overwrite_components/components.yaml",
+			Value: "/imagevector_overwrite_components/components.yaml",
 		})
 		deployment.Template.Spec.Containers[0].VolumeMounts = append(deployment.Template.Spec.Containers[0].VolumeMounts, corev1.VolumeMount{
 			Name:      "gardenlet-imagevector-overwrite-components",
 			ReadOnly:  true,
-			MountPath: "/charts_overwrite_components",
+			MountPath: "/imagevector_overwrite_components",
 		})
 		deployment.Template.Spec.Volumes = append(deployment.Template.Spec.Volumes, corev1.Volume{
 			Name: "gardenlet-imagevector-overwrite-components",
