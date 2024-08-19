@@ -3,7 +3,7 @@ sources:
   repo: gardener/gardener
   version:
     fromFile: ../../../gardener/gardenlet.yaml
-  imageVector: imagevector/images.yaml
+  imageVector: imagevector/containers.yaml
 - name: etcd-druid
   repo: gardener/etcd-druid
   version:
