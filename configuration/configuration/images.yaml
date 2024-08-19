@@ -59,7 +59,7 @@ gardenlet:
       - name: etcd-druid
         repository: europe-docker.pkg.dev/gardener-project/releases/gardener/etcd-druid
         sourceRepository: github.com/gardener/etcd-druid
-        tag: v0.22.3
+        tag: v0.22.4
       - name: dependency-watchdog
         repository: europe-docker.pkg.dev/gardener-project/releases/gardener/dependency-watchdog
         sourceRepository: github.com/gardener/dependency-watchdog
@@ -377,7 +377,7 @@ gardenlet:
         name: coredns
         repository: registry.k8s.io/coredns/coredns
         sourceRepository: github.com/coredns/coredns
-        tag: v1.11.1
+        tag: v1.11.3
       - labels:
           - name: gardener.cloud/cve-categorisation
             value:
@@ -432,13 +432,10 @@ gardenlet:
         repository: europe-docker.pkg.dev/gardener-project/releases/3rd/kubernetesui/metrics-scraper
         sourceRepository: github.com/kubernetes/dashboard
         tag: v1.0.9
-      - name: alpine
-        repository: europe-docker.pkg.dev/gardener-project/releases/3rd/alpine
-        tag: 3.20.2
       - name: alpine-conntrack
         repository: europe-docker.pkg.dev/gardener-project/releases/gardener/alpine-conntrack
         sourceRepository: github.com/gardener/alpine-conntrack
-        tag: 3.20.1
+        tag: 3.20.2
       - labels:
           - name: gardener.cloud/cve-categorisation
             value:
@@ -562,7 +559,7 @@ gardenlet:
         name: valitail
         repository: europe-docker.pkg.dev/gardener-project/releases/3rd/credativ/valitail
         sourceRepository: github.com/credativ/vali
-        tag: v2.2.17
+        tag: v2.2.15
       - labels:
           - name: gardener.cloud/cve-categorisation
             value:
@@ -2422,7 +2419,7 @@ etcd-druid:
         resourceId:
           name: etcdbrctl
         sourceRepository: github.com/gardener/etcd-backup-restore
-        tag: v0.28.2
+        tag: v0.28.3
       - name: etcd-wrapper
         repository: europe-docker.pkg.dev/gardener-project/public/gardener/etcd-wrapper
         sourceRepository: github.com/gardener/etcd-wrapper
