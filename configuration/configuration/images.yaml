@@ -137,8 +137,13 @@ gardenlet:
       - name: cluster-autoscaler
         repository: europe-docker.pkg.dev/gardener-project/releases/gardener/autoscaler/cluster-autoscaler
         sourceRepository: github.com/gardener/autoscaler
+        tag: v1.30.0
+        targetVersion: '>= 1.30'
+      - name: cluster-autoscaler
+        repository: europe-docker.pkg.dev/gardener-project/releases/gardener/autoscaler/cluster-autoscaler
+        sourceRepository: github.com/gardener/autoscaler
         tag: v1.29.1
-        targetVersion: '>= 1.29'
+        targetVersion: 1.29.x
       - name: cluster-autoscaler
         repository: europe-docker.pkg.dev/gardener-project/releases/gardener/autoscaler/cluster-autoscaler
         sourceRepository: github.com/gardener/autoscaler
@@ -152,12 +157,12 @@ gardenlet:
       - name: cluster-autoscaler
         repository: europe-docker.pkg.dev/gardener-project/releases/gardener/autoscaler/cluster-autoscaler
         sourceRepository: github.com/gardener/autoscaler
-        tag: v1.26.2
+        tag: v1.26.3
         targetVersion: 1.26.x
       - name: cluster-autoscaler
         repository: europe-docker.pkg.dev/gardener-project/releases/gardener/autoscaler/cluster-autoscaler
         sourceRepository: github.com/gardener/autoscaler
-        tag: v1.25.3
+        tag: v1.25.4
         targetVersion: 1.25.x
       - name: vpn-seed-server
         repository: europe-docker.pkg.dev/gardener-project/releases/gardener/vpn-seed-server
@@ -179,7 +184,7 @@ gardenlet:
         name: prometheus-operator
         repository: quay.io/prometheus-operator/prometheus-operator
         sourceRepository: github.com/prometheus-operator/prometheus-operator
-        tag: v0.75.2
+        tag: v0.76.0
       - labels:
           - name: gardener.cloud/cve-categorisation
             value:
@@ -213,7 +218,7 @@ gardenlet:
         name: prometheus
         repository: quay.io/prometheus/prometheus
         sourceRepository: github.com/prometheus/prometheus
-        tag: v2.53.1
+        tag: v2.54.0
       - labels:
           - name: gardener.cloud/cve-categorisation
             value:
@@ -230,7 +235,7 @@ gardenlet:
         name: configmap-reloader
         repository: quay.io/prometheus-operator/prometheus-config-reloader
         sourceRepository: github.com/prometheus-operator/prometheus-operator
-        tag: v0.75.2
+        tag: v0.76.0
       - labels:
           - name: gardener.cloud/cve-categorisation
             value:
@@ -263,7 +268,7 @@ gardenlet:
         name: kube-state-metrics
         repository: registry.k8s.io/kube-state-metrics/kube-state-metrics
         sourceRepository: github.com/kubernetes/kube-state-metrics
-        tag: v2.8.2
+        tag: v2.13.0
       - name: gardener-metrics-exporter
         repository: europe-docker.pkg.dev/gardener-project/releases/gardener/metrics-exporter
         resourceId:
@@ -304,7 +309,7 @@ gardenlet:
         name: plutono
         repository: europe-docker.pkg.dev/gardener-project/releases/3rd/credativ/plutono
         sourceRepository: github.com/credativ/plutono
-        tag: v7.5.32
+        tag: v7.5.33
       - labels:
           - name: gardener.cloud/cve-categorisation
             value:
@@ -506,7 +511,7 @@ gardenlet:
         name: vali
         repository: europe-docker.pkg.dev/gardener-project/releases/3rd/credativ/vali
         sourceRepository: github.com/credativ/vali
-        tag: v2.2.17
+        tag: v2.2.18
       - labels:
           - name: gardener.cloud/cve-categorisation
             value:
@@ -559,7 +564,7 @@ gardenlet:
         name: valitail
         repository: europe-docker.pkg.dev/gardener-project/releases/3rd/credativ/valitail
         sourceRepository: github.com/credativ/vali
-        tag: v2.2.15
+        tag: v2.2.18
       - labels:
           - name: gardener.cloud/cve-categorisation
             value:
@@ -627,7 +632,7 @@ gardenlet:
         name: vpa-admission-controller
         repository: registry.k8s.io/autoscaling/vpa-admission-controller
         sourceRepository: github.com/kubernetes/autoscaler
-        tag: 1.1.2
+        tag: 1.2.1
       - labels:
           - name: gardener.cloud/cve-categorisation
             value:
@@ -638,9 +643,9 @@ gardenlet:
               network_exposure: private
               user_interaction: gardener-operator
         name: vpa-recommender
-        repository: registry.k8s.io/autoscaling/vpa-recommender
-        sourceRepository: github.com/kubernetes/autoscaler
-        tag: 1.1.2
+        repository: europe-docker.pkg.dev/gardener-project/releases/gardener/autoscaler/vertical-pod-autoscaler/vpa-recommender
+        sourceRepository: github.com/gardener/autoscaler
+        tag: 1.2.1
       - labels:
           - name: gardener.cloud/cve-categorisation
             value:
@@ -653,7 +658,7 @@ gardenlet:
         name: vpa-updater
         repository: registry.k8s.io/autoscaling/vpa-updater
         sourceRepository: github.com/kubernetes/autoscaler
-        tag: 1.1.2
+        tag: 1.2.1
       - labels:
           - name: gardener.cloud/cve-categorisation
             value:
@@ -708,7 +713,7 @@ gardenlet:
       - name: ext-authz-server
         repository: europe-docker.pkg.dev/gardener-project/releases/gardener/ext-authz-server
         sourceRepository: github.com/gardener/ext-authz-server
-        tag: 0.9.0
+        tag: 0.10.0
       - labels:
           - name: gardener.cloud/cve-categorisation
             value:

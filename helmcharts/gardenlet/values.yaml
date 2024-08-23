@@ -54,6 +54,8 @@ config:
             syncPeriod: 6h
         tokenRequestor:
             concurrentSyncs: 5
+        tokenRequestorWorkloadIdentity:
+            concurrentSyncs: 5
         vpaEvictionRequirements:
             concurrentSyncs: 5
     debugging:
@@ -91,7 +93,7 @@ env: []
 image:
     pullPolicy: IfNotPresent
     repository: europe-docker.pkg.dev/gardener-project/releases/gardener/gardenlet
-    tag: v1.101.2
+    tag: v1.102.0
 invalidateServiceAccountToken: true
 nodeToleration:
     defaultNotReadyTolerationSeconds: 60
@@ -103,4 +105,3 @@ resources:
         memory: 100Mi
 revisionHistoryLimit: 2
 serviceAccountName: gardenlet
-vpa: false
