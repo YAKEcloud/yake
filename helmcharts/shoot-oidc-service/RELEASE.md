@@ -1,17 +1,26 @@
 # [gardener/gardener-extension-shoot-oidc-service]
 
-## ⚠️ Breaking Changes
+## ✨ New Features
 
-- `[OPERATOR]` `extension-shoot-oidc-service` no longer supports Shoots with Кubernetes version == 1.24. by @shafeeqes [#142]
-# [gardener/oidc-webhook-authenticator]
-
-## ⚠️ Breaking Changes
-
-- `[OPERATOR]` :warning: OWA no longer delegates authentication and authorization to a `kube-apiserver`. It now only supports optional client certificate authentication which can be configured via the "--client-ca-file" flag. Paths that do require authentication can be skipped by setting the flag "--authentication-always-allow-paths". The same flags can be configured with the helm chart via `.Values.runtime.auth.clientCABundle` and `.Values.runtime.auth.authenticationAlwaysAllowPaths`. Operators should remove residuals of roles and rolebindings that were used to authorize OWA callers. by @dimityrmirchev [gardener/oidc-webhook-authenticator#148]
-- `[OPERATOR]` Flags related to `kube-apiserver` authn/z delegation and `kube-apiserver` serving were removed.  by @dimityrmirchev [gardener/oidc-webhook-authenticator#148]
+- `[OPERATOR]` The extension mutating webhook now uses object selector to reduce the number of calls. by @dimityrmirchev [#224]
+- `[OPERATOR]` Helm charts of extension and admission controller are published as OCI artifacts now. by @oliver-goetz [#222]
 ## 🏃 Others
 
-- `[DEPENDENCY]` OWA is now built using go version 1.22.1. by @dimityrmirchev [gardener/oidc-webhook-authenticator#151]
+- `[DEPENDENCY]` The extension is now built using go version 1.22.5. by @dimityrmirchev [#220]
+# [gardener/oidc-webhook-authenticator]
 
+## 🏃 Others
+
+- `[DEVELOPER]` The following dependencies have been updated:  
+  - github.com/coreos/go-oidc/v3 v3.1.0 -> v3.10.0  
+  - golang.org/x/time v0.3.0 -> v0.5.0  
+  - k8s.io/* v0.27.9 -> v0.30.1  
+  - sigs.k8s.io/controller-runtime v0.15.3 -> v0.18.4  
+  - golang.org/x/crypto v0.21.0 -> v0.24.0  
+  - golang.org/x/net v0.23.0 -> v0.26.0 by @vpnachev [gardener/oidc-webhook-authenticator#157]
+- `[DEPENDENCY]` OWA is now built using go version 1.22.5. by @dimityrmirchev [gardener/oidc-webhook-authenticator#158]
+
+## Helm Charts
+- shoot-oidc-service: `europe-docker.pkg.dev/gardener-project/releases/charts/gardener/extensions/shoot-oidc-service:v0.27.0`
 ## Docker Images
-- gardener-extension-shoot-oidc-service: `europe-docker.pkg.dev/gardener-project/releases/gardener/extensions/shoot-oidc-service:v0.25.0`
+- gardener-extension-shoot-oidc-service: `europe-docker.pkg.dev/gardener-project/releases/gardener/extensions/shoot-oidc-service:v0.27.0`
