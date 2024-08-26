@@ -1325,7 +1325,7 @@ provider-azure:
         name: machine-controller-manager-provider-azure
         repository: europe-docker.pkg.dev/gardener-project/releases/gardener/machine-controller-manager-provider-azure
         sourceRepository: github.com/gardener/machine-controller-manager-provider-azure
-        tag: v0.13.0
+        tag: v0.13.1
       - labels:
           - name: gardener.cloud/cve-categorisation
             value:
