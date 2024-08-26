@@ -17,7 +17,7 @@ stringData:
         repository: {{ include "replaceRegistry" (dict "quay.io/jetstack/cert-manager-acmesolver" .Values.registryOverwrite) }}
     startupapicheck:
       image:
-        repository: {{ include "replaceRegistry" (dict "quay.io/jetstack/cert-manager-ctl" .Values.registryOverwrite) }}
+        repository: {{ include "replaceRegistry" (dict "quay.io/jetstack/cert-manager-startupapicheck" .Values.registryOverwrite) }}
     webhook:
       image:
         repository: {{ include "replaceRegistry" (dict "quay.io/jetstack/cert-manager-webhook" .Values.registryOverwrite) }}
