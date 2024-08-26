@@ -1,4 +1,4 @@
 apiVersion: v2
 description: Helmchart for controllerregistration of provider-alicloud
 name: controller
-version: 1.52.1
+version: 1.53.0

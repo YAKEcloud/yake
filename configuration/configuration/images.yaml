@@ -2002,7 +2002,7 @@ provider-alicloud:
         name: machine-controller-manager-provider-alicloud
         repository: europe-docker.pkg.dev/gardener-project/releases/gardener/machine-controller-manager-provider-alicloud
         sourceRepository: github.com/gardener/machine-controller-manager-provider-alicloud
-        tag: v0.10.1
+        tag: v0.11.0
       - name: alicloud-controller-manager
         repository: registry-eu-central-1.ack.aliyuncs.com/acs/cloud-controller-manager-amd64
         sourceRepository: https://github.com/kubernetes/cloud-provider-alibaba-cloud
@@ -2098,7 +2098,14 @@ provider-alicloud:
         repository: registry.k8s.io/sig-storage/csi-resizer
         sourceRepository: https://github.com/kubernetes-csi/external-resizer
         tag: v1.6.0
-      - name: csi-plugin-alicloud
+      - labels:
+          - name: cloud.gardener.cnudie/responsibles
+            value:
+              - type: githubUser
+                username: shaoyongfeng
+              - email: taylor.shao@sap.com
+                type: emailAddress
+        name: csi-plugin-alicloud
         repository: registry.eu-central-1.aliyuncs.com/acs/csi-plugin
         sourceRepository: https://github.com/kubernetes-sigs/alibaba-cloud-csi-driver
         tag: v1.30.1-242df8a-aliyun
