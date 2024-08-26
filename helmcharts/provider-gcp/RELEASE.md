@@ -1,31 +1,23 @@
-# [gardener/machine-controller-manager]
-
-## ⚠️ Breaking Changes
-
-- `[DEVELOPER]`  New provider method Driver.InitializeMachine added for Post-Creation VM Instance Initialization steps. by @elankath [gardener/machine-controller-manager#898]
-## 🏃 Others
-
-- `[OPERATOR]` Updated k8s dependencies to `v0.29.3` by @rishabh-11 [gardener/machine-controller-manager#907]
-- `[OPERATOR]` Removed vendor directory by @rishabh-11 [gardener/machine-controller-manager#903]
-# [gardener/machine-controller-manager-provider-gcp]
-
-## 🏃 Others
-
-- `[USER]` The providerSpec validation has changed for the following driver calls:-  
-  - DeleteMachine, ListMachines, and GetMachineStatus validate only the zone field in the providerSpec. by @rishabh-11 [gardener/machine-controller-manager-provider-gcp#123]
-- `[USER]` Remove strict validation about disk types by @kon-angelo [gardener/machine-controller-manager-provider-gcp#108]
-- `[DEVELOPER]` Removed vendor directory by @rishabh-11 [gardener/machine-controller-manager-provider-gcp#112]
-- `[DEVELOPER]` Support for passing disk params provisioned-iops and provisioned-throughput by @hebelsan [gardener/machine-controller-manager-provider-gcp#122]
 # [gardener/gardener-extension-provider-gcp]
 
 ## ✨ New Features
 
-- `[USER]` Add support for specifying data volume sourceImage in the workerConfig by @hebelsan [#751]
+- `[OPERATOR]` Helm charts of extension and admission controller are published as OCI artifacts now. by @oliver-goetz [#805]
+## 🐛 Bug Fixes
+
+- `[OPERATOR]` Removed unnecessary preStop hook from `node-driver-registrar` in `csi-driver-node`, as socket removal is now handled internally by `node-driver-registrar`, resolving distroless image error. by @sujeet01 [#792]
+- `[USER]` Allow configuring iops and throughput of hyperdisk-balanced disks by @hebelsan [#793]
 ## 🏃 Others
 
-- `[OPERATOR]` A problem with deploying MachineClasses that reference an operating system image whose version contains a `+` character was fixed.  by @AndreasBurger [#787]
-- `[OPERATOR]` Support and validation of disk params provisioned-iops and provisioned-throughput by @hebelsan [#743]
+- `[OPERATOR]` Inserts architecture from worker to the machine class by @sssash18 [#809]
+- `[OPERATOR]` Starting with gardenlet >= v1.98.0, use controlplane webhook object selector to limit mutator calls. by @LucaBernstein [#789]
+- `[OPERATOR]` Update the VPA CRD used for testing locally by @hebelsan [#812]
+- `[OPERATOR]` A `priorityClassName` can now be set for the admission deployment via the `gardener-extension-admission-gcp` Helm chart. by @timuthy [#794]
 
+## Helm Charts
+- admission-gcp-application: `europe-docker.pkg.dev/gardener-project/releases/charts/gardener/extensions/admission-gcp-application:v1.38.0`
+- admission-gcp-runtime: `europe-docker.pkg.dev/gardener-project/releases/charts/gardener/extensions/admission-gcp-runtime:v1.38.0`
+- provider-gcp: `europe-docker.pkg.dev/gardener-project/releases/charts/gardener/extensions/provider-gcp:v1.38.0`
 ## Docker Images
-- gardener-extension-admission-gcp: `europe-docker.pkg.dev/gardener-project/releases/gardener/extensions/admission-gcp:v1.37.0`
-- gardener-extension-provider-gcp: `europe-docker.pkg.dev/gardener-project/releases/gardener/extensions/provider-gcp:v1.37.0`
+- gardener-extension-admission-gcp: `europe-docker.pkg.dev/gardener-project/releases/gardener/extensions/admission-gcp:v1.38.0`
+- gardener-extension-provider-gcp: `europe-docker.pkg.dev/gardener-project/releases/gardener/extensions/provider-gcp:v1.38.0`
