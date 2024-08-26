@@ -1,9 +1,9 @@
 # [gardener/gardener-extension-shoot-rsyslog-relp]
 
-## 🏃 Others
+## 🐛 Bug Fixes
 
-- `[OPERATOR]` The memory of the `rsyslog.service` systemd unit is now limited via a drop-in config. The following configurations are used: `MemoryMin=15M`, `MemoryHigh=150M`, `MemoryMax=300M`, `MemorySwapMax=0` by @plkokanov [#139]
+- `[OPERATOR]` Fixed an issue that caused the `-a exit,always -F arch=b64 -S mount_setattr -F auid!=-1 -F key=privileged_special` audit rule to not get correctly applied. by @plkokanov [#151]
 
 ## Docker Images
-- gardener-extension-shoot-rsyslog-relp-admission: `europe-docker.pkg.dev/gardener-project/releases/gardener/extensions/shoot-rsyslog-relp-admission:v0.5.1`
-- gardener-extension-shoot-rsyslog-relp: `europe-docker.pkg.dev/gardener-project/releases/gardener/extensions/shoot-rsyslog-relp:v0.5.1`
+- gardener-extension-shoot-rsyslog-relp-admission: `europe-docker.pkg.dev/gardener-project/releases/gardener/extensions/shoot-rsyslog-relp-admission:v0.5.2`
+- gardener-extension-shoot-rsyslog-relp: `europe-docker.pkg.dev/gardener-project/releases/gardener/extensions/shoot-rsyslog-relp:v0.5.2`
