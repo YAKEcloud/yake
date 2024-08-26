@@ -148,7 +148,7 @@
       "registryUrlTemplate": "https://gardener-community.github.io/gardener-charts",
       "versioningTemplate": "semver-coerced",
       "matchStrings": [
-        "(?<depName>[a-z-]+):\\\\s+version: (?<currentValue>[0-9.]+)"
+        "(?<depName>[a-z-]+):\\s+version: (?<currentValue>[0-9.]+)"
       ]
     },
     {
@@ -157,7 +157,7 @@
         "[.]ya?ml$"
       ],
       "matchStrings": [
-        "(?<currentValue>[^ ]+?) # renovate: datasource=(?<datasource>.+?) depName=(?<depName>.+?)( versioning=(?<versioning>.+?))?\\n"
+        "(?<currentValue>[^ ]+?) # renovate: datasource=(?<datasource>.+?) depName=(?<depName>.+?)( versioning=(?<versioning>.+?))?\n"
       ]
     },
     {
@@ -169,7 +169,7 @@
       "registryUrlTemplate": "https://gardener-community.github.io/gardener-charts",
       "versioningTemplate": "semver-coerced",
       "matchStrings": [
-        "chart: (?<depName>[a-z-]+)\\n +version: (?<currentValue>[0-9.]+)"
+        "chart: (?<depName>[a-z-]+)\n +version: (?<currentValue>[0-9.]+)"
       ]
     },
     {
@@ -181,7 +181,7 @@
       "registryUrlTemplate": "https://vmware-tanzu.github.io/helm-charts",
       "versioningTemplate": "semver-coerced",
       "matchStrings": [
-        "chart: (?<depName>[a-z-]+)\\n +version: (?<currentValue>[0-9.]+)"
+        "chart: (?<depName>[a-z-]+)\n +version: (?<currentValue>[0-9.]+)"
       ]
     },
     {
@@ -190,7 +190,7 @@
         "^hack/tools/install.sh$"
       ],
       "matchStrings": [
-        "# renovate: datasource=(?<datasource>.+?) depName=(?<depName>.+?)( versioning=(?<versioning>.+?))?\\n.+?VERSION=(?<currentValue>.+?)\\n"
+        "# renovate: datasource=(?<datasource>.+?) depName=(?<depName>.+?)( versioning=(?<versioning>.+?))?\n.+?VERSION=(?<currentValue>.+?)\n"
       ]
     }
   ],
