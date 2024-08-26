@@ -223,3 +223,14 @@ hide_table_of_contents: true
 
 
 </details>
+
+<details>
+<summary><b>Update shoot-flux to <code>0.6.1</code></b></summary>
+
+## What's Changed
+* :bug: Fix reconcile order for new Shoots by @maboehm in https://github.com/stackitcloud/gardener-extension-shoot-flux/pull/84
+
+
+**Full Changelog**: https://github.com/stackitcloud/gardener-extension-shoot-flux/compare/v0.6.0...v0.6.1
+
+</details>
