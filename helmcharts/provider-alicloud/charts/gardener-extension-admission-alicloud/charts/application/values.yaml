@@ -3,7 +3,7 @@ global:
     image:
         pullPolicy: IfNotPresent
         repository: europe-docker.pkg.dev/gardener-project/public/gardener/extensions/admission-alicloud
-        tag: v1.52.1
+        tag: v1.53.0
     kubeconfig: null
     metricsPort: 8080
     replicaCount: 1
