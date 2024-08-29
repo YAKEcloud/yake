@@ -4,7 +4,7 @@ global:
     image:
         pullPolicy: IfNotPresent
         repository: europe-docker.pkg.dev/gardener-project/public/gardener/extensions/admission-shoot-dns-service
-        tag: v1.52.0
+        tag: v1.52.1
     kubeconfig: null
     replicaCount: 1
     resources: {}
