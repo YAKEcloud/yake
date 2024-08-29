@@ -9,4 +9,4 @@ dependencies:
   repository: ""
 description: A Helm chart for the Gardener Shoot DNS Service admission controller
 name: gardener-extension-admission-shoot-dns-service
-version: 1.52.0
+version: 1.52.1
