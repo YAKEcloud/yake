@@ -2,7 +2,7 @@
 
 ## 🐛 Bug Fixes
 
-- `[USER]` Fixed a bug where navigating between cluster details pages caused new ticket titles to inherit the title from the previously viewed cluster by @petersutter [#1976]
+- `[USER]` We have addressed an issue affecting the worker group zone configuration for existing Azure clusters by @grolu [#2003]
 
 ## Docker Images
-- gardener-dashboard: `europe-docker.pkg.dev/gardener-project/releases/gardener/dashboard:1.76.1`
+- gardener-dashboard: `europe-docker.pkg.dev/gardener-project/releases/gardener/dashboard:1.76.2`
