@@ -377,3 +377,33 @@ hide_table_of_contents: true
 
 
 </details>
+
+<details>
+<summary><b>Update dashboard to <code>1.76.2</code></b></summary>
+
+# [gardener/dashboard]
+
+## 🐛 Bug Fixes
+
+- `[USER]` We have addressed an issue affecting the worker group zone configuration for existing Azure clusters by @grolu [#2003]
+
+## Docker Images
+- gardener-dashboard: `europe-docker.pkg.dev/gardener-project/releases/gardener/dashboard:1.76.2`
+
+
+</details>
+
+<details>
+<summary><b>Update dashboard to <code>1.76.2</code></b></summary>
+
+# [gardener/dashboard]
+
+## 🐛 Bug Fixes
+
+- `[USER]` We have addressed an issue affecting the worker group zone configuration for existing Azure clusters by @grolu [#2003]
+
+## Docker Images
+- gardener-dashboard: `europe-docker.pkg.dev/gardener-project/releases/gardener/dashboard:1.76.2`
+
+
+</details>
