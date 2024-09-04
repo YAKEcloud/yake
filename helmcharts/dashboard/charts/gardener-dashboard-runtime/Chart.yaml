@@ -5,4 +5,4 @@ dependencies:
   repository: ""
 description: A Helm chart to deploy the Gardener dashboard runtime related components
 name: gardener-dashboard-runtime
-version: 1.76.2
+version: 1.77.0
