@@ -41,7 +41,7 @@ gardenlet:
       - name: gardener-dashboard
         repository: europe-docker.pkg.dev/gardener-project/releases/gardener/dashboard
         sourceRepository: github.com/gardener/dashboard
-        tag: 1.76.1
+        tag: 1.77.0
       - name: terminal-controller-manager
         repository: europe-docker.pkg.dev/gardener-project/releases/gardener/terminal-controller-manager
         sourceRepository: github.com/gardener/terminal-controller-manager
@@ -184,7 +184,7 @@ gardenlet:
         name: prometheus-operator
         repository: quay.io/prometheus-operator/prometheus-operator
         sourceRepository: github.com/prometheus-operator/prometheus-operator
-        tag: v0.76.0
+        tag: v0.76.1
       - labels:
           - name: gardener.cloud/cve-categorisation
             value:
@@ -218,7 +218,7 @@ gardenlet:
         name: prometheus
         repository: quay.io/prometheus/prometheus
         sourceRepository: github.com/prometheus/prometheus
-        tag: v2.54.0
+        tag: v2.54.1
       - labels:
           - name: gardener.cloud/cve-categorisation
             value:
@@ -235,7 +235,7 @@ gardenlet:
         name: configmap-reloader
         repository: quay.io/prometheus-operator/prometheus-config-reloader
         sourceRepository: github.com/prometheus-operator/prometheus-operator
-        tag: v0.76.0
+        tag: v0.76.1
       - labels:
           - name: gardener.cloud/cve-categorisation
             value:
@@ -251,7 +251,7 @@ gardenlet:
                 type: githubTeam
         name: cortex
         repository: quay.io/cortexproject/cortex
-        tag: v1.17.1
+        tag: v1.18.0
       - labels:
           - name: gardener.cloud/cve-categorisation
             value:
@@ -326,7 +326,7 @@ gardenlet:
         name: plutono-dashboard-refresher
         repository: quay.io/kiwigrid/k8s-sidecar
         sourceRepository: github.com/kiwigrid/k8s-sidecar
-        tag: 1.27.5
+        tag: 1.27.6
       - labels:
           - name: gardener.cloud/cve-categorisation
             value:
@@ -361,7 +361,7 @@ gardenlet:
         name: metrics-server
         repository: registry.k8s.io/metrics-server/metrics-server
         sourceRepository: github.com/kubernetes-sigs/metrics-server
-        tag: v0.7.1
+        tag: v0.7.2
       - name: vpn-shoot-client
         repository: europe-docker.pkg.dev/gardener-project/releases/gardener/vpn-shoot-client
         sourceRepository: github.com/gardener/vpn2
@@ -457,7 +457,7 @@ gardenlet:
         name: fluent-operator
         repository: europe-docker.pkg.dev/gardener-project/releases/3rd/fluent-operator/fluent-operator
         sourceRepository: github.com/fluent/fluent-operator
-        tag: v2.9.0
+        tag: v3.1.0
       - labels:
           - name: gardener.cloud/cve-categorisation
             value:
@@ -474,7 +474,7 @@ gardenlet:
         name: fluent-bit
         repository: europe-docker.pkg.dev/gardener-project/releases/3rd/fluent-operator/fluent-bit
         sourceRepository: github.com/fluent/fluent-operator
-        tag: v3.0.7
+        tag: v3.1.5
       - labels:
           - name: gardener.cloud/cve-categorisation
             value:
@@ -494,7 +494,7 @@ gardenlet:
         resourceId:
           name: fluent-bit-to-vali
         sourceRepository: github.com/gardener/logging
-        tag: v0.60.0
+        tag: v0.61.0
       - labels:
           - name: gardener.cloud/cve-categorisation
             value:
@@ -528,7 +528,7 @@ gardenlet:
         name: vali-curator
         repository: europe-docker.pkg.dev/gardener-project/releases/gardener/vali-curator
         sourceRepository: github.com/gardener/logging
-        tag: v0.60.0
+        tag: v0.61.0
       - labels:
           - name: gardener.cloud/cve-categorisation
             value:
@@ -546,7 +546,7 @@ gardenlet:
         name: kube-rbac-proxy
         repository: quay.io/brancz/kube-rbac-proxy
         sourceRepository: github.com/brancz/kube-rbac-proxy
-        tag: v0.18.0
+        tag: v0.18.1
       - labels:
           - name: gardener.cloud/cve-categorisation
             value:
@@ -585,7 +585,7 @@ gardenlet:
         resourceId:
           name: telegraf-iptables
         sourceRepository: github.com/gardener/logging
-        tag: v0.60.0
+        tag: v0.61.0
       - labels:
           - name: gardener.cloud/cve-categorisation
             value:
@@ -602,7 +602,7 @@ gardenlet:
         name: event-logger
         repository: europe-docker.pkg.dev/gardener-project/releases/gardener/event-logger
         sourceRepository: github.com/gardener/logging
-        tag: v0.60.0
+        tag: v0.61.0
       - labels:
           - name: gardener.cloud/cve-categorisation
             value:
@@ -619,7 +619,7 @@ gardenlet:
         name: tune2fs
         repository: europe-docker.pkg.dev/gardener-project/releases/gardener/tune2fs
         sourceRepository: github.com/gardener/logging
-        tag: v0.60.0
+        tag: v0.61.0
       - labels:
           - name: gardener.cloud/cve-categorisation
             value:
@@ -671,7 +671,7 @@ gardenlet:
         name: hvpa-controller
         repository: europe-docker.pkg.dev/gardener-project/releases/gardener/hvpa-controller
         sourceRepository: github.com/gardener/hvpa-controller
-        tag: v0.15.0
+        tag: v0.16.0
       - name: cluster-proportional-autoscaler
         repository: registry.k8s.io/cpa/cluster-proportional-autoscaler
         sourceRepository: https://github.com/kubernetes-sigs/cluster-proportional-autoscaler
