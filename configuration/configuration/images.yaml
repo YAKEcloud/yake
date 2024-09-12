@@ -2132,15 +2132,15 @@ provider-hcloud:
       - name: csi-attacher
         repository: registry.k8s.io/sig-storage/csi-attacher
         sourceRepository: https://github.com/kubernetes-csi/external-attacher
-        tag: v3.4.0
+        tag: v3.5.1
       - name: csi-resizer
         repository: registry.k8s.io/sig-storage/csi-resizer
         sourceRepository: https://github.com/kubernetes-csi/external-resizer
-        tag: v1.4.0
+        tag: v1.12.0
       - name: csi-node-driver-registrar
         repository: registry.k8s.io/sig-storage/csi-node-driver-registrar
         sourceRepository: https://github.com/kubernetes-csi/node-driver-registrar
-        tag: v2.4.0
+        tag: v2.12.0
       - name: csi-provisioner
         repository: registry.k8s.io/sig-storage/csi-provisioner
         sourceRepository: https://github.com/kubernetes-csi/external-provisioner
@@ -2148,7 +2148,7 @@ provider-hcloud:
       - name: hcloud-cloud-controller-manager
         repository: docker.io/hetznercloud/hcloud-cloud-controller-manager
         sourceRepository: https://github.com/hetznercloud/hcloud-cloud-controller-manager
-        tag: v1.13.2
+        tag: v1.20.0
       - name: machine-controller-manager
         repository: eu.gcr.io/gardener-project/gardener/machine-controller-manager
         sourceRepository: https://github.com/gardener/machine-controller-manager
@@ -2168,7 +2168,7 @@ provider-hcloud:
       - name: liveness-probe
         repository: registry.k8s.io/sig-storage/livenessprobe
         sourceRepository: https://github.com/kubernetes-csi/livenessprobe
-        tag: v2.5.0
+        tag: v2.14.0
 networking-calico:
   imageVectorOriginal:
     images:
