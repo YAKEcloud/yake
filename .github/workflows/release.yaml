@@ -63,7 +63,7 @@ jobs:
           make_latest: v${{ env.RELEASE_AS_LATEST }}  # set in prepare.sh
 
   upload-oci:
-    runs-on: self-hosted
+    runs-on: ubuntu-22.04
     name: Upload OCI
     if: success('prepare')
     needs:
