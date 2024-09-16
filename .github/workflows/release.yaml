@@ -3,6 +3,8 @@ name: Release
 run-name: Release "${{ inputs.version || github.event.head_commit.message }}" by @${{ github.actor }}
 permissions:
   contents: write
+  packages: write
+
 on:
   workflow_dispatch:
     inputs:
@@ -59,3 +61,24 @@ jobs:
           body_path: /tmp/release-body.md
           tag_name: v${{ steps.version.outputs.version }}
           make_latest: v${{ env.RELEASE_AS_LATEST }}  # set in prepare.sh
+
+  upload-oci:
+    runs-on: self-hosted
+    name: Upload OCI
+    if: success('prepare')
+    needs:
+      - prepare
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          ref: "v${{ needs.prepare.outputs.version }}"
+      - name: Login to GHCR
+        uses: docker/login-action@v2
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ github.token }}
+      - name: Upload to harbor container registry
+        env:
+          tag: "v${{ needs.prepare.outputs.version }}"
+        run: hack/release/upload-oci.sh
