@@ -48,7 +48,8 @@ major=$(echo "$majorAndMinor" | grep -oE '^[0-9]{1,}')
 minor=$(echo "$majorAndMinor" | grep -oE '[0-9]{1,}$')
 nextMinorBranch="release-v$major.$((minor + 1))"
 
-if [[ -e ".git/refs/heads/$nextMinorBranch" ]]; then
+# git rev-parse would also match a tag of that name, but seems like an okay solution here
+if git rev-parse --verify "origin/$nextMinorBranch" 1>/dev/null 2>&1; then
   echo "RELEASE_AS_LATEST=false" | tee -a "$GITHUB_ENV"
 else
   echo "RELEASE_AS_LATEST=true" | tee -a "$GITHUB_ENV"
