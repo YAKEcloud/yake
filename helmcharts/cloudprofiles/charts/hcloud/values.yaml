@@ -48,47 +48,27 @@ machineTypes:
     - cpu: "2"
       gpu: "0"
       memory: 8Gi
-      name: ccx11
-    - cpu: "2"
-      gpu: "0"
-      memory: 8Gi
-      name: ccx12
+      name: ccx13
     - cpu: "4"
       gpu: "0"
       memory: 16Gi
-      name: ccx21
-    - cpu: "4"
-      gpu: "0"
-      memory: 16Gi
-      name: ccx22
+      name: ccx23
     - cpu: "8"
       gpu: "0"
       memory: 32Gi
-      name: ccx31
-    - cpu: "8"
-      gpu: "0"
-      memory: 32Gi
-      name: ccx32
+      name: ccx33
     - cpu: "16"
       gpu: "0"
       memory: 64Gi
-      name: ccx41
-    - cpu: "16"
-      gpu: "0"
-      memory: 64Gi
-      name: ccx42
+      name: ccx43
     - cpu: "32"
       gpu: "0"
       memory: 128Gi
-      name: ccx51
-    - cpu: "32"
-      gpu: "0"
-      memory: 128Gi
-      name: ccx52
+      name: ccx53
     - cpu: "48"
       gpu: "0"
       memory: 192Gi
-      name: ccx62
+      name: ccx63
     - architecture: arm64
       cpu: "2"
       gpu: "0"
@@ -142,11 +122,6 @@ regions:
             - cx32
             - cx42
             - cx52
-            - ccx11
-            - ccx21
-            - ccx31
-            - ccx41
-            - ccx51
             - cax11
             - cax21
             - cax31
@@ -159,11 +134,6 @@ regions:
             - cx32
             - cx42
             - cx52
-            - ccx11
-            - ccx21
-            - ccx31
-            - ccx41
-            - ccx51
             - cax11
             - cax21
             - cax31
@@ -176,11 +146,6 @@ regions:
             - cx32
             - cx42
             - cx52
-            - ccx11
-            - ccx21
-            - ccx31
-            - ccx41
-            - ccx51
             - cax11
             - cax21
             - cax31
