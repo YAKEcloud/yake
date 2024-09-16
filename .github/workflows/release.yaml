@@ -60,7 +60,7 @@ jobs:
         with:
           body_path: /tmp/release-body.md
           tag_name: v${{ steps.version.outputs.version }}
-          make_latest: v${{ env.RELEASE_AS_LATEST }}  # set in prepare.sh
+          make_latest: ${{ env.RELEASE_AS_LATEST }}  # set in prepare.sh
 
   upload-oci:
     runs-on: ubuntu-22.04
