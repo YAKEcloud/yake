@@ -38,7 +38,7 @@ kubectl create serviceaccount my-service-account
 CLUSTER_NAME=$(kubectl config view --minify -o jsonpath='{.clusters[0].name}')
 CLUSTER_SERVER=$(kubectl config view --minify -o jsonpath='{.clusters[0].cluster.server}')
 CA_CERT=$(kubectl config view --minify --raw -o jsonpath='{.clusters[0].cluster.certificate-authority-data}')
-TOKEN=$(kubectl create token my-service-account)
+TOKEN=$(kubectl create token my-service-account --duration=48h)
 
 cat << EOF > sa-kubeconfig.yaml
 apiVersion: v1
