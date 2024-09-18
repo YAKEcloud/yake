@@ -164,7 +164,7 @@
       "registryUrlTemplate": "https://gardener-community.github.io/gardener-charts",
       "versioningTemplate": "semver-coerced",
       "matchStrings": [
-        "(?<depName>[a-z-]+):\\s+version: (?<currentValue>[0-9.]+)"
+        "(?<depName>[a-z0-9-]+):\\s+version: (?<currentValue>[0-9.]+)"
       ]
     },
     {
@@ -185,7 +185,7 @@
       "registryUrlTemplate": "https://gardener-community.github.io/gardener-charts",
       "versioningTemplate": "semver-coerced",
       "matchStrings": [
-        "chart: (?<depName>[a-z-]+)\n +version: (?<currentValue>[0-9.]+)"
+        "chart: (?<depName>[a-z0-9-]+)\n +version: (?<currentValue>[0-9.]+)"
       ]
     },
     {
@@ -197,7 +197,7 @@
       "registryUrlTemplate": "https://vmware-tanzu.github.io/helm-charts",
       "versioningTemplate": "semver-coerced",
       "matchStrings": [
-        "chart: (?<depName>[a-z-]+)\n +version: (?<currentValue>[0-9.]+)"
+        "chart: (?<depName>[a-z0-9-]+)\n +version: (?<currentValue>[0-9.]+)"
       ]
     },
     {
