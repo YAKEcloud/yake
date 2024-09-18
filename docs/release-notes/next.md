@@ -68,3 +68,13 @@ hide_table_of_contents: true
 **Full Changelog**: https://github.com/gardener-community/cloudprofiles/compare/0.7.17...0.7.18
 
 </details>
+
+<details>
+<summary><b>Update backup-s3 to <code>0.4.1</code></b></summary>
+
+## General Changes
+
+* Generate new controller-registration.yaml
+
+
+</details>
