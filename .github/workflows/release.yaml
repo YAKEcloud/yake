@@ -69,7 +69,7 @@ jobs:
     needs:
       - prepare
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
         with:
           ref: "v${{ needs.prepare.outputs.version }}"
       - name: Login to GHCR
