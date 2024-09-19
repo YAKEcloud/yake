@@ -3,4 +3,4 @@ appVersion: "1.0"
 description: A Helm chart to deploy the gardener-extension-admission-alicloud application
   related resources
 name: application
-version: 1.53.0
+version: 1.54.0

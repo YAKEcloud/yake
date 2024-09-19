@@ -8,4 +8,4 @@ dependencies:
   repository: ""
 description: A helmchart for provider-alicloud
 name: provider-alicloud
-version: 1.53.0
+version: 1.54.0
