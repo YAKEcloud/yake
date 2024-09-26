@@ -1,3 +1,3 @@
 ## General Changes
 
-* Generate new controller-registration.yaml
+* Bump g/g to 1.91.4 (#7) @simcod
