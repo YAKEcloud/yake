@@ -265,3 +265,13 @@ hide_table_of_contents: true
 
 
 </details>
+
+<details>
+<summary><b>Update backup-s3 to <code>0.5.0</code></b></summary>
+
+## General Changes
+
+* Bump g/g to 1.91.4 (#7) @simcod
+
+
+</details>
