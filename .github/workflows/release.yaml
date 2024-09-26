@@ -22,7 +22,7 @@ concurrency:
 
 jobs:
   prepare:
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-24.04
     name: Prepare
     env:
       version: ${{ github.event.inputs.version }}
@@ -63,7 +63,7 @@ jobs:
           make_latest: ${{ env.RELEASE_AS_LATEST }}  # set in prepare.sh
 
   upload-oci:
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-24.04
     name: Upload OCI
     if: success('prepare')
     needs:
