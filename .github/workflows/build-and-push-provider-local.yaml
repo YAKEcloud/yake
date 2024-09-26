@@ -20,7 +20,7 @@ on:
 jobs:
   buildAndPush:
     name: Build and push extension-provider-local to ghcr
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-24.04
     steps:
       - name: Checkout the repository
         uses: actions/checkout@v4
