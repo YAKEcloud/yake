@@ -104,7 +104,7 @@ install_envsubst() {
 
 install_flux() {
   # renovate: datasource=github-releases depName=fluxcd/flux2
-  VERSION=v2.3.0
+  VERSION=v2.4.0
 
   if _isStale $FLUX $VERSION; then
     curl -L "https://github.com/fluxcd/flux2/releases/download/$VERSION/flux_${VERSION/v/}_${TOOLS_KERNEL}_$TOOLS_ARCH.tar.gz" | tar -xzm -C "$TOOLS_BIN_DIR"
