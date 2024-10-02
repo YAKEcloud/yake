@@ -2281,7 +2281,20 @@ networking-cilium:
         name: cilium-agent
         repository: quay.io/cilium/cilium
         sourceRepository: github.com/cilium/cilium
-        tag: v1.15.6
+        tag: v1.16.2
+      - labels:
+          - name: gardener.cloud/cve-categorisation
+            value:
+              authentication_enforced: false
+              availability_requirement: low
+              confidentiality_requirement: low
+              integrity_requirement: high
+              network_exposure: protected
+              user_interaction: end-user
+        name: cilium-envoy
+        repository: quay.io/cilium/cilium-envoy
+        sourceRepository: github.com/cilium/cilium
+        tag: v1.29.9-1726784081-a90146d13b4cd7d168d573396ccf2b3db5a3b047@sha256:9762041c3760de226a8b00cc12f27dacc28b7691ea926748f9b5c18862db503f
       - labels:
           - name: gardener.cloud/cve-categorisation
             value:
@@ -2294,7 +2307,7 @@ networking-cilium:
         name: cilium-operator
         repository: quay.io/cilium/operator
         sourceRepository: github.com/cilium/cilium
-        tag: v1.15.6
+        tag: v1.16.2
       - labels:
           - name: gardener.cloud/cve-categorisation
             value:
@@ -2307,7 +2320,7 @@ networking-cilium:
         name: hubble-ui
         repository: quay.io/cilium/hubble-ui
         sourceRepository: github.com/cilium/hubble-ui
-        tag: v0.13.0
+        tag: v0.13.1
       - labels:
           - name: gardener.cloud/cve-categorisation
             value:
@@ -2320,7 +2333,7 @@ networking-cilium:
         name: hubble-ui-backend
         repository: quay.io/cilium/hubble-ui-backend
         sourceRepository: github.com/cilium/hubble-ui-backend
-        tag: v0.13.0
+        tag: v0.13.1
       - labels:
           - name: gardener.cloud/cve-categorisation
             value:
@@ -2333,7 +2346,7 @@ networking-cilium:
         name: hubble-relay
         repository: quay.io/cilium/hubble-relay
         sourceRepository: github.com/cilium/hubble-ui
-        tag: v1.15.6
+        tag: v1.16.2
       - labels:
           - name: gardener.cloud/cve-categorisation
             value:
@@ -2346,7 +2359,7 @@ networking-cilium:
         name: certgen
         repository: quay.io/cilium/certgen
         sourceRepository: github.com/cilium/certgen
-        tag: v0.1.12
+        tag: v0.2.0
       - name: kube-proxy
         repository: registry.k8s.io/kube-proxy
         sourceRepository: github.com/kubernetes/kubernetes
