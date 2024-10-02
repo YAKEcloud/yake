@@ -9,4 +9,4 @@ dependencies:
   repository: ""
 description: A Helm chart for the Gardener Azure admission controller
 name: gardener-extension-admission-azure
-version: 1.47.2
+version: 1.47.3
