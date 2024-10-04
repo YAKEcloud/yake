@@ -37,7 +37,7 @@ gardenlet:
       - name: gardener-discovery-server
         repository: europe-docker.pkg.dev/gardener-project/releases/gardener/gardener-discovery-server
         sourceRepository: github.com/gardener/gardener-discovery-server
-        tag: v0.1.0
+        tag: v0.2.0
       - name: gardener-dashboard
         repository: europe-docker.pkg.dev/gardener-project/releases/gardener/dashboard
         sourceRepository: github.com/gardener/dashboard
@@ -105,7 +105,7 @@ gardenlet:
         name: ingress-default-backend
         repository: europe-docker.pkg.dev/gardener-project/releases/gardener/ingress-default-backend
         sourceRepository: github.com/gardener/ingress-default-backend
-        tag: 0.19.0
+        tag: 0.20.0
       - name: hyperkube
         repository: europe-docker.pkg.dev/gardener-project/releases/hyperkube
         sourceRepository: github.com/gardener/hyperkube
@@ -188,7 +188,7 @@ gardenlet:
         name: prometheus-operator
         repository: quay.io/prometheus-operator/prometheus-operator
         sourceRepository: github.com/prometheus-operator/prometheus-operator
-        tag: v0.76.2
+        tag: v0.77.1
       - labels:
           - name: gardener.cloud/cve-categorisation
             value:
@@ -239,7 +239,7 @@ gardenlet:
         name: configmap-reloader
         repository: quay.io/prometheus-operator/prometheus-config-reloader
         sourceRepository: github.com/prometheus-operator/prometheus-operator
-        tag: v0.76.2
+        tag: v0.77.1
       - labels:
           - name: gardener.cloud/cve-categorisation
             value:
@@ -330,7 +330,7 @@ gardenlet:
         name: plutono-dashboard-refresher
         repository: quay.io/kiwigrid/k8s-sidecar
         sourceRepository: github.com/kiwigrid/k8s-sidecar
-        tag: 1.27.6
+        tag: 1.28.0
       - labels:
           - name: gardener.cloud/cve-categorisation
             value:
@@ -700,7 +700,7 @@ gardenlet:
         name: istio-proxy
         repository: gcr.io/istio-release/proxyv2
         sourceRepository: github.com/istio/istio
-        tag: 1.21.5-distroless
+        tag: 1.21.6-distroless
       - labels:
           - name: gardener.cloud/cve-categorisation
             value:
@@ -717,7 +717,7 @@ gardenlet:
         name: istio-istiod
         repository: gcr.io/istio-release/pilot
         sourceRepository: github.com/istio/istio
-        tag: 1.21.5-distroless
+        tag: 1.21.6-distroless
       - name: ext-authz-server
         repository: europe-docker.pkg.dev/gardener-project/releases/gardener/ext-authz-server
         sourceRepository: github.com/gardener/ext-authz-server
@@ -756,7 +756,7 @@ gardenlet:
         name: apiserver-proxy
         repository: europe-docker.pkg.dev/gardener-project/releases/3rd/envoyproxy/envoy-distroless
         sourceRepository: github.com/envoyproxy/envoy
-        tag: v1.31.1
+        tag: v1.31.2
       - name: apiserver-proxy-sidecar
         repository: europe-docker.pkg.dev/gardener-project/releases/gardener/apiserver-proxy
         resourceId:
