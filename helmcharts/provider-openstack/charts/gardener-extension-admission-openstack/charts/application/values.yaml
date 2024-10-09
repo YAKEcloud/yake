@@ -5,7 +5,7 @@ global:
     image:
         pullPolicy: IfNotPresent
         repository: europe-docker.pkg.dev/gardener-project/public/gardener/extensions/admission-openstack
-        tag: v1.41.2
+        tag: v1.42.0
     kubeconfig: null
     metricsPort: 8080
     replicaCount: 1
@@ -23,9 +23,6 @@ global:
             name: ""
     vpa:
         enabled: true
-        resourcePolicy:
-            minAllowed:
-                memory: 64Mi
         updatePolicy:
             updateMode: Auto
     webhookConfig:

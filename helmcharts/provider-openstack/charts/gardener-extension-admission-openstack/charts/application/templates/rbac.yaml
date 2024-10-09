@@ -10,7 +10,16 @@ rules:
   - core.gardener.cloud
   resources:
   - cloudprofiles
+  - namespacedcloudprofiles
   - secretbindings
+  verbs:
+  - get
+  - list
+  - watch
+- apiGroups:
+  - security.gardener.cloud
+  resources:
+  - credentialsbindings
   verbs:
   - get
   - list

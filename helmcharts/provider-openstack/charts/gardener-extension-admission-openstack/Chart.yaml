@@ -9,4 +9,4 @@ dependencies:
   repository: ""
 description: A Helm chart for the Gardener Openstack admission controller
 name: gardener-extension-admission-openstack
-version: 1.41.2
+version: 1.42.0
