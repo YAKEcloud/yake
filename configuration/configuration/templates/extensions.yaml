@@ -97,7 +97,7 @@ stringData:
 {{- end }}
 
     shoot-dns-service:
-      version: 1.52.1
+      version: 1.53.0
       admission:
         enabled: true
       values:
