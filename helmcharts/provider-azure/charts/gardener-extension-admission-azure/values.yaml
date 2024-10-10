@@ -5,7 +5,7 @@ global:
     image:
         pullPolicy: IfNotPresent
         repository: europe-docker.pkg.dev/gardener-project/public/gardener/extensions/admission-azure
-        tag: v1.48.0
+        tag: v1.48.1
     kubeconfig: null
     metricsPort: 8080
     replicaCount: 1
