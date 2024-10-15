@@ -1,6 +1,6 @@
 {
   "assignees": [
-    "j2L4e"
+    "lotharbach"
   ],
   "baseBranches": [
     "main",
@@ -11,7 +11,8 @@
     "release-v1.101",
     "release-v1.102",
     "release-v1.103",
-    "release-v1.104"
+    "release-v1.104",
+    "release-v1.105"
   ],
   "automerge": true,
   "configMigration": true,
@@ -50,7 +51,8 @@
         "release-v1.101",
         "release-v1.102",
         "release-v1.103",
-        "release-v1.104"
+        "release-v1.104",
+        "release-v1.105"
       ],
       "enabled": false,
       "matchPackageNames": [
@@ -160,6 +162,20 @@
         "release-v1.104"
       ],
       "allowedVersions": "/^1[.]104[.].*$/",
+      "enabled": true,
+      "matchPackageNames": [
+        "/gardener-controlplane/",
+        "/gardener-controlplane-application/",
+        "/gardener-controlplane-runtime/",
+        "/gardener-application/",
+        "/gardenlet/"
+      ]
+    },
+    {
+      "matchBaseBranches": [
+        "release-v1.105"
+      ],
+      "allowedVersions": "/^1[.]105[.].*$/",
       "enabled": true,
       "matchPackageNames": [
         "/gardener-controlplane/",
