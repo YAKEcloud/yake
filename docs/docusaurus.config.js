@@ -7,33 +7,42 @@ const darkCodeTheme = themes.dracula;
 const fs = require("fs");
 
 // Reverse the sidebar items ordering (including nested category items)
-function reverseSidebarItems(items) {
-  // Reverse items in categories
-  const result = items
-    .filter(item => {
-      if(process.env.NODE_ENV !== 'production') {
-          return true
-      }
-
-      return item.id !== 'next'
-    })
-    .map((item) => {
-      if (item.type === 'category') {
-        return {...item, items: reverseSidebarItems(item.items)};
-      }
-      return item;
-    })
-    .reverse();
-
-  return result;
+function reverseVersionSort(items) {
+  return items.sort((a, b) => compareVersions(a.id, b.id));
 }
 
 function getLatestReleaseNotes() {
-  const dir = fs.readdirSync('release-notes').sort();
+  // Sort by version and filter out anything that does not contain a version
+  const dir = fs.readdirSync('release-notes').filter(file => extractVersion(file)).sort(compareVersions);
+  // return just the version of the first element
+  return extractVersion(dir[0]);
+}
 
-  const latest = dir[dir.length - 1].replace('.md', '');
+function extractVersion(versionString) {
+  if (typeof versionString !== 'string') {
+    return null; // Return null if the input is not a string
+  }
+  const match = versionString.match(/.*?v?(\d+\.\d+)/); // Match version pattern
+  return match ? match[1] : null; // Return the version or null if not found
+}
 
-  return latest;
+function compareVersions(a, b) {
+  const versionA = extractVersion(a);
+  const versionB = extractVersion(b);
+
+  if (!versionA && !versionB) return a.localeCompare(b); // Use ascii sorting when both non-numeric
+  if (!versionA) return -1; // Non-numeric comes first
+  if (!versionB) return 1; // Non-numeric comes first
+
+  // Split versions into major and minor parts
+  const [majorA, minorA] = versionA.split('.').map(Number);
+  const [majorB, minorB] = versionB.split('.').map(Number);
+
+  // Compare major versions first
+  if (majorA !== majorB) return majorB - majorA;
+
+  // If major versions are equal, compare minor versions
+  return minorB - minorA;
 }
 
 /** @type {import('@docusaurus/types').Config} */
@@ -97,7 +106,7 @@ const config = {
         sidebarPath: require.resolve("./sidebars.js"),
 				async sidebarItemsGenerator({defaultSidebarItemsGenerator, ...args}) {
 						const sidebarItems = await defaultSidebarItemsGenerator(args);
-						return reverseSidebarItems(sidebarItems);
+						return reverseVersionSort(sidebarItems);
         },
         // ... other options
       }),
@@ -127,7 +136,7 @@ const config = {
                     label: "Docs",
                 },
                 {
-                    to: "/release-notes/" + getLatestReleaseNotes(),
+                    to: "/release-notes/v" + getLatestReleaseNotes(),
                     label: "Release Notes",
                     position: "left",
                     activeBaseRegex: `/release-notes/`,
