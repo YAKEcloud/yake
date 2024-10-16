@@ -5,7 +5,7 @@ global:
     image:
         pullPolicy: IfNotPresent
         repository: europe-docker.pkg.dev/gardener-project/public/gardener/extensions/admission-gcp
-        tag: v1.38.1
+        tag: v1.39.0
     kubeconfig: null
     metricsPort: 8080
     replicaCount: 1
@@ -23,9 +23,6 @@ global:
             name: ""
     vpa:
         enabled: true
-        resourcePolicy:
-            minAllowed:
-                memory: 64Mi
         updatePolicy:
             updateMode: Auto
     webhookConfig:
