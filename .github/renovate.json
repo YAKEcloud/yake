@@ -249,7 +249,8 @@
   "enabledManagers": [
     "flux",
     "custom.regex",
-    "github-actions"
+    "github-actions",
+    "npm"
   ],
   "prCreation": "immediate",
   "semanticCommits": "disabled",
