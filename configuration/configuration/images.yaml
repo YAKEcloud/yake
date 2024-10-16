@@ -1915,7 +1915,7 @@ provider-gcp:
         name: cloud-controller-manager
         repository: europe-docker.pkg.dev/gardener-project/releases/kubernetes/cloud-provider-gcp
         sourceRepository: github.com/gardener/cloud-provider-gcp
-        tag: v1.28.9
+        tag: v1.28.14
         targetVersion: 1.28.x
       - labels:
           - name: gardener.cloud/cve-categorisation
@@ -1929,7 +1929,7 @@ provider-gcp:
         name: cloud-controller-manager
         repository: europe-docker.pkg.dev/gardener-project/releases/kubernetes/cloud-provider-gcp
         sourceRepository: github.com/gardener/cloud-provider-gcp
-        tag: v1.29.4
+        tag: v1.29.9
         targetVersion: 1.29.x
       - labels:
           - name: gardener.cloud/cve-categorisation
@@ -1943,8 +1943,22 @@ provider-gcp:
         name: cloud-controller-manager
         repository: europe-docker.pkg.dev/gardener-project/releases/kubernetes/cloud-provider-gcp
         sourceRepository: github.com/gardener/cloud-provider-gcp
-        tag: v1.30.0
-        targetVersion: '>= 1.30'
+        tag: v1.30.5
+        targetVersion: 1.30.x
+      - labels:
+          - name: gardener.cloud/cve-categorisation
+            value:
+              authentication_enforced: false
+              availability_requirement: low
+              confidentiality_requirement: high
+              integrity_requirement: high
+              network_exposure: protected
+              user_interaction: gardener-operator
+        name: cloud-controller-manager
+        repository: registry.k8s.io/cloud-provider-gcp/cloud-controller-manager
+        sourceRepository: github.com/kubernetes/cloud-provider-gcp
+        tag: v30.0.0
+        targetVersion: '>= 1.31'
       - labels:
           - name: gardener.cloud/cve-categorisation
             value:
@@ -1970,7 +1984,7 @@ provider-gcp:
         name: csi-driver
         repository: registry.k8s.io/cloud-provider-gcp/gcp-compute-persistent-disk-csi-driver
         sourceRepository: github.com/kubernetes-sigs/gcp-compute-persistent-disk-csi-driver
-        tag: v1.13.6
+        tag: v1.15.0
       - labels:
           - name: gardener.cloud/cve-categorisation
             value:
@@ -1983,7 +1997,7 @@ provider-gcp:
         name: csi-provisioner
         repository: registry.k8s.io/sig-storage/csi-provisioner
         sourceRepository: github.com/kubernetes-csi/external-provisioner
-        tag: v4.0.0
+        tag: v5.1.0
       - labels:
           - name: gardener.cloud/cve-categorisation
             value:
@@ -1996,7 +2010,7 @@ provider-gcp:
         name: csi-attacher
         repository: registry.k8s.io/sig-storage/csi-attacher
         sourceRepository: github.com/kubernetes-csi/external-attacher
-        tag: v4.5.0
+        tag: v4.7.0
       - labels:
           - name: gardener.cloud/cve-categorisation
             value:
@@ -2009,7 +2023,7 @@ provider-gcp:
         name: csi-resizer
         repository: registry.k8s.io/sig-storage/csi-resizer
         sourceRepository: github.com/kubernetes-csi/external-resizer
-        tag: v1.10.0
+        tag: v1.12.0
       - labels:
           - name: gardener.cloud/cve-categorisation
             value:
@@ -2022,7 +2036,7 @@ provider-gcp:
         name: csi-snapshotter
         repository: registry.k8s.io/sig-storage/csi-snapshotter
         sourceRepository: github.com/kubernetes-csi/external-snapshotter
-        tag: v7.0.1
+        tag: v8.1.0
       - labels:
           - name: gardener.cloud/cve-categorisation
             value:
@@ -2035,7 +2049,7 @@ provider-gcp:
         name: csi-snapshot-validation-webhook
         repository: registry.k8s.io/sig-storage/snapshot-validation-webhook
         sourceRepository: github.com/kubernetes-csi/external-snapshotter
-        tag: v7.0.1
+        tag: v8.1.0
       - labels:
           - name: gardener.cloud/cve-categorisation
             value:
@@ -2048,7 +2062,7 @@ provider-gcp:
         name: csi-snapshot-controller
         repository: registry.k8s.io/sig-storage/snapshot-controller
         sourceRepository: github.com/kubernetes-csi/external-snapshotter
-        tag: v7.0.1
+        tag: v8.1.0
       - labels:
           - name: gardener.cloud/cve-categorisation
             value:
@@ -2061,7 +2075,7 @@ provider-gcp:
         name: csi-node-driver-registrar
         repository: registry.k8s.io/sig-storage/csi-node-driver-registrar
         sourceRepository: github.com/kubernetes-csi/node-driver-registrar
-        tag: v2.10.0
+        tag: v2.12.0
       - labels:
           - name: gardener.cloud/cve-categorisation
             value:
@@ -2074,7 +2088,7 @@ provider-gcp:
         name: csi-liveness-probe
         repository: registry.k8s.io/sig-storage/livenessprobe
         sourceRepository: github.com/kubernetes-csi/livenessprobe
-        tag: v2.12.0
+        tag: v2.14.0
 provider-alicloud:
   imageVectorOriginal:
     images:
