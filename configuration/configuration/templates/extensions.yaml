@@ -231,7 +231,7 @@ stringData:
 {{- end }}
 
     shoot-flux:
-      version: 0.7.0
+      version: 0.8.0
       values:
         imagePullPolicy:
         image:
