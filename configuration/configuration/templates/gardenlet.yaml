@@ -17,8 +17,6 @@ stringData:
           data:
             {{- toYaml .Values.domains.global.credentials | nindent 12 }}
     config:
-      featureGates:
-        HVPA: true
       seedConfig:
         spec:
 {{- if .Values.backups.enabled }}
