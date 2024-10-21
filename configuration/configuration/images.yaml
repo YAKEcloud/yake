@@ -76,7 +76,7 @@ gardenlet:
         name: nginx-ingress-controller
         repository: registry.k8s.io/ingress-nginx/controller-chroot
         sourceRepository: github.com/kubernetes/ingress-nginx
-        tag: v1.11.2
+        tag: v1.11.3
         targetVersion: '>= 1.26'
       - labels:
           - name: gardener.cloud/cve-categorisation
@@ -167,7 +167,7 @@ gardenlet:
       - name: vpn-server
         repository: europe-docker.pkg.dev/gardener-project/releases/gardener/vpn-server
         sourceRepository: github.com/gardener/vpn2
-        tag: 0.27.0
+        tag: 0.28.0
       - name: vpn-seed-server
         repository: europe-docker.pkg.dev/gardener-project/releases/gardener/vpn-seed-server
         sourceRepository: github.com/gardener/vpn2
@@ -255,7 +255,7 @@ gardenlet:
                 type: githubTeam
         name: cortex
         repository: quay.io/cortexproject/cortex
-        tag: v1.18.0
+        tag: v1.18.1
       - labels:
           - name: gardener.cloud/cve-categorisation
             value:
@@ -369,7 +369,7 @@ gardenlet:
       - name: vpn-client
         repository: europe-docker.pkg.dev/gardener-project/releases/gardener/vpn-client
         sourceRepository: github.com/gardener/vpn2
-        tag: 0.27.0
+        tag: 0.28.0
       - name: vpn-shoot-client
         repository: europe-docker.pkg.dev/gardener-project/releases/gardener/vpn-shoot-client
         sourceRepository: github.com/gardener/vpn2
@@ -424,7 +424,7 @@ gardenlet:
         name: node-problem-detector
         repository: registry.k8s.io/node-problem-detector/node-problem-detector
         sourceRepository: github.com/kubernetes/node-problem-detector
-        tag: v0.8.19
+        tag: v0.8.20
       - labels:
           - name: cloud.gardener.cnudie/dso/scanning-hints/binary_id/v1
             value:
@@ -700,7 +700,7 @@ gardenlet:
         name: istio-proxy
         repository: gcr.io/istio-release/proxyv2
         sourceRepository: github.com/istio/istio
-        tag: 1.21.6-distroless
+        tag: 1.23.2-distroless
       - labels:
           - name: gardener.cloud/cve-categorisation
             value:
@@ -717,7 +717,7 @@ gardenlet:
         name: istio-istiod
         repository: gcr.io/istio-release/pilot
         sourceRepository: github.com/istio/istio
-        tag: 1.21.6-distroless
+        tag: 1.23.2-distroless
       - name: ext-authz-server
         repository: europe-docker.pkg.dev/gardener-project/releases/gardener/ext-authz-server
         sourceRepository: github.com/gardener/ext-authz-server
@@ -756,7 +756,7 @@ gardenlet:
         name: apiserver-proxy
         repository: europe-docker.pkg.dev/gardener-project/releases/3rd/envoyproxy/envoy-distroless
         sourceRepository: github.com/envoyproxy/envoy
-        tag: v1.31.2
+        tag: v1.32.0
       - name: apiserver-proxy-sidecar
         repository: europe-docker.pkg.dev/gardener-project/releases/gardener/apiserver-proxy
         resourceId:
