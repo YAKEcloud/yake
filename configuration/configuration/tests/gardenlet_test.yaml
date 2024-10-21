@@ -20,8 +20,6 @@ tests:
                   data:
                     token: example
             config:
-              featureGates:
-                HVPA: true
               seedConfig:
                 spec:
                   ingress:
