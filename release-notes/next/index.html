@@ -5,7 +5,7 @@
 <meta name="generator" content="Docusaurus v3.5.2">
 <title data-rh="true">Release Notes next | Yet another Kubernetes Engine</title><meta data-rh="true" name="viewport" content="width=device-width,initial-scale=1"><meta data-rh="true" name="twitter:card" content="summary_large_image"><meta data-rh="true" property="og:url" content="https://yake.cloud/release-notes/next"><meta data-rh="true" property="og:locale" content="en"><meta data-rh="true" name="docusaurus_locale" content="en"><meta data-rh="true" name="docsearch:language" content="en"><meta data-rh="true" name="gardener" content="installation, production, operations, maintenance"><meta data-rh="true" name="docusaurus_version" content="current"><meta data-rh="true" name="docusaurus_tag" content="docs-release-notes-current"><meta data-rh="true" name="docsearch:version" content="current"><meta data-rh="true" name="docsearch:docusaurus_tag" content="docs-release-notes-current"><meta data-rh="true" property="og:title" content="Release Notes next | Yet another Kubernetes Engine"><meta data-rh="true" name="description" content="Yake release notes and upgrade guide"><meta data-rh="true" property="og:description" content="Yake release notes and upgrade guide"><link data-rh="true" rel="icon" href="/img/favicon.ico"><link data-rh="true" rel="canonical" href="https://yake.cloud/release-notes/next"><link data-rh="true" rel="alternate" href="https://yake.cloud/release-notes/next" hreflang="en"><link data-rh="true" rel="alternate" href="https://yake.cloud/release-notes/next" hreflang="x-default"><link rel="alternate" type="application/rss+xml" href="/blog/rss.xml" title="Yet another Kubernetes Engine RSS Feed">
 <link rel="alternate" type="application/atom+xml" href="/blog/atom.xml" title="Yet another Kubernetes Engine Atom Feed"><link rel="stylesheet" href="/assets/css/styles.42569791.css">
-<script src="/assets/js/runtime~main.4d35406a.js" defer="defer"></script>
+<script src="/assets/js/runtime~main.2afdcddb.js" defer="defer"></script>
 <script src="/assets/js/main.54058dbf.js" defer="defer"></script>
 </head>
 <body class="navigation-with-keyboard">
@@ -268,6 +268,201 @@
 <h2 class="anchor anchorWithStickyNavbar_LWe7" id="docker-images-6">Docker Images<a href="#docker-images-6" class="hash-link" aria-label="Direct link to Docker Images" title="Direct link to Docker Images">​</a></h2>
 <ul>
 <li>gardener-extension-shoot-cert-service: <code>europe-docker.pkg.dev/gardener-project/releases/gardener/extensions/shoot-cert-service:v1.45.0</code></li>
+</ul>
+</div></div></details>
+<details class="details_lb9f alert alert--info details_b_Ee" data-collapsed="true"><summary><b>Update gardener-controlplane to <code>1.106.0</code></b></summary><div><div class="collapsibleContent_i85q">
+<!-- -->
+<h1>[gardener/gardener]</h1>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="️-breaking-changes">⚠️ Breaking Changes<a href="#️-breaking-changes" class="hash-link" aria-label="Direct link to ⚠️ Breaking Changes" title="Direct link to ⚠️ Breaking Changes">​</a></h2>
+<ul>
+<li><code>[OPERATOR]</code> <code>kubeletCSRApprover</code> controller in <code>gardener-resource-manager</code> Helm chart has been renamed to <code>csrApprover</code>. by @oliver-goetz [#10549]</li>
+<li><code>[OPERATOR]</code> The <code>HVPA</code> and <code>HVPAForShootedSeed</code> feature gates have been deprecated and locked to false. Disable the <code>HVPA</code> and <code>HVPAForShootedSeed</code> feature gates if you have them enabled before upgrading to this version of Gardener. by @plkokanov [#10659]</li>
+</ul>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="-noteworthy-4">📰 Noteworthy<a href="#-noteworthy-4" class="hash-link" aria-label="Direct link to 📰 Noteworthy" title="Direct link to 📰 Noteworthy">​</a></h2>
+<ul>
+<li><code>[USER]</code> For Kubernetes 1.31+ Shoot clusters, the kubelet and containerd cgroup driver is set to <code>systemd</code>. Previously, the used cgroup driver was <code>cgroupfs</code>. Find more details in the <a href="https://github.com/gardener/gardener/blob/v1.105.0/docs/extensions/operatingsystemconfig.md#cgroup-driver" target="_blank" rel="noopener noreferrer">cgroup driver section</a>. by @ialidzhikov [#10472]</li>
+<li><code>[OPERATOR]</code> The gardener operator chart (<code>charts/gardener/operator</code>) does no longer enable the <code>HVPA</code> feature gate in its default <code>values.yaml</code>. by @ialidzhikov [#10566]</li>
+</ul>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="-new-features-6">✨ New Features<a href="#-new-features-6" class="hash-link" aria-label="Direct link to ✨ New Features" title="Direct link to ✨ New Features">​</a></h2>
+<ul>
+<li><code>[DEVELOPER]</code> Allow gosec to be consumed from gardener/gardener by @ScheererJ [#10642]</li>
+<li><code>[DEVELOPER]</code> Gardener can now support clusters with Kubernetes version 1.31. Extension developers have to prepare individual extensions as well to work with 1.31. by @ialidzhikov [#10472]</li>
+<li><code>[OPERATOR]</code> Adds <code>CloudProfile</code> validation for the recently introduced <code>.spec.bastion</code> section. by @hebelsan [#10318]</li>
+<li><code>[OPERATOR]</code> Gardener can now support clusters with Kubernetes version 1.31. To allow creation/update of 1.31 clusters you will have to update the version of your provider extension(s) to a version that supports 1.31 as well. Please consult the respective releases and notes in the provider extension&#x27;s repository. by @ialidzhikov [#10472]</li>
+<li><code>[OPERATOR]</code> Added an alert for the <code>Garden</code> resource&#x27;s conditions, along with a dashboard that also displays the resource&#x27;s last operation. by @rickardsjp [#10562]</li>
+</ul>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="-bug-fixes-5">🐛 Bug Fixes<a href="#-bug-fixes-5" class="hash-link" aria-label="Direct link to 🐛 Bug Fixes" title="Direct link to 🐛 Bug Fixes">​</a></h2>
+<ul>
+<li><code>[OPERATOR]</code> Fixes an issue with the network metrics relabeling config that caused the <code>Node Details</code> dashboard to not display data for AWS nodes. by @rickardsjp [#10625]</li>
+</ul>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="-others-6">🏃 Others<a href="#-others-6" class="hash-link" aria-label="Direct link to 🏃 Others" title="Direct link to 🏃 Others">​</a></h2>
+<ul>
+<li><code>[DEPENDENCY]</code> The <code>registry.k8s.io/ingress-nginx/controller-chroot</code> image has been updated to <code>v1.11.3</code>. by @gardener-ci-robot [#10626]</li>
+<li><code>[DEPENDENCY]</code> The <code>gardener/vpn2</code> image has been updated to <code>0.28.0</code>. <a href="https://redirect.github.com/gardener/vpn2/releases/tag/0.28.0" target="_blank" rel="noopener noreferrer">Release Notes</a> by @gardener-ci-robot [#10640]</li>
+<li><code>[DEPENDENCY]</code> The <code>quay.io/cortexproject/cortex</code> image has been updated to <code>v1.18.1</code>. by @gardener-ci-robot [#10657]</li>
+<li><code>[DEPENDENCY]</code> The <code>registry.k8s.io/node-problem-detector/node-problem-detector</code> image has been updated to <code>v0.8.20</code>. by @gardener-ci-robot [#10661]</li>
+<li><code>[DEPENDENCY]</code> The <code>envoyproxy/envoy</code> image has been updated to <code>v1.32.0</code>. <a href="https://redirect.github.com/envoyproxy/envoy/releases/tag/v1.32.0" target="_blank" rel="noopener noreferrer">Release Notes</a> by @gardener-ci-robot [#10656]</li>
+<li><code>[OPERATOR]</code> HA-VPN works if seed and shoot have different IPFamilies. by @DockToFuture [#10622]</li>
+<li><code>[OPERATOR]</code> Update istio to version 1.23.2 by @axel7born [#10558]</li>
+<li><code>[OPERATOR]</code> [NewVPN] Enable IPv6 for HA if needed. by @MartinWeindel [#10641]</li>
+<li><code>[OPERATOR]</code> Gardener generated certificates are valid 1 minute before issuance to handle some amount of clock skew. by @ScheererJ [#10603]</li>
+<li><code>[OPERATOR]</code> Metrics for <code>vpa-recommender</code>s are now collected in separate prometheus instances depending on where the <code>vpa-recommender</code> pods are deployed. Metrics for the <code>vpa-recommender</code> in the <code>garden</code> namespace are collected in <code>prometheus-seed</code>. Metrics for the <code>vpa-recommender</code> in the shoot control plane namespaces are collected in the corresponding <code>prometheus-shoot</code>. Additionally, the <code>VPA Recommender</code> plutono dashboard is separately deployed for seeds in the <code>garden</code> namespace and shoots in their control plane namespaces. by @plkokanov [#10517]</li>
+<li><code>[OPERATOR]</code> Clean up migration code from the monitoring component by @vicwicker [#10597]</li>
+<li><code>[DEVELOPER]</code> The following dependencies are updated:
+<ul>
+<li><code>k8s.io/*</code> : <code>v0.29.8</code> -&gt; <code>v0.31.0</code></li>
+<li><code>sigs.k8s.io/controller-runtime</code>: <code>v0.17.5</code> -&gt; <code>v0.19.0</code> by @ary1992 [#10459]</li>
+</ul>
+</li>
+<li><code>[DEVELOPER]</code> The HVPA features gates (<code>HVPA</code> and <code>HVPAForShootedSeed</code>) are no longer enabled in local setups. by @ialidzhikov [#10566]</li>
+</ul>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="helm-charts-7">Helm Charts<a href="#helm-charts-7" class="hash-link" aria-label="Direct link to Helm Charts" title="Direct link to Helm Charts">​</a></h2>
+<ul>
+<li>controlplane: <code>europe-docker.pkg.dev/gardener-project/releases/charts/gardener/controlplane:v1.106.0</code></li>
+<li>gardenlet: <code>europe-docker.pkg.dev/gardener-project/releases/charts/gardener/gardenlet:v1.106.0</code></li>
+<li>operator: <code>europe-docker.pkg.dev/gardener-project/releases/charts/gardener/operator:v1.106.0</code></li>
+<li>resource-manager: <code>europe-docker.pkg.dev/gardener-project/releases/charts/gardener/resource-manager:v1.106.0</code></li>
+</ul>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="docker-images-7">Docker Images<a href="#docker-images-7" class="hash-link" aria-label="Direct link to Docker Images" title="Direct link to Docker Images">​</a></h2>
+<ul>
+<li>admission-controller: <code>europe-docker.pkg.dev/gardener-project/releases/gardener/admission-controller:v1.106.0</code></li>
+<li>apiserver: <code>europe-docker.pkg.dev/gardener-project/releases/gardener/apiserver:v1.106.0</code></li>
+<li>controller-manager: <code>europe-docker.pkg.dev/gardener-project/releases/gardener/controller-manager:v1.106.0</code></li>
+<li>gardenlet: <code>europe-docker.pkg.dev/gardener-project/releases/gardener/gardenlet:v1.106.0</code></li>
+<li>node-agent: <code>europe-docker.pkg.dev/gardener-project/releases/gardener/node-agent:v1.106.0</code></li>
+<li>operator: <code>europe-docker.pkg.dev/gardener-project/releases/gardener/operator:v1.106.0</code></li>
+<li>resource-manager: <code>europe-docker.pkg.dev/gardener-project/releases/gardener/resource-manager:v1.106.0</code></li>
+<li>scheduler: <code>europe-docker.pkg.dev/gardener-project/releases/gardener/scheduler:v1.106.0</code></li>
+</ul>
+</div></div></details>
+<details class="details_lb9f alert alert--info details_b_Ee" data-collapsed="true"><summary><b>Update gardener-controlplane to <code>1.106.0</code></b></summary><div><div class="collapsibleContent_i85q">
+<!-- -->
+<h1>[gardener/gardener]</h1>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="️-breaking-changes-1">⚠️ Breaking Changes<a href="#️-breaking-changes-1" class="hash-link" aria-label="Direct link to ⚠️ Breaking Changes" title="Direct link to ⚠️ Breaking Changes">​</a></h2>
+<ul>
+<li><code>[OPERATOR]</code> <code>kubeletCSRApprover</code> controller in <code>gardener-resource-manager</code> Helm chart has been renamed to <code>csrApprover</code>. by @oliver-goetz [#10549]</li>
+<li><code>[OPERATOR]</code> The <code>HVPA</code> and <code>HVPAForShootedSeed</code> feature gates have been deprecated and locked to false. Disable the <code>HVPA</code> and <code>HVPAForShootedSeed</code> feature gates if you have them enabled before upgrading to this version of Gardener. by @plkokanov [#10659]</li>
+</ul>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="-noteworthy-5">📰 Noteworthy<a href="#-noteworthy-5" class="hash-link" aria-label="Direct link to 📰 Noteworthy" title="Direct link to 📰 Noteworthy">​</a></h2>
+<ul>
+<li><code>[USER]</code> For Kubernetes 1.31+ Shoot clusters, the kubelet and containerd cgroup driver is set to <code>systemd</code>. Previously, the used cgroup driver was <code>cgroupfs</code>. Find more details in the <a href="https://github.com/gardener/gardener/blob/v1.105.0/docs/extensions/operatingsystemconfig.md#cgroup-driver" target="_blank" rel="noopener noreferrer">cgroup driver section</a>. by @ialidzhikov [#10472]</li>
+<li><code>[OPERATOR]</code> The gardener operator chart (<code>charts/gardener/operator</code>) does no longer enable the <code>HVPA</code> feature gate in its default <code>values.yaml</code>. by @ialidzhikov [#10566]</li>
+</ul>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="-new-features-7">✨ New Features<a href="#-new-features-7" class="hash-link" aria-label="Direct link to ✨ New Features" title="Direct link to ✨ New Features">​</a></h2>
+<ul>
+<li><code>[DEVELOPER]</code> Allow gosec to be consumed from gardener/gardener by @ScheererJ [#10642]</li>
+<li><code>[DEVELOPER]</code> Gardener can now support clusters with Kubernetes version 1.31. Extension developers have to prepare individual extensions as well to work with 1.31. by @ialidzhikov [#10472]</li>
+<li><code>[OPERATOR]</code> Adds <code>CloudProfile</code> validation for the recently introduced <code>.spec.bastion</code> section. by @hebelsan [#10318]</li>
+<li><code>[OPERATOR]</code> Gardener can now support clusters with Kubernetes version 1.31. To allow creation/update of 1.31 clusters you will have to update the version of your provider extension(s) to a version that supports 1.31 as well. Please consult the respective releases and notes in the provider extension&#x27;s repository. by @ialidzhikov [#10472]</li>
+<li><code>[OPERATOR]</code> Added an alert for the <code>Garden</code> resource&#x27;s conditions, along with a dashboard that also displays the resource&#x27;s last operation. by @rickardsjp [#10562]</li>
+</ul>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="-bug-fixes-6">🐛 Bug Fixes<a href="#-bug-fixes-6" class="hash-link" aria-label="Direct link to 🐛 Bug Fixes" title="Direct link to 🐛 Bug Fixes">​</a></h2>
+<ul>
+<li><code>[OPERATOR]</code> Fixes an issue with the network metrics relabeling config that caused the <code>Node Details</code> dashboard to not display data for AWS nodes. by @rickardsjp [#10625]</li>
+</ul>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="-others-7">🏃 Others<a href="#-others-7" class="hash-link" aria-label="Direct link to 🏃 Others" title="Direct link to 🏃 Others">​</a></h2>
+<ul>
+<li><code>[DEPENDENCY]</code> The <code>registry.k8s.io/ingress-nginx/controller-chroot</code> image has been updated to <code>v1.11.3</code>. by @gardener-ci-robot [#10626]</li>
+<li><code>[DEPENDENCY]</code> The <code>gardener/vpn2</code> image has been updated to <code>0.28.0</code>. <a href="https://redirect.github.com/gardener/vpn2/releases/tag/0.28.0" target="_blank" rel="noopener noreferrer">Release Notes</a> by @gardener-ci-robot [#10640]</li>
+<li><code>[DEPENDENCY]</code> The <code>quay.io/cortexproject/cortex</code> image has been updated to <code>v1.18.1</code>. by @gardener-ci-robot [#10657]</li>
+<li><code>[DEPENDENCY]</code> The <code>registry.k8s.io/node-problem-detector/node-problem-detector</code> image has been updated to <code>v0.8.20</code>. by @gardener-ci-robot [#10661]</li>
+<li><code>[DEPENDENCY]</code> The <code>envoyproxy/envoy</code> image has been updated to <code>v1.32.0</code>. <a href="https://redirect.github.com/envoyproxy/envoy/releases/tag/v1.32.0" target="_blank" rel="noopener noreferrer">Release Notes</a> by @gardener-ci-robot [#10656]</li>
+<li><code>[OPERATOR]</code> HA-VPN works if seed and shoot have different IPFamilies. by @DockToFuture [#10622]</li>
+<li><code>[OPERATOR]</code> Update istio to version 1.23.2 by @axel7born [#10558]</li>
+<li><code>[OPERATOR]</code> [NewVPN] Enable IPv6 for HA if needed. by @MartinWeindel [#10641]</li>
+<li><code>[OPERATOR]</code> Gardener generated certificates are valid 1 minute before issuance to handle some amount of clock skew. by @ScheererJ [#10603]</li>
+<li><code>[OPERATOR]</code> Metrics for <code>vpa-recommender</code>s are now collected in separate prometheus instances depending on where the <code>vpa-recommender</code> pods are deployed. Metrics for the <code>vpa-recommender</code> in the <code>garden</code> namespace are collected in <code>prometheus-seed</code>. Metrics for the <code>vpa-recommender</code> in the shoot control plane namespaces are collected in the corresponding <code>prometheus-shoot</code>. Additionally, the <code>VPA Recommender</code> plutono dashboard is separately deployed for seeds in the <code>garden</code> namespace and shoots in their control plane namespaces. by @plkokanov [#10517]</li>
+<li><code>[OPERATOR]</code> Clean up migration code from the monitoring component by @vicwicker [#10597]</li>
+<li><code>[DEVELOPER]</code> The following dependencies are updated:
+<ul>
+<li><code>k8s.io/*</code> : <code>v0.29.8</code> -&gt; <code>v0.31.0</code></li>
+<li><code>sigs.k8s.io/controller-runtime</code>: <code>v0.17.5</code> -&gt; <code>v0.19.0</code> by @ary1992 [#10459]</li>
+</ul>
+</li>
+<li><code>[DEVELOPER]</code> The HVPA features gates (<code>HVPA</code> and <code>HVPAForShootedSeed</code>) are no longer enabled in local setups. by @ialidzhikov [#10566]</li>
+</ul>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="helm-charts-8">Helm Charts<a href="#helm-charts-8" class="hash-link" aria-label="Direct link to Helm Charts" title="Direct link to Helm Charts">​</a></h2>
+<ul>
+<li>controlplane: <code>europe-docker.pkg.dev/gardener-project/releases/charts/gardener/controlplane:v1.106.0</code></li>
+<li>gardenlet: <code>europe-docker.pkg.dev/gardener-project/releases/charts/gardener/gardenlet:v1.106.0</code></li>
+<li>operator: <code>europe-docker.pkg.dev/gardener-project/releases/charts/gardener/operator:v1.106.0</code></li>
+<li>resource-manager: <code>europe-docker.pkg.dev/gardener-project/releases/charts/gardener/resource-manager:v1.106.0</code></li>
+</ul>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="docker-images-8">Docker Images<a href="#docker-images-8" class="hash-link" aria-label="Direct link to Docker Images" title="Direct link to Docker Images">​</a></h2>
+<ul>
+<li>admission-controller: <code>europe-docker.pkg.dev/gardener-project/releases/gardener/admission-controller:v1.106.0</code></li>
+<li>apiserver: <code>europe-docker.pkg.dev/gardener-project/releases/gardener/apiserver:v1.106.0</code></li>
+<li>controller-manager: <code>europe-docker.pkg.dev/gardener-project/releases/gardener/controller-manager:v1.106.0</code></li>
+<li>gardenlet: <code>europe-docker.pkg.dev/gardener-project/releases/gardener/gardenlet:v1.106.0</code></li>
+<li>node-agent: <code>europe-docker.pkg.dev/gardener-project/releases/gardener/node-agent:v1.106.0</code></li>
+<li>operator: <code>europe-docker.pkg.dev/gardener-project/releases/gardener/operator:v1.106.0</code></li>
+<li>resource-manager: <code>europe-docker.pkg.dev/gardener-project/releases/gardener/resource-manager:v1.106.0</code></li>
+<li>scheduler: <code>europe-docker.pkg.dev/gardener-project/releases/gardener/scheduler:v1.106.0</code></li>
+</ul>
+</div></div></details>
+<details class="details_lb9f alert alert--info details_b_Ee" data-collapsed="true"><summary><b>Update gardenlet to <code>1.106.0</code></b></summary><div><div class="collapsibleContent_i85q">
+<!-- -->
+<h1>[gardener/gardener]</h1>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="️-breaking-changes-2">⚠️ Breaking Changes<a href="#️-breaking-changes-2" class="hash-link" aria-label="Direct link to ⚠️ Breaking Changes" title="Direct link to ⚠️ Breaking Changes">​</a></h2>
+<ul>
+<li><code>[OPERATOR]</code> <code>kubeletCSRApprover</code> controller in <code>gardener-resource-manager</code> Helm chart has been renamed to <code>csrApprover</code>. by @oliver-goetz [#10549]</li>
+<li><code>[OPERATOR]</code> The <code>HVPA</code> and <code>HVPAForShootedSeed</code> feature gates have been deprecated and locked to false. Disable the <code>HVPA</code> and <code>HVPAForShootedSeed</code> feature gates if you have them enabled before upgrading to this version of Gardener. by @plkokanov [#10659]</li>
+</ul>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="-noteworthy-6">📰 Noteworthy<a href="#-noteworthy-6" class="hash-link" aria-label="Direct link to 📰 Noteworthy" title="Direct link to 📰 Noteworthy">​</a></h2>
+<ul>
+<li><code>[USER]</code> For Kubernetes 1.31+ Shoot clusters, the kubelet and containerd cgroup driver is set to <code>systemd</code>. Previously, the used cgroup driver was <code>cgroupfs</code>. Find more details in the <a href="https://github.com/gardener/gardener/blob/v1.105.0/docs/extensions/operatingsystemconfig.md#cgroup-driver" target="_blank" rel="noopener noreferrer">cgroup driver section</a>. by @ialidzhikov [#10472]</li>
+<li><code>[OPERATOR]</code> The gardener operator chart (<code>charts/gardener/operator</code>) does no longer enable the <code>HVPA</code> feature gate in its default <code>values.yaml</code>. by @ialidzhikov [#10566]</li>
+</ul>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="-new-features-8">✨ New Features<a href="#-new-features-8" class="hash-link" aria-label="Direct link to ✨ New Features" title="Direct link to ✨ New Features">​</a></h2>
+<ul>
+<li><code>[DEVELOPER]</code> Allow gosec to be consumed from gardener/gardener by @ScheererJ [#10642]</li>
+<li><code>[DEVELOPER]</code> Gardener can now support clusters with Kubernetes version 1.31. Extension developers have to prepare individual extensions as well to work with 1.31. by @ialidzhikov [#10472]</li>
+<li><code>[OPERATOR]</code> Adds <code>CloudProfile</code> validation for the recently introduced <code>.spec.bastion</code> section. by @hebelsan [#10318]</li>
+<li><code>[OPERATOR]</code> Gardener can now support clusters with Kubernetes version 1.31. To allow creation/update of 1.31 clusters you will have to update the version of your provider extension(s) to a version that supports 1.31 as well. Please consult the respective releases and notes in the provider extension&#x27;s repository. by @ialidzhikov [#10472]</li>
+<li><code>[OPERATOR]</code> Added an alert for the <code>Garden</code> resource&#x27;s conditions, along with a dashboard that also displays the resource&#x27;s last operation. by @rickardsjp [#10562]</li>
+</ul>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="-bug-fixes-7">🐛 Bug Fixes<a href="#-bug-fixes-7" class="hash-link" aria-label="Direct link to 🐛 Bug Fixes" title="Direct link to 🐛 Bug Fixes">​</a></h2>
+<ul>
+<li><code>[OPERATOR]</code> Fixes an issue with the network metrics relabeling config that caused the <code>Node Details</code> dashboard to not display data for AWS nodes. by @rickardsjp [#10625]</li>
+</ul>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="-others-8">🏃 Others<a href="#-others-8" class="hash-link" aria-label="Direct link to 🏃 Others" title="Direct link to 🏃 Others">​</a></h2>
+<ul>
+<li><code>[DEPENDENCY]</code> The <code>registry.k8s.io/ingress-nginx/controller-chroot</code> image has been updated to <code>v1.11.3</code>. by @gardener-ci-robot [#10626]</li>
+<li><code>[DEPENDENCY]</code> The <code>gardener/vpn2</code> image has been updated to <code>0.28.0</code>. <a href="https://redirect.github.com/gardener/vpn2/releases/tag/0.28.0" target="_blank" rel="noopener noreferrer">Release Notes</a> by @gardener-ci-robot [#10640]</li>
+<li><code>[DEPENDENCY]</code> The <code>quay.io/cortexproject/cortex</code> image has been updated to <code>v1.18.1</code>. by @gardener-ci-robot [#10657]</li>
+<li><code>[DEPENDENCY]</code> The <code>registry.k8s.io/node-problem-detector/node-problem-detector</code> image has been updated to <code>v0.8.20</code>. by @gardener-ci-robot [#10661]</li>
+<li><code>[DEPENDENCY]</code> The <code>envoyproxy/envoy</code> image has been updated to <code>v1.32.0</code>. <a href="https://redirect.github.com/envoyproxy/envoy/releases/tag/v1.32.0" target="_blank" rel="noopener noreferrer">Release Notes</a> by @gardener-ci-robot [#10656]</li>
+<li><code>[OPERATOR]</code> HA-VPN works if seed and shoot have different IPFamilies. by @DockToFuture [#10622]</li>
+<li><code>[OPERATOR]</code> Update istio to version 1.23.2 by @axel7born [#10558]</li>
+<li><code>[OPERATOR]</code> [NewVPN] Enable IPv6 for HA if needed. by @MartinWeindel [#10641]</li>
+<li><code>[OPERATOR]</code> Gardener generated certificates are valid 1 minute before issuance to handle some amount of clock skew. by @ScheererJ [#10603]</li>
+<li><code>[OPERATOR]</code> Metrics for <code>vpa-recommender</code>s are now collected in separate prometheus instances depending on where the <code>vpa-recommender</code> pods are deployed. Metrics for the <code>vpa-recommender</code> in the <code>garden</code> namespace are collected in <code>prometheus-seed</code>. Metrics for the <code>vpa-recommender</code> in the shoot control plane namespaces are collected in the corresponding <code>prometheus-shoot</code>. Additionally, the <code>VPA Recommender</code> plutono dashboard is separately deployed for seeds in the <code>garden</code> namespace and shoots in their control plane namespaces. by @plkokanov [#10517]</li>
+<li><code>[OPERATOR]</code> Clean up migration code from the monitoring component by @vicwicker [#10597]</li>
+<li><code>[DEVELOPER]</code> The following dependencies are updated:
+<ul>
+<li><code>k8s.io/*</code> : <code>v0.29.8</code> -&gt; <code>v0.31.0</code></li>
+<li><code>sigs.k8s.io/controller-runtime</code>: <code>v0.17.5</code> -&gt; <code>v0.19.0</code> by @ary1992 [#10459]</li>
+</ul>
+</li>
+<li><code>[DEVELOPER]</code> The HVPA features gates (<code>HVPA</code> and <code>HVPAForShootedSeed</code>) are no longer enabled in local setups. by @ialidzhikov [#10566]</li>
+</ul>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="helm-charts-9">Helm Charts<a href="#helm-charts-9" class="hash-link" aria-label="Direct link to Helm Charts" title="Direct link to Helm Charts">​</a></h2>
+<ul>
+<li>controlplane: <code>europe-docker.pkg.dev/gardener-project/releases/charts/gardener/controlplane:v1.106.0</code></li>
+<li>gardenlet: <code>europe-docker.pkg.dev/gardener-project/releases/charts/gardener/gardenlet:v1.106.0</code></li>
+<li>operator: <code>europe-docker.pkg.dev/gardener-project/releases/charts/gardener/operator:v1.106.0</code></li>
+<li>resource-manager: <code>europe-docker.pkg.dev/gardener-project/releases/charts/gardener/resource-manager:v1.106.0</code></li>
+</ul>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="docker-images-9">Docker Images<a href="#docker-images-9" class="hash-link" aria-label="Direct link to Docker Images" title="Direct link to Docker Images">​</a></h2>
+<ul>
+<li>admission-controller: <code>europe-docker.pkg.dev/gardener-project/releases/gardener/admission-controller:v1.106.0</code></li>
+<li>apiserver: <code>europe-docker.pkg.dev/gardener-project/releases/gardener/apiserver:v1.106.0</code></li>
+<li>controller-manager: <code>europe-docker.pkg.dev/gardener-project/releases/gardener/controller-manager:v1.106.0</code></li>
+<li>gardenlet: <code>europe-docker.pkg.dev/gardener-project/releases/gardener/gardenlet:v1.106.0</code></li>
+<li>node-agent: <code>europe-docker.pkg.dev/gardener-project/releases/gardener/node-agent:v1.106.0</code></li>
+<li>operator: <code>europe-docker.pkg.dev/gardener-project/releases/gardener/operator:v1.106.0</code></li>
+<li>resource-manager: <code>europe-docker.pkg.dev/gardener-project/releases/gardener/resource-manager:v1.106.0</code></li>
+<li>scheduler: <code>europe-docker.pkg.dev/gardener-project/releases/gardener/scheduler:v1.106.0</code></li>
 </ul>
 </div></div></details></div></article><nav class="pagination-nav docusaurus-mt-lg" aria-label="Docs pages"><a class="pagination-nav__link pagination-nav__link--next" href="/release-notes/v1.105"><div class="pagination-nav__sublabel">Next</div><div class="pagination-nav__label">Release Notes v1.105</div></a></nav></div></div></div></div></main></div></div></div><footer class="footer footer--dark"><div class="container container-fluid"><div class="row footer__links"><div class="col footer__col"><div class="footer__title">Docs</div><ul class="footer__items clean-list"><li class="footer__item"><a class="footer__link-item" href="/docs/overview">Docs</a></li></ul></div><div class="col footer__col"><div class="footer__title">Community</div><ul class="footer__items clean-list"><li class="footer__item"><a href="https://github.com/yakecloud" target="_blank" rel="noopener noreferrer" class="footer__link-item">GitHub<svg width="13.5" height="13.5" aria-hidden="true" viewBox="0 0 24 24" class="iconExternalLink_nPIU"><path fill="currentColor" d="M21 13v10h-21v-19h12v2h-10v15h17v-8h2zm3-12h-10.988l4.035 4-6.977 7.07 2.828 2.828 6.977-7.07 4.125 4.172v-11z"></path></svg></a></li><li class="footer__item"><a href="https://github.com/gardener-community" target="_blank" rel="noopener noreferrer" class="footer__link-item">Gardener Community<svg width="13.5" height="13.5" aria-hidden="true" viewBox="0 0 24 24" class="iconExternalLink_nPIU"><path fill="currentColor" d="M21 13v10h-21v-19h12v2h-10v15h17v-8h2zm3-12h-10.988l4.035 4-6.977 7.07 2.828 2.828 6.977-7.07 4.125 4.172v-11z"></path></svg></a></li><li class="footer__item"><a href="https://gardener-cloud.slack.com" target="_blank" rel="noopener noreferrer" class="footer__link-item">Slack<svg width="13.5" height="13.5" aria-hidden="true" viewBox="0 0 24 24" class="iconExternalLink_nPIU"><path fill="currentColor" d="M21 13v10h-21v-19h12v2h-10v15h17v-8h2zm3-12h-10.988l4.035 4-6.977 7.07 2.828 2.828 6.977-7.07 4.125 4.172v-11z"></path></svg></a></li></ul></div><div class="col footer__col"><div class="footer__title">More</div><ul class="footer__items clean-list"><li class="footer__item"><a class="footer__link-item" href="/blog">Blog</a></li><li class="footer__item"><a class="footer__link-item" href="/legals">Legals</a></li><li class="footer__item"><a class="footer__link-item" href="/privacy-policy">Privacy policy</a></li></ul></div></div><div class="footer__bottom text--center"><div class="footer__copyright">Copyright © 2024 23 Technologies GmbH</div></div></div></footer></div>
 </body>
