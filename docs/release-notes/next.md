@@ -77,3 +77,23 @@ hide_table_of_contents: true
 - `[OPERATOR]` Broken API doc links are now fixed by @rishabh-11 [gardener/machine-controller-manager#927]
 
 </details>
+
+<details>
+<summary><b>Update provider-gcp to <code>1.39.1</code></b></summary>
+
+# [gardener/gardener-extension-provider-gcp]
+
+## 🏃 Others
+
+- `[OPERATOR]` Fix an issue where the firewall rules where created with the wrong priority when using the flow reconciler. by @kon-angelo [#873]
+
+## Helm Charts
+- admission-gcp-application: `europe-docker.pkg.dev/gardener-project/releases/charts/gardener/extensions/admission-gcp-application:v1.39.1`
+- admission-gcp-runtime: `europe-docker.pkg.dev/gardener-project/releases/charts/gardener/extensions/admission-gcp-runtime:v1.39.1`
+- provider-gcp: `europe-docker.pkg.dev/gardener-project/releases/charts/gardener/extensions/provider-gcp:v1.39.1`
+## Docker Images
+- gardener-extension-admission-gcp: `europe-docker.pkg.dev/gardener-project/releases/gardener/extensions/admission-gcp:v1.39.1`
+- gardener-extension-provider-gcp: `europe-docker.pkg.dev/gardener-project/releases/gardener/extensions/provider-gcp:v1.39.1`
+
+
+</details>
