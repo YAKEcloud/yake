@@ -3,7 +3,7 @@ global:
     image:
         pullPolicy: IfNotPresent
         repository: europe-docker.pkg.dev/gardener-project/public/gardener/extensions/admission-aws
-        tag: v1.57.1
+        tag: v1.58.0
     kubeconfig: null
     metricsPort: 8080
     replicaCount: 1
@@ -21,9 +21,6 @@ global:
             name: ""
     vpa:
         enabled: true
-        resourcePolicy:
-            minAllowed:
-                memory: 64Mi
         updatePolicy:
             updateMode: Auto
     webhookConfig:
