@@ -5,7 +5,7 @@
 <meta name="generator" content="Docusaurus v3.5.2">
 <title data-rh="true">Release Notes next | Yet another Kubernetes Engine</title><meta data-rh="true" name="viewport" content="width=device-width,initial-scale=1"><meta data-rh="true" name="twitter:card" content="summary_large_image"><meta data-rh="true" property="og:url" content="https://yake.cloud/release-notes/next"><meta data-rh="true" property="og:locale" content="en"><meta data-rh="true" name="docusaurus_locale" content="en"><meta data-rh="true" name="docsearch:language" content="en"><meta data-rh="true" name="gardener" content="installation, production, operations, maintenance"><meta data-rh="true" name="docusaurus_version" content="current"><meta data-rh="true" name="docusaurus_tag" content="docs-release-notes-current"><meta data-rh="true" name="docsearch:version" content="current"><meta data-rh="true" name="docsearch:docusaurus_tag" content="docs-release-notes-current"><meta data-rh="true" property="og:title" content="Release Notes next | Yet another Kubernetes Engine"><meta data-rh="true" name="description" content="Yake release notes and upgrade guide"><meta data-rh="true" property="og:description" content="Yake release notes and upgrade guide"><link data-rh="true" rel="icon" href="/img/favicon.ico"><link data-rh="true" rel="canonical" href="https://yake.cloud/release-notes/next"><link data-rh="true" rel="alternate" href="https://yake.cloud/release-notes/next" hreflang="en"><link data-rh="true" rel="alternate" href="https://yake.cloud/release-notes/next" hreflang="x-default"><link rel="alternate" type="application/rss+xml" href="/blog/rss.xml" title="Yet another Kubernetes Engine RSS Feed">
 <link rel="alternate" type="application/atom+xml" href="/blog/atom.xml" title="Yet another Kubernetes Engine Atom Feed"><link rel="stylesheet" href="/assets/css/styles.42569791.css">
-<script src="/assets/js/runtime~main.bcd0552a.js" defer="defer"></script>
+<script src="/assets/js/runtime~main.1bdb1440.js" defer="defer"></script>
 <script src="/assets/js/main.b4c3ccaa.js" defer="defer"></script>
 </head>
 <body class="navigation-with-keyboard">
@@ -15,6 +15,73 @@
 <details class="details_lb9f alert alert--info details_b_Ee" data-collapsed="true"><summary><b>Update provider-hcloud to <code>0.6.32</code></b></summary><div><div class="collapsibleContent_i85q">
 <!-- -->
 <h1>[gardener-extension-provider-hcloud] v0.6.32</h1>
+</div></div></details>
+<details class="details_lb9f alert alert--info details_b_Ee" data-collapsed="true"><summary><b>Update provider-aws to <code>1.58.0</code></b></summary><div><div class="collapsibleContent_i85q">
+<!-- -->
+<h1>[gardener/gardener-extension-provider-aws]</h1>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="-new-features">✨ New Features<a href="#-new-features" class="hash-link" aria-label="Direct link to ✨ New Features" title="Direct link to ✨ New Features">​</a></h2>
+<ul>
+<li><code>[USER]</code> The admission webhook now validates <code>CredentialsBinding</code>s. by @dimityrmirchev [#1047]</li>
+<li><code>[USER]</code> Enable support for the field <code>shoot.Spec.CloudProfile</code> alongside <code>cloudProfileName</code> and enable the future use of <code>NamespacedCloudProfile</code>. by @LucaBernstein [#1000]</li>
+<li><code>[USER]</code> The provider-aws extension does now support shoot clusters with Kubernetes version 1.31. You should consider the <a href="https://github.com/kubernetes/kubernetes/blob/master/CHANGELOG/CHANGELOG-1.31.md" target="_blank" rel="noopener noreferrer">Kubernetes release notes</a> before upgrading to 1.31.  by @ialidzhikov [#1055]</li>
+</ul>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="-bug-fixes">🐛 Bug Fixes<a href="#-bug-fixes" class="hash-link" aria-label="Direct link to 🐛 Bug Fixes" title="Direct link to 🐛 Bug Fixes">​</a></h2>
+<ul>
+<li><code>[OPERATOR]</code> An issue causing Shoot force deletion to fail because the control plane webhook failing to get the Infrastructure object from the Seed cluster is now fixed. The control plane webhook now reads the infrastructureConfig from the Shoot spec in the Cluster resource. Previously, it was fetching the Infrastructure object from the Seed cluster and was reading the infrastructureConfig from there. by @Kostov6 [#1068]</li>
+<li><code>[USER]</code> Fix cleanup of routing table associations by @hebelsan [#1083]</li>
+</ul>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="-others">🏃 Others<a href="#-others" class="hash-link" aria-label="Direct link to 🏃 Others" title="Direct link to 🏃 Others">​</a></h2>
+<ul>
+<li><code>[OPERATOR]</code> Create IPv6 ServiceCIDR and write IPv6 ranges to Infra.Status.Networking by @axel7born [#1081]</li>
+<li><code>[OPERATOR]</code> The shoot-webhook that mutates the <code>addons-nginx-ingress-controller</code> ConfigMap does now specify object selector. The webhook will now intercept only requests for the <code>addons-nginx-ingress-controller</code> ConfigMap. by @ialidzhikov [#988]</li>
+<li><code>[OPERATOR]</code> The aws-ipam-controller is enabled for IPv6 and dual stack shoot clusters. It replaces the IPAM of the cloud-controller-manager and kube-controller-manager and supports additionally prefix delegation in case of IPv6 or dual stack.  by @DockToFuture [#984]</li>
+<li><code>[OPERATOR]</code> Add ipv6 support to deploy IPv6 shoots. by @axel7born [#1024]</li>
+<li><code>[OPERATOR]</code> Enable <code>nat64</code> and <code>dns64</code> for IPv6 shoot clusters. by @DockToFuture [#1082]</li>
+<li><code>[OPERATOR]</code> Fix error classification when deleting DNS record sets by @hebelsan [#1033]</li>
+<li><code>[OPERATOR]</code> The provider-aws extension no longer configures min/maxAllowed in any managed VPA resource. by @hebelsan [#1070]</li>
+<li><code>[OPERATOR]</code> The following images are updated:<br>
+registry.k8s.io/provider-aws/aws-ebs-csi-driver: v1.29.0 -&gt; v1.35.0 by @scs-gardener-team-gitlab [#1080]</li>
+<li><code>[OPERATOR]</code> <code>aws-custom-route-controller</code> is disabled for IPv6. by @DockToFuture [#1088]</li>
+<li><code>[OPERATOR]</code> Update cloud-provider images including CSI driver images by @hebelsan [#1072]</li>
+<li><code>[OPERATOR]</code> Add flow migration integration test by @kon-angelo [#1046]</li>
+<li><code>[DEVELOPER]</code> Update gardener/gardener to 1.103.0 and golang to 1.23.0 by @hebelsan [#1049]</li>
+</ul>
+<h1>[gardener/machine-controller-manager-provider-aws]</h1>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="-others-1">🏃 Others<a href="#-others-1" class="hash-link" aria-label="Direct link to 🏃 Others" title="Direct link to 🏃 Others">​</a></h2>
+<ul>
+<li><code>[OPERATOR]</code> <code>InitializeMachine</code> returns <code>Uninitialized</code> error code if VM is not found. by @thiyyakat [gardener/machine-controller-manager-provider-aws#173]</li>
+<li><code>[OPERATOR]</code> Set PrimaryIpv6 flag for instances with IPv6 addresses. by @axel7born [gardener/machine-controller-manager-provider-aws#174]</li>
+<li><code>[OPERATOR]</code> Use <code>ProviderID</code> as a fallback for fetching the VM. by @thiyyakat [gardener/machine-controller-manager-provider-aws#173]</li>
+<li><code>[OPERATOR]</code> Golang version used upgraded to <code>1.22.5</code> by @rishabh-11 [gardener/machine-controller-manager-provider-aws#166]</li>
+<li><code>[OPERATOR]</code> Golangci-lint will now be used as the linter instead of the older golint. by @aaronfern [gardener/machine-controller-manager-provider-aws#168]</li>
+</ul>
+<h1>[gardener/machine-controller-manager]</h1>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="-new-features-1">✨ New Features<a href="#-new-features-1" class="hash-link" aria-label="Direct link to ✨ New Features" title="Direct link to ✨ New Features">​</a></h2>
+<ul>
+<li><code>[DEVELOPER]</code> MCM adds the name of the machine to <code>node.gardener.cloud/machine-name</code> label of the corresponding node. by @oliver-goetz [gardener/machine-controller-manager#919]</li>
+<li><code>[DEVELOPER]</code> MCM replaces the magic string <code>&lt;&lt;MACHINE_NAME&gt;&gt;</code> in user data with the name of the machine when it is bootstrapped. by @oliver-goetz [gardener/machine-controller-manager#919]</li>
+</ul>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="-bug-fixes-1">🐛 Bug Fixes<a href="#-bug-fixes-1" class="hash-link" aria-label="Direct link to 🐛 Bug Fixes" title="Direct link to 🐛 Bug Fixes">​</a></h2>
+<ul>
+<li><code>[OPERATOR]</code> Fixed a bug where failure of machine initialization caused label updates to not happen.  by @thiyyakat [gardener/machine-controller-manager#940]</li>
+<li><code>[DEVELOPER]</code> Fixed bug that removed the shoot-- prefix from control cluster namespace for integration tests using the gardener local setup case by @thiyyakat [gardener/machine-controller-manager#935]</li>
+</ul>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="-others-2">🏃 Others<a href="#-others-2" class="hash-link" aria-label="Direct link to 🏃 Others" title="Direct link to 🏃 Others">​</a></h2>
+<ul>
+<li><code>[OPERATOR]</code> <code>getVMStatus</code> always redirects to <code>InitiateDrain</code>. It also populates the node label on the machine object by checking <code>node.gardener.cloud/machine-name</code> label on the nodes.  by @thiyyakat [gardener/machine-controller-manager#940]</li>
+<li><code>[OPERATOR]</code> Drain timeout is now correctly honored for Pod eviction during Machine Drain by @sssash18 [gardener/machine-controller-manager#920]</li>
+<li><code>[OPERATOR]</code> golangci-lint will now be used as the linter instead of the older golint by @aaronfern [gardener/machine-controller-manager#929]</li>
+<li><code>[OPERATOR]</code> Golang version used is now upgraded to <code>1.22.5</code> by @aaronfern [gardener/machine-controller-manager#929]</li>
+<li><code>[DEVELOPER]</code> The following dependencies are updated:
+<ul>
+<li><code>k8s.io/*</code> : <code>v0.29.3</code> -&gt; <code>v0.31.0</code> by @ary1992 [gardener/machine-controller-manager#938]</li>
+</ul>
+</li>
+</ul>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="-documentation">📖 Documentation<a href="#-documentation" class="hash-link" aria-label="Direct link to 📖 Documentation" title="Direct link to 📖 Documentation">​</a></h2>
+<ul>
+<li><code>[OPERATOR]</code> Broken API doc links are now fixed by @rishabh-11 [gardener/machine-controller-manager#927]</li>
+</ul>
 </div></div></details></div></article><nav class="pagination-nav docusaurus-mt-lg" aria-label="Docs pages"><a class="pagination-nav__link pagination-nav__link--next" href="/release-notes/v1.106"><div class="pagination-nav__sublabel">Next</div><div class="pagination-nav__label">Release Notes v1.106</div></a></nav></div></div></div></div></main></div></div></div><footer class="footer footer--dark"><div class="container container-fluid"><div class="row footer__links"><div class="col footer__col"><div class="footer__title">Docs</div><ul class="footer__items clean-list"><li class="footer__item"><a class="footer__link-item" href="/docs/overview">Docs</a></li></ul></div><div class="col footer__col"><div class="footer__title">Community</div><ul class="footer__items clean-list"><li class="footer__item"><a href="https://github.com/yakecloud" target="_blank" rel="noopener noreferrer" class="footer__link-item">GitHub<svg width="13.5" height="13.5" aria-hidden="true" viewBox="0 0 24 24" class="iconExternalLink_nPIU"><path fill="currentColor" d="M21 13v10h-21v-19h12v2h-10v15h17v-8h2zm3-12h-10.988l4.035 4-6.977 7.07 2.828 2.828 6.977-7.07 4.125 4.172v-11z"></path></svg></a></li><li class="footer__item"><a href="https://github.com/gardener-community" target="_blank" rel="noopener noreferrer" class="footer__link-item">Gardener Community<svg width="13.5" height="13.5" aria-hidden="true" viewBox="0 0 24 24" class="iconExternalLink_nPIU"><path fill="currentColor" d="M21 13v10h-21v-19h12v2h-10v15h17v-8h2zm3-12h-10.988l4.035 4-6.977 7.07 2.828 2.828 6.977-7.07 4.125 4.172v-11z"></path></svg></a></li><li class="footer__item"><a href="https://gardener-cloud.slack.com" target="_blank" rel="noopener noreferrer" class="footer__link-item">Slack<svg width="13.5" height="13.5" aria-hidden="true" viewBox="0 0 24 24" class="iconExternalLink_nPIU"><path fill="currentColor" d="M21 13v10h-21v-19h12v2h-10v15h17v-8h2zm3-12h-10.988l4.035 4-6.977 7.07 2.828 2.828 6.977-7.07 4.125 4.172v-11z"></path></svg></a></li></ul></div><div class="col footer__col"><div class="footer__title">More</div><ul class="footer__items clean-list"><li class="footer__item"><a class="footer__link-item" href="/blog">Blog</a></li><li class="footer__item"><a class="footer__link-item" href="/legals">Legals</a></li><li class="footer__item"><a class="footer__link-item" href="/privacy-policy">Privacy policy</a></li></ul></div></div><div class="footer__bottom text--center"><div class="footer__copyright">Copyright © 2024 23 Technologies GmbH</div></div></div></footer></div>
 </body>
 </html>
