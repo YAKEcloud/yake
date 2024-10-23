@@ -220,7 +220,7 @@ stringData:
 {{- end }}
 
     backup-s3:
-      version: 0.5.0
+      version: 0.6.0
       values:
         image:
           pullPolicy: IfNotPresent
