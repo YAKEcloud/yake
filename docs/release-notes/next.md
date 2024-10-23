@@ -104,3 +104,14 @@ hide_table_of_contents: true
 **Full Changelog**: https://github.com/gardener-community/cloudprofiles/compare/0.7.18...0.7.19
 
 </details>
+
+<details>
+<summary><b>Update backup-s3 to <code>0.6.0</code></b></summary>
+
+## General Changes
+
+* Bump g/g to 1.95.6 (#9) @robertvolkmann
+* Add Service in order to generate correct NetworkPolicies (#8) @maboehm
+
+
+</details>
