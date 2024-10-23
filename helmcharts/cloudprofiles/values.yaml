@@ -20,14 +20,20 @@ global:
                 1.28.13:
                     classification: deprecated
                 1.28.14:
+                    classification: deprecated
+                1.28.15:
                     classification: supported
                 1.29.8:
                     classification: deprecated
                 1.29.9:
+                    classification: deprecated
+                1.29.10:
                     classification: supported
                 1.30.4:
                     classification: deprecated
                 1.30.5:
+                    classification: deprecated
+                1.30.6:
                     classification: supported
         versions: {}
     seedSelector:
