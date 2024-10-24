@@ -2543,7 +2543,7 @@ shoot-oidc-service:
       - name: oidc-webhook-authenticator
         repository: europe-docker.pkg.dev/gardener-project/releases/gardener/oidc-webhook-authenticator
         sourceRepository: github.com/gardener/oidc-webhook-authenticator
-        tag: v0.31.0
+        tag: v0.32.0
 shoot-networking-filter:
   imageVectorOriginal:
     images:
