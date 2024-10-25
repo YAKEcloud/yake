@@ -1,14 +1,24 @@
 # [gardener/dashboard]
 
+## ⚠️ Breaking Changes
+
+- `[OPERATOR]` Cost Object: You must migrate existing configurations to the new format. Previously, the configuration used `Values.global.dashboard.frontendConfig.costObject`. It should now be updated to `Values.global.dashboard.frontendConfig.costObjects`, which is a list of objects. Each object in this list must include a `type` property, alongside existing properties such as `title`, `description`, and `regex`. by @petersutter [#2102]
+- `[USER]` Removed the ability for users to retrieve their token from the My Account page. by @petersutter [#2131]
 ## ✨ New Features
 
-- `[USER]` Adds line selection highlighting in the `Shoot` YAML editor when selecting the line numbers. The line selection is reflected in the URL. by @petersutter [#1982]
-- `[USER]` Available purposes now depend on enabled add-ons, which can only be activated if the purpose is set to `evaluation`. Hints have been added to explain potential limitations in purpose selection by @grolu [#2031]
+- `[USER]` Header warnings returned by the Kubernetes API server are now displayed as notifications in the Gardener dashboard. This includes important messages like deprecation warnings. Additionally, admission webhooks may provide custom warnings in the headers by @grolu [#2033]
+- `[USER]` Upgraded the code editor from CodeMirror 5 to CodeMirror 6 to enhance performance, modernize the interface, and improve extensibility by @grolu [#2058]
+- `[USER]` Support Azure Cloud Configuration for DNS Secrets by @grolu [#2034]
+- `[OPERATOR]` Enhanced cost object configuration to support multiple cost object types. The selected type is now stored under `Project.annotations["billing.gardener.cloud/costObjectType"]`. by @petersutter [#2102]
 ## 🐛 Bug Fixes
 
-- `[USER]` Resolved an issue where updates to existing worker groups would fail if an unused zone network configuration was present by @grolu [#2048]
-- `[USER]` chart: An issue causing the `controlledValues: RequestsOnly` field not to be set for the `gardener-dashboard-vpa` VPA is now fixed. by @ialidzhikov [#2017]
-- `[OPERATOR]` Upgraded the gardener dashboard to use Node.js version v22.7 which resolves  [CVE-2024-24806](https://nvd.nist.gov/vuln/detail/CVE-2024-24806) by @holgerkoser [#2063]
+- `[USER]` Fixed issues with hibernation schedule dialog: reset button and time saving by @petersutter [#2076]
+- `[USER]` Consider all seeds for Shoot migration and add warning for provider mismatch by @petersutter [#2079]
+- `[USER]` To enhance the overview and readability of the cluster list, particularly in environments constrained by space or containing an abundance of information, we have introduced a feature that allows items to be collapsed when they are displayed in the cluster list. by @grolu [#1991]
+- `[USER]` Fixed display issues with minimum volume size by @grolu [#2030]
+## 🏃 Others
+
+- `[USER]` The option to rotate the SSH keypair is hidden when SSH access is disabled. by @petersutter [#2077]
 
 ## Docker Images
-- gardener-dashboard: `europe-docker.pkg.dev/gardener-project/releases/gardener/dashboard:1.77.0`
+- gardener-dashboard: `europe-docker.pkg.dev/gardener-project/releases/gardener/dashboard:1.78.0`
