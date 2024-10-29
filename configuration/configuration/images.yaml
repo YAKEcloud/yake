@@ -2577,7 +2577,7 @@ shoot-rsyslog-relp:
               policy: skip
         name: alpine
         repository: europe-docker.pkg.dev/gardener-project/releases/3rd/alpine
-        tag: 3.18.4
+        tag: 3.20.3
       - labels:
           - name: cloud.gardener.cnudie/dso/scanning-hints/binary_id/v1
             value:
@@ -2587,7 +2587,7 @@ shoot-rsyslog-relp:
         name: pause-container
         repository: registry.k8s.io/pause
         sourceRepository: github.com/kubernetes/kubernetes/blob/master/build/pause/Dockerfile
-        tag: "3.9"
+        tag: "3.10"
 etcd-druid:
   imageVectorOriginal:
     images:
