@@ -9,6 +9,7 @@ import (
 	"math"
 	"net/http"
 	"net/url"
+	"os"
 	"path"
 	"regexp"
 	"strings"
@@ -63,6 +64,7 @@ func ImportImageVectors(config Configuration) {
 		cur := test.Unlink(1)
 		tmp, err := getImageVector(cur.Value.(SrcConfiguration), outBytes)
 		if err != nil {
+			fmt.Fprintf(os.Stderr, "Error retrieving image vector: %v\n", err)
 			test = test.Link(cur)
 			test = test.Next()
 			continue
@@ -103,16 +105,20 @@ func getImageVector(cfg SrcConfiguration, bytesForVersion []byte) ([]byte, error
 	}
 
 	// insert docker.io or docker.io/library, when it is missing in upstream image vector
-	for _, item := range imageVector["images"].([]any) {
-		repository := item.(map[string]any)["repository"].(string)
-		repositorySplitted := strings.Split(repository, "/")
-		if len(repositorySplitted) == 1 {
-			item.(map[string]any)["repository"] = "docker.io/library/" + item.(map[string]any)["repository"].(string)
-		} else if !strings.Contains(repositorySplitted[0], ".") {
-			item.(map[string]any)["repository"] = "docker.io/" + item.(map[string]any)["repository"].(string)
-		} else if repositorySplitted[0] == "docker.io" && len(repositorySplitted) == 2 {
-			item.(map[string]any)["repository"] = path.Join(repositorySplitted[0], "library", repositorySplitted[1])
+	if images, ok := imageVector["images"].([]any); ok {
+		for _, item := range images {
+			repository := item.(map[string]any)["repository"].(string)
+			repositorySplitted := strings.Split(repository, "/")
+			if len(repositorySplitted) == 1 {
+				item.(map[string]any)["repository"] = "docker.io/library/" + item.(map[string]any)["repository"].(string)
+			} else if !strings.Contains(repositorySplitted[0], ".") {
+				item.(map[string]any)["repository"] = "docker.io/" + item.(map[string]any)["repository"].(string)
+			} else if repositorySplitted[0] == "docker.io" && len(repositorySplitted) == 2 {
+				item.(map[string]any)["repository"] = path.Join(repositorySplitted[0], "library", repositorySplitted[1])
+			}
 		}
+	} else {
+		return nil, fmt.Errorf("imageVector downloaded from %s does not contain valid 'images' key", imageVectorUrl)
 	}
 
 	out := make(map[string]any)
