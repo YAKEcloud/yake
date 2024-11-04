@@ -8,7 +8,7 @@ sources:
   repo: gardener/etcd-druid
   version:
     fromFile: iterative
-  imageVector: charts/images.yaml
+  imageVector: internal/images/images.yaml
 - name: provider-openstack
   repo: gardener/gardener-extension-provider-openstack
   version:
