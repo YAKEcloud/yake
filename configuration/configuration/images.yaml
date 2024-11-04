@@ -2559,13 +2559,13 @@ shoot-networking-problemdetector:
         resourceId:
           name: network-problem-detector
         sourceRepository: github.com/gardener/network-problem-detector
-        tag: v0.24.0
+        tag: v0.25.0
       - name: network-problem-detector-controller
         repository: europe-docker.pkg.dev/gardener-project/releases/gardener/network-problem-detector
         resourceId:
           name: network-problem-detector
         sourceRepository: github.com/gardener/network-problem-detector
-        tag: v0.24.0
+        tag: v0.25.0
 shoot-rsyslog-relp:
   imageVectorOriginal:
     images:
