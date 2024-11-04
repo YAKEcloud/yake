@@ -2588,4 +2588,30 @@ shoot-rsyslog-relp:
         repository: registry.k8s.io/pause
         sourceRepository: github.com/kubernetes/kubernetes/blob/master/build/pause/Dockerfile
         tag: "3.10"
+etcd-druid:
+  imageVectorOriginal:
+    images:
+      - name: etcd-backup-restore
+        repository: europe-docker.pkg.dev/gardener-project/public/gardener/etcdbrctl
+        resourceId:
+          name: etcdbrctl
+        sourceRepository: github.com/gardener/etcd-backup-restore
+        tag: v0.24.9
+      - name: etcd
+        repository: europe-docker.pkg.dev/gardener-project/public/gardener/etcd
+        sourceRepository: github.com/gardener/etcd-custom-image
+        tag: v3.4.26-7
+      - name: etcd-backup-restore-distroless
+        repository: europe-docker.pkg.dev/gardener-project/public/gardener/etcdbrctl
+        resourceId:
+          name: etcdbrctl
+        sourceRepository: github.com/gardener/etcd-backup-restore
+        tag: v0.30.2
+      - name: etcd-wrapper
+        repository: europe-docker.pkg.dev/gardener-project/public/gardener/etcd-wrapper
+        sourceRepository: github.com/gardener/etcd-wrapper
+        tag: v0.2.0
+      - name: alpine
+        repository: europe-docker.pkg.dev/gardener-project/public/3rd/alpine
+        tag: 3.18.4
 
