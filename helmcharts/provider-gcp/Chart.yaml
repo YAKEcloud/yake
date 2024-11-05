@@ -8,4 +8,4 @@ dependencies:
   repository: ""
 description: A helmchart for provider-gcp
 name: provider-gcp
-version: 1.39.1
+version: 1.40.0
