@@ -9,4 +9,4 @@ dependencies:
   repository: ""
 description: A Helm chart for the Gardener AWS admission controller
 name: gardener-extension-admission-aws
-version: 1.58.2
+version: 1.58.3

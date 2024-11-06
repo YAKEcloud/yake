@@ -3,7 +3,7 @@ global:
     image:
         pullPolicy: IfNotPresent
         repository: europe-docker.pkg.dev/gardener-project/public/gardener/extensions/admission-aws
-        tag: v1.58.2
+        tag: v1.58.3
     kubeconfig: null
     metricsPort: 8080
     replicaCount: 1
