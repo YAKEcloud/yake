@@ -216,6 +216,12 @@
         "/gardener-application/",
         "/gardenlet/"
       ]
+    },
+    {
+      "groupName": "docusaurus",
+      "matchPackageNames": [
+        "/docusaurus/"
+      ]
     }
   ],
   "customManagers": [
