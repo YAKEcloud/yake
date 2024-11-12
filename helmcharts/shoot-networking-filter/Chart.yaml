@@ -5,4 +5,4 @@ dependencies:
   repository: ""
 description: A helmchart for shoot-networking-filter
 name: shoot-networking-filter
-version: 0.20.0
+version: 0.21.0
