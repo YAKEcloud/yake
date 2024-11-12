@@ -59,7 +59,7 @@ gardenlet:
       - name: etcd-druid
         repository: europe-docker.pkg.dev/gardener-project/releases/gardener/etcd-druid
         sourceRepository: github.com/gardener/etcd-druid
-        tag: v0.23.2
+        tag: v0.23.3
       - name: dependency-watchdog
         repository: europe-docker.pkg.dev/gardener-project/releases/gardener/dependency-watchdog
         sourceRepository: github.com/gardener/dependency-watchdog
