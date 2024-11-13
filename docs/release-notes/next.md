@@ -294,3 +294,23 @@ hide_table_of_contents: true
 **Full Changelog**: https://github.com/stackitcloud/gardener-extension-shoot-flux/compare/v0.9.0...v0.10.0
 
 </details>
+
+<details>
+<summary><b>Update provider-gcp to <code>1.40.1</code></b></summary>
+
+# [gardener/gardener-extension-provider-gcp]
+
+## 🐛 Bug Fixes
+
+- `[USER]` Fix missing RBAC PV patching permissions for csi-provisioner" by @kon-angelo [#900]
+
+## Helm Charts
+- admission-gcp-application: `europe-docker.pkg.dev/gardener-project/releases/charts/gardener/extensions/admission-gcp-application:v1.40.1`
+- admission-gcp-runtime: `europe-docker.pkg.dev/gardener-project/releases/charts/gardener/extensions/admission-gcp-runtime:v1.40.1`
+- provider-gcp: `europe-docker.pkg.dev/gardener-project/releases/charts/gardener/extensions/provider-gcp:v1.40.1`
+## Docker Images
+- gardener-extension-admission-gcp: `europe-docker.pkg.dev/gardener-project/releases/gardener/extensions/admission-gcp:v1.40.1`
+- gardener-extension-provider-gcp: `europe-docker.pkg.dev/gardener-project/releases/gardener/extensions/provider-gcp:v1.40.1`
+
+
+</details>
