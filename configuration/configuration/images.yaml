@@ -59,7 +59,7 @@ gardenlet:
       - name: etcd-druid
         repository: europe-docker.pkg.dev/gardener-project/releases/gardener/etcd-druid
         sourceRepository: github.com/gardener/etcd-druid
-        tag: v0.23.3
+        tag: v0.24.1
       - name: dependency-watchdog
         repository: europe-docker.pkg.dev/gardener-project/releases/gardener/dependency-watchdog
         sourceRepository: github.com/gardener/dependency-watchdog
@@ -188,7 +188,7 @@ gardenlet:
         name: prometheus-operator
         repository: quay.io/prometheus-operator/prometheus-operator
         sourceRepository: github.com/prometheus-operator/prometheus-operator
-        tag: v0.77.2
+        tag: v0.78.1
       - labels:
           - name: gardener.cloud/cve-categorisation
             value:
@@ -222,7 +222,7 @@ gardenlet:
         name: prometheus
         repository: quay.io/prometheus/prometheus
         sourceRepository: github.com/prometheus/prometheus
-        tag: v2.55.0
+        tag: v2.55.1
       - labels:
           - name: gardener.cloud/cve-categorisation
             value:
@@ -239,7 +239,7 @@ gardenlet:
         name: configmap-reloader
         repository: quay.io/prometheus-operator/prometheus-config-reloader
         sourceRepository: github.com/prometheus-operator/prometheus-operator
-        tag: v0.77.2
+        tag: v0.78.1
       - labels:
           - name: gardener.cloud/cve-categorisation
             value:
@@ -272,7 +272,7 @@ gardenlet:
         name: kube-state-metrics
         repository: registry.k8s.io/kube-state-metrics/kube-state-metrics
         sourceRepository: github.com/kubernetes/kube-state-metrics
-        tag: v2.13.0
+        tag: v2.14.0
       - name: gardener-metrics-exporter
         repository: europe-docker.pkg.dev/gardener-project/releases/gardener/metrics-exporter
         resourceId:
@@ -465,7 +465,7 @@ gardenlet:
         name: fluent-operator
         repository: europe-docker.pkg.dev/gardener-project/releases/3rd/fluent-operator/fluent-operator
         sourceRepository: github.com/fluent/fluent-operator
-        tag: v3.1.0
+        tag: v3.2.0
       - labels:
           - name: gardener.cloud/cve-categorisation
             value:
@@ -482,7 +482,7 @@ gardenlet:
         name: fluent-bit
         repository: europe-docker.pkg.dev/gardener-project/releases/3rd/fluent-operator/fluent-bit
         sourceRepository: github.com/fluent/fluent-operator
-        tag: v3.1.5
+        tag: v3.1.8
       - labels:
           - name: gardener.cloud/cve-categorisation
             value:
@@ -502,7 +502,7 @@ gardenlet:
         resourceId:
           name: fluent-bit-to-vali
         sourceRepository: github.com/gardener/logging
-        tag: v0.61.0
+        tag: v0.62.0
       - labels:
           - name: gardener.cloud/cve-categorisation
             value:
@@ -536,7 +536,7 @@ gardenlet:
         name: vali-curator
         repository: europe-docker.pkg.dev/gardener-project/releases/gardener/vali-curator
         sourceRepository: github.com/gardener/logging
-        tag: v0.61.0
+        tag: v0.62.0
       - labels:
           - name: gardener.cloud/cve-categorisation
             value:
@@ -593,7 +593,7 @@ gardenlet:
         resourceId:
           name: telegraf-iptables
         sourceRepository: github.com/gardener/logging
-        tag: v0.61.0
+        tag: v0.62.0
       - labels:
           - name: gardener.cloud/cve-categorisation
             value:
@@ -610,7 +610,7 @@ gardenlet:
         name: event-logger
         repository: europe-docker.pkg.dev/gardener-project/releases/gardener/event-logger
         sourceRepository: github.com/gardener/logging
-        tag: v0.61.0
+        tag: v0.62.0
       - labels:
           - name: gardener.cloud/cve-categorisation
             value:
@@ -627,7 +627,7 @@ gardenlet:
         name: tune2fs
         repository: europe-docker.pkg.dev/gardener-project/releases/gardener/tune2fs
         sourceRepository: github.com/gardener/logging
-        tag: v0.61.0
+        tag: v0.62.0
       - labels:
           - name: gardener.cloud/cve-categorisation
             value:
@@ -653,7 +653,7 @@ gardenlet:
         name: vpa-recommender
         repository: europe-docker.pkg.dev/gardener-project/releases/gardener/autoscaler/vertical-pod-autoscaler/vpa-recommender
         sourceRepository: github.com/gardener/autoscaler
-        tag: 1.2.1
+        tag: 1.2.1-gardener-build.3
       - labels:
           - name: gardener.cloud/cve-categorisation
             value:
@@ -763,10 +763,6 @@ gardenlet:
           name: apiserver-proxy
         sourceRepository: github.com/gardener/apiserver-proxy
         tag: v0.17.0
-      - name: cert-management
-        repository: europe-docker.pkg.dev/gardener-project/releases/cert-controller-manager
-        sourceRepository: github.com/gardener/cert-management
-        tag: v0.16.0
 provider-openstack:
   imageVectorOriginal:
     images:
@@ -2606,11 +2602,11 @@ etcd-druid:
         resourceId:
           name: etcdbrctl
         sourceRepository: github.com/gardener/etcd-backup-restore
-        tag: v0.30.2
+        tag: v0.31.1
       - name: etcd-wrapper
         repository: europe-docker.pkg.dev/gardener-project/public/gardener/etcd-wrapper
         sourceRepository: github.com/gardener/etcd-wrapper
-        tag: v0.2.0
+        tag: v0.3.0
       - name: alpine
         repository: europe-docker.pkg.dev/gardener-project/public/3rd/alpine
         tag: 3.18.4
