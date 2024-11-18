@@ -14,7 +14,8 @@
     "release-v1.104",
     "release-v1.105",
     "release-v1.106",
-    "release-v1.107"
+    "release-v1.107",
+    "release-v1.108"
   ],
   "automerge": true,
   "configMigration": true,
@@ -56,7 +57,8 @@
         "release-v1.104",
         "release-v1.105",
         "release-v1.106",
-        "release-v1.107"
+        "release-v1.107",
+        "release-v1.108"
       ],
       "enabled": false,
       "matchPackageNames": [
@@ -222,6 +224,16 @@
       "matchPackageNames": [
         "/docusaurus/"
       ]
+    },
+    {
+      "groupName": "docusaurus",
+      "matchPackageNames": [
+        "/docusaurus/"
+      ],
+      "matchBaseBranches": [
+        "release-v1.108"
+      ],
+      "allowedVersions": "/^1[.]108[.].*$/"
     }
   ],
   "customManagers": [
