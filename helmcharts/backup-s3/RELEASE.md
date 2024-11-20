@@ -1,4 +1,2 @@
 ## General Changes
-
-* Bump g/g to 1.95.6 (#9) @robertvolkmann
-* Add Service in order to generate correct NetworkPolicies (#8) @maboehm
+* Revendor g/g v1.100 (https://github.com/metal-stack/gardener-extension-backup-s3/pull/11) @Gerrit91 
