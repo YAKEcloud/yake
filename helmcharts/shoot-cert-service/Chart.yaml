@@ -5,4 +5,4 @@ dependencies:
   repository: ""
 description: A helmchart for shoot-cert-service
 name: shoot-cert-service
-version: 1.45.0
+version: 1.46.0
