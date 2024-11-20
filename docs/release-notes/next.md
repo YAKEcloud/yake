@@ -60,3 +60,14 @@ hide_table_of_contents: true
 
 
 </details>
+
+<details>
+<summary><b>Update shoot-flux to <code>0.11.0</code></b></summary>
+
+## What's Changed
+* Bump gardener to `v1.105.3` by @Duciwuci in https://github.com/stackitcloud/gardener-extension-shoot-flux/pull/119
+
+
+**Full Changelog**: https://github.com/stackitcloud/gardener-extension-shoot-flux/compare/v0.10.0...v0.11.0
+
+</details>
