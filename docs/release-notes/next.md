@@ -101,3 +101,10 @@ hide_table_of_contents: true
 
 
 </details>
+
+<details>
+<summary><b>Update cloudprofiles to <code>0.7.20</code></b></summary>
+
+**Full Changelog**: https://github.com/gardener-community/cloudprofiles/compare/0.7.19...0.7.20
+
+</details>
