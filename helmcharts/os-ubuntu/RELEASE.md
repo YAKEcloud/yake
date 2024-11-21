@@ -2,17 +2,16 @@
 
 ## ⚠️ Breaking Changes
 
-- `[OPERATOR]` Change OCI Image Registry from GCR (`eu.gcr.io/gardener-project`) to Artifact-Registry (`europe-docker.pkg.dev/gardener-project/releases`) by @ccwienk [#101]
-## 📰 Noteworthy
+- `[OPERATOR]` This extension is no longer able to run with Gardener versions lower than `v1.90` when the `UseGardenerNodeAgent` feature gate is disabled. by @rfranzke [#126]
+## ✨ New Features
 
-- `[OPERATOR]` It is assumed that `gardenlet`'s `UseGardenerNodeAgent` is turned on by default if the feature gate is not explicitly set. Hence, make sure to use at least Gardener `v1.82` when using this extension version. by @rfranzke [#111]
-- `[OPERATOR]` This extension is now prepared to run with an enabled `UseGardenerNodeAgent` feature gate. by @rfranzke [#99]
+- `[OPERATOR]` Helm charts of extension and admission controller are published as OCI artifacts now. by @oliver-goetz [#143]
 ## 🏃 Others
 
-- `[OPERATOR]` The following dependency is updated:  
-  - github.com/gardener/gardener: v1.77.1-> v1.80.3  
-  - k8s.io/* : v0.26.3 -> v0.28.2  
-  - sigs.k8s.io/controller-runtime: v0.14.6-> v0.16.2 by @shafeeqes [#95]
+- `[DEVELOPER]` The `vendor` directory was removed in favor of the `go mod cache`. by @LucaBernstein [#133]
+- `[DEVELOPER]` Static Application Security Testing (sast) with `gosec` got enabled on this repository. by @MrBatschner [#163]
 
+## Helm Charts
+- os-ubuntu: `europe-docker.pkg.dev/gardener-project/releases/charts/gardener/extensions/os-ubuntu:v1.26.0`
 ## Docker Images
-- gardener-extension-os-ubuntu: `europe-docker.pkg.dev/gardener-project/releases/gardener/extensions/os-ubuntu:v1.25.0`
+- gardener-extension-os-ubuntu: `europe-docker.pkg.dev/gardener-project/releases/gardener/extensions/os-ubuntu:v1.26.0`
