@@ -36,7 +36,7 @@ global:
         image:
             pullPolicy: IfNotPresent
             repository: europe-docker.pkg.dev/gardener-project/releases/gardener/admission-controller
-            tag: v1.108.1
+            tag: v1.109.0
         replicaCount: 3
         resources:
             requests:
@@ -134,43 +134,10 @@ global:
             useSidecar: false
         featureGates: {}
         groupPriorityMinimum: 10000
-        hvpa:
-            enabled: false
-            limitsRequestsGapScaleParams:
-                cpu:
-                    percentage: 70
-                    value: "1"
-                memory:
-                    percentage: 70
-                    value: 1G
-            maxReplicas: 4
-            minReplicas: 1
-            targetAverageUtilizationCpu: 80
-            targetAverageUtilizationMemory: 80
-            vpaScaleDownMode: Auto
-            vpaScaleDownStabilization:
-                minChange:
-                    cpu:
-                        percentage: 80
-                        value: 600m
-                    memory:
-                        percentage: 80
-                        value: 600M
-                stabilizationDuration: 15m
-            vpaScaleUpMode: Auto
-            vpaScaleUpStabilization:
-                minChange:
-                    cpu:
-                        percentage: 80
-                        value: 300m
-                    memory:
-                        percentage: 80
-                        value: 200M
-                stabilizationDuration: 3m
         image:
             pullPolicy: IfNotPresent
             repository: europe-docker.pkg.dev/gardener-project/releases/gardener/apiserver
-            tag: v1.108.1
+            tag: v1.109.0
         insecureSkipTLSVerify: false
         livenessProbe:
             enable: true
@@ -295,7 +262,7 @@ global:
         image:
             pullPolicy: IfNotPresent
             repository: europe-docker.pkg.dev/gardener-project/releases/gardener/controller-manager
-            tag: v1.108.1
+            tag: v1.109.0
         replicaCount: 1
         resources:
             requests:
@@ -353,7 +320,7 @@ global:
         image:
             pullPolicy: IfNotPresent
             repository: europe-docker.pkg.dev/gardener-project/releases/gardener/scheduler
-            tag: v1.108.1
+            tag: v1.109.0
         replicaCount: 1
         resources:
             requests:
