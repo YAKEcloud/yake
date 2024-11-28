@@ -636,3 +636,17 @@ no release notes available
 
 
 </details>
+
+<details>
+<summary><b>Update gardener-metrics-exporter to <code>0.32.0</code></b></summary>
+
+no release notes available
+
+</details>
+
+<details>
+<summary><b>Update gardener-metrics-exporter to <code>0.32.0</code></b></summary>
+
+no release notes available
+
+</details>
