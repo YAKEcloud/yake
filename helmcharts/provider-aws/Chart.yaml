@@ -3,9 +3,6 @@ dependencies:
 - condition: controller.enabled
   name: controller
   repository: ""
-- condition: gardener-extension-admission-aws.enabled
-  name: gardener-extension-admission-aws
-  repository: ""
 description: A helmchart for provider-aws
 name: provider-aws
-version: 1.58.3
+version: 1.59.0
