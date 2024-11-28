@@ -701,3 +701,25 @@ no release notes available
 - `[OPERATOR]` Bumps golang from 1.23.1 to 1.23.2. by @dependabot[bot] [gardener/aws-custom-route-controller#33]
 
 </details>
+
+<details>
+<summary><b>Update gardener-metrics-exporter to <code>0.33.0</code></b></summary>
+
+no release notes available
+
+## Docker Images
+- metrics-exporter: `europe-docker.pkg.dev/gardener-project/releases/gardener/metrics-exporter:0.33.0`
+
+
+</details>
+
+<details>
+<summary><b>Update gardener-metrics-exporter to <code>0.33.0</code></b></summary>
+
+no release notes available
+
+## Docker Images
+- metrics-exporter: `europe-docker.pkg.dev/gardener-project/releases/gardener/metrics-exporter:0.33.0`
+
+
+</details>
