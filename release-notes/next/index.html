@@ -5,7 +5,7 @@
 <meta name="generator" content="Docusaurus v3.6.3">
 <title data-rh="true">Release Notes next | Yet another Kubernetes Engine</title><meta data-rh="true" name="viewport" content="width=device-width,initial-scale=1"><meta data-rh="true" name="twitter:card" content="summary_large_image"><meta data-rh="true" property="og:url" content="https://yake.cloud/release-notes/next"><meta data-rh="true" property="og:locale" content="en"><meta data-rh="true" name="docusaurus_locale" content="en"><meta data-rh="true" name="docsearch:language" content="en"><meta data-rh="true" name="gardener" content="installation, production, operations, maintenance"><meta data-rh="true" name="docusaurus_version" content="current"><meta data-rh="true" name="docusaurus_tag" content="docs-release-notes-current"><meta data-rh="true" name="docsearch:version" content="current"><meta data-rh="true" name="docsearch:docusaurus_tag" content="docs-release-notes-current"><meta data-rh="true" property="og:title" content="Release Notes next | Yet another Kubernetes Engine"><meta data-rh="true" name="description" content="Yake release notes and upgrade guide"><meta data-rh="true" property="og:description" content="Yake release notes and upgrade guide"><link data-rh="true" rel="icon" href="/img/favicon.ico"><link data-rh="true" rel="canonical" href="https://yake.cloud/release-notes/next"><link data-rh="true" rel="alternate" href="https://yake.cloud/release-notes/next" hreflang="en"><link data-rh="true" rel="alternate" href="https://yake.cloud/release-notes/next" hreflang="x-default"><link rel="alternate" type="application/rss+xml" href="/blog/rss.xml" title="Yet another Kubernetes Engine RSS Feed">
 <link rel="alternate" type="application/atom+xml" href="/blog/atom.xml" title="Yet another Kubernetes Engine Atom Feed"><link rel="stylesheet" href="/assets/css/styles.aea4da5a.css">
-<script src="/assets/js/runtime~main.43c86bd7.js" defer="defer"></script>
+<script src="/assets/js/runtime~main.63c1b3f9.js" defer="defer"></script>
 <script src="/assets/js/main.71971689.js" defer="defer"></script>
 </head>
 <body class="navigation-with-keyboard">
@@ -640,6 +640,59 @@
 <details class="details_lb9f alert alert--info details_b_Ee" data-collapsed="true"><summary><b>Update gardener-metrics-exporter to <code>0.32.0</code></b></summary><div><div class="collapsibleContent_i85q">
 <!-- -->
 <p>no release notes available</p>
+</div></div></details>
+<details class="details_lb9f alert alert--info details_b_Ee" data-collapsed="true"><summary><b>Update provider-aws to <code>1.59.0</code></b></summary><div><div class="collapsibleContent_i85q">
+<!-- -->
+<h1>[gardener/gardener-extension-provider-aws]</h1>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="️-breaking-changes-8">⚠️ Breaking Changes<a href="#️-breaking-changes-8" class="hash-link" aria-label="Direct link to ⚠️ Breaking Changes" title="Direct link to ⚠️ Breaking Changes">​</a></h2>
+<ul>
+<li><code>[OPERATOR]</code> The Helm charts for the <code>application</code> and <code>runtime</code> parts of the gardener-extension-admission-aws admission controller have been separated into standalone charts. These charts now assume a Garden setup with a virtual garden. Both charts must be deployed individually: the <code>runtime</code> chart on the Garden runtime cluster, and the <code>application</code> chart on the virtual garden. Additionally, the intermediate <code>global</code> level in the Helm values has been removed, so you may need to adjust your provided values accordingly. by @MartinWeindel [#1100]</li>
+</ul>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="-noteworthy-6">📰 Noteworthy<a href="#-noteworthy-6" class="hash-link" aria-label="Direct link to 📰 Noteworthy" title="Direct link to 📰 Noteworthy">​</a></h2>
+<ul>
+<li><code>[DEVELOPER]</code> Updated AWS SDK from v1 to v2 by @AndreasBurger [#1060]</li>
+</ul>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="-new-features-6">✨ New Features<a href="#-new-features-6" class="hash-link" aria-label="Direct link to ✨ New Features" title="Direct link to ✨ New Features">​</a></h2>
+<ul>
+<li><code>[OPERATOR]</code> Adjustments for additional deployment of extension and admission controller on Garden runtime cluster by gardener-operator. by @MartinWeindel [#1100]</li>
+<li><code>[OPERATOR]</code> Support specification of extended resources in provider config node template without re-specifying core resources. by @elankath [#1010]</li>
+</ul>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="-others-17">🏃 Others<a href="#-others-17" class="hash-link" aria-label="Direct link to 🏃 Others" title="Direct link to 🏃 Others">​</a></h2>
+<ul>
+<li><code>[OPERATOR]</code> Fixed terraform deploy and integration tests for IPv6. by @axel7born [#1112]</li>
+<li><code>[OPERATOR]</code> update images of pause and alpine container by @hebelsan [#1101]</li>
+<li><code>[OPERATOR]</code> Add IPv4 ranges from Spec.Networking to Status.Networking. by @axel7born [#1094]</li>
+<li><code>[OPERATOR]</code> Filter pod ranges for IPv4 CIDRs to configure Custom-Route-Controller. by @axel7born [#1138]</li>
+<li><code>[OPERATOR]</code> Create bastion vm from the info provided in the cloud profile bastion section by @hebelsan [#1040]</li>
+<li><code>[OPERATOR]</code> Added validation to allow only IPv6-only shoot clusters, but not dual-stack as it is not supported, yet. by @ScheererJ [#1095]</li>
+<li><code>[OPERATOR]</code> Fixed an issue preventing the deployment of internal load balancers in IPv6-only shoots. by @axel7born [#1108]</li>
+<li><code>[OPERATOR]</code> Add <code>NamespacedCloudProfile</code> admission mutation and validation to support custom machine images and types. by @LucaBernstein [#1136]</li>
+<li><code>[OPERATOR]</code> Remove the duplicate provider type check from the admission webhooks. by @LucaBernstein [#1117]</li>
+<li><code>[OPERATOR]</code> Fix an issue where the &quot;0.0.0.0/0&quot; route creation would fail if the nat-gateway was previously deleted. by @kon-angelo [#1111]</li>
+<li><code>[OPERATOR]</code> Update gardener to v1.106.1 by @hebelsan [#1110]</li>
+<li><code>[OPERATOR]</code> Dual-stack networking, i.e. networks with IPv4 and IPv6, are allowed now. by @ScheererJ [#1139]</li>
+<li><code>[OPERATOR]</code> AWS load balancers controller is always enabled for IPv6-only and dual-stack shoot clusters. by @ScheererJ [#1099]</li>
+<li><code>[OPERATOR]</code> Harmonize logging output from controller-runtime logger and kubernetes logger. by @DockToFuture [#1105]</li>
+<li><code>[OPERATOR]</code> <code>gosec</code> was introduced for Static Application Security Testing (SAST). by @DockToFuture [#1105]</li>
+<li><code>[DEPENDENCY]</code> Update go to version 1.23.3 by @hebelsan [#1121]</li>
+<li><code>[DEVELOPER]</code> Add gosec as sast makefile target by @hebelsan [#1123]</li>
+</ul>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="-documentation-1">📖 Documentation<a href="#-documentation-1" class="hash-link" aria-label="Direct link to 📖 Documentation" title="Direct link to 📖 Documentation">​</a></h2>
+<ul>
+<li><code>[USER]</code> Add overview documentation for IPv6 by @ScheererJ [#1143]</li>
+</ul>
+<h1>[gardener/aws-custom-route-controller]</h1>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="-new-features-7">✨ New Features<a href="#-new-features-7" class="hash-link" aria-label="Direct link to ✨ New Features" title="Direct link to ✨ New Features">​</a></h2>
+<ul>
+<li><code>[USER]</code> <code>gosec</code> was introduced for Static Application Security Testing (SAST). by @ScheererJ [gardener/aws-custom-route-controller#34]</li>
+<li><code>[USER]</code> Update sdk version to v2 by @kon-angelo [gardener/aws-custom-route-controller#48]</li>
+<li><code>[USER]</code> The <code>aws-custom-route-controller</code> only adds node routes for IPv4 pod CIDR ranges and does not interfere with IPv6 routes. by @DockToFuture [gardener/aws-custom-route-controller#43]</li>
+</ul>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="-others-18">🏃 Others<a href="#-others-18" class="hash-link" aria-label="Direct link to 🏃 Others" title="Direct link to 🏃 Others">​</a></h2>
+<ul>
+<li><code>[OPERATOR]</code> Bumps golang from 1.23.2 to 1.23.3. by @dependabot[bot] [gardener/aws-custom-route-controller#44]</li>
+<li><code>[OPERATOR]</code> Bumps golang from 1.23.1 to 1.23.2. by @dependabot[bot] [gardener/aws-custom-route-controller#33]</li>
+</ul>
 </div></div></details></div></article><nav class="pagination-nav docusaurus-mt-lg" aria-label="Docs pages"><a class="pagination-nav__link pagination-nav__link--next" href="/release-notes/v1.108"><div class="pagination-nav__sublabel">Next</div><div class="pagination-nav__label">Release Notes v1.108</div></a></nav></div></div></div></div></main></div></div></div><footer class="footer footer--dark"><div class="container container-fluid"><div class="row footer__links"><div class="col footer__col"><div class="footer__title">Docs</div><ul class="footer__items clean-list"><li class="footer__item"><a class="footer__link-item" href="/docs/overview">Docs</a></li></ul></div><div class="col footer__col"><div class="footer__title">Community</div><ul class="footer__items clean-list"><li class="footer__item"><a href="https://github.com/yakecloud" target="_blank" rel="noopener noreferrer" class="footer__link-item">GitHub<svg width="13.5" height="13.5" aria-hidden="true" viewBox="0 0 24 24" class="iconExternalLink_nPIU"><path fill="currentColor" d="M21 13v10h-21v-19h12v2h-10v15h17v-8h2zm3-12h-10.988l4.035 4-6.977 7.07 2.828 2.828 6.977-7.07 4.125 4.172v-11z"></path></svg></a></li><li class="footer__item"><a href="https://github.com/gardener-community" target="_blank" rel="noopener noreferrer" class="footer__link-item">Gardener Community<svg width="13.5" height="13.5" aria-hidden="true" viewBox="0 0 24 24" class="iconExternalLink_nPIU"><path fill="currentColor" d="M21 13v10h-21v-19h12v2h-10v15h17v-8h2zm3-12h-10.988l4.035 4-6.977 7.07 2.828 2.828 6.977-7.07 4.125 4.172v-11z"></path></svg></a></li><li class="footer__item"><a href="https://gardener-cloud.slack.com" target="_blank" rel="noopener noreferrer" class="footer__link-item">Slack<svg width="13.5" height="13.5" aria-hidden="true" viewBox="0 0 24 24" class="iconExternalLink_nPIU"><path fill="currentColor" d="M21 13v10h-21v-19h12v2h-10v15h17v-8h2zm3-12h-10.988l4.035 4-6.977 7.07 2.828 2.828 6.977-7.07 4.125 4.172v-11z"></path></svg></a></li></ul></div><div class="col footer__col"><div class="footer__title">More</div><ul class="footer__items clean-list"><li class="footer__item"><a class="footer__link-item" href="/blog">Blog</a></li><li class="footer__item"><a class="footer__link-item" href="/legals">Legals</a></li><li class="footer__item"><a class="footer__link-item" href="/privacy-policy">Privacy policy</a></li></ul></div></div><div class="footer__bottom text--center"><div class="footer__copyright">Copyright © 2024 23 Technologies GmbH</div></div></div></footer></div>
 </body>
 </html>
