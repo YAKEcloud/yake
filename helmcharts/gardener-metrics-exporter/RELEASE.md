@@ -2,9 +2,7 @@
 
 ## 🏃 Others
 
-- `[OPERATOR]` The costObject for workerless shoots is now determined correctly. by @vicwicker [#103]
-- `[OPERATOR]` Add garden_version to the garden_shoot_info metric by @Kumm-Kai [#101]
-- `[OPERATOR]` Rename `garden_version` label to `gardener_version` on `garden_shoot_info` metric. by @rickardsjp [#102]
-
-## Docker Images
-- metrics-exporter: `europe-docker.pkg.dev/gardener-project/releases/gardener/metrics-exporter:0.30.0`
+- `[USER]` Remove duplicated metrics from README by @Sinscerly [#110]
+- `[OPERATOR]` Add cost_object_type label to garden_shoot_info metric by @chrkl [#112]
+- `[OPERATOR]` Add `is_hibernated` to the `garden_shoot_info` metric by @Sinscerly [#107]
+- `[OPERATOR]` Add `technical_id` to `garden_shoot_.+` metrics by @robinschneider [#111]
