@@ -2506,7 +2506,7 @@ shoot-cert-service:
       - name: cert-management
         repository: europe-docker.pkg.dev/gardener-project/releases/cert-controller-manager
         sourceRepository: github.com/gardener/cert-management
-        tag: v0.16.0
+        tag: v0.17.1
 shoot-dns-service:
   imageVectorOriginal:
     images:
