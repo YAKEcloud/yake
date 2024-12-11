@@ -7,7 +7,7 @@ metadata:
   labels:
     app: gardener
     role: apiserver
-    chart: "{{ .Chart.Name }}-{{ .Chart.Version }}"
+    chart: "{{ .Chart.Name }}-{{ .Chart.Version | replace "+" "_" }}"
     release: "{{ .Release.Name }}"
     heritage: "{{ .Release.Service }}"
 spec:
@@ -47,7 +47,7 @@ spec:
       labels:
         app: gardener
         role: apiserver
-        chart: "{{ .Chart.Name }}-{{ .Chart.Version }}"
+        chart: "{{ .Chart.Name }}-{{ .Chart.Version | replace "+" "_" }}"
         release: "{{ .Release.Name }}"
         heritage: "{{ .Release.Service }}"
         {{- if .Values.global.apiserver.etcd.useSidecar }}
@@ -382,7 +382,7 @@ spec:
         {{- end }}
       {{- if .Values.global.apiserver.etcd.useSidecar }}
       - name: etcd
-        image: quay.io/coreos/etcd:v3.3.12
+        image: quay.io/coreos/etcd:v3.5.17
         imagePullPolicy: IfNotPresent
         command:
         - /usr/local/bin/etcd
@@ -519,7 +519,7 @@ metadata:
   namespace: garden
   labels:
     sidecar: etcd
-    chart: "{{ .Chart.Name }}-{{ .Chart.Version }}"
+    chart: "{{ .Chart.Name }}-{{ .Chart.Version | replace "+" "_" }}"
     release: "{{ .Release.Name }}"
     heritage: "{{ .Release.Service }}"
 spec:
