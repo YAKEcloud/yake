@@ -2042,7 +2042,7 @@ provider-gcp:
         name: csi-driver
         repository: registry.k8s.io/cloud-provider-gcp/gcp-compute-persistent-disk-csi-driver
         sourceRepository: github.com/kubernetes-sigs/gcp-compute-persistent-disk-csi-driver
-        tag: v1.15.0
+        tag: v1.15.1
       - labels:
           - name: gardener.cloud/cve-categorisation
             value:
