@@ -2168,9 +2168,9 @@ provider-alicloud:
         sourceRepository: github.com/gardener/machine-controller-manager-provider-alicloud
         tag: v0.11.0
       - name: alicloud-controller-manager
-        repository: registry-eu-central-1.ack.aliyuncs.com/acs/cloud-controller-manager-amd64
+        repository: registry-eu-central-1.ack.aliyuncs.com/acs/cloud-controller-manager
         sourceRepository: https://github.com/kubernetes/cloud-provider-alibaba-cloud
-        tag: v2.7.0
+        tag: v2.10.0
       - labels:
           - name: gardener.cloud/cve-categorisation
             value:
