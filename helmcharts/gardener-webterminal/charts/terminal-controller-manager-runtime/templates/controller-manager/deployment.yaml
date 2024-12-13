@@ -1,0 +1,195 @@
+apiVersion: {{ include "deploymentversion" . }}
+kind: Deployment
+metadata:
+  name: terminal-controller-manager
+  namespace: {{ .Release.Namespace }}
+  labels:
+    app.kubernetes.io/name: terminal
+    app.kubernetes.io/component: controller-manager
+    helm.sh/chart: "{{ .Chart.Name }}-{{ .Chart.Version }}"
+    app.kubernetes.io/instance: "{{ .Release.Name }}"
+    app.kubernetes.io/managed-by: "{{ .Release.Service }}"
+spec:
+  replicas: {{ .Values.global.controller.replicaCount }}
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: terminal
+      app.kubernetes.io/component: controller-manager
+  template:
+    metadata:
+      annotations:
+        kubectl.kubernetes.io/default-container: manager
+        checksum/configmap-terminal-config: {{ include (print .Template.BasePath "/controller-manager/configmap.yaml") . | sha256sum }}
+        checksum/secert-admission-webhook-cert: {{ include (print .Template.BasePath "/admission-controller/secret-admission-webhook-cert.yaml") . | sha256sum }}
+        {{- if .Values.global.controller.manager.kubeconfig }}
+        checksum/secret-kubeconfig-manager: {{ include (print .Template.BasePath "/controller-manager/secret-kubeconfig-manager.yaml") . | sha256sum }}
+        {{- end }}
+        {{- if .Values.global.controller.podAnnotations }}
+        {{- toYaml .Values.global.controller.podAnnotations | nindent 8 }}
+        {{- end }}
+      labels:
+        app.kubernetes.io/name: terminal
+        app.kubernetes.io/component: controller-manager
+        helm.sh/chart: "{{ .Chart.Name }}-{{ .Chart.Version }}"
+        app.kubernetes.io/instance: "{{ .Release.Name }}"
+        app.kubernetes.io/managed-by: "{{ .Release.Service }}"
+        networking.gardener.cloud/to-dns: allowed
+        networking.gardener.cloud/to-runtime-apiserver: allowed
+        networking.gardener.cloud/to-public-networks: allowed
+        networking.gardener.cloud/to-private-networks: allowed
+        {{- if eq .Release.Namespace "garden" }}
+        networking.resources.gardener.cloud/to-virtual-garden-kube-apiserver-tcp-443: allowed
+        {{- else }}
+        networking.resources.gardener.cloud/to-garden-virtual-garden-kube-apiserver-tcp-443: allowed
+        {{- end }}
+        {{- if .Values.global.controller.podLabels }}
+        {{- toYaml .Values.global.controller.podLabels | nindent 8 }}
+        {{- end }}
+    spec:
+      {{- if .Values.global.controller.manager.kubeconfig }}
+      automountServiceAccountToken: false
+      {{- end }}
+      {{- if or ( not .Values.global.deployment.virtualGarden.enabled ) .Values.global.controller.manager.serviceAccountTokenVolumeProjection.enabled }}
+      serviceAccountName: {{ required ".Values.global.controller.serviceAccountName is required" .Values.global.controller.serviceAccountName }}
+      {{- else }}
+      serviceAccountName: default
+      {{- end }}
+      containers:
+      - name: manager
+        image: "{{ include "utils-templates.image" .Values.global.controller.manager.image }}"
+        imagePullPolicy: {{ .Values.global.controller.manager.image.pullPolicy }}
+        command:
+        - /manager
+        args:
+        - --config-file=/etc/terminal-controller-manager/config.yaml
+        - --zap-devel=false
+        ports:
+        - containerPort: 9443
+          name: webhook
+          protocol: TCP
+        - containerPort: {{ required ".Values.global.controller.manager.config.server.metrics.port is required" .Values.global.controller.manager.config.server.metrics.port }}
+          name: https
+          protocol: TCP
+        env:
+        {{- if .Values.global.controller.manager.kubeconfig }}
+        - name: KUBECONFIG
+          value: /etc/terminal-controller-manager/secrets/kubeconfig/kubeconfig
+        {{- end }}
+        {{- if .Values.global.controller.manager.projectedKubeconfig }}
+        - name: KUBECONFIG
+          value: {{ required ".Values.global.controller.manager.projectedKubeconfig.baseMountPath is required" .Values.global.controller.manager.projectedKubeconfig.baseMountPath }}/kubeconfig
+        {{- end }}
+        {{- if .Values.global.controller.manager.livenessProbe.enabled }}
+        livenessProbe:
+          httpGet:
+            path: /healthz
+            port: {{ required ".Values.global.controller.manager.config.server.healthProbes.port is required" .Values.global.controller.manager.config.server.healthProbes.port }}
+            scheme: HTTP
+          initialDelaySeconds: {{ .Values.global.controller.manager.livenessProbe.initialDelaySeconds }}
+          periodSeconds: {{ .Values.global.controller.manager.livenessProbe.periodSeconds }}
+          timeoutSeconds: {{ .Values.global.controller.manager.livenessProbe.timeoutSeconds }}
+          successThreshold: {{ .Values.global.controller.manager.livenessProbe.successThreshold }}
+          failureThreshold: {{ .Values.global.controller.manager.livenessProbe.failureThreshold }}
+        {{- end }}
+        {{- if .Values.global.controller.manager.readinessProbe.enabled }}
+        readinessProbe:
+          httpGet:
+            path: /readyz
+            port: {{ required ".Values.global.controller.manager.config.server.healthProbes.port is required" .Values.global.controller.manager.config.server.healthProbes.port }}
+            scheme: HTTP
+          initialDelaySeconds: {{ .Values.global.controller.manager.readinessProbe.initialDelaySeconds }}
+          periodSeconds: {{ .Values.global.controller.manager.readinessProbe.periodSeconds }}
+          timeoutSeconds: {{ .Values.global.controller.manager.readinessProbe.timeoutSeconds }}
+          successThreshold: {{ .Values.global.controller.manager.readinessProbe.successThreshold }}
+          failureThreshold: {{ .Values.global.controller.manager.readinessProbe.failureThreshold }}
+        {{- end }}
+        resources: {{ toYaml .Values.global.controller.manager.resources | trim | nindent 10 }}
+        securityContext:
+          allowPrivilegeEscalation: false
+        volumeMounts:
+        {{- if .Values.global.controller.manager.kubeconfig }}
+        - name: terminal-controller-secret-kubeconfig
+          mountPath: /etc/terminal-controller-manager/secrets/kubeconfig
+          readOnly: true
+        {{- end }}
+        {{- if .Values.global.controller.manager.serviceAccountTokenVolumeProjection.enabled }}
+        - name: service-account-token-manager
+          mountPath: /var/run/secrets/projected/serviceaccount
+          readOnly: true
+        {{- end }}
+        {{- if .Values.global.controller.manager.projectedKubeconfig }}
+        - name: kubeconfig-manager
+          mountPath: {{ required ".Values.global.controller.manager.projectedKubeconfig.baseMountPath is required" .Values.global.controller.manager.projectedKubeconfig.baseMountPath }}
+          readOnly: true
+        {{- end }}
+        - mountPath: /tmp/k8s-webhook-server/serving-certs
+          name: terminal-admission-controller-cert
+          readOnly: true
+        - mountPath: /tmp/k8s-metrics-server/serving-certs
+          name: terminal-metrics-server-cert
+          readOnly: true
+        - mountPath: /etc/terminal-controller-manager
+          name: terminal-controller-manager-config
+          readOnly: true
+      securityContext:
+        runAsNonRoot: true
+        runAsUser: 65532
+      terminationGracePeriodSeconds: 10
+      volumes:
+      {{- if .Values.global.controller.manager.kubeconfig }}
+      - name: terminal-controller-secret-kubeconfig
+        secret:
+          secretName: terminal-kubeconfig-manager
+      {{- end }}
+      {{- if .Values.global.controller.manager.serviceAccountTokenVolumeProjection.enabled }}
+      - name: service-account-token-manager
+        projected:
+          sources:
+          - serviceAccountToken:
+              path: token
+              expirationSeconds: {{ required ".Values.global.controller.manager.serviceAccountTokenVolumeProjection.expirationSeconds is required" .Values.global.controller.manager.serviceAccountTokenVolumeProjection.expirationSeconds }}
+              {{- if .Values.global.controller.manager.serviceAccountTokenVolumeProjection.audience }}
+              audience: {{ .Values.global.controller.manager.serviceAccountTokenVolumeProjection.audience }}
+              {{- end }}
+      {{- end }}
+      {{- if .Values.global.controller.manager.projectedKubeconfig }}
+      - name: kubeconfig-manager
+        projected:
+          sources:
+          - secret:
+              items:
+              - key: kubeconfig
+                path: kubeconfig
+              name: {{ required ".Values.global.controller.manager.projectedKubeconfig.genericKubeconfigSecretName is required" .Values.global.controller.manager.projectedKubeconfig.genericKubeconfigSecretName }}
+              optional: false
+          - secret:
+              items:
+              - key: token
+                path: token
+              name: {{ required ".Values.global.controller.manager.projectedKubeconfig.tokenSecretName is required" .Values.global.controller.manager.projectedKubeconfig.tokenSecretName }}
+              optional: false
+      {{- end }}
+      {{- if .Values.global.admission.config.server.webhooks.tlsSecretName }}
+      - name: terminal-admission-controller-cert
+        secret:
+          secretName: {{ .Values.global.admission.config.server.webhooks.tlsSecretName }}
+      {{- else }}
+      - name: terminal-admission-controller-cert
+        secret:
+          secretName: terminal-admission-controller-cert
+      {{- end }}
+      {{- if .Values.global.controller.manager.config.server.metrics.tlsSecretName }}
+      - name: terminal-metrics-server-cert
+        secret:
+          secretName: {{ .Values.global.controller.manager.config.server.metrics.tlsSecretName }}
+      {{- else }}
+      - name: terminal-metrics-server-cert
+        secret:
+          secretName: terminal-metrics-server-cert
+      {{- end }}
+      - name: terminal-controller-manager-config
+        configMap:
+          items:
+          - key: config.yaml
+            path: config.yaml
+          name: terminal-controller-manager

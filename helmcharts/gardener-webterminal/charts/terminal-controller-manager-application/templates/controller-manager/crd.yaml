@@ -1,0 +1,3 @@
+{{- if and .Values.global.deployment.createCRD }}
+{{ .Files.Get "crd-gen/dashboard.gardener.cloud_terminals.yaml" }}
+{{- end }}

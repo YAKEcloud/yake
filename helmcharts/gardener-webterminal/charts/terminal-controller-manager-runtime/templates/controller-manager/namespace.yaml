@@ -1,0 +1,14 @@
+{{- if .Values.global.deployment.createNamespace }}
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: {{ .Release.Namespace }}
+  labels:
+    app.kubernetes.io/name: terminal
+    helm.sh/chart: "{{ .Chart.Name }}-{{ .Chart.Version }}"
+    app.kubernetes.io/instance: "{{ .Release.Name }}"
+    app.kubernetes.io/managed-by: "{{ .Release.Service }}"
+    {{- if ne .Release.Namespace "garden" }}
+    networking.gardener.cloud/access-target-apiserver: allowed
+    {{- end }}
+{{- end }}

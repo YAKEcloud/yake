@@ -1,0 +1,20 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: terminal-metrics
+  namespace: {{ .Release.Namespace }}
+  labels:
+    app.kubernetes.io/name: terminal
+    app.kubernetes.io/component: controller-manager
+    helm.sh/chart: "{{ .Chart.Name }}-{{ .Chart.Version }}"
+    app.kubernetes.io/instance: "{{ .Release.Name }}"
+    app.kubernetes.io/managed-by: "{{ .Release.Service }}"
+spec:
+  ports:
+  - name: https
+    port: {{ required ".Values.global.controller.manager.config.server.metrics.port is required" .Values.global.controller.manager.config.server.metrics.port }}
+    protocol: TCP
+    targetPort: https
+  selector:
+    app.kubernetes.io/name: terminal
+    app.kubernetes.io/component: controller-manager

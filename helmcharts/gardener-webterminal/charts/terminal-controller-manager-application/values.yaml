@@ -1,3 +1,59 @@
 global:
-    application:
-        certificate: null
+    admission:
+        config:
+            server:
+                webhooks:
+                    tlsSecretName: null
+    controller:
+        manager:
+            config:
+                honourServiceAccountRefHostCluster: false
+                server:
+                    healthProbes:
+                        bindAddress: ""
+                        port: 8081
+                    metrics:
+                        bindAddress: ""
+                        port: 8443
+                        tlsSecretName: null
+            image:
+                pullPolicy: IfNotPresent
+                repository: europe-docker.pkg.dev/gardener-project/public/gardener/terminal-controller-manager
+                tag: v0.33.0
+            livenessProbe:
+                enabled: true
+                failureThreshold: 6
+                initialDelaySeconds: 15
+                periodSeconds: 20
+                successThreshold: 1
+                timeoutSeconds: 5
+            readinessProbe:
+                enabled: true
+                failureThreshold: 6
+                initialDelaySeconds: 5
+                periodSeconds: 10
+                successThreshold: 1
+                timeoutSeconds: 5
+            resources:
+                limits:
+                    cpu: 200m
+                    memory: 300Mi
+                requests:
+                    cpu: 100m
+                    memory: 100Mi
+            serviceAccountTokenVolumeProjection:
+                audience: ""
+                enabled: true
+                expirationSeconds: 3600
+        podAnnotations: null
+        podLabels: null
+        replicaCount: 1
+        serviceAccountName: terminal-controller-manager
+    deployment:
+        createCRD: true
+        createNamespace: true
+        virtualGarden:
+            enabled: true
+            terminalUserName: null
+utils-templates:
+    enabled: false

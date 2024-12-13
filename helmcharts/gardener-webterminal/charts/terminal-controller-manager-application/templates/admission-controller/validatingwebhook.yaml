@@ -1,0 +1,37 @@
+apiVersion: {{ include "webhookadmissionregistration" . }}
+kind: ValidatingWebhookConfiguration
+metadata:
+  name: terminal-validating-webhook-configuration
+  labels:
+    app.kubernetes.io/name: terminal
+    app.kubernetes.io/component: admission-controller
+    helm.sh/chart: "{{ .Chart.Name }}-{{ .Chart.Version }}"
+    app.kubernetes.io/instance: "{{ .Release.Name }}"
+    app.kubernetes.io/managed-by: "{{ .Release.Service }}"
+webhooks:
+- admissionReviewVersions:
+  - v1
+  - v1beta1
+  clientConfig:
+    {{- if .Values.global.deployment.virtualGarden.enabled }}
+    url: https://terminal-admission-controller.{{ .Release.Namespace }}.svc/validate-terminal
+    {{- else }}
+    service:
+      name: terminal-admission-controller
+      namespace: {{ .Release.Namespace }}
+      path: /validate-terminal
+    {{- end }}
+    caBundle: {{ required ".Values.global.admission.config.server.webhooks.caBundle is required" (b64enc .Values.global.admission.config.server.webhooks.caBundle) }}
+  failurePolicy: Fail
+  name: validating-create-update-terminal.gardener.cloud
+  rules:
+  - apiGroups:
+    - dashboard.gardener.cloud
+    apiVersions:
+    - v1alpha1
+    operations:
+    - CREATE
+    - UPDATE
+    resources:
+    - terminals
+  sideEffects: None
