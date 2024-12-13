@@ -38,16 +38,16 @@
 - `[OPERATOR]` Improve shoot credential rotation documentation. by @marc1404 [#10998]
 
 ## Helm Charts
-- controlplane: `europe-docker.pkg.dev/gardener-project/releases/charts/gardener/controlplane:v1.110.0`
-- gardenlet: `europe-docker.pkg.dev/gardener-project/releases/charts/gardener/gardenlet:v1.110.0`
-- operator: `europe-docker.pkg.dev/gardener-project/releases/charts/gardener/operator:v1.110.0`
-- resource-manager: `europe-docker.pkg.dev/gardener-project/releases/charts/gardener/resource-manager:v1.110.0`
+- controlplane: `europe-docker.pkg.dev/gardener-project/releases/charts/gardener/controlplane:v1.109.0`
+- gardenlet: `europe-docker.pkg.dev/gardener-project/releases/charts/gardener/gardenlet:v1.109.0`
+- operator: `europe-docker.pkg.dev/gardener-project/releases/charts/gardener/operator:v1.109.0`
+- resource-manager: `europe-docker.pkg.dev/gardener-project/releases/charts/gardener/resource-manager:v1.109.0`
 ## Docker Images
-- admission-controller: `europe-docker.pkg.dev/gardener-project/releases/gardener/admission-controller:v1.110.0`
-- apiserver: `europe-docker.pkg.dev/gardener-project/releases/gardener/apiserver:v1.110.0`
-- controller-manager: `europe-docker.pkg.dev/gardener-project/releases/gardener/controller-manager:v1.110.0`
-- gardenlet: `europe-docker.pkg.dev/gardener-project/releases/gardener/gardenlet:v1.110.0`
-- node-agent: `europe-docker.pkg.dev/gardener-project/releases/gardener/node-agent:v1.110.0`
-- operator: `europe-docker.pkg.dev/gardener-project/releases/gardener/operator:v1.110.0`
-- resource-manager: `europe-docker.pkg.dev/gardener-project/releases/gardener/resource-manager:v1.110.0`
-- scheduler: `europe-docker.pkg.dev/gardener-project/releases/gardener/scheduler:v1.110.0`
+- admission-controller: `europe-docker.pkg.dev/gardener-project/releases/gardener/admission-controller:v1.109.0`
+- apiserver: `europe-docker.pkg.dev/gardener-project/releases/gardener/apiserver:v1.109.0`
+- controller-manager: `europe-docker.pkg.dev/gardener-project/releases/gardener/controller-manager:v1.109.0`
+- gardenlet: `europe-docker.pkg.dev/gardener-project/releases/gardener/gardenlet:v1.109.0`
+- node-agent: `europe-docker.pkg.dev/gardener-project/releases/gardener/node-agent:v1.109.0`
+- operator: `europe-docker.pkg.dev/gardener-project/releases/gardener/operator:v1.109.0`
+- resource-manager: `europe-docker.pkg.dev/gardener-project/releases/gardener/resource-manager:v1.109.0`
+- scheduler: `europe-docker.pkg.dev/gardener-project/releases/gardener/scheduler:v1.109.0`
