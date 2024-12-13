@@ -6,6 +6,9 @@ dependencies:
 - condition: terminal-controller-manager-runtime.enabled
   name: terminal-controller-manager-runtime
   repository: ""
-description: A Helm chart to deploy the Gardener webterminal
+- condition: utils-templates.enabled
+  name: utils-templates
+  repository: ""
+description: A Helm chart to deploy the terminal-controller-manager
 name: gardener-webterminal
-version: 0.0.2
+version: 0.33.0

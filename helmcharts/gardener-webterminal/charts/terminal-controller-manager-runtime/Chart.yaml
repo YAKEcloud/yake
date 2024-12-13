@@ -1,5 +1,9 @@
 apiVersion: v2
-description: A Helm chart to deploy the terminal controller manager runtime related
-  resources
+dependencies:
+- condition: utils-templates.enabled
+  name: utils-templates
+  repository: ""
+description: A Helm chart to deploy the terminal-controller-manager runtime related
+  components
 name: terminal-controller-manager-runtime
-version: 0.0.2
+version: 0.33.0
