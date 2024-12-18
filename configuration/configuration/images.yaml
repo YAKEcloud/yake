@@ -2532,7 +2532,7 @@ shoot-dns-service:
       - name: dns-controller-manager
         repository: europe-docker.pkg.dev/gardener-project/releases/dns-controller-manager
         sourceRepository: github.com/gardener/external-dns-management
-        tag: v0.22.1
+        tag: v0.22.2
 runtime-gvisor:
   imageVectorOriginal:
     images:

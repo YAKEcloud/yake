@@ -8,9 +8,16 @@ spec:
   {{- if .Values.global.vpa.resourcePolicy }}
   resourcePolicy:
     containerPolicies:
-    - containerName: '*'
-      minAllowed:
-        memory: {{ required ".Values.global.vpa.resourcePolicy.minAllowed.memory is required" .Values.global.vpa.resourcePolicy.minAllowed.memory }}
+    - containerName: {{ include "name" . }}
+      {{- with .Values.global.vpa.resourcePolicy.minAllowed }}
+      minAllowed: {{ toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.global.vpa.resourcePolicy.maxAllowed }}
+      maxAllowed: {{ toYaml . | nindent 8 }}
+      {{- end }}
+      {{- if .Values.global.vpa.resourcePolicy.controlledValues }}
+      controlledValues: {{ .Values.global.vpa.resourcePolicy.controlledValues }}
+      {{- end }}
   {{- end }}
   targetRef:
     apiVersion: apps/v1
