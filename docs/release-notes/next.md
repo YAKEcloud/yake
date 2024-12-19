@@ -134,3 +134,36 @@ hide_table_of_contents: true
 
 
 </details>
+
+<details>
+<summary><b>Update gardener-controlplane to <code>1.110.1</code></b></summary>
+
+# [gardener/gardener]
+
+## 🐛 Bug Fixes
+
+- `[USER]` Fix initial scheduling of `Shoot` with `NamespacedCloudProfile` reference. by @LucaBernstein [#11076]
+
+</details>
+
+<details>
+<summary><b>Update gardener-controlplane to <code>1.110.1</code></b></summary>
+
+# [gardener/gardener]
+
+## 🐛 Bug Fixes
+
+- `[USER]` Fix initial scheduling of `Shoot` with `NamespacedCloudProfile` reference. by @LucaBernstein [#11076]
+
+</details>
+
+<details>
+<summary><b>Update gardenlet to <code>1.110.1</code></b></summary>
+
+# [gardener/gardener]
+
+## 🐛 Bug Fixes
+
+- `[USER]` Fix initial scheduling of `Shoot` with `NamespacedCloudProfile` reference. by @LucaBernstein [#11076]
+
+</details>
