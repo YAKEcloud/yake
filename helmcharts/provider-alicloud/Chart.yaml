@@ -3,9 +3,6 @@ dependencies:
 - condition: controller.enabled
   name: controller
   repository: ""
-- condition: gardener-extension-admission-alicloud.enabled
-  name: gardener-extension-admission-alicloud
-  repository: ""
 description: A helmchart for provider-alicloud
 name: provider-alicloud
-version: 1.56.0
+version: 1.57.0

@@ -1,4 +1,2 @@
 controller:
     enabled: false
-gardener-extension-admission-alicloud:
-    enabled: false
