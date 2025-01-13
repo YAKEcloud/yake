@@ -2437,7 +2437,7 @@ networking-cilium:
         name: cilium-agent
         repository: quay.io/cilium/cilium
         sourceRepository: github.com/cilium/cilium
-        tag: v1.16.4
+        tag: v1.16.5
       - labels:
           - name: gardener.cloud/cve-categorisation
             value:
@@ -2463,7 +2463,7 @@ networking-cilium:
         name: cilium-operator
         repository: quay.io/cilium/operator
         sourceRepository: github.com/cilium/cilium
-        tag: v1.16.4
+        tag: v1.16.5
       - labels:
           - name: gardener.cloud/cve-categorisation
             value:
@@ -2502,7 +2502,7 @@ networking-cilium:
         name: hubble-relay
         repository: quay.io/cilium/hubble-relay
         sourceRepository: github.com/cilium/hubble-ui
-        tag: v1.16.4
+        tag: v1.16.5
       - labels:
           - name: gardener.cloud/cve-categorisation
             value:
@@ -2515,7 +2515,7 @@ networking-cilium:
         name: certgen
         repository: quay.io/cilium/certgen
         sourceRepository: github.com/cilium/certgen
-        tag: v0.2.0
+        tag: v0.2.2
       - name: kube-proxy
         repository: registry.k8s.io/kube-proxy
         sourceRepository: github.com/kubernetes/kubernetes
