@@ -167,7 +167,7 @@ gardenlet:
       - name: vpn-server
         repository: europe-docker.pkg.dev/gardener-project/releases/gardener/vpn-server
         sourceRepository: github.com/gardener/vpn2
-        tag: 0.33.0
+        tag: 0.34.0
       - name: vpn-seed-server
         repository: europe-docker.pkg.dev/gardener-project/releases/gardener/vpn-seed-server
         sourceRepository: github.com/gardener/vpn2
@@ -369,7 +369,7 @@ gardenlet:
       - name: vpn-client
         repository: europe-docker.pkg.dev/gardener-project/releases/gardener/vpn-client
         sourceRepository: github.com/gardener/vpn2
-        tag: 0.33.0
+        tag: 0.34.0
       - name: vpn-shoot-client
         repository: europe-docker.pkg.dev/gardener-project/releases/gardener/vpn-shoot-client
         sourceRepository: github.com/gardener/vpn2
