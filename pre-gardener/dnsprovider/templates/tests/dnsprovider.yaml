@@ -47,7 +47,7 @@ spec:
   serviceAccountName: {{ .Release.Name }}-test-provider-sa
   containers:
     - name: test-dnsprovider
-      image: bitnami/kubectl
+      image: europe-docker.pkg.dev/gardener-project/releases/gardener/ops-toolbelt:latest
       command: ['bash', '-c']
       args:
         - |
