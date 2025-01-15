@@ -8,4 +8,4 @@ dependencies:
   repository: ""
 description: A helmchart for provider-azure
 name: provider-azure
-version: 1.49.2
+version: 1.49.3
