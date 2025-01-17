@@ -2,23 +2,24 @@
 
 ## ⚠️ Breaking Changes
 
-- `[OPERATOR]` Cost Object: You must migrate existing configurations to the new format. Previously, the configuration used `Values.global.dashboard.frontendConfig.costObject`. It should now be updated to `Values.global.dashboard.frontendConfig.costObjects`, which is a list of objects. Each object in this list must include a `type` property, alongside existing properties such as `title`, `description`, and `regex`. by @petersutter [#2102]
-- `[USER]` Removed the ability for users to retrieve their token from the My Account page. by @petersutter [#2131]
-## ✨ New Features
-
-- `[USER]` Header warnings returned by the Kubernetes API server are now displayed as notifications in the Gardener dashboard. This includes important messages like deprecation warnings. Additionally, admission webhooks may provide custom warnings in the headers by @grolu [#2033]
-- `[USER]` Upgraded the code editor from CodeMirror 5 to CodeMirror 6 to enhance performance, modernize the interface, and improve extensibility by @grolu [#2058]
-- `[USER]` Support Azure Cloud Configuration for DNS Secrets by @grolu [#2034]
-- `[OPERATOR]` Enhanced cost object configuration to support multiple cost object types. The selected type is now stored under `Project.annotations["billing.gardener.cloud/costObjectType"]`. by @petersutter [#2102]
+- `[OPERATOR]` Access Restrictions:  
+  - This dashboard version requires Gardener version `v1.107.0` if access restrictions are configured.  
+  - The `accessRestriction.items[].display.visibleIf` and `accessRestriction.items[].display.inverted` configurations are no longer supported and will be ignored. The dashboard will now assume `visibleIf=true` and `inverted=false`. However, this change does not affect the `accessRestriction.items[].input.options[].display.visibleIf` and `accessRestriction.items[].input.options[].display.inverted` settings. by @petersutter [#2163]
+- `[OPERATOR]` The dashboard no longer falls back to reading the cluster CA from the deprecated `<shoot-name>.ca-cluster` `Secret`. This change requires Gardener `v1.89.0` or higher. by @petersutter [#2164]
+- `[USER]` Static token kubeconfig support has been removed from the dashboard. This feature is no longer needed as of Kubernetes version `1.27`, where the `enableStaticTokenKubeconfig` field is permanently set to `false`. by @petersutter [#2171]
+- `[USER]` The dashboard no longer relies on the specific labels `cloudprofile.garden.sapcloud.io/name` and `gardener.cloud/dnsProviderName` to filter when selecting secrets. Instead, it now solely relies on the newly introduced provider.type field. As a result, cloud profiles are no longer selectable during secret creation, and all cloud profiles for the current infrastructure are now available for selection by @grolu [#2141]
 ## 🐛 Bug Fixes
 
-- `[USER]` Fixed issues with hibernation schedule dialog: reset button and time saving by @petersutter [#2076]
-- `[USER]` Consider all seeds for Shoot migration and add warning for provider mismatch by @petersutter [#2079]
-- `[USER]` To enhance the overview and readability of the cluster list, particularly in environments constrained by space or containing an abundance of information, we have introduced a feature that allows items to be collapsed when they are displayed in the cluster list. by @grolu [#1991]
-- `[USER]` Fixed display issues with minimum volume size by @grolu [#2030]
+- `[USER]` Fixed alertmanager URL by @petersutter [#2178]
+- `[USER]` Resolved an issue where the editor search did not function correctly for non-editable clusters, such as 'Purpose: Infrastructure' by @grolu [#2176]
+- `[OPERATOR]` Switched to a polling-based watcher approach for kube-config files, as we've observed that some filesystem events can be missed by chokidar. by @holgerkoser [#2202]
 ## 🏃 Others
 
-- `[USER]` The option to rotate the SSH keypair is hidden when SSH access is disabled. by @petersutter [#2077]
+- `[OPERATOR]` **Action Required:** The automatic mapping from `accessRestriction.items[@key="seed.gardener.cloud/eu-access"]` to `accessRestriction.items[@key="eu-access-only"]` will be removed in a future dashboard version. Dashboard operators who use `seed.gardener.cloud/eu-access` in their access restriction configuration should update the key to `eu-access-only`. If your configuration does not include `seed.gardener.cloud/eu-access`, no action is required. by @petersutter [#2196]
+## 📖 Documentation
+
+- `[OPERATOR]` Fix the link reference to the shoot credentials rotation page. by @marc1404 [#2221]
+- `[OPERATOR]` Fix the link reference to the control plane high availability page. by @marc1404 [#2225]
 
 ## Docker Images
-- gardener-dashboard: `europe-docker.pkg.dev/gardener-project/releases/gardener/dashboard:1.78.0`
+- gardener-dashboard: `europe-docker.pkg.dev/gardener-project/releases/gardener/dashboard:1.79.0`
