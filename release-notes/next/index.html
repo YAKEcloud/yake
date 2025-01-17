@@ -5,7 +5,7 @@
 <meta name="generator" content="Docusaurus v3.7.0">
 <title data-rh="true">Release Notes next | Yet another Kubernetes Engine</title><meta data-rh="true" name="viewport" content="width=device-width,initial-scale=1"><meta data-rh="true" name="twitter:card" content="summary_large_image"><meta data-rh="true" property="og:url" content="https://yake.cloud/release-notes/next"><meta data-rh="true" property="og:locale" content="en"><meta data-rh="true" name="docusaurus_locale" content="en"><meta data-rh="true" name="docsearch:language" content="en"><meta data-rh="true" name="gardener" content="installation, production, operations, maintenance"><meta data-rh="true" name="docusaurus_version" content="current"><meta data-rh="true" name="docusaurus_tag" content="docs-release-notes-current"><meta data-rh="true" name="docsearch:version" content="current"><meta data-rh="true" name="docsearch:docusaurus_tag" content="docs-release-notes-current"><meta data-rh="true" property="og:title" content="Release Notes next | Yet another Kubernetes Engine"><meta data-rh="true" name="description" content="Yake release notes and upgrade guide"><meta data-rh="true" property="og:description" content="Yake release notes and upgrade guide"><link data-rh="true" rel="icon" href="/img/favicon.ico"><link data-rh="true" rel="canonical" href="https://yake.cloud/release-notes/next"><link data-rh="true" rel="alternate" href="https://yake.cloud/release-notes/next" hreflang="en"><link data-rh="true" rel="alternate" href="https://yake.cloud/release-notes/next" hreflang="x-default"><link rel="alternate" type="application/rss+xml" href="/blog/rss.xml" title="Yet another Kubernetes Engine RSS Feed">
 <link rel="alternate" type="application/atom+xml" href="/blog/atom.xml" title="Yet another Kubernetes Engine Atom Feed"><link rel="stylesheet" href="/assets/css/styles.a6ab13cb.css">
-<script src="/assets/js/runtime~main.152278d6.js" defer="defer"></script>
+<script src="/assets/js/runtime~main.5182821a.js" defer="defer"></script>
 <script src="/assets/js/main.a77e71ff.js" defer="defer"></script>
 </head>
 <body class="navigation-with-keyboard">
@@ -273,6 +273,76 @@
 <ul>
 <li>gardener-extension-admission-shoot-dns-service: <code>europe-docker.pkg.dev/gardener-project/releases/gardener/extensions/admission-shoot-dns-service:v1.56.0</code></li>
 <li>gardener-extension-shoot-dns-service: <code>europe-docker.pkg.dev/gardener-project/releases/gardener/extensions/shoot-dns-service:v1.56.0</code></li>
+</ul>
+</div></div></details>
+<details class="details_lb9f alert alert--info details_b_Ee" data-collapsed="true"><summary><b>Update dashboard to <code>1.79.0</code></b></summary><div><div class="collapsibleContent_i85q">
+<!-- -->
+<h1>[gardener/dashboard]</h1>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="️-breaking-changes">⚠️ Breaking Changes<a href="#️-breaking-changes" class="hash-link" aria-label="Direct link to ⚠️ Breaking Changes" title="Direct link to ⚠️ Breaking Changes">​</a></h2>
+<ul>
+<li><code>[OPERATOR]</code> Access Restrictions:
+<ul>
+<li>This dashboard version requires Gardener version <code>v1.107.0</code> if access restrictions are configured.</li>
+<li>The <code>accessRestriction.items[].display.visibleIf</code> and <code>accessRestriction.items[].display.inverted</code> configurations are no longer supported and will be ignored. The dashboard will now assume <code>visibleIf=true</code> and <code>inverted=false</code>. However, this change does not affect the <code>accessRestriction.items[].input.options[].display.visibleIf</code> and <code>accessRestriction.items[].input.options[].display.inverted</code> settings. by @petersutter [#2163]</li>
+</ul>
+</li>
+<li><code>[OPERATOR]</code> The dashboard no longer falls back to reading the cluster CA from the deprecated <code>&lt;shoot-name&gt;.ca-cluster</code> <code>Secret</code>. This change requires Gardener <code>v1.89.0</code> or higher. by @petersutter [#2164]</li>
+<li><code>[USER]</code> Static token kubeconfig support has been removed from the dashboard. This feature is no longer needed as of Kubernetes version <code>1.27</code>, where the <code>enableStaticTokenKubeconfig</code> field is permanently set to <code>false</code>. by @petersutter [#2171]</li>
+<li><code>[USER]</code> The dashboard no longer relies on the specific labels <code>cloudprofile.garden.sapcloud.io/name</code> and <code>gardener.cloud/dnsProviderName</code> to filter when selecting secrets. Instead, it now solely relies on the newly introduced provider.type field. As a result, cloud profiles are no longer selectable during secret creation, and all cloud profiles for the current infrastructure are now available for selection by @grolu [#2141]</li>
+</ul>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="-bug-fixes-4">🐛 Bug Fixes<a href="#-bug-fixes-4" class="hash-link" aria-label="Direct link to 🐛 Bug Fixes" title="Direct link to 🐛 Bug Fixes">​</a></h2>
+<ul>
+<li><code>[USER]</code> Fixed alertmanager URL by @petersutter [#2178]</li>
+<li><code>[USER]</code> Resolved an issue where the editor search did not function correctly for non-editable clusters, such as &#x27;Purpose: Infrastructure&#x27; by @grolu [#2176]</li>
+<li><code>[OPERATOR]</code> Switched to a polling-based watcher approach for kube-config files, as we&#x27;ve observed that some filesystem events can be missed by chokidar. by @holgerkoser [#2202]</li>
+</ul>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="-others-7">🏃 Others<a href="#-others-7" class="hash-link" aria-label="Direct link to 🏃 Others" title="Direct link to 🏃 Others">​</a></h2>
+<ul>
+<li><code>[OPERATOR]</code> <strong>Action Required:</strong> The automatic mapping from <code>accessRestriction.items[@key=&quot;seed.gardener.cloud/eu-access&quot;]</code> to <code>accessRestriction.items[@key=&quot;eu-access-only&quot;]</code> will be removed in a future dashboard version. Dashboard operators who use <code>seed.gardener.cloud/eu-access</code> in their access restriction configuration should update the key to <code>eu-access-only</code>. If your configuration does not include <code>seed.gardener.cloud/eu-access</code>, no action is required. by @petersutter [#2196]</li>
+</ul>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="-documentation">📖 Documentation<a href="#-documentation" class="hash-link" aria-label="Direct link to 📖 Documentation" title="Direct link to 📖 Documentation">​</a></h2>
+<ul>
+<li><code>[OPERATOR]</code> Fix the link reference to the shoot credentials rotation page. by @marc1404 [#2221]</li>
+<li><code>[OPERATOR]</code> Fix the link reference to the control plane high availability page. by @marc1404 [#2225]</li>
+</ul>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="docker-images-9">Docker Images<a href="#docker-images-9" class="hash-link" aria-label="Direct link to Docker Images" title="Direct link to Docker Images">​</a></h2>
+<ul>
+<li>gardener-dashboard: <code>europe-docker.pkg.dev/gardener-project/releases/gardener/dashboard:1.79.0</code></li>
+</ul>
+</div></div></details>
+<details class="details_lb9f alert alert--info details_b_Ee" data-collapsed="true"><summary><b>Update dashboard to <code>1.79.0</code></b></summary><div><div class="collapsibleContent_i85q">
+<!-- -->
+<h1>[gardener/dashboard]</h1>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="️-breaking-changes-1">⚠️ Breaking Changes<a href="#️-breaking-changes-1" class="hash-link" aria-label="Direct link to ⚠️ Breaking Changes" title="Direct link to ⚠️ Breaking Changes">​</a></h2>
+<ul>
+<li><code>[OPERATOR]</code> Access Restrictions:
+<ul>
+<li>This dashboard version requires Gardener version <code>v1.107.0</code> if access restrictions are configured.</li>
+<li>The <code>accessRestriction.items[].display.visibleIf</code> and <code>accessRestriction.items[].display.inverted</code> configurations are no longer supported and will be ignored. The dashboard will now assume <code>visibleIf=true</code> and <code>inverted=false</code>. However, this change does not affect the <code>accessRestriction.items[].input.options[].display.visibleIf</code> and <code>accessRestriction.items[].input.options[].display.inverted</code> settings. by @petersutter [#2163]</li>
+</ul>
+</li>
+<li><code>[OPERATOR]</code> The dashboard no longer falls back to reading the cluster CA from the deprecated <code>&lt;shoot-name&gt;.ca-cluster</code> <code>Secret</code>. This change requires Gardener <code>v1.89.0</code> or higher. by @petersutter [#2164]</li>
+<li><code>[USER]</code> Static token kubeconfig support has been removed from the dashboard. This feature is no longer needed as of Kubernetes version <code>1.27</code>, where the <code>enableStaticTokenKubeconfig</code> field is permanently set to <code>false</code>. by @petersutter [#2171]</li>
+<li><code>[USER]</code> The dashboard no longer relies on the specific labels <code>cloudprofile.garden.sapcloud.io/name</code> and <code>gardener.cloud/dnsProviderName</code> to filter when selecting secrets. Instead, it now solely relies on the newly introduced provider.type field. As a result, cloud profiles are no longer selectable during secret creation, and all cloud profiles for the current infrastructure are now available for selection by @grolu [#2141]</li>
+</ul>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="-bug-fixes-5">🐛 Bug Fixes<a href="#-bug-fixes-5" class="hash-link" aria-label="Direct link to 🐛 Bug Fixes" title="Direct link to 🐛 Bug Fixes">​</a></h2>
+<ul>
+<li><code>[USER]</code> Fixed alertmanager URL by @petersutter [#2178]</li>
+<li><code>[USER]</code> Resolved an issue where the editor search did not function correctly for non-editable clusters, such as &#x27;Purpose: Infrastructure&#x27; by @grolu [#2176]</li>
+<li><code>[OPERATOR]</code> Switched to a polling-based watcher approach for kube-config files, as we&#x27;ve observed that some filesystem events can be missed by chokidar. by @holgerkoser [#2202]</li>
+</ul>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="-others-8">🏃 Others<a href="#-others-8" class="hash-link" aria-label="Direct link to 🏃 Others" title="Direct link to 🏃 Others">​</a></h2>
+<ul>
+<li><code>[OPERATOR]</code> <strong>Action Required:</strong> The automatic mapping from <code>accessRestriction.items[@key=&quot;seed.gardener.cloud/eu-access&quot;]</code> to <code>accessRestriction.items[@key=&quot;eu-access-only&quot;]</code> will be removed in a future dashboard version. Dashboard operators who use <code>seed.gardener.cloud/eu-access</code> in their access restriction configuration should update the key to <code>eu-access-only</code>. If your configuration does not include <code>seed.gardener.cloud/eu-access</code>, no action is required. by @petersutter [#2196]</li>
+</ul>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="-documentation-1">📖 Documentation<a href="#-documentation-1" class="hash-link" aria-label="Direct link to 📖 Documentation" title="Direct link to 📖 Documentation">​</a></h2>
+<ul>
+<li><code>[OPERATOR]</code> Fix the link reference to the shoot credentials rotation page. by @marc1404 [#2221]</li>
+<li><code>[OPERATOR]</code> Fix the link reference to the control plane high availability page. by @marc1404 [#2225]</li>
+</ul>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="docker-images-10">Docker Images<a href="#docker-images-10" class="hash-link" aria-label="Direct link to Docker Images" title="Direct link to Docker Images">​</a></h2>
+<ul>
+<li>gardener-dashboard: <code>europe-docker.pkg.dev/gardener-project/releases/gardener/dashboard:1.79.0</code></li>
 </ul>
 </div></div></details></div></article><nav class="pagination-nav docusaurus-mt-lg" aria-label="Docs pages"><a class="pagination-nav__link pagination-nav__link--next" href="/release-notes/v1.110"><div class="pagination-nav__sublabel">Next</div><div class="pagination-nav__label">Release Notes v1.110</div></a></nav></div></div></div></div></main></div></div></div><footer class="footer footer--dark"><div class="container container-fluid"><div class="row footer__links"><div class="col footer__col"><div class="footer__title">Docs</div><ul class="footer__items clean-list"><li class="footer__item"><a class="footer__link-item" href="/docs/overview">Docs</a></li></ul></div><div class="col footer__col"><div class="footer__title">Community</div><ul class="footer__items clean-list"><li class="footer__item"><a href="https://github.com/yakecloud" target="_blank" rel="noopener noreferrer" class="footer__link-item">GitHub<svg width="13.5" height="13.5" aria-hidden="true" viewBox="0 0 24 24" class="iconExternalLink_nPIU"><path fill="currentColor" d="M21 13v10h-21v-19h12v2h-10v15h17v-8h2zm3-12h-10.988l4.035 4-6.977 7.07 2.828 2.828 6.977-7.07 4.125 4.172v-11z"></path></svg></a></li><li class="footer__item"><a href="https://github.com/gardener-community" target="_blank" rel="noopener noreferrer" class="footer__link-item">Gardener Community<svg width="13.5" height="13.5" aria-hidden="true" viewBox="0 0 24 24" class="iconExternalLink_nPIU"><path fill="currentColor" d="M21 13v10h-21v-19h12v2h-10v15h17v-8h2zm3-12h-10.988l4.035 4-6.977 7.07 2.828 2.828 6.977-7.07 4.125 4.172v-11z"></path></svg></a></li><li class="footer__item"><a href="https://gardener-cloud.slack.com" target="_blank" rel="noopener noreferrer" class="footer__link-item">Slack<svg width="13.5" height="13.5" aria-hidden="true" viewBox="0 0 24 24" class="iconExternalLink_nPIU"><path fill="currentColor" d="M21 13v10h-21v-19h12v2h-10v15h17v-8h2zm3-12h-10.988l4.035 4-6.977 7.07 2.828 2.828 6.977-7.07 4.125 4.172v-11z"></path></svg></a></li></ul></div><div class="col footer__col"><div class="footer__title">More</div><ul class="footer__items clean-list"><li class="footer__item"><a class="footer__link-item" href="/blog">Blog</a></li><li class="footer__item"><a class="footer__link-item" href="/legals">Legals</a></li><li class="footer__item"><a class="footer__link-item" href="/privacy-policy">Privacy policy</a></li></ul></div></div><div class="footer__bottom text--center"><div class="footer__copyright">Copyright © 2025 23 Technologies GmbH</div></div></div></footer></div>
 </body>
