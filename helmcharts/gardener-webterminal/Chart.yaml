@@ -11,4 +11,4 @@ dependencies:
   repository: ""
 description: A Helm chart to deploy the terminal-controller-manager
 name: gardener-webterminal
-version: 0.33.0
+version: 0.34.0
