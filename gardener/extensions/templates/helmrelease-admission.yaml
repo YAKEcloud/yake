@@ -17,7 +17,7 @@ spec:
   targetNamespace: garden
   chart:
     spec:
-      chart: {{ $k }}
+      chart: {{ if hasKey $v "chartPath" }}{{ $v.chartPath }}{{ else }}{{ $k }}{{ end }}
       version: {{ $v.version }}
       sourceRef:
         kind: HelmRepository
@@ -52,7 +52,7 @@ spec:
   targetNamespace: garden
   chart:
     spec:
-      chart: {{ $k }}
+      chart: {{ if hasKey $v "chartPath" }}{{ $v.chartPath }}{{ else }}{{ $k }}{{ end }}
       version: {{ $v.version }}
       sourceRef:
         kind: HelmRepository

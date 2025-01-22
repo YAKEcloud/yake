@@ -183,6 +183,7 @@ stringData:
       version: 1.59.2
       admission:
         enabled: true
+      chartPath: gardener-extension-admission-aws/charts
 {{- if .Values.registryOverwrite }}
         values:
           image:
