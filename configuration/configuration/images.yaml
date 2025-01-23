@@ -41,11 +41,11 @@ gardenlet:
       - name: gardener-dashboard
         repository: europe-docker.pkg.dev/gardener-project/releases/gardener/dashboard
         sourceRepository: github.com/gardener/dashboard
-        tag: 1.78.0
+        tag: 1.79.0
       - name: terminal-controller-manager
         repository: europe-docker.pkg.dev/gardener-project/releases/gardener/terminal-controller-manager
         sourceRepository: github.com/gardener/terminal-controller-manager
-        tag: v0.33.0
+        tag: v0.34.0
       - labels:
           - name: cloud.gardener.cnudie/dso/scanning-hints/binary_id/v1
             value:
@@ -59,7 +59,7 @@ gardenlet:
       - name: etcd-druid
         repository: europe-docker.pkg.dev/gardener-project/releases/gardener/etcd-druid
         sourceRepository: github.com/gardener/etcd-druid
-        tag: v0.25.0
+        tag: v0.26.1
       - name: dependency-watchdog
         repository: europe-docker.pkg.dev/gardener-project/releases/gardener/dependency-watchdog
         sourceRepository: github.com/gardener/dependency-watchdog
@@ -76,8 +76,22 @@ gardenlet:
         name: nginx-ingress-controller
         repository: registry.k8s.io/ingress-nginx/controller-chroot
         sourceRepository: github.com/kubernetes/ingress-nginx
-        tag: v1.11.3
-        targetVersion: '>= 1.26'
+        tag: v1.12.0
+        targetVersion: '>= 1.28'
+      - labels:
+          - name: gardener.cloud/cve-categorisation
+            value:
+              authentication_enforced: true
+              availability_requirement: low
+              confidentiality_requirement: low
+              integrity_requirement: low
+              network_exposure: public
+              user_interaction: end-user
+        name: nginx-ingress-controller
+        repository: registry.k8s.io/ingress-nginx/controller-chroot
+        sourceRepository: github.com/kubernetes/ingress-nginx
+        tag: v1.11.4
+        targetVersion: '>= 1.26 < 1.28'
       - labels:
           - name: gardener.cloud/cve-categorisation
             value:
@@ -105,7 +119,7 @@ gardenlet:
         name: ingress-default-backend
         repository: europe-docker.pkg.dev/gardener-project/releases/gardener/ingress-default-backend
         sourceRepository: github.com/gardener/ingress-default-backend
-        tag: 0.20.0
+        tag: 0.21.0
       - name: hyperkube
         repository: europe-docker.pkg.dev/gardener-project/releases/hyperkube
         sourceRepository: github.com/gardener/hyperkube
@@ -205,7 +219,7 @@ gardenlet:
         name: alertmanager
         repository: quay.io/prometheus/alertmanager
         sourceRepository: github.com/prometheus/alertmanager
-        tag: v0.27.0
+        tag: v0.28.0
       - labels:
           - name: gardener.cloud/cve-categorisation
             value:
@@ -330,7 +344,7 @@ gardenlet:
         name: plutono-dashboard-refresher
         repository: quay.io/kiwigrid/k8s-sidecar
         sourceRepository: github.com/kiwigrid/k8s-sidecar
-        tag: 1.28.1
+        tag: 1.29.0
       - labels:
           - name: gardener.cloud/cve-categorisation
             value:
@@ -407,7 +421,7 @@ gardenlet:
         name: node-local-dns
         repository: registry.k8s.io/dns/k8s-dns-node-cache
         sourceRepository: github.com/kubernetes/kubernetes/blob/master/cluster/addons/dns/nodelocaldns
-        tag: 1.23.1
+        tag: 1.24.0
       - labels:
           - name: gardener.cloud/cve-categorisation
             value:
@@ -448,7 +462,7 @@ gardenlet:
       - name: alpine-conntrack
         repository: europe-docker.pkg.dev/gardener-project/releases/gardener/alpine-conntrack
         sourceRepository: github.com/gardener/alpine-conntrack
-        tag: 3.20.3
+        tag: 3.21.1
       - labels:
           - name: gardener.cloud/cve-categorisation
             value:
@@ -502,7 +516,7 @@ gardenlet:
         resourceId:
           name: fluent-bit-to-vali
         sourceRepository: github.com/gardener/logging
-        tag: v0.62.0
+        tag: v0.63.0
       - labels:
           - name: gardener.cloud/cve-categorisation
             value:
@@ -536,7 +550,7 @@ gardenlet:
         name: vali-curator
         repository: europe-docker.pkg.dev/gardener-project/releases/gardener/vali-curator
         sourceRepository: github.com/gardener/logging
-        tag: v0.62.0
+        tag: v0.63.0
       - labels:
           - name: gardener.cloud/cve-categorisation
             value:
@@ -593,7 +607,7 @@ gardenlet:
         resourceId:
           name: telegraf-iptables
         sourceRepository: github.com/gardener/logging
-        tag: v0.62.0
+        tag: v0.63.0
       - labels:
           - name: gardener.cloud/cve-categorisation
             value:
@@ -610,7 +624,7 @@ gardenlet:
         name: event-logger
         repository: europe-docker.pkg.dev/gardener-project/releases/gardener/event-logger
         sourceRepository: github.com/gardener/logging
-        tag: v0.62.0
+        tag: v0.63.0
       - labels:
           - name: gardener.cloud/cve-categorisation
             value:
@@ -627,7 +641,7 @@ gardenlet:
         name: tune2fs
         repository: europe-docker.pkg.dev/gardener-project/releases/gardener/tune2fs
         sourceRepository: github.com/gardener/logging
-        tag: v0.62.0
+        tag: v0.63.0
       - labels:
           - name: gardener.cloud/cve-categorisation
             value:
@@ -692,7 +706,7 @@ gardenlet:
         name: istio-proxy
         repository: gcr.io/istio-release/proxyv2
         sourceRepository: github.com/istio/istio
-        tag: 1.23.3-distroless
+        tag: 1.23.4-distroless
       - labels:
           - name: gardener.cloud/cve-categorisation
             value:
@@ -709,7 +723,7 @@ gardenlet:
         name: istio-istiod
         repository: gcr.io/istio-release/pilot
         sourceRepository: github.com/istio/istio
-        tag: 1.23.3-distroless
+        tag: 1.23.4-distroless
       - name: ext-authz-server
         repository: europe-docker.pkg.dev/gardener-project/releases/gardener/ext-authz-server
         sourceRepository: github.com/gardener/ext-authz-server
@@ -748,7 +762,7 @@ gardenlet:
         name: apiserver-proxy
         repository: europe-docker.pkg.dev/gardener-project/releases/3rd/envoyproxy/envoy-distroless
         sourceRepository: github.com/envoyproxy/envoy
-        tag: v1.32.2
+        tag: v1.33.0
       - name: apiserver-proxy-sidecar
         repository: europe-docker.pkg.dev/gardener-project/releases/gardener/apiserver-proxy
         resourceId:
@@ -2596,13 +2610,13 @@ etcd-druid:
       - name: etcd-wrapper
         repository: europe-docker.pkg.dev/gardener-project/public/gardener/etcd-wrapper
         sourceRepository: github.com/gardener/etcd-wrapper
-        tag: v0.3.0
+        tag: v0.4.0
       - name: etcd-backup-restore
         repository: europe-docker.pkg.dev/gardener-project/public/gardener/etcdbrctl
         resourceId:
           name: etcdbrctl
         sourceRepository: github.com/gardener/etcd-backup-restore
-        tag: v0.32.0
+        tag: v0.33.0
       - name: alpine
         repository: europe-docker.pkg.dev/gardener-project/public/3rd/alpine
         tag: 3.20.3
