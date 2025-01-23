@@ -132,7 +132,7 @@ stringData:
 {{- end }}
 
     shoot-networking-filter:
-      version: 0.21.0
+      version: 0.22.0
 {{- if .Values.registryOverwrite }}
       values:
         image:
