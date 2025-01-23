@@ -784,7 +784,7 @@ provider-openstack:
         name: terraformer
         repository: europe-docker.pkg.dev/gardener-project/releases/gardener/terraformer-openstack
         sourceRepository: github.com/gardener/terraformer
-        tag: v2.26.0
+        tag: v2.27.0
       - labels:
           - name: gardener.cloud/cve-categorisation
             value:
