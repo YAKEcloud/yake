@@ -1,6 +1,6 @@
 {
   "assignees": [
-    "rhizoet"
+    "23t-machine-user"
   ],
   "baseBranches": [
     "main",
@@ -15,7 +15,8 @@
     "release-v1.105",
     "release-v1.106",
     "release-v1.107",
-    "release-v1.108"
+    "release-v1.108",
+    "release-v1.109"
   ],
   "automerge": true,
   "configMigration": true,
@@ -58,7 +59,8 @@
         "release-v1.105",
         "release-v1.106",
         "release-v1.107",
-        "release-v1.108"
+        "release-v1.108",
+        "release-v1.109"
       ],
       "enabled": false,
       "matchPackageNames": [
@@ -234,6 +236,16 @@
         "release-v1.108"
       ],
       "allowedVersions": "/^1[.]108[.].*$/"
+    },
+    {
+      "groupName": "docusaurus",
+      "matchPackageNames": [
+        "/docusaurus/"
+      ],
+      "matchBaseBranches": [
+        "release-v1.109"
+      ],
+      "allowedVersions": "/^1[.]109[.].*$/"
     }
   ],
   "customManagers": [
