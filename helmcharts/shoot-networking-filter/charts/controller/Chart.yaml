@@ -1,4 +1,4 @@
 apiVersion: v2
 description: Helmchart for controllerregistration of shoot-networking-filter
 name: controller
-version: 0.21.0
+version: 0.22.0
