@@ -170,7 +170,7 @@ stringData:
 {{- end }}
 
     provider-alicloud:
-      version: 1.57.0
+      version: 1.58.0
 {{- if .Values.registryOverwrite }}
       values:
         image:

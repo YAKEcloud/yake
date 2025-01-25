@@ -2167,7 +2167,7 @@ provider-alicloud:
       - name: terraformer
         repository: europe-docker.pkg.dev/gardener-project/releases/gardener/terraformer-alicloud
         sourceRepository: github.com/gardener/terraformer
-        tag: v2.26.0
+        tag: v2.27.0
       - labels:
           - name: gardener.cloud/cve-categorisation
             value:
@@ -2197,7 +2197,7 @@ provider-alicloud:
         name: csi-attacher
         repository: registry.k8s.io/sig-storage/csi-attacher
         sourceRepository: https://github.com/kubernetes-csi/external-attacher
-        tag: v4.0.0
+        tag: v4.7.0
       - labels:
           - name: gardener.cloud/cve-categorisation
             value:
@@ -2210,7 +2210,7 @@ provider-alicloud:
         name: csi-node-driver-registrar
         repository: registry.k8s.io/sig-storage/csi-node-driver-registrar
         sourceRepository: https://github.com/kubernetes-csi/node-driver-registrar
-        tag: v2.6.2
+        tag: v2.12.0
       - labels:
           - name: gardener.cloud/cve-categorisation
             value:
@@ -2223,7 +2223,7 @@ provider-alicloud:
         name: csi-provisioner
         repository: registry.k8s.io/sig-storage/csi-provisioner
         sourceRepository: github.com/kubernetes-csi/external-provisioner
-        tag: v3.3.0
+        tag: v5.1.0
       - labels:
           - name: gardener.cloud/cve-categorisation
             value:
@@ -2236,7 +2236,7 @@ provider-alicloud:
         name: csi-snapshotter
         repository: registry.k8s.io/sig-storage/csi-snapshotter
         sourceRepository: github.com/kubernetes-csi/external-snapshotter
-        tag: v6.1.0
+        tag: v8.1.0
       - labels:
           - name: gardener.cloud/cve-categorisation
             value:
@@ -2249,7 +2249,7 @@ provider-alicloud:
         name: csi-snapshot-validation-webhook
         repository: registry.k8s.io/sig-storage/snapshot-validation-webhook
         sourceRepository: github.com/kubernetes-csi/external-snapshotter
-        tag: v6.1.0
+        tag: v8.1.0
       - labels:
           - name: gardener.cloud/cve-categorisation
             value:
@@ -2262,7 +2262,7 @@ provider-alicloud:
         name: csi-snapshot-controller
         repository: registry.k8s.io/sig-storage/snapshot-controller
         sourceRepository: github.com/kubernetes-csi/external-snapshotter
-        tag: v6.1.0
+        tag: v8.1.0
       - labels:
           - name: gardener.cloud/cve-categorisation
             value:
@@ -2275,7 +2275,7 @@ provider-alicloud:
         name: csi-resizer
         repository: registry.k8s.io/sig-storage/csi-resizer
         sourceRepository: https://github.com/kubernetes-csi/external-resizer
-        tag: v1.6.0
+        tag: v1.12.0
       - labels:
           - name: cloud.gardener.cnudie/responsibles
             value:
@@ -2303,7 +2303,7 @@ provider-alicloud:
         name: csi-liveness-probe
         repository: registry.k8s.io/sig-storage/livenessprobe
         sourceRepository: github.com/kubernetes-csi/livenessprobe
-        tag: v2.8.0
+        tag: v2.14.0
 provider-hcloud:
   imageVectorOriginal:
     images:

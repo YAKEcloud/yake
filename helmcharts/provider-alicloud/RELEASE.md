@@ -1,21 +1,27 @@
-# [gardener/gardener-extension-provider-alicloud]
+# [gardener/terraformer]
 
-## ⚠️ Breaking Changes
+## 🐛 Bug Fixes
 
-- `[OPERATOR]` The Helm charts for the `application` and `runtime` parts of the gardener-extension-admission-alicloud admission controller have been separated into standalone charts. These charts now assume a Garden setup with a virtual garden. Both charts must be deployed individually: the `runtime` chart on the Garden runtime cluster, and the `application` chart on the virtual garden. Additionally, the intermediate `global` level in the Helm values has been removed, so you may need to adjust your provided values accordingly. by @MartinWeindel [#746]
-## ✨ New Features
-
-- `[OPERATOR]` Adjustments for additional deployment of extension and admission controller on Garden runtime cluster by gardener-operator. by @MartinWeindel [#746]
+- `[DEVELOPER]` Provider `azurerm` was updated to version 3.47.0 and is now properly recognising the `ARM_OIDC_TOKEN_FILE_PATH` env variable. by @dimityrmirchev [gardener/terraformer#156]
 ## 🏃 Others
 
-- `[OPERATOR]` Fixes Alicloud bastion instance CPU architecture not aligning with the image CPU architecture in certain conditions by @tedteng [#747]
-- `[OPERATOR]` Remove the duplicate provider type check from the admission webhooks. by @LucaBernstein [#749]
-- `[OPERATOR]` Bump gardener/gardener from v1.98.4 to v1.108.1. by @MartinWeindel [#746]
+- `[OPERATOR]` Update alpine to `v3.21.2` by @kon-angelo [gardener/terraformer#157]
+- `[OPERATOR]` Update golang to `v1.23.5` by @kon-angelo [gardener/terraformer#157]
+# [gardener/gardener-extension-provider-alicloud]
+
+## 📰 Noteworthy
+
+- `[USER]` The kube-system/csi-disk-plugin-alicloud DaemonSet is no longer scaled by a VerticalPodAutoscaler as it does not really benefit from it. Removing VerticalPodAutoscaler for that component will reduce unnecessary evictions by VPA and will be a mitigation for https://issues.k8s.io/126921. by @ialidzhikov [#750]
+## 🏃 Others
+
+- `[OPERATOR]` Update CSI image version by @kevin-lacoo [#757]
+- `[OPERATOR]` Update `gardener/gardener` dependency to `v1.110.4` by @MartinWeindel [#756]
+- `[OPERATOR]` The kube-system/csi-disk-plugin-alicloud DaemonSet does no longer specify resource limits. by @ialidzhikov [#750]
 
 ## Helm Charts
-- admission-alicloud-application: `europe-docker.pkg.dev/gardener-project/releases/charts/gardener/extensions/admission-alicloud-application:v1.57.0`
-- admission-alicloud-runtime: `europe-docker.pkg.dev/gardener-project/releases/charts/gardener/extensions/admission-alicloud-runtime:v1.57.0`
-- provider-alicloud: `europe-docker.pkg.dev/gardener-project/releases/charts/gardener/extensions/provider-alicloud:v1.57.0`
+- admission-alicloud-application: `europe-docker.pkg.dev/gardener-project/releases/charts/gardener/extensions/admission-alicloud-application:v1.58.0`
+- admission-alicloud-runtime: `europe-docker.pkg.dev/gardener-project/releases/charts/gardener/extensions/admission-alicloud-runtime:v1.58.0`
+- provider-alicloud: `europe-docker.pkg.dev/gardener-project/releases/charts/gardener/extensions/provider-alicloud:v1.58.0`
 ## Docker Images
-- gardener-extension-admission-alicloud: `europe-docker.pkg.dev/gardener-project/releases/gardener/extensions/admission-alicloud:v1.57.0`
-- gardener-extension-provider-alicloud: `europe-docker.pkg.dev/gardener-project/releases/gardener/extensions/provider-alicloud:v1.57.0`
+- gardener-extension-admission-alicloud: `europe-docker.pkg.dev/gardener-project/releases/gardener/extensions/admission-alicloud:v1.58.0`
+- gardener-extension-provider-alicloud: `europe-docker.pkg.dev/gardener-project/releases/gardener/extensions/provider-alicloud:v1.58.0`
