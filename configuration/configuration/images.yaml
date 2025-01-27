@@ -1932,7 +1932,7 @@ provider-gcp:
         name: terraformer
         repository: europe-docker.pkg.dev/gardener-project/releases/gardener/terraformer-gcp
         sourceRepository: github.com/gardener/terraformer
-        tag: v2.26.0
+        tag: v2.27.0
       - labels:
           - name: gardener.cloud/cve-categorisation
             value:
@@ -2043,7 +2043,7 @@ provider-gcp:
         name: machine-controller-manager-provider-gcp
         repository: europe-docker.pkg.dev/gardener-project/releases/gardener/machine-controller-manager-provider-gcp
         sourceRepository: github.com/gardener/machine-controller-manager-provider-gcp
-        tag: v0.20.0
+        tag: v0.21.0
       - labels:
           - name: gardener.cloud/cve-categorisation
             value:
