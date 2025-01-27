@@ -1594,7 +1594,7 @@ provider-aws:
         name: terraformer
         repository: europe-docker.pkg.dev/gardener-project/releases/gardener/terraformer-aws
         sourceRepository: github.com/gardener/terraformer
-        tag: v2.26.0
+        tag: v2.27.0
       - labels:
           - name: gardener.cloud/cve-categorisation
             value:
@@ -1705,7 +1705,7 @@ provider-aws:
         name: machine-controller-manager-provider-aws
         repository: europe-docker.pkg.dev/gardener-project/releases/gardener/machine-controller-manager-provider-aws
         sourceRepository: github.com/gardener/machine-controller-manager-provider-aws
-        tag: v0.21.0
+        tag: v0.22.0
       - labels:
           - name: gardener.cloud/cve-categorisation
             value:
@@ -1731,7 +1731,7 @@ provider-aws:
         name: aws-ipam-controller
         repository: europe-docker.pkg.dev/gardener-project/releases/gardener/aws-ipam-controller
         sourceRepository: github.com/gardener/aws-ipam-controller
-        tag: v0.2.0
+        tag: v0.4.0
       - labels:
           - name: gardener.cloud/cve-categorisation
             value:
