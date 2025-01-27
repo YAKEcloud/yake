@@ -5,4 +5,4 @@ dependencies:
   repository: ""
 description: A helmchart for provider-aws
 name: provider-aws
-version: 1.59.2
+version: 1.60.0
