@@ -2543,14 +2543,16 @@ shoot-cert-service:
 shoot-dns-service:
   imageVectorOriginal:
     images:
-      - name: dns-controller-manager-with-metadata-records
+      - name: dns-controller-manager
         repository: europe-docker.pkg.dev/gardener-project/releases/dns-controller-manager
         sourceRepository: github.com/gardener/external-dns-management
         tag: v0.22.2
+        targetVersion: '>= 1.26'
       - name: dns-controller-manager
         repository: europe-docker.pkg.dev/gardener-project/releases/dns-controller-manager
         sourceRepository: github.com/gardener/external-dns-management
         tag: v0.23.0
+        targetVersion: 1.25.x
 runtime-gvisor:
   imageVectorOriginal:
     images:
