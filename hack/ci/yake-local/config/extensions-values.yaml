@@ -12,3 +12,5 @@ stringData:
       enabled: true
     networking-calico:
       enabled: true
+    provider-aws:
+      enabled: true

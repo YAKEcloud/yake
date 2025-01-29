@@ -1,7 +1,5 @@
 {{- range $k, $v := .Values }}
 {{ $extShortName := trimPrefix "provider-" $k }}
-{{- if $v.enabled }}
-{{- if ($v.admission).enabled }}
 ---
 apiVersion: helm.toolkit.fluxcd.io/v2beta2
 kind: HelmRelease
@@ -28,13 +26,6 @@ spec:
     remediation:
       retries: 3
     createNamespace: true
-  values:
-    global:
-{{ include "admission.values" . | indent 6 }}
-    gardener-extension-admission-{{ $extShortName }}:
-      enabled: true
-      application:
-        enabled: true
   valuesFrom:
     - kind: Secret
       name: gardener-extension-{{ $extShortName }}-admission-tls
@@ -75,13 +66,6 @@ spec:
             target:
               kind: Deployment
               name: gardener-extension-admission-{{ $extShortName }}
-  values:
-    global:
-{{ include "admission.values" $v | indent 6 }}
-    gardener-extension-admission-{{ $extShortName }}:
-      enabled: true
-      runtime:
-        enabled: true
   valuesFrom:
     - kind: Secret
       name: gardener-extension-{{ $extShortName }}-admission-tls
@@ -98,6 +82,4 @@ spec:
       valuesKey: value
       targetPath: global.kubeconfig
       optional: false
-{{- end }}
-{{- end }}
 {{- end }}

@@ -48,12 +48,7 @@ stringData:
 
     provider-azure:
       version: 1.49.3
-      admission:
-        enabled: true
 {{- if .Values.registryOverwrite }}
-        values:
-          image:
-            repository: {{ include "replaceRegistry" (dict "europe-docker.pkg.dev/gardener-project/releases/extensions/admission-azure" .Values.registryOverwrite) }}
       values:
         image:
           repository: {{ include "replaceRegistry" (dict "europe-docker.pkg.dev/gardener-project/releases/extensions/provider-azure" .Values.registryOverwrite) }}
@@ -61,30 +56,17 @@ stringData:
 {{ include "provider-azure.imageVectorOverwrite" . | indent 10 }}
 {{- end }}
 
-    admission-azure-application:
-      version: 1.49.3
-{{- if .Values.registryOverwrite }}
-      values:
-        image:
-          repository: {{ include "replaceRegistry" (dict "europe-docker.pkg.dev/gardener-project/releases/charts/gardener/extensions/admission-azure-application" .Values.registryOverwrite) }}
-{{- end }}
-
     admission-azure-runtime:
       version: 1.49.3
 {{- if .Values.registryOverwrite }}
       values:
         image:
-          repository: {{ include "replaceRegistry" (dict "europe-docker.pkg.dev/gardener-project/releases/charts/gardener/extensions/admission-azure-runtime" .Values.registryOverwrite) }}
+          repository: {{ include "replaceRegistry" (dict "europe-docker.pkg.dev/gardener-project/releases/gardener/extensions/admission-azure" .Values.registryOverwrite) }}
 {{- end }}
 
     provider-openstack:
       version: 1.44.1
-      admission:
-        enabled: true
 {{- if .Values.registryOverwrite }}
-        values:
-          image:
-            repository: {{ include "replaceRegistry" (dict "europe-docker.pkg.dev/gardener-project/releases/extensions/admission-openstack" .Values.registryOverwrite) }}
       values:
         image:
           repository: {{ include "replaceRegistry" (dict "europe-docker.pkg.dev/gardener-project/releases/extensions/provider-openstack" .Values.registryOverwrite) }}
@@ -92,20 +74,12 @@ stringData:
 {{ include "provider-openstack.imageVectorOverwrite" . | indent 10 }}
 {{- end }}
 
-    admission-openstack-application:
-      version: 1.44.1
-{{- if .Values.registryOverwrite }}
-      values:
-        image:
-          repository: {{ include "replaceRegistry" (dict "europe-docker.pkg.dev/gardener-project/releases/charts/gardener/extensions/admission-openstack-application" .Values.registryOverwrite) }}
-{{- end }}
-
     admission-openstack-runtime:
       version: 1.44.1
 {{- if .Values.registryOverwrite }}
       values:
         image:
-          repository: {{ include "replaceRegistry" (dict "europe-docker.pkg.dev/gardener-project/releases/charts/gardener/extensions/admission-openstack-runtime" .Values.registryOverwrite) }}
+          repository: {{ include "replaceRegistry" (dict "europe-docker.pkg.dev/gardener-project/releases/gardener/extensions/admission-openstack" .Values.registryOverwrite) }}
 {{- end }}
 
     networking-calico:
@@ -211,30 +185,17 @@ stringData:
 {{ include "provider-alicloud.imageVectorOverwrite" . | indent 10 }}
 {{- end }}
 
-    admission-alicloud-application:
-      version: 1.57.0
-{{- if .Values.registryOverwrite }}
-      values:
-        image:
-          repository: {{ include "replaceRegistry" (dict "europe-docker.pkg.dev/gardener-project/releases/charts/gardener/extensions/admission-alicloud-application" .Values.registryOverwrite) }}
-{{- end }}
-
     admission-alicloud-runtime:
       version: 1.57.0
 {{- if .Values.registryOverwrite }}
       values:
         image:
-          repository: {{ include "replaceRegistry" (dict "europe-docker.pkg.dev/gardener-project/releases/charts/gardener/extensions/admission-alicloud-runtime" .Values.registryOverwrite) }}
+          repository: {{ include "replaceRegistry" (dict "europe-docker.pkg.dev/gardener-project/releases/gardener/extensions/admission-alicloud" .Values.registryOverwrite) }}
 {{- end }}
 
     provider-aws:
       version: 1.59.2
-      admission:
-        enabled: true
 {{- if .Values.registryOverwrite }}
-        values:
-          image:
-            repository: {{ include "replaceRegistry" (dict "europe-docker.pkg.dev/gardener-project/releases/extensions/admission-aws" .Values.registryOverwrite) }}
       values:
         image:
           repository: {{ include "replaceRegistry" (dict "europe-docker.pkg.dev/gardener-project/releases/extensions/provider-aws" .Values.registryOverwrite) }}
@@ -242,30 +203,17 @@ stringData:
 {{ include "provider-aws.imageVectorOverwrite" . | indent 10 }}
 {{- end }}
 
-    admission-aws-application:
-      version: 1.59.2
-{{- if .Values.registryOverwrite }}
-      values:
-        image:
-          repository: {{ include "replaceRegistry" (dict "europe-docker.pkg.dev/gardener-project/releases/charts/gardener/extensions/admission-aws-application" .Values.registryOverwrite) }}
-{{- end }}
-
     admission-aws-runtime:
       version: 1.59.2
 {{- if .Values.registryOverwrite }}
       values:
         image:
-          repository: {{ include "replaceRegistry" (dict "europe-docker.pkg.dev/gardener-project/releases/charts/gardener/extensions/admission-aws-runtime" .Values.registryOverwrite) }}
+          repository: {{ include "replaceRegistry" (dict "europe-docker.pkg.dev/gardener-project/releases/gardener/extensions/admission-aws" .Values.registryOverwrite) }}
 {{- end }}
 
     provider-gcp:
       version: 1.41.1
-      admission:
-        enabled: true
 {{- if .Values.registryOverwrite }}
-        values:
-          image:
-            repository: {{ include "replaceRegistry" (dict "europe-docker.pkg.dev/gardener-project/releases/extensions/admission-gcp" .Values.registryOverwrite) }}
       values:
         image:
           repository: {{ include "replaceRegistry" (dict "europe-docker.pkg.dev/gardener-project/releases/extensions/provider-gcp" .Values.registryOverwrite) }}
@@ -273,20 +221,12 @@ stringData:
 {{ include "provider-gcp.imageVectorOverwrite" . | indent 10 }}
 {{- end }}
 
-    admission-gcp-application:
-      version: 1.41.1
-{{- if .Values.registryOverwrite }}
-      values:
-        image:
-          repository: {{ include "replaceRegistry" (dict "europe-docker.pkg.dev/gardener-project/releases/charts/gardener/extensions/admission-gcp-application" .Values.registryOverwrite) }}
-{{- end }}
-
     admission-gcp-runtime:
       version: 1.41.1
 {{- if .Values.registryOverwrite }}
       values:
         image:
-          repository: {{ include "replaceRegistry" (dict "europe-docker.pkg.dev/gardener-project/releases/charts/gardener/extensions/admission-gcp-runtime" .Values.registryOverwrite) }}
+          repository: {{ include "replaceRegistry" (dict "europe-docker.pkg.dev/gardener-project/releases/gardener/extensions/admission-gcp" .Values.registryOverwrite) }}
 {{- end }}
 
     runtime-gvisor:
