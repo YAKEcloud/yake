@@ -1,13 +1,13 @@
 apiVersion: v2
 dependencies:
-- condition: runtime.enabled
-  name: runtime
-  repository: ""
 - condition: application.enabled
   name: application
+  repository: ""
+- condition: runtime.enabled
+  name: runtime
   repository: ""
 deprecated: true
 description: A Helm chart to deploy the Gardener controlplane (API server, controller-manager,
   scheduler, admission-controller)
 name: gardener-controlplane
-version: 1.111.0
+version: 1.111.1

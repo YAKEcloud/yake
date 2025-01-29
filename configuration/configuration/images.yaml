@@ -41,7 +41,7 @@ gardenlet:
       - name: gardener-dashboard
         repository: europe-docker.pkg.dev/gardener-project/releases/gardener/dashboard
         sourceRepository: github.com/gardener/dashboard
-        tag: 1.79.0
+        tag: 1.79.1
       - name: terminal-controller-manager
         repository: europe-docker.pkg.dev/gardener-project/releases/gardener/terminal-controller-manager
         sourceRepository: github.com/gardener/terminal-controller-manager
