@@ -1347,3 +1347,33 @@ no release notes available
 
 
 </details>
+
+<details>
+<summary><b>Update gardener-metrics-exporter to <code>0.34.0</code></b></summary>
+
+# [gardener/gardener-metrics-exporter]
+
+## 🐛 Bug Fixes
+
+- `[OPERATOR]` fix some node related metrics not scraped by @crigertg [#116]
+
+## Docker Images
+- metrics-exporter: `europe-docker.pkg.dev/gardener-project/releases/gardener/metrics-exporter:0.34.0`
+
+
+</details>
+
+<details>
+<summary><b>Update gardener-metrics-exporter to <code>0.34.0</code></b></summary>
+
+# [gardener/gardener-metrics-exporter]
+
+## 🐛 Bug Fixes
+
+- `[OPERATOR]` fix some node related metrics not scraped by @crigertg [#116]
+
+## Docker Images
+- metrics-exporter: `europe-docker.pkg.dev/gardener-project/releases/gardener/metrics-exporter:0.34.0`
+
+
+</details>
