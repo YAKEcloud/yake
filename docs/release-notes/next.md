@@ -1495,3 +1495,23 @@ no release notes available
 **Full Changelog**: https://github.com/stackitcloud/gardener-extension-shoot-flux/compare/v0.14.0...v0.15.0
 
 </details>
+
+<details>
+<summary><b>Update cert-management to <code>0.17.4</code></b></summary>
+
+# [gardener/cert-management]
+
+## 🐛 Bug Fixes
+
+- `[USER]` Fix exhaustion of request quotas on concurrent certificates with same domain name by @MartinWeindel [#399]
+## 🏃 Others
+
+- `[DEPENDENCY]` Update module `gardener/gardener` to `v1.111.1`. by @gardener-ci-robot [#398]
+
+## Helm Charts
+- cert-controller-manager: `europe-docker.pkg.dev/gardener-project/releases/charts/cert-controller-manager:v0.17.4`
+## Docker Images
+- cert-management: `europe-docker.pkg.dev/gardener-project/releases/cert-controller-manager:v0.17.4`
+
+
+</details>
