@@ -119,7 +119,7 @@ gardenlet:
         name: ingress-default-backend
         repository: europe-docker.pkg.dev/gardener-project/releases/gardener/ingress-default-backend
         sourceRepository: github.com/gardener/ingress-default-backend
-        tag: 0.21.0
+        tag: 0.22.0
       - name: hyperkube
         repository: europe-docker.pkg.dev/gardener-project/releases/hyperkube
         sourceRepository: github.com/gardener/hyperkube
@@ -286,13 +286,13 @@ gardenlet:
         name: kube-state-metrics
         repository: registry.k8s.io/kube-state-metrics/kube-state-metrics
         sourceRepository: github.com/kubernetes/kube-state-metrics
-        tag: v2.14.0
+        tag: v2.15.0
       - name: gardener-metrics-exporter
         repository: europe-docker.pkg.dev/gardener-project/releases/gardener/metrics-exporter
         resourceId:
           name: metrics-exporter
         sourceRepository: github.com/gardener/gardener-metrics-exporter
-        tag: 0.33.0
+        tag: 0.34.0
       - labels:
           - name: gardener.cloud/cve-categorisation
             value:
@@ -344,7 +344,7 @@ gardenlet:
         name: plutono-dashboard-refresher
         repository: quay.io/kiwigrid/k8s-sidecar
         sourceRepository: github.com/kiwigrid/k8s-sidecar
-        tag: 1.29.0
+        tag: 1.30.0
       - labels:
           - name: gardener.cloud/cve-categorisation
             value:
@@ -421,7 +421,7 @@ gardenlet:
         name: node-local-dns
         repository: registry.k8s.io/dns/k8s-dns-node-cache
         sourceRepository: github.com/kubernetes/kubernetes/blob/master/cluster/addons/dns/nodelocaldns
-        tag: 1.24.0
+        tag: 1.25.0
       - labels:
           - name: gardener.cloud/cve-categorisation
             value:
@@ -516,7 +516,7 @@ gardenlet:
         resourceId:
           name: fluent-bit-to-vali
         sourceRepository: github.com/gardener/logging
-        tag: v0.63.0
+        tag: v0.64.0
       - labels:
           - name: gardener.cloud/cve-categorisation
             value:
@@ -550,7 +550,7 @@ gardenlet:
         name: vali-curator
         repository: europe-docker.pkg.dev/gardener-project/releases/gardener/vali-curator
         sourceRepository: github.com/gardener/logging
-        tag: v0.63.0
+        tag: v0.64.0
       - labels:
           - name: gardener.cloud/cve-categorisation
             value:
@@ -607,7 +607,7 @@ gardenlet:
         resourceId:
           name: telegraf-iptables
         sourceRepository: github.com/gardener/logging
-        tag: v0.63.0
+        tag: v0.64.0
       - labels:
           - name: gardener.cloud/cve-categorisation
             value:
@@ -624,7 +624,7 @@ gardenlet:
         name: event-logger
         repository: europe-docker.pkg.dev/gardener-project/releases/gardener/event-logger
         sourceRepository: github.com/gardener/logging
-        tag: v0.63.0
+        tag: v0.64.0
       - labels:
           - name: gardener.cloud/cve-categorisation
             value:
@@ -641,7 +641,7 @@ gardenlet:
         name: tune2fs
         repository: europe-docker.pkg.dev/gardener-project/releases/gardener/tune2fs
         sourceRepository: github.com/gardener/logging
-        tag: v0.63.0
+        tag: v0.64.0
       - labels:
           - name: gardener.cloud/cve-categorisation
             value:

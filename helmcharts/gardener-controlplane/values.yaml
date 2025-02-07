@@ -38,7 +38,7 @@ global:
         image:
             pullPolicy: IfNotPresent
             repository: europe-docker.pkg.dev/gardener-project/releases/gardener/admission-controller
-            tag: v1.111.2
+            tag: v1.112.0
         replicaCount: 3
         resources:
             requests:
@@ -139,7 +139,7 @@ global:
         image:
             pullPolicy: IfNotPresent
             repository: europe-docker.pkg.dev/gardener-project/releases/gardener/apiserver
-            tag: v1.111.2
+            tag: v1.112.0
         insecureSkipTLSVerify: false
         livenessProbe:
             enable: true
@@ -230,6 +230,8 @@ global:
                     concurrentSyncs: 5
                     enableShootControlPlaneRestarter: true
                     enableShootCoreAddonRestarter: false
+                shootMigration:
+                    concurrentSyncs: 5
                 shootQuota:
                     concurrentSyncs: 5
                     syncPeriod: 60m
@@ -264,7 +266,7 @@ global:
         image:
             pullPolicy: IfNotPresent
             repository: europe-docker.pkg.dev/gardener-project/releases/gardener/controller-manager
-            tag: v1.111.2
+            tag: v1.112.0
         replicaCount: 1
         resources:
             requests:
@@ -322,7 +324,7 @@ global:
         image:
             pullPolicy: IfNotPresent
             repository: europe-docker.pkg.dev/gardener-project/releases/gardener/scheduler
-            tag: v1.111.2
+            tag: v1.112.0
         replicaCount: 1
         resources:
             requests:
