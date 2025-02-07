@@ -1545,3 +1545,24 @@ no release notes available
 
 
 </details>
+
+<details>
+<summary><b>Update gardener-controlplane to <code>1.112.0</code></b></summary>
+
+
+
+</details>
+
+<details>
+<summary><b>Update gardener-controlplane to <code>1.112.0</code></b></summary>
+
+
+
+</details>
+
+<details>
+<summary><b>Update gardenlet to <code>1.112.0</code></b></summary>
+
+
+
+</details>
