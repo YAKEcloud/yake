@@ -8,8 +8,38 @@ type: Opaque
 stringData:
   values.yaml: |-
     global:
-      runtime:
-        certificate:
-          certManager:
-            enabled: true
-            issuerName: gardener-ca
+      deployment:
+        createNamespace: false
+        virtualGarden:
+          enabled: true
+      controller:
+        manager:
+          config:
+            server:
+              metrics:
+                tls:
+                  crt: |
+                    -----BEGIN CERTIFICATE-----
+                    ...
+                    -----END CERTIFICATE-----
+                  key: |
+                    -----BEGIN RSA PRIVATE KEY-----
+                    ...
+                    -----END RSA PRIVATE
+      admission:
+        config:
+          server:
+            webhooks:
+              caBundle: |
+                -----BEGIN CERTIFICATE-----
+                ...
+                -----END CERTIFICATE-----
+              tls:
+                crt: |
+                  -----BEGIN CERTIFICATE-----
+                  ...
+                  -----END CERTIFICATE-----
+                key: |
+                  -----BEGIN RSA PRIVATE KEY-----
+                  ...
+                  -----END RSA PRIVATE
