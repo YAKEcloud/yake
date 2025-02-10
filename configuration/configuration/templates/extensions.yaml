@@ -50,6 +50,7 @@ stringData:
       version: 1.49.1
       admission:
         enabled: true
+        split: false
 {{- if .Values.registryOverwrite }}
         values:
           image:
@@ -171,6 +172,8 @@ stringData:
 
     provider-alicloud:
       version: 1.55.0
+      admission:
+        enabled: true
 {{- if .Values.registryOverwrite }}
       values:
         image:
