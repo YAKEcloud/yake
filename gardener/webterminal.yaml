@@ -8,7 +8,7 @@ spec:
   dependsOn:
     - name: configuration
     - name: gardener-application
-  targetNamespace: flux-system
+  targetNamespace: terminal-system
   interval: 1m
   chart:
     spec:
@@ -23,15 +23,54 @@ spec:
     remediation:
       retries: 3
     createNamespace: true
+  values:
+    utils-templates:
+      enabled: true
   valuesFrom:
     - kind: Secret
       name: webterminal-base-values
       optional: false
     - kind: Secret
+      name: webterminal-values-0
+      optional: true
+    - kind: Secret
+      name: webterminal-values-1
+      optional: true
+    - kind: Secret
+      name: webterminal-values-2
+      optional: true
+    - kind: Secret
       name: webterminal-values
       optional: true
       valuesKey: enabled
       targetPath: terminal-controller-manager-runtime.enabled
+
+    - kind: Secret
+      name: gardener-internal-kubeconfig
+      valuesKey: value
+      targetPath: global.controller.manager.kubeconfig
+
+    - kind: Secret
+      name: terminal-metrics-cert
+      valuesKey: tls.key
+      targetPath: global.controller.manager.config.server.metrics.tls.key
+    - kind: Secret
+      name: terminal-metrics-cert
+      valuesKey: tls.crt
+      targetPath: global.controller.manager.config.server.metrics.tls.crt
+    - kind: Secret
+      name: terminal-admission-controller-cert
+      valuesKey: ca.crt
+      targetPath: global.admission.config.server.webhooks.caBundle
+    - kind: Secret
+      name: terminal-admission-controller-cert
+      valuesKey: tls.key
+      targetPath: global.admission.config.server.webhooks.tls.key
+    - kind: Secret
+      name: terminal-admission-controller-cert
+      valuesKey: tls.crt
+      targetPath: global.admission.config.server.webhooks.tls.crt
+
 ---
 apiVersion: helm.toolkit.fluxcd.io/v2beta2
 kind: HelmRelease
@@ -42,7 +81,7 @@ spec:
   dependsOn:
     - name: configuration
     - name: terminal-controller-manager-runtime
-  targetNamespace: flux-system
+  targetNamespace: terminal-system
   kubeConfig:
     secretRef:
       name: gardener-internal-kubeconfig
@@ -60,14 +99,45 @@ spec:
     remediation:
       retries: 3
     createNamespace: true
+  values:
+    utils-templates:
+      enabled: true
   valuesFrom:
     - kind: Secret
-      name: terminal-webhook-server-cert
-      valuesKey: tls.crt
-      targetPath: global.application.certificate.caBundle
+      name: webterminal-base-values
+      optional: false
+    - kind: Secret
+      name: webterminal-values-0
+      optional: true
+    - kind: Secret
+      name: webterminal-values-1
+      optional: true
+    - kind: Secret
+      name: webterminal-values-2
       optional: true
     - kind: Secret
       name: webterminal-values
       optional: true
       valuesKey: enabled
       targetPath: terminal-controller-manager-application.enabled
+
+    - kind: Secret
+      name: terminal-metrics-cert
+      valuesKey: tls.key
+      targetPath: global.controller.manager.config.server.metrics.tls.key
+    - kind: Secret
+      name: terminal-metrics-cert
+      valuesKey: tls.crt
+      targetPath: global.controller.manager.config.server.metrics.tls.crt
+    - kind: Secret
+      name: terminal-admission-controller-cert
+      valuesKey: ca.crt
+      targetPath: global.admission.config.server.webhooks.caBundle
+    - kind: Secret
+      name: terminal-admission-controller-cert
+      valuesKey: tls.key
+      targetPath: global.admission.config.server.webhooks.tls.key
+    - kind: Secret
+      name: terminal-admission-controller-cert
+      valuesKey: tls.crt
+      targetPath: global.admission.config.server.webhooks.tls.crt
