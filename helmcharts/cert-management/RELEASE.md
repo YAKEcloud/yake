@@ -1,13 +1,10 @@
 # [gardener/cert-management]
 
-## 🐛 Bug Fixes
+## ✨ New Features
 
-- `[USER]` Fix exhaustion of request quotas on concurrent certificates with same domain name by @MartinWeindel [#399]
-## 🏃 Others
-
-- `[DEPENDENCY]` Update module `gardener/gardener` to `v1.111.1`. by @gardener-ci-robot [#398]
+- `[OPERATOR]` Introduce multi-arch build for `linux/arm64` images. by @marc1404 [#405]
 
 ## Helm Charts
-- cert-controller-manager: `europe-docker.pkg.dev/gardener-project/releases/charts/cert-controller-manager:v0.17.4`
+- cert-controller-manager: `europe-docker.pkg.dev/gardener-project/releases/charts/cert-controller-manager:v0.17.5`
 ## Docker Images
-- cert-management: `europe-docker.pkg.dev/gardener-project/releases/cert-controller-manager:v0.17.4`
+- cert-management: `europe-docker.pkg.dev/gardener-project/releases/cert-controller-manager:v0.17.5`
