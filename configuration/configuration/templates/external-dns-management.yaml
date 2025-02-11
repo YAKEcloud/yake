@@ -7,10 +7,6 @@ type: Opaque
 stringData:
   values.yaml: |-
     external-dns-management:
-{{- if .Values.registryOverwrite }}
-      image:
-        repository: {{ include "replaceRegistry" (dict "europe-docker.pkg.dev/gardener-project/releases/dns-controller-manager" .Values.registryOverwrite) }}
-{{- end }}
       enabled: true
       configuration:
         dnsClass: base-dns-class

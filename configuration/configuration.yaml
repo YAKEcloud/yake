@@ -20,9 +20,6 @@ spec:
         name: yake
         namespace: flux-system
       interval: 1m
-      valuesFiles:
-        - configuration/configuration/values.yaml
-        - configuration/configuration/images.yaml
   valuesFrom:
     - kind: Secret
       name: yake-config-0

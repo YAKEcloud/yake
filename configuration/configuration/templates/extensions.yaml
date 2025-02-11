@@ -9,93 +9,34 @@ stringData:
   values.yaml: |-
     os-ubuntu:
       version: 1.28.0
-{{- if .Values.registryOverwrite }}
-      values:
-        image:
-          repository: {{ include "replaceRegistry" (dict "europe-docker.pkg.dev/gardener-project/releases/extensions/os-ubuntu" .Values.registryOverwrite) }}
-{{- end }}
 
     os-gardenlinux:
       version: 0.28.1
-{{- if .Values.registryOverwrite }}
-      values:
-        image:
-          repository: {{ include "replaceRegistry" (dict "europe-docker.pkg.dev/gardener-project/releases/extensions/os-gardenlinux" .Values.registryOverwrite) }}
-{{- end }}
 
     os-coreos:
       version: 1.24.0
-{{- if .Values.registryOverwrite }}
-      values:
-        image:
-          repository: {{ include "replaceRegistry" (dict "europe-docker.pkg.dev/gardener-project/releases/extensions/os-coreos" .Values.registryOverwrite) }}
-{{- end }}
 
     provider-hcloud:
       version: 0.6.32
       admission:
         enabled: false
-{{- if .Values.registryOverwrite }}
-        values:
-          image:
-            repository: {{ include "replaceRegistry" (dict "ghcr.io/23technologies/gardener-extension-provider-hcloud/admission" .Values.registryOverwrite) }}
-      values:
-        image:
-          repository: {{ include "replaceRegistry" (dict "ghcr.io/23technologies/gardener-extension-provider-hcloud" .Values.registryOverwrite) }}
-        imageVectorOverwrite: |
-{{ include "provider-hcloud.imageVectorOverwrite" . | indent 10 }}
-{{- end }}
 
     provider-azure:
       version: 1.49.4
       admission:
         enabled: true
         split: false
-{{- if .Values.registryOverwrite }}
-        values:
-          image:
-            repository: {{ include "replaceRegistry" (dict "europe-docker.pkg.dev/gardener-project/releases/extensions/admission-azure" .Values.registryOverwrite) }}
-      values:
-        image:
-          repository: {{ include "replaceRegistry" (dict "europe-docker.pkg.dev/gardener-project/releases/extensions/provider-azure" .Values.registryOverwrite) }}
-        imageVectorOverwrite: |
-{{ include "provider-azure.imageVectorOverwrite" . | indent 10 }}
-{{- end }}
 
     provider-openstack:
       version: 1.46.0
       admission:
         enabled: true
-{{- if .Values.registryOverwrite }}
-        values:
-          image:
-            repository: {{ include "replaceRegistry" (dict "europe-docker.pkg.dev/gardener-project/releases/extensions/admission-openstack" .Values.registryOverwrite) }}
-      values:
-        image:
-          repository: {{ include "replaceRegistry" (dict "europe-docker.pkg.dev/gardener-project/releases/extensions/provider-openstack" .Values.registryOverwrite) }}
-        imageVectorOverwrite: |
-{{ include "provider-openstack.imageVectorOverwrite" . | indent 10 }}
-{{- end }}
 
     networking-calico:
       version: 1.46.1
-{{- if .Values.registryOverwrite }}
-      values:
-        image:
-          repository: {{ include "replaceRegistry" (dict "europe-docker.pkg.dev/gardener-project/releases/extensions/networking-calico" .Values.registryOverwrite) }}
-        imageVectorOverwrite: |
-{{ include "networking-calico.imageVectorOverwrite" . | indent 10 }}
-{{- end }}
 
     shoot-cert-service:
       version: 1.48.0
-{{- if .Values.registryOverwrite }}
-      values:
-        image:
-          repository: {{ include "replaceRegistry" (dict "europe-docker.pkg.dev/gardener-project/releases/extensions/shoot-cert-service" .Values.registryOverwrite) }}
-        imageVectorOverwrite: |
-{{ include "shoot-cert-service.imageVectorOverwrite" . | indent 10 }}
-{{- end }}
 
     shoot-dns-service:
       version: 1.59.0
@@ -105,141 +46,48 @@ stringData:
         dnsControllerManager:
           deploy: true
           image:
-{{- if .Values.registryOverwrite }}
-            repository: {{ include "replaceRegistry" (dict "europe-docker.pkg.dev/gardener-project/releases/dns-controller-manager" .Values.registryOverwrite) }}
-{{- else }}
             repository: europe-docker.pkg.dev/gardener-project/releases/dns-controller-manager
-{{- end }}
           configuration:
             cacheTtl: 300
             controllers: dnscontrollers,dnssources
             dnsPoolResyncPeriod: 30m
             serverPortHttp: 8080
-{{- if .Values.registryOverwrite }}
-        image:
-          repository: {{ include "replaceRegistry" (dict "europe-docker.pkg.dev/gardener-project/releases/extensions/shoot-dns-service" .Values.registryOverwrite) }}
-        imageVectorOverwrite: |
-{{ include "shoot-dns-service.imageVectorOverwrite" . | indent 10 }}
-{{- end }}
 
     shoot-oidc-service:
       version: 0.29.0
-{{- if .Values.registryOverwrite }}
-      values:
-        image:
-          repository: {{ include "replaceRegistry" (dict "europe-docker.pkg.dev/gardener-project/releases/extensions/shoot-oidc-service" .Values.registryOverwrite) }}
-        imageVectorOverwrite: |
-{{ include "shoot-oidc-service.imageVectorOverwrite" . | indent 10 }}
-{{- end }}
 
     shoot-networking-filter:
       version: 0.22.0
-{{- if .Values.registryOverwrite }}
-      values:
-        image:
-          repository: {{ include "replaceRegistry" (dict "europe-docker.pkg.dev/gardener-project/releases/extensions/shoot-networking-filter" .Values.registryOverwrite) }}
-        imageVectorOverwrite: |
-{{ include "shoot-networking-filter.imageVectorOverwrite" . | indent 10 }}
-{{- end }}
 
     shoot-networking-problemdetector:
       version: 0.26.0
-{{- if .Values.registryOverwrite }}
-      values:
-        image:
-          repository: {{ include "replaceRegistry" (dict "europe-docker.pkg.dev/gardener-project/releases/gardener/extensions/shoot-networking-problemdetector" .Values.registryOverwrite) }}
-        imageVectorOverwrite: |
-{{ include "shoot-networking-problemdetector.imageVectorOverwrite" . | indent 10 }}
-{{- end }}
 
     shoot-rsyslog-relp:
       version: 0.7.0
-{{- if .Values.registryOverwrite }}
-      values:
-        image:
-          repository: {{ include "replaceRegistry" (dict "eu.gcr.io/gardener-project/gardener/extensions/shoot-rsyslog-relp" .Values.registryOverwrite) }}
-        imageVectorOverwrite: |
-{{ include "shoot-rsyslog-relp.imageVectorOverwrite" . | indent 10 }}
-{{- end }}
 
     networking-cilium:
       version: 1.39.0
-{{- if .Values.registryOverwrite }}
-      values:
-        imageVectorOverwrite: |
-{{ include "networking-cilium.imageVectorOverwrite" . | indent 10 }}
-{{- end }}
 
     provider-alicloud:
       version: 1.58.0
       admission:
         enabled: true
-{{- if .Values.registryOverwrite }}
-      values:
-        image:
-          repository: {{ include "replaceRegistry" (dict "europe-docker.pkg.dev/gardener-project/releases/extensions/provider-alicloud" .Values.registryOverwrite) }}
-        imageVectorOverwrite: |
-{{ include "provider-alicloud.imageVectorOverwrite" . | indent 10 }}
-{{- end }}
 
     provider-aws:
       version: 1.60.0
       admission:
         enabled: true
-{{- if .Values.registryOverwrite }}
-        values:
-          image:
-            repository: {{ include "replaceRegistry" (dict "europe-docker.pkg.dev/gardener-project/releases/extensions/admission-aws" .Values.registryOverwrite) }}
-      values:
-        image:
-          repository: {{ include "replaceRegistry" (dict "europe-docker.pkg.dev/gardener-project/releases/extensions/provider-aws" .Values.registryOverwrite) }}
-        imageVectorOverwrite: |
-{{ include "provider-aws.imageVectorOverwrite" . | indent 10 }}
-{{- end }}
 
     provider-gcp:
       version: 1.42.1
       admission:
         enabled: true
-{{- if .Values.registryOverwrite }}
-        values:
-          image:
-            repository: {{ include "replaceRegistry" (dict "europe-docker.pkg.dev/gardener-project/releases/extensions/admission-gcp" .Values.registryOverwrite) }}
-      values:
-        image:
-          repository: {{ include "replaceRegistry" (dict "europe-docker.pkg.dev/gardener-project/releases/extensions/provider-gcp" .Values.registryOverwrite) }}
-        imageVectorOverwrite: |
-{{ include "provider-gcp.imageVectorOverwrite" . | indent 10 }}
-{{- end }}
 
     runtime-gvisor:
       version: 0.17.0
-{{- if .Values.registryOverwrite }}
-      values:
-        image:
-          repository: {{ include "replaceRegistry" (dict "europe-docker.pkg.dev/gardener-project/releases/extensions/runtime-gvisor" .Values.registryOverwrite) }}
-        imageVectorOverwrite: |
-{{ include "runtime-gvisor.imageVectorOverwrite" . | indent 10 }}
-{{- end }}
 
     backup-s3:
       version: 0.7.1
-      values:
-        image:
-          pullPolicy: IfNotPresent
-{{- if .Values.registryOverwrite }}
-          repository: {{ include "replaceRegistry" (dict "ghcr.io/metal-stack/gardener-extension-backup-s3" .Values.registryOverwrite) }}
-{{- else }}
-          repository: ghcr.io/metal-stack/gardener-extension-backup-s3
-{{- end }}
 
     shoot-flux:
       version: 0.15.0
-      values:
-        imagePullPolicy:
-        image:
-{{- if .Values.registryOverwrite }}
-          repository: {{ include "replaceRegistry" (dict "ghcr.io/stackitcloud/gardener-extension-shoot-flux" .Values.registryOverwrite) }}
-{{- else }}
-          repository: ghcr.io/stackitcloud/gardener-extension-shoot-flux
-{{- end }}

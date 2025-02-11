@@ -20,27 +20,3 @@ tests:
               issuerNamespace: garden
               dnsClass: base-dns-class
               dnsNamespace: garden
-  - it: should set repository with registryOverwrite
-    values:
-      - ../values-test.yaml
-      - ../images.yaml
-    set:
-      registryOverwrite:
-        europe-docker.pkg.dev: myregistry.example.org/europe-docker.pkg.dev
-    asserts:
-      - matchRegex:
-          path: stringData['values.yaml']
-          pattern: "repository: myregistry.example.org/europe-docker.pkg.dev/gardener-project/releases/cert-controller-manager\n"
-  - it: should use original repository with registryOverwrite that does not contain the registry in use
-    values:
-      - ../values-test.yaml
-      - ../images.yaml
-    set:
-      registryOverwrite:
-        foo.bar.reg: myregistry.example.org
-        reg.foo.bar: myregistry.example.org
-    asserts:
-      - matchRegex:
-          path: stringData['values.yaml']
-          pattern: "repository: europe-docker.pkg.dev/gardener-project/releases/cert-controller-manager\n"
-

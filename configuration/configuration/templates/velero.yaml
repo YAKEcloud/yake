@@ -8,10 +8,6 @@ stringData:
   values.yaml: |
 {{- if .Values.backups.enabled }}
     snapshotsEnabled: false
-{{- if .Values.registryOverwrite }}
-    image:
-      repository: {{ include "replaceRegistry" (dict "docker.io/velero/velero" .Values.registryOverwrite) }}
-{{- end }}
 {{- if eq .Values.backups.provider "azure" }}
     credentials:
       useSecret: false
@@ -28,11 +24,7 @@ stringData:
             storageAccountKeyEnvVar: AZURE_STORAGE_ACCOUNT_ACCESS_KEY
     initContainers:
       - name: velero-plugin-for-microsoft-azure
-{{- if .Values.registryOverwrite }}
-        image: {{ include "replaceRegistry" (dict "docker.io/velero/velero-plugin-for-microsoft-azure:v1.6.0" .Values.registryOverwrite) }}
-{{- else }}
         image: velero/velero-plugin-for-microsoft-azure:v1.7.0
-{{- end }}
         imagePullPolicy: IfNotPresent
         volumeMounts:
           - mountPath: /target
@@ -53,11 +45,7 @@ stringData:
             region: {{ .Values.backups.region }}
     initContainers:
       - name: velero-plugin-for-aws
-{{- if .Values.registryOverwrite }}
-        image: {{ include "replaceRegistry" (dict "docker.io/velero/velero-plugin-for-aws:v1.6.0" .Values.registryOverwrite) }}
-{{- else }}
         image: velero/velero-plugin-for-aws:v1.7.0
-{{- end }}
         imagePullPolicy: IfNotPresent
         volumeMounts:
           - mountPath: /target
@@ -80,11 +68,7 @@ stringData:
             s3Url: {{ .Values.backups.endpoint }}
     initContainers:
       - name: velero-plugin-for-aws
-{{- if .Values.registryOverwrite }}
-        image: {{ include "replaceRegistry" (dict "docker.io/velero/velero-plugin-for-aws:v1.6.0" .Values.registryOverwrite) }}
-{{- else }}
         image: velero/velero-plugin-for-aws:v1.7.0
-{{- end }}
         imagePullPolicy: IfNotPresent
         volumeMounts:
           - mountPath: /target
@@ -139,11 +123,7 @@ stringData:
             region: {{ .Values.backups.region }}
     initContainers:
       - name: velero-plugin-for-openstack
-{{- if .Values.registryOverwrite }}
-        image: {{ include "replaceRegistry" (dict "docker.io/lirt/velero-plugin-for-openstack:v0.4.1" .Values.registryOverwrite) }}
-{{- else }}
         image: lirt/velero-plugin-for-openstack:v0.5.2
-{{- end }}
         imagePullPolicy: IfNotPresent
         volumeMounts:
           - mountPath: /target

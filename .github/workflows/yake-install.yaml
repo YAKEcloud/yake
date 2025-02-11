@@ -36,7 +36,6 @@ jobs:
         env:
           K8S_VERSION: ${{ matrix.version }}
           CNI: ${{ matrix.cni }}
-          REGISTRY_OVERWRITE: ${{ vars.REGISTRY_OVERWRITE }}  # set as a repository variable so it will not be used in forks
         with:
           timeout_minutes: 20
           max_attempts: 3

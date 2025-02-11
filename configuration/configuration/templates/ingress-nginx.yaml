@@ -7,10 +7,6 @@ type: Opaque
 stringData:
   values.yaml: |-
     controller:
-{{- if .Values.registryOverwrite }}
-      image:
-        repository: {{ include "replaceRegistry" (dict "registry.k8s.io/ingress-nginx/controller" .Values.registryOverwrite) }}
-{{- end }}
       admissionWebhooks:
         patch:
           labels:
@@ -27,11 +23,3 @@ stringData:
 {{- end }}
       extraArgs:
         enable-ssl-passthrough: ""
-{{- if .Values.registryOverwrite }}
-    patch:
-      image:
-        repository: {{ include "replaceRegistry" (dict "registry.k8s.io/ingress-nginx/kube-webhook-certgen" .Values.registryOverwrite) }}
-    defaultbackend:
-      image:
-        repository: {{ include "replaceRegistry" (dict "registry.k8s.io/defaultbackend-amd64" .Values.registryOverwrite) }}
-{{- end }}

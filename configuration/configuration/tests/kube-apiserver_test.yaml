@@ -56,17 +56,3 @@ tests:
                   myca has
                   multiple
                   lines
-  - it: should set repository with registryOverwrite
-    values:
-      - ../values-test.yaml
-      - ../images.yaml
-    set:
-      registryOverwrite:
-        registry.k8s.io: myregistry.example.org
-    asserts:
-      - matchRegex:
-          path: stringData['values.yaml']
-          pattern: |-2
-            images:
-              apiserver: myregistry.example.org/kube-apiserver:v.+
-              controllermanager: myregistry.example.org/kube-controller-manager:v.+

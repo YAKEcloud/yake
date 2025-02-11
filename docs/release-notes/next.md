@@ -5,6 +5,13 @@ hide_table_of_contents: true
 # Release Notes next
 
 ## Yake release notes and upgrade guide
+:::danger
+The `registryOverwrite` configuration is no longer supported. Please use other methods to point to internal registry mirrors or caches:
+  * https://github.com/containerd/containerd/blob/main/docs/hosts.md
+  * https://github.com/gardener/gardener/blob/master/docs/usage/advanced/containerd-registry-configuration.md
+  * https://github.com/gardener/gardener-extension-registry-cache
+:::
+
 
 ## Related upstream release notes / changelogs
 

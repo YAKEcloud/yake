@@ -34,23 +34,3 @@ tests:
       - notMatchRegex:
           path: stringData['values.yaml']
           pattern: "cert.gardener.cloud/class: base-cert-class"
-  - it: should set repository with registryOverwrite
-    values:
-      - ../values-test.yaml
-      - ../images.yaml
-    set:
-      registryOverwrite:
-        registry.k8s.io: myregistry.example.org
-    asserts:
-      - matchRegex:
-          path: stringData['values.yaml']
-          pattern: |-2
-              image:
-                repository: myregistry.example.org/ingress-nginx/controller
-            [\s\S]*
-            patch:
-              image:
-                repository: myregistry.example.org/ingress-nginx/kube-webhook-certgen
-            defaultbackend:
-              image:
-                repository: myregistry.example.org/defaultbackend-amd64
