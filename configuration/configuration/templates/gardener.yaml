@@ -19,28 +19,12 @@ stringData:
         replicaCount: 2
         vpa: true
         clusterIdentity: {{ .Values.clusterIdentity }}
-{{- if .Values.registryOverwrite }}
-        image:
-          repository: {{ include "replaceRegistry" (dict "europe-docker.pkg.dev/gardener-project/releases/gardener/apiserver" .Values.registryOverwrite) }}
-{{- end }}
       admission:
         replicaCount: 2
         vpa: true
-{{- if .Values.registryOverwrite }}
-        image:
-          repository: {{ include "replaceRegistry" (dict "europe-docker.pkg.dev/gardener-project/releases/gardener/admission-controller" .Values.registryOverwrite) }}
-{{- end }}
       controller:
         replicaCount: 2
         vpa: true
-{{- if .Values.registryOverwrite }}
-        image:
-          repository: {{ include "replaceRegistry" (dict "europe-docker.pkg.dev/gardener-project/releases/gardener/controller-manager" .Values.registryOverwrite) }}
-{{- end }}
       scheduler:
         replicaCount: 2
         vpa: true
-{{- if .Values.registryOverwrite }}
-        image:
-          repository: {{ include "replaceRegistry" (dict "europe-docker.pkg.dev/gardener-project/releases/gardener/scheduler" .Values.registryOverwrite) }}
-{{- end }}

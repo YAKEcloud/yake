@@ -15,14 +15,3 @@ tests:
               configuration:
                 dnsClass: base-dns-class
                 identifier: garden-cluster-identity-base-dns
-  - it: should set repository with registryOverwrite
-    values:
-      - ../values-test.yaml
-      - ../images.yaml
-    set:
-      registryOverwrite:
-        europe-docker.pkg.dev: myregistry.example.org/europe-docker.pkg.dev
-    asserts:
-      - matchRegex:
-          path: stringData['values.yaml']
-          pattern: "repository: myregistry.example.org/europe-docker.pkg.dev/gardener-project/releases/dns-controller-manager\n"

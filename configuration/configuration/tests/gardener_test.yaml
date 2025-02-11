@@ -74,22 +74,3 @@ tests:
                 provider: local
                 credentials:
                   secret: local
-
-  - it: should set repository with registryOverwrite
-    values:
-      - ../values-test.yaml
-      - ../images.yaml
-    set:
-      registryOverwrite:
-        europe-docker.pkg.dev: myregistry.example.org/europe-docker.pkg.dev
-    asserts:
-      - matchRegex:
-          path: stringData['values.yaml']
-          pattern: |-2
-                  repository: myregistry.example.org/europe-docker.pkg.dev/gardener-project/releases/gardener/apiserver
-            [\s\S]*
-                  repository: myregistry.example.org/europe-docker.pkg.dev/gardener-project/releases/gardener/admission-controller
-            [\s\S]*
-                  repository: myregistry.example.org/europe-docker.pkg.dev/gardener-project/releases/gardener/controller-manager
-            [\s\S]*
-                  repository: myregistry.example.org/europe-docker.pkg.dev/gardener-project/releases/gardener/scheduler

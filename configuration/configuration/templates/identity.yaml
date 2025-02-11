@@ -6,10 +6,6 @@ metadata:
 type: Opaque
 stringData:
   values.yaml: |-
-{{- if .Values.registryOverwrite }}
-    image:
-      repository: {{ include "replaceRegistry" (dict "ghcr.io/dexidp/dex" .Values.registryOverwrite) }}
-{{- end }}
     connectors: ~
     issuerUrl: https://{{ include "identity.domain" . }}/oidc
     dashboardOrigins:

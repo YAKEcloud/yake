@@ -37,16 +37,3 @@ tests:
           pattern: |-2
                 cert.gardener.cloud/purpose: managed
                 cert.gardener.cloud/class: base-cert-class
-  - it: should set repository with registryOverwrite
-    values:
-      - ../values-test.yaml
-      - ../images.yaml
-    set:
-      registryOverwrite:
-        ghcr.io: myregistry.example.org
-    asserts:
-      - matchRegex:
-          path: stringData['values.yaml']
-          pattern: |-2
-            image:
-              repository: myregistry.example.org/dexidp/dex

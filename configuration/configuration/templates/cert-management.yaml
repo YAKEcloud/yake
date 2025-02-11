@@ -6,10 +6,6 @@ metadata:
 type: Opaque
 stringData:
   values.yaml: |-
-{{- if .Values.registryOverwrite }}
-    image:
-      repository: {{ include "replaceRegistry" (dict "europe-docker.pkg.dev/gardener-project/releases/cert-controller-manager" .Values.registryOverwrite) }}
-{{- end }}
     createCRDs:
       issuers: false
       certificates: false

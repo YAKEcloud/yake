@@ -11,8 +11,7 @@ tests:
           path: stringData['values.yaml']
           value: |-
             global:
-              runtime:
-                certificate:
-                  certManager:
-                    enabled: true
-                    issuerName: gardener-ca
+              deployment:
+                createNamespace: false
+                virtualGarden:
+                  enabled: true

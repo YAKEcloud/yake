@@ -27,7 +27,7 @@ spec:
   valuesFrom:
     - kind: Secret
       name: etcd-events-base-values
-      optional: false
+      optional: true
     - kind: Secret
       name: etcd-events-values-0
       optional: true

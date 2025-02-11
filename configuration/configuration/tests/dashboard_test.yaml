@@ -33,17 +33,6 @@ tests:
                   public:
                     clientId: kube-kubectl
                     usePKCE: true
-  - it: should set repository with registryOverwrite
-    values:
-      - ../values-test.yaml
-      - ../images.yaml
-    set:
-      registryOverwrite:
-        europe-docker.pkg.dev: myregistry.example.org/europe-docker.pkg.dev
-    asserts:
-      - matchRegex:
-          path: stringData['values.yaml']
-          pattern: "repository: myregistry.example.org/europe-docker.pkg.dev/gardener-project/releases/gardener/dashboard\n"
   - it: should not set cert annotations if issuer is disabled
     values:
       - ../values-test.yaml

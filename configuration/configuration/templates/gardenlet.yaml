@@ -46,14 +46,3 @@ stringData:
         kubeconfigSecret:
           name: gardenlet-kubeconfig
           namespace: garden
-{{- if .Values.registryOverwrite }}
-    image:
-      repository: {{ include "replaceRegistry" (dict "europe-docker.pkg.dev/gardener-project/releases/gardener/gardenlet" .Values.registryOverwrite) }}
-    imageVectorOverwrite: |
-{{ include "gardenlet.imageVectorOverwrite" . | indent 6 }}
-    componentImageVectorOverwrites: |
-      components:
-      - name: etcd-druid
-        imageVectorOverwrite: |
-{{ include "etcd-druid.imageVectorOverwrite" . | indent 10 }}
-{{- end }}

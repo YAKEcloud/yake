@@ -6,14 +6,6 @@ metadata:
 type: Opaque
 stringData:
   values.yaml: |-
-  {{- if .Values.registryOverwrite }}
-        etcd:
-          image:
-            repository: {{ include "replaceRegistry" (dict "europe-docker.pkg.dev/gardener-project/public/gardener/etcd" .Values.registryOverwrite) }}
-        etcd-backup-restore:
-          image:
-            repository: {{ include "replaceRegistry" (dict "europe-docker.pkg.dev/gardener-project/public/gardener/etcdbrctl" .Values.registryOverwrite) }}
-{{- end }}
 {{- if .Values.backups.enabled }}
 {{- if eq .Values.backups.provider "azure" }}
         backup:
