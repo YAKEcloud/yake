@@ -5,4 +5,4 @@ dependencies:
   repository: ""
 description: A helmchart for networking-calico
 name: networking-calico
-version: 1.46.1
+version: 1.46.2
