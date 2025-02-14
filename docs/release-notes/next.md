@@ -1795,3 +1795,10 @@ no release notes available
 
 
 </details>
+
+<details>
+<summary><b>Update cloudprofiles to <code>0.7.23</code></b></summary>
+
+**Full Changelog**: https://github.com/gardener-community/cloudprofiles/compare/0.7.22...0.7.23
+
+</details>
