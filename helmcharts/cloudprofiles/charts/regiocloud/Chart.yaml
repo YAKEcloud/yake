@@ -3,4 +3,4 @@ appVersion: 0.20220317.0
 description: A Helm chart for Kubernetes
 name: regiocloud
 type: application
-version: 0.7.22
+version: 0.7.23

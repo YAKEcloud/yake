@@ -11,8 +11,12 @@ machineImages:
       versions:
         - cri:
             - name: containerd
-          version: 20.4.20210616
+          version: 24.4.20240529
 machineTypes:
+    - cpu: "2"
+      gpu: "0"
+      memory: 2Gi
+      name: cpx11
     - cpu: "2"
       gpu: "0"
       memory: 4Gi
@@ -98,7 +102,7 @@ providerConfig:
         - name: ubuntu
           versions:
             - imageName: ubuntu-20.04
-              version: 20.4.20210616
+              version: 24.4.20240529
     regions:
         - name: hel1
         - name: fsn1
