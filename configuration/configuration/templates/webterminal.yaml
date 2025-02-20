@@ -8,6 +8,12 @@ type: Opaque
 stringData:
   values.yaml: |-
     global:
+      controller:
+        manager:
+          config:
+            leaderElection:
+              leaderElect: true
+              resourceNamespace: kube-system
       deployment:
         createNamespace: false
         virtualGarden:

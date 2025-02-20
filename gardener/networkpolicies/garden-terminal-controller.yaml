@@ -1,0 +1,21 @@
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: yake-gardener-terminal-controller
+  namespace: garden
+spec:
+  podSelector:
+    matchLabels:
+      app.kubernetes.io/name: terminal
+      app.kubernetes.io/component: controller-manager
+  ingress:
+    - from:
+      - podSelector:
+          matchLabels:
+            app: garden
+            component: kube-apiserver
+  egress:
+    - {}
+  policyTypes:
+  - Ingress
+  - Egress
