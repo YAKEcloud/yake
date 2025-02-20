@@ -1,6 +1,6 @@
 {
   "assignees": [
-    "rhizoet"
+    "lotharbach"
   ],
   "baseBranches": [
     "main",
@@ -8,7 +8,8 @@
     "release-v1.107",
     "release-v1.108",
     "release-v1.109",
-    "release-v1.110"
+    "release-v1.110",
+    "release-v1.111"
   ],
   "automerge": true,
   "configMigration": true,
@@ -50,7 +51,8 @@
         "release-v1.107",
         "release-v1.108",
         "release-v1.109",
-        "release-v1.110"
+        "release-v1.110",
+        "release-v1.111"
       ],
       "enabled": false,
       "matchPackageNames": [
@@ -118,6 +120,20 @@
         "release-v1.110"
       ],
       "allowedVersions": "/^1[.]110[.].*$/",
+      "enabled": true,
+      "matchPackageNames": [
+        "/gardener-controlplane/",
+        "/gardener-controlplane-application/",
+        "/gardener-controlplane-runtime/",
+        "/gardener-application/",
+        "/gardenlet/"
+      ]
+    },
+    {
+      "matchBaseBranches": [
+        "release-v1.111"
+      ],
+      "allowedVersions": "/^1[.]111[.].*$/",
       "enabled": true,
       "matchPackageNames": [
         "/gardener-controlplane/",
