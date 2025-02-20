@@ -8,7 +8,7 @@ spec:
   dependsOn:
     - name: configuration
     - name: gardener-application
-  targetNamespace: terminal-system
+  targetNamespace: garden
   interval: 1m
   chart:
     spec:
@@ -81,7 +81,7 @@ spec:
   dependsOn:
     - name: configuration
     - name: terminal-controller-manager-runtime
-  targetNamespace: terminal-system
+  targetNamespace: garden
   kubeConfig:
     secretRef:
       name: gardener-internal-kubeconfig

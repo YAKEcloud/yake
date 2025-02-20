@@ -12,3 +12,4 @@ resources:
   - garden-identity.yaml
   - garden-kube-apiserver.yaml
   - garden-gardener-metrics-exporter.yaml
+  - garden-terminal-controller.yaml
