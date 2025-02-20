@@ -68,6 +68,10 @@ spec:
         podSelector:
           matchLabels:
             app: kustomize-controller
+      - podSelector:
+          matchLabels:
+            app.kubernetes.io/name: terminal
+            app.kubernetes.io/component: controller-manager
   egress:
     - {}
   policyTypes:
