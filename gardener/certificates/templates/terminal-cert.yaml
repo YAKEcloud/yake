@@ -6,16 +6,16 @@ metadata:
   namespace: flux-system
 spec:
   secretName: terminal-admission-controller-cert
-  commonName: terminal-admission-controller.terminal-system.svc.cluster.local
+  commonName: terminal-admission-controller.garden.svc.cluster.local
   duration: 87600h # 10 years
   usages:
     - server auth
   dnsNames:
     - terminal-admission-controller
-    - terminal-admission-controller.terminal-system
-    - terminal-admission-controller.terminal-system.svc
-    - terminal-admission-controller.terminal-system.svc.cluster
-    - terminal-admission-controller.terminal-system.svc.cluster.local
+    - terminal-admission-controller.garden
+    - terminal-admission-controller.garden.svc
+    - terminal-admission-controller.garden.svc.cluster
+    - terminal-admission-controller.garden.svc.cluster.local
   issuerRef:
     name: gardener-ca
   privateKey:
@@ -29,16 +29,16 @@ metadata:
   namespace: flux-system
 spec:
   secretName: terminal-metrics-cert
-  commonName: terminal-metrics.terminal-system.svc.cluster.local
+  commonName: terminal-metrics.garden.svc.cluster.local
   duration: 87600h # 10 years
   usages:
     - server auth
   dnsNames:
     - terminal-metrics
-    - terminal-metrics.terminal-system
-    - terminal-metrics.terminal-system.svc
-    - terminal-metrics.terminal-system.svc.cluster
-    - terminal-metrics.terminal-system.svc.cluster.local
+    - terminal-metrics.garden
+    - terminal-metrics.garden.svc
+    - terminal-metrics.garden.svc.cluster
+    - terminal-metrics.garden.svc.cluster.local
   issuerRef:
     name: gardener-ca
   privateKey:
