@@ -70,7 +70,7 @@ spec:
             app: kustomize-controller
       - namespaceSelector:
           matchLabels:
-            kubernetes.io/metadata.name: flux-system
+            kubernetes.io/metadata.name: terminal-system
         podSelector:
           matchLabels:
             component: terminal-manager
