@@ -113,4 +113,5 @@ git push -u origin "$branch"
 git push -u origin "$tag" -f
 
 # copy release notes to reuse in github release, cut frontmatter
-tail -n +5 "docs/release-notes/v$majorAndMinor.md" > /tmp/release-body.md
+# tail -n +5 "docs/release-notes/v$majorAndMinor.md" > /tmp/release-body.md
+echo "https://yake.cloud/release-notes/v$majorAndMinor" > /tmp/release-body.md
