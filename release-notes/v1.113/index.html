@@ -1,0 +1,406 @@
+<!doctype html>
+<html lang="en" dir="ltr" class="docs-wrapper plugin-docs plugin-id-release-notes docs-version-current docs-doc-page docs-doc-id-v1.113" data-has-hydrated="false">
+<head>
+<meta charset="UTF-8">
+<meta name="generator" content="Docusaurus v3.7.0">
+<title data-rh="true">Release Notes v1.113 | Yet another Kubernetes Engine</title><meta data-rh="true" name="viewport" content="width=device-width,initial-scale=1"><meta data-rh="true" name="twitter:card" content="summary_large_image"><meta data-rh="true" property="og:url" content="https://yake.cloud/release-notes/v1.113"><meta data-rh="true" property="og:locale" content="en"><meta data-rh="true" name="docusaurus_locale" content="en"><meta data-rh="true" name="docsearch:language" content="en"><meta data-rh="true" name="gardener" content="installation, production, operations, maintenance"><meta data-rh="true" name="docusaurus_version" content="current"><meta data-rh="true" name="docusaurus_tag" content="docs-release-notes-current"><meta data-rh="true" name="docsearch:version" content="current"><meta data-rh="true" name="docsearch:docusaurus_tag" content="docs-release-notes-current"><meta data-rh="true" property="og:title" content="Release Notes v1.113 | Yet another Kubernetes Engine"><meta data-rh="true" name="description" content="Yake release notes and upgrade guide"><meta data-rh="true" property="og:description" content="Yake release notes and upgrade guide"><link data-rh="true" rel="icon" href="/img/favicon.ico"><link data-rh="true" rel="canonical" href="https://yake.cloud/release-notes/v1.113"><link data-rh="true" rel="alternate" href="https://yake.cloud/release-notes/v1.113" hreflang="en"><link data-rh="true" rel="alternate" href="https://yake.cloud/release-notes/v1.113" hreflang="x-default"><link rel="alternate" type="application/rss+xml" href="/blog/rss.xml" title="Yet another Kubernetes Engine RSS Feed">
+<link rel="alternate" type="application/atom+xml" href="/blog/atom.xml" title="Yet another Kubernetes Engine Atom Feed"><link rel="stylesheet" href="/assets/css/styles.a6ab13cb.css">
+<script src="/assets/js/runtime~main.9846bc1f.js" defer="defer"></script>
+<script src="/assets/js/main.13efdfee.js" defer="defer"></script>
+</head>
+<body class="navigation-with-keyboard">
+<script>!function(){function t(t){document.documentElement.setAttribute("data-theme",t)}var e=function(){try{return new URLSearchParams(window.location.search).get("docusaurus-theme")}catch(t){}}()||function(){try{return window.localStorage.getItem("theme")}catch(t){}}();t(null!==e?e:"light")}(),function(){try{const n=new URLSearchParams(window.location.search).entries();for(var[t,e]of n)if(t.startsWith("docusaurus-data-")){var a=t.replace("docusaurus-data-","data-");document.documentElement.setAttribute(a,e)}}catch(t){}}()</script><div id="__docusaurus"><link rel="preload" as="image" href="/img/logo.svg"><link rel="preload" as="image" href="/img/logo_dark.svg"><div role="region" aria-label="Skip to main content"><a class="skipToContent_fXgn" href="#__docusaurus_skipToContent_fallback">Skip to main content</a></div><nav aria-label="Main" class="navbar navbar--fixed-top"><div class="navbar__inner"><div class="navbar__items"><button aria-label="Toggle navigation bar" aria-expanded="false" class="navbar__toggle clean-btn" type="button"><svg width="30" height="30" viewBox="0 0 30 30" aria-hidden="true"><path stroke="currentColor" stroke-linecap="round" stroke-miterlimit="10" stroke-width="2" d="M4 7h22M4 15h22M4 23h22"></path></svg></button><a class="navbar__brand" href="/"><div class="navbar__logo"><img src="/img/logo.svg" alt="YAKE" class="themedComponent_mlkZ themedComponent--light_NVdE"><img src="/img/logo_dark.svg" alt="YAKE" class="themedComponent_mlkZ themedComponent--dark_xIcU"></div><b class="navbar__title text--truncate">YAKE</b></a><a class="navbar__item navbar__link" href="/docs/overview">Docs</a><a aria-current="page" class="navbar__item navbar__link navbar__link--active" href="/release-notes/v1.113">Release Notes</a><a class="navbar__item navbar__link" href="/blog">Blog</a></div><div class="navbar__items navbar__items--right"><div class="navbar__item dropdown dropdown--hoverable dropdown--right"><a class="navbar__link" aria-haspopup="true" aria-expanded="false" role="button" href="/docs/overview">1.113.x</a><ul class="dropdown__menu"><li><a class="dropdown__link" href="/docs/next/overview">Next</a></li><li><a class="dropdown__link" href="/docs/overview">1.113.x</a></li><li><a class="dropdown__link" href="/docs/1.112.x/overview">1.112.x</a></li><li><a class="dropdown__link" href="/docs/1.111.x/overview">1.111.x</a></li><li><a class="dropdown__link" href="/docs/1.110.x/overview">1.110.x</a></li><li><a class="dropdown__link" href="/docs/1.109.x/overview">1.109.x</a></li><li><a class="dropdown__link" href="/docs/1.108.x/overview">1.108.x</a></li><li><a class="dropdown__link" href="/docs/1.107.x/overview">1.107.x</a></li><li><a class="dropdown__link" href="/docs/1.106.x/overview">1.106.x</a></li><li><a class="dropdown__link" href="/docs/1.105.x/overview">1.105.x</a></li><li><a class="dropdown__link" href="/docs/1.104.x/overview">1.104.x</a></li><li><a class="dropdown__link" href="/docs/1.103.x/overview">1.103.x</a></li><li><a class="dropdown__link" href="/docs/1.102.x/overview">1.102.x</a></li><li><a class="dropdown__link" href="/docs/1.101.x/overview">1.101.x</a></li><li><a class="dropdown__link" href="/docs/1.100.x/overview">1.100.x</a></li><li><a class="dropdown__link" href="/docs/1.99.x/overview">1.99.x</a></li><li><a class="dropdown__link" href="/docs/1.98.x/overview">1.98.x</a></li><li><a class="dropdown__link" href="/docs/1.97.x/overview">1.97.x</a></li><li><a class="dropdown__link" href="/docs/1.96.x/overview">1.96.x</a></li><li><a class="dropdown__link" href="/docs/1.95.x/overview">1.95.x</a></li><li><a class="dropdown__link" href="/docs/1.94.x/overview">1.94.x</a></li><li><a class="dropdown__link" href="/docs/1.93.x/overview">1.93.x</a></li><li><a class="dropdown__link" href="/docs/1.92.x/overview">1.92.x</a></li><li><a class="dropdown__link" href="/docs/1.91.x/overview">1.91.x</a></li><li><a class="dropdown__link" href="/docs/1.90.x/overview">1.90.x</a></li><li><a class="dropdown__link" href="/docs/1.89.x/overview">1.89.x</a></li><li><a class="dropdown__link" href="/docs/1.88.x/overview">1.88.x</a></li><li><a class="dropdown__link" href="/docs/1.87.x/overview">1.87.x</a></li><li><a class="dropdown__link" href="/docs/1.86.x/overview">1.86.x</a></li><li><a class="dropdown__link" href="/docs/1.85.x/overview">1.85.x</a></li><li><a class="dropdown__link" href="/docs/1.84.x/overview">1.84.x</a></li><li><a class="dropdown__link" href="/docs/1.83.x/overview">1.83.x</a></li><li><a class="dropdown__link" href="/docs/1.82.x/overview">1.82.x</a></li><li><a class="dropdown__link" href="/docs/1.81.x/overview">1.81.x</a></li><li><a class="dropdown__link" href="/docs/1.80.x/overview">1.80.x</a></li><li><a class="dropdown__link" href="/docs/1.79.x/overview">1.79.x</a></li><li><a class="dropdown__link" href="/docs/1.78.x/overview">1.78.x</a></li><li><a class="dropdown__link" href="/docs/1.77.x/overview">1.77.x</a></li><li><a class="dropdown__link" href="/docs/1.76.x/overview">1.76.x</a></li><li><a class="dropdown__link" href="/docs/1.75.x/overview">1.75.x</a></li><li><a class="dropdown__link" href="/docs/1.74.x/overview">1.74.x</a></li><li><a class="dropdown__link" href="/docs/1.73.x/overview">1.73.x</a></li><li><a class="dropdown__link" href="/docs/1.72.x/overview">1.72.x</a></li><li><a class="dropdown__link" href="/docs/1.71.x/overview">1.71.x</a></li><li><a class="dropdown__link" href="/docs/1.70.x/overview">1.70.x</a></li><li><a class="dropdown__link" href="/docs/1.69.x/overview">1.69.x</a></li><li><a class="dropdown__link" href="/docs/1.68.x/overview">1.68.x</a></li><li><a class="dropdown__link" href="/docs/1.67.x/overview">1.67.x</a></li><li><a class="dropdown__link" href="/docs/1.66.x/overview">1.66.x</a></li><li><a class="dropdown__link" href="/docs/1.65.x/overview">1.65.x</a></li><li><a class="dropdown__link" href="/docs/1.64.x/overview">1.64.x</a></li><li><a class="dropdown__link" href="/docs/1.63.x/overview">1.63.x</a></li></ul></div><a href="https://github.com/yakecloud/yake" target="_blank" rel="noopener noreferrer" class="navbar__item navbar__link">GitHub<svg width="13.5" height="13.5" aria-hidden="true" viewBox="0 0 24 24" class="iconExternalLink_nPIU"><path fill="currentColor" d="M21 13v10h-21v-19h12v2h-10v15h17v-8h2zm3-12h-10.988l4.035 4-6.977 7.07 2.828 2.828 6.977-7.07 4.125 4.172v-11z"></path></svg></a><div class="toggle_vylO colorModeToggle_DEke"><button class="clean-btn toggleButton_gllP toggleButtonDisabled_aARS" type="button" disabled="" title="Switch between dark and light mode (currently light mode)" aria-label="Switch between dark and light mode (currently light mode)" aria-live="polite" aria-pressed="false"><svg viewBox="0 0 24 24" width="24" height="24" class="lightToggleIcon_pyhR"><path fill="currentColor" d="M12,9c1.65,0,3,1.35,3,3s-1.35,3-3,3s-3-1.35-3-3S10.35,9,12,9 M12,7c-2.76,0-5,2.24-5,5s2.24,5,5,5s5-2.24,5-5 S14.76,7,12,7L12,7z M2,13l2,0c0.55,0,1-0.45,1-1s-0.45-1-1-1l-2,0c-0.55,0-1,0.45-1,1S1.45,13,2,13z M20,13l2,0c0.55,0,1-0.45,1-1 s-0.45-1-1-1l-2,0c-0.55,0-1,0.45-1,1S19.45,13,20,13z M11,2v2c0,0.55,0.45,1,1,1s1-0.45,1-1V2c0-0.55-0.45-1-1-1S11,1.45,11,2z M11,20v2c0,0.55,0.45,1,1,1s1-0.45,1-1v-2c0-0.55-0.45-1-1-1C11.45,19,11,19.45,11,20z M5.99,4.58c-0.39-0.39-1.03-0.39-1.41,0 c-0.39,0.39-0.39,1.03,0,1.41l1.06,1.06c0.39,0.39,1.03,0.39,1.41,0s0.39-1.03,0-1.41L5.99,4.58z M18.36,16.95 c-0.39-0.39-1.03-0.39-1.41,0c-0.39,0.39-0.39,1.03,0,1.41l1.06,1.06c0.39,0.39,1.03,0.39,1.41,0c0.39-0.39,0.39-1.03,0-1.41 L18.36,16.95z M19.42,5.99c0.39-0.39,0.39-1.03,0-1.41c-0.39-0.39-1.03-0.39-1.41,0l-1.06,1.06c-0.39,0.39-0.39,1.03,0,1.41 s1.03,0.39,1.41,0L19.42,5.99z M7.05,18.36c0.39-0.39,0.39-1.03,0-1.41c-0.39-0.39-1.03-0.39-1.41,0l-1.06,1.06 c-0.39,0.39-0.39,1.03,0,1.41s1.03,0.39,1.41,0L7.05,18.36z"></path></svg><svg viewBox="0 0 24 24" width="24" height="24" class="darkToggleIcon_wfgR"><path fill="currentColor" d="M9.37,5.51C9.19,6.15,9.1,6.82,9.1,7.5c0,4.08,3.32,7.4,7.4,7.4c0.68,0,1.35-0.09,1.99-0.27C17.45,17.19,14.93,19,12,19 c-3.86,0-7-3.14-7-7C5,9.07,6.81,6.55,9.37,5.51z M12,3c-4.97,0-9,4.03-9,9s4.03,9,9,9s9-4.03,9-9c0-0.46-0.04-0.92-0.1-1.36 c-0.98,1.37-2.58,2.26-4.4,2.26c-2.98,0-5.4-2.42-5.4-5.4c0-1.81,0.89-3.42,2.26-4.4C12.92,3.04,12.46,3,12,3L12,3z"></path></svg></button></div><div class="navbarSearchContainer_Bca1"><div class="navbar__search searchBarContainer_NW3z" dir="ltr"><input placeholder="Search" aria-label="Search" class="navbar__search-input searchInput_YFbd" value=""><div class="loadingRing_RJI3 searchBarLoadingRing_YnHq"><div></div><div></div><div></div><div></div></div></div></div></div></div><div role="presentation" class="navbar-sidebar__backdrop"></div></nav><div id="__docusaurus_skipToContent_fallback" class="main-wrapper mainWrapper_z2l0"><div class="docsWrapper_hBAB"><button aria-label="Scroll back to top" class="clean-btn theme-back-to-top-button backToTopButton_sjWU" type="button"></button><div class="docRoot_UBD9"><aside class="theme-doc-sidebar-container docSidebarContainer_YfHR"><div class="sidebarViewport_aRkj"><div class="sidebar_njMd"><nav aria-label="Docs sidebar" class="menu thin-scrollbar menu_SIkG"><ul class="theme-doc-sidebar-menu menu__list"><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-1 menu__list-item"><a class="menu__link" href="/release-notes/next">Release Notes next</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-1 menu__list-item"><a class="menu__link menu__link--active" aria-current="page" href="/release-notes/v1.113">Release Notes v1.113</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-1 menu__list-item"><a class="menu__link" href="/release-notes/v1.112">Release Notes v1.112</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-1 menu__list-item"><a class="menu__link" href="/release-notes/v1.111">Release Notes v1.111</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-1 menu__list-item"><a class="menu__link" href="/release-notes/v1.110">Release Notes v1.110</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-1 menu__list-item"><a class="menu__link" href="/release-notes/v1.109">Release Notes v1.109</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-1 menu__list-item"><a class="menu__link" href="/release-notes/v1.108">Release Notes v1.108</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-1 menu__list-item"><a class="menu__link" href="/release-notes/v1.107">Release Notes v1.107</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-1 menu__list-item"><a class="menu__link" href="/release-notes/v1.106">Release Notes v1.106</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-1 menu__list-item"><a class="menu__link" href="/release-notes/v1.105">Release Notes v1.105</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-1 menu__list-item"><a class="menu__link" href="/release-notes/v1.104">Release Notes v1.104</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-1 menu__list-item"><a class="menu__link" href="/release-notes/v1.103">Release Notes v1.103</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-1 menu__list-item"><a class="menu__link" href="/release-notes/v1.102">Release Notes v1.102</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-1 menu__list-item"><a class="menu__link" href="/release-notes/v1.101">Release Notes v1.101</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-1 menu__list-item"><a class="menu__link" href="/release-notes/v1.100">Release Notes v1.100</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-1 menu__list-item"><a class="menu__link" href="/release-notes/v1.99">Release Notes v1.99</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-1 menu__list-item"><a class="menu__link" href="/release-notes/v1.98">Release Notes v1.98</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-1 menu__list-item"><a class="menu__link" href="/release-notes/v1.97">Release Notes v1.97</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-1 menu__list-item"><a class="menu__link" href="/release-notes/v1.96">Release Notes v1.96</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-1 menu__list-item"><a class="menu__link" href="/release-notes/v1.95">Release Notes v1.95</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-1 menu__list-item"><a class="menu__link" href="/release-notes/v1.94">Release Notes v1.94</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-1 menu__list-item"><a class="menu__link" href="/release-notes/v1.93">Release Notes v1.93</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-1 menu__list-item"><a class="menu__link" href="/release-notes/v1.92">Release Notes v1.92</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-1 menu__list-item"><a class="menu__link" href="/release-notes/v1.91">Release Notes v1.91</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-1 menu__list-item"><a class="menu__link" href="/release-notes/v1.90">Release Notes v1.90</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-1 menu__list-item"><a class="menu__link" href="/release-notes/v1.89">Release Notes v1.89</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-1 menu__list-item"><a class="menu__link" href="/release-notes/v1.88">Release Notes v1.88</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-1 menu__list-item"><a class="menu__link" href="/release-notes/v1.87">Release Notes v1.87</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-1 menu__list-item"><a class="menu__link" href="/release-notes/v1.86">Release Notes v1.86</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-1 menu__list-item"><a class="menu__link" href="/release-notes/v1.85">Release Notes v1.85</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-1 menu__list-item"><a class="menu__link" href="/release-notes/v1.84">Release Notes v1.84</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-1 menu__list-item"><a class="menu__link" href="/release-notes/v1.83">Release Notes v1.83</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-1 menu__list-item"><a class="menu__link" href="/release-notes/v1.82">Release Notes v1.82</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-1 menu__list-item"><a class="menu__link" href="/release-notes/v1.81">Release Notes v1.81</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-1 menu__list-item"><a class="menu__link" href="/release-notes/v1.80">Release Notes v1.80</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-1 menu__list-item"><a class="menu__link" href="/release-notes/v1.79">Release Notes v1.79</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-1 menu__list-item"><a class="menu__link" href="/release-notes/v1.78">Release Notes v1.78</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-1 menu__list-item"><a class="menu__link" href="/release-notes/v1.77">Release Notes v1.77</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-1 menu__list-item"><a class="menu__link" href="/release-notes/v1.76">Release Notes v1.76</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-1 menu__list-item"><a class="menu__link" href="/release-notes/v1.75">Release Notes v1.75</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-1 menu__list-item"><a class="menu__link" href="/release-notes/v1.74">Release Notes v1.74</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-1 menu__list-item"><a class="menu__link" href="/release-notes/v1.73">Release Notes v1.73</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-1 menu__list-item"><a class="menu__link" href="/release-notes/v1.72">Release Notes v1.72</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-1 menu__list-item"><a class="menu__link" href="/release-notes/v1.71">Release Notes v1.71</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-1 menu__list-item"><a class="menu__link" href="/release-notes/v1.70">Release Notes v1.70</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-1 menu__list-item"><a class="menu__link" href="/release-notes/v1.69">Release Notes v1.69</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-1 menu__list-item"><a class="menu__link" href="/release-notes/v1.68">Release Notes v1.68</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-1 menu__list-item"><a class="menu__link" href="/release-notes/v1.67">Release Notes v1.67</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-1 menu__list-item"><a class="menu__link" href="/release-notes/v1.66">Release Notes v1.66</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-1 menu__list-item"><a class="menu__link" href="/release-notes/v1.65">Release Notes v1.65</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-1 menu__list-item"><a class="menu__link" href="/release-notes/v1.64">Release Notes v1.64</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-1 menu__list-item"><a class="menu__link" href="/release-notes/v1.63">Release Notes v1.63</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-1 menu__list-item"><a class="menu__link" href="/release-notes/v1.62">Release Notes v1.62</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-1 menu__list-item"><a class="menu__link" href="/release-notes/v1.61">Release Notes v1.61</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-1 menu__list-item"><a class="menu__link" href="/release-notes/v1.60">Release Notes v1.60</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-1 menu__list-item"><a class="menu__link" href="/release-notes/v1.59">Release Notes v1.59</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-1 menu__list-item"><a class="menu__link" href="/release-notes/v1.58">Release Notes v1.58</a></li></ul></nav></div></div></aside><main class="docMainContainer_TBSr"><div class="container padding-top--md padding-bottom--lg"><div class="row"><div class="col"><div class="docItemContainer_Djhp"><article><nav class="theme-doc-breadcrumbs breadcrumbsContainer_Z_bl" aria-label="Breadcrumbs"><ul class="breadcrumbs" itemscope="" itemtype="https://schema.org/BreadcrumbList"><li class="breadcrumbs__item"><a aria-label="Home page" class="breadcrumbs__link" href="/"><svg viewBox="0 0 24 24" class="breadcrumbHomeIcon_YNFT"><path d="M10 19v-5h4v5c0 .55.45 1 1 1h3c.55 0 1-.45 1-1v-7h1.7c.46 0 .68-.57.33-.87L12.67 3.6c-.38-.34-.96-.34-1.34 0l-8.36 7.53c-.34.3-.13.87.33.87H5v7c0 .55.45 1 1 1h3c.55 0 1-.45 1-1z" fill="currentColor"></path></svg></a></li><li itemscope="" itemprop="itemListElement" itemtype="https://schema.org/ListItem" class="breadcrumbs__item breadcrumbs__item--active"><span class="breadcrumbs__link" itemprop="name">Release Notes v1.113</span><meta itemprop="position" content="1"></li></ul></nav><div class="theme-doc-markdown markdown"><header><h1>Release Notes v1.113</h1></header>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="yake-release-notes-and-upgrade-guide">Yake release notes and upgrade guide<a href="#yake-release-notes-and-upgrade-guide" class="hash-link" aria-label="Direct link to Yake release notes and upgrade guide" title="Direct link to Yake release notes and upgrade guide">​</a></h2>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="related-upstream-release-notes--changelogs">Related upstream release notes / changelogs<a href="#related-upstream-release-notes--changelogs" class="hash-link" aria-label="Direct link to Related upstream release notes / changelogs" title="Direct link to Related upstream release notes / changelogs">​</a></h2>
+<details class="details_lb9f alert alert--info details_b_Ee" data-collapsed="true"><summary><b>Update runtime-gvisor to <code>0.18.0</code></b></summary><div><div class="collapsibleContent_i85q">
+<!-- -->
+<h1>[gardener/gardener-extension-runtime-gvisor]</h1>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="-others">🏃 Others<a href="#-others" class="hash-link" aria-label="Direct link to 🏃 Others" title="Direct link to 🏃 Others">​</a></h2>
+<ul>
+<li><code>[USER]</code> The gVisor binaries were updated to release <code>20250210.0</code>. by @MrBatschner [#192]</li>
+<li><code>[OPERATOR]</code> Containers, which do not require privilege escalations, now forbid privilege escalations explicitly. by @georgibaltiev [#176]</li>
+</ul>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="helm-charts">Helm Charts<a href="#helm-charts" class="hash-link" aria-label="Direct link to Helm Charts" title="Direct link to Helm Charts">​</a></h2>
+<ul>
+<li>runtime-gvisor: <code>europe-docker.pkg.dev/gardener-project/releases/charts/gardener/extensions/runtime-gvisor:v0.18.0</code></li>
+</ul>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="docker-images">Docker Images<a href="#docker-images" class="hash-link" aria-label="Direct link to Docker Images" title="Direct link to Docker Images">​</a></h2>
+<ul>
+<li>gardener-extension-runtime-gvisor-installation: <code>europe-docker.pkg.dev/gardener-project/releases/gardener/extensions/runtime-gvisor-installation:v0.18.0</code></li>
+<li>gardener-extension-runtime-gvisor: <code>europe-docker.pkg.dev/gardener-project/releases/gardener/extensions/runtime-gvisor:v0.18.0</code></li>
+</ul>
+</div></div></details>
+<details class="details_lb9f alert alert--info details_b_Ee" data-collapsed="true"><summary><b>Update provider-azure to <code>1.50.1</code></b></summary><div><div class="collapsibleContent_i85q">
+<!-- -->
+<p>no release notes available</p>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="helm-charts-1">Helm Charts<a href="#helm-charts-1" class="hash-link" aria-label="Direct link to Helm Charts" title="Direct link to Helm Charts">​</a></h2>
+<ul>
+<li>admission-azure-application: <code>europe-docker.pkg.dev/gardener-project/releases/charts/gardener/extensions/admission-azure-application:v1.50.1</code></li>
+<li>admission-azure-runtime: <code>europe-docker.pkg.dev/gardener-project/releases/charts/gardener/extensions/admission-azure-runtime:v1.50.1</code></li>
+<li>provider-azure: <code>europe-docker.pkg.dev/gardener-project/releases/charts/gardener/extensions/provider-azure:v1.50.1</code></li>
+</ul>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="docker-images-1">Docker Images<a href="#docker-images-1" class="hash-link" aria-label="Direct link to Docker Images" title="Direct link to Docker Images">​</a></h2>
+<ul>
+<li>gardener-extension-admission-azure: <code>europe-docker.pkg.dev/gardener-project/releases/gardener/extensions/admission-azure:v1.50.1</code></li>
+<li>gardener-extension-provider-azure: <code>europe-docker.pkg.dev/gardener-project/releases/gardener/extensions/provider-azure:v1.50.1</code></li>
+</ul>
+</div></div></details>
+<details class="details_lb9f alert alert--info details_b_Ee" data-collapsed="true"><summary><b>Update provider-alicloud to <code>1.59.1</code></b></summary><div><div class="collapsibleContent_i85q">
+<!-- -->
+<p>no release notes available</p>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="helm-charts-2">Helm Charts<a href="#helm-charts-2" class="hash-link" aria-label="Direct link to Helm Charts" title="Direct link to Helm Charts">​</a></h2>
+<ul>
+<li>admission-alicloud-application: <code>europe-docker.pkg.dev/gardener-project/releases/charts/gardener/extensions/admission-alicloud-application:v1.59.1</code></li>
+<li>admission-alicloud-runtime: <code>europe-docker.pkg.dev/gardener-project/releases/charts/gardener/extensions/admission-alicloud-runtime:v1.59.1</code></li>
+<li>provider-alicloud: <code>europe-docker.pkg.dev/gardener-project/releases/charts/gardener/extensions/provider-alicloud:v1.59.1</code></li>
+</ul>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="docker-images-2">Docker Images<a href="#docker-images-2" class="hash-link" aria-label="Direct link to Docker Images" title="Direct link to Docker Images">​</a></h2>
+<ul>
+<li>gardener-extension-admission-alicloud: <code>europe-docker.pkg.dev/gardener-project/releases/gardener/extensions/admission-alicloud:v1.59.1</code></li>
+<li>gardener-extension-provider-alicloud: <code>europe-docker.pkg.dev/gardener-project/releases/gardener/extensions/provider-alicloud:v1.59.1</code></li>
+</ul>
+</div></div></details>
+<details class="details_lb9f alert alert--info details_b_Ee" data-collapsed="true"><summary><b>Update gardener-controlplane to <code>1.113.0</code></b></summary><div><div class="collapsibleContent_i85q">
+<!-- -->
+<h1>[gardener/gardener]</h1>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="️-breaking-changes">⚠️ Breaking Changes<a href="#️-breaking-changes" class="hash-link" aria-label="Direct link to ⚠️ Breaking Changes" title="Direct link to ⚠️ Breaking Changes">​</a></h2>
+<ul>
+<li><code>[OPERATOR]</code> There is an incompatible change in the <code>Garden</code> (<code>gardens.operator.gardener.cloud</code>) custom resource: Fields <code>.spec.runtimeCluster.networking.{nodes,pods,services}</code> and <code>.spec.virtualCluster.networking.services</code> were changed from type <code>string</code> to type <code>[]string</code>, e.g., in JSON format, replace <code>&quot;nodes&quot;: &quot;10.0.0.0/16&quot;</code> with <code>&quot;nodes&quot;: [&quot;10.0.0.0/16&quot;]</code>. by @ScheererJ [#11251]</li>
+</ul>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="-noteworthy">📰 Noteworthy<a href="#-noteworthy" class="hash-link" aria-label="Direct link to 📰 Noteworthy" title="Direct link to 📰 Noteworthy">​</a></h2>
+<ul>
+<li><code>[OPERATOR]</code> Incoming reverse VPN connections no longer get authenticated by the reversed-vpn-auth-server as the authentication logic was moved to envoy itself. by @Wieneo [#11328]</li>
+<li><code>[OPERATOR]</code> The apiserver-proxy component does not use the proxy protocol anymore, see <a href="https://github.com/gardener/gardener/blob/master/docs/proposals/30-apiserver-proxy.md" target="_blank" rel="noopener noreferrer">GEP-30</a>. by @Wieneo [#11364]</li>
+<li><code>[OPERATOR]</code> The <code>shoot.gardener.cloud/managed-seed-api-server</code> annotation is deprecated and will be removed in a future release. Instead, consider enabling high availability for the ManagedSeed&#x27;s Shoot control plane. by @ialidzhikov [#11372]</li>
+<li><code>[OPERATOR]</code> Added a new feature gate called &quot;RemoveAPIServerProxyLegacyPort&quot;, which disables the unused proxy port (8443) on the istio-ingressgateway Services. Operators can choose to remove the legacy apiserver-proxy port as soon as all shoots have switched to the new apiserver-proxy configuration. They might want to do so if they activate the ACL extension, which is vulnerable to proxy protocol headers of untrusted clients on the apiserver-proxy port. by @Wieneo [#11380]</li>
+</ul>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="-new-features">✨ New Features<a href="#-new-features" class="hash-link" aria-label="Direct link to ✨ New Features" title="Direct link to ✨ New Features">​</a></h2>
+<ul>
+<li><code>[USER]</code> <code>gardener-operator</code> maintains information about Gardener API Server configuration in the world readable <code>ConfigMap</code> <code>gardener-info</code> in the <code>gardener-system-public</code> <code>Namespace</code>, read <a href="https://github.com/gardener/gardener/blob/master/docs/usage/gardener/gardener_info_configmap.md" target="_blank" rel="noopener noreferrer">here</a> for more details about the content of the<code>ConfigMap</code>.  by @vpnachev [#11238]</li>
+<li><code>[OPERATOR]</code> Enhance the <code>gardener-operator</code> to allow specification of more than a single network range for <code>.spec.runtimeCluster.networking.nodes</code>, <code>.spec.runtimeCluster.networking.pods</code>, <code>.spec.runtimeCluster.networking.services</code>, and <code>.spec.virtualCluster.networking.services</code>, which also allows dual-stack configurations. by @ScheererJ [#11251]</li>
+<li><code>[OPERATOR]</code> Introduces <code>shoot_operation_duration_seconds</code> metric to record <code>Shoot</code> operation <code>Create</code> and <code>Delete</code>.  by @simcod [#10971]</li>
+<li><code>[OPERATOR]</code> Gardener can now support clusters with Kubernetes version 1.32. To allow creation/update of 1.32 clusters you will have to update the version of your provider extension(s) to a version that supports 1.32 as well. Please consult the respective releases and notes in the provider extension&#x27;s repository. by @marc1404 [#11197]</li>
+<li><code>[OPERATOR]</code> <code>CloudProfile.spec.limits.maxNodesTotal</code> can be used to limit the maximum number of nodes a shoot can have during runtime. See <a href="https://github.com/gardener/gardener/blob/master/docs/usage/shoot/shoot_limits.md" target="_blank" rel="noopener noreferrer">the documentation</a> for more details. by @timebertt [#11279]</li>
+<li><code>[DEVELOPER]</code> Gardener can now support clusters with Kubernetes version 1.32. Extension developers have to prepare individual extensions as well to work with 1.32. by @marc1404 [#11197]</li>
+</ul>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="-bug-fixes">🐛 Bug Fixes<a href="#-bug-fixes" class="hash-link" aria-label="Direct link to 🐛 Bug Fixes" title="Direct link to 🐛 Bug Fixes">​</a></h2>
+<ul>
+<li><code>[OPERATOR]</code> A bug which prevented usage of labels with <code>seed.gardener.cloud/</code> prefix on <code>Seed</code>, <code>ManagedSeed</code>, <code>BackupEntry</code>, and <code>Shoot</code> resources has been fixed. by @rfranzke [#11485]</li>
+<li><code>[OPERATOR]</code> A misleading error message appearing when an operator has wrongly configured OIDC config for the Gardener Dashboard in the Garden resource was fixed. by @dimityrmirchev [#11432]</li>
+<li><code>[USER]</code> The ETCD encryption config now properly configures a 32-byte key. by @dimityrmirchev [#11150]</li>
+</ul>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="-others-1">🏃 Others<a href="#-others-1" class="hash-link" aria-label="Direct link to 🏃 Others" title="Direct link to 🏃 Others">​</a></h2>
+<ul>
+<li><code>[DEPENDENCY]</code> The following dependencies have been updated:
+<ul>
+<li><code>gardener/dependency-watchdog</code> from <code>v1.3.0</code> to <code>v1.4.0</code>. <a href="https://redirect.github.com/gardener/dependency-watchdog/releases/tag/v1.4.0" target="_blank" rel="noopener noreferrer">Release Notes</a></li>
+<li><code>github.com/gardener/dependency-watchdog</code> from <code>v1.3.0</code> to <code>v1.4.0</code>.  by @gardener-ci-robot [#11423]</li>
+</ul>
+</li>
+<li><code>[DEPENDENCY]</code> The following dependencies have been updated:
+<ul>
+<li><code>quay.io/brancz/kube-rbac-proxy</code> from <code>v0.18.2</code> to <code>v0.19.0</code>.  by @gardener-ci-robot [#11419]</li>
+</ul>
+</li>
+<li><code>[DEPENDENCY]</code> The following dependencies have been updated:
+<ul>
+<li><code>credativ/plutono</code> from <code>v7.5.35</code> to <code>v7.5.36</code>. <a href="https://redirect.github.com/credativ/plutono/releases/tag/v7.5.36" target="_blank" rel="noopener noreferrer">Release Notes</a> by @gardener-ci-robot [#11316]</li>
+</ul>
+</li>
+<li><code>[DEPENDENCY]</code> The following dependencies have been updated:
+<ul>
+<li><code>gardener/alpine-conntrack</code> from <code>3.21.1</code> to <code>3.21.3</code>. <a href="https://redirect.github.com/gardener/alpine-conntrack/releases/tag/3.21.3" target="_blank" rel="noopener noreferrer">Release Notes</a> by @gardener-ci-robot [#11409]</li>
+</ul>
+</li>
+<li><code>[DEPENDENCY]</code> The following dependencies have been updated:
+<ul>
+<li><code>gardener/apiserver-proxy</code> from <code>v0.18.0</code> to <code>v0.19.0</code>. <a href="https://redirect.github.com/gardener/apiserver-proxy/releases/tag/v0.19.0" target="_blank" rel="noopener noreferrer">Release Notes</a> by @gardener-ci-robot [#11330]</li>
+</ul>
+</li>
+<li><code>[DEPENDENCY]</code> The following dependencies have been updated:
+<ul>
+<li><code>gcr.io/istio-release/pilot</code> from <code>1.23.4</code> to <code>1.23.5</code>.</li>
+<li><code>gcr.io/istio-release/proxyv2</code> from <code>1.23.4</code> to <code>1.23.5</code>.  by @gardener-ci-robot [#11371]</li>
+</ul>
+</li>
+<li><code>[DEPENDENCY]</code> The following dependencies have been updated:
+<ul>
+<li><code>gardener/vpn2</code> from <code>0.34.0</code> to <code>0.35.0</code>. <a href="https://redirect.github.com/gardener/vpn2/releases/tag/0.35.0" target="_blank" rel="noopener noreferrer">Release Notes</a> by @gardener-ci-robot [#11348]</li>
+</ul>
+</li>
+<li><code>[DEPENDENCY]</code> The following dependencies have been updated:
+<ul>
+<li><code>gardener/vpn2</code> from <code>0.35.0</code> to <code>0.36.0</code>. <a href="https://redirect.github.com/gardener/vpn2/releases/tag/0.36.0" target="_blank" rel="noopener noreferrer">Release Notes</a> by @gardener-ci-robot [#11438]</li>
+</ul>
+</li>
+<li><code>[DEPENDENCY]</code> The following dependencies have been updated:
+<ul>
+<li><code>credativ/vali</code> from <code>v2.2.20</code> to <code>v2.2.21</code>. <a href="https://redirect.github.com/credativ/vali/releases/tag/v2.2.21" target="_blank" rel="noopener noreferrer">Release Notes</a> by @gardener-ci-robot [#11313]</li>
+</ul>
+</li>
+<li><code>[DEVELOPER]</code> The following dependencies are updated:
+<ul>
+<li><code>k8s.io/*</code>: <code>v0.31.6</code> -&gt; <code>v0.32.2</code></li>
+<li><code>sigs.k8s.io/controller-runtime</code>: <code>v0.19.6</code> -&gt; <code>v0.20.2</code></li>
+<li><code>sigs.k8s.io/controller-tools</code>: <code>v0.16.5</code> -&gt; <code>v0.17.2</code> by @LucaBernstein [#11418]</li>
+</ul>
+</li>
+<li><code>[DEVELOPER]</code> <code>github.com/gardener/gardener/pkg/utils/managedresources.{WaitUntilHealthy,WaitUntilHealthyAndNotProgressing}</code> funcs now accept a <code>client.Reader</code> instead of a <code>client.Client</code>. by @ialidzhikov [#11321]</li>
+<li><code>[DEVELOPER]</code> <code>golang-test</code> images for Go 1.24 are built now. Those for Go 1.22 are not built anymore because it is out of maintenance.  by @oliver-goetz [#11369]</li>
+<li><code>[OPERATOR]</code> Remove wildcards <code>*</code> from RBAC roles for the <code>cluster-autoscaler</code>, <code>machine-controller-manager</code> and <code>prometheus-operator</code> components. by @AleksandarSavchev [#11314]</li>
+<li><code>[OPERATOR]</code> Shoot system and Shoot control plane containers, which do not require privilege escalations, now forbid privilege escalation explicitly. There is an <a href="https://github.com/kubernetes/kubernetes/issues/118822" target="_blank" rel="noopener noreferrer">issue in Kubernetes</a> about the privilege escalation configuration being <code>true</code> by default. by @georgibaltiev [#11241]</li>
+<li><code>[OPERATOR]</code> Fix the <code>shoot-annotated-seed-service-endpoints</code> scrape configuration by adding the address port by @vicwicker [#11413]</li>
+<li><code>[OPERATOR]</code> Revisit the <code>VerticalPodAutoscalerCappedRecommendation</code> alert to fix a race condition and other small improvements by @vicwicker [#11325]</li>
+<li><code>[OPERATOR]</code> Remove CPU as controlled resource from VPA for alertmanager and vpn-authzserver.<br>
+Remove CPU requests from alertmanager and vpn-authzserver. by @voelzmo [#11366]</li>
+<li><code>[OPERATOR]</code> The <code>gardener-resource-manager</code> no longer syncs all resources every minute for virtual garden and shoot clusters. It already watches its desired resources anyways, i.e., it already reacts instantly, so there is no need to additionally apply them every minute. by @rfranzke [#11394]</li>
+</ul>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="helm-charts-3">Helm Charts<a href="#helm-charts-3" class="hash-link" aria-label="Direct link to Helm Charts" title="Direct link to Helm Charts">​</a></h2>
+<ul>
+<li>controlplane: <code>europe-docker.pkg.dev/gardener-project/releases/charts/gardener/controlplane:v1.113.0</code></li>
+<li>gardenlet: <code>europe-docker.pkg.dev/gardener-project/releases/charts/gardener/gardenlet:v1.113.0</code></li>
+<li>operator: <code>europe-docker.pkg.dev/gardener-project/releases/charts/gardener/operator:v1.113.0</code></li>
+<li>resource-manager: <code>europe-docker.pkg.dev/gardener-project/releases/charts/gardener/resource-manager:v1.113.0</code></li>
+</ul>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="docker-images-3">Docker Images<a href="#docker-images-3" class="hash-link" aria-label="Direct link to Docker Images" title="Direct link to Docker Images">​</a></h2>
+<ul>
+<li>admission-controller: <code>europe-docker.pkg.dev/gardener-project/releases/gardener/admission-controller:v1.113.0</code></li>
+<li>apiserver: <code>europe-docker.pkg.dev/gardener-project/releases/gardener/apiserver:v1.113.0</code></li>
+<li>controller-manager: <code>europe-docker.pkg.dev/gardener-project/releases/gardener/controller-manager:v1.113.0</code></li>
+<li>gardenlet: <code>europe-docker.pkg.dev/gardener-project/releases/gardener/gardenlet:v1.113.0</code></li>
+<li>node-agent: <code>europe-docker.pkg.dev/gardener-project/releases/gardener/node-agent:v1.113.0</code></li>
+<li>operator: <code>europe-docker.pkg.dev/gardener-project/releases/gardener/operator:v1.113.0</code></li>
+<li>resource-manager: <code>europe-docker.pkg.dev/gardener-project/releases/gardener/resource-manager:v1.113.0</code></li>
+<li>scheduler: <code>europe-docker.pkg.dev/gardener-project/releases/gardener/scheduler:v1.113.0</code></li>
+</ul>
+</div></div></details>
+<details class="details_lb9f alert alert--info details_b_Ee" data-collapsed="true"><summary><b>Update gardener-controlplane to <code>1.113.0</code></b></summary><div><div class="collapsibleContent_i85q">
+<!-- -->
+<h1>[gardener/gardener]</h1>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="️-breaking-changes-1">⚠️ Breaking Changes<a href="#️-breaking-changes-1" class="hash-link" aria-label="Direct link to ⚠️ Breaking Changes" title="Direct link to ⚠️ Breaking Changes">​</a></h2>
+<ul>
+<li><code>[OPERATOR]</code> There is an incompatible change in the <code>Garden</code> (<code>gardens.operator.gardener.cloud</code>) custom resource: Fields <code>.spec.runtimeCluster.networking.{nodes,pods,services}</code> and <code>.spec.virtualCluster.networking.services</code> were changed from type <code>string</code> to type <code>[]string</code>, e.g., in JSON format, replace <code>&quot;nodes&quot;: &quot;10.0.0.0/16&quot;</code> with <code>&quot;nodes&quot;: [&quot;10.0.0.0/16&quot;]</code>. by @ScheererJ [#11251]</li>
+</ul>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="-noteworthy-1">📰 Noteworthy<a href="#-noteworthy-1" class="hash-link" aria-label="Direct link to 📰 Noteworthy" title="Direct link to 📰 Noteworthy">​</a></h2>
+<ul>
+<li><code>[OPERATOR]</code> Incoming reverse VPN connections no longer get authenticated by the reversed-vpn-auth-server as the authentication logic was moved to envoy itself. by @Wieneo [#11328]</li>
+<li><code>[OPERATOR]</code> The apiserver-proxy component does not use the proxy protocol anymore, see <a href="https://github.com/gardener/gardener/blob/master/docs/proposals/30-apiserver-proxy.md" target="_blank" rel="noopener noreferrer">GEP-30</a>. by @Wieneo [#11364]</li>
+<li><code>[OPERATOR]</code> The <code>shoot.gardener.cloud/managed-seed-api-server</code> annotation is deprecated and will be removed in a future release. Instead, consider enabling high availability for the ManagedSeed&#x27;s Shoot control plane. by @ialidzhikov [#11372]</li>
+<li><code>[OPERATOR]</code> Added a new feature gate called &quot;RemoveAPIServerProxyLegacyPort&quot;, which disables the unused proxy port (8443) on the istio-ingressgateway Services. Operators can choose to remove the legacy apiserver-proxy port as soon as all shoots have switched to the new apiserver-proxy configuration. They might want to do so if they activate the ACL extension, which is vulnerable to proxy protocol headers of untrusted clients on the apiserver-proxy port. by @Wieneo [#11380]</li>
+</ul>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="-new-features-1">✨ New Features<a href="#-new-features-1" class="hash-link" aria-label="Direct link to ✨ New Features" title="Direct link to ✨ New Features">​</a></h2>
+<ul>
+<li><code>[USER]</code> <code>gardener-operator</code> maintains information about Gardener API Server configuration in the world readable <code>ConfigMap</code> <code>gardener-info</code> in the <code>gardener-system-public</code> <code>Namespace</code>, read <a href="https://github.com/gardener/gardener/blob/master/docs/usage/gardener/gardener_info_configmap.md" target="_blank" rel="noopener noreferrer">here</a> for more details about the content of the<code>ConfigMap</code>.  by @vpnachev [#11238]</li>
+<li><code>[OPERATOR]</code> Enhance the <code>gardener-operator</code> to allow specification of more than a single network range for <code>.spec.runtimeCluster.networking.nodes</code>, <code>.spec.runtimeCluster.networking.pods</code>, <code>.spec.runtimeCluster.networking.services</code>, and <code>.spec.virtualCluster.networking.services</code>, which also allows dual-stack configurations. by @ScheererJ [#11251]</li>
+<li><code>[OPERATOR]</code> Introduces <code>shoot_operation_duration_seconds</code> metric to record <code>Shoot</code> operation <code>Create</code> and <code>Delete</code>.  by @simcod [#10971]</li>
+<li><code>[OPERATOR]</code> Gardener can now support clusters with Kubernetes version 1.32. To allow creation/update of 1.32 clusters you will have to update the version of your provider extension(s) to a version that supports 1.32 as well. Please consult the respective releases and notes in the provider extension&#x27;s repository. by @marc1404 [#11197]</li>
+<li><code>[OPERATOR]</code> <code>CloudProfile.spec.limits.maxNodesTotal</code> can be used to limit the maximum number of nodes a shoot can have during runtime. See <a href="https://github.com/gardener/gardener/blob/master/docs/usage/shoot/shoot_limits.md" target="_blank" rel="noopener noreferrer">the documentation</a> for more details. by @timebertt [#11279]</li>
+<li><code>[DEVELOPER]</code> Gardener can now support clusters with Kubernetes version 1.32. Extension developers have to prepare individual extensions as well to work with 1.32. by @marc1404 [#11197]</li>
+</ul>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="-bug-fixes-1">🐛 Bug Fixes<a href="#-bug-fixes-1" class="hash-link" aria-label="Direct link to 🐛 Bug Fixes" title="Direct link to 🐛 Bug Fixes">​</a></h2>
+<ul>
+<li><code>[OPERATOR]</code> A bug which prevented usage of labels with <code>seed.gardener.cloud/</code> prefix on <code>Seed</code>, <code>ManagedSeed</code>, <code>BackupEntry</code>, and <code>Shoot</code> resources has been fixed. by @rfranzke [#11485]</li>
+<li><code>[OPERATOR]</code> A misleading error message appearing when an operator has wrongly configured OIDC config for the Gardener Dashboard in the Garden resource was fixed. by @dimityrmirchev [#11432]</li>
+<li><code>[USER]</code> The ETCD encryption config now properly configures a 32-byte key. by @dimityrmirchev [#11150]</li>
+</ul>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="-others-2">🏃 Others<a href="#-others-2" class="hash-link" aria-label="Direct link to 🏃 Others" title="Direct link to 🏃 Others">​</a></h2>
+<ul>
+<li><code>[DEPENDENCY]</code> The following dependencies have been updated:
+<ul>
+<li><code>gardener/dependency-watchdog</code> from <code>v1.3.0</code> to <code>v1.4.0</code>. <a href="https://redirect.github.com/gardener/dependency-watchdog/releases/tag/v1.4.0" target="_blank" rel="noopener noreferrer">Release Notes</a></li>
+<li><code>github.com/gardener/dependency-watchdog</code> from <code>v1.3.0</code> to <code>v1.4.0</code>.  by @gardener-ci-robot [#11423]</li>
+</ul>
+</li>
+<li><code>[DEPENDENCY]</code> The following dependencies have been updated:
+<ul>
+<li><code>quay.io/brancz/kube-rbac-proxy</code> from <code>v0.18.2</code> to <code>v0.19.0</code>.  by @gardener-ci-robot [#11419]</li>
+</ul>
+</li>
+<li><code>[DEPENDENCY]</code> The following dependencies have been updated:
+<ul>
+<li><code>credativ/plutono</code> from <code>v7.5.35</code> to <code>v7.5.36</code>. <a href="https://redirect.github.com/credativ/plutono/releases/tag/v7.5.36" target="_blank" rel="noopener noreferrer">Release Notes</a> by @gardener-ci-robot [#11316]</li>
+</ul>
+</li>
+<li><code>[DEPENDENCY]</code> The following dependencies have been updated:
+<ul>
+<li><code>gardener/alpine-conntrack</code> from <code>3.21.1</code> to <code>3.21.3</code>. <a href="https://redirect.github.com/gardener/alpine-conntrack/releases/tag/3.21.3" target="_blank" rel="noopener noreferrer">Release Notes</a> by @gardener-ci-robot [#11409]</li>
+</ul>
+</li>
+<li><code>[DEPENDENCY]</code> The following dependencies have been updated:
+<ul>
+<li><code>gardener/apiserver-proxy</code> from <code>v0.18.0</code> to <code>v0.19.0</code>. <a href="https://redirect.github.com/gardener/apiserver-proxy/releases/tag/v0.19.0" target="_blank" rel="noopener noreferrer">Release Notes</a> by @gardener-ci-robot [#11330]</li>
+</ul>
+</li>
+<li><code>[DEPENDENCY]</code> The following dependencies have been updated:
+<ul>
+<li><code>gcr.io/istio-release/pilot</code> from <code>1.23.4</code> to <code>1.23.5</code>.</li>
+<li><code>gcr.io/istio-release/proxyv2</code> from <code>1.23.4</code> to <code>1.23.5</code>.  by @gardener-ci-robot [#11371]</li>
+</ul>
+</li>
+<li><code>[DEPENDENCY]</code> The following dependencies have been updated:
+<ul>
+<li><code>gardener/vpn2</code> from <code>0.34.0</code> to <code>0.35.0</code>. <a href="https://redirect.github.com/gardener/vpn2/releases/tag/0.35.0" target="_blank" rel="noopener noreferrer">Release Notes</a> by @gardener-ci-robot [#11348]</li>
+</ul>
+</li>
+<li><code>[DEPENDENCY]</code> The following dependencies have been updated:
+<ul>
+<li><code>gardener/vpn2</code> from <code>0.35.0</code> to <code>0.36.0</code>. <a href="https://redirect.github.com/gardener/vpn2/releases/tag/0.36.0" target="_blank" rel="noopener noreferrer">Release Notes</a> by @gardener-ci-robot [#11438]</li>
+</ul>
+</li>
+<li><code>[DEPENDENCY]</code> The following dependencies have been updated:
+<ul>
+<li><code>credativ/vali</code> from <code>v2.2.20</code> to <code>v2.2.21</code>. <a href="https://redirect.github.com/credativ/vali/releases/tag/v2.2.21" target="_blank" rel="noopener noreferrer">Release Notes</a> by @gardener-ci-robot [#11313]</li>
+</ul>
+</li>
+<li><code>[DEVELOPER]</code> The following dependencies are updated:
+<ul>
+<li><code>k8s.io/*</code>: <code>v0.31.6</code> -&gt; <code>v0.32.2</code></li>
+<li><code>sigs.k8s.io/controller-runtime</code>: <code>v0.19.6</code> -&gt; <code>v0.20.2</code></li>
+<li><code>sigs.k8s.io/controller-tools</code>: <code>v0.16.5</code> -&gt; <code>v0.17.2</code> by @LucaBernstein [#11418]</li>
+</ul>
+</li>
+<li><code>[DEVELOPER]</code> <code>github.com/gardener/gardener/pkg/utils/managedresources.{WaitUntilHealthy,WaitUntilHealthyAndNotProgressing}</code> funcs now accept a <code>client.Reader</code> instead of a <code>client.Client</code>. by @ialidzhikov [#11321]</li>
+<li><code>[DEVELOPER]</code> <code>golang-test</code> images for Go 1.24 are built now. Those for Go 1.22 are not built anymore because it is out of maintenance.  by @oliver-goetz [#11369]</li>
+<li><code>[OPERATOR]</code> Remove wildcards <code>*</code> from RBAC roles for the <code>cluster-autoscaler</code>, <code>machine-controller-manager</code> and <code>prometheus-operator</code> components. by @AleksandarSavchev [#11314]</li>
+<li><code>[OPERATOR]</code> Shoot system and Shoot control plane containers, which do not require privilege escalations, now forbid privilege escalation explicitly. There is an <a href="https://github.com/kubernetes/kubernetes/issues/118822" target="_blank" rel="noopener noreferrer">issue in Kubernetes</a> about the privilege escalation configuration being <code>true</code> by default. by @georgibaltiev [#11241]</li>
+<li><code>[OPERATOR]</code> Fix the <code>shoot-annotated-seed-service-endpoints</code> scrape configuration by adding the address port by @vicwicker [#11413]</li>
+<li><code>[OPERATOR]</code> Revisit the <code>VerticalPodAutoscalerCappedRecommendation</code> alert to fix a race condition and other small improvements by @vicwicker [#11325]</li>
+<li><code>[OPERATOR]</code> Remove CPU as controlled resource from VPA for alertmanager and vpn-authzserver.<br>
+Remove CPU requests from alertmanager and vpn-authzserver. by @voelzmo [#11366]</li>
+<li><code>[OPERATOR]</code> The <code>gardener-resource-manager</code> no longer syncs all resources every minute for virtual garden and shoot clusters. It already watches its desired resources anyways, i.e., it already reacts instantly, so there is no need to additionally apply them every minute. by @rfranzke [#11394]</li>
+</ul>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="helm-charts-4">Helm Charts<a href="#helm-charts-4" class="hash-link" aria-label="Direct link to Helm Charts" title="Direct link to Helm Charts">​</a></h2>
+<ul>
+<li>controlplane: <code>europe-docker.pkg.dev/gardener-project/releases/charts/gardener/controlplane:v1.113.0</code></li>
+<li>gardenlet: <code>europe-docker.pkg.dev/gardener-project/releases/charts/gardener/gardenlet:v1.113.0</code></li>
+<li>operator: <code>europe-docker.pkg.dev/gardener-project/releases/charts/gardener/operator:v1.113.0</code></li>
+<li>resource-manager: <code>europe-docker.pkg.dev/gardener-project/releases/charts/gardener/resource-manager:v1.113.0</code></li>
+</ul>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="docker-images-4">Docker Images<a href="#docker-images-4" class="hash-link" aria-label="Direct link to Docker Images" title="Direct link to Docker Images">​</a></h2>
+<ul>
+<li>admission-controller: <code>europe-docker.pkg.dev/gardener-project/releases/gardener/admission-controller:v1.113.0</code></li>
+<li>apiserver: <code>europe-docker.pkg.dev/gardener-project/releases/gardener/apiserver:v1.113.0</code></li>
+<li>controller-manager: <code>europe-docker.pkg.dev/gardener-project/releases/gardener/controller-manager:v1.113.0</code></li>
+<li>gardenlet: <code>europe-docker.pkg.dev/gardener-project/releases/gardener/gardenlet:v1.113.0</code></li>
+<li>node-agent: <code>europe-docker.pkg.dev/gardener-project/releases/gardener/node-agent:v1.113.0</code></li>
+<li>operator: <code>europe-docker.pkg.dev/gardener-project/releases/gardener/operator:v1.113.0</code></li>
+<li>resource-manager: <code>europe-docker.pkg.dev/gardener-project/releases/gardener/resource-manager:v1.113.0</code></li>
+<li>scheduler: <code>europe-docker.pkg.dev/gardener-project/releases/gardener/scheduler:v1.113.0</code></li>
+</ul>
+</div></div></details>
+<details class="details_lb9f alert alert--info details_b_Ee" data-collapsed="true"><summary><b>Update gardenlet to <code>1.113.0</code></b></summary><div><div class="collapsibleContent_i85q">
+<!-- -->
+<h1>[gardener/gardener]</h1>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="️-breaking-changes-2">⚠️ Breaking Changes<a href="#️-breaking-changes-2" class="hash-link" aria-label="Direct link to ⚠️ Breaking Changes" title="Direct link to ⚠️ Breaking Changes">​</a></h2>
+<ul>
+<li><code>[OPERATOR]</code> There is an incompatible change in the <code>Garden</code> (<code>gardens.operator.gardener.cloud</code>) custom resource: Fields <code>.spec.runtimeCluster.networking.{nodes,pods,services}</code> and <code>.spec.virtualCluster.networking.services</code> were changed from type <code>string</code> to type <code>[]string</code>, e.g., in JSON format, replace <code>&quot;nodes&quot;: &quot;10.0.0.0/16&quot;</code> with <code>&quot;nodes&quot;: [&quot;10.0.0.0/16&quot;]</code>. by @ScheererJ [#11251]</li>
+</ul>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="-noteworthy-2">📰 Noteworthy<a href="#-noteworthy-2" class="hash-link" aria-label="Direct link to 📰 Noteworthy" title="Direct link to 📰 Noteworthy">​</a></h2>
+<ul>
+<li><code>[OPERATOR]</code> Incoming reverse VPN connections no longer get authenticated by the reversed-vpn-auth-server as the authentication logic was moved to envoy itself. by @Wieneo [#11328]</li>
+<li><code>[OPERATOR]</code> The apiserver-proxy component does not use the proxy protocol anymore, see <a href="https://github.com/gardener/gardener/blob/master/docs/proposals/30-apiserver-proxy.md" target="_blank" rel="noopener noreferrer">GEP-30</a>. by @Wieneo [#11364]</li>
+<li><code>[OPERATOR]</code> The <code>shoot.gardener.cloud/managed-seed-api-server</code> annotation is deprecated and will be removed in a future release. Instead, consider enabling high availability for the ManagedSeed&#x27;s Shoot control plane. by @ialidzhikov [#11372]</li>
+<li><code>[OPERATOR]</code> Added a new feature gate called &quot;RemoveAPIServerProxyLegacyPort&quot;, which disables the unused proxy port (8443) on the istio-ingressgateway Services. Operators can choose to remove the legacy apiserver-proxy port as soon as all shoots have switched to the new apiserver-proxy configuration. They might want to do so if they activate the ACL extension, which is vulnerable to proxy protocol headers of untrusted clients on the apiserver-proxy port. by @Wieneo [#11380]</li>
+</ul>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="-new-features-2">✨ New Features<a href="#-new-features-2" class="hash-link" aria-label="Direct link to ✨ New Features" title="Direct link to ✨ New Features">​</a></h2>
+<ul>
+<li><code>[USER]</code> <code>gardener-operator</code> maintains information about Gardener API Server configuration in the world readable <code>ConfigMap</code> <code>gardener-info</code> in the <code>gardener-system-public</code> <code>Namespace</code>, read <a href="https://github.com/gardener/gardener/blob/master/docs/usage/gardener/gardener_info_configmap.md" target="_blank" rel="noopener noreferrer">here</a> for more details about the content of the<code>ConfigMap</code>.  by @vpnachev [#11238]</li>
+<li><code>[OPERATOR]</code> Enhance the <code>gardener-operator</code> to allow specification of more than a single network range for <code>.spec.runtimeCluster.networking.nodes</code>, <code>.spec.runtimeCluster.networking.pods</code>, <code>.spec.runtimeCluster.networking.services</code>, and <code>.spec.virtualCluster.networking.services</code>, which also allows dual-stack configurations. by @ScheererJ [#11251]</li>
+<li><code>[OPERATOR]</code> Introduces <code>shoot_operation_duration_seconds</code> metric to record <code>Shoot</code> operation <code>Create</code> and <code>Delete</code>.  by @simcod [#10971]</li>
+<li><code>[OPERATOR]</code> Gardener can now support clusters with Kubernetes version 1.32. To allow creation/update of 1.32 clusters you will have to update the version of your provider extension(s) to a version that supports 1.32 as well. Please consult the respective releases and notes in the provider extension&#x27;s repository. by @marc1404 [#11197]</li>
+<li><code>[OPERATOR]</code> <code>CloudProfile.spec.limits.maxNodesTotal</code> can be used to limit the maximum number of nodes a shoot can have during runtime. See <a href="https://github.com/gardener/gardener/blob/master/docs/usage/shoot/shoot_limits.md" target="_blank" rel="noopener noreferrer">the documentation</a> for more details. by @timebertt [#11279]</li>
+<li><code>[DEVELOPER]</code> Gardener can now support clusters with Kubernetes version 1.32. Extension developers have to prepare individual extensions as well to work with 1.32. by @marc1404 [#11197]</li>
+</ul>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="-bug-fixes-2">🐛 Bug Fixes<a href="#-bug-fixes-2" class="hash-link" aria-label="Direct link to 🐛 Bug Fixes" title="Direct link to 🐛 Bug Fixes">​</a></h2>
+<ul>
+<li><code>[OPERATOR]</code> A bug which prevented usage of labels with <code>seed.gardener.cloud/</code> prefix on <code>Seed</code>, <code>ManagedSeed</code>, <code>BackupEntry</code>, and <code>Shoot</code> resources has been fixed. by @rfranzke [#11485]</li>
+<li><code>[OPERATOR]</code> A misleading error message appearing when an operator has wrongly configured OIDC config for the Gardener Dashboard in the Garden resource was fixed. by @dimityrmirchev [#11432]</li>
+<li><code>[USER]</code> The ETCD encryption config now properly configures a 32-byte key. by @dimityrmirchev [#11150]</li>
+</ul>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="-others-3">🏃 Others<a href="#-others-3" class="hash-link" aria-label="Direct link to 🏃 Others" title="Direct link to 🏃 Others">​</a></h2>
+<ul>
+<li><code>[DEPENDENCY]</code> The following dependencies have been updated:
+<ul>
+<li><code>gardener/dependency-watchdog</code> from <code>v1.3.0</code> to <code>v1.4.0</code>. <a href="https://redirect.github.com/gardener/dependency-watchdog/releases/tag/v1.4.0" target="_blank" rel="noopener noreferrer">Release Notes</a></li>
+<li><code>github.com/gardener/dependency-watchdog</code> from <code>v1.3.0</code> to <code>v1.4.0</code>.  by @gardener-ci-robot [#11423]</li>
+</ul>
+</li>
+<li><code>[DEPENDENCY]</code> The following dependencies have been updated:
+<ul>
+<li><code>quay.io/brancz/kube-rbac-proxy</code> from <code>v0.18.2</code> to <code>v0.19.0</code>.  by @gardener-ci-robot [#11419]</li>
+</ul>
+</li>
+<li><code>[DEPENDENCY]</code> The following dependencies have been updated:
+<ul>
+<li><code>credativ/plutono</code> from <code>v7.5.35</code> to <code>v7.5.36</code>. <a href="https://redirect.github.com/credativ/plutono/releases/tag/v7.5.36" target="_blank" rel="noopener noreferrer">Release Notes</a> by @gardener-ci-robot [#11316]</li>
+</ul>
+</li>
+<li><code>[DEPENDENCY]</code> The following dependencies have been updated:
+<ul>
+<li><code>gardener/alpine-conntrack</code> from <code>3.21.1</code> to <code>3.21.3</code>. <a href="https://redirect.github.com/gardener/alpine-conntrack/releases/tag/3.21.3" target="_blank" rel="noopener noreferrer">Release Notes</a> by @gardener-ci-robot [#11409]</li>
+</ul>
+</li>
+<li><code>[DEPENDENCY]</code> The following dependencies have been updated:
+<ul>
+<li><code>gardener/apiserver-proxy</code> from <code>v0.18.0</code> to <code>v0.19.0</code>. <a href="https://redirect.github.com/gardener/apiserver-proxy/releases/tag/v0.19.0" target="_blank" rel="noopener noreferrer">Release Notes</a> by @gardener-ci-robot [#11330]</li>
+</ul>
+</li>
+<li><code>[DEPENDENCY]</code> The following dependencies have been updated:
+<ul>
+<li><code>gcr.io/istio-release/pilot</code> from <code>1.23.4</code> to <code>1.23.5</code>.</li>
+<li><code>gcr.io/istio-release/proxyv2</code> from <code>1.23.4</code> to <code>1.23.5</code>.  by @gardener-ci-robot [#11371]</li>
+</ul>
+</li>
+<li><code>[DEPENDENCY]</code> The following dependencies have been updated:
+<ul>
+<li><code>gardener/vpn2</code> from <code>0.34.0</code> to <code>0.35.0</code>. <a href="https://redirect.github.com/gardener/vpn2/releases/tag/0.35.0" target="_blank" rel="noopener noreferrer">Release Notes</a> by @gardener-ci-robot [#11348]</li>
+</ul>
+</li>
+<li><code>[DEPENDENCY]</code> The following dependencies have been updated:
+<ul>
+<li><code>gardener/vpn2</code> from <code>0.35.0</code> to <code>0.36.0</code>. <a href="https://redirect.github.com/gardener/vpn2/releases/tag/0.36.0" target="_blank" rel="noopener noreferrer">Release Notes</a> by @gardener-ci-robot [#11438]</li>
+</ul>
+</li>
+<li><code>[DEPENDENCY]</code> The following dependencies have been updated:
+<ul>
+<li><code>credativ/vali</code> from <code>v2.2.20</code> to <code>v2.2.21</code>. <a href="https://redirect.github.com/credativ/vali/releases/tag/v2.2.21" target="_blank" rel="noopener noreferrer">Release Notes</a> by @gardener-ci-robot [#11313]</li>
+</ul>
+</li>
+<li><code>[DEVELOPER]</code> The following dependencies are updated:
+<ul>
+<li><code>k8s.io/*</code>: <code>v0.31.6</code> -&gt; <code>v0.32.2</code></li>
+<li><code>sigs.k8s.io/controller-runtime</code>: <code>v0.19.6</code> -&gt; <code>v0.20.2</code></li>
+<li><code>sigs.k8s.io/controller-tools</code>: <code>v0.16.5</code> -&gt; <code>v0.17.2</code> by @LucaBernstein [#11418]</li>
+</ul>
+</li>
+<li><code>[DEVELOPER]</code> <code>github.com/gardener/gardener/pkg/utils/managedresources.{WaitUntilHealthy,WaitUntilHealthyAndNotProgressing}</code> funcs now accept a <code>client.Reader</code> instead of a <code>client.Client</code>. by @ialidzhikov [#11321]</li>
+<li><code>[DEVELOPER]</code> <code>golang-test</code> images for Go 1.24 are built now. Those for Go 1.22 are not built anymore because it is out of maintenance.  by @oliver-goetz [#11369]</li>
+<li><code>[OPERATOR]</code> Remove wildcards <code>*</code> from RBAC roles for the <code>cluster-autoscaler</code>, <code>machine-controller-manager</code> and <code>prometheus-operator</code> components. by @AleksandarSavchev [#11314]</li>
+<li><code>[OPERATOR]</code> Shoot system and Shoot control plane containers, which do not require privilege escalations, now forbid privilege escalation explicitly. There is an <a href="https://github.com/kubernetes/kubernetes/issues/118822" target="_blank" rel="noopener noreferrer">issue in Kubernetes</a> about the privilege escalation configuration being <code>true</code> by default. by @georgibaltiev [#11241]</li>
+<li><code>[OPERATOR]</code> Fix the <code>shoot-annotated-seed-service-endpoints</code> scrape configuration by adding the address port by @vicwicker [#11413]</li>
+<li><code>[OPERATOR]</code> Revisit the <code>VerticalPodAutoscalerCappedRecommendation</code> alert to fix a race condition and other small improvements by @vicwicker [#11325]</li>
+<li><code>[OPERATOR]</code> Remove CPU as controlled resource from VPA for alertmanager and vpn-authzserver.<br>
+Remove CPU requests from alertmanager and vpn-authzserver. by @voelzmo [#11366]</li>
+<li><code>[OPERATOR]</code> The <code>gardener-resource-manager</code> no longer syncs all resources every minute for virtual garden and shoot clusters. It already watches its desired resources anyways, i.e., it already reacts instantly, so there is no need to additionally apply them every minute. by @rfranzke [#11394]</li>
+</ul>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="helm-charts-5">Helm Charts<a href="#helm-charts-5" class="hash-link" aria-label="Direct link to Helm Charts" title="Direct link to Helm Charts">​</a></h2>
+<ul>
+<li>controlplane: <code>europe-docker.pkg.dev/gardener-project/releases/charts/gardener/controlplane:v1.113.0</code></li>
+<li>gardenlet: <code>europe-docker.pkg.dev/gardener-project/releases/charts/gardener/gardenlet:v1.113.0</code></li>
+<li>operator: <code>europe-docker.pkg.dev/gardener-project/releases/charts/gardener/operator:v1.113.0</code></li>
+<li>resource-manager: <code>europe-docker.pkg.dev/gardener-project/releases/charts/gardener/resource-manager:v1.113.0</code></li>
+</ul>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="docker-images-5">Docker Images<a href="#docker-images-5" class="hash-link" aria-label="Direct link to Docker Images" title="Direct link to Docker Images">​</a></h2>
+<ul>
+<li>admission-controller: <code>europe-docker.pkg.dev/gardener-project/releases/gardener/admission-controller:v1.113.0</code></li>
+<li>apiserver: <code>europe-docker.pkg.dev/gardener-project/releases/gardener/apiserver:v1.113.0</code></li>
+<li>controller-manager: <code>europe-docker.pkg.dev/gardener-project/releases/gardener/controller-manager:v1.113.0</code></li>
+<li>gardenlet: <code>europe-docker.pkg.dev/gardener-project/releases/gardener/gardenlet:v1.113.0</code></li>
+<li>node-agent: <code>europe-docker.pkg.dev/gardener-project/releases/gardener/node-agent:v1.113.0</code></li>
+<li>operator: <code>europe-docker.pkg.dev/gardener-project/releases/gardener/operator:v1.113.0</code></li>
+<li>resource-manager: <code>europe-docker.pkg.dev/gardener-project/releases/gardener/resource-manager:v1.113.0</code></li>
+<li>scheduler: <code>europe-docker.pkg.dev/gardener-project/releases/gardener/scheduler:v1.113.0</code></li>
+</ul>
+</div></div></details></div></article><nav class="pagination-nav docusaurus-mt-lg" aria-label="Docs pages"><a class="pagination-nav__link pagination-nav__link--prev" href="/release-notes/next"><div class="pagination-nav__sublabel">Previous</div><div class="pagination-nav__label">Release Notes next</div></a><a class="pagination-nav__link pagination-nav__link--next" href="/release-notes/v1.112"><div class="pagination-nav__sublabel">Next</div><div class="pagination-nav__label">Release Notes v1.112</div></a></nav></div></div></div></div></main></div></div></div><footer class="footer footer--dark"><div class="container container-fluid"><div class="row footer__links"><div class="col footer__col"><div class="footer__title">Docs</div><ul class="footer__items clean-list"><li class="footer__item"><a class="footer__link-item" href="/docs/overview">Docs</a></li></ul></div><div class="col footer__col"><div class="footer__title">Community</div><ul class="footer__items clean-list"><li class="footer__item"><a href="https://github.com/yakecloud" target="_blank" rel="noopener noreferrer" class="footer__link-item">GitHub<svg width="13.5" height="13.5" aria-hidden="true" viewBox="0 0 24 24" class="iconExternalLink_nPIU"><path fill="currentColor" d="M21 13v10h-21v-19h12v2h-10v15h17v-8h2zm3-12h-10.988l4.035 4-6.977 7.07 2.828 2.828 6.977-7.07 4.125 4.172v-11z"></path></svg></a></li><li class="footer__item"><a href="https://github.com/gardener-community" target="_blank" rel="noopener noreferrer" class="footer__link-item">Gardener Community<svg width="13.5" height="13.5" aria-hidden="true" viewBox="0 0 24 24" class="iconExternalLink_nPIU"><path fill="currentColor" d="M21 13v10h-21v-19h12v2h-10v15h17v-8h2zm3-12h-10.988l4.035 4-6.977 7.07 2.828 2.828 6.977-7.07 4.125 4.172v-11z"></path></svg></a></li><li class="footer__item"><a href="https://gardener-cloud.slack.com" target="_blank" rel="noopener noreferrer" class="footer__link-item">Slack<svg width="13.5" height="13.5" aria-hidden="true" viewBox="0 0 24 24" class="iconExternalLink_nPIU"><path fill="currentColor" d="M21 13v10h-21v-19h12v2h-10v15h17v-8h2zm3-12h-10.988l4.035 4-6.977 7.07 2.828 2.828 6.977-7.07 4.125 4.172v-11z"></path></svg></a></li></ul></div><div class="col footer__col"><div class="footer__title">More</div><ul class="footer__items clean-list"><li class="footer__item"><a class="footer__link-item" href="/blog">Blog</a></li><li class="footer__item"><a class="footer__link-item" href="/legals">Legals</a></li><li class="footer__item"><a class="footer__link-item" href="/privacy-policy">Privacy policy</a></li></ul></div></div><div class="footer__bottom text--center"><div class="footer__copyright">Copyright © 2025 23 Technologies GmbH</div></div></div></footer></div>
+</body>
+</html>
