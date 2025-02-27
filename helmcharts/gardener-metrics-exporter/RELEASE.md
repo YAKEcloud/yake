@@ -1,8 +1,8 @@
 # [gardener/gardener-metrics-exporter]
 
-## 🐛 Bug Fixes
+## 🏃 Others
 
-- `[OPERATOR]` fix some node related metrics not scraped by @crigertg [#116]
+- `[OPERATOR]` Adds SAST scanning using `gosec`. by @rickardsjp [#120]
 
 ## Docker Images
-- metrics-exporter: `europe-docker.pkg.dev/gardener-project/releases/gardener/metrics-exporter:0.34.0`
+- metrics-exporter: `europe-docker.pkg.dev/gardener-project/releases/gardener/metrics-exporter:0.35.0`
