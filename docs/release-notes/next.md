@@ -41,3 +41,33 @@ hide_table_of_contents: true
 **Full Changelog**: https://github.com/stackitcloud/gardener-extension-shoot-flux/compare/v0.15.0...v0.16.0
 
 </details>
+
+<details>
+<summary><b>Update gardener-metrics-exporter to <code>0.35.0</code></b></summary>
+
+# [gardener/gardener-metrics-exporter]
+
+## 🏃 Others
+
+- `[OPERATOR]` Adds SAST scanning using `gosec`. by @rickardsjp [#120]
+
+## Docker Images
+- metrics-exporter: `europe-docker.pkg.dev/gardener-project/releases/gardener/metrics-exporter:0.35.0`
+
+
+</details>
+
+<details>
+<summary><b>Update gardener-metrics-exporter to <code>0.35.0</code></b></summary>
+
+# [gardener/gardener-metrics-exporter]
+
+## 🏃 Others
+
+- `[OPERATOR]` Adds SAST scanning using `gosec`. by @rickardsjp [#120]
+
+## Docker Images
+- metrics-exporter: `europe-docker.pkg.dev/gardener-project/releases/gardener/metrics-exporter:0.35.0`
+
+
+</details>
