@@ -204,3 +204,14 @@ no release notes available
 
 
 </details>
+
+<details>
+<summary><b>Update shoot-flux to <code>0.17.1</code></b></summary>
+
+## What's Changed
+* Fix `shoot-info` `ConfigMap` creation when bootstrapping flux by @nschad in https://github.com/stackitcloud/gardener-extension-shoot-flux/pull/139
+
+
+**Full Changelog**: https://github.com/stackitcloud/gardener-extension-shoot-flux/compare/v0.17.0...v0.17.1
+
+</details>
