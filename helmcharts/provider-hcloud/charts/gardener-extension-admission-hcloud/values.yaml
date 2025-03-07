@@ -5,7 +5,7 @@ global:
     image:
         pullPolicy: IfNotPresent
         repository: ghcr.io/23technologies/gardener-extension-provider-hcloud/admission
-        tag: v0.6.32
+        tag: v0.6.33
     kubeconfig: null
     metricsPort: 8080
     replicaCount: 1
