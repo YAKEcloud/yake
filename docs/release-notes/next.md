@@ -355,3 +355,10 @@ no release notes available
 
 
 </details>
+
+<details>
+<summary><b>Update garden-kube-apiserver to <code>5.2.0</code></b></summary>
+
+**Full Changelog**: https://github.com/gardener-community/garden-kube-apiserver/compare/v5.1.1...v5.2.0
+
+</details>
