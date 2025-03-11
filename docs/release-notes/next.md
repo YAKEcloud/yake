@@ -122,8 +122,8 @@ no release notes available
 </details>
 
 <details>
-<summary><b>Update garden-kube-apiserver to <code>5.1.0</code></b></summary>
+<summary><b>Update garden-kube-apiserver to <code>5.1.1</code></b></summary>
 
-**Full Changelog**: https://github.com/gardener-community/garden-kube-apiserver/compare/5.0.0...5.1.0
+
 
 </details>

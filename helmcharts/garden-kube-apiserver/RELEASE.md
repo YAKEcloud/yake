@@ -1,1 +1,0 @@
-**Full Changelog**: https://github.com/gardener-community/garden-kube-apiserver/compare/5.0.0...5.1.0
