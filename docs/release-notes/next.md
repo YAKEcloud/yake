@@ -95,8 +95,6 @@ hide_table_of_contents: true
 
 
 </details>
-<<<<<<< HEAD
-=======
 
 <details>
 <summary><b>Update networking-cilium to <code>1.40.1</code></b></summary>
@@ -129,4 +127,3 @@ no release notes available
 **Full Changelog**: https://github.com/gardener-community/garden-kube-apiserver/compare/5.0.0...5.1.0
 
 </details>
->>>>>>> 9e08f03505 (Update Helm release garden-kube-apiserver to v5.1.0)
