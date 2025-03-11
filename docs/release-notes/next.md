@@ -348,3 +348,10 @@ no release notes available
 **Full Changelog**: https://github.com/23technologies/gardener-extension-provider-hcloud/compare/v0.6.32...v0.6.33
 
 </details>
+
+<details>
+<summary><b>Update garden-kube-apiserver to <code>5.1.1</code></b></summary>
+
+
+
+</details>
