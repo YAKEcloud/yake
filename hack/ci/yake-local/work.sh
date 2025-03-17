@@ -11,7 +11,7 @@ source ../../../hack/tools/install.sh
 CLUSTERNAME="yake-local"
 VGARDEN_KUBECONFIG="/tmp/$CLUSTERNAME-apiserver.yaml"
 
-K8S_VERSION="${K8S_VERSION:-v1.29.4}"
+K8S_VERSION="${K8S_VERSION:-v1.31.6}"
 CNI="${CNI:-default}"
 
 if [[ $CNI == "default" ]]; then
@@ -72,7 +72,7 @@ _setup_kind_network() {
 _create_cluster () {
   _print_heading "Create Cluster"
   # If export kubeconfig fails, the cluster does not yet exist and we need to create it
-  $KIND export kubeconfig -n $CLUSTERNAME > /dev/null 2>&1  || $KIND create cluster --config "$kindConfig" --name $CLUSTERNAME --image="kindest/node:$K8S_VERSION"
+  $KIND export kubeconfig -n $CLUSTERNAME > /dev/null 2>&1  || $KIND create cluster --config "$kindConfig" --name $CLUSTERNAME --image="registry.regio.digital/proxy_cache/kindest/node:$K8S_VERSION"
 	$KIND export kubeconfig -n $CLUSTERNAME
 	$KUBECTL config set-context --current --namespace=default
 }
