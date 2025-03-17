@@ -80,7 +80,7 @@ install_helm() {
 
 install_kind() {
   # not under renovate control
-  VERSION=v0.20.0
+  VERSION=v0.27.0
 
   if _isStale "$KIND" "$VERSION"; then
 		curl -L -o "$KIND" "https://github.com/kubernetes-sigs/kind/releases/download/${VERSION}/kind-${TOOLS_KERNEL}-${TOOLS_ARCH}"
