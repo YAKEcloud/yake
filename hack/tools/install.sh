@@ -68,7 +68,7 @@ install_yq() {
 
 install_helm() {
   # renovate: datasource=github-tags depName=helm/helm
-  VERSION=v3.17.1
+  VERSION=v3.17.2
 
   if _isStale $HELM $VERSION; then
     curl -L "https://get.helm.sh/helm-$VERSION-$TOOLS_KERNEL-$TOOLS_ARCH.tar.gz" | tar -xzm --strip-components 1 -C $TOOLS_BIN_DIR "$TOOLS_KERNEL-$TOOLS_ARCH/helm"
