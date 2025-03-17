@@ -5,7 +5,7 @@
 <meta name="generator" content="Docusaurus v3.7.0">
 <title data-rh="true">Release Notes next | Yet another Kubernetes Engine</title><meta data-rh="true" name="viewport" content="width=device-width,initial-scale=1"><meta data-rh="true" name="twitter:card" content="summary_large_image"><meta data-rh="true" property="og:url" content="https://yake.cloud/release-notes/next"><meta data-rh="true" property="og:locale" content="en"><meta data-rh="true" name="docusaurus_locale" content="en"><meta data-rh="true" name="docsearch:language" content="en"><meta data-rh="true" name="gardener" content="installation, production, operations, maintenance"><meta data-rh="true" name="docusaurus_version" content="current"><meta data-rh="true" name="docusaurus_tag" content="docs-release-notes-current"><meta data-rh="true" name="docsearch:version" content="current"><meta data-rh="true" name="docsearch:docusaurus_tag" content="docs-release-notes-current"><meta data-rh="true" property="og:title" content="Release Notes next | Yet another Kubernetes Engine"><meta data-rh="true" name="description" content="Yake release notes and upgrade guide"><meta data-rh="true" property="og:description" content="Yake release notes and upgrade guide"><link data-rh="true" rel="icon" href="/img/favicon.ico"><link data-rh="true" rel="canonical" href="https://yake.cloud/release-notes/next"><link data-rh="true" rel="alternate" href="https://yake.cloud/release-notes/next" hreflang="en"><link data-rh="true" rel="alternate" href="https://yake.cloud/release-notes/next" hreflang="x-default"><link rel="alternate" type="application/rss+xml" href="/blog/rss.xml" title="Yet another Kubernetes Engine RSS Feed">
 <link rel="alternate" type="application/atom+xml" href="/blog/atom.xml" title="Yet another Kubernetes Engine Atom Feed"><link rel="stylesheet" href="/assets/css/styles.a6ab13cb.css">
-<script src="/assets/js/runtime~main.4109d34e.js" defer="defer"></script>
+<script src="/assets/js/runtime~main.636bc578.js" defer="defer"></script>
 <script src="/assets/js/main.13efdfee.js" defer="defer"></script>
 </head>
 <body class="navigation-with-keyboard">
@@ -329,6 +329,264 @@
 <details class="details_lb9f alert alert--info details_b_Ee" data-collapsed="true"><summary><b>Update garden-kube-apiserver to <code>5.2.0</code></b></summary><div><div class="collapsibleContent_i85q">
 <!-- -->
 <p><strong>Full Changelog</strong>: <a href="https://github.com/gardener-community/garden-kube-apiserver/compare/v5.1.1...v5.2.0" target="_blank" rel="noopener noreferrer">https://github.com/gardener-community/garden-kube-apiserver/compare/v5.1.1...v5.2.0</a></p>
+</div></div></details>
+<details class="details_lb9f alert alert--info details_b_Ee" data-collapsed="true"><summary><b>Update gardener-controlplane to <code>1.114.0</code></b></summary><div><div class="collapsibleContent_i85q">
+<!-- -->
+<h1>[gardener/gardener]</h1>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="️-breaking-changes-3">⚠️ Breaking Changes<a href="#️-breaking-changes-3" class="hash-link" aria-label="Direct link to ⚠️ Breaking Changes" title="Direct link to ⚠️ Breaking Changes">​</a></h2>
+<ul>
+<li><code>[OPERATOR]</code> The injection of a garden cluster kubeconfig into extension deployments running in the seed cluster does NO LONGER happen automatically. If you need it, make sure to set <code>.injectGardenKubeconfig=true</code> in your <code>ControllerDeployment</code> resources before you upgrade your <code>gardenlet</code>s to this version. by @rfranzke [#11607]</li>
+<li><code>[OPERATOR]</code> ⚠️ Gardener does no longer support garden, seed, or shoot clusters with Kubernetes versions &lt;= 1.26. Make sure to upgrade all existing clusters before upgrading to this Gardener version. by @shafeeqes [#10664]</li>
+<li><code>[USER]</code> The <code>.spec.kubernetes.enableStaticTokenKubeconfig</code> field in the Shoot API is deprecated and will be removed in Gardener <code>v1.120</code>. Please adapt your Shoot manifests accordingly. by @shafeeqes [#10664]</li>
+<li><code>[USER]</code> The <code>.spec.kubernetes.kubeControllerManager.podEvictionTimeout</code> field in the Shoot API is deprecated since Gardener <code>v1.63</code> and will be removed in Gardener <code>v1.120</code>. Please adapt your Shoot manifests accordingly. by @shafeeqes [#10664]</li>
+<li><code>[USER]</code> A <code>deny-all</code> network policy is now deployed in the <code>kube-system</code> namespaces of <code>Shoot</code>s with Kubernetes version <code>&gt;= v1.33</code>. by @AleksandarSavchev [#11502]</li>
+</ul>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="-noteworthy">📰 Noteworthy<a href="#-noteworthy" class="hash-link" aria-label="Direct link to 📰 Noteworthy" title="Direct link to 📰 Noteworthy">​</a></h2>
+<ul>
+<li><code>[DEVELOPER]</code> The <code>SeedNamePredicate</code> function in the <code>pkg/controllerutils/predicate</code> pkg is now dropped. by @shafeeqes [#11449]</li>
+<li><code>[DEVELOPER]</code> A new convenience tool <code>extension-generator</code> was added to generate <code>Extension</code> example manifests. Gardener extensions can execute this script in the scope of the build process to always check in and provide an up-to-date example in their repositories. by @timuthy [#11329]</li>
+<li><code>[USER]</code> All <code>Seed</code>s are now automatically labeled with <code>name.seed.gardener.cloud/&lt;name&gt;=true</code> (⚠ no longer <code>seed.gardener.cloud/&lt;name&gt;=true</code>) where <code>&lt;name&gt;</code> is their own name, and (if applicable) the name of their parent seed in case they are managed seeds. This label can be used as selector for requests. by @rfranzke [#11479]</li>
+<li><code>[OPERATOR]</code> Removed reversed-vpn-auth-server deployment as it was unused. See <a href="https://github.com/gardener/gardener/issues/11214" target="_blank" rel="noopener noreferrer">https://github.com/gardener/gardener/issues/11214</a> by @Wieneo [#11338]</li>
+</ul>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="-new-features">✨ New Features<a href="#-new-features" class="hash-link" aria-label="Direct link to ✨ New Features" title="Direct link to ✨ New Features">​</a></h2>
+<ul>
+<li><code>[OPERATOR]</code> Layer 7 load balancing for <code>virtual-garden-</code> and <code>shoot-kube-apiservers</code> can be activated via <code>IstioTLSTermination</code> feature gate in <code>gardener-operator</code> and <code>gardenlet</code> by @oliver-goetz [#11085]</li>
+<li><code>[OPERATOR]</code> Enhanced the <code>Shoot</code> and <code>Garden</code> APIs to configured <code>minAllowed</code> VPA values for <code>etcd</code>s and <code>kube-apiserver</code>. See <a href="https://github.com/gardener/gardener/blob/master/example/90-shoot.yaml" target="_blank" rel="noopener noreferrer">shoot example</a> or <a href="https://github.com/gardener/gardener/blob/master/example/operator/20-garden.yaml" target="_blank" rel="noopener noreferrer">garden example</a> for more information. by @timuthy [#11252]</li>
+<li><code>[OPERATOR]</code> <code>gardener-operator</code> now waits for required <code>Extension</code>s to get ready early in the reconcile flow. It addresses use-cases where extensions run mutating webhooks in the garden runtime cluster that must be present when <code>Garden</code> components are deployed. by @timuthy [#11523]</li>
+<li><code>[USER]</code> When the scheduler succeeds to assign a <code>Seed</code> to a <code>Shoot</code>, its <code>.status.lastOperation</code> is set to <code>nil</code> (in case it was set to <code>Create Pending</code>). by @rfranzke [#11484]</li>
+</ul>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="-bug-fixes-6">🐛 Bug Fixes<a href="#-bug-fixes-6" class="hash-link" aria-label="Direct link to 🐛 Bug Fixes" title="Direct link to 🐛 Bug Fixes">​</a></h2>
+<ul>
+<li><code>[OPERATOR]</code> To be compatible with containerd 2.0, calls to the <code>ctr</code> binary now have flags before arguments when pulling images from a registry during node bootstrap. by @MrBatschner [#11507]</li>
+<li><code>[OPERATOR]</code> Fixed a bug where the destination gardenlet acted on shoots in control plane migration too early. by @timebertt [#11521]</li>
+<li><code>[OPERATOR]</code> An issue was fixed that caused a deployment error when a <code>Gardenlet</code> resource referred to a remote cluster (<code>spec.kubeconfigSecretRef</code> defined). by @timuthy [#11580]</li>
+<li><code>[DEVELOPER]</code> local setup: An issue causing the machine-controller-manager-provider-local image not to be updated in the local setup when the images are cached is now fixed. by @ialidzhikov [#11472]</li>
+<li><code>[DEVELOPER]</code> SSH tunnel for local development with remote seed no longer fails with slow DNS. by @matthias-horne [#11538]</li>
+</ul>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="-others-6">🏃 Others<a href="#-others-6" class="hash-link" aria-label="Direct link to 🏃 Others" title="Direct link to 🏃 Others">​</a></h2>
+<ul>
+<li><code>[DEVELOPER]</code> <code>machinecontrollermanager</code>, <code>fluentoperator</code> and <code>extension</code> components now use the <code>CRDDeployer</code> to deploy <code>CRD</code>s. by @tobschli [#11128]</li>
+<li><code>[OPERATOR]</code> The logging stack is now updated with the latest released components. by @nickytd [#11475]</li>
+<li><code>[OPERATOR]</code> Include <code>VPA</code> dashboards in <code>plutono</code> running within a <code>Garden</code> cluster with enabled VPA configuration. by @vitanovs [#11391]</li>
+<li><code>[OPERATOR]</code> Increase timeout used for waiting for CRD readiness to 2 minutes by @ScheererJ [#11503]</li>
+<li><code>[OPERATOR]</code> Update <code>prometheus</code> label of <code>vpa-admission-controller</code> and <code>vpa-recommender</code> <code>ServiceMonitors</code> from <code>seed</code> to <code>garden</code> when deployed by the <code>garden-operator</code>. With this change, the <code>Garden</code> cluster <code>Prometheus</code> will match the <code>ServiceMonitors</code> and start collecting metrics from the configured services. by @vitanovs [#11318]</li>
+<li><code>[OPERATOR]</code> <code>API Server Request Rates Per Verb And Resource</code> supports selection per Pod by @hendrikKahl [#11501]</li>
+<li><code>[DEPENDENCY]</code> The following dependencies have been updated:
+<ul>
+<li><code>quay.io/kiwigrid/k8s-sidecar</code> from <code>1.30.0</code> to <code>1.30.1</code>.  by @gardener-ci-robot [#11476]</li>
+</ul>
+</li>
+<li><code>[DEPENDENCY]</code> The following dependencies have been updated:
+<ul>
+<li><code>gardener/gardener-metrics-exporter</code> from <code>0.35.0</code> to <code>0.36.0</code>. <a href="https://redirect.github.com/gardener/gardener-metrics-exporter/releases/tag/0.36.0" target="_blank" rel="noopener noreferrer">Release Notes</a> by @gardener-ci-robot [#11543]</li>
+</ul>
+</li>
+<li><code>[DEPENDENCY]</code> The following dependencies have been updated:
+<ul>
+<li><code>quay.io/prometheus/node-exporter</code> from <code>v1.8.2</code> to <code>v1.9.0</code>.  by @gardener-ci-robot [#11408]</li>
+</ul>
+</li>
+<li><code>[DEPENDENCY]</code> The following dependencies have been updated:
+<ul>
+<li><code>quay.io/cortexproject/cortex</code> from <code>v1.18.1</code> to <code>v1.19.0</code>.  by @gardener-ci-robot [#11542]</li>
+</ul>
+</li>
+<li><code>[DEPENDENCY]</code> The following dependencies have been updated:
+<ul>
+<li><code>gardener/gardener-metrics-exporter</code> from <code>0.34.0</code> to <code>0.35.0</code>. <a href="https://redirect.github.com/gardener/gardener-metrics-exporter/releases/tag/0.35.0" target="_blank" rel="noopener noreferrer">Release Notes</a> by @gardener-ci-robot [#11541]</li>
+</ul>
+</li>
+</ul>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="helm-charts-10">Helm Charts<a href="#helm-charts-10" class="hash-link" aria-label="Direct link to Helm Charts" title="Direct link to Helm Charts">​</a></h2>
+<ul>
+<li>controlplane: <code>europe-docker.pkg.dev/gardener-project/releases/charts/gardener/controlplane:v1.114.0</code></li>
+<li>gardenlet: <code>europe-docker.pkg.dev/gardener-project/releases/charts/gardener/gardenlet:v1.114.0</code></li>
+<li>operator: <code>europe-docker.pkg.dev/gardener-project/releases/charts/gardener/operator:v1.114.0</code></li>
+<li>resource-manager: <code>europe-docker.pkg.dev/gardener-project/releases/charts/gardener/resource-manager:v1.114.0</code></li>
+</ul>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="docker-images-14">Docker Images<a href="#docker-images-14" class="hash-link" aria-label="Direct link to Docker Images" title="Direct link to Docker Images">​</a></h2>
+<ul>
+<li>admission-controller: <code>europe-docker.pkg.dev/gardener-project/releases/gardener/admission-controller:v1.114.0</code></li>
+<li>apiserver: <code>europe-docker.pkg.dev/gardener-project/releases/gardener/apiserver:v1.114.0</code></li>
+<li>controller-manager: <code>europe-docker.pkg.dev/gardener-project/releases/gardener/controller-manager:v1.114.0</code></li>
+<li>gardenlet: <code>europe-docker.pkg.dev/gardener-project/releases/gardener/gardenlet:v1.114.0</code></li>
+<li>node-agent: <code>europe-docker.pkg.dev/gardener-project/releases/gardener/node-agent:v1.114.0</code></li>
+<li>operator: <code>europe-docker.pkg.dev/gardener-project/releases/gardener/operator:v1.114.0</code></li>
+<li>resource-manager: <code>europe-docker.pkg.dev/gardener-project/releases/gardener/resource-manager:v1.114.0</code></li>
+<li>scheduler: <code>europe-docker.pkg.dev/gardener-project/releases/gardener/scheduler:v1.114.0</code></li>
+</ul>
+</div></div></details>
+<details class="details_lb9f alert alert--info details_b_Ee" data-collapsed="true"><summary><b>Update gardener-controlplane to <code>1.114.0</code></b></summary><div><div class="collapsibleContent_i85q">
+<!-- -->
+<h1>[gardener/gardener]</h1>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="️-breaking-changes-4">⚠️ Breaking Changes<a href="#️-breaking-changes-4" class="hash-link" aria-label="Direct link to ⚠️ Breaking Changes" title="Direct link to ⚠️ Breaking Changes">​</a></h2>
+<ul>
+<li><code>[OPERATOR]</code> The injection of a garden cluster kubeconfig into extension deployments running in the seed cluster does NO LONGER happen automatically. If you need it, make sure to set <code>.injectGardenKubeconfig=true</code> in your <code>ControllerDeployment</code> resources before you upgrade your <code>gardenlet</code>s to this version. by @rfranzke [#11607]</li>
+<li><code>[OPERATOR]</code> ⚠️ Gardener does no longer support garden, seed, or shoot clusters with Kubernetes versions &lt;= 1.26. Make sure to upgrade all existing clusters before upgrading to this Gardener version. by @shafeeqes [#10664]</li>
+<li><code>[USER]</code> The <code>.spec.kubernetes.enableStaticTokenKubeconfig</code> field in the Shoot API is deprecated and will be removed in Gardener <code>v1.120</code>. Please adapt your Shoot manifests accordingly. by @shafeeqes [#10664]</li>
+<li><code>[USER]</code> The <code>.spec.kubernetes.kubeControllerManager.podEvictionTimeout</code> field in the Shoot API is deprecated since Gardener <code>v1.63</code> and will be removed in Gardener <code>v1.120</code>. Please adapt your Shoot manifests accordingly. by @shafeeqes [#10664]</li>
+<li><code>[USER]</code> A <code>deny-all</code> network policy is now deployed in the <code>kube-system</code> namespaces of <code>Shoot</code>s with Kubernetes version <code>&gt;= v1.33</code>. by @AleksandarSavchev [#11502]</li>
+</ul>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="-noteworthy-1">📰 Noteworthy<a href="#-noteworthy-1" class="hash-link" aria-label="Direct link to 📰 Noteworthy" title="Direct link to 📰 Noteworthy">​</a></h2>
+<ul>
+<li><code>[DEVELOPER]</code> The <code>SeedNamePredicate</code> function in the <code>pkg/controllerutils/predicate</code> pkg is now dropped. by @shafeeqes [#11449]</li>
+<li><code>[DEVELOPER]</code> A new convenience tool <code>extension-generator</code> was added to generate <code>Extension</code> example manifests. Gardener extensions can execute this script in the scope of the build process to always check in and provide an up-to-date example in their repositories. by @timuthy [#11329]</li>
+<li><code>[USER]</code> All <code>Seed</code>s are now automatically labeled with <code>name.seed.gardener.cloud/&lt;name&gt;=true</code> (⚠ no longer <code>seed.gardener.cloud/&lt;name&gt;=true</code>) where <code>&lt;name&gt;</code> is their own name, and (if applicable) the name of their parent seed in case they are managed seeds. This label can be used as selector for requests. by @rfranzke [#11479]</li>
+<li><code>[OPERATOR]</code> Removed reversed-vpn-auth-server deployment as it was unused. See <a href="https://github.com/gardener/gardener/issues/11214" target="_blank" rel="noopener noreferrer">https://github.com/gardener/gardener/issues/11214</a> by @Wieneo [#11338]</li>
+</ul>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="-new-features-1">✨ New Features<a href="#-new-features-1" class="hash-link" aria-label="Direct link to ✨ New Features" title="Direct link to ✨ New Features">​</a></h2>
+<ul>
+<li><code>[OPERATOR]</code> Layer 7 load balancing for <code>virtual-garden-</code> and <code>shoot-kube-apiservers</code> can be activated via <code>IstioTLSTermination</code> feature gate in <code>gardener-operator</code> and <code>gardenlet</code> by @oliver-goetz [#11085]</li>
+<li><code>[OPERATOR]</code> Enhanced the <code>Shoot</code> and <code>Garden</code> APIs to configured <code>minAllowed</code> VPA values for <code>etcd</code>s and <code>kube-apiserver</code>. See <a href="https://github.com/gardener/gardener/blob/master/example/90-shoot.yaml" target="_blank" rel="noopener noreferrer">shoot example</a> or <a href="https://github.com/gardener/gardener/blob/master/example/operator/20-garden.yaml" target="_blank" rel="noopener noreferrer">garden example</a> for more information. by @timuthy [#11252]</li>
+<li><code>[OPERATOR]</code> <code>gardener-operator</code> now waits for required <code>Extension</code>s to get ready early in the reconcile flow. It addresses use-cases where extensions run mutating webhooks in the garden runtime cluster that must be present when <code>Garden</code> components are deployed. by @timuthy [#11523]</li>
+<li><code>[USER]</code> When the scheduler succeeds to assign a <code>Seed</code> to a <code>Shoot</code>, its <code>.status.lastOperation</code> is set to <code>nil</code> (in case it was set to <code>Create Pending</code>). by @rfranzke [#11484]</li>
+</ul>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="-bug-fixes-7">🐛 Bug Fixes<a href="#-bug-fixes-7" class="hash-link" aria-label="Direct link to 🐛 Bug Fixes" title="Direct link to 🐛 Bug Fixes">​</a></h2>
+<ul>
+<li><code>[OPERATOR]</code> To be compatible with containerd 2.0, calls to the <code>ctr</code> binary now have flags before arguments when pulling images from a registry during node bootstrap. by @MrBatschner [#11507]</li>
+<li><code>[OPERATOR]</code> Fixed a bug where the destination gardenlet acted on shoots in control plane migration too early. by @timebertt [#11521]</li>
+<li><code>[OPERATOR]</code> An issue was fixed that caused a deployment error when a <code>Gardenlet</code> resource referred to a remote cluster (<code>spec.kubeconfigSecretRef</code> defined). by @timuthy [#11580]</li>
+<li><code>[DEVELOPER]</code> local setup: An issue causing the machine-controller-manager-provider-local image not to be updated in the local setup when the images are cached is now fixed. by @ialidzhikov [#11472]</li>
+<li><code>[DEVELOPER]</code> SSH tunnel for local development with remote seed no longer fails with slow DNS. by @matthias-horne [#11538]</li>
+</ul>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="-others-7">🏃 Others<a href="#-others-7" class="hash-link" aria-label="Direct link to 🏃 Others" title="Direct link to 🏃 Others">​</a></h2>
+<ul>
+<li><code>[DEVELOPER]</code> <code>machinecontrollermanager</code>, <code>fluentoperator</code> and <code>extension</code> components now use the <code>CRDDeployer</code> to deploy <code>CRD</code>s. by @tobschli [#11128]</li>
+<li><code>[OPERATOR]</code> The logging stack is now updated with the latest released components. by @nickytd [#11475]</li>
+<li><code>[OPERATOR]</code> Include <code>VPA</code> dashboards in <code>plutono</code> running within a <code>Garden</code> cluster with enabled VPA configuration. by @vitanovs [#11391]</li>
+<li><code>[OPERATOR]</code> Increase timeout used for waiting for CRD readiness to 2 minutes by @ScheererJ [#11503]</li>
+<li><code>[OPERATOR]</code> Update <code>prometheus</code> label of <code>vpa-admission-controller</code> and <code>vpa-recommender</code> <code>ServiceMonitors</code> from <code>seed</code> to <code>garden</code> when deployed by the <code>garden-operator</code>. With this change, the <code>Garden</code> cluster <code>Prometheus</code> will match the <code>ServiceMonitors</code> and start collecting metrics from the configured services. by @vitanovs [#11318]</li>
+<li><code>[OPERATOR]</code> <code>API Server Request Rates Per Verb And Resource</code> supports selection per Pod by @hendrikKahl [#11501]</li>
+<li><code>[DEPENDENCY]</code> The following dependencies have been updated:
+<ul>
+<li><code>quay.io/kiwigrid/k8s-sidecar</code> from <code>1.30.0</code> to <code>1.30.1</code>.  by @gardener-ci-robot [#11476]</li>
+</ul>
+</li>
+<li><code>[DEPENDENCY]</code> The following dependencies have been updated:
+<ul>
+<li><code>gardener/gardener-metrics-exporter</code> from <code>0.35.0</code> to <code>0.36.0</code>. <a href="https://redirect.github.com/gardener/gardener-metrics-exporter/releases/tag/0.36.0" target="_blank" rel="noopener noreferrer">Release Notes</a> by @gardener-ci-robot [#11543]</li>
+</ul>
+</li>
+<li><code>[DEPENDENCY]</code> The following dependencies have been updated:
+<ul>
+<li><code>quay.io/prometheus/node-exporter</code> from <code>v1.8.2</code> to <code>v1.9.0</code>.  by @gardener-ci-robot [#11408]</li>
+</ul>
+</li>
+<li><code>[DEPENDENCY]</code> The following dependencies have been updated:
+<ul>
+<li><code>quay.io/cortexproject/cortex</code> from <code>v1.18.1</code> to <code>v1.19.0</code>.  by @gardener-ci-robot [#11542]</li>
+</ul>
+</li>
+<li><code>[DEPENDENCY]</code> The following dependencies have been updated:
+<ul>
+<li><code>gardener/gardener-metrics-exporter</code> from <code>0.34.0</code> to <code>0.35.0</code>. <a href="https://redirect.github.com/gardener/gardener-metrics-exporter/releases/tag/0.35.0" target="_blank" rel="noopener noreferrer">Release Notes</a> by @gardener-ci-robot [#11541]</li>
+</ul>
+</li>
+</ul>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="helm-charts-11">Helm Charts<a href="#helm-charts-11" class="hash-link" aria-label="Direct link to Helm Charts" title="Direct link to Helm Charts">​</a></h2>
+<ul>
+<li>controlplane: <code>europe-docker.pkg.dev/gardener-project/releases/charts/gardener/controlplane:v1.114.0</code></li>
+<li>gardenlet: <code>europe-docker.pkg.dev/gardener-project/releases/charts/gardener/gardenlet:v1.114.0</code></li>
+<li>operator: <code>europe-docker.pkg.dev/gardener-project/releases/charts/gardener/operator:v1.114.0</code></li>
+<li>resource-manager: <code>europe-docker.pkg.dev/gardener-project/releases/charts/gardener/resource-manager:v1.114.0</code></li>
+</ul>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="docker-images-15">Docker Images<a href="#docker-images-15" class="hash-link" aria-label="Direct link to Docker Images" title="Direct link to Docker Images">​</a></h2>
+<ul>
+<li>admission-controller: <code>europe-docker.pkg.dev/gardener-project/releases/gardener/admission-controller:v1.114.0</code></li>
+<li>apiserver: <code>europe-docker.pkg.dev/gardener-project/releases/gardener/apiserver:v1.114.0</code></li>
+<li>controller-manager: <code>europe-docker.pkg.dev/gardener-project/releases/gardener/controller-manager:v1.114.0</code></li>
+<li>gardenlet: <code>europe-docker.pkg.dev/gardener-project/releases/gardener/gardenlet:v1.114.0</code></li>
+<li>node-agent: <code>europe-docker.pkg.dev/gardener-project/releases/gardener/node-agent:v1.114.0</code></li>
+<li>operator: <code>europe-docker.pkg.dev/gardener-project/releases/gardener/operator:v1.114.0</code></li>
+<li>resource-manager: <code>europe-docker.pkg.dev/gardener-project/releases/gardener/resource-manager:v1.114.0</code></li>
+<li>scheduler: <code>europe-docker.pkg.dev/gardener-project/releases/gardener/scheduler:v1.114.0</code></li>
+</ul>
+</div></div></details>
+<details class="details_lb9f alert alert--info details_b_Ee" data-collapsed="true"><summary><b>Update gardenlet to <code>1.114.0</code></b></summary><div><div class="collapsibleContent_i85q">
+<!-- -->
+<h1>[gardener/gardener]</h1>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="️-breaking-changes-5">⚠️ Breaking Changes<a href="#️-breaking-changes-5" class="hash-link" aria-label="Direct link to ⚠️ Breaking Changes" title="Direct link to ⚠️ Breaking Changes">​</a></h2>
+<ul>
+<li><code>[OPERATOR]</code> The injection of a garden cluster kubeconfig into extension deployments running in the seed cluster does NO LONGER happen automatically. If you need it, make sure to set <code>.injectGardenKubeconfig=true</code> in your <code>ControllerDeployment</code> resources before you upgrade your <code>gardenlet</code>s to this version. by @rfranzke [#11607]</li>
+<li><code>[OPERATOR]</code> ⚠️ Gardener does no longer support garden, seed, or shoot clusters with Kubernetes versions &lt;= 1.26. Make sure to upgrade all existing clusters before upgrading to this Gardener version. by @shafeeqes [#10664]</li>
+<li><code>[USER]</code> The <code>.spec.kubernetes.enableStaticTokenKubeconfig</code> field in the Shoot API is deprecated and will be removed in Gardener <code>v1.120</code>. Please adapt your Shoot manifests accordingly. by @shafeeqes [#10664]</li>
+<li><code>[USER]</code> The <code>.spec.kubernetes.kubeControllerManager.podEvictionTimeout</code> field in the Shoot API is deprecated since Gardener <code>v1.63</code> and will be removed in Gardener <code>v1.120</code>. Please adapt your Shoot manifests accordingly. by @shafeeqes [#10664]</li>
+<li><code>[USER]</code> A <code>deny-all</code> network policy is now deployed in the <code>kube-system</code> namespaces of <code>Shoot</code>s with Kubernetes version <code>&gt;= v1.33</code>. by @AleksandarSavchev [#11502]</li>
+</ul>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="-noteworthy-2">📰 Noteworthy<a href="#-noteworthy-2" class="hash-link" aria-label="Direct link to 📰 Noteworthy" title="Direct link to 📰 Noteworthy">​</a></h2>
+<ul>
+<li><code>[DEVELOPER]</code> The <code>SeedNamePredicate</code> function in the <code>pkg/controllerutils/predicate</code> pkg is now dropped. by @shafeeqes [#11449]</li>
+<li><code>[DEVELOPER]</code> A new convenience tool <code>extension-generator</code> was added to generate <code>Extension</code> example manifests. Gardener extensions can execute this script in the scope of the build process to always check in and provide an up-to-date example in their repositories. by @timuthy [#11329]</li>
+<li><code>[USER]</code> All <code>Seed</code>s are now automatically labeled with <code>name.seed.gardener.cloud/&lt;name&gt;=true</code> (⚠ no longer <code>seed.gardener.cloud/&lt;name&gt;=true</code>) where <code>&lt;name&gt;</code> is their own name, and (if applicable) the name of their parent seed in case they are managed seeds. This label can be used as selector for requests. by @rfranzke [#11479]</li>
+<li><code>[OPERATOR]</code> Removed reversed-vpn-auth-server deployment as it was unused. See <a href="https://github.com/gardener/gardener/issues/11214" target="_blank" rel="noopener noreferrer">https://github.com/gardener/gardener/issues/11214</a> by @Wieneo [#11338]</li>
+</ul>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="-new-features-2">✨ New Features<a href="#-new-features-2" class="hash-link" aria-label="Direct link to ✨ New Features" title="Direct link to ✨ New Features">​</a></h2>
+<ul>
+<li><code>[OPERATOR]</code> Layer 7 load balancing for <code>virtual-garden-</code> and <code>shoot-kube-apiservers</code> can be activated via <code>IstioTLSTermination</code> feature gate in <code>gardener-operator</code> and <code>gardenlet</code> by @oliver-goetz [#11085]</li>
+<li><code>[OPERATOR]</code> Enhanced the <code>Shoot</code> and <code>Garden</code> APIs to configured <code>minAllowed</code> VPA values for <code>etcd</code>s and <code>kube-apiserver</code>. See <a href="https://github.com/gardener/gardener/blob/master/example/90-shoot.yaml" target="_blank" rel="noopener noreferrer">shoot example</a> or <a href="https://github.com/gardener/gardener/blob/master/example/operator/20-garden.yaml" target="_blank" rel="noopener noreferrer">garden example</a> for more information. by @timuthy [#11252]</li>
+<li><code>[OPERATOR]</code> <code>gardener-operator</code> now waits for required <code>Extension</code>s to get ready early in the reconcile flow. It addresses use-cases where extensions run mutating webhooks in the garden runtime cluster that must be present when <code>Garden</code> components are deployed. by @timuthy [#11523]</li>
+<li><code>[USER]</code> When the scheduler succeeds to assign a <code>Seed</code> to a <code>Shoot</code>, its <code>.status.lastOperation</code> is set to <code>nil</code> (in case it was set to <code>Create Pending</code>). by @rfranzke [#11484]</li>
+</ul>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="-bug-fixes-8">🐛 Bug Fixes<a href="#-bug-fixes-8" class="hash-link" aria-label="Direct link to 🐛 Bug Fixes" title="Direct link to 🐛 Bug Fixes">​</a></h2>
+<ul>
+<li><code>[OPERATOR]</code> To be compatible with containerd 2.0, calls to the <code>ctr</code> binary now have flags before arguments when pulling images from a registry during node bootstrap. by @MrBatschner [#11507]</li>
+<li><code>[OPERATOR]</code> Fixed a bug where the destination gardenlet acted on shoots in control plane migration too early. by @timebertt [#11521]</li>
+<li><code>[OPERATOR]</code> An issue was fixed that caused a deployment error when a <code>Gardenlet</code> resource referred to a remote cluster (<code>spec.kubeconfigSecretRef</code> defined). by @timuthy [#11580]</li>
+<li><code>[DEVELOPER]</code> local setup: An issue causing the machine-controller-manager-provider-local image not to be updated in the local setup when the images are cached is now fixed. by @ialidzhikov [#11472]</li>
+<li><code>[DEVELOPER]</code> SSH tunnel for local development with remote seed no longer fails with slow DNS. by @matthias-horne [#11538]</li>
+</ul>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="-others-8">🏃 Others<a href="#-others-8" class="hash-link" aria-label="Direct link to 🏃 Others" title="Direct link to 🏃 Others">​</a></h2>
+<ul>
+<li><code>[DEVELOPER]</code> <code>machinecontrollermanager</code>, <code>fluentoperator</code> and <code>extension</code> components now use the <code>CRDDeployer</code> to deploy <code>CRD</code>s. by @tobschli [#11128]</li>
+<li><code>[OPERATOR]</code> The logging stack is now updated with the latest released components. by @nickytd [#11475]</li>
+<li><code>[OPERATOR]</code> Include <code>VPA</code> dashboards in <code>plutono</code> running within a <code>Garden</code> cluster with enabled VPA configuration. by @vitanovs [#11391]</li>
+<li><code>[OPERATOR]</code> Increase timeout used for waiting for CRD readiness to 2 minutes by @ScheererJ [#11503]</li>
+<li><code>[OPERATOR]</code> Update <code>prometheus</code> label of <code>vpa-admission-controller</code> and <code>vpa-recommender</code> <code>ServiceMonitors</code> from <code>seed</code> to <code>garden</code> when deployed by the <code>garden-operator</code>. With this change, the <code>Garden</code> cluster <code>Prometheus</code> will match the <code>ServiceMonitors</code> and start collecting metrics from the configured services. by @vitanovs [#11318]</li>
+<li><code>[OPERATOR]</code> <code>API Server Request Rates Per Verb And Resource</code> supports selection per Pod by @hendrikKahl [#11501]</li>
+<li><code>[DEPENDENCY]</code> The following dependencies have been updated:
+<ul>
+<li><code>quay.io/kiwigrid/k8s-sidecar</code> from <code>1.30.0</code> to <code>1.30.1</code>.  by @gardener-ci-robot [#11476]</li>
+</ul>
+</li>
+<li><code>[DEPENDENCY]</code> The following dependencies have been updated:
+<ul>
+<li><code>gardener/gardener-metrics-exporter</code> from <code>0.35.0</code> to <code>0.36.0</code>. <a href="https://redirect.github.com/gardener/gardener-metrics-exporter/releases/tag/0.36.0" target="_blank" rel="noopener noreferrer">Release Notes</a> by @gardener-ci-robot [#11543]</li>
+</ul>
+</li>
+<li><code>[DEPENDENCY]</code> The following dependencies have been updated:
+<ul>
+<li><code>quay.io/prometheus/node-exporter</code> from <code>v1.8.2</code> to <code>v1.9.0</code>.  by @gardener-ci-robot [#11408]</li>
+</ul>
+</li>
+<li><code>[DEPENDENCY]</code> The following dependencies have been updated:
+<ul>
+<li><code>quay.io/cortexproject/cortex</code> from <code>v1.18.1</code> to <code>v1.19.0</code>.  by @gardener-ci-robot [#11542]</li>
+</ul>
+</li>
+<li><code>[DEPENDENCY]</code> The following dependencies have been updated:
+<ul>
+<li><code>gardener/gardener-metrics-exporter</code> from <code>0.34.0</code> to <code>0.35.0</code>. <a href="https://redirect.github.com/gardener/gardener-metrics-exporter/releases/tag/0.35.0" target="_blank" rel="noopener noreferrer">Release Notes</a> by @gardener-ci-robot [#11541]</li>
+</ul>
+</li>
+</ul>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="helm-charts-12">Helm Charts<a href="#helm-charts-12" class="hash-link" aria-label="Direct link to Helm Charts" title="Direct link to Helm Charts">​</a></h2>
+<ul>
+<li>controlplane: <code>europe-docker.pkg.dev/gardener-project/releases/charts/gardener/controlplane:v1.114.0</code></li>
+<li>gardenlet: <code>europe-docker.pkg.dev/gardener-project/releases/charts/gardener/gardenlet:v1.114.0</code></li>
+<li>operator: <code>europe-docker.pkg.dev/gardener-project/releases/charts/gardener/operator:v1.114.0</code></li>
+<li>resource-manager: <code>europe-docker.pkg.dev/gardener-project/releases/charts/gardener/resource-manager:v1.114.0</code></li>
+</ul>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="docker-images-16">Docker Images<a href="#docker-images-16" class="hash-link" aria-label="Direct link to Docker Images" title="Direct link to Docker Images">​</a></h2>
+<ul>
+<li>admission-controller: <code>europe-docker.pkg.dev/gardener-project/releases/gardener/admission-controller:v1.114.0</code></li>
+<li>apiserver: <code>europe-docker.pkg.dev/gardener-project/releases/gardener/apiserver:v1.114.0</code></li>
+<li>controller-manager: <code>europe-docker.pkg.dev/gardener-project/releases/gardener/controller-manager:v1.114.0</code></li>
+<li>gardenlet: <code>europe-docker.pkg.dev/gardener-project/releases/gardener/gardenlet:v1.114.0</code></li>
+<li>node-agent: <code>europe-docker.pkg.dev/gardener-project/releases/gardener/node-agent:v1.114.0</code></li>
+<li>operator: <code>europe-docker.pkg.dev/gardener-project/releases/gardener/operator:v1.114.0</code></li>
+<li>resource-manager: <code>europe-docker.pkg.dev/gardener-project/releases/gardener/resource-manager:v1.114.0</code></li>
+<li>scheduler: <code>europe-docker.pkg.dev/gardener-project/releases/gardener/scheduler:v1.114.0</code></li>
+</ul>
 </div></div></details></div></article><nav class="pagination-nav docusaurus-mt-lg" aria-label="Docs pages"><a class="pagination-nav__link pagination-nav__link--next" href="/release-notes/v1.113"><div class="pagination-nav__sublabel">Next</div><div class="pagination-nav__label">Release Notes v1.113</div></a></nav></div></div></div></div></main></div></div></div><footer class="footer footer--dark"><div class="container container-fluid"><div class="row footer__links"><div class="col footer__col"><div class="footer__title">Docs</div><ul class="footer__items clean-list"><li class="footer__item"><a class="footer__link-item" href="/docs/overview">Docs</a></li></ul></div><div class="col footer__col"><div class="footer__title">Community</div><ul class="footer__items clean-list"><li class="footer__item"><a href="https://github.com/yakecloud" target="_blank" rel="noopener noreferrer" class="footer__link-item">GitHub<svg width="13.5" height="13.5" aria-hidden="true" viewBox="0 0 24 24" class="iconExternalLink_nPIU"><path fill="currentColor" d="M21 13v10h-21v-19h12v2h-10v15h17v-8h2zm3-12h-10.988l4.035 4-6.977 7.07 2.828 2.828 6.977-7.07 4.125 4.172v-11z"></path></svg></a></li><li class="footer__item"><a href="https://github.com/gardener-community" target="_blank" rel="noopener noreferrer" class="footer__link-item">Gardener Community<svg width="13.5" height="13.5" aria-hidden="true" viewBox="0 0 24 24" class="iconExternalLink_nPIU"><path fill="currentColor" d="M21 13v10h-21v-19h12v2h-10v15h17v-8h2zm3-12h-10.988l4.035 4-6.977 7.07 2.828 2.828 6.977-7.07 4.125 4.172v-11z"></path></svg></a></li><li class="footer__item"><a href="https://gardener-cloud.slack.com" target="_blank" rel="noopener noreferrer" class="footer__link-item">Slack<svg width="13.5" height="13.5" aria-hidden="true" viewBox="0 0 24 24" class="iconExternalLink_nPIU"><path fill="currentColor" d="M21 13v10h-21v-19h12v2h-10v15h17v-8h2zm3-12h-10.988l4.035 4-6.977 7.07 2.828 2.828 6.977-7.07 4.125 4.172v-11z"></path></svg></a></li></ul></div><div class="col footer__col"><div class="footer__title">More</div><ul class="footer__items clean-list"><li class="footer__item"><a class="footer__link-item" href="/blog">Blog</a></li><li class="footer__item"><a class="footer__link-item" href="/legals">Legals</a></li><li class="footer__item"><a class="footer__link-item" href="/privacy-policy">Privacy policy</a></li></ul></div></div><div class="footer__bottom text--center"><div class="footer__copyright">Copyright © 2025 23 Technologies GmbH</div></div></div></footer></div>
 </body>
 </html>
