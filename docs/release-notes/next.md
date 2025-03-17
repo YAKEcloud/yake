@@ -611,3 +611,25 @@ no release notes available
 
 
 </details>
+
+<details>
+<summary><b>Update gardener-metrics-exporter to <code>0.37.0</code></b></summary>
+
+no release notes available
+
+## Docker Images
+- metrics-exporter: `europe-docker.pkg.dev/gardener-project/releases/gardener/metrics-exporter:0.37.0`
+
+
+</details>
+
+<details>
+<summary><b>Update gardener-metrics-exporter to <code>0.37.0</code></b></summary>
+
+no release notes available
+
+## Docker Images
+- metrics-exporter: `europe-docker.pkg.dev/gardener-project/releases/gardener/metrics-exporter:0.37.0`
+
+
+</details>
