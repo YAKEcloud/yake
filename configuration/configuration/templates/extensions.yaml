@@ -79,7 +79,7 @@ stringData:
         enabled: true
 
     provider-gcp:
-      version: 1.42.2
+      version: 1.43.0
       admission:
         enabled: true
 
