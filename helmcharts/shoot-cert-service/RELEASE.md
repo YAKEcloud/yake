@@ -1,23 +1,19 @@
-# [gardener/cert-management]
+# [gardener/gardener-extension-shoot-cert-service]
 
 ## 🐛 Bug Fixes
 
-- `[USER]` Fix exhaustion of request quotas on concurrent certificates with same domain name by @MartinWeindel [gardener/cert-management#399]
+- `[OPERATOR]` Fixes the cert controller manager's observability configuration. by @rickardsjp [#356]
 ## 🏃 Others
 
-- `[OPERATOR]` Support `DNSRecord.spec.class` by annotation `cert.gardener.cloud/dnsrecord-class` by @MartinWeindel [gardener/cert-management#384]
-- `[DEPENDENCY]` Update module `gardener/gardener` to `v1.111.1`. by @gardener-ci-robot [gardener/cert-management#398]
-## 📖 Documentation
+- `[OPERATOR]` Support for using a `CA` issuer as default issuer. by @MartinWeindel [#337]
+- `[OPERATOR]` `extension-shoot-cert-service` no longer supports Shoots with Кubernetes version <= 1.26. by @RadaBDimitrova [#309]
+# [gardener/cert-management]
 
-- `[DEVELOPER]` Document gaps between the community `cert-manager` and Gardener's `cert-management`. by @marc1404 [gardener/cert-management#379]
-# [gardener/gardener-extension-shoot-cert-service]
+## ✨ New Features
 
-## 🏃 Others
-
-- `[OPERATOR]` Bumps github.com/gardener/gardener from 1.109.0 to 1.110.0. by @dependabot[bot] [#324]
-- `[OPERATOR]` Containers, which do not require privilege escalations, now forbid privilege escalations explicitly. by @georgibaltiev [#335]
+- `[OPERATOR]` Introduce multi-arch build for `linux/arm64` images. by @marc1404 [gardener/cert-management#405]
 
 ## Helm Charts
-- shoot-cert-service: `europe-docker.pkg.dev/gardener-project/releases/charts/gardener/extensions/shoot-cert-service:v1.48.0`
+- shoot-cert-service: `europe-docker.pkg.dev/gardener-project/releases/charts/gardener/extensions/shoot-cert-service:v1.49.0`
 ## Docker Images
-- gardener-extension-shoot-cert-service: `europe-docker.pkg.dev/gardener-project/releases/gardener/extensions/shoot-cert-service:v1.48.0`
+- gardener-extension-shoot-cert-service: `europe-docker.pkg.dev/gardener-project/releases/gardener/extensions/shoot-cert-service:v1.49.0`
