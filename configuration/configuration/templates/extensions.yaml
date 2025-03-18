@@ -45,8 +45,6 @@ stringData:
       values:
         dnsControllerManager:
           deploy: true
-          image:
-            repository: europe-docker.pkg.dev/gardener-project/releases/dns-controller-manager
           configuration:
             cacheTtl: 300
             controllers: dnscontrollers,dnssources
