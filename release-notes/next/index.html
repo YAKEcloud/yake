@@ -5,7 +5,7 @@
 <meta name="generator" content="Docusaurus v3.7.0">
 <title data-rh="true">Release Notes next | Yet another Kubernetes Engine</title><meta data-rh="true" name="viewport" content="width=device-width,initial-scale=1"><meta data-rh="true" name="twitter:card" content="summary_large_image"><meta data-rh="true" property="og:url" content="https://yake.cloud/release-notes/next"><meta data-rh="true" property="og:locale" content="en"><meta data-rh="true" name="docusaurus_locale" content="en"><meta data-rh="true" name="docsearch:language" content="en"><meta data-rh="true" name="gardener" content="installation, production, operations, maintenance"><meta data-rh="true" name="docusaurus_version" content="current"><meta data-rh="true" name="docusaurus_tag" content="docs-release-notes-current"><meta data-rh="true" name="docsearch:version" content="current"><meta data-rh="true" name="docsearch:docusaurus_tag" content="docs-release-notes-current"><meta data-rh="true" property="og:title" content="Release Notes next | Yet another Kubernetes Engine"><meta data-rh="true" name="description" content="Yake release notes and upgrade guide"><meta data-rh="true" property="og:description" content="Yake release notes and upgrade guide"><link data-rh="true" rel="icon" href="/img/favicon.ico"><link data-rh="true" rel="canonical" href="https://yake.cloud/release-notes/next"><link data-rh="true" rel="alternate" href="https://yake.cloud/release-notes/next" hreflang="en"><link data-rh="true" rel="alternate" href="https://yake.cloud/release-notes/next" hreflang="x-default"><link rel="alternate" type="application/rss+xml" href="/blog/rss.xml" title="Yet another Kubernetes Engine RSS Feed">
 <link rel="alternate" type="application/atom+xml" href="/blog/atom.xml" title="Yet another Kubernetes Engine Atom Feed"><link rel="stylesheet" href="/assets/css/styles.a6ab13cb.css">
-<script src="/assets/js/runtime~main.0721d3e0.js" defer="defer"></script>
+<script src="/assets/js/runtime~main.97200b7f.js" defer="defer"></script>
 <script src="/assets/js/main.b23fa87c.js" defer="defer"></script>
 </head>
 <body class="navigation-with-keyboard">
@@ -356,6 +356,279 @@
 <ul>
 <li>gardener-extension-admission-gcp: <code>europe-docker.pkg.dev/gardener-project/releases/gardener/extensions/admission-gcp:v1.43.2</code></li>
 <li>gardener-extension-provider-gcp: <code>europe-docker.pkg.dev/gardener-project/releases/gardener/extensions/provider-gcp:v1.43.2</code></li>
+</ul>
+</div></div></details>
+<details class="details_lb9f alert alert--info details_b_Ee" data-collapsed="true"><summary><b>Update gardener-controlplane to <code>1.116.0</code></b></summary><div><div class="collapsibleContent_i85q">
+<!-- -->
+<h1>[gardener/gardener]</h1>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="️-breaking-changes-1">⚠️ Breaking Changes<a href="#️-breaking-changes-1" class="hash-link" aria-label="Direct link to ⚠️ Breaking Changes" title="Direct link to ⚠️ Breaking Changes">​</a></h2>
+<ul>
+<li><code>[DEVELOPER]</code> <code>/hack/generate-crds.sh</code> will no longer generate any CRDs with <code>group=druid.gardener.cloud</code>. One must use <a href="https://github.com/gardener/etcd-druid/blob/v0.28.0/api/core/v1alpha1/crds/crd.go#L35" target="_blank" rel="noopener noreferrer">etcd-druid API</a> to get the CRDs that serve as a single source of truth for all etcd-druid CRDs. by @unmarshall [#11545]</li>
+<li><code>[DEVELOPER]</code> The extension <code>class</code> field in the <a href="https://github.com/gardener/gardener/blob/ec709dbc3119b9888c29361e7d93c47db1674b0c/extensions/pkg/controller/extension/controller.go" target="_blank" rel="noopener noreferrer">generic extension controller</a> was removed. Please use the new field <code>classes</code> instead. by @timuthy [#11764]</li>
+<li><code>[OPERATOR]</code> The etcd-druid&#x27;s GA-ed <code>UseEtcdWrapper</code> feature gate is removed. It is now unconditionally enabled. It should no longer be passed in gardenlet configuration. Before upgrading to this version of Gardener, check your gardenlet configuration and make sure that it does not specify the etcd-druid&#x27;s <code>UseEtcdWrapper</code> feature gate. by @unmarshall [#11545]</li>
+<li><code>[OPERATOR]</code> The default etcd-main storage is increased from <code>10Gi</code> to <code>25Gi</code>. The etcd-main storage capacity is mutated by provider extensions. Before upgrading to this version of Gardener, make sure the provider extensions which you use mutate the etcd-main capacity. Otherwise, the default storage capacity change in Gardener could be unexpected or breaking. by @unmarshall [#11545]</li>
+<li><code>[OPERATOR]</code> Please note, if you configure <code>spec.extensions</code> in your <code>Garden</code> resource: <code>gardener-operator</code> adds a <code>garden-</code> prefix to all extension resources configured via the <code>Garden</code>. Existing extension resources (not prefixed) will be deleted automatically at the end of the reconciliation. Another, manually triggered  <code>Garden</code> reconciliation might be required to reach the desired state of the extension again. by @timuthy [#11764]</li>
+</ul>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="-noteworthy">📰 Noteworthy<a href="#-noteworthy" class="hash-link" aria-label="Direct link to 📰 Noteworthy" title="Direct link to 📰 Noteworthy">​</a></h2>
+<ul>
+<li><code>[OPERATOR]</code> <code>NodeAgentAuthorizer</code> feature gate has been promoted to beta and is now enabled by default. by @oliver-goetz [#11757]</li>
+<li><code>[OPERATOR]</code> The feature gate <code>NewVPN</code> has been graduated to <code>GA</code>. It was already enabled by default and can now no longer be turned off. The feature gate will be removed in a future release. by @domdom82 [#11714]</li>
+</ul>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="-new-features-4">✨ New Features<a href="#-new-features-4" class="hash-link" aria-label="Direct link to ✨ New Features" title="Direct link to ✨ New Features">​</a></h2>
+<ul>
+<li><code>[OPERATOR]</code> Extensions can be configured for <code>Seed</code>s via <code>spec.extensions</code> to deploy extensions for the seed cluster. Before activating this configuration, please first confirm that the corresponding extension is compatible with the seed use-case. by @timuthy [#11764]</li>
+</ul>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="-bug-fixes-3">🐛 Bug Fixes<a href="#-bug-fixes-3" class="hash-link" aria-label="Direct link to 🐛 Bug Fixes" title="Direct link to 🐛 Bug Fixes">​</a></h2>
+<ul>
+<li><code>[OPERATOR]</code> The <code>NetworkPolicy</code> controller part of <code>gardener-resource-manager</code> does no longer attempt to create resources in terminating namespaces. by @rfranzke [#11808]</li>
+<li><code>[OPERATOR]</code> An issue causing Shoot reconciliation to fail with <code>no relationship found</code> when the referenced SecretBinding/CredentialsBinding is forcefully deleted (its finalizer is removed by the end user) and then recreated with the same name is now fixed. gardener-admission-controller&#x27;s  authorisation graph is now updated for a Shoot after forceful deletion and recreation of the referenced Secretbinding/CredentialsBinding. by @MartinWeindel [#11461]</li>
+<li><code>[OPERATOR]</code> If the computed pod label selector contains keys exceeding 63 characters, the <code>NetworkPolicy</code> controller part of <code>gardener-resource-manager</code> does now shorten them to make sure they can actually get created. Previously, it failed trying to create them infinitely, resulting in high CPU load in large clusters. by @rfranzke [#11808]</li>
+<li><code>[OPERATOR]</code> Keep <code>operator.gardener.cloud.Extension</code> condition <code>RequiredRuntime</code> = <code>true</code> until deletion of <code>extensions.gardener.cloud.Extension</code>s has completed. by @MartinWeindel [#11696]</li>
+<li><code>[OPERATOR]</code> Fix a bug that appears when migrating a <code>Shoot</code> between <code>Seed</code>s by introducing a new controller, which manages a <code>ShootState</code> finalizer preventing early object deletions. by @vitanovs [#11491]</li>
+</ul>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="-others-12">🏃 Others<a href="#-others-12" class="hash-link" aria-label="Direct link to 🏃 Others" title="Direct link to 🏃 Others">​</a></h2>
+<ul>
+<li><code>[DEVELOPER]</code> Remove the double maintenance of CRDs defined in etcd-druid. Now, gardenlet is using the etcd-druid CRD APIs to get the CRDs ensuring one single source of truth. by @unmarshall [#11545]</li>
+<li><code>[DEVELOPER]</code> Remove the dependency on the <code>github.com/gardener/etcd-druid</code> module and instead introduce dependency on <code>github.com/gardener/etcd-druid/api</code> module. by @unmarshall [#11545]</li>
+<li><code>[OPERATOR]</code> Add optional argument <code>--custom-package &lt;group&gt;=&lt;package&gt;</code> to <code>generate-crds.sh</code> script. by @MartinWeindel [#11702]</li>
+<li><code>[OPERATOR]</code> Remove unnecessary istio loadbalancer annotations from the ClusterIP kube-apiserver service. by @kon-angelo [#11728]</li>
+<li><code>[OPERATOR]</code> Increase VPA client-side rate limits to <code>200</code> qps and <code>250</code> burst. by @voelzmo [#11748]</li>
+<li><code>[DEPENDENCY]</code> The following dependencies have been updated:
+<ul>
+<li><code>envoyproxy/envoy</code> from <code>v1.33.1</code> to <code>v1.33.2</code>. <a href="https://redirect.github.com/envoyproxy/envoy/releases/tag/v1.33.2" target="_blank" rel="noopener noreferrer">Release Notes</a> by @gardener-ci-robot [#11751]</li>
+</ul>
+</li>
+<li><code>[DEPENDENCY]</code> The following dependencies have been updated:
+<ul>
+<li><code>quay.io/prometheus/node-exporter</code> from <code>v1.9.0</code> to <code>v1.9.1</code>.  by @gardener-ci-robot [#11784]</li>
+</ul>
+</li>
+<li><code>[DEPENDENCY]</code> The following dependencies have been updated:
+<ul>
+<li><code>gardener/etcd-druid</code> from <code>v0.27.0</code> to <code>v0.28.0</code>. <a href="https://redirect.github.com/gardener/etcd-druid/releases/tag/v0.28.0" target="_blank" rel="noopener noreferrer">Release Notes</a></li>
+<li><code>github.com/gardener/etcd-druid</code> from <code>v0.27.0</code> to <code>v0.28.0</code>.  by @unmarshall [#11545]</li>
+</ul>
+</li>
+<li><code>[DEPENDENCY]</code> The following dependencies have been updated:
+<ul>
+<li><code>quay.io/kiwigrid/k8s-sidecar</code> from <code>1.30.2</code> to <code>1.30.3</code>.  by @gardener-ci-robot [#11766]</li>
+</ul>
+</li>
+<li><code>[DEPENDENCY]</code> The following dependencies have been updated:
+<ul>
+<li><code>envoyproxy/envoy</code> from <code>v1.33.0</code> to <code>v1.33.1</code>. <a href="https://redirect.github.com/envoyproxy/envoy/releases/tag/v1.33.1" target="_blank" rel="noopener noreferrer">Release Notes</a> by @gardener-ci-robot [#11720]</li>
+</ul>
+</li>
+<li><code>[DEPENDENCY]</code> The following dependencies have been updated:
+<ul>
+<li><code>quay.io/coreos/etcd</code> from <code>v3.4.36</code> to <code>v3.5.20</code>.  by @gardener-ci-robot [#11756]</li>
+</ul>
+</li>
+<li><code>[DEPENDENCY]</code> The following dependencies have been updated:
+<ul>
+<li><code>quay.io/coreos/etcd</code> from <code>v3.4.34</code> to <code>v3.4.36</code>.  by @gardener-ci-robot [#11755]</li>
+</ul>
+</li>
+</ul>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="helm-charts-11">Helm Charts<a href="#helm-charts-11" class="hash-link" aria-label="Direct link to Helm Charts" title="Direct link to Helm Charts">​</a></h2>
+<ul>
+<li>controlplane: <code>europe-docker.pkg.dev/gardener-project/releases/charts/gardener/controlplane:v1.116.0</code></li>
+<li>gardenlet: <code>europe-docker.pkg.dev/gardener-project/releases/charts/gardener/gardenlet:v1.116.0</code></li>
+<li>operator: <code>europe-docker.pkg.dev/gardener-project/releases/charts/gardener/operator:v1.116.0</code></li>
+<li>resource-manager: <code>europe-docker.pkg.dev/gardener-project/releases/charts/gardener/resource-manager:v1.116.0</code></li>
+</ul>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="docker-images-11">Docker Images<a href="#docker-images-11" class="hash-link" aria-label="Direct link to Docker Images" title="Direct link to Docker Images">​</a></h2>
+<ul>
+<li>admission-controller: <code>europe-docker.pkg.dev/gardener-project/releases/gardener/admission-controller:v1.116.0</code></li>
+<li>apiserver: <code>europe-docker.pkg.dev/gardener-project/releases/gardener/apiserver:v1.116.0</code></li>
+<li>controller-manager: <code>europe-docker.pkg.dev/gardener-project/releases/gardener/controller-manager:v1.116.0</code></li>
+<li>gardenlet: <code>europe-docker.pkg.dev/gardener-project/releases/gardener/gardenlet:v1.116.0</code></li>
+<li>node-agent: <code>europe-docker.pkg.dev/gardener-project/releases/gardener/node-agent:v1.116.0</code></li>
+<li>operator: <code>europe-docker.pkg.dev/gardener-project/releases/gardener/operator:v1.116.0</code></li>
+<li>resource-manager: <code>europe-docker.pkg.dev/gardener-project/releases/gardener/resource-manager:v1.116.0</code></li>
+<li>scheduler: <code>europe-docker.pkg.dev/gardener-project/releases/gardener/scheduler:v1.116.0</code></li>
+</ul>
+</div></div></details>
+<details class="details_lb9f alert alert--info details_b_Ee" data-collapsed="true"><summary><b>Update gardener-controlplane to <code>1.116.0</code></b></summary><div><div class="collapsibleContent_i85q">
+<!-- -->
+<h1>[gardener/gardener]</h1>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="️-breaking-changes-2">⚠️ Breaking Changes<a href="#️-breaking-changes-2" class="hash-link" aria-label="Direct link to ⚠️ Breaking Changes" title="Direct link to ⚠️ Breaking Changes">​</a></h2>
+<ul>
+<li><code>[DEVELOPER]</code> <code>/hack/generate-crds.sh</code> will no longer generate any CRDs with <code>group=druid.gardener.cloud</code>. One must use <a href="https://github.com/gardener/etcd-druid/blob/v0.28.0/api/core/v1alpha1/crds/crd.go#L35" target="_blank" rel="noopener noreferrer">etcd-druid API</a> to get the CRDs that serve as a single source of truth for all etcd-druid CRDs. by @unmarshall [#11545]</li>
+<li><code>[DEVELOPER]</code> The extension <code>class</code> field in the <a href="https://github.com/gardener/gardener/blob/ec709dbc3119b9888c29361e7d93c47db1674b0c/extensions/pkg/controller/extension/controller.go" target="_blank" rel="noopener noreferrer">generic extension controller</a> was removed. Please use the new field <code>classes</code> instead. by @timuthy [#11764]</li>
+<li><code>[OPERATOR]</code> The etcd-druid&#x27;s GA-ed <code>UseEtcdWrapper</code> feature gate is removed. It is now unconditionally enabled. It should no longer be passed in gardenlet configuration. Before upgrading to this version of Gardener, check your gardenlet configuration and make sure that it does not specify the etcd-druid&#x27;s <code>UseEtcdWrapper</code> feature gate. by @unmarshall [#11545]</li>
+<li><code>[OPERATOR]</code> The default etcd-main storage is increased from <code>10Gi</code> to <code>25Gi</code>. The etcd-main storage capacity is mutated by provider extensions. Before upgrading to this version of Gardener, make sure the provider extensions which you use mutate the etcd-main capacity. Otherwise, the default storage capacity change in Gardener could be unexpected or breaking. by @unmarshall [#11545]</li>
+<li><code>[OPERATOR]</code> Please note, if you configure <code>spec.extensions</code> in your <code>Garden</code> resource: <code>gardener-operator</code> adds a <code>garden-</code> prefix to all extension resources configured via the <code>Garden</code>. Existing extension resources (not prefixed) will be deleted automatically at the end of the reconciliation. Another, manually triggered  <code>Garden</code> reconciliation might be required to reach the desired state of the extension again. by @timuthy [#11764]</li>
+</ul>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="-noteworthy-1">📰 Noteworthy<a href="#-noteworthy-1" class="hash-link" aria-label="Direct link to 📰 Noteworthy" title="Direct link to 📰 Noteworthy">​</a></h2>
+<ul>
+<li><code>[OPERATOR]</code> <code>NodeAgentAuthorizer</code> feature gate has been promoted to beta and is now enabled by default. by @oliver-goetz [#11757]</li>
+<li><code>[OPERATOR]</code> The feature gate <code>NewVPN</code> has been graduated to <code>GA</code>. It was already enabled by default and can now no longer be turned off. The feature gate will be removed in a future release. by @domdom82 [#11714]</li>
+</ul>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="-new-features-5">✨ New Features<a href="#-new-features-5" class="hash-link" aria-label="Direct link to ✨ New Features" title="Direct link to ✨ New Features">​</a></h2>
+<ul>
+<li><code>[OPERATOR]</code> Extensions can be configured for <code>Seed</code>s via <code>spec.extensions</code> to deploy extensions for the seed cluster. Before activating this configuration, please first confirm that the corresponding extension is compatible with the seed use-case. by @timuthy [#11764]</li>
+</ul>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="-bug-fixes-4">🐛 Bug Fixes<a href="#-bug-fixes-4" class="hash-link" aria-label="Direct link to 🐛 Bug Fixes" title="Direct link to 🐛 Bug Fixes">​</a></h2>
+<ul>
+<li><code>[OPERATOR]</code> The <code>NetworkPolicy</code> controller part of <code>gardener-resource-manager</code> does no longer attempt to create resources in terminating namespaces. by @rfranzke [#11808]</li>
+<li><code>[OPERATOR]</code> An issue causing Shoot reconciliation to fail with <code>no relationship found</code> when the referenced SecretBinding/CredentialsBinding is forcefully deleted (its finalizer is removed by the end user) and then recreated with the same name is now fixed. gardener-admission-controller&#x27;s  authorisation graph is now updated for a Shoot after forceful deletion and recreation of the referenced Secretbinding/CredentialsBinding. by @MartinWeindel [#11461]</li>
+<li><code>[OPERATOR]</code> If the computed pod label selector contains keys exceeding 63 characters, the <code>NetworkPolicy</code> controller part of <code>gardener-resource-manager</code> does now shorten them to make sure they can actually get created. Previously, it failed trying to create them infinitely, resulting in high CPU load in large clusters. by @rfranzke [#11808]</li>
+<li><code>[OPERATOR]</code> Keep <code>operator.gardener.cloud.Extension</code> condition <code>RequiredRuntime</code> = <code>true</code> until deletion of <code>extensions.gardener.cloud.Extension</code>s has completed. by @MartinWeindel [#11696]</li>
+<li><code>[OPERATOR]</code> Fix a bug that appears when migrating a <code>Shoot</code> between <code>Seed</code>s by introducing a new controller, which manages a <code>ShootState</code> finalizer preventing early object deletions. by @vitanovs [#11491]</li>
+</ul>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="-others-13">🏃 Others<a href="#-others-13" class="hash-link" aria-label="Direct link to 🏃 Others" title="Direct link to 🏃 Others">​</a></h2>
+<ul>
+<li><code>[DEVELOPER]</code> Remove the double maintenance of CRDs defined in etcd-druid. Now, gardenlet is using the etcd-druid CRD APIs to get the CRDs ensuring one single source of truth. by @unmarshall [#11545]</li>
+<li><code>[DEVELOPER]</code> Remove the dependency on the <code>github.com/gardener/etcd-druid</code> module and instead introduce dependency on <code>github.com/gardener/etcd-druid/api</code> module. by @unmarshall [#11545]</li>
+<li><code>[OPERATOR]</code> Add optional argument <code>--custom-package &lt;group&gt;=&lt;package&gt;</code> to <code>generate-crds.sh</code> script. by @MartinWeindel [#11702]</li>
+<li><code>[OPERATOR]</code> Remove unnecessary istio loadbalancer annotations from the ClusterIP kube-apiserver service. by @kon-angelo [#11728]</li>
+<li><code>[OPERATOR]</code> Increase VPA client-side rate limits to <code>200</code> qps and <code>250</code> burst. by @voelzmo [#11748]</li>
+<li><code>[DEPENDENCY]</code> The following dependencies have been updated:
+<ul>
+<li><code>envoyproxy/envoy</code> from <code>v1.33.1</code> to <code>v1.33.2</code>. <a href="https://redirect.github.com/envoyproxy/envoy/releases/tag/v1.33.2" target="_blank" rel="noopener noreferrer">Release Notes</a> by @gardener-ci-robot [#11751]</li>
+</ul>
+</li>
+<li><code>[DEPENDENCY]</code> The following dependencies have been updated:
+<ul>
+<li><code>quay.io/prometheus/node-exporter</code> from <code>v1.9.0</code> to <code>v1.9.1</code>.  by @gardener-ci-robot [#11784]</li>
+</ul>
+</li>
+<li><code>[DEPENDENCY]</code> The following dependencies have been updated:
+<ul>
+<li><code>gardener/etcd-druid</code> from <code>v0.27.0</code> to <code>v0.28.0</code>. <a href="https://redirect.github.com/gardener/etcd-druid/releases/tag/v0.28.0" target="_blank" rel="noopener noreferrer">Release Notes</a></li>
+<li><code>github.com/gardener/etcd-druid</code> from <code>v0.27.0</code> to <code>v0.28.0</code>.  by @unmarshall [#11545]</li>
+</ul>
+</li>
+<li><code>[DEPENDENCY]</code> The following dependencies have been updated:
+<ul>
+<li><code>quay.io/kiwigrid/k8s-sidecar</code> from <code>1.30.2</code> to <code>1.30.3</code>.  by @gardener-ci-robot [#11766]</li>
+</ul>
+</li>
+<li><code>[DEPENDENCY]</code> The following dependencies have been updated:
+<ul>
+<li><code>envoyproxy/envoy</code> from <code>v1.33.0</code> to <code>v1.33.1</code>. <a href="https://redirect.github.com/envoyproxy/envoy/releases/tag/v1.33.1" target="_blank" rel="noopener noreferrer">Release Notes</a> by @gardener-ci-robot [#11720]</li>
+</ul>
+</li>
+<li><code>[DEPENDENCY]</code> The following dependencies have been updated:
+<ul>
+<li><code>quay.io/coreos/etcd</code> from <code>v3.4.36</code> to <code>v3.5.20</code>.  by @gardener-ci-robot [#11756]</li>
+</ul>
+</li>
+<li><code>[DEPENDENCY]</code> The following dependencies have been updated:
+<ul>
+<li><code>quay.io/coreos/etcd</code> from <code>v3.4.34</code> to <code>v3.4.36</code>.  by @gardener-ci-robot [#11755]</li>
+</ul>
+</li>
+</ul>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="helm-charts-12">Helm Charts<a href="#helm-charts-12" class="hash-link" aria-label="Direct link to Helm Charts" title="Direct link to Helm Charts">​</a></h2>
+<ul>
+<li>controlplane: <code>europe-docker.pkg.dev/gardener-project/releases/charts/gardener/controlplane:v1.116.0</code></li>
+<li>gardenlet: <code>europe-docker.pkg.dev/gardener-project/releases/charts/gardener/gardenlet:v1.116.0</code></li>
+<li>operator: <code>europe-docker.pkg.dev/gardener-project/releases/charts/gardener/operator:v1.116.0</code></li>
+<li>resource-manager: <code>europe-docker.pkg.dev/gardener-project/releases/charts/gardener/resource-manager:v1.116.0</code></li>
+</ul>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="docker-images-12">Docker Images<a href="#docker-images-12" class="hash-link" aria-label="Direct link to Docker Images" title="Direct link to Docker Images">​</a></h2>
+<ul>
+<li>admission-controller: <code>europe-docker.pkg.dev/gardener-project/releases/gardener/admission-controller:v1.116.0</code></li>
+<li>apiserver: <code>europe-docker.pkg.dev/gardener-project/releases/gardener/apiserver:v1.116.0</code></li>
+<li>controller-manager: <code>europe-docker.pkg.dev/gardener-project/releases/gardener/controller-manager:v1.116.0</code></li>
+<li>gardenlet: <code>europe-docker.pkg.dev/gardener-project/releases/gardener/gardenlet:v1.116.0</code></li>
+<li>node-agent: <code>europe-docker.pkg.dev/gardener-project/releases/gardener/node-agent:v1.116.0</code></li>
+<li>operator: <code>europe-docker.pkg.dev/gardener-project/releases/gardener/operator:v1.116.0</code></li>
+<li>resource-manager: <code>europe-docker.pkg.dev/gardener-project/releases/gardener/resource-manager:v1.116.0</code></li>
+<li>scheduler: <code>europe-docker.pkg.dev/gardener-project/releases/gardener/scheduler:v1.116.0</code></li>
+</ul>
+</div></div></details>
+<details class="details_lb9f alert alert--info details_b_Ee" data-collapsed="true"><summary><b>Update gardenlet to <code>1.116.0</code></b></summary><div><div class="collapsibleContent_i85q">
+<!-- -->
+<h1>[gardener/gardener]</h1>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="️-breaking-changes-3">⚠️ Breaking Changes<a href="#️-breaking-changes-3" class="hash-link" aria-label="Direct link to ⚠️ Breaking Changes" title="Direct link to ⚠️ Breaking Changes">​</a></h2>
+<ul>
+<li><code>[DEVELOPER]</code> <code>/hack/generate-crds.sh</code> will no longer generate any CRDs with <code>group=druid.gardener.cloud</code>. One must use <a href="https://github.com/gardener/etcd-druid/blob/v0.28.0/api/core/v1alpha1/crds/crd.go#L35" target="_blank" rel="noopener noreferrer">etcd-druid API</a> to get the CRDs that serve as a single source of truth for all etcd-druid CRDs. by @unmarshall [#11545]</li>
+<li><code>[DEVELOPER]</code> The extension <code>class</code> field in the <a href="https://github.com/gardener/gardener/blob/ec709dbc3119b9888c29361e7d93c47db1674b0c/extensions/pkg/controller/extension/controller.go" target="_blank" rel="noopener noreferrer">generic extension controller</a> was removed. Please use the new field <code>classes</code> instead. by @timuthy [#11764]</li>
+<li><code>[OPERATOR]</code> The etcd-druid&#x27;s GA-ed <code>UseEtcdWrapper</code> feature gate is removed. It is now unconditionally enabled. It should no longer be passed in gardenlet configuration. Before upgrading to this version of Gardener, check your gardenlet configuration and make sure that it does not specify the etcd-druid&#x27;s <code>UseEtcdWrapper</code> feature gate. by @unmarshall [#11545]</li>
+<li><code>[OPERATOR]</code> The default etcd-main storage is increased from <code>10Gi</code> to <code>25Gi</code>. The etcd-main storage capacity is mutated by provider extensions. Before upgrading to this version of Gardener, make sure the provider extensions which you use mutate the etcd-main capacity. Otherwise, the default storage capacity change in Gardener could be unexpected or breaking. by @unmarshall [#11545]</li>
+<li><code>[OPERATOR]</code> Please note, if you configure <code>spec.extensions</code> in your <code>Garden</code> resource: <code>gardener-operator</code> adds a <code>garden-</code> prefix to all extension resources configured via the <code>Garden</code>. Existing extension resources (not prefixed) will be deleted automatically at the end of the reconciliation. Another, manually triggered  <code>Garden</code> reconciliation might be required to reach the desired state of the extension again. by @timuthy [#11764]</li>
+</ul>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="-noteworthy-2">📰 Noteworthy<a href="#-noteworthy-2" class="hash-link" aria-label="Direct link to 📰 Noteworthy" title="Direct link to 📰 Noteworthy">​</a></h2>
+<ul>
+<li><code>[OPERATOR]</code> <code>NodeAgentAuthorizer</code> feature gate has been promoted to beta and is now enabled by default. by @oliver-goetz [#11757]</li>
+<li><code>[OPERATOR]</code> The feature gate <code>NewVPN</code> has been graduated to <code>GA</code>. It was already enabled by default and can now no longer be turned off. The feature gate will be removed in a future release. by @domdom82 [#11714]</li>
+</ul>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="-new-features-6">✨ New Features<a href="#-new-features-6" class="hash-link" aria-label="Direct link to ✨ New Features" title="Direct link to ✨ New Features">​</a></h2>
+<ul>
+<li><code>[OPERATOR]</code> Extensions can be configured for <code>Seed</code>s via <code>spec.extensions</code> to deploy extensions for the seed cluster. Before activating this configuration, please first confirm that the corresponding extension is compatible with the seed use-case. by @timuthy [#11764]</li>
+</ul>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="-bug-fixes-5">🐛 Bug Fixes<a href="#-bug-fixes-5" class="hash-link" aria-label="Direct link to 🐛 Bug Fixes" title="Direct link to 🐛 Bug Fixes">​</a></h2>
+<ul>
+<li><code>[OPERATOR]</code> The <code>NetworkPolicy</code> controller part of <code>gardener-resource-manager</code> does no longer attempt to create resources in terminating namespaces. by @rfranzke [#11808]</li>
+<li><code>[OPERATOR]</code> An issue causing Shoot reconciliation to fail with <code>no relationship found</code> when the referenced SecretBinding/CredentialsBinding is forcefully deleted (its finalizer is removed by the end user) and then recreated with the same name is now fixed. gardener-admission-controller&#x27;s  authorisation graph is now updated for a Shoot after forceful deletion and recreation of the referenced Secretbinding/CredentialsBinding. by @MartinWeindel [#11461]</li>
+<li><code>[OPERATOR]</code> If the computed pod label selector contains keys exceeding 63 characters, the <code>NetworkPolicy</code> controller part of <code>gardener-resource-manager</code> does now shorten them to make sure they can actually get created. Previously, it failed trying to create them infinitely, resulting in high CPU load in large clusters. by @rfranzke [#11808]</li>
+<li><code>[OPERATOR]</code> Keep <code>operator.gardener.cloud.Extension</code> condition <code>RequiredRuntime</code> = <code>true</code> until deletion of <code>extensions.gardener.cloud.Extension</code>s has completed. by @MartinWeindel [#11696]</li>
+<li><code>[OPERATOR]</code> Fix a bug that appears when migrating a <code>Shoot</code> between <code>Seed</code>s by introducing a new controller, which manages a <code>ShootState</code> finalizer preventing early object deletions. by @vitanovs [#11491]</li>
+</ul>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="-others-14">🏃 Others<a href="#-others-14" class="hash-link" aria-label="Direct link to 🏃 Others" title="Direct link to 🏃 Others">​</a></h2>
+<ul>
+<li><code>[DEVELOPER]</code> Remove the double maintenance of CRDs defined in etcd-druid. Now, gardenlet is using the etcd-druid CRD APIs to get the CRDs ensuring one single source of truth. by @unmarshall [#11545]</li>
+<li><code>[DEVELOPER]</code> Remove the dependency on the <code>github.com/gardener/etcd-druid</code> module and instead introduce dependency on <code>github.com/gardener/etcd-druid/api</code> module. by @unmarshall [#11545]</li>
+<li><code>[OPERATOR]</code> Add optional argument <code>--custom-package &lt;group&gt;=&lt;package&gt;</code> to <code>generate-crds.sh</code> script. by @MartinWeindel [#11702]</li>
+<li><code>[OPERATOR]</code> Remove unnecessary istio loadbalancer annotations from the ClusterIP kube-apiserver service. by @kon-angelo [#11728]</li>
+<li><code>[OPERATOR]</code> Increase VPA client-side rate limits to <code>200</code> qps and <code>250</code> burst. by @voelzmo [#11748]</li>
+<li><code>[DEPENDENCY]</code> The following dependencies have been updated:
+<ul>
+<li><code>envoyproxy/envoy</code> from <code>v1.33.1</code> to <code>v1.33.2</code>. <a href="https://redirect.github.com/envoyproxy/envoy/releases/tag/v1.33.2" target="_blank" rel="noopener noreferrer">Release Notes</a> by @gardener-ci-robot [#11751]</li>
+</ul>
+</li>
+<li><code>[DEPENDENCY]</code> The following dependencies have been updated:
+<ul>
+<li><code>quay.io/prometheus/node-exporter</code> from <code>v1.9.0</code> to <code>v1.9.1</code>.  by @gardener-ci-robot [#11784]</li>
+</ul>
+</li>
+<li><code>[DEPENDENCY]</code> The following dependencies have been updated:
+<ul>
+<li><code>gardener/etcd-druid</code> from <code>v0.27.0</code> to <code>v0.28.0</code>. <a href="https://redirect.github.com/gardener/etcd-druid/releases/tag/v0.28.0" target="_blank" rel="noopener noreferrer">Release Notes</a></li>
+<li><code>github.com/gardener/etcd-druid</code> from <code>v0.27.0</code> to <code>v0.28.0</code>.  by @unmarshall [#11545]</li>
+</ul>
+</li>
+<li><code>[DEPENDENCY]</code> The following dependencies have been updated:
+<ul>
+<li><code>quay.io/kiwigrid/k8s-sidecar</code> from <code>1.30.2</code> to <code>1.30.3</code>.  by @gardener-ci-robot [#11766]</li>
+</ul>
+</li>
+<li><code>[DEPENDENCY]</code> The following dependencies have been updated:
+<ul>
+<li><code>envoyproxy/envoy</code> from <code>v1.33.0</code> to <code>v1.33.1</code>. <a href="https://redirect.github.com/envoyproxy/envoy/releases/tag/v1.33.1" target="_blank" rel="noopener noreferrer">Release Notes</a> by @gardener-ci-robot [#11720]</li>
+</ul>
+</li>
+<li><code>[DEPENDENCY]</code> The following dependencies have been updated:
+<ul>
+<li><code>quay.io/coreos/etcd</code> from <code>v3.4.36</code> to <code>v3.5.20</code>.  by @gardener-ci-robot [#11756]</li>
+</ul>
+</li>
+<li><code>[DEPENDENCY]</code> The following dependencies have been updated:
+<ul>
+<li><code>quay.io/coreos/etcd</code> from <code>v3.4.34</code> to <code>v3.4.36</code>.  by @gardener-ci-robot [#11755]</li>
+</ul>
+</li>
+</ul>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="helm-charts-13">Helm Charts<a href="#helm-charts-13" class="hash-link" aria-label="Direct link to Helm Charts" title="Direct link to Helm Charts">​</a></h2>
+<ul>
+<li>controlplane: <code>europe-docker.pkg.dev/gardener-project/releases/charts/gardener/controlplane:v1.116.0</code></li>
+<li>gardenlet: <code>europe-docker.pkg.dev/gardener-project/releases/charts/gardener/gardenlet:v1.116.0</code></li>
+<li>operator: <code>europe-docker.pkg.dev/gardener-project/releases/charts/gardener/operator:v1.116.0</code></li>
+<li>resource-manager: <code>europe-docker.pkg.dev/gardener-project/releases/charts/gardener/resource-manager:v1.116.0</code></li>
+</ul>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="docker-images-13">Docker Images<a href="#docker-images-13" class="hash-link" aria-label="Direct link to Docker Images" title="Direct link to Docker Images">​</a></h2>
+<ul>
+<li>admission-controller: <code>europe-docker.pkg.dev/gardener-project/releases/gardener/admission-controller:v1.116.0</code></li>
+<li>apiserver: <code>europe-docker.pkg.dev/gardener-project/releases/gardener/apiserver:v1.116.0</code></li>
+<li>controller-manager: <code>europe-docker.pkg.dev/gardener-project/releases/gardener/controller-manager:v1.116.0</code></li>
+<li>gardenlet: <code>europe-docker.pkg.dev/gardener-project/releases/gardener/gardenlet:v1.116.0</code></li>
+<li>node-agent: <code>europe-docker.pkg.dev/gardener-project/releases/gardener/node-agent:v1.116.0</code></li>
+<li>operator: <code>europe-docker.pkg.dev/gardener-project/releases/gardener/operator:v1.116.0</code></li>
+<li>resource-manager: <code>europe-docker.pkg.dev/gardener-project/releases/gardener/resource-manager:v1.116.0</code></li>
+<li>scheduler: <code>europe-docker.pkg.dev/gardener-project/releases/gardener/scheduler:v1.116.0</code></li>
 </ul>
 </div></div></details></div></article><nav class="pagination-nav docusaurus-mt-lg" aria-label="Docs pages"><a class="pagination-nav__link pagination-nav__link--next" href="/release-notes/v1.115"><div class="pagination-nav__sublabel">Next</div><div class="pagination-nav__label">Release Notes v1.115</div></a></nav></div></div></div></div></main></div></div></div><footer class="footer footer--dark"><div class="container container-fluid"><div class="row footer__links"><div class="col footer__col"><div class="footer__title">Docs</div><ul class="footer__items clean-list"><li class="footer__item"><a class="footer__link-item" href="/docs/overview">Docs</a></li></ul></div><div class="col footer__col"><div class="footer__title">Community</div><ul class="footer__items clean-list"><li class="footer__item"><a href="https://github.com/yakecloud" target="_blank" rel="noopener noreferrer" class="footer__link-item">GitHub<svg width="13.5" height="13.5" aria-hidden="true" viewBox="0 0 24 24" class="iconExternalLink_nPIU"><path fill="currentColor" d="M21 13v10h-21v-19h12v2h-10v15h17v-8h2zm3-12h-10.988l4.035 4-6.977 7.07 2.828 2.828 6.977-7.07 4.125 4.172v-11z"></path></svg></a></li><li class="footer__item"><a href="https://github.com/gardener-community" target="_blank" rel="noopener noreferrer" class="footer__link-item">Gardener Community<svg width="13.5" height="13.5" aria-hidden="true" viewBox="0 0 24 24" class="iconExternalLink_nPIU"><path fill="currentColor" d="M21 13v10h-21v-19h12v2h-10v15h17v-8h2zm3-12h-10.988l4.035 4-6.977 7.07 2.828 2.828 6.977-7.07 4.125 4.172v-11z"></path></svg></a></li><li class="footer__item"><a href="https://gardener-cloud.slack.com" target="_blank" rel="noopener noreferrer" class="footer__link-item">Slack<svg width="13.5" height="13.5" aria-hidden="true" viewBox="0 0 24 24" class="iconExternalLink_nPIU"><path fill="currentColor" d="M21 13v10h-21v-19h12v2h-10v15h17v-8h2zm3-12h-10.988l4.035 4-6.977 7.07 2.828 2.828 6.977-7.07 4.125 4.172v-11z"></path></svg></a></li></ul></div><div class="col footer__col"><div class="footer__title">More</div><ul class="footer__items clean-list"><li class="footer__item"><a class="footer__link-item" href="/blog">Blog</a></li><li class="footer__item"><a class="footer__link-item" href="/legals">Legals</a></li><li class="footer__item"><a class="footer__link-item" href="/privacy-policy">Privacy policy</a></li></ul></div></div><div class="footer__bottom text--center"><div class="footer__copyright">Copyright © 2025 23 Technologies GmbH</div></div></div></footer></div>
 </body>
