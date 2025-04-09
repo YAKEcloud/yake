@@ -67,7 +67,7 @@ stringData:
       version: 1.40.1
 
     provider-alicloud:
-      version: 1.59.2
+      version: 1.60.0
       admission:
         enabled: true
 
