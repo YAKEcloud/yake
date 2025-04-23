@@ -80,3 +80,10 @@ no release notes available
 **Full Changelog**: https://github.com/gardener-community/garden-kube-apiserver/compare/v5.6.1...v5.6.2
 
 </details>
+
+<details>
+<summary><b>Update cloudprofiles to <code>0.7.25</code></b></summary>
+
+**Full Changelog**: https://github.com/gardener-community/cloudprofiles/compare/0.7.24...0.7.25
+
+</details>

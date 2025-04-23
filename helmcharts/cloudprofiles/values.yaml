@@ -38,6 +38,8 @@ global:
                 1.30.10:
                     classification: deprecated
                 1.30.11:
+                    classification: deprecated
+                1.30.12:
                     classification: supported
         versions: {}
     seedSelector:
