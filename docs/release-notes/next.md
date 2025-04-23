@@ -73,3 +73,10 @@ no release notes available
 
 
 </details>
+
+<details>
+<summary><b>Update garden-kube-apiserver to <code>5.6.2</code></b></summary>
+
+**Full Changelog**: https://github.com/gardener-community/garden-kube-apiserver/compare/v5.6.1...v5.6.2
+
+</details>
