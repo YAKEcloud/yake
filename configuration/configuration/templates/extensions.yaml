@@ -39,7 +39,7 @@ stringData:
       version: 1.49.0
 
     shoot-dns-service:
-      version: 1.62.1
+      version: 1.63.0
       admission:
         enabled: true
       values:
