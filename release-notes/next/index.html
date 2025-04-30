@@ -5,7 +5,7 @@
 <meta name="generator" content="Docusaurus v3.7.0">
 <title data-rh="true">Release Notes next | Yet another Kubernetes Engine</title><meta data-rh="true" name="viewport" content="width=device-width,initial-scale=1"><meta data-rh="true" name="twitter:card" content="summary_large_image"><meta data-rh="true" property="og:url" content="https://yake.cloud/release-notes/next"><meta data-rh="true" property="og:locale" content="en"><meta data-rh="true" name="docusaurus_locale" content="en"><meta data-rh="true" name="docsearch:language" content="en"><meta data-rh="true" name="gardener" content="installation, production, operations, maintenance"><meta data-rh="true" name="docusaurus_version" content="current"><meta data-rh="true" name="docusaurus_tag" content="docs-release-notes-current"><meta data-rh="true" name="docsearch:version" content="current"><meta data-rh="true" name="docsearch:docusaurus_tag" content="docs-release-notes-current"><meta data-rh="true" property="og:title" content="Release Notes next | Yet another Kubernetes Engine"><meta data-rh="true" name="description" content="Yake release notes and upgrade guide"><meta data-rh="true" property="og:description" content="Yake release notes and upgrade guide"><link data-rh="true" rel="icon" href="/img/favicon.ico"><link data-rh="true" rel="canonical" href="https://yake.cloud/release-notes/next"><link data-rh="true" rel="alternate" href="https://yake.cloud/release-notes/next" hreflang="en"><link data-rh="true" rel="alternate" href="https://yake.cloud/release-notes/next" hreflang="x-default"><link rel="alternate" type="application/rss+xml" href="/blog/rss.xml" title="Yet another Kubernetes Engine RSS Feed">
 <link rel="alternate" type="application/atom+xml" href="/blog/atom.xml" title="Yet another Kubernetes Engine Atom Feed"><link rel="stylesheet" href="/assets/css/styles.a6ab13cb.css">
-<script src="/assets/js/runtime~main.5824332c.js" defer="defer"></script>
+<script src="/assets/js/runtime~main.14fd0093.js" defer="defer"></script>
 <script src="/assets/js/main.0eae7b36.js" defer="defer"></script>
 </head>
 <body class="navigation-with-keyboard">
@@ -526,6 +526,120 @@ Pay attention that <a href="https://github.com/gardenlinux/gardenlinux/releases/
 <ul>
 <li>gardener-extension-admission-cilium: <code>europe-docker.pkg.dev/gardener-project/releases/gardener/extensions/admission-cilium:v1.41.2</code></li>
 <li>gardener-extension-networking-cilium: <code>europe-docker.pkg.dev/gardener-project/releases/gardener/extensions/networking-cilium:v1.41.2</code></li>
+</ul>
+</div></div></details>
+<details class="details_lb9f alert alert--info details_b_Ee" data-collapsed="true"><summary><b>Update dashboard to <code>1.80.0</code></b></summary><div><div class="collapsibleContent_i85q">
+<!-- -->
+<h1>[gardener/dashboard]</h1>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="-new-features">✨ New Features<a href="#-new-features" class="hash-link" aria-label="Direct link to ✨ New Features" title="Direct link to ✨ New Features">​</a></h2>
+<ul>
+<li><code>[OPERATOR]</code> Added support for kubeconfigs that include a path in the API server URL by @grolu [#2368]</li>
+<li><code>[USER]</code> CredentialsBinding Support
+<ul>
+<li>Support viewing, editing, and creating <code>CredentialsBindings</code> referencing <code>Secrets</code></li>
+<li>New <code>Secrets</code> are now automatically created with a <code>CredentialsBinding</code></li>
+<li>Existing <code>SecretBindings</code> remain updatable; however, creating new <code>SecretBindings</code> via the Dashboard is no longer supported</li>
+<li><code>CredentialsBindings</code> referencing <code>WorkloadIdentity</code> resources are visible (for cluster creation) but cannot be edited or deleted (yet)</li>
+<li>The &quot;Secrets&quot; page has been renamed to &quot;Credentials&quot; and now includes an extra &quot;Kind&quot; column to differentiate <code>Binding</code> types. The &quot;Secret&quot; column (showing the referenced credential resource name) has been removed</li>
+<li>A hint is displayed when a <code>Secret</code> is referenced by another <code>Binding</code>, and deletion is prevented if a secret is in use.</li>
+<li>Refactored the credential selection dropdown, aligned icons with &quot;Credentials&quot; page by @grolu [#2336]</li>
+</ul>
+</li>
+<li><code>[USER]</code> Kubernetes warning notifications are dismissed after 5 seconds by @petersutter [#2330]</li>
+<li><code>[USER]</code> Implemented virtual scrolling for the cluster list. Rows are now rendered dynamically as you scroll, replacing the previous paging option. This improvement optimizes performance and provides a smoother browsing experience when viewing large data sets by @grolu [#1674]</li>
+<li><code>[USER]</code> When editing an existing secret, the dialog now displays all associated data, providing clear context for review and modification by @grolu [#2195]</li>
+<li><code>[USER]</code> Notifications will remain visible as long as the mouse hovers over them, rather than disappearing after 5 seconds. by @petersutter [#2280]</li>
+<li><code>[USER]</code> Real-time updates for projects are now supported. Changes and deletions to projects are instantly reflected in the frontend through the WebSocket connection. by @holgerkoser [#2222]</li>
+</ul>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="-bug-fixes-12">🐛 Bug Fixes<a href="#-bug-fixes-12" class="hash-link" aria-label="Direct link to 🐛 Bug Fixes" title="Direct link to 🐛 Bug Fixes">​</a></h2>
+<ul>
+<li><code>[USER]</code> Minor icon fixes:
+<ul>
+<li>Fixed the issue where the connection icon was missing in the subscription progress state</li>
+<li>Corrected the generic &quot;box icon&quot; tooltip</li>
+<li>A tooltip is now displayed for the subscription state icon by @petersutter [#2331]</li>
+</ul>
+</li>
+<li><code>[USER]</code> Fixed missing details on error notification by @petersutter [#2280]</li>
+<li><code>[USER]</code> Fixed a couple of issues related to CodeMirror state handling:
+<ul>
+<li>Toggling managed fields only works once #2249</li>
+<li>Unsaved changes dialog appears though changes were saved #2355</li>
+<li>History not reseted correctly after changes were saved</li>
+<li>Enter key falls back to default behavior if code completions fail to load by @grolu [#2361]</li>
+</ul>
+</li>
+<li><code>[USER]</code> Added PowerDNS support by @Lappihuan [#2349]</li>
+<li><code>[USER]</code> Fixed several issues with Create Terminal Dialog:
+<ul>
+<li>Disable terminal scheduling on non-managed seeds</li>
+<li>Added error handling in case cluster nodes cannot be retrieved</li>
+<li>Moved alerts from scrollable container to fixed position to make them always visible by @grolu [#2373]</li>
+</ul>
+</li>
+<li><code>[USER]</code> The generated kubeconfig for garden cluster access (Account page) previously used the deprecated <code>--oidc-use-pkce</code> flag. It has now been replaced with the <code>--oidc-pkce-method</code> flag. Please redownload your kubeconfig if you encounter any deprecation messages. by @benedikt-haug [#2353]</li>
+<li><code>[USER]</code> Fixed missing terminal shortcuts for &quot;shoot&quot; and &quot;cp&quot; scopes by @Lappihuan [#2339]</li>
+</ul>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="docker-images-21">Docker Images<a href="#docker-images-21" class="hash-link" aria-label="Direct link to Docker Images" title="Direct link to Docker Images">​</a></h2>
+<ul>
+<li>gardener-dashboard: <code>europe-docker.pkg.dev/gardener-project/releases/gardener/dashboard:1.80.0</code></li>
+</ul>
+</div></div></details>
+<details class="details_lb9f alert alert--info details_b_Ee" data-collapsed="true"><summary><b>Update dashboard to <code>1.80.0</code></b></summary><div><div class="collapsibleContent_i85q">
+<!-- -->
+<h1>[gardener/dashboard]</h1>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="-new-features-1">✨ New Features<a href="#-new-features-1" class="hash-link" aria-label="Direct link to ✨ New Features" title="Direct link to ✨ New Features">​</a></h2>
+<ul>
+<li><code>[OPERATOR]</code> Added support for kubeconfigs that include a path in the API server URL by @grolu [#2368]</li>
+<li><code>[USER]</code> CredentialsBinding Support
+<ul>
+<li>Support viewing, editing, and creating <code>CredentialsBindings</code> referencing <code>Secrets</code></li>
+<li>New <code>Secrets</code> are now automatically created with a <code>CredentialsBinding</code></li>
+<li>Existing <code>SecretBindings</code> remain updatable; however, creating new <code>SecretBindings</code> via the Dashboard is no longer supported</li>
+<li><code>CredentialsBindings</code> referencing <code>WorkloadIdentity</code> resources are visible (for cluster creation) but cannot be edited or deleted (yet)</li>
+<li>The &quot;Secrets&quot; page has been renamed to &quot;Credentials&quot; and now includes an extra &quot;Kind&quot; column to differentiate <code>Binding</code> types. The &quot;Secret&quot; column (showing the referenced credential resource name) has been removed</li>
+<li>A hint is displayed when a <code>Secret</code> is referenced by another <code>Binding</code>, and deletion is prevented if a secret is in use.</li>
+<li>Refactored the credential selection dropdown, aligned icons with &quot;Credentials&quot; page by @grolu [#2336]</li>
+</ul>
+</li>
+<li><code>[USER]</code> Kubernetes warning notifications are dismissed after 5 seconds by @petersutter [#2330]</li>
+<li><code>[USER]</code> Implemented virtual scrolling for the cluster list. Rows are now rendered dynamically as you scroll, replacing the previous paging option. This improvement optimizes performance and provides a smoother browsing experience when viewing large data sets by @grolu [#1674]</li>
+<li><code>[USER]</code> When editing an existing secret, the dialog now displays all associated data, providing clear context for review and modification by @grolu [#2195]</li>
+<li><code>[USER]</code> Notifications will remain visible as long as the mouse hovers over them, rather than disappearing after 5 seconds. by @petersutter [#2280]</li>
+<li><code>[USER]</code> Real-time updates for projects are now supported. Changes and deletions to projects are instantly reflected in the frontend through the WebSocket connection. by @holgerkoser [#2222]</li>
+</ul>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="-bug-fixes-13">🐛 Bug Fixes<a href="#-bug-fixes-13" class="hash-link" aria-label="Direct link to 🐛 Bug Fixes" title="Direct link to 🐛 Bug Fixes">​</a></h2>
+<ul>
+<li><code>[USER]</code> Minor icon fixes:
+<ul>
+<li>Fixed the issue where the connection icon was missing in the subscription progress state</li>
+<li>Corrected the generic &quot;box icon&quot; tooltip</li>
+<li>A tooltip is now displayed for the subscription state icon by @petersutter [#2331]</li>
+</ul>
+</li>
+<li><code>[USER]</code> Fixed missing details on error notification by @petersutter [#2280]</li>
+<li><code>[USER]</code> Fixed a couple of issues related to CodeMirror state handling:
+<ul>
+<li>Toggling managed fields only works once #2249</li>
+<li>Unsaved changes dialog appears though changes were saved #2355</li>
+<li>History not reseted correctly after changes were saved</li>
+<li>Enter key falls back to default behavior if code completions fail to load by @grolu [#2361]</li>
+</ul>
+</li>
+<li><code>[USER]</code> Added PowerDNS support by @Lappihuan [#2349]</li>
+<li><code>[USER]</code> Fixed several issues with Create Terminal Dialog:
+<ul>
+<li>Disable terminal scheduling on non-managed seeds</li>
+<li>Added error handling in case cluster nodes cannot be retrieved</li>
+<li>Moved alerts from scrollable container to fixed position to make them always visible by @grolu [#2373]</li>
+</ul>
+</li>
+<li><code>[USER]</code> The generated kubeconfig for garden cluster access (Account page) previously used the deprecated <code>--oidc-use-pkce</code> flag. It has now been replaced with the <code>--oidc-pkce-method</code> flag. Please redownload your kubeconfig if you encounter any deprecation messages. by @benedikt-haug [#2353]</li>
+<li><code>[USER]</code> Fixed missing terminal shortcuts for &quot;shoot&quot; and &quot;cp&quot; scopes by @Lappihuan [#2339]</li>
+</ul>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="docker-images-22">Docker Images<a href="#docker-images-22" class="hash-link" aria-label="Direct link to Docker Images" title="Direct link to Docker Images">​</a></h2>
+<ul>
+<li>gardener-dashboard: <code>europe-docker.pkg.dev/gardener-project/releases/gardener/dashboard:1.80.0</code></li>
 </ul>
 </div></div></details></div></article><nav class="pagination-nav docusaurus-mt-lg" aria-label="Docs pages"><a class="pagination-nav__link pagination-nav__link--next" href="/release-notes/v1.117"><div class="pagination-nav__sublabel">Next</div><div class="pagination-nav__label">Release Notes v1.117</div></a></nav></div></div></div></div></main></div></div></div><footer class="footer footer--dark"><div class="container container-fluid"><div class="row footer__links"><div class="col footer__col"><div class="footer__title">Docs</div><ul class="footer__items clean-list"><li class="footer__item"><a class="footer__link-item" href="/docs/overview">Docs</a></li></ul></div><div class="col footer__col"><div class="footer__title">Community</div><ul class="footer__items clean-list"><li class="footer__item"><a href="https://github.com/yakecloud" target="_blank" rel="noopener noreferrer" class="footer__link-item">GitHub<svg width="13.5" height="13.5" aria-hidden="true" viewBox="0 0 24 24" class="iconExternalLink_nPIU"><path fill="currentColor" d="M21 13v10h-21v-19h12v2h-10v15h17v-8h2zm3-12h-10.988l4.035 4-6.977 7.07 2.828 2.828 6.977-7.07 4.125 4.172v-11z"></path></svg></a></li><li class="footer__item"><a href="https://github.com/gardener-community" target="_blank" rel="noopener noreferrer" class="footer__link-item">Gardener Community<svg width="13.5" height="13.5" aria-hidden="true" viewBox="0 0 24 24" class="iconExternalLink_nPIU"><path fill="currentColor" d="M21 13v10h-21v-19h12v2h-10v15h17v-8h2zm3-12h-10.988l4.035 4-6.977 7.07 2.828 2.828 6.977-7.07 4.125 4.172v-11z"></path></svg></a></li><li class="footer__item"><a href="https://gardener-cloud.slack.com" target="_blank" rel="noopener noreferrer" class="footer__link-item">Slack<svg width="13.5" height="13.5" aria-hidden="true" viewBox="0 0 24 24" class="iconExternalLink_nPIU"><path fill="currentColor" d="M21 13v10h-21v-19h12v2h-10v15h17v-8h2zm3-12h-10.988l4.035 4-6.977 7.07 2.828 2.828 6.977-7.07 4.125 4.172v-11z"></path></svg></a></li></ul></div><div class="col footer__col"><div class="footer__title">More</div><ul class="footer__items clean-list"><li class="footer__item"><a class="footer__link-item" href="/blog">Blog</a></li><li class="footer__item"><a class="footer__link-item" href="/legals">Legals</a></li><li class="footer__item"><a class="footer__link-item" href="/privacy-policy">Privacy policy</a></li></ul></div></div><div class="footer__bottom text--center"><div class="footer__copyright">Copyright © 2025 23 Technologies GmbH</div></div></div></footer></div>
 </body>
