@@ -11,4 +11,4 @@ dependencies:
   repository: ""
 description: A Helm chart to deploy the Gardener dashboard
 name: dashboard
-version: 1.79.1
+version: 1.80.0
