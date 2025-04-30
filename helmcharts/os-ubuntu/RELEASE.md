@@ -2,9 +2,9 @@
 
 ## 🏃 Others
 
-- `[OPERATOR]` `extension-os-ubuntu` no longer supports Shoots with Кubernetes version <= 1.26. by @RadaBDimitrova [#157]
+- `[OPERATOR]` Fix broken `make start` in Makefile, remove `.dev/kubeconfig` reference in README by @robinschneider [#199]
 
 ## Helm Charts
-- os-ubuntu: `europe-docker.pkg.dev/gardener-project/releases/charts/gardener/extensions/os-ubuntu:v1.30.0`
+- os-ubuntu: `europe-docker.pkg.dev/gardener-project/releases/charts/gardener/extensions/os-ubuntu:v1.31.0`
 ## Docker Images
-- gardener-extension-os-ubuntu: `europe-docker.pkg.dev/gardener-project/releases/gardener/extensions/os-ubuntu:v1.30.0`
+- gardener-extension-os-ubuntu: `europe-docker.pkg.dev/gardener-project/releases/gardener/extensions/os-ubuntu:v1.31.0`
