@@ -24,10 +24,10 @@
   "prHourlyLimit": 0,
   "prConcurrentLimit": 1,
   "flux": {
-    "fileMatch": [
-      "pre-gardener/.*.yaml",
-      "gardener/.*.yaml",
-      "flux-system/gotk-components.yaml"
+    "managerFilePatterns": [
+      "/pre-gardener/.*.yaml/",
+      "/gardener/.*.yaml/",
+      "/flux-system/gotk-components.yaml/"
     ]
   },
   "packageRules": [
@@ -243,8 +243,8 @@
   "customManagers": [
     {
       "customType": "regex",
-      "fileMatch": [
-        "^configuration/configuration/templates/extensions.yaml$"
+      "managerFilePatterns": [
+        "/^configuration/configuration/templates/extensions.yaml$/"
       ],
       "datasourceTemplate": "helm",
       "registryUrlTemplate": "https://gardener-community.github.io/gardener-charts",
@@ -255,8 +255,8 @@
     },
     {
       "customType": "regex",
-      "fileMatch": [
-        "[.]ya?ml$"
+      "managerFilePatterns": [
+        "/[.]ya?ml$/"
       ],
       "matchStrings": [
         "(?<currentValue>[^ ]+?) # renovate: datasource=(?<datasource>.+?) depName=(?<depName>.+?)( versioning=(?<versioning>.+?))?\n"
@@ -264,8 +264,8 @@
     },
     {
       "customType": "regex",
-      "fileMatch": [
-        "^addons/addons/templates/dashboard.yaml$"
+      "managerFilePatterns": [
+        "/^addons/addons/templates/dashboard.yaml$/"
       ],
       "datasourceTemplate": "helm",
       "registryUrlTemplate": "https://gardener-community.github.io/gardener-charts",
@@ -276,8 +276,8 @@
     },
     {
       "customType": "regex",
-      "fileMatch": [
-        "^addons/addons/templates/velero.yaml$"
+      "managerFilePatterns": [
+        "/^addons/addons/templates/velero.yaml$/"
       ],
       "datasourceTemplate": "helm",
       "registryUrlTemplate": "https://vmware-tanzu.github.io/helm-charts",
@@ -288,8 +288,8 @@
     },
     {
       "customType": "regex",
-      "fileMatch": [
-        "^hack/tools/install.sh$"
+      "managerFilePatterns": [
+        "/^hack/tools/install.sh$/"
       ],
       "matchStrings": [
         "# renovate: datasource=(?<datasource>.+?) depName=(?<depName>.+?)( versioning=(?<versioning>.+?))?\n.+?VERSION=(?<currentValue>.+?)\n"
