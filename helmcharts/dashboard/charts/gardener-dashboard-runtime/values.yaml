@@ -35,7 +35,7 @@ global:
         image:
             pullPolicy: IfNotPresent
             repository: europe-docker.pkg.dev/gardener-project/releases/gardener/dashboard
-            tag: 1.80.0
+            tag: 1.80.1
         ingress:
             annotations:
                 nginx.ingress.kubernetes.io/ssl-redirect: "true"
