@@ -1,4 +1,4 @@
 apiVersion: v2
 description: Helmchart for controllerregistration of provider-gcp
 name: controller
-version: 1.43.2
+version: 1.43.3
