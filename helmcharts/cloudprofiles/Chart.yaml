@@ -6,8 +6,17 @@ dependencies:
 - condition: azure.enabled
   name: azure
   repository: ""
+- condition: citycloud.enabled
+  name: citycloud
+  repository: ""
 - condition: fugacloud.enabled
   name: fugacloud
+  repository: ""
+- condition: wavestack.enabled
+  name: wavestack
+  repository: ""
+- condition: alicloud.enabled
+  name: alicloud
   repository: ""
 - condition: gcp.enabled
   name: gcp
@@ -18,12 +27,6 @@ dependencies:
 - condition: ovh.enabled
   name: ovh
   repository: ""
-- condition: alicloud.enabled
-  name: alicloud
-  repository: ""
-- condition: citycloud.enabled
-  name: citycloud
-  repository: ""
 - condition: pluscloud-open.enabled
   name: pluscloud-open
   repository: ""
@@ -33,10 +36,7 @@ dependencies:
 - condition: scs-community-platform.enabled
   name: scs-community-platform
   repository: ""
-- condition: wavestack.enabled
-  name: wavestack
-  repository: ""
 description: A Helm chart for Kubernetes
 name: cloudprofiles
 type: application
-version: 0.7.25
+version: 0.7.26
