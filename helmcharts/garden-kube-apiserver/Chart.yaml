@@ -3,4 +3,4 @@ description: This repo packages the kube-apiserver for the usage in the gardener
   This is the foundation that gets extended by the gardener-apiserver
 kubeVersion: '>= 1.30.0'
 name: garden-kube-apiserver
-version: 5.6.2
+version: 5.7.0
