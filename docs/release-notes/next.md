@@ -448,3 +448,10 @@ hide_table_of_contents: true
 
 
 </details>
+
+<details>
+<summary><b>Update garden-kube-apiserver to <code>5.7.0</code></b></summary>
+
+**Full Changelog**: https://github.com/gardener-community/garden-kube-apiserver/compare/v5.6.2...v5.7.0
+
+</details>
