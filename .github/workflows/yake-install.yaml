@@ -17,8 +17,9 @@ jobs:
           - calico
           - cilium
         version:
-          - v1.31.6
-          - v1.30.10
+          - v1.32.5
+          - v1.31.9
+          - v1.30.13
     runs-on: arc-runner-set
     timeout-minutes: 60
     name: "Yake install testrun"
