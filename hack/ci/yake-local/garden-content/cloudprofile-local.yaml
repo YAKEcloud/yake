@@ -8,11 +8,9 @@ spec:
     - name: local
   kubernetes:
     versions:
-      - version: 1.28.2
-      - version: 1.27.1
-      - version: 1.26.0
-      - version: 1.25.4
-      - version: 1.24.8
+      - version: 1.32.5
+      - version: 1.31.9
+      - version: 1.30.13
   # These values do not represent the actual machine capacity. The actual
   # capacity of the machine depends on your docker resource allocation.
   machineTypes:
