@@ -36,7 +36,7 @@ global:
         image:
             pullPolicy: IfNotPresent
             repository: europe-docker.pkg.dev/gardener-project/releases/gardener/admission-controller
-            tag: v1.114.0
+            tag: v1.118.2
         replicaCount: 3
         resources:
             requests:
@@ -67,10 +67,7 @@ global:
                     enabled: false
                     expirationSeconds: 3600
         audit:
-            log:
-                maxBackup: 5
-                maxSize: 100
-                path: /tmp/audit/audit.log
+            log: {}
             policy: |
                 apiVersion: audit.k8s.io/v1
                 kind: Policy
@@ -137,7 +134,7 @@ global:
         image:
             pullPolicy: IfNotPresent
             repository: europe-docker.pkg.dev/gardener-project/releases/gardener/apiserver
-            tag: v1.114.0
+            tag: v1.118.2
         insecureSkipTLSVerify: false
         livenessProbe:
             enable: true
@@ -239,6 +236,8 @@ global:
                     concurrentSyncs: 5
                     retryJitterPeriod: 5m
                     retryPeriod: 10m
+                shootState:
+                    concurrentSyncs: 5
             debugging:
                 enableContentionProfiling: false
                 enableProfiling: false
@@ -264,7 +263,7 @@ global:
         image:
             pullPolicy: IfNotPresent
             repository: europe-docker.pkg.dev/gardener-project/releases/gardener/controller-manager
-            tag: v1.114.0
+            tag: v1.118.2
         replicaCount: 1
         resources:
             requests:
@@ -322,7 +321,7 @@ global:
         image:
             pullPolicy: IfNotPresent
             repository: europe-docker.pkg.dev/gardener-project/releases/gardener/scheduler
-            tag: v1.114.0
+            tag: v1.118.2
         replicaCount: 1
         resources:
             requests:

@@ -2,7 +2,7 @@
 
 ## 🐛 Bug Fixes
 
-- `[OPERATOR]` Fixed an issue with `redirectPath` handling during the OIDC authentication flow. by @petersutter [#2278]
+- `[USER]` Lazy rendering was not functioning correctly in some scenarios, leading to performance issues with large cluster lists by @grolu [#2442]
 
-## Docker Images
-- gardener-dashboard: `europe-docker.pkg.dev/gardener-project/releases/gardener/dashboard:1.79.1`
+## Container (OCI) Images
+- gardener-dashboard: `europe-docker.pkg.dev/gardener-project/releases/gardener/dashboard:1.80.2`

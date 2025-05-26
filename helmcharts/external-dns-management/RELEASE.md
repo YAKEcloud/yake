@@ -1,10 +1,10 @@
 # [gardener/external-dns-management]
 
-## ✨ New Features
+## 🏃 Others
 
-- `[OPERATOR]` Introduce multi-arch build for `linux/arm64` images. by @marc1404 [#413]
+- `[OPERATOR]` `DNSOwner` resources are now completely ignored by @MartinWeindel [#446]
 
 ## Helm Charts
-- dns-controller-manager: `europe-docker.pkg.dev/gardener-project/releases/charts/dns-controller-manager:v0.23.1`
-## Docker Images
-- dns-controller-manager: `europe-docker.pkg.dev/gardener-project/releases/dns-controller-manager:v0.23.1`
+- dns-controller-manager: `europe-docker.pkg.dev/gardener-project/releases/charts/dns-controller-manager:v0.24.0`
+## Container (OCI) Images
+- dns-controller-manager: `europe-docker.pkg.dev/gardener-project/releases/dns-controller-manager:v0.24.0`

@@ -73,6 +73,8 @@ topologySpreadConstraints:
   labelSelector:
     matchLabels:
 {{ include "gardenlet.deployment.matchLabels" . | indent 6 }}
+  matchLabelKeys:
+  - "pod-template-hash"
 {{- if gt (int (include "gardenlet.seed.numberOfZones" .)) 1 }}
 - maxSkew: 1
   minDomains: {{ include "gardenlet.deployment.minDomains" . }}
@@ -81,6 +83,8 @@ topologySpreadConstraints:
   labelSelector:
     matchLabels:
 {{ include "gardenlet.deployment.matchLabels" . | indent 6 }}
+  matchLabelKeys:
+  - "pod-template-hash"
 {{- end }}
 {{- end }}
 {{- end -}}
@@ -244,6 +248,10 @@ controllers:
   shootState:
     concurrentSyncs: {{ required ".Values.config.controllers.shootState.concurrentSyncs is required" .Values.config.controllers.shootState.concurrentSyncs }}
     syncPeriod: {{ required ".Values.config.controllers.shootState.syncPeriod is required" .Values.config.controllers.shootState.syncPeriod }}
+  {{- end }}
+  {{- if .Values.config.controllers.shootStatus }}
+  shootStatus:
+    concurrentSyncs: {{ required ".Values.config.controllers.shootStatus.concurrentSyncs is required" .Values.config.controllers.shootStatus.concurrentSyncs }}
   {{- end }}
   {{- if .Values.config.controllers.managedSeed }}
   managedSeed:

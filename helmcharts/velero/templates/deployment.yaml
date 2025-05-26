@@ -65,8 +65,12 @@ spec:
     {{- end }}
       restartPolicy: Always
       serviceAccountName: {{ include "velero.serverServiceAccount" . }}
+      automountServiceAccountToken: {{ .Values.serviceAccount.server.automountServiceAccountToken }}
       {{- if .Values.priorityClassName }}
       priorityClassName: {{ include "velero.priorityClassName" . }}
+      {{- end }}
+      {{- if .Values.runtimeClassName }}
+      runtimeClassName: {{ include "velero.runtimeClassName" . }}
       {{- end }}
       terminationGracePeriodSeconds: {{ .Values.terminationGracePeriodSeconds }}
       containers:
@@ -130,6 +134,9 @@ spec:
             {{- end }}
             {{- with .garbageCollectionFrequency }}
             - --garbage-collection-frequency={{ . }}
+            {{- end }}
+            {{- with .itemBlockWorkerCount }}
+            - --item-block-worker-count={{ . }}
             {{- end }}
             {{- with .logFormat }}
             - --log-format={{ . }}

@@ -26,6 +26,7 @@ spec:
     metadata:
       labels:
         name: node-agent
+        role: node-agent
         app.kubernetes.io/name: {{ include "velero.name" . }}
         app.kubernetes.io/instance: {{ .Release.Name }}
         app.kubernetes.io/managed-by: {{ .Release.Service }}
@@ -55,12 +56,16 @@ spec:
       {{- end }}
     {{- end }}
       serviceAccountName: {{ include "velero.serverServiceAccount" . }}
+      automountServiceAccountToken: {{ .Values.serviceAccount.server.automountServiceAccountToken }}
       {{- with .Values.nodeAgent.podSecurityContext }}
       securityContext:
         {{- toYaml . | nindent 8 }}
       {{- end }}
       {{- if .Values.nodeAgent.priorityClassName }}
       priorityClassName: {{ include "velero.nodeAgent.priorityClassName" . }}
+      {{- end }}
+      {{- if .Values.runtimeClassName }}
+      runtimeClassName: {{ include "velero.nodeAgent.runtimeClassName" . }}
       {{- end }}
       terminationGracePeriodSeconds: {{ .Values.terminationGracePeriodSeconds }}
       volumes:
@@ -72,6 +77,9 @@ spec:
         - name: host-pods
           hostPath:
             path: {{ .Values.nodeAgent.podVolumePath }}
+        - name: host-plugins
+          hostPath:
+            path: {{ .Values.nodeAgent.pluginVolumePath | default "/var/lib/kubelet/plugins" }}
         {{- if .Values.nodeAgent.useScratchEmptyDir }}
         - name: scratch
           emptyDir: {}
@@ -119,6 +127,9 @@ spec:
             {{- end }}
             - name: host-pods
               mountPath: /host_pods
+              mountPropagation: HostToContainer
+            - name: host-plugins
+              mountPath: /host_plugins
               mountPropagation: HostToContainer
             {{- if .Values.nodeAgent.useScratchEmptyDir }}
             - name: scratch
@@ -197,10 +208,10 @@ spec:
       affinity:
         {{- toYaml . | nindent 8 }}
       {{- end }}
-    {{- with .Values.nodeAgent.dnsConfig }}
-    dnsConfig:
-      {{- toYaml . | nindent 8 }}
-    {{- end }}
+      {{- with .Values.nodeAgent.dnsConfig }}
+      dnsConfig:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
   {{- with .Values.nodeAgent.updateStrategy }}
   updateStrategy:
     {{- toYaml . | nindent 4 }}

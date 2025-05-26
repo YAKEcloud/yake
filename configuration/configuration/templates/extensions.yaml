@@ -8,38 +8,38 @@ type: Opaque
 stringData:
   values.yaml: |-
     os-ubuntu:
-      version: 1.29.0
+      version: 1.31.0
 
     os-gardenlinux:
-      version: 0.29.0
+      version: 0.30.0
 
     os-coreos:
       version: 1.24.0
 
     provider-hcloud:
-      version: 0.6.33
+      version: 0.6.34
       admission:
         enabled: false
 
     provider-azure:
-      version: 1.51.0
+      version: 1.52.3
       admission:
         enabled: true
         split: false
 
     provider-openstack:
-      version: 1.46.0
+      version: 1.47.0
       admission:
         enabled: true
 
     networking-calico:
-      version: 1.47.0
+      version: 1.48.1
 
     shoot-cert-service:
-      version: 1.48.0
+      version: 1.50.1
 
     shoot-dns-service:
-      version: 1.61.0
+      version: 1.63.0
       admission:
         enabled: true
       values:
@@ -52,40 +52,40 @@ stringData:
             serverPortHttp: 8080
 
     shoot-oidc-service:
-      version: 0.30.0
+      version: 0.31.0
 
     shoot-networking-filter:
-      version: 0.22.0
+      version: 0.23.0
 
     shoot-networking-problemdetector:
-      version: 0.26.0
+      version: 0.27.0
 
     shoot-rsyslog-relp:
-      version: 0.7.0
+      version: 0.9.0
 
     networking-cilium:
-      version: 1.40.1
+      version: 1.41.2
 
     provider-alicloud:
-      version: 1.59.1
+      version: 1.61.1
       admission:
         enabled: true
 
     provider-aws:
-      version: 1.60.2
+      version: 1.61.2
       admission:
         enabled: true
 
     provider-gcp:
-      version: 1.43.0
+      version: 1.43.3
       admission:
         enabled: true
 
     runtime-gvisor:
-      version: 0.18.0
+      version: 0.21.0
 
     backup-s3:
       version: 0.7.1
 
     shoot-flux:
-      version: 0.17.1
+      version: 0.18.0

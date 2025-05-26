@@ -98,9 +98,6 @@ spec:
         {{- if (include "gardener-apiserver.hasAdmissionPlugins" .) }}
         - --admission-control-config-file=/etc/gardener-apiserver/admission/configuration.yaml
         {{- end }}
-        {{- if .Values.global.apiserver.audit.dynamicConfiguration }}
-        - --audit-dynamic-configuration={{ .Values.global.apiserver.audit.dynamicConfiguration }}
-        {{- end }}
         {{- if .Values.global.apiserver.audit.log.batchBufferSize }}
         - --audit-log-batch-buffer-size={{ .Values.global.apiserver.audit.log.batchBufferSize }}
         {{- end }}
@@ -316,6 +313,8 @@ spec:
         dnsConfig:
 {{ toYaml .Values.global.apiserver.dnsConfig | indent 10 }}
         {{- end }}
+        securityContext:
+          allowPrivilegeEscalation: false
         volumeMounts:
         {{- if .Values.global.apiserver.encryption.config }}
         - name: gardener-apiserver-encryption-config
@@ -382,7 +381,7 @@ spec:
         {{- end }}
       {{- if .Values.global.apiserver.etcd.useSidecar }}
       - name: etcd
-        image: quay.io/coreos/etcd:v3.5.18
+        image: quay.io/coreos/etcd:v3.5.21
         imagePullPolicy: IfNotPresent
         command:
         - /usr/local/bin/etcd
@@ -409,6 +408,8 @@ spec:
         resources:
           requests:
             cpu: 200m
+        securityContext:
+          allowPrivilegeEscalation: false
         volumeMounts:
         - name: etcd
           mountPath: /var/etcd/data

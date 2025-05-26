@@ -740,6 +740,9 @@ func ComputeExpectedGardenletConfiguration(
 				ConcurrentSyncs: &five,
 				SyncPeriod:      &metav1.Duration{Duration: 6 * time.Hour},
 			},
+			ShootStatus: &gardenletconfigv1alpha1.ShootStatusControllerConfiguration{
+				ConcurrentSyncs: &five,
+			},
 			TokenRequestorServiceAccount: &gardenletconfigv1alpha1.TokenRequestorServiceAccountControllerConfiguration{
 				ConcurrentSyncs: &five,
 			},
@@ -980,6 +983,9 @@ func ComputeExpectedGardenletDeploymentSpec(
 								corev1.ResourceMemory: resource.MustParse("100Mi"),
 							},
 						},
+						SecurityContext: &corev1.SecurityContext{
+							AllowPrivilegeEscalation: ptr.To(false),
+						},
 						TerminationMessagePath:   "/dev/termination-log",
 						TerminationMessagePolicy: corev1.TerminationMessageReadFile,
 						VolumeMounts: []corev1.VolumeMount{{
@@ -1066,6 +1072,8 @@ func ComputeExpectedGardenletDeploymentSpec(
 				nil,
 				false,
 			)
+
+			kubernetesutils.MutateMatchLabelKeys(deployment.Template.Spec.TopologySpreadConstraints)
 		}
 
 		if deploymentConfiguration.Env != nil {
@@ -1073,11 +1081,11 @@ func ComputeExpectedGardenletDeploymentSpec(
 		}
 
 		if deploymentConfiguration.PodLabels != nil {
-			deployment.Template.ObjectMeta.Labels = utils.MergeStringMaps(deployment.Template.ObjectMeta.Labels, deploymentConfiguration.PodLabels)
+			deployment.Template.Labels = utils.MergeStringMaps(deployment.Template.Labels, deploymentConfiguration.PodLabels)
 		}
 
 		if deploymentConfiguration.PodAnnotations != nil {
-			deployment.Template.ObjectMeta.Annotations = utils.MergeStringMaps(deployment.Template.ObjectMeta.Annotations, deploymentConfiguration.PodAnnotations)
+			deployment.Template.Annotations = utils.MergeStringMaps(deployment.Template.Annotations, deploymentConfiguration.PodAnnotations)
 		}
 
 		if deploymentConfiguration.Resources != nil {
@@ -1233,7 +1241,7 @@ func VerifyGardenletDeployment(ctx context.Context,
 		deployment,
 	)).ToNot(HaveOccurred())
 
-	Expect(deployment.ObjectMeta.Labels).To(DeepEqual(expectedDeployment.ObjectMeta.Labels))
+	Expect(deployment.Labels).To(DeepEqual(expectedDeployment.Labels))
 
 	assertResourceReferenceExists(uniqueName["gardenlet-configmap"], "configmap-", deployment.Spec.Template.Annotations)
 

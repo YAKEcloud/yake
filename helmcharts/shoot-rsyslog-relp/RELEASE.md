@@ -1,17 +1,17 @@
 # [gardener/gardener-extension-shoot-rsyslog-relp]
 
-## 📰 Noteworthy
+## ⚠️ Breaking Changes
 
-- `[DEVELOPER]` `gosec` is made available for SAST(static application security testing), it can be run with `make sast` or `make sast-report`, but is also incorporated in the `verify` and `verify-extended` makefile targets.  by @Kostov6 [#189]
-## 🐛 Bug Fixes
+- `[OPERATOR]` The type of the `imageVectorOverwrite` value is changed from string to object. by @ialidzhikov [#260]
+## 🏃 Others
 
-- `[DEVELOPER]` An issue causing `make extension-up` to fail to patch the ControllerDeployment is now mitigated. by @ialidzhikov [#194]
-- `[DEVELOPER]` An issue causing `make extension-up` to do NOT generate a new tag for local source code changes is now fixed. by @ialidzhikov [#194]
+- `[OPERATOR]` Update base image from `debian11` to `debian12`. by @MartinWeindel [#264]
+- `[OPERATOR]` The RBAC is now reduced to only the required resources and verbs. by @plkokanov [#266]
 
 ## Helm Charts
-- shoot-rsyslog-relp-admission-application: `europe-docker.pkg.dev/gardener-project/releases/charts/gardener/extensions/shoot-rsyslog-relp-admission-application:v0.7.0`
-- shoot-rsyslog-relp-admission-runtime: `europe-docker.pkg.dev/gardener-project/releases/charts/gardener/extensions/shoot-rsyslog-relp-admission-runtime:v0.7.0`
-- shoot-rsyslog-relp: `europe-docker.pkg.dev/gardener-project/releases/charts/gardener/extensions/shoot-rsyslog-relp:v0.7.0`
-## Docker Images
-- gardener-extension-shoot-rsyslog-relp-admission: `europe-docker.pkg.dev/gardener-project/releases/gardener/extensions/shoot-rsyslog-relp-admission:v0.7.0`
-- gardener-extension-shoot-rsyslog-relp: `europe-docker.pkg.dev/gardener-project/releases/gardener/extensions/shoot-rsyslog-relp:v0.7.0`
+- shoot-rsyslog-relp-admission-application: `europe-docker.pkg.dev/gardener-project/releases/charts/gardener/extensions/shoot-rsyslog-relp-admission-application:v0.9.0`
+- shoot-rsyslog-relp-admission-runtime: `europe-docker.pkg.dev/gardener-project/releases/charts/gardener/extensions/shoot-rsyslog-relp-admission-runtime:v0.9.0`
+- shoot-rsyslog-relp: `europe-docker.pkg.dev/gardener-project/releases/charts/gardener/extensions/shoot-rsyslog-relp:v0.9.0`
+## Container (OCI) Images
+- gardener-extension-shoot-rsyslog-relp-admission: `europe-docker.pkg.dev/gardener-project/releases/gardener/extensions/shoot-rsyslog-relp-admission:v0.9.0`
+- gardener-extension-shoot-rsyslog-relp: `europe-docker.pkg.dev/gardener-project/releases/gardener/extensions/shoot-rsyslog-relp:v0.9.0`
