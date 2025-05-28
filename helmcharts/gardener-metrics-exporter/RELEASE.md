@@ -1,4 +1,8 @@
-no release notes available
+# [gardener/gardener-metrics-exporter]
 
-## Docker Images
-- metrics-exporter: `europe-docker.pkg.dev/gardener-project/releases/gardener/metrics-exporter:0.38.0`
+## 🏃 Others
+
+- `[OPERATOR]` Remove gardener_shoot_custom_privileged_containers_total metric by @chrkl [#127]
+
+## Container (OCI) Images
+- metrics-exporter: `europe-docker.pkg.dev/gardener-project/releases/gardener/metrics-exporter:0.39.0`
