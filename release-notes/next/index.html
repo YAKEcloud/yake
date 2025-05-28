@@ -5,7 +5,7 @@
 <meta name="generator" content="Docusaurus v3.8.0">
 <title data-rh="true">Release Notes next | Yet another Kubernetes Engine</title><meta data-rh="true" name="viewport" content="width=device-width,initial-scale=1"><meta data-rh="true" name="twitter:card" content="summary_large_image"><meta data-rh="true" property="og:url" content="https://yake.cloud/release-notes/next"><meta data-rh="true" property="og:locale" content="en"><meta data-rh="true" name="docusaurus_locale" content="en"><meta data-rh="true" name="docsearch:language" content="en"><meta data-rh="true" name="gardener" content="installation, production, operations, maintenance"><meta data-rh="true" name="docusaurus_version" content="current"><meta data-rh="true" name="docusaurus_tag" content="docs-release-notes-current"><meta data-rh="true" name="docsearch:version" content="current"><meta data-rh="true" name="docsearch:docusaurus_tag" content="docs-release-notes-current"><meta data-rh="true" property="og:title" content="Release Notes next | Yet another Kubernetes Engine"><meta data-rh="true" name="description" content="Yake release notes and upgrade guide"><meta data-rh="true" property="og:description" content="Yake release notes and upgrade guide"><link data-rh="true" rel="icon" href="/img/favicon.ico"><link data-rh="true" rel="canonical" href="https://yake.cloud/release-notes/next"><link data-rh="true" rel="alternate" href="https://yake.cloud/release-notes/next" hreflang="en"><link data-rh="true" rel="alternate" href="https://yake.cloud/release-notes/next" hreflang="x-default"><script data-rh="true" type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Release Notes next","item":"https://yake.cloud/release-notes/next"}]}</script><link rel="alternate" type="application/rss+xml" href="/blog/rss.xml" title="Yet another Kubernetes Engine RSS Feed">
 <link rel="alternate" type="application/atom+xml" href="/blog/atom.xml" title="Yet another Kubernetes Engine Atom Feed"><link rel="stylesheet" href="/assets/css/styles.9a630ee0.css">
-<script src="/assets/js/runtime~main.697e1d38.js" defer="defer"></script>
+<script src="/assets/js/runtime~main.5e0d84f9.js" defer="defer"></script>
 <script src="/assets/js/main.51958f92.js" defer="defer"></script>
 </head>
 <body class="navigation-with-keyboard">
@@ -805,6 +805,38 @@ csi-snapshot-controller: v8.2.0 -&gt; v8.2.1 by @hebelsan [#1072]</li>
 <ul>
 <li>gardener-extension-admission-gcp: <code>europe-docker.pkg.dev/gardener-project/releases/gardener/extensions/admission-gcp:v1.44.0</code></li>
 <li>gardener-extension-provider-gcp: <code>europe-docker.pkg.dev/gardener-project/releases/gardener/extensions/provider-gcp:v1.44.0</code></li>
+</ul>
+</div></div></details>
+<details class="details_lb9f alert alert--info details_b_Ee" data-collapsed="true"><summary><b>Update shoot-dns-service to <code>1.64.0</code></b></summary><div><div class="collapsibleContent_i85q">
+<!-- -->
+<h1>[gardener/gardener-extension-shoot-dns-service]</h1>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="-others-21">🏃 Others<a href="#-others-21" class="hash-link" aria-label="Direct link to 🏃 Others" title="Direct link to 🏃 Others">​</a></h2>
+<ul>
+<li><code>[OPERATOR]</code> Drop handling of DNSOwner by @MartinWeindel [#474]</li>
+</ul>
+<h1>[gardener/external-dns-management]</h1>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="-new-features-8">✨ New Features<a href="#-new-features-8" class="hash-link" aria-label="Direct link to ✨ New Features" title="Direct link to ✨ New Features">​</a></h2>
+<ul>
+<li><code>[USER]</code> [alicloud-dns] Add support for weighted routing policy. More details see <a href="https://github.com/gardener/external-dns-management/tree/master/docs/alicloud-dns#routing-policy" target="_blank" rel="noopener noreferrer">https://github.com/gardener/external-dns-management/tree/master/docs/alicloud-dns#routing-policy</a> by @MartinWeindel [gardener/external-dns-management#461]</li>
+</ul>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="-bug-fixes-17">🐛 Bug Fixes<a href="#-bug-fixes-17" class="hash-link" aria-label="Direct link to 🐛 Bug Fixes" title="Direct link to 🐛 Bug Fixes">​</a></h2>
+<ul>
+<li><code>[USER]</code> Fix update of status for source <code>DNSEntries</code> if they are very old, as the heuristics for old entries without <code>generateName</code> field did not work. by @MartinWeindel [gardener/external-dns-management#466]</li>
+</ul>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="-others-22">🏃 Others<a href="#-others-22" class="hash-link" aria-label="Direct link to 🏃 Others" title="Direct link to 🏃 Others">​</a></h2>
+<ul>
+<li><code>[DEVELOPER]</code> cleanup: drop unused (and outdated) script by @ccwienk [gardener/external-dns-management#465]</li>
+</ul>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="helm-charts-19">Helm Charts<a href="#helm-charts-19" class="hash-link" aria-label="Direct link to Helm Charts" title="Direct link to Helm Charts">​</a></h2>
+<ul>
+<li>admission-shoot-dns-service-application: <code>europe-docker.pkg.dev/gardener-project/releases/charts/gardener/extensions/admission-shoot-dns-service-application:v1.64.0</code></li>
+<li>admission-shoot-dns-service-runtime: <code>europe-docker.pkg.dev/gardener-project/releases/charts/gardener/extensions/admission-shoot-dns-service-runtime:v1.64.0</code></li>
+<li>shoot-dns-service: <code>europe-docker.pkg.dev/gardener-project/releases/charts/gardener/extensions/shoot-dns-service:v1.64.0</code></li>
+</ul>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="container-oci-images-23">Container (OCI) Images<a href="#container-oci-images-23" class="hash-link" aria-label="Direct link to Container (OCI) Images" title="Direct link to Container (OCI) Images">​</a></h2>
+<ul>
+<li>gardener-extension-admission-shoot-dns-service: <code>europe-docker.pkg.dev/gardener-project/releases/gardener/extensions/admission-shoot-dns-service:v1.64.0</code></li>
+<li>gardener-extension-shoot-dns-service: <code>europe-docker.pkg.dev/gardener-project/releases/gardener/extensions/shoot-dns-service:v1.64.0</code></li>
 </ul>
 </div></div></details></div></article><nav class="docusaurus-mt-lg pagination-nav" aria-label="Docs pages"><a class="pagination-nav__link pagination-nav__link--next" href="/release-notes/v1.118"><div class="pagination-nav__sublabel">Next</div><div class="pagination-nav__label">Release Notes v1.118</div></a></nav></div></div></div></div></main></div></div></div><footer class="theme-layout-footer footer footer--dark"><div class="container container-fluid"><div class="row footer__links"><div class="theme-layout-footer-column col footer__col"><div class="footer__title">Docs</div><ul class="footer__items clean-list"><li class="footer__item"><a class="footer__link-item" href="/docs/overview">Docs</a></li></ul></div><div class="theme-layout-footer-column col footer__col"><div class="footer__title">Community</div><ul class="footer__items clean-list"><li class="footer__item"><a href="https://github.com/yakecloud" target="_blank" rel="noopener noreferrer" class="footer__link-item">GitHub<svg width="13.5" height="13.5" aria-hidden="true" class="iconExternalLink_nPIU"><use href="#theme-svg-external-link"></use></svg></a></li><li class="footer__item"><a href="https://github.com/gardener-community" target="_blank" rel="noopener noreferrer" class="footer__link-item">Gardener Community<svg width="13.5" height="13.5" aria-hidden="true" class="iconExternalLink_nPIU"><use href="#theme-svg-external-link"></use></svg></a></li><li class="footer__item"><a href="https://gardener-cloud.slack.com" target="_blank" rel="noopener noreferrer" class="footer__link-item">Slack<svg width="13.5" height="13.5" aria-hidden="true" class="iconExternalLink_nPIU"><use href="#theme-svg-external-link"></use></svg></a></li></ul></div><div class="theme-layout-footer-column col footer__col"><div class="footer__title">More</div><ul class="footer__items clean-list"><li class="footer__item"><a class="footer__link-item" href="/blog">Blog</a></li><li class="footer__item"><a class="footer__link-item" href="/legals">Legals</a></li><li class="footer__item"><a class="footer__link-item" href="/privacy-policy">Privacy policy</a></li></ul></div></div><div class="footer__bottom text--center"><div class="footer__copyright">Copyright © 2025 23 Technologies GmbH</div></div></div></footer></div>
 </body>
