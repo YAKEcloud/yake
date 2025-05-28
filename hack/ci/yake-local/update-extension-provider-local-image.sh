@@ -13,7 +13,7 @@ install_yq
 git clone https://github.com/gardener/gardener gardener-upstream
 
 cd gardener-upstream || exit 1
-git checkout "$newVersion"
+git checkout v"$newVersion"
 cd ..
 
 export newChart=$(tar -C gardener-upstream/charts/gardener/provider-local -czf - . | base64 -w0 -)
