@@ -641,3 +641,13 @@ hide_table_of_contents: true
 
 
 </details>
+
+<details>
+<summary><b>Update backup-s3 to <code>0.7.2</code></b></summary>
+
+## General Changes
+
+* Release Helm OCI artifacts and revendor g/g v1.113. (#15) @Gerrit91
+
+
+</details>
