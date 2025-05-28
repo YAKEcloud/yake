@@ -1,3 +1,3 @@
 ## General Changes
 
-* Remove deployment anti affinity rule. (#12) @Gerrit91
+* Release Helm OCI artifacts and revendor g/g v1.113. (#15) @Gerrit91
