@@ -674,3 +674,33 @@ hide_table_of_contents: true
 
 
 </details>
+
+<details>
+<summary><b>Update gardener-metrics-exporter to <code>0.39.0</code></b></summary>
+
+# [gardener/gardener-metrics-exporter]
+
+## 🏃 Others
+
+- `[OPERATOR]` Remove gardener_shoot_custom_privileged_containers_total metric by @chrkl [#127]
+
+## Container (OCI) Images
+- metrics-exporter: `europe-docker.pkg.dev/gardener-project/releases/gardener/metrics-exporter:0.39.0`
+
+
+</details>
+
+<details>
+<summary><b>Update gardener-metrics-exporter to <code>0.39.0</code></b></summary>
+
+# [gardener/gardener-metrics-exporter]
+
+## 🏃 Others
+
+- `[OPERATOR]` Remove gardener_shoot_custom_privileged_containers_total metric by @chrkl [#127]
+
+## Container (OCI) Images
+- metrics-exporter: `europe-docker.pkg.dev/gardener-project/releases/gardener/metrics-exporter:0.39.0`
+
+
+</details>
