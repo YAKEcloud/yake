@@ -704,3 +704,15 @@ hide_table_of_contents: true
 
 
 </details>
+
+<details>
+<summary><b>Update provider-aws to <code>1.62.1</code></b></summary>
+
+# [gardener/gardener-extension-provider-aws]
+
+## 🏃 Others
+
+- `[OPERATOR]` Fixes `make verify` and switches the building pipelines to GHA by @kon-angelo [#1343]
+
+
+</details>
