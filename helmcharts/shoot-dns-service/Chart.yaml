@@ -5,4 +5,4 @@ dependencies:
   repository: ""
 description: A helmchart for shoot-dns-service
 name: shoot-dns-service
-version: 1.63.0
+version: 1.64.0
