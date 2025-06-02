@@ -2,7 +2,10 @@
 
 ## 🐛 Bug Fixes
 
-- `[USER]` Lazy rendering was not functioning correctly in some scenarios, leading to performance issues with large cluster lists by @grolu [#2442]
+- `[USER]` Fixed Credentials Search by @grolu [#2461]
+- `[USER]` Fixed Generic Secret Dialog issues  
+  - Dialog now correctly writes key-value pairs at the top level  
+  - Resolved an issue where data was not available in update mode by @grolu [#2449]
 
 ## Container (OCI) Images
-- gardener-dashboard: `europe-docker.pkg.dev/gardener-project/releases/gardener/dashboard:1.80.2`
+- gardener-dashboard: `europe-docker.pkg.dev/gardener-project/releases/gardener/dashboard:1.80.3`
