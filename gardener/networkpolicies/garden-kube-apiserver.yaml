@@ -21,6 +21,7 @@ spec:
                 - gardener-extension-admission-aws
                 - gardener-extension-admission-alicloud
                 - gardener-extension-admission-shoot-dns-service
+                - gardener-extension-admission-acl
       - podSelector:
           matchLabels:
             yake.cloud/app: ingress-nginx
