@@ -1,16 +1,14 @@
 # [gardener/external-dns-management]
 
-## ✨ New Features
-
-- `[USER]` [alicloud-dns] Add support for weighted routing policy. More details see https://github.com/gardener/external-dns-management/tree/master/docs/alicloud-dns#routing-policy by @MartinWeindel [#461]
 ## 🐛 Bug Fixes
 
-- `[USER]` Fix update of status for source `DNSEntries` if they are very old, as the heuristics for old entries without `generateName` field did not work. by @MartinWeindel [#466]
+- `[USER]` Ensure ignored entries are not deleted on cleanup in an edge case. by @MartinWeindel [#505]
 ## 🏃 Others
 
-- `[DEVELOPER]` cleanup: drop unused (and outdated) script by @ccwienk [#465]
+- `[USER]` [provider type openstack-designate] Allow secret key `authURL` as alias of `OS_AUTH_URL` by @MartinWeindel [#504]
+- `[OPERATOR]` Bump `openstack-designate` provider library `gophercloud` from version `v0.24.0` to `v2.7.0`. by @MartinWeindel [#481]
 
 ## Helm Charts
-- dns-controller-manager: `europe-docker.pkg.dev/gardener-project/releases/charts/dns-controller-manager:v0.25.0`
+- dns-controller-manager: `europe-docker.pkg.dev/gardener-project/releases/charts/dns-controller-manager:v0.25.1`
 ## Container (OCI) Images
-- dns-controller-manager: `europe-docker.pkg.dev/gardener-project/releases/dns-controller-manager:v0.25.0`
+- dns-controller-manager: `europe-docker.pkg.dev/gardener-project/releases/dns-controller-manager:v0.25.1`

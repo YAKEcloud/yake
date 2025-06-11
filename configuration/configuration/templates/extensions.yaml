@@ -36,10 +36,10 @@ stringData:
       version: 1.48.1
 
     shoot-cert-service:
-      version: 1.50.1
+      version: 1.51.0
 
     shoot-dns-service:
-      version: 1.64.0
+      version: 1.64.1
       admission:
         enabled: true
       values:
@@ -67,12 +67,12 @@ stringData:
       version: 1.41.2
 
     provider-alicloud:
-      version: 1.61.1
+      version: 1.62.0
       admission:
         enabled: true
 
     provider-aws:
-      version: 1.62.1
+      version: 1.62.2
       admission:
         enabled: true
 
