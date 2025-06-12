@@ -89,3 +89,8 @@ stringData:
 
     shoot-flux:
       version: 0.19.0
+
+    acl:
+      version: 1.9.0
+      admission:
+        enabled: true
