@@ -44,13 +44,20 @@ jobs:
         run: |
           git config user.name "${GITHUB_ACTOR}"
           git config user.email "${GITHUB_ACTOR}@users.noreply.github.com"
+      - name: Setup yq
+        uses: dcarbone/install-yq-action@v1
       - name: Configure version to release
-        id: version
         env:
-          COMMIT_MESSAGE: "${{ github.event.head_commit.message }}"
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        if: github.event_name == 'push'
+        id: version
         run: |
           if [[ -z "$version" ]]; then
-            version=$(echo "$COMMIT_MESSAGE" | grep -oiP "gardener-controlplane to v\K([0-9]+\.[0-9]+\.[0-9]+)")-0
+            version=$(yq eval 'select(.metadata.name == "gardener-application") | .spec.chart.spec.version' gardener/gardener.yaml)-0
+          fi
+          if gh release view "$version" >/dev/null 2>&1; then
+            echo "Release $version already exists – manual bugfix release required."
+            exit 1
           fi
           echo "version=$version" | tee $GITHUB_ENV | tee $GITHUB_OUTPUT
       - name: Prepare release
