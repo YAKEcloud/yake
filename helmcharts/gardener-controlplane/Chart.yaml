@@ -10,4 +10,4 @@ deprecated: true
 description: A Helm chart to deploy the Gardener controlplane (API server, controller-manager,
   scheduler, admission-controller)
 name: gardener-controlplane
-version: 1.119.0
+version: 1.119.1
