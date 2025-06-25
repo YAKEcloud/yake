@@ -17,7 +17,7 @@ stringData:
       version: 1.25.0
 
     provider-hcloud:
-      version: 0.6.34
+      version: 0.6.41
       admission:
         enabled: false
 
