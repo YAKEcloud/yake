@@ -13,8 +13,10 @@ stringData:
       useSecret: false
     configuration:
       extraEnvVars:
-        AZURE_STORAGE_ACCOUNT_ACCESS_KEY: {{ .Values.backups.credentials.storageAccountAccessKey | b64dec }}
-        AZURE_CLOUD_NAME: AzurePublicCloud
+        - name: AZURE_STORAGE_ACCOUNT_ACCESS_KEY
+          value: {{ .Values.backups.credentials.storageAccountAccessKey | b64dec }}
+        - name: AZURE_CLOUD_NAME
+          value: AzurePublicCloud
       backupStorageLocation:
         - bucket: {{ .Values.backups.bucketName }}
           provider: azure
@@ -35,8 +37,10 @@ stringData:
       useSecret: false
     configuration:
       extraEnvVars:
-        AWS_ACCESS_KEY_ID: {{ .Values.backups.credentials.accessKeyID | b64dec }}
-        AWS_SECRET_ACCESS_KEY: {{ .Values.backups.credentials.secretAccessKey | b64dec }}
+        - name: AWS_ACCESS_KEY_ID
+          value: {{ .Values.backups.credentials.accessKeyID | b64dec }}
+        - name: AWS_SECRET_ACCESS_KEY
+          value: {{ .Values.backups.credentials.secretAccessKey | b64dec }}
       backupStorageLocation:
         - bucket: {{ .Values.backups.bucketName }}
           provider: aws
@@ -56,8 +60,10 @@ stringData:
       useSecret: false
     configuration:
       extraEnvVars:
-        AWS_ACCESS_KEY_ID: {{ .Values.backups.credentials.accessKeyID | b64dec }}
-        AWS_SECRET_ACCESS_KEY: {{ .Values.backups.credentials.secretAccessKey | b64dec }}
+        - name: AWS_ACCESS_KEY_ID
+          value: {{ .Values.backups.credentials.accessKeyID | b64dec }}
+        - name: AWS_SECRET_ACCESS_KEY
+          value: {{ .Values.backups.credentials.secretAccessKey | b64dec }}
       backupStorageLocation:
         - bucket: {{ .Values.backups.bucketName }}
           provider: aws
@@ -81,39 +87,40 @@ stringData:
       extraEnvVars:
         {{- $c := .Values.backups.credentials }}
         {{- if $c.authURL }}
-        OS_AUTH_URL: {{ $c.authURL | b64dec }}
+        - name: OS_AUTH_URL
+          value: {{ $c.authURL | b64dec }}
         {{- end }}
-
         {{- if $c.password }}
-        OS_PASSWORD: {{ $c.password | b64dec }}
+        - name: OS_PASSWORD
+          value: {{ $c.password | b64dec }}
         {{- end }}
-
         {{- if $c.username }}
-        OS_USERNAME: {{ $c.username | b64dec }}
+        - name: OS_USERNAME
+          value: {{ $c.username | b64dec }}
         {{- end }}
-
         {{- if $c.tenantName }}
-        OS_PROJECT_NAME: {{ $c.tenantName | b64dec }}
+        - name: OS_PROJECT_NAME
+          value: {{ $c.tenantName | b64dec }}
         {{- end }}
-
         {{- if $c.region }}
-        OS_REGION_NAME: {{ $c.region | b64dec }}
+        - name: OS_REGION_NAME
+          value: {{ $c.region | b64dec }}
         {{- end }}
-
         {{- if $c.domainName }}
-        OS_DOMAIN_NAME: {{ $c.domainName | b64dec }}
+        - name: OS_DOMAIN_NAME
+          value: {{ $c.domainName | b64dec }}
         {{- end }}
-
         {{- if $c.applicationCredentialID }}
-        OS_APPLICATION_CREDENTIAL_ID: {{ $c.applicationCredentialID | b64dec }}
+        - name: OS_APPLICATION_CREDENTIAL_ID
+          value: {{ $c.applicationCredentialID | b64dec }}
         {{- end }}
-
         {{- if $c.applicationCredentialName }}
-        OS_APPLICATION_CREDENTIAL_NAME: {{ $c.applicationCredentialName | b64dec }}
+        - name: OS_APPLICATION_CREDENTIAL_NAME
+          value: {{ $c.applicationCredentialName | b64dec }}
         {{- end }}
-
         {{- if $c.applicationCredentialSecret }}
-        OS_APPLICATION_CREDENTIAL_SECRET: {{ $c.applicationCredentialSecret | b64dec }}
+        - name: OS_APPLICATION_CREDENTIAL_SECRET
+          value: {{ $c.applicationCredentialSecret | b64dec }}
         {{- end }}
       backupStorageLocation:
         - bucket: {{ .Values.backups.bucketName }}
@@ -150,12 +157,4 @@ stringData:
             includedNamespaces:
               - '*'
 
-    # TODO: Remove upgradeJobResources once https://github.com/vmware-tanzu/helm-charts/issues/515 is resolved
-    upgradeJobResources:
-      requests:
-        cpu: 50m
-        memory: 256Mi
-      limits:
-        cpu: 100m
-        memory: 512Mi
 {{- end }}
