@@ -52,3 +52,20 @@ hide_table_of_contents: true
 **Full Changelog**: https://github.com/gardener-community/cloudprofiles/compare/0.7.26...0.7.27
 
 </details>
+
+<details>
+<summary><b>Update external-dns-management to <code>0.25.2</code></b></summary>
+
+# [gardener/external-dns-management]
+
+## 🐛 Bug Fixes
+
+- `[USER]` Fix sporadic failing updates on switching entries between simple and weighted routing policy. by @MartinWeindel [#524]
+
+## Helm Charts
+- dns-controller-manager: `europe-docker.pkg.dev/gardener-project/releases/charts/dns-controller-manager:v0.25.2`
+## Container (OCI) Images
+- dns-controller-manager: `europe-docker.pkg.dev/gardener-project/releases/dns-controller-manager:v0.25.2`
+
+
+</details>
