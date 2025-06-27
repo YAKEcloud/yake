@@ -45,3 +45,10 @@ hide_table_of_contents: true
 # [gardener-extension-provider-hcloud] v0.6.41
 
 </details>
+
+<details>
+<summary><b>Update cloudprofiles to <code>0.7.27</code></b></summary>
+
+**Full Changelog**: https://github.com/gardener-community/cloudprofiles/compare/0.7.26...0.7.27
+
+</details>
