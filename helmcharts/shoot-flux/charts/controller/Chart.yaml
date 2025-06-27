@@ -1,4 +1,4 @@
 apiVersion: v2
 description: Helmchart for controllerregistration of shoot-flux
 name: controller
-version: 0.19.0
+version: 0.20.1

@@ -69,3 +69,14 @@ hide_table_of_contents: true
 
 
 </details>
+
+<details>
+<summary><b>Update shoot-flux to <code>0.20.1</code></b></summary>
+
+## What's Changed
+* Fix lease RBAC by @Wieneo in https://github.com/stackitcloud/gardener-extension-shoot-flux/pull/163
+
+
+**Full Changelog**: https://github.com/stackitcloud/gardener-extension-shoot-flux/compare/v0.20.0...v0.20.1
+
+</details>
