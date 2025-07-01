@@ -56,17 +56,15 @@ rm -rf "$tmpDir"
 
 
 if [[ $curHelmRepo == gardener-charts ]]; then
-  if ! grep -q "Update $depName to <code>$newVersion</code>" "$releaseNoteFile"; then
-    echo ""  >> docs/release-notes/next.md
-    echo "<details>"  >> docs/release-notes/next.md
-    echo "<summary><b>Update $depName to <code>$newVersion</code></b></summary>" >>  docs/release-notes/next.md
-    echo ""  >> docs/release-notes/next.md
-    cat helmcharts/$depName/RELEASE.md  >> docs/release-notes/next.md
-    echo ""  >> docs/release-notes/next.md
-    echo ""  >> docs/release-notes/next.md
-    echo "</details>"  >> docs/release-notes/next.md
-    sed -z 's/\r\n/\n/g' -i docs/release-notes/next.md
-  else
-      echo "Release note for $depName $newVersion already present. Skipping."
-  fi
+	 echo ""  >> docs/release-notes/next.md
+	 echo "<details>"  >> docs/release-notes/next.md
+	 echo "<summary><b>Update $depName to <code>$newVersion</code></b></summary>" >> docs/release-notes/next.md
+	 echo ""  >> docs/release-notes/next.md
+	 cat helmcharts/$depName/RELEASE.md  >> docs/release-notes/next.md
+	 echo ""  >> docs/release-notes/next.md
+	 echo ""  >> docs/release-notes/next.md
+	 echo "</details>"  >> docs/release-notes/next.md
+
+	 # convert CRLF line endings to LF
+	 sed -z 's/\r\n/\n/g' -i docs/release-notes/next.md
 fi
