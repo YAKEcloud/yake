@@ -2,4 +2,4 @@ apiVersion: v2
 description: A Helm chart to deploy the gardener-metrics-exporter application related
   resources
 name: application
-version: 0.39.0
+version: 0.40.0
