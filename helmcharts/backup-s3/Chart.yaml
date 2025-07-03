@@ -5,4 +5,4 @@ dependencies:
   repository: ""
 description: A helmchart for backup-s3
 name: backup-s3
-version: 0.7.2
+version: 0.7.3

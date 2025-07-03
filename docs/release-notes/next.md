@@ -190,3 +190,14 @@ hide_table_of_contents: true
 
 
 </details>
+
+<details>
+<summary><b>Update backup-s3 to <code>0.7.3</code></b></summary>
+
+## General Changes
+
+* Fix extension runtime RBAC (#17) @Wieneo
+* include sbom in container image (#16) @mac641
+
+
+</details>
