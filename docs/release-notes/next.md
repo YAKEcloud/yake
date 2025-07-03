@@ -177,3 +177,16 @@ hide_table_of_contents: true
 
 
 </details>
+
+<details>
+<summary><b>Update networking-calico to <code>1.49.0</code></b></summary>
+
+# [gardener/gardener-extension-networking-calico]
+
+## 🏃 Others
+
+- `[DEVELOPER]` migrate CICD-Pipelines to GitHub-Actions by @ccwienk [#668]
+- `[OPERATOR]` The healthcheck controller is now removed. by @axel7born [#649]
+
+
+</details>
