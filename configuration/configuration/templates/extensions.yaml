@@ -91,6 +91,6 @@ stringData:
       version: 0.20.1
 
     acl:
-      version: 1.9.0
+      version: 1.10.0
       admission:
         enabled: true
