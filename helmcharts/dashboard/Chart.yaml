@@ -1,14 +1,14 @@
 apiVersion: v2
 dependencies:
-- condition: utils-templates.enabled
-  name: utils-templates
-  repository: ""
 - condition: gardener-dashboard-application.enabled
   name: gardener-dashboard-application
   repository: ""
 - condition: gardener-dashboard-runtime.enabled
   name: gardener-dashboard-runtime
   repository: ""
+- condition: utils-templates.enabled
+  name: utils-templates
+  repository: ""
 description: A Helm chart to deploy the Gardener dashboard
 name: dashboard
-version: 1.80.3
+version: 1.81.0
