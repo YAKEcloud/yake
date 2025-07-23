@@ -5,7 +5,7 @@
 <meta name="generator" content="Docusaurus v3.8.1">
 <title data-rh="true">Release Notes next | Yet another Kubernetes Engine</title><meta data-rh="true" name="viewport" content="width=device-width,initial-scale=1"><meta data-rh="true" name="twitter:card" content="summary_large_image"><meta data-rh="true" property="og:url" content="https://yake.cloud/release-notes/next"><meta data-rh="true" property="og:locale" content="en"><meta data-rh="true" name="docusaurus_locale" content="en"><meta data-rh="true" name="docsearch:language" content="en"><meta data-rh="true" name="gardener" content="installation, production, operations, maintenance"><meta data-rh="true" name="docusaurus_version" content="current"><meta data-rh="true" name="docusaurus_tag" content="docs-release-notes-current"><meta data-rh="true" name="docsearch:version" content="current"><meta data-rh="true" name="docsearch:docusaurus_tag" content="docs-release-notes-current"><meta data-rh="true" property="og:title" content="Release Notes next | Yet another Kubernetes Engine"><meta data-rh="true" name="description" content="Yake release notes and upgrade guide"><meta data-rh="true" property="og:description" content="Yake release notes and upgrade guide"><link data-rh="true" rel="icon" href="/img/favicon.ico"><link data-rh="true" rel="canonical" href="https://yake.cloud/release-notes/next"><link data-rh="true" rel="alternate" href="https://yake.cloud/release-notes/next" hreflang="en"><link data-rh="true" rel="alternate" href="https://yake.cloud/release-notes/next" hreflang="x-default"><script data-rh="true" type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Release Notes next","item":"https://yake.cloud/release-notes/next"}]}</script><link rel="alternate" type="application/rss+xml" href="/blog/rss.xml" title="Yet another Kubernetes Engine RSS Feed">
 <link rel="alternate" type="application/atom+xml" href="/blog/atom.xml" title="Yet another Kubernetes Engine Atom Feed"><link rel="stylesheet" href="/assets/css/styles.9a630ee0.css">
-<script src="/assets/js/runtime~main.93bbcf8d.js" defer="defer"></script>
+<script src="/assets/js/runtime~main.94c94361.js" defer="defer"></script>
 <script src="/assets/js/main.bf0fe890.js" defer="defer"></script>
 </head>
 <body class="navigation-with-keyboard">
@@ -158,6 +158,49 @@
 <h2 class="anchor anchorWithStickyNavbar_LWe7" id="container-oci-images-4">Container (OCI) Images<a href="#container-oci-images-4" class="hash-link" aria-label="Direct link to Container (OCI) Images" title="Direct link to Container (OCI) Images">​</a></h2>
 <ul>
 <li>gardener-extension-os-gardenlinux: <code>europe-docker.pkg.dev/gardener-project/releases/gardener/extensions/os-gardenlinux:v0.32.0</code></li>
+</ul>
+</div></div></details>
+<details class="details_lb9f alert alert--info details_b_Ee" data-collapsed="true"><summary><b>Update provider-gcp to <code>1.45.0</code></b></summary><div><div class="collapsibleContent_i85q">
+<!-- -->
+<h1>[gardener/machine-controller-manager-provider-gcp]</h1>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="-others-3">🏃 Others<a href="#-others-3" class="hash-link" aria-label="Direct link to 🏃 Others" title="Direct link to 🏃 Others">​</a></h2>
+<ul>
+<li><code>[USER]</code> Improved credentials configuration validation. by @aaronfern [gardener/machine-controller-manager-provider-gcp#155]</li>
+<li><code>[OPERATOR]</code> machine-controller-manager-provider-gcp base image is updated to <code>gcr.io/distroless/static-debian12:nonroot</code> by @aaronfern [gardener/machine-controller-manager-provider-gcp#154]</li>
+</ul>
+<h1>[gardener/gardener-extension-provider-gcp]</h1>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="️-breaking-changes">⚠️ Breaking Changes<a href="#️-breaking-changes" class="hash-link" aria-label="Direct link to ⚠️ Breaking Changes" title="Direct link to ⚠️ Breaking Changes">​</a></h2>
+<ul>
+<li><code>[OPERATOR]</code> The native-SDK infrastructure reconciler is now promoted as default. Existing shoots will be migrated during their maintenance period and new shoots will automatically use this implementation without any need for the added annotations. Migration from the Terraformer implementation is still supported but will be removed in subsequent releases. by @kon-angelo [#1012]</li>
+</ul>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="-new-features-1">✨ New Features<a href="#-new-features-1" class="hash-link" aria-label="Direct link to ✨ New Features" title="Direct link to ✨ New Features">​</a></h2>
+<ul>
+<li><code>[USER]</code> This extension now supports in-place node updates. Read more about it <a href="https://github.com/gardener/gardener/blob/master/docs/proposals/31-inplace-node-update.md" target="_blank" rel="noopener noreferrer">here</a>. by @acumino [#1069]</li>
+<li><code>[OPERATOR]</code> Add support for enabling the CSI Filestore driver by @hebelsan [#1095]</li>
+</ul>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="-bug-fixes-4">🐛 Bug Fixes<a href="#-bug-fixes-4" class="hash-link" aria-label="Direct link to 🐛 Bug Fixes" title="Direct link to 🐛 Bug Fixes">​</a></h2>
+<ul>
+<li><code>[OPERATOR]</code> Fix Bastion deletion when VM details cannot be determined by @hebelsan [#1081]</li>
+</ul>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="-others-4">🏃 Others<a href="#-others-4" class="hash-link" aria-label="Direct link to 🏃 Others" title="Direct link to 🏃 Others">​</a></h2>
+<ul>
+<li><code>[OPERATOR]</code> Update <code>gardener/gardener</code> to <code>v1.120.0</code> <a href="https://github.com/gardener/gardener/releases/tag/v1.120.0" target="_blank" rel="noopener noreferrer">Release Notes</a>. by @acumino [#1069]</li>
+<li><code>[OPERATOR]</code> The provider-gcp extension does now support shoot clusters with Kubernetes version 1.33. You should consider the <a href="https://github.com/kubernetes/kubernetes/blob/master/CHANGELOG/CHANGELOG-1.33.md" target="_blank" rel="noopener noreferrer">Kubernetes release notes</a> before upgrading to 1.33. by @plkokanov [#1092]</li>
+<li><code>[OPERATOR]</code> Upgrade vendored gardener/gardener <code>v1.120.1</code> -&gt; <code>v1.121.1</code> by @hebelsan [#1097]</li>
+<li><code>[OPERATOR]</code> Clients created by the GCP extension provider will now identify themselves by adding to the <code>user-agent</code> header of their calls. by @AndreasBurger [#1112]</li>
+<li><code>[OPERATOR]</code> The cloud-controller-manager image for clusters running Kubernetes &gt;= 1.33 is now updated to <code>v33.1.1</code>. by @plkokanov [#1113]</li>
+<li><code>[OPERATOR]</code> Allow creating new internal subnet for an externally managed VPC if it didn&#x27;t exist before. by @voelzmo [#1108]</li>
+</ul>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="helm-charts-5">Helm Charts<a href="#helm-charts-5" class="hash-link" aria-label="Direct link to Helm Charts" title="Direct link to Helm Charts">​</a></h2>
+<ul>
+<li>admission-gcp-application: <code>europe-docker.pkg.dev/gardener-project/releases/charts/gardener/extensions/admission-gcp-application:v1.45.0</code></li>
+<li>admission-gcp-runtime: <code>europe-docker.pkg.dev/gardener-project/releases/charts/gardener/extensions/admission-gcp-runtime:v1.45.0</code></li>
+<li>provider-gcp: <code>europe-docker.pkg.dev/gardener-project/releases/charts/gardener/extensions/provider-gcp:v1.45.0</code></li>
+</ul>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="container-oci-images-5">Container (OCI) Images<a href="#container-oci-images-5" class="hash-link" aria-label="Direct link to Container (OCI) Images" title="Direct link to Container (OCI) Images">​</a></h2>
+<ul>
+<li>gardener-extension-admission-gcp: <code>europe-docker.pkg.dev/gardener-project/releases/gardener/extensions/admission-gcp:v1.45.0</code></li>
+<li>gardener-extension-provider-gcp: <code>europe-docker.pkg.dev/gardener-project/releases/gardener/extensions/provider-gcp:v1.45.0</code></li>
 </ul>
 </div></div></details></div></article><nav class="docusaurus-mt-lg pagination-nav" aria-label="Docs pages"><a class="pagination-nav__link pagination-nav__link--next" href="/release-notes/v1.122"><div class="pagination-nav__sublabel">Next</div><div class="pagination-nav__label">Release Notes v1.122</div></a></nav></div></div></div></div></main></div></div></div><footer class="theme-layout-footer footer footer--dark"><div class="container container-fluid"><div class="row footer__links"><div class="theme-layout-footer-column col footer__col"><div class="footer__title">Docs</div><ul class="footer__items clean-list"><li class="footer__item"><a class="footer__link-item" href="/docs/overview">Docs</a></li></ul></div><div class="theme-layout-footer-column col footer__col"><div class="footer__title">Community</div><ul class="footer__items clean-list"><li class="footer__item"><a href="https://github.com/yakecloud" target="_blank" rel="noopener noreferrer" class="footer__link-item">GitHub<svg width="13.5" height="13.5" aria-hidden="true" class="iconExternalLink_nPIU"><use href="#theme-svg-external-link"></use></svg></a></li><li class="footer__item"><a href="https://github.com/gardener-community" target="_blank" rel="noopener noreferrer" class="footer__link-item">Gardener Community<svg width="13.5" height="13.5" aria-hidden="true" class="iconExternalLink_nPIU"><use href="#theme-svg-external-link"></use></svg></a></li><li class="footer__item"><a href="https://gardener-cloud.slack.com" target="_blank" rel="noopener noreferrer" class="footer__link-item">Slack<svg width="13.5" height="13.5" aria-hidden="true" class="iconExternalLink_nPIU"><use href="#theme-svg-external-link"></use></svg></a></li></ul></div><div class="theme-layout-footer-column col footer__col"><div class="footer__title">More</div><ul class="footer__items clean-list"><li class="footer__item"><a class="footer__link-item" href="/blog">Blog</a></li><li class="footer__item"><a class="footer__link-item" href="/legals">Legals</a></li><li class="footer__item"><a class="footer__link-item" href="/privacy-policy">Privacy policy</a></li></ul></div></div><div class="footer__bottom text--center"><div class="footer__copyright">Copyright © 2025 23 Technologies GmbH</div></div></div></footer></div>
 </body>
