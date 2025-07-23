@@ -1,14 +1,18 @@
 # [gardener/gardener-extension-shoot-cert-service]
 
-## ✨ New Features
-
-- `[OPERATOR]` Manage `garden-cert` and `controlplane-cert` for runtime cluster and seeds by @MartinWeindel [#369]
 ## 🏃 Others
 
-- `[OPERATOR]` Introduce second extension type `controlplane-cert-service` with lifecycle `reconcile: BeforeKubeAPIServer`. by @MartinWeindel [#407]
-- `[OPERATOR]` Drop sni-config webhook by @MartinWeindel [#405]
+- `[DEVELOPER]` migrate CICD-Pipelines to GitHub-Actions by @ccwienk [#427]
+- `[OPERATOR]` Add annotation `cert.gardener.cloud/class` for control plane issuers by @MartinWeindel [#422]
+- `[DEPENDENCY]` Updated `cert-management` to `v0.17.8`. by @marc1404 [#435]
+# [gardener/cert-management]
 
-## Helm Charts
-- shoot-cert-service: `europe-docker.pkg.dev/gardener-project/releases/charts/gardener/extensions/shoot-cert-service:v1.51.0`
-## Container (OCI) Images
-- gardener-extension-shoot-cert-service: `europe-docker.pkg.dev/gardener-project/releases/gardener/extensions/shoot-cert-service:v1.51.0`
+## ✨ New Features
+
+- `[USER]` Added `cert.gardener.cloud/not-before` annotation and `IssuanceDate` field to `Certificate`. by @marc1404 [gardener/cert-management#489]
+## 🏃 Others
+
+- `[OPERATOR]` Support `cert.gardener.cloud/class` annotation for `issuers` by @MartinWeindel [gardener/cert-management#512]
+## 📖 Documentation
+
+- `[USER]` Documented the correct minimum duration of `Certificate`s assuming the default renewal window of 30 days. by @marc1404 [gardener/cert-management#495]
