@@ -23,7 +23,9 @@ stringData:
           backup:
             provider: {{ .Values.backups.provider }}
             region: {{ .Values.backups.region }}
-            secretRef:
+            credentialsRef:
+              apiVersion: v1
+              kind: Secret
               name: for-backups-internal-seed
               namespace: garden
 {{- end }}
