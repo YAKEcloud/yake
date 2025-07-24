@@ -5,7 +5,7 @@
 <meta name="generator" content="Docusaurus v3.8.1">
 <title data-rh="true">Release Notes next | Yet another Kubernetes Engine</title><meta data-rh="true" name="viewport" content="width=device-width,initial-scale=1"><meta data-rh="true" name="twitter:card" content="summary_large_image"><meta data-rh="true" property="og:url" content="https://yake.cloud/release-notes/next"><meta data-rh="true" property="og:locale" content="en"><meta data-rh="true" name="docusaurus_locale" content="en"><meta data-rh="true" name="docsearch:language" content="en"><meta data-rh="true" name="gardener" content="installation, production, operations, maintenance"><meta data-rh="true" name="docusaurus_version" content="current"><meta data-rh="true" name="docusaurus_tag" content="docs-release-notes-current"><meta data-rh="true" name="docsearch:version" content="current"><meta data-rh="true" name="docsearch:docusaurus_tag" content="docs-release-notes-current"><meta data-rh="true" property="og:title" content="Release Notes next | Yet another Kubernetes Engine"><meta data-rh="true" name="description" content="Yake release notes and upgrade guide"><meta data-rh="true" property="og:description" content="Yake release notes and upgrade guide"><link data-rh="true" rel="icon" href="/img/favicon.ico"><link data-rh="true" rel="canonical" href="https://yake.cloud/release-notes/next"><link data-rh="true" rel="alternate" href="https://yake.cloud/release-notes/next" hreflang="en"><link data-rh="true" rel="alternate" href="https://yake.cloud/release-notes/next" hreflang="x-default"><script data-rh="true" type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Release Notes next","item":"https://yake.cloud/release-notes/next"}]}</script><link rel="alternate" type="application/rss+xml" href="/blog/rss.xml" title="Yet another Kubernetes Engine RSS Feed">
 <link rel="alternate" type="application/atom+xml" href="/blog/atom.xml" title="Yet another Kubernetes Engine Atom Feed"><link rel="stylesheet" href="/assets/css/styles.9a630ee0.css">
-<script src="/assets/js/runtime~main.bf1dfa5f.js" defer="defer"></script>
+<script src="/assets/js/runtime~main.c276cf7d.js" defer="defer"></script>
 <script src="/assets/js/main.6b977eee.js" defer="defer"></script>
 </head>
 <body class="navigation-with-keyboard">
@@ -103,6 +103,816 @@
 <li>operator: <code>europe-docker.pkg.dev/gardener-project/releases/gardener/operator:v1.123.2</code></li>
 <li>resource-manager: <code>europe-docker.pkg.dev/gardener-project/releases/gardener/resource-manager:v1.123.2</code></li>
 <li>scheduler: <code>europe-docker.pkg.dev/gardener-project/releases/gardener/scheduler:v1.123.2</code></li>
+</ul>
+</div></div></details>
+<details class="details_lb9f alert alert--info details_b_Ee" data-collapsed="true"><summary><b>Update gardener-controlplane to <code>1.124.0</code></b></summary><div><div class="collapsibleContent_i85q">
+<!-- -->
+<h1>[gardener/gardener]</h1>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="️-breaking-changes">⚠️ Breaking Changes<a href="#️-breaking-changes" class="hash-link" aria-label="Direct link to ⚠️ Breaking Changes" title="Direct link to ⚠️ Breaking Changes">​</a></h2>
+<ul>
+<li><code>[OPERATOR]</code> ⚠️ The <code>BackupBucket</code> API field <code>spec.secretRef</code> has been removed, please migrate your backupbucket manifests to <code>spec.credentialsRef</code>! Gardener API server already has defaulted this field.  by @vpnachev [#12517]</li>
+<li><code>[USER]</code> Starting with Kubernetes v1.34, setting the field <code>.spec.cloudProfileName</code> is be forbidden. The field will be dropped from existing Shoots once. Users are advised to drop this field and specify the cloud profile using the <code>.spec.cloudProfile.name</code> field instead. by @LucaBernstein [#11816]</li>
+</ul>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="-noteworthy">📰 Noteworthy<a href="#-noteworthy" class="hash-link" aria-label="Direct link to 📰 Noteworthy" title="Direct link to 📰 Noteworthy">​</a></h2>
+<ul>
+<li><code>[OPERATOR]</code> The graduated feature gate <code>NodeAgentAuthorizer</code> has been removed. by @oliver-goetz [#12576]</li>
+<li><code>[USER]</code> Starting with Kubernetes v1.33, there are be API warnings for Shoots that have the <code>.spec.cloudProfileName</code> field set. Users are advised to drop this field and specify the cloud profile using the <code>.spec.cloudProfile.name</code> field instead. by @LucaBernstein [#11816]</li>
+</ul>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="-new-features">✨ New Features<a href="#-new-features" class="hash-link" aria-label="Direct link to ✨ New Features" title="Direct link to ✨ New Features">​</a></h2>
+<ul>
+<li><code>[USER]</code> IPv4 or dual-stack shoots can now define IPv4 pod, service and node networks overlapping with networks of their seed. This works for both HA and non-HA shoots now. by @domdom82 [#12204]</li>
+<li><code>[USER]</code> The Shoot resource does now support configuring feature gates for the Vertical Pod Autoscaler (VPA). With this feature, end users can enable the <code>InPlacePodVerticalScaling</code> feature gate of VPA. For more details, see <a href="https://github.com/gardener/gardener/blob/v1.124.0/docs/usage/autoscaling/in-place-resource-updates.md" target="_blank" rel="noopener noreferrer">In-Place Updates of Pod Resources</a>. by @vitanovs [#12339]</li>
+<li><code>[OPERATOR]</code> Istio service &amp; workload dashboards are deployed now in Seeds and in Garden runtime cluster to improve observability when L7 load balancing is active. Additionally, the existing Istio dashboards for Seeds are now deployed in the Garden runtime cluster too. by @oliver-goetz [#12509]</li>
+<li><code>[OPERATOR]</code> The Seed and Garden resources do now support configuring feature gates for the Vertical Pod Autoscaler (VPA). With this feature, Gardener operators can enable the <code>InPlacePodVerticalScaling</code> feature gate of VPA. For more details, see <a href="https://github.com/gardener/gardener/blob/v1.124.0/docs/usage/autoscaling/in-place-resource-updates.md" target="_blank" rel="noopener noreferrer">In-Place Updates of Pod Resources</a>. by @vitanovs [#12339]</li>
+<li><code>[OPERATOR]</code> Introduced a feature gate <code>OpenTelemetryCollector</code> that enables the creation of an <code>OpenTelemetry Collector</code> inside the control-plane of every Shoot. This will route logs through the aforementioned <code>Collector</code>, enabling Shoot logs to be stored in any backend. by @rrhubenov [#12428]</li>
+</ul>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="-bug-fixes-3">🐛 Bug Fixes<a href="#-bug-fixes-3" class="hash-link" aria-label="Direct link to 🐛 Bug Fixes" title="Direct link to 🐛 Bug Fixes">​</a></h2>
+<ul>
+<li><code>[OPERATOR]</code> A bug in which <code>gardener-node-agent</code> was not able to in-place update OS versions that specify only <code>MAJOR.MINOR</code> in the <code>os-release</code> but <code>MAJOR.MINOR.PATCH</code> in the cloud profile is now fixed. by @shafeeqes [#12542]</li>
+<li><code>[OPERATOR]</code> A bug has been fixed which caused <code>Pod</code>s from namespaces other than <code>kube-system</code> and labeled with <code>node.gardener.cloud/critical-component=true</code> to be considered by <code>gardener-resource-manager</code>. by @rfranzke [#12557]</li>
+<li><code>[OPERATOR]</code> A bug where WorkloadIdentity tokens used for etcd backups, i.e. in the context of <code>BackupEntry</code> resource, tried to include shoot and project info when the shoot resource is deleted is now fixed.  by @vpnachev [#12516]</li>
+<li><code>[OPERATOR]</code> <code>gardener-resource-manager</code> is now excluded from <code>pod-kube-apiserver-load-balancing</code> webhook when running in garden runtime cluster. by @oliver-goetz [#12526]</li>
+<li><code>[OPERATOR]</code> A bug in shoot reconciliation that caused RewriteEncryptedDataAddLabel to be called for hibernated shoots, leading to a panic in the gardenlet, has been fixed. by @acumino [#12602]</li>
+<li><code>[OPERATOR]</code> A bug in the <code>istio-ingress</code> helm chart which could lead to a missing traffic distribution policy in the internal istio-ingressgateway service on certain Kubernetes versions has been fixed. by @oliver-goetz [#12541]</li>
+<li><code>[OPERATOR]</code> A bug has been fixed which prevented the seed-specific Plutono dashboards from being provided by <code>gardenlet</code> in case its seed cluster was the garden runtime cluster at the same time. by @rfranzke [#12476]</li>
+</ul>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="-others">🏃 Others<a href="#-others" class="hash-link" aria-label="Direct link to 🏃 Others" title="Direct link to 🏃 Others">​</a></h2>
+<ul>
+<li><code>[DEPENDENCY]</code> The following dependencies have been updated:
+<ul>
+<li><code>envoyproxy/envoy</code> from <code>v1.34.1</code> to <code>v1.34.2</code>. <a href="https://redirect.github.com/envoyproxy/envoy/releases/tag/v1.34.2" target="_blank" rel="noopener noreferrer">Release Notes</a> by @gardener-ci-robot [#12501]</li>
+</ul>
+</li>
+<li><code>[DEPENDENCY]</code> The following dependencies have been updated:
+<ul>
+<li><code>gardener/machine-controller-manager</code> from <code>v0.58.0</code> to <code>v0.59.0</code>. <a href="https://redirect.github.com/gardener/machine-controller-manager/releases/tag/v0.59.0" target="_blank" rel="noopener noreferrer">Release Notes</a></li>
+<li><code>github.com/gardener/machine-controller-manager</code> from <code>v0.58.0</code> to <code>v0.59.0</code>.  by @gardener-ci-robot [#12482]</li>
+</ul>
+</li>
+<li><code>[DEPENDENCY]</code> The following dependencies have been updated:
+<ul>
+<li><code>europe-docker.pkg.dev/gardener-project/releases/3rd/opentelemetry-operator/opentelemetry-operator</code> from <code>v0.127.0</code> to <code>v0.129.1</code>.  by @rrhubenov [#12480]</li>
+</ul>
+</li>
+<li><code>[DEPENDENCY]</code> The following dependencies have been updated:
+<ul>
+<li><code>credativ/vali</code> from <code>v2.2.24</code> to <code>v2.2.25</code>. <a href="https://redirect.github.com/credativ/vali/releases/tag/v2.2.25" target="_blank" rel="noopener noreferrer">Release Notes</a> by @gardener-ci-robot [#12555]</li>
+</ul>
+</li>
+<li><code>[DEPENDENCY]</code> The following dependencies have been updated:
+<ul>
+<li><code>gardener/machine-controller-manager</code> from <code>v0.59.1</code> to <code>v0.59.2</code>. <a href="https://redirect.github.com/gardener/machine-controller-manager/releases/tag/v0.59.2" target="_blank" rel="noopener noreferrer">Release Notes</a></li>
+<li><code>github.com/gardener/machine-controller-manager</code> from <code>v0.59.1</code> to <code>v0.59.2</code>. by @gardener-ci-robot [#12595]</li>
+</ul>
+</li>
+<li><code>[DEPENDENCY]</code> The following dependencies have been updated:
+<ul>
+<li><code>gardener/machine-controller-manager</code> from <code>v0.59.0</code> to <code>v0.59.1</code>. <a href="https://redirect.github.com/gardener/machine-controller-manager/releases/tag/v0.59.1" target="_blank" rel="noopener noreferrer">Release Notes</a></li>
+<li><code>github.com/gardener/machine-controller-manager</code> from <code>v0.59.0</code> to <code>v0.59.1</code>.  by @gardener-ci-robot [#12569]</li>
+</ul>
+</li>
+<li><code>[DEPENDENCY]</code> The following dependencies have been updated:
+<ul>
+<li><code>credativ/plutono</code> from <code>v7.5.39</code> to <code>v7.5.40</code>. <a href="https://redirect.github.com/credativ/plutono/releases/tag/v7.5.40" target="_blank" rel="noopener noreferrer">Release Notes</a> by @gardener-ci-robot [#12554]</li>
+</ul>
+</li>
+<li><code>[DEPENDENCY]</code> The following dependencies have been updated:
+<ul>
+<li><code>gardener/etcd-druid</code> from <code>v0.30.1</code> to <code>v0.31.0</code>. <a href="https://redirect.github.com/gardener/etcd-druid/releases/tag/v0.31.0" target="_blank" rel="noopener noreferrer">Release Notes</a></li>
+<li><code>github.com/gardener/etcd-druid/api</code> from <code>v0.30.1</code> to <code>v0.31.0</code>.  by @rfranzke [#12551]</li>
+</ul>
+</li>
+<li><code>[DEPENDENCY]</code> The following dependencies have been updated:
+<ul>
+<li><code>envoyproxy/envoy</code> from <code>v1.34.2</code> to <code>v1.34.3</code>. <a href="https://redirect.github.com/envoyproxy/envoy/releases/tag/v1.34.3" target="_blank" rel="noopener noreferrer">Release Notes</a> by @gardener-ci-robot [#12574]</li>
+</ul>
+</li>
+<li><code>[OPERATOR]</code> Resource limits on vpn-shoot have been removed. by @domdom82 [#12515]</li>
+<li><code>[OPERATOR]</code> A new validation for Quota <code>.spec.clusterLifetimeDays</code> field is added. The field value must be greater than 0. by @tobschli [#12478]</li>
+<li><code>[OPERATOR]</code> Resource limits on vpn envoy have been removed. by @domdom82 [#12534]
+[github.com/gardener/gardener-discovery-server:v0.7.0]</li>
+</ul>
+<h1>[gardener/gardener-discovery-server]</h1>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="-others-1">🏃 Others<a href="#-others-1" class="hash-link" aria-label="Direct link to 🏃 Others" title="Direct link to 🏃 Others">​</a></h2>
+<ul>
+<li><code>[OPERATOR]</code> The following third-party dependencies have been updated:
+<ul>
+<li>github.com/go-logr/logr v1.4.2 -&gt; v1.4.3</li>
+<li>cel.dev/expr v0.23.1 -&gt; v0.24.0</li>
+<li>github.com/Masterminds/semver/v3 v3.3.1 -&gt; v3.4.0</li>
+<li>github.com/fluent/fluent-operator/v3 v3.3.0 -&gt; v3.4.0</li>
+<li>golang.org/x/sync v0.15.0 -&gt; v0.16.0</li>
+<li>golang.org/x/sys v0.33.0 -&gt; v0.34.0</li>
+<li>golang.org/x/term v0.32.0 -&gt; v0.33.0</li>
+<li>golang.org/x/text v0.26.0 -&gt; v0.27.0</li>
+<li>helm.sh/helm/v3 v3.18.3 -&gt; v3.18.4</li>
+<li>sigs.k8s.io/yaml v1.4.0 -&gt; v1.5.0 by @vpnachev [#126]</li>
+</ul>
+</li>
+<li><code>[OPERATOR]</code> <code>gardener-discovery-server</code> is now built using go 1.24.5. by @dependabot[bot] [#125]</li>
+<li><code>[DEPENDENCY]</code> The following third-party dependencies have been updated:
+<ul>
+<li>github.com/gardener/gardener v1.121.2 -&gt; v1.122.1</li>
+<li>k8s.io/api v0.32.5 -&gt; v0.33.2</li>
+<li>k8s.io/apimachinery v0.32.5 -&gt; v0.33.2</li>
+<li>k8s.io/client-go v0.32.5 -&gt; v0.33.2</li>
+<li>k8s.io/component-base v0.32.5 -&gt; v0.33.2</li>
+<li>sigs.k8s.io/controller-runtime v0.20.4 -&gt; v0.21.0</li>
+<li>sigs.k8s.io/controller-tools v0.17.3 -&gt; v0.18.0 by @dependabot[bot] [#124]</li>
+</ul>
+</li>
+</ul>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="container-oci-images-3">Container (OCI) Images<a href="#container-oci-images-3" class="hash-link" aria-label="Direct link to Container (OCI) Images" title="Direct link to Container (OCI) Images">​</a></h2>
+<ul>
+<li>gardener-discovery-server: <code>europe-docker.pkg.dev/gardener-project/releases/gardener/gardener-discovery-server:v0.7.0</code></li>
+</ul>
+<p>[github.com/gardener/etcd-druid:v0.31.0]</p>
+<h1>[gardener/etcd-druid]</h1>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="️-breaking-changes-1">⚠️ Breaking Changes<a href="#️-breaking-changes-1" class="hash-link" aria-label="Direct link to ⚠️ Breaking Changes" title="Direct link to ⚠️ Breaking Changes">​</a></h2>
+<ul>
+<li><code>[OPERATOR]</code> The existing CLI flag reconciler-service-account was optional. Its value is a fully qualified name of the service account used by etcd-druid in the format &quot;system:serviceaccount:<namespace>:<service-account-name>&quot;.  This has now been made required. If you are continuing to use the deprecated CLI fags then you must specify it. Alternatively if you have switched to using the new OperatorConfiguration then you should set &quot;OperatorConfiguration.Webhooks.EtcdComponentProtection.ServiceAccountInfo&quot; instead. by @unmarshall [#1090]</service-account-name></namespace></li>
+</ul>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="-new-features-1">✨ New Features<a href="#-new-features-1" class="hash-link" aria-label="Direct link to ✨ New Features" title="Direct link to ✨ New Features">​</a></h2>
+<ul>
+<li><code>[DEVELOPER]</code> The new <code>.spec.etcd.wrapperPort</code> field allows to change the server port of <code>etcd-wrapper</code>. by @rfranzke [#1086]</li>
+<li><code>[OPERATOR]</code> Introduced OperatorConfiguration as a replacement to the existing etcd-druid CLI flags. The configuration gets mounted as a ConfigMap onto the etcd-druid Deployment. The existing CLI flags have been marked as deprecated. Their support will be removed after a few releases of etcd-druid. by @unmarshall [#1090]</li>
+</ul>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="-bug-fixes-4">🐛 Bug Fixes<a href="#-bug-fixes-4" class="hash-link" aria-label="Direct link to 🐛 Bug Fixes" title="Direct link to 🐛 Bug Fixes">​</a></h2>
+<ul>
+<li><code>[DEVELOPER]</code> Fix incorrectly named config field in skaffold profile for e2e tests by @anveshreddy18 [#1134]</li>
+<li><code>[DEVELOPER]</code> An issue has been fixed which caused <code>etcd</code> pods not to start when port different from the default values were used. by @rfranzke [#1086]</li>
+<li><code>[OPERATOR]</code> Fix a bug which caused etcd-druid to fail at start up, due to a group mismatch for <code>OperatorConfiguration</code> in its group registration and templates. by @renormalize [#1118]</li>
+<li><code>[USER]</code> Fix a volume mount issue of provider <code>Local</code> for etcd backups by @anveshreddy18 [#1102]</li>
+</ul>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="-others-2">🏃 Others<a href="#-others-2" class="hash-link" aria-label="Direct link to 🏃 Others" title="Direct link to 🏃 Others">​</a></h2>
+<ul>
+<li><code>[USER]</code> Secret controller now manages finalizer on referenced backup-restore TLS secrets. by @shreyas-s-rao [#1125]</li>
+<li><code>[OPERATOR]</code> replace usage of fake client library in tests with the fake client builder in test/utils directory by @Shreyas-s14 [#1120]</li>
+<li><code>[OPERATOR]</code> Fixes etcd-druid service template yaml to properly support operator configuration values defined in values.yaml by @unmarshall [#1132]</li>
+<li><code>[DEVELOPER]</code> Remove the functionality that deletes old ConfigMaps from the cluster by @anveshreddy18 [#1103]</li>
+</ul>
+<h1>[gardener/etcd-backup-restore]</h1>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="-new-features-2">✨ New Features<a href="#-new-features-2" class="hash-link" aria-label="Direct link to ✨ New Features" title="Direct link to ✨ New Features">​</a></h2>
+<ul>
+<li><code>[DEVELOPER]</code> AWS SDK has been upgraded to v2. by @vpnachev [gardener/etcd-backup-restore#874]</li>
+</ul>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="-others-3">🏃 Others<a href="#-others-3" class="hash-link" aria-label="Direct link to 🏃 Others" title="Direct link to 🏃 Others">​</a></h2>
+<ul>
+<li><code>[DEVELOPER]</code> Update golang version to <code>1.24.4</code>. by @shreyas-s-rao [gardener/etcd-backup-restore#886]</li>
+</ul>
+<h1>[gardener/etcd-wrapper]</h1>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="-others-4">🏃 Others<a href="#-others-4" class="hash-link" aria-label="Direct link to 🏃 Others" title="Direct link to 🏃 Others">​</a></h2>
+<ul>
+<li><code>[DEVELOPER]</code> Update golang images to <code>1.24.4</code>. by @shreyas-s-rao [gardener/etcd-wrapper#58]</li>
+</ul>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="helm-charts-3">Helm Charts<a href="#helm-charts-3" class="hash-link" aria-label="Direct link to Helm Charts" title="Direct link to Helm Charts">​</a></h2>
+<ul>
+<li>etcd-druid: <code>europe-docker.pkg.dev/gardener-project/releases/charts/gardener/etcd-druid/etcd-druid:v0.31.0</code></li>
+</ul>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="container-oci-images-4">Container (OCI) Images<a href="#container-oci-images-4" class="hash-link" aria-label="Direct link to Container (OCI) Images" title="Direct link to Container (OCI) Images">​</a></h2>
+<ul>
+<li>etcd-druid: <code>europe-docker.pkg.dev/gardener-project/releases/gardener/etcd-druid:v0.31.0</code></li>
+</ul>
+<p>[github.com/gardener/etcd-wrapper:v0.5.2]</p>
+<h1>[gardener/etcd-wrapper]</h1>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="-others-5">🏃 Others<a href="#-others-5" class="hash-link" aria-label="Direct link to 🏃 Others" title="Direct link to 🏃 Others">​</a></h2>
+<ul>
+<li><code>[DEVELOPER]</code> Update golang images to <code>1.24.4</code>. by @shreyas-s-rao [#58]</li>
+</ul>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="container-oci-images-5">Container (OCI) Images<a href="#container-oci-images-5" class="hash-link" aria-label="Direct link to Container (OCI) Images" title="Direct link to Container (OCI) Images">​</a></h2>
+<ul>
+<li>etcd-wrapper: <code>europe-docker.pkg.dev/gardener-project/releases/gardener/etcd-wrapper:v0.5.2</code></li>
+</ul>
+<p>[github.com/gardener/etcd-backup-restore:v0.37.0]</p>
+<h1>[gardener/etcd-backup-restore]</h1>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="-new-features-3">✨ New Features<a href="#-new-features-3" class="hash-link" aria-label="Direct link to ✨ New Features" title="Direct link to ✨ New Features">​</a></h2>
+<ul>
+<li><code>[DEVELOPER]</code> AWS SDK has been upgraded to v2. by @vpnachev [#874]</li>
+</ul>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="-others-6">🏃 Others<a href="#-others-6" class="hash-link" aria-label="Direct link to 🏃 Others" title="Direct link to 🏃 Others">​</a></h2>
+<ul>
+<li><code>[DEVELOPER]</code> Update golang version to <code>1.24.4</code>. by @shreyas-s-rao [#886]</li>
+</ul>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="container-oci-images-6">Container (OCI) Images<a href="#container-oci-images-6" class="hash-link" aria-label="Direct link to Container (OCI) Images" title="Direct link to Container (OCI) Images">​</a></h2>
+<ul>
+<li>etcdbrctl: <code>europe-docker.pkg.dev/gardener-project/releases/gardener/etcdbrctl:v0.37.0</code></li>
+</ul>
+<p>[github.com/gardener/machine-controller-manager:v0.59.0]</p>
+<h1>[gardener/machine-controller-manager]</h1>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="-new-features-4">✨ New Features<a href="#-new-features-4" class="hash-link" aria-label="Direct link to ✨ New Features" title="Direct link to ✨ New Features">​</a></h2>
+<ul>
+<li><code>[OPERATOR]</code> machine-controller-manager can manage machines without a target cluster by specifying <code>--target-kubeconfig=none</code>. See the <a href="https://github.com/gardener/machine-controller-manager/blob/master/docs/FAQ.md#how-to-run-mcm-in-different-cluster-setups" target="_blank" rel="noopener noreferrer">documentation</a> for more details. by @timebertt [#1004]</li>
+</ul>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="-bug-fixes-5">🐛 Bug Fixes<a href="#-bug-fixes-5" class="hash-link" aria-label="Direct link to 🐛 Bug Fixes" title="Direct link to 🐛 Bug Fixes">​</a></h2>
+<ul>
+<li><code>[OPERATOR]</code> Fix a bug where MCM does not check if a pod has already been evicted before reattempting eviction blindly by @aaronfern [#979]</li>
+<li><code>[OPERATOR]</code> Fixed a bug in the MachineSet controller where the machine status was set to <code>Terminating</code> even if attempt to delete the machine object failed. by @takoverflow [#995]</li>
+</ul>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="-others-7">🏃 Others<a href="#-others-7" class="hash-link" aria-label="Direct link to 🏃 Others" title="Direct link to 🏃 Others">​</a></h2>
+<ul>
+<li><code>[OPERATOR]</code> add new label <code>node_name</code> to the <code>mcm_machine_info</code> metric by @aaronfern [#1000]</li>
+<li><code>[OPERATOR]</code> machine-controller-manager base image is updated to <code>gcr.io/distroless/static-debian12:nonroot</code>. by @aaronfern [#991]</li>
+</ul>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="container-oci-images-7">Container (OCI) Images<a href="#container-oci-images-7" class="hash-link" aria-label="Direct link to Container (OCI) Images" title="Direct link to Container (OCI) Images">​</a></h2>
+<ul>
+<li>machine-controller-manager: <code>europe-docker.pkg.dev/gardener-project/releases/gardener/machine-controller-manager:v0.59.0</code></li>
+</ul>
+<p>[github.com/gardener/machine-controller-manager:v0.59.1]</p>
+<h1>[gardener/machine-controller-manager]</h1>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="-others-8">🏃 Others<a href="#-others-8" class="hash-link" aria-label="Direct link to 🏃 Others" title="Direct link to 🏃 Others">​</a></h2>
+<ul>
+<li><code>[OPERATOR]</code> <code>node.gardener.cloud/critical-components-not-ready</code> taint is added to the node after the successful in-place update to prevent scheduling any workload before critical component pods are ready. by @acumino [#1017]</li>
+</ul>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="container-oci-images-8">Container (OCI) Images<a href="#container-oci-images-8" class="hash-link" aria-label="Direct link to Container (OCI) Images" title="Direct link to Container (OCI) Images">​</a></h2>
+<ul>
+<li>machine-controller-manager: <code>europe-docker.pkg.dev/gardener-project/releases/gardener/machine-controller-manager:v0.59.1</code></li>
+</ul>
+<p>[github.com/gardener/machine-controller-manager:v0.59.2]</p>
+<h1>[gardener/machine-controller-manager]</h1>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="-bug-fixes-6">🐛 Bug Fixes<a href="#-bug-fixes-6" class="hash-link" aria-label="Direct link to 🐛 Bug Fixes" title="Direct link to 🐛 Bug Fixes">​</a></h2>
+<ul>
+<li><code>[OPERATOR]</code> Fixed a bug where machines in the <code>InPlaceUpdating</code> phase were incorrectly transferred to the new machine set during inplace updates. This caused the machine controller to miss updating the phase to <code>InPlaceUpdateSuccessful</code>, resulting in machines getting stuck or marked as <code>InPlaceUpdateFailed</code>. by @acumino [#1020]
+[github.com/gardener/vpn2:0.39.0]</li>
+</ul>
+<h1>[gardener/vpn2]</h1>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="-noteworthy-1">📰 Noteworthy<a href="#-noteworthy-1" class="hash-link" aria-label="Direct link to 📰 Noteworthy" title="Direct link to 📰 Noteworthy">​</a></h2>
+<ul>
+<li><code>[OPERATOR]</code> Overlapping CIDR ranges between seed and shoot IPv4 networks for HA VPN deployments are now possible. by @domdom82 [#151]</li>
+</ul>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="container-oci-images-9">Container (OCI) Images<a href="#container-oci-images-9" class="hash-link" aria-label="Direct link to Container (OCI) Images" title="Direct link to Container (OCI) Images">​</a></h2>
+<ul>
+<li>vpn-client: <code>europe-docker.pkg.dev/gardener-project/releases/gardener/vpn-client:0.39.0</code></li>
+<li>vpn-server: <code>europe-docker.pkg.dev/gardener-project/releases/gardener/vpn-server:0.39.0</code></li>
+</ul>
+<p>[github.com/gardener/vpn2:0.40.0]</p>
+<h1>[gardener/vpn2]</h1>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="-noteworthy-2">📰 Noteworthy<a href="#-noteworthy-2" class="hash-link" aria-label="Direct link to 📰 Noteworthy" title="Direct link to 📰 Noteworthy">​</a></h2>
+<ul>
+<li><code>[OPERATOR]</code> Double-NAT IP mapping will only be done if there is an actual overlap of shoot vs. seed IPv4 network ranges for HA VPN deployments. Non-HA VPN configurations are unchanged. by @domdom82 [#154]</li>
+</ul>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="container-oci-images-10">Container (OCI) Images<a href="#container-oci-images-10" class="hash-link" aria-label="Direct link to Container (OCI) Images" title="Direct link to Container (OCI) Images">​</a></h2>
+<ul>
+<li>vpn-client: <code>europe-docker.pkg.dev/gardener-project/releases/gardener/vpn-client:0.40.0</code></li>
+<li>vpn-server: <code>europe-docker.pkg.dev/gardener-project/releases/gardener/vpn-server:0.40.0</code></li>
+</ul>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="helm-charts-4">Helm Charts<a href="#helm-charts-4" class="hash-link" aria-label="Direct link to Helm Charts" title="Direct link to Helm Charts">​</a></h2>
+<ul>
+<li>controlplane: <code>europe-docker.pkg.dev/gardener-project/releases/charts/gardener/controlplane:v1.124.0</code></li>
+<li>gardenlet: <code>europe-docker.pkg.dev/gardener-project/releases/charts/gardener/gardenlet:v1.124.0</code></li>
+<li>operator: <code>europe-docker.pkg.dev/gardener-project/releases/charts/gardener/operator:v1.124.0</code></li>
+<li>resource-manager: <code>europe-docker.pkg.dev/gardener-project/releases/charts/gardener/resource-manager:v1.124.0</code></li>
+</ul>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="container-oci-images-11">Container (OCI) Images<a href="#container-oci-images-11" class="hash-link" aria-label="Direct link to Container (OCI) Images" title="Direct link to Container (OCI) Images">​</a></h2>
+<ul>
+<li>admission-controller: <code>europe-docker.pkg.dev/gardener-project/releases/gardener/admission-controller:v1.124.0</code></li>
+<li>apiserver: <code>europe-docker.pkg.dev/gardener-project/releases/gardener/apiserver:v1.124.0</code></li>
+<li>controller-manager: <code>europe-docker.pkg.dev/gardener-project/releases/gardener/controller-manager:v1.124.0</code></li>
+<li>gardenadm: <code>europe-docker.pkg.dev/gardener-project/releases/gardener/gardenadm:v1.124.0</code></li>
+<li>gardenlet: <code>europe-docker.pkg.dev/gardener-project/releases/gardener/gardenlet:v1.124.0</code></li>
+<li>node-agent: <code>europe-docker.pkg.dev/gardener-project/releases/gardener/node-agent:v1.124.0</code></li>
+<li>operator: <code>europe-docker.pkg.dev/gardener-project/releases/gardener/operator:v1.124.0</code></li>
+<li>resource-manager: <code>europe-docker.pkg.dev/gardener-project/releases/gardener/resource-manager:v1.124.0</code></li>
+<li>scheduler: <code>europe-docker.pkg.dev/gardener-project/releases/gardener/scheduler:v1.124.0</code></li>
+</ul>
+</div></div></details>
+<details class="details_lb9f alert alert--info details_b_Ee" data-collapsed="true"><summary><b>Update gardener-controlplane to <code>1.124.0</code></b></summary><div><div class="collapsibleContent_i85q">
+<!-- -->
+<h1>[gardener/gardener]</h1>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="️-breaking-changes-2">⚠️ Breaking Changes<a href="#️-breaking-changes-2" class="hash-link" aria-label="Direct link to ⚠️ Breaking Changes" title="Direct link to ⚠️ Breaking Changes">​</a></h2>
+<ul>
+<li><code>[OPERATOR]</code> ⚠️ The <code>BackupBucket</code> API field <code>spec.secretRef</code> has been removed, please migrate your backupbucket manifests to <code>spec.credentialsRef</code>! Gardener API server already has defaulted this field.  by @vpnachev [#12517]</li>
+<li><code>[USER]</code> Starting with Kubernetes v1.34, setting the field <code>.spec.cloudProfileName</code> is be forbidden. The field will be dropped from existing Shoots once. Users are advised to drop this field and specify the cloud profile using the <code>.spec.cloudProfile.name</code> field instead. by @LucaBernstein [#11816]</li>
+</ul>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="-noteworthy-3">📰 Noteworthy<a href="#-noteworthy-3" class="hash-link" aria-label="Direct link to 📰 Noteworthy" title="Direct link to 📰 Noteworthy">​</a></h2>
+<ul>
+<li><code>[OPERATOR]</code> The graduated feature gate <code>NodeAgentAuthorizer</code> has been removed. by @oliver-goetz [#12576]</li>
+<li><code>[USER]</code> Starting with Kubernetes v1.33, there are be API warnings for Shoots that have the <code>.spec.cloudProfileName</code> field set. Users are advised to drop this field and specify the cloud profile using the <code>.spec.cloudProfile.name</code> field instead. by @LucaBernstein [#11816]</li>
+</ul>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="-new-features-5">✨ New Features<a href="#-new-features-5" class="hash-link" aria-label="Direct link to ✨ New Features" title="Direct link to ✨ New Features">​</a></h2>
+<ul>
+<li><code>[USER]</code> IPv4 or dual-stack shoots can now define IPv4 pod, service and node networks overlapping with networks of their seed. This works for both HA and non-HA shoots now. by @domdom82 [#12204]</li>
+<li><code>[USER]</code> The Shoot resource does now support configuring feature gates for the Vertical Pod Autoscaler (VPA). With this feature, end users can enable the <code>InPlacePodVerticalScaling</code> feature gate of VPA. For more details, see <a href="https://github.com/gardener/gardener/blob/v1.124.0/docs/usage/autoscaling/in-place-resource-updates.md" target="_blank" rel="noopener noreferrer">In-Place Updates of Pod Resources</a>. by @vitanovs [#12339]</li>
+<li><code>[OPERATOR]</code> Istio service &amp; workload dashboards are deployed now in Seeds and in Garden runtime cluster to improve observability when L7 load balancing is active. Additionally, the existing Istio dashboards for Seeds are now deployed in the Garden runtime cluster too. by @oliver-goetz [#12509]</li>
+<li><code>[OPERATOR]</code> The Seed and Garden resources do now support configuring feature gates for the Vertical Pod Autoscaler (VPA). With this feature, Gardener operators can enable the <code>InPlacePodVerticalScaling</code> feature gate of VPA. For more details, see <a href="https://github.com/gardener/gardener/blob/v1.124.0/docs/usage/autoscaling/in-place-resource-updates.md" target="_blank" rel="noopener noreferrer">In-Place Updates of Pod Resources</a>. by @vitanovs [#12339]</li>
+<li><code>[OPERATOR]</code> Introduced a feature gate <code>OpenTelemetryCollector</code> that enables the creation of an <code>OpenTelemetry Collector</code> inside the control-plane of every Shoot. This will route logs through the aforementioned <code>Collector</code>, enabling Shoot logs to be stored in any backend. by @rrhubenov [#12428]</li>
+</ul>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="-bug-fixes-7">🐛 Bug Fixes<a href="#-bug-fixes-7" class="hash-link" aria-label="Direct link to 🐛 Bug Fixes" title="Direct link to 🐛 Bug Fixes">​</a></h2>
+<ul>
+<li><code>[OPERATOR]</code> A bug in which <code>gardener-node-agent</code> was not able to in-place update OS versions that specify only <code>MAJOR.MINOR</code> in the <code>os-release</code> but <code>MAJOR.MINOR.PATCH</code> in the cloud profile is now fixed. by @shafeeqes [#12542]</li>
+<li><code>[OPERATOR]</code> A bug has been fixed which caused <code>Pod</code>s from namespaces other than <code>kube-system</code> and labeled with <code>node.gardener.cloud/critical-component=true</code> to be considered by <code>gardener-resource-manager</code>. by @rfranzke [#12557]</li>
+<li><code>[OPERATOR]</code> A bug where WorkloadIdentity tokens used for etcd backups, i.e. in the context of <code>BackupEntry</code> resource, tried to include shoot and project info when the shoot resource is deleted is now fixed.  by @vpnachev [#12516]</li>
+<li><code>[OPERATOR]</code> <code>gardener-resource-manager</code> is now excluded from <code>pod-kube-apiserver-load-balancing</code> webhook when running in garden runtime cluster. by @oliver-goetz [#12526]</li>
+<li><code>[OPERATOR]</code> A bug in shoot reconciliation that caused RewriteEncryptedDataAddLabel to be called for hibernated shoots, leading to a panic in the gardenlet, has been fixed. by @acumino [#12602]</li>
+<li><code>[OPERATOR]</code> A bug in the <code>istio-ingress</code> helm chart which could lead to a missing traffic distribution policy in the internal istio-ingressgateway service on certain Kubernetes versions has been fixed. by @oliver-goetz [#12541]</li>
+<li><code>[OPERATOR]</code> A bug has been fixed which prevented the seed-specific Plutono dashboards from being provided by <code>gardenlet</code> in case its seed cluster was the garden runtime cluster at the same time. by @rfranzke [#12476]</li>
+</ul>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="-others-9">🏃 Others<a href="#-others-9" class="hash-link" aria-label="Direct link to 🏃 Others" title="Direct link to 🏃 Others">​</a></h2>
+<ul>
+<li><code>[DEPENDENCY]</code> The following dependencies have been updated:
+<ul>
+<li><code>envoyproxy/envoy</code> from <code>v1.34.1</code> to <code>v1.34.2</code>. <a href="https://redirect.github.com/envoyproxy/envoy/releases/tag/v1.34.2" target="_blank" rel="noopener noreferrer">Release Notes</a> by @gardener-ci-robot [#12501]</li>
+</ul>
+</li>
+<li><code>[DEPENDENCY]</code> The following dependencies have been updated:
+<ul>
+<li><code>gardener/machine-controller-manager</code> from <code>v0.58.0</code> to <code>v0.59.0</code>. <a href="https://redirect.github.com/gardener/machine-controller-manager/releases/tag/v0.59.0" target="_blank" rel="noopener noreferrer">Release Notes</a></li>
+<li><code>github.com/gardener/machine-controller-manager</code> from <code>v0.58.0</code> to <code>v0.59.0</code>.  by @gardener-ci-robot [#12482]</li>
+</ul>
+</li>
+<li><code>[DEPENDENCY]</code> The following dependencies have been updated:
+<ul>
+<li><code>europe-docker.pkg.dev/gardener-project/releases/3rd/opentelemetry-operator/opentelemetry-operator</code> from <code>v0.127.0</code> to <code>v0.129.1</code>.  by @rrhubenov [#12480]</li>
+</ul>
+</li>
+<li><code>[DEPENDENCY]</code> The following dependencies have been updated:
+<ul>
+<li><code>credativ/vali</code> from <code>v2.2.24</code> to <code>v2.2.25</code>. <a href="https://redirect.github.com/credativ/vali/releases/tag/v2.2.25" target="_blank" rel="noopener noreferrer">Release Notes</a> by @gardener-ci-robot [#12555]</li>
+</ul>
+</li>
+<li><code>[DEPENDENCY]</code> The following dependencies have been updated:
+<ul>
+<li><code>gardener/machine-controller-manager</code> from <code>v0.59.1</code> to <code>v0.59.2</code>. <a href="https://redirect.github.com/gardener/machine-controller-manager/releases/tag/v0.59.2" target="_blank" rel="noopener noreferrer">Release Notes</a></li>
+<li><code>github.com/gardener/machine-controller-manager</code> from <code>v0.59.1</code> to <code>v0.59.2</code>. by @gardener-ci-robot [#12595]</li>
+</ul>
+</li>
+<li><code>[DEPENDENCY]</code> The following dependencies have been updated:
+<ul>
+<li><code>gardener/machine-controller-manager</code> from <code>v0.59.0</code> to <code>v0.59.1</code>. <a href="https://redirect.github.com/gardener/machine-controller-manager/releases/tag/v0.59.1" target="_blank" rel="noopener noreferrer">Release Notes</a></li>
+<li><code>github.com/gardener/machine-controller-manager</code> from <code>v0.59.0</code> to <code>v0.59.1</code>.  by @gardener-ci-robot [#12569]</li>
+</ul>
+</li>
+<li><code>[DEPENDENCY]</code> The following dependencies have been updated:
+<ul>
+<li><code>credativ/plutono</code> from <code>v7.5.39</code> to <code>v7.5.40</code>. <a href="https://redirect.github.com/credativ/plutono/releases/tag/v7.5.40" target="_blank" rel="noopener noreferrer">Release Notes</a> by @gardener-ci-robot [#12554]</li>
+</ul>
+</li>
+<li><code>[DEPENDENCY]</code> The following dependencies have been updated:
+<ul>
+<li><code>gardener/etcd-druid</code> from <code>v0.30.1</code> to <code>v0.31.0</code>. <a href="https://redirect.github.com/gardener/etcd-druid/releases/tag/v0.31.0" target="_blank" rel="noopener noreferrer">Release Notes</a></li>
+<li><code>github.com/gardener/etcd-druid/api</code> from <code>v0.30.1</code> to <code>v0.31.0</code>.  by @rfranzke [#12551]</li>
+</ul>
+</li>
+<li><code>[DEPENDENCY]</code> The following dependencies have been updated:
+<ul>
+<li><code>envoyproxy/envoy</code> from <code>v1.34.2</code> to <code>v1.34.3</code>. <a href="https://redirect.github.com/envoyproxy/envoy/releases/tag/v1.34.3" target="_blank" rel="noopener noreferrer">Release Notes</a> by @gardener-ci-robot [#12574]</li>
+</ul>
+</li>
+<li><code>[OPERATOR]</code> Resource limits on vpn-shoot have been removed. by @domdom82 [#12515]</li>
+<li><code>[OPERATOR]</code> A new validation for Quota <code>.spec.clusterLifetimeDays</code> field is added. The field value must be greater than 0. by @tobschli [#12478]</li>
+<li><code>[OPERATOR]</code> Resource limits on vpn envoy have been removed. by @domdom82 [#12534]
+[github.com/gardener/gardener-discovery-server:v0.7.0]</li>
+</ul>
+<h1>[gardener/gardener-discovery-server]</h1>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="-others-10">🏃 Others<a href="#-others-10" class="hash-link" aria-label="Direct link to 🏃 Others" title="Direct link to 🏃 Others">​</a></h2>
+<ul>
+<li><code>[OPERATOR]</code> The following third-party dependencies have been updated:
+<ul>
+<li>github.com/go-logr/logr v1.4.2 -&gt; v1.4.3</li>
+<li>cel.dev/expr v0.23.1 -&gt; v0.24.0</li>
+<li>github.com/Masterminds/semver/v3 v3.3.1 -&gt; v3.4.0</li>
+<li>github.com/fluent/fluent-operator/v3 v3.3.0 -&gt; v3.4.0</li>
+<li>golang.org/x/sync v0.15.0 -&gt; v0.16.0</li>
+<li>golang.org/x/sys v0.33.0 -&gt; v0.34.0</li>
+<li>golang.org/x/term v0.32.0 -&gt; v0.33.0</li>
+<li>golang.org/x/text v0.26.0 -&gt; v0.27.0</li>
+<li>helm.sh/helm/v3 v3.18.3 -&gt; v3.18.4</li>
+<li>sigs.k8s.io/yaml v1.4.0 -&gt; v1.5.0 by @vpnachev [#126]</li>
+</ul>
+</li>
+<li><code>[OPERATOR]</code> <code>gardener-discovery-server</code> is now built using go 1.24.5. by @dependabot[bot] [#125]</li>
+<li><code>[DEPENDENCY]</code> The following third-party dependencies have been updated:
+<ul>
+<li>github.com/gardener/gardener v1.121.2 -&gt; v1.122.1</li>
+<li>k8s.io/api v0.32.5 -&gt; v0.33.2</li>
+<li>k8s.io/apimachinery v0.32.5 -&gt; v0.33.2</li>
+<li>k8s.io/client-go v0.32.5 -&gt; v0.33.2</li>
+<li>k8s.io/component-base v0.32.5 -&gt; v0.33.2</li>
+<li>sigs.k8s.io/controller-runtime v0.20.4 -&gt; v0.21.0</li>
+<li>sigs.k8s.io/controller-tools v0.17.3 -&gt; v0.18.0 by @dependabot[bot] [#124]</li>
+</ul>
+</li>
+</ul>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="container-oci-images-12">Container (OCI) Images<a href="#container-oci-images-12" class="hash-link" aria-label="Direct link to Container (OCI) Images" title="Direct link to Container (OCI) Images">​</a></h2>
+<ul>
+<li>gardener-discovery-server: <code>europe-docker.pkg.dev/gardener-project/releases/gardener/gardener-discovery-server:v0.7.0</code></li>
+</ul>
+<p>[github.com/gardener/etcd-druid:v0.31.0]</p>
+<h1>[gardener/etcd-druid]</h1>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="️-breaking-changes-3">⚠️ Breaking Changes<a href="#️-breaking-changes-3" class="hash-link" aria-label="Direct link to ⚠️ Breaking Changes" title="Direct link to ⚠️ Breaking Changes">​</a></h2>
+<ul>
+<li><code>[OPERATOR]</code> The existing CLI flag reconciler-service-account was optional. Its value is a fully qualified name of the service account used by etcd-druid in the format &quot;system:serviceaccount:<namespace>:<service-account-name>&quot;.  This has now been made required. If you are continuing to use the deprecated CLI fags then you must specify it. Alternatively if you have switched to using the new OperatorConfiguration then you should set &quot;OperatorConfiguration.Webhooks.EtcdComponentProtection.ServiceAccountInfo&quot; instead. by @unmarshall [#1090]</service-account-name></namespace></li>
+</ul>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="-new-features-6">✨ New Features<a href="#-new-features-6" class="hash-link" aria-label="Direct link to ✨ New Features" title="Direct link to ✨ New Features">​</a></h2>
+<ul>
+<li><code>[DEVELOPER]</code> The new <code>.spec.etcd.wrapperPort</code> field allows to change the server port of <code>etcd-wrapper</code>. by @rfranzke [#1086]</li>
+<li><code>[OPERATOR]</code> Introduced OperatorConfiguration as a replacement to the existing etcd-druid CLI flags. The configuration gets mounted as a ConfigMap onto the etcd-druid Deployment. The existing CLI flags have been marked as deprecated. Their support will be removed after a few releases of etcd-druid. by @unmarshall [#1090]</li>
+</ul>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="-bug-fixes-8">🐛 Bug Fixes<a href="#-bug-fixes-8" class="hash-link" aria-label="Direct link to 🐛 Bug Fixes" title="Direct link to 🐛 Bug Fixes">​</a></h2>
+<ul>
+<li><code>[DEVELOPER]</code> Fix incorrectly named config field in skaffold profile for e2e tests by @anveshreddy18 [#1134]</li>
+<li><code>[DEVELOPER]</code> An issue has been fixed which caused <code>etcd</code> pods not to start when port different from the default values were used. by @rfranzke [#1086]</li>
+<li><code>[OPERATOR]</code> Fix a bug which caused etcd-druid to fail at start up, due to a group mismatch for <code>OperatorConfiguration</code> in its group registration and templates. by @renormalize [#1118]</li>
+<li><code>[USER]</code> Fix a volume mount issue of provider <code>Local</code> for etcd backups by @anveshreddy18 [#1102]</li>
+</ul>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="-others-11">🏃 Others<a href="#-others-11" class="hash-link" aria-label="Direct link to 🏃 Others" title="Direct link to 🏃 Others">​</a></h2>
+<ul>
+<li><code>[USER]</code> Secret controller now manages finalizer on referenced backup-restore TLS secrets. by @shreyas-s-rao [#1125]</li>
+<li><code>[OPERATOR]</code> replace usage of fake client library in tests with the fake client builder in test/utils directory by @Shreyas-s14 [#1120]</li>
+<li><code>[OPERATOR]</code> Fixes etcd-druid service template yaml to properly support operator configuration values defined in values.yaml by @unmarshall [#1132]</li>
+<li><code>[DEVELOPER]</code> Remove the functionality that deletes old ConfigMaps from the cluster by @anveshreddy18 [#1103]</li>
+</ul>
+<h1>[gardener/etcd-backup-restore]</h1>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="-new-features-7">✨ New Features<a href="#-new-features-7" class="hash-link" aria-label="Direct link to ✨ New Features" title="Direct link to ✨ New Features">​</a></h2>
+<ul>
+<li><code>[DEVELOPER]</code> AWS SDK has been upgraded to v2. by @vpnachev [gardener/etcd-backup-restore#874]</li>
+</ul>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="-others-12">🏃 Others<a href="#-others-12" class="hash-link" aria-label="Direct link to 🏃 Others" title="Direct link to 🏃 Others">​</a></h2>
+<ul>
+<li><code>[DEVELOPER]</code> Update golang version to <code>1.24.4</code>. by @shreyas-s-rao [gardener/etcd-backup-restore#886]</li>
+</ul>
+<h1>[gardener/etcd-wrapper]</h1>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="-others-13">🏃 Others<a href="#-others-13" class="hash-link" aria-label="Direct link to 🏃 Others" title="Direct link to 🏃 Others">​</a></h2>
+<ul>
+<li><code>[DEVELOPER]</code> Update golang images to <code>1.24.4</code>. by @shreyas-s-rao [gardener/etcd-wrapper#58]</li>
+</ul>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="helm-charts-5">Helm Charts<a href="#helm-charts-5" class="hash-link" aria-label="Direct link to Helm Charts" title="Direct link to Helm Charts">​</a></h2>
+<ul>
+<li>etcd-druid: <code>europe-docker.pkg.dev/gardener-project/releases/charts/gardener/etcd-druid/etcd-druid:v0.31.0</code></li>
+</ul>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="container-oci-images-13">Container (OCI) Images<a href="#container-oci-images-13" class="hash-link" aria-label="Direct link to Container (OCI) Images" title="Direct link to Container (OCI) Images">​</a></h2>
+<ul>
+<li>etcd-druid: <code>europe-docker.pkg.dev/gardener-project/releases/gardener/etcd-druid:v0.31.0</code></li>
+</ul>
+<p>[github.com/gardener/etcd-wrapper:v0.5.2]</p>
+<h1>[gardener/etcd-wrapper]</h1>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="-others-14">🏃 Others<a href="#-others-14" class="hash-link" aria-label="Direct link to 🏃 Others" title="Direct link to 🏃 Others">​</a></h2>
+<ul>
+<li><code>[DEVELOPER]</code> Update golang images to <code>1.24.4</code>. by @shreyas-s-rao [#58]</li>
+</ul>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="container-oci-images-14">Container (OCI) Images<a href="#container-oci-images-14" class="hash-link" aria-label="Direct link to Container (OCI) Images" title="Direct link to Container (OCI) Images">​</a></h2>
+<ul>
+<li>etcd-wrapper: <code>europe-docker.pkg.dev/gardener-project/releases/gardener/etcd-wrapper:v0.5.2</code></li>
+</ul>
+<p>[github.com/gardener/etcd-backup-restore:v0.37.0]</p>
+<h1>[gardener/etcd-backup-restore]</h1>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="-new-features-8">✨ New Features<a href="#-new-features-8" class="hash-link" aria-label="Direct link to ✨ New Features" title="Direct link to ✨ New Features">​</a></h2>
+<ul>
+<li><code>[DEVELOPER]</code> AWS SDK has been upgraded to v2. by @vpnachev [#874]</li>
+</ul>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="-others-15">🏃 Others<a href="#-others-15" class="hash-link" aria-label="Direct link to 🏃 Others" title="Direct link to 🏃 Others">​</a></h2>
+<ul>
+<li><code>[DEVELOPER]</code> Update golang version to <code>1.24.4</code>. by @shreyas-s-rao [#886]</li>
+</ul>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="container-oci-images-15">Container (OCI) Images<a href="#container-oci-images-15" class="hash-link" aria-label="Direct link to Container (OCI) Images" title="Direct link to Container (OCI) Images">​</a></h2>
+<ul>
+<li>etcdbrctl: <code>europe-docker.pkg.dev/gardener-project/releases/gardener/etcdbrctl:v0.37.0</code></li>
+</ul>
+<p>[github.com/gardener/machine-controller-manager:v0.59.0]</p>
+<h1>[gardener/machine-controller-manager]</h1>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="-new-features-9">✨ New Features<a href="#-new-features-9" class="hash-link" aria-label="Direct link to ✨ New Features" title="Direct link to ✨ New Features">​</a></h2>
+<ul>
+<li><code>[OPERATOR]</code> machine-controller-manager can manage machines without a target cluster by specifying <code>--target-kubeconfig=none</code>. See the <a href="https://github.com/gardener/machine-controller-manager/blob/master/docs/FAQ.md#how-to-run-mcm-in-different-cluster-setups" target="_blank" rel="noopener noreferrer">documentation</a> for more details. by @timebertt [#1004]</li>
+</ul>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="-bug-fixes-9">🐛 Bug Fixes<a href="#-bug-fixes-9" class="hash-link" aria-label="Direct link to 🐛 Bug Fixes" title="Direct link to 🐛 Bug Fixes">​</a></h2>
+<ul>
+<li><code>[OPERATOR]</code> Fix a bug where MCM does not check if a pod has already been evicted before reattempting eviction blindly by @aaronfern [#979]</li>
+<li><code>[OPERATOR]</code> Fixed a bug in the MachineSet controller where the machine status was set to <code>Terminating</code> even if attempt to delete the machine object failed. by @takoverflow [#995]</li>
+</ul>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="-others-16">🏃 Others<a href="#-others-16" class="hash-link" aria-label="Direct link to 🏃 Others" title="Direct link to 🏃 Others">​</a></h2>
+<ul>
+<li><code>[OPERATOR]</code> add new label <code>node_name</code> to the <code>mcm_machine_info</code> metric by @aaronfern [#1000]</li>
+<li><code>[OPERATOR]</code> machine-controller-manager base image is updated to <code>gcr.io/distroless/static-debian12:nonroot</code>. by @aaronfern [#991]</li>
+</ul>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="container-oci-images-16">Container (OCI) Images<a href="#container-oci-images-16" class="hash-link" aria-label="Direct link to Container (OCI) Images" title="Direct link to Container (OCI) Images">​</a></h2>
+<ul>
+<li>machine-controller-manager: <code>europe-docker.pkg.dev/gardener-project/releases/gardener/machine-controller-manager:v0.59.0</code></li>
+</ul>
+<p>[github.com/gardener/machine-controller-manager:v0.59.1]</p>
+<h1>[gardener/machine-controller-manager]</h1>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="-others-17">🏃 Others<a href="#-others-17" class="hash-link" aria-label="Direct link to 🏃 Others" title="Direct link to 🏃 Others">​</a></h2>
+<ul>
+<li><code>[OPERATOR]</code> <code>node.gardener.cloud/critical-components-not-ready</code> taint is added to the node after the successful in-place update to prevent scheduling any workload before critical component pods are ready. by @acumino [#1017]</li>
+</ul>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="container-oci-images-17">Container (OCI) Images<a href="#container-oci-images-17" class="hash-link" aria-label="Direct link to Container (OCI) Images" title="Direct link to Container (OCI) Images">​</a></h2>
+<ul>
+<li>machine-controller-manager: <code>europe-docker.pkg.dev/gardener-project/releases/gardener/machine-controller-manager:v0.59.1</code></li>
+</ul>
+<p>[github.com/gardener/machine-controller-manager:v0.59.2]</p>
+<h1>[gardener/machine-controller-manager]</h1>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="-bug-fixes-10">🐛 Bug Fixes<a href="#-bug-fixes-10" class="hash-link" aria-label="Direct link to 🐛 Bug Fixes" title="Direct link to 🐛 Bug Fixes">​</a></h2>
+<ul>
+<li><code>[OPERATOR]</code> Fixed a bug where machines in the <code>InPlaceUpdating</code> phase were incorrectly transferred to the new machine set during inplace updates. This caused the machine controller to miss updating the phase to <code>InPlaceUpdateSuccessful</code>, resulting in machines getting stuck or marked as <code>InPlaceUpdateFailed</code>. by @acumino [#1020]
+[github.com/gardener/vpn2:0.39.0]</li>
+</ul>
+<h1>[gardener/vpn2]</h1>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="-noteworthy-4">📰 Noteworthy<a href="#-noteworthy-4" class="hash-link" aria-label="Direct link to 📰 Noteworthy" title="Direct link to 📰 Noteworthy">​</a></h2>
+<ul>
+<li><code>[OPERATOR]</code> Overlapping CIDR ranges between seed and shoot IPv4 networks for HA VPN deployments are now possible. by @domdom82 [#151]</li>
+</ul>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="container-oci-images-18">Container (OCI) Images<a href="#container-oci-images-18" class="hash-link" aria-label="Direct link to Container (OCI) Images" title="Direct link to Container (OCI) Images">​</a></h2>
+<ul>
+<li>vpn-client: <code>europe-docker.pkg.dev/gardener-project/releases/gardener/vpn-client:0.39.0</code></li>
+<li>vpn-server: <code>europe-docker.pkg.dev/gardener-project/releases/gardener/vpn-server:0.39.0</code></li>
+</ul>
+<p>[github.com/gardener/vpn2:0.40.0]</p>
+<h1>[gardener/vpn2]</h1>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="-noteworthy-5">📰 Noteworthy<a href="#-noteworthy-5" class="hash-link" aria-label="Direct link to 📰 Noteworthy" title="Direct link to 📰 Noteworthy">​</a></h2>
+<ul>
+<li><code>[OPERATOR]</code> Double-NAT IP mapping will only be done if there is an actual overlap of shoot vs. seed IPv4 network ranges for HA VPN deployments. Non-HA VPN configurations are unchanged. by @domdom82 [#154]</li>
+</ul>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="container-oci-images-19">Container (OCI) Images<a href="#container-oci-images-19" class="hash-link" aria-label="Direct link to Container (OCI) Images" title="Direct link to Container (OCI) Images">​</a></h2>
+<ul>
+<li>vpn-client: <code>europe-docker.pkg.dev/gardener-project/releases/gardener/vpn-client:0.40.0</code></li>
+<li>vpn-server: <code>europe-docker.pkg.dev/gardener-project/releases/gardener/vpn-server:0.40.0</code></li>
+</ul>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="helm-charts-6">Helm Charts<a href="#helm-charts-6" class="hash-link" aria-label="Direct link to Helm Charts" title="Direct link to Helm Charts">​</a></h2>
+<ul>
+<li>controlplane: <code>europe-docker.pkg.dev/gardener-project/releases/charts/gardener/controlplane:v1.124.0</code></li>
+<li>gardenlet: <code>europe-docker.pkg.dev/gardener-project/releases/charts/gardener/gardenlet:v1.124.0</code></li>
+<li>operator: <code>europe-docker.pkg.dev/gardener-project/releases/charts/gardener/operator:v1.124.0</code></li>
+<li>resource-manager: <code>europe-docker.pkg.dev/gardener-project/releases/charts/gardener/resource-manager:v1.124.0</code></li>
+</ul>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="container-oci-images-20">Container (OCI) Images<a href="#container-oci-images-20" class="hash-link" aria-label="Direct link to Container (OCI) Images" title="Direct link to Container (OCI) Images">​</a></h2>
+<ul>
+<li>admission-controller: <code>europe-docker.pkg.dev/gardener-project/releases/gardener/admission-controller:v1.124.0</code></li>
+<li>apiserver: <code>europe-docker.pkg.dev/gardener-project/releases/gardener/apiserver:v1.124.0</code></li>
+<li>controller-manager: <code>europe-docker.pkg.dev/gardener-project/releases/gardener/controller-manager:v1.124.0</code></li>
+<li>gardenadm: <code>europe-docker.pkg.dev/gardener-project/releases/gardener/gardenadm:v1.124.0</code></li>
+<li>gardenlet: <code>europe-docker.pkg.dev/gardener-project/releases/gardener/gardenlet:v1.124.0</code></li>
+<li>node-agent: <code>europe-docker.pkg.dev/gardener-project/releases/gardener/node-agent:v1.124.0</code></li>
+<li>operator: <code>europe-docker.pkg.dev/gardener-project/releases/gardener/operator:v1.124.0</code></li>
+<li>resource-manager: <code>europe-docker.pkg.dev/gardener-project/releases/gardener/resource-manager:v1.124.0</code></li>
+<li>scheduler: <code>europe-docker.pkg.dev/gardener-project/releases/gardener/scheduler:v1.124.0</code></li>
+</ul>
+</div></div></details>
+<details class="details_lb9f alert alert--info details_b_Ee" data-collapsed="true"><summary><b>Update gardenlet to <code>1.124.0</code></b></summary><div><div class="collapsibleContent_i85q">
+<!-- -->
+<h1>[gardener/gardener]</h1>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="️-breaking-changes-4">⚠️ Breaking Changes<a href="#️-breaking-changes-4" class="hash-link" aria-label="Direct link to ⚠️ Breaking Changes" title="Direct link to ⚠️ Breaking Changes">​</a></h2>
+<ul>
+<li><code>[OPERATOR]</code> ⚠️ The <code>BackupBucket</code> API field <code>spec.secretRef</code> has been removed, please migrate your backupbucket manifests to <code>spec.credentialsRef</code>! Gardener API server already has defaulted this field.  by @vpnachev [#12517]</li>
+<li><code>[USER]</code> Starting with Kubernetes v1.34, setting the field <code>.spec.cloudProfileName</code> is be forbidden. The field will be dropped from existing Shoots once. Users are advised to drop this field and specify the cloud profile using the <code>.spec.cloudProfile.name</code> field instead. by @LucaBernstein [#11816]</li>
+</ul>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="-noteworthy-6">📰 Noteworthy<a href="#-noteworthy-6" class="hash-link" aria-label="Direct link to 📰 Noteworthy" title="Direct link to 📰 Noteworthy">​</a></h2>
+<ul>
+<li><code>[OPERATOR]</code> The graduated feature gate <code>NodeAgentAuthorizer</code> has been removed. by @oliver-goetz [#12576]</li>
+<li><code>[USER]</code> Starting with Kubernetes v1.33, there are be API warnings for Shoots that have the <code>.spec.cloudProfileName</code> field set. Users are advised to drop this field and specify the cloud profile using the <code>.spec.cloudProfile.name</code> field instead. by @LucaBernstein [#11816]</li>
+</ul>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="-new-features-10">✨ New Features<a href="#-new-features-10" class="hash-link" aria-label="Direct link to ✨ New Features" title="Direct link to ✨ New Features">​</a></h2>
+<ul>
+<li><code>[USER]</code> IPv4 or dual-stack shoots can now define IPv4 pod, service and node networks overlapping with networks of their seed. This works for both HA and non-HA shoots now. by @domdom82 [#12204]</li>
+<li><code>[USER]</code> The Shoot resource does now support configuring feature gates for the Vertical Pod Autoscaler (VPA). With this feature, end users can enable the <code>InPlacePodVerticalScaling</code> feature gate of VPA. For more details, see <a href="https://github.com/gardener/gardener/blob/v1.124.0/docs/usage/autoscaling/in-place-resource-updates.md" target="_blank" rel="noopener noreferrer">In-Place Updates of Pod Resources</a>. by @vitanovs [#12339]</li>
+<li><code>[OPERATOR]</code> Istio service &amp; workload dashboards are deployed now in Seeds and in Garden runtime cluster to improve observability when L7 load balancing is active. Additionally, the existing Istio dashboards for Seeds are now deployed in the Garden runtime cluster too. by @oliver-goetz [#12509]</li>
+<li><code>[OPERATOR]</code> The Seed and Garden resources do now support configuring feature gates for the Vertical Pod Autoscaler (VPA). With this feature, Gardener operators can enable the <code>InPlacePodVerticalScaling</code> feature gate of VPA. For more details, see <a href="https://github.com/gardener/gardener/blob/v1.124.0/docs/usage/autoscaling/in-place-resource-updates.md" target="_blank" rel="noopener noreferrer">In-Place Updates of Pod Resources</a>. by @vitanovs [#12339]</li>
+<li><code>[OPERATOR]</code> Introduced a feature gate <code>OpenTelemetryCollector</code> that enables the creation of an <code>OpenTelemetry Collector</code> inside the control-plane of every Shoot. This will route logs through the aforementioned <code>Collector</code>, enabling Shoot logs to be stored in any backend. by @rrhubenov [#12428]</li>
+</ul>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="-bug-fixes-11">🐛 Bug Fixes<a href="#-bug-fixes-11" class="hash-link" aria-label="Direct link to 🐛 Bug Fixes" title="Direct link to 🐛 Bug Fixes">​</a></h2>
+<ul>
+<li><code>[OPERATOR]</code> A bug in which <code>gardener-node-agent</code> was not able to in-place update OS versions that specify only <code>MAJOR.MINOR</code> in the <code>os-release</code> but <code>MAJOR.MINOR.PATCH</code> in the cloud profile is now fixed. by @shafeeqes [#12542]</li>
+<li><code>[OPERATOR]</code> A bug has been fixed which caused <code>Pod</code>s from namespaces other than <code>kube-system</code> and labeled with <code>node.gardener.cloud/critical-component=true</code> to be considered by <code>gardener-resource-manager</code>. by @rfranzke [#12557]</li>
+<li><code>[OPERATOR]</code> A bug where WorkloadIdentity tokens used for etcd backups, i.e. in the context of <code>BackupEntry</code> resource, tried to include shoot and project info when the shoot resource is deleted is now fixed.  by @vpnachev [#12516]</li>
+<li><code>[OPERATOR]</code> <code>gardener-resource-manager</code> is now excluded from <code>pod-kube-apiserver-load-balancing</code> webhook when running in garden runtime cluster. by @oliver-goetz [#12526]</li>
+<li><code>[OPERATOR]</code> A bug in shoot reconciliation that caused RewriteEncryptedDataAddLabel to be called for hibernated shoots, leading to a panic in the gardenlet, has been fixed. by @acumino [#12602]</li>
+<li><code>[OPERATOR]</code> A bug in the <code>istio-ingress</code> helm chart which could lead to a missing traffic distribution policy in the internal istio-ingressgateway service on certain Kubernetes versions has been fixed. by @oliver-goetz [#12541]</li>
+<li><code>[OPERATOR]</code> A bug has been fixed which prevented the seed-specific Plutono dashboards from being provided by <code>gardenlet</code> in case its seed cluster was the garden runtime cluster at the same time. by @rfranzke [#12476]</li>
+</ul>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="-others-18">🏃 Others<a href="#-others-18" class="hash-link" aria-label="Direct link to 🏃 Others" title="Direct link to 🏃 Others">​</a></h2>
+<ul>
+<li><code>[DEPENDENCY]</code> The following dependencies have been updated:
+<ul>
+<li><code>envoyproxy/envoy</code> from <code>v1.34.1</code> to <code>v1.34.2</code>. <a href="https://redirect.github.com/envoyproxy/envoy/releases/tag/v1.34.2" target="_blank" rel="noopener noreferrer">Release Notes</a> by @gardener-ci-robot [#12501]</li>
+</ul>
+</li>
+<li><code>[DEPENDENCY]</code> The following dependencies have been updated:
+<ul>
+<li><code>gardener/machine-controller-manager</code> from <code>v0.58.0</code> to <code>v0.59.0</code>. <a href="https://redirect.github.com/gardener/machine-controller-manager/releases/tag/v0.59.0" target="_blank" rel="noopener noreferrer">Release Notes</a></li>
+<li><code>github.com/gardener/machine-controller-manager</code> from <code>v0.58.0</code> to <code>v0.59.0</code>.  by @gardener-ci-robot [#12482]</li>
+</ul>
+</li>
+<li><code>[DEPENDENCY]</code> The following dependencies have been updated:
+<ul>
+<li><code>europe-docker.pkg.dev/gardener-project/releases/3rd/opentelemetry-operator/opentelemetry-operator</code> from <code>v0.127.0</code> to <code>v0.129.1</code>.  by @rrhubenov [#12480]</li>
+</ul>
+</li>
+<li><code>[DEPENDENCY]</code> The following dependencies have been updated:
+<ul>
+<li><code>credativ/vali</code> from <code>v2.2.24</code> to <code>v2.2.25</code>. <a href="https://redirect.github.com/credativ/vali/releases/tag/v2.2.25" target="_blank" rel="noopener noreferrer">Release Notes</a> by @gardener-ci-robot [#12555]</li>
+</ul>
+</li>
+<li><code>[DEPENDENCY]</code> The following dependencies have been updated:
+<ul>
+<li><code>gardener/machine-controller-manager</code> from <code>v0.59.1</code> to <code>v0.59.2</code>. <a href="https://redirect.github.com/gardener/machine-controller-manager/releases/tag/v0.59.2" target="_blank" rel="noopener noreferrer">Release Notes</a></li>
+<li><code>github.com/gardener/machine-controller-manager</code> from <code>v0.59.1</code> to <code>v0.59.2</code>. by @gardener-ci-robot [#12595]</li>
+</ul>
+</li>
+<li><code>[DEPENDENCY]</code> The following dependencies have been updated:
+<ul>
+<li><code>gardener/machine-controller-manager</code> from <code>v0.59.0</code> to <code>v0.59.1</code>. <a href="https://redirect.github.com/gardener/machine-controller-manager/releases/tag/v0.59.1" target="_blank" rel="noopener noreferrer">Release Notes</a></li>
+<li><code>github.com/gardener/machine-controller-manager</code> from <code>v0.59.0</code> to <code>v0.59.1</code>.  by @gardener-ci-robot [#12569]</li>
+</ul>
+</li>
+<li><code>[DEPENDENCY]</code> The following dependencies have been updated:
+<ul>
+<li><code>credativ/plutono</code> from <code>v7.5.39</code> to <code>v7.5.40</code>. <a href="https://redirect.github.com/credativ/plutono/releases/tag/v7.5.40" target="_blank" rel="noopener noreferrer">Release Notes</a> by @gardener-ci-robot [#12554]</li>
+</ul>
+</li>
+<li><code>[DEPENDENCY]</code> The following dependencies have been updated:
+<ul>
+<li><code>gardener/etcd-druid</code> from <code>v0.30.1</code> to <code>v0.31.0</code>. <a href="https://redirect.github.com/gardener/etcd-druid/releases/tag/v0.31.0" target="_blank" rel="noopener noreferrer">Release Notes</a></li>
+<li><code>github.com/gardener/etcd-druid/api</code> from <code>v0.30.1</code> to <code>v0.31.0</code>.  by @rfranzke [#12551]</li>
+</ul>
+</li>
+<li><code>[DEPENDENCY]</code> The following dependencies have been updated:
+<ul>
+<li><code>envoyproxy/envoy</code> from <code>v1.34.2</code> to <code>v1.34.3</code>. <a href="https://redirect.github.com/envoyproxy/envoy/releases/tag/v1.34.3" target="_blank" rel="noopener noreferrer">Release Notes</a> by @gardener-ci-robot [#12574]</li>
+</ul>
+</li>
+<li><code>[OPERATOR]</code> Resource limits on vpn-shoot have been removed. by @domdom82 [#12515]</li>
+<li><code>[OPERATOR]</code> A new validation for Quota <code>.spec.clusterLifetimeDays</code> field is added. The field value must be greater than 0. by @tobschli [#12478]</li>
+<li><code>[OPERATOR]</code> Resource limits on vpn envoy have been removed. by @domdom82 [#12534]
+[github.com/gardener/gardener-discovery-server:v0.7.0]</li>
+</ul>
+<h1>[gardener/gardener-discovery-server]</h1>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="-others-19">🏃 Others<a href="#-others-19" class="hash-link" aria-label="Direct link to 🏃 Others" title="Direct link to 🏃 Others">​</a></h2>
+<ul>
+<li><code>[OPERATOR]</code> The following third-party dependencies have been updated:
+<ul>
+<li>github.com/go-logr/logr v1.4.2 -&gt; v1.4.3</li>
+<li>cel.dev/expr v0.23.1 -&gt; v0.24.0</li>
+<li>github.com/Masterminds/semver/v3 v3.3.1 -&gt; v3.4.0</li>
+<li>github.com/fluent/fluent-operator/v3 v3.3.0 -&gt; v3.4.0</li>
+<li>golang.org/x/sync v0.15.0 -&gt; v0.16.0</li>
+<li>golang.org/x/sys v0.33.0 -&gt; v0.34.0</li>
+<li>golang.org/x/term v0.32.0 -&gt; v0.33.0</li>
+<li>golang.org/x/text v0.26.0 -&gt; v0.27.0</li>
+<li>helm.sh/helm/v3 v3.18.3 -&gt; v3.18.4</li>
+<li>sigs.k8s.io/yaml v1.4.0 -&gt; v1.5.0 by @vpnachev [#126]</li>
+</ul>
+</li>
+<li><code>[OPERATOR]</code> <code>gardener-discovery-server</code> is now built using go 1.24.5. by @dependabot[bot] [#125]</li>
+<li><code>[DEPENDENCY]</code> The following third-party dependencies have been updated:
+<ul>
+<li>github.com/gardener/gardener v1.121.2 -&gt; v1.122.1</li>
+<li>k8s.io/api v0.32.5 -&gt; v0.33.2</li>
+<li>k8s.io/apimachinery v0.32.5 -&gt; v0.33.2</li>
+<li>k8s.io/client-go v0.32.5 -&gt; v0.33.2</li>
+<li>k8s.io/component-base v0.32.5 -&gt; v0.33.2</li>
+<li>sigs.k8s.io/controller-runtime v0.20.4 -&gt; v0.21.0</li>
+<li>sigs.k8s.io/controller-tools v0.17.3 -&gt; v0.18.0 by @dependabot[bot] [#124]</li>
+</ul>
+</li>
+</ul>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="container-oci-images-21">Container (OCI) Images<a href="#container-oci-images-21" class="hash-link" aria-label="Direct link to Container (OCI) Images" title="Direct link to Container (OCI) Images">​</a></h2>
+<ul>
+<li>gardener-discovery-server: <code>europe-docker.pkg.dev/gardener-project/releases/gardener/gardener-discovery-server:v0.7.0</code></li>
+</ul>
+<p>[github.com/gardener/etcd-druid:v0.31.0]</p>
+<h1>[gardener/etcd-druid]</h1>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="️-breaking-changes-5">⚠️ Breaking Changes<a href="#️-breaking-changes-5" class="hash-link" aria-label="Direct link to ⚠️ Breaking Changes" title="Direct link to ⚠️ Breaking Changes">​</a></h2>
+<ul>
+<li><code>[OPERATOR]</code> The existing CLI flag reconciler-service-account was optional. Its value is a fully qualified name of the service account used by etcd-druid in the format &quot;system:serviceaccount:<namespace>:<service-account-name>&quot;.  This has now been made required. If you are continuing to use the deprecated CLI fags then you must specify it. Alternatively if you have switched to using the new OperatorConfiguration then you should set &quot;OperatorConfiguration.Webhooks.EtcdComponentProtection.ServiceAccountInfo&quot; instead. by @unmarshall [#1090]</service-account-name></namespace></li>
+</ul>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="-new-features-11">✨ New Features<a href="#-new-features-11" class="hash-link" aria-label="Direct link to ✨ New Features" title="Direct link to ✨ New Features">​</a></h2>
+<ul>
+<li><code>[DEVELOPER]</code> The new <code>.spec.etcd.wrapperPort</code> field allows to change the server port of <code>etcd-wrapper</code>. by @rfranzke [#1086]</li>
+<li><code>[OPERATOR]</code> Introduced OperatorConfiguration as a replacement to the existing etcd-druid CLI flags. The configuration gets mounted as a ConfigMap onto the etcd-druid Deployment. The existing CLI flags have been marked as deprecated. Their support will be removed after a few releases of etcd-druid. by @unmarshall [#1090]</li>
+</ul>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="-bug-fixes-12">🐛 Bug Fixes<a href="#-bug-fixes-12" class="hash-link" aria-label="Direct link to 🐛 Bug Fixes" title="Direct link to 🐛 Bug Fixes">​</a></h2>
+<ul>
+<li><code>[DEVELOPER]</code> Fix incorrectly named config field in skaffold profile for e2e tests by @anveshreddy18 [#1134]</li>
+<li><code>[DEVELOPER]</code> An issue has been fixed which caused <code>etcd</code> pods not to start when port different from the default values were used. by @rfranzke [#1086]</li>
+<li><code>[OPERATOR]</code> Fix a bug which caused etcd-druid to fail at start up, due to a group mismatch for <code>OperatorConfiguration</code> in its group registration and templates. by @renormalize [#1118]</li>
+<li><code>[USER]</code> Fix a volume mount issue of provider <code>Local</code> for etcd backups by @anveshreddy18 [#1102]</li>
+</ul>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="-others-20">🏃 Others<a href="#-others-20" class="hash-link" aria-label="Direct link to 🏃 Others" title="Direct link to 🏃 Others">​</a></h2>
+<ul>
+<li><code>[USER]</code> Secret controller now manages finalizer on referenced backup-restore TLS secrets. by @shreyas-s-rao [#1125]</li>
+<li><code>[OPERATOR]</code> replace usage of fake client library in tests with the fake client builder in test/utils directory by @Shreyas-s14 [#1120]</li>
+<li><code>[OPERATOR]</code> Fixes etcd-druid service template yaml to properly support operator configuration values defined in values.yaml by @unmarshall [#1132]</li>
+<li><code>[DEVELOPER]</code> Remove the functionality that deletes old ConfigMaps from the cluster by @anveshreddy18 [#1103]</li>
+</ul>
+<h1>[gardener/etcd-backup-restore]</h1>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="-new-features-12">✨ New Features<a href="#-new-features-12" class="hash-link" aria-label="Direct link to ✨ New Features" title="Direct link to ✨ New Features">​</a></h2>
+<ul>
+<li><code>[DEVELOPER]</code> AWS SDK has been upgraded to v2. by @vpnachev [gardener/etcd-backup-restore#874]</li>
+</ul>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="-others-21">🏃 Others<a href="#-others-21" class="hash-link" aria-label="Direct link to 🏃 Others" title="Direct link to 🏃 Others">​</a></h2>
+<ul>
+<li><code>[DEVELOPER]</code> Update golang version to <code>1.24.4</code>. by @shreyas-s-rao [gardener/etcd-backup-restore#886]</li>
+</ul>
+<h1>[gardener/etcd-wrapper]</h1>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="-others-22">🏃 Others<a href="#-others-22" class="hash-link" aria-label="Direct link to 🏃 Others" title="Direct link to 🏃 Others">​</a></h2>
+<ul>
+<li><code>[DEVELOPER]</code> Update golang images to <code>1.24.4</code>. by @shreyas-s-rao [gardener/etcd-wrapper#58]</li>
+</ul>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="helm-charts-7">Helm Charts<a href="#helm-charts-7" class="hash-link" aria-label="Direct link to Helm Charts" title="Direct link to Helm Charts">​</a></h2>
+<ul>
+<li>etcd-druid: <code>europe-docker.pkg.dev/gardener-project/releases/charts/gardener/etcd-druid/etcd-druid:v0.31.0</code></li>
+</ul>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="container-oci-images-22">Container (OCI) Images<a href="#container-oci-images-22" class="hash-link" aria-label="Direct link to Container (OCI) Images" title="Direct link to Container (OCI) Images">​</a></h2>
+<ul>
+<li>etcd-druid: <code>europe-docker.pkg.dev/gardener-project/releases/gardener/etcd-druid:v0.31.0</code></li>
+</ul>
+<p>[github.com/gardener/etcd-wrapper:v0.5.2]</p>
+<h1>[gardener/etcd-wrapper]</h1>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="-others-23">🏃 Others<a href="#-others-23" class="hash-link" aria-label="Direct link to 🏃 Others" title="Direct link to 🏃 Others">​</a></h2>
+<ul>
+<li><code>[DEVELOPER]</code> Update golang images to <code>1.24.4</code>. by @shreyas-s-rao [#58]</li>
+</ul>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="container-oci-images-23">Container (OCI) Images<a href="#container-oci-images-23" class="hash-link" aria-label="Direct link to Container (OCI) Images" title="Direct link to Container (OCI) Images">​</a></h2>
+<ul>
+<li>etcd-wrapper: <code>europe-docker.pkg.dev/gardener-project/releases/gardener/etcd-wrapper:v0.5.2</code></li>
+</ul>
+<p>[github.com/gardener/etcd-backup-restore:v0.37.0]</p>
+<h1>[gardener/etcd-backup-restore]</h1>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="-new-features-13">✨ New Features<a href="#-new-features-13" class="hash-link" aria-label="Direct link to ✨ New Features" title="Direct link to ✨ New Features">​</a></h2>
+<ul>
+<li><code>[DEVELOPER]</code> AWS SDK has been upgraded to v2. by @vpnachev [#874]</li>
+</ul>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="-others-24">🏃 Others<a href="#-others-24" class="hash-link" aria-label="Direct link to 🏃 Others" title="Direct link to 🏃 Others">​</a></h2>
+<ul>
+<li><code>[DEVELOPER]</code> Update golang version to <code>1.24.4</code>. by @shreyas-s-rao [#886]</li>
+</ul>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="container-oci-images-24">Container (OCI) Images<a href="#container-oci-images-24" class="hash-link" aria-label="Direct link to Container (OCI) Images" title="Direct link to Container (OCI) Images">​</a></h2>
+<ul>
+<li>etcdbrctl: <code>europe-docker.pkg.dev/gardener-project/releases/gardener/etcdbrctl:v0.37.0</code></li>
+</ul>
+<p>[github.com/gardener/machine-controller-manager:v0.59.0]</p>
+<h1>[gardener/machine-controller-manager]</h1>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="-new-features-14">✨ New Features<a href="#-new-features-14" class="hash-link" aria-label="Direct link to ✨ New Features" title="Direct link to ✨ New Features">​</a></h2>
+<ul>
+<li><code>[OPERATOR]</code> machine-controller-manager can manage machines without a target cluster by specifying <code>--target-kubeconfig=none</code>. See the <a href="https://github.com/gardener/machine-controller-manager/blob/master/docs/FAQ.md#how-to-run-mcm-in-different-cluster-setups" target="_blank" rel="noopener noreferrer">documentation</a> for more details. by @timebertt [#1004]</li>
+</ul>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="-bug-fixes-13">🐛 Bug Fixes<a href="#-bug-fixes-13" class="hash-link" aria-label="Direct link to 🐛 Bug Fixes" title="Direct link to 🐛 Bug Fixes">​</a></h2>
+<ul>
+<li><code>[OPERATOR]</code> Fix a bug where MCM does not check if a pod has already been evicted before reattempting eviction blindly by @aaronfern [#979]</li>
+<li><code>[OPERATOR]</code> Fixed a bug in the MachineSet controller where the machine status was set to <code>Terminating</code> even if attempt to delete the machine object failed. by @takoverflow [#995]</li>
+</ul>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="-others-25">🏃 Others<a href="#-others-25" class="hash-link" aria-label="Direct link to 🏃 Others" title="Direct link to 🏃 Others">​</a></h2>
+<ul>
+<li><code>[OPERATOR]</code> add new label <code>node_name</code> to the <code>mcm_machine_info</code> metric by @aaronfern [#1000]</li>
+<li><code>[OPERATOR]</code> machine-controller-manager base image is updated to <code>gcr.io/distroless/static-debian12:nonroot</code>. by @aaronfern [#991]</li>
+</ul>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="container-oci-images-25">Container (OCI) Images<a href="#container-oci-images-25" class="hash-link" aria-label="Direct link to Container (OCI) Images" title="Direct link to Container (OCI) Images">​</a></h2>
+<ul>
+<li>machine-controller-manager: <code>europe-docker.pkg.dev/gardener-project/releases/gardener/machine-controller-manager:v0.59.0</code></li>
+</ul>
+<p>[github.com/gardener/machine-controller-manager:v0.59.1]</p>
+<h1>[gardener/machine-controller-manager]</h1>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="-others-26">🏃 Others<a href="#-others-26" class="hash-link" aria-label="Direct link to 🏃 Others" title="Direct link to 🏃 Others">​</a></h2>
+<ul>
+<li><code>[OPERATOR]</code> <code>node.gardener.cloud/critical-components-not-ready</code> taint is added to the node after the successful in-place update to prevent scheduling any workload before critical component pods are ready. by @acumino [#1017]</li>
+</ul>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="container-oci-images-26">Container (OCI) Images<a href="#container-oci-images-26" class="hash-link" aria-label="Direct link to Container (OCI) Images" title="Direct link to Container (OCI) Images">​</a></h2>
+<ul>
+<li>machine-controller-manager: <code>europe-docker.pkg.dev/gardener-project/releases/gardener/machine-controller-manager:v0.59.1</code></li>
+</ul>
+<p>[github.com/gardener/machine-controller-manager:v0.59.2]</p>
+<h1>[gardener/machine-controller-manager]</h1>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="-bug-fixes-14">🐛 Bug Fixes<a href="#-bug-fixes-14" class="hash-link" aria-label="Direct link to 🐛 Bug Fixes" title="Direct link to 🐛 Bug Fixes">​</a></h2>
+<ul>
+<li><code>[OPERATOR]</code> Fixed a bug where machines in the <code>InPlaceUpdating</code> phase were incorrectly transferred to the new machine set during inplace updates. This caused the machine controller to miss updating the phase to <code>InPlaceUpdateSuccessful</code>, resulting in machines getting stuck or marked as <code>InPlaceUpdateFailed</code>. by @acumino [#1020]
+[github.com/gardener/vpn2:0.39.0]</li>
+</ul>
+<h1>[gardener/vpn2]</h1>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="-noteworthy-7">📰 Noteworthy<a href="#-noteworthy-7" class="hash-link" aria-label="Direct link to 📰 Noteworthy" title="Direct link to 📰 Noteworthy">​</a></h2>
+<ul>
+<li><code>[OPERATOR]</code> Overlapping CIDR ranges between seed and shoot IPv4 networks for HA VPN deployments are now possible. by @domdom82 [#151]</li>
+</ul>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="container-oci-images-27">Container (OCI) Images<a href="#container-oci-images-27" class="hash-link" aria-label="Direct link to Container (OCI) Images" title="Direct link to Container (OCI) Images">​</a></h2>
+<ul>
+<li>vpn-client: <code>europe-docker.pkg.dev/gardener-project/releases/gardener/vpn-client:0.39.0</code></li>
+<li>vpn-server: <code>europe-docker.pkg.dev/gardener-project/releases/gardener/vpn-server:0.39.0</code></li>
+</ul>
+<p>[github.com/gardener/vpn2:0.40.0]</p>
+<h1>[gardener/vpn2]</h1>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="-noteworthy-8">📰 Noteworthy<a href="#-noteworthy-8" class="hash-link" aria-label="Direct link to 📰 Noteworthy" title="Direct link to 📰 Noteworthy">​</a></h2>
+<ul>
+<li><code>[OPERATOR]</code> Double-NAT IP mapping will only be done if there is an actual overlap of shoot vs. seed IPv4 network ranges for HA VPN deployments. Non-HA VPN configurations are unchanged. by @domdom82 [#154]</li>
+</ul>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="container-oci-images-28">Container (OCI) Images<a href="#container-oci-images-28" class="hash-link" aria-label="Direct link to Container (OCI) Images" title="Direct link to Container (OCI) Images">​</a></h2>
+<ul>
+<li>vpn-client: <code>europe-docker.pkg.dev/gardener-project/releases/gardener/vpn-client:0.40.0</code></li>
+<li>vpn-server: <code>europe-docker.pkg.dev/gardener-project/releases/gardener/vpn-server:0.40.0</code></li>
+</ul>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="helm-charts-8">Helm Charts<a href="#helm-charts-8" class="hash-link" aria-label="Direct link to Helm Charts" title="Direct link to Helm Charts">​</a></h2>
+<ul>
+<li>controlplane: <code>europe-docker.pkg.dev/gardener-project/releases/charts/gardener/controlplane:v1.124.0</code></li>
+<li>gardenlet: <code>europe-docker.pkg.dev/gardener-project/releases/charts/gardener/gardenlet:v1.124.0</code></li>
+<li>operator: <code>europe-docker.pkg.dev/gardener-project/releases/charts/gardener/operator:v1.124.0</code></li>
+<li>resource-manager: <code>europe-docker.pkg.dev/gardener-project/releases/charts/gardener/resource-manager:v1.124.0</code></li>
+</ul>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="container-oci-images-29">Container (OCI) Images<a href="#container-oci-images-29" class="hash-link" aria-label="Direct link to Container (OCI) Images" title="Direct link to Container (OCI) Images">​</a></h2>
+<ul>
+<li>admission-controller: <code>europe-docker.pkg.dev/gardener-project/releases/gardener/admission-controller:v1.124.0</code></li>
+<li>apiserver: <code>europe-docker.pkg.dev/gardener-project/releases/gardener/apiserver:v1.124.0</code></li>
+<li>controller-manager: <code>europe-docker.pkg.dev/gardener-project/releases/gardener/controller-manager:v1.124.0</code></li>
+<li>gardenadm: <code>europe-docker.pkg.dev/gardener-project/releases/gardener/gardenadm:v1.124.0</code></li>
+<li>gardenlet: <code>europe-docker.pkg.dev/gardener-project/releases/gardener/gardenlet:v1.124.0</code></li>
+<li>node-agent: <code>europe-docker.pkg.dev/gardener-project/releases/gardener/node-agent:v1.124.0</code></li>
+<li>operator: <code>europe-docker.pkg.dev/gardener-project/releases/gardener/operator:v1.124.0</code></li>
+<li>resource-manager: <code>europe-docker.pkg.dev/gardener-project/releases/gardener/resource-manager:v1.124.0</code></li>
+<li>scheduler: <code>europe-docker.pkg.dev/gardener-project/releases/gardener/scheduler:v1.124.0</code></li>
 </ul>
 </div></div></details></div></article><nav class="docusaurus-mt-lg pagination-nav" aria-label="Docs pages"><a class="pagination-nav__link pagination-nav__link--next" href="/release-notes/v1.123"><div class="pagination-nav__sublabel">Next</div><div class="pagination-nav__label">Release Notes v1.123</div></a></nav></div></div></div></div></main></div></div></div><footer class="theme-layout-footer footer footer--dark"><div class="container container-fluid"><div class="row footer__links"><div class="theme-layout-footer-column col footer__col"><div class="footer__title">Docs</div><ul class="footer__items clean-list"><li class="footer__item"><a class="footer__link-item" href="/docs/overview">Docs</a></li></ul></div><div class="theme-layout-footer-column col footer__col"><div class="footer__title">Community</div><ul class="footer__items clean-list"><li class="footer__item"><a href="https://github.com/yakecloud" target="_blank" rel="noopener noreferrer" class="footer__link-item">GitHub<svg width="13.5" height="13.5" aria-hidden="true" class="iconExternalLink_nPIU"><use href="#theme-svg-external-link"></use></svg></a></li><li class="footer__item"><a href="https://github.com/gardener-community" target="_blank" rel="noopener noreferrer" class="footer__link-item">Gardener Community<svg width="13.5" height="13.5" aria-hidden="true" class="iconExternalLink_nPIU"><use href="#theme-svg-external-link"></use></svg></a></li><li class="footer__item"><a href="https://gardener-cloud.slack.com" target="_blank" rel="noopener noreferrer" class="footer__link-item">Slack<svg width="13.5" height="13.5" aria-hidden="true" class="iconExternalLink_nPIU"><use href="#theme-svg-external-link"></use></svg></a></li></ul></div><div class="theme-layout-footer-column col footer__col"><div class="footer__title">More</div><ul class="footer__items clean-list"><li class="footer__item"><a class="footer__link-item" href="/blog">Blog</a></li><li class="footer__item"><a class="footer__link-item" href="/legals">Legals</a></li><li class="footer__item"><a class="footer__link-item" href="/privacy-policy">Privacy policy</a></li></ul></div></div><div class="footer__bottom text--center"><div class="footer__copyright">Copyright © 2025 23 Technologies GmbH</div></div></div></footer></div>
 </body>
