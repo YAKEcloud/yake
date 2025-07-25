@@ -5,7 +5,7 @@
 <meta name="generator" content="Docusaurus v3.8.1">
 <title data-rh="true">Release Notes next | Yet another Kubernetes Engine</title><meta data-rh="true" name="viewport" content="width=device-width,initial-scale=1"><meta data-rh="true" name="twitter:card" content="summary_large_image"><meta data-rh="true" property="og:url" content="https://yake.cloud/release-notes/next"><meta data-rh="true" property="og:locale" content="en"><meta data-rh="true" name="docusaurus_locale" content="en"><meta data-rh="true" name="docsearch:language" content="en"><meta data-rh="true" name="gardener" content="installation, production, operations, maintenance"><meta data-rh="true" name="docusaurus_version" content="current"><meta data-rh="true" name="docusaurus_tag" content="docs-release-notes-current"><meta data-rh="true" name="docsearch:version" content="current"><meta data-rh="true" name="docsearch:docusaurus_tag" content="docs-release-notes-current"><meta data-rh="true" property="og:title" content="Release Notes next | Yet another Kubernetes Engine"><meta data-rh="true" name="description" content="Yake release notes and upgrade guide"><meta data-rh="true" property="og:description" content="Yake release notes and upgrade guide"><link data-rh="true" rel="icon" href="/img/favicon.ico"><link data-rh="true" rel="canonical" href="https://yake.cloud/release-notes/next"><link data-rh="true" rel="alternate" href="https://yake.cloud/release-notes/next" hreflang="en"><link data-rh="true" rel="alternate" href="https://yake.cloud/release-notes/next" hreflang="x-default"><script data-rh="true" type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Release Notes next","item":"https://yake.cloud/release-notes/next"}]}</script><link rel="alternate" type="application/rss+xml" href="/blog/rss.xml" title="Yet another Kubernetes Engine RSS Feed">
 <link rel="alternate" type="application/atom+xml" href="/blog/atom.xml" title="Yet another Kubernetes Engine Atom Feed"><link rel="stylesheet" href="/assets/css/styles.9a630ee0.css">
-<script src="/assets/js/runtime~main.56c44753.js" defer="defer"></script>
+<script src="/assets/js/runtime~main.010fd0a2.js" defer="defer"></script>
 <script src="/assets/js/main.6b977eee.js" defer="defer"></script>
 </head>
 <body class="navigation-with-keyboard">
@@ -956,6 +956,43 @@
 <li><code>[OPERATOR]</code> Add validation for <code>DNSProvider</code> field <code>.spec.type</code> to restrict it to known types. Additional standard validations have been added for fields like <code>.spec.defaultTTL</code>, <code>domains.include</code>, <code>domains.exclude</code>, <code>zones.include</code>, <code>zones.exclude</code>. by @MartinWeindel [#557]</li>
 <li><code>[DEVELOPER]</code> migrate CICD-Pipelines to GitHub-Actions by @ccwienk [#531]</li>
 <li><code>[USER]</code> [provider type openstack-designate] Allow secret key <code>authURL</code> as alias of <code>OS_AUTH_URL</code> by @MartinWeindel [#504]</li>
+</ul>
+</div></div></details>
+<details class="details_lb9f alert alert--info details_b_Ee" data-collapsed="true"><summary><b>Update shoot-dns-service to <code>1.67.0</code></b></summary><div><div class="collapsibleContent_i85q">
+<!-- -->
+<h1>[gardener/gardener-extension-shoot-dns-service]</h1>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="️-breaking-changes-7">⚠️ Breaking Changes<a href="#️-breaking-changes-7" class="hash-link" aria-label="Direct link to ⚠️ Breaking Changes" title="Direct link to ⚠️ Breaking Changes">​</a></h2>
+<ul>
+<li><code>[OPERATOR]</code> <code>shoot-dns-service</code> no longer supports Shoots with Кubernetes version &lt;= 1.28. by @RadaBDimitrova [#512]</li>
+</ul>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="-others-29">🏃 Others<a href="#-others-29" class="hash-link" aria-label="Direct link to 🏃 Others" title="Direct link to 🏃 Others">​</a></h2>
+<ul>
+<li><code>[OPERATOR]</code> export testresults as inlined ocm-resource by @heldkat [#513]</li>
+<li><code>[OPERATOR]</code> Upgrade github.com/gardener/external-dns-management from <code>v0.25.2</code> to <code>v0.26.0</code> by @MartinWeindel [#516]</li>
+<li><code>[DEVELOPER]</code> migrate CICD-Pipelines to GitHub-Actions by @ccwienk [#505]</li>
+</ul>
+<h1>[gardener/external-dns-management]</h1>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="️-breaking-changes-8">⚠️ Breaking Changes<a href="#️-breaking-changes-8" class="hash-link" aria-label="Direct link to ⚠️ Breaking Changes" title="Direct link to ⚠️ Breaking Changes">​</a></h2>
+<ul>
+<li><code>[OPERATOR]</code> Deprecated <code>DNSEntry.spec.reference</code>. The field will be removed with a future release. by @marc1404 [gardener/external-dns-management#558]</li>
+<li><code>[USER]</code> The values of provider secrets are now validated restrictedly. Because of this policy change, minor inconsistencies tolerated formerly can now lead to failing validation and therefore for failing provider states. Especially check for leading and trailing whitespaces, empty values or unknown secret keys. by @MartinWeindel [gardener/external-dns-management#535]</li>
+</ul>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="-bug-fixes-16">🐛 Bug Fixes<a href="#-bug-fixes-16" class="hash-link" aria-label="Direct link to 🐛 Bug Fixes" title="Direct link to 🐛 Bug Fixes">​</a></h2>
+<ul>
+<li><code>[OPERATOR]</code> Fix panic on controller startup if a <code>DNSEntry</code> is annotated with <code>dns.gardener.cloud/target-hard-ignore=true</code> by @MartinWeindel [gardener/external-dns-management#554]</li>
+<li><code>[USER]</code> Ensure ignored entries are not deleted on cleanup in an edge case. by @MartinWeindel [gardener/external-dns-management#505]</li>
+<li><code>[USER]</code> Fix sporadic failing updates on switching entries between simple and weighted routing policy. by @MartinWeindel [gardener/external-dns-management#524]</li>
+</ul>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="-others-30">🏃 Others<a href="#-others-30" class="hash-link" aria-label="Direct link to 🏃 Others" title="Direct link to 🏃 Others">​</a></h2>
+<ul>
+<li><code>[OPERATOR]</code> Bump <code>openstack-designate</code> provider library <code>gophercloud</code> from version <code>v0.24.0</code> to <code>v2.7.0</code>. by @MartinWeindel [gardener/external-dns-management#481]</li>
+<li><code>[OPERATOR]</code> export testresults as inlined ocm-resource by @heldkat [gardener/external-dns-management#561]</li>
+<li><code>[OPERATOR]</code> Avoid entry reconciliation starvation on high load by improving timing of zone reconciliations. by @MartinWeindel [gardener/external-dns-management#533]</li>
+<li><code>[OPERATOR]</code> Implement validation of provider secrets. Trailing whitespaces are not ignored anymore. Empty values or unknown secret keys are not allowed anymore for security reasons. by @MartinWeindel [gardener/external-dns-management#535]</li>
+<li><code>[OPERATOR]</code> Fix the <code>linux/arm64</code> image build. by @MartinWeindel [gardener/external-dns-management#551]</li>
+<li><code>[OPERATOR]</code> Add validation for <code>DNSProvider</code> field <code>.spec.type</code> to restrict it to known types. Additional standard validations have been added for fields like <code>.spec.defaultTTL</code>, <code>domains.include</code>, <code>domains.exclude</code>, <code>zones.include</code>, <code>zones.exclude</code>. by @MartinWeindel [gardener/external-dns-management#557]</li>
+<li><code>[DEVELOPER]</code> migrate CICD-Pipelines to GitHub-Actions by @ccwienk [gardener/external-dns-management#531]</li>
+<li><code>[USER]</code> [provider type openstack-designate] Allow secret key <code>authURL</code> as alias of <code>OS_AUTH_URL</code> by @MartinWeindel [gardener/external-dns-management#504]</li>
 </ul>
 </div></div></details></div></article><nav class="docusaurus-mt-lg pagination-nav" aria-label="Docs pages"><a class="pagination-nav__link pagination-nav__link--next" href="/release-notes/v1.123"><div class="pagination-nav__sublabel">Next</div><div class="pagination-nav__label">Release Notes v1.123</div></a></nav></div></div></div></div></main></div></div></div><footer class="theme-layout-footer footer footer--dark"><div class="container container-fluid"><div class="row footer__links"><div class="theme-layout-footer-column col footer__col"><div class="footer__title">Docs</div><ul class="footer__items clean-list"><li class="footer__item"><a class="footer__link-item" href="/docs/overview">Docs</a></li></ul></div><div class="theme-layout-footer-column col footer__col"><div class="footer__title">Community</div><ul class="footer__items clean-list"><li class="footer__item"><a href="https://github.com/yakecloud" target="_blank" rel="noopener noreferrer" class="footer__link-item">GitHub<svg width="13.5" height="13.5" aria-hidden="true" class="iconExternalLink_nPIU"><use href="#theme-svg-external-link"></use></svg></a></li><li class="footer__item"><a href="https://github.com/gardener-community" target="_blank" rel="noopener noreferrer" class="footer__link-item">Gardener Community<svg width="13.5" height="13.5" aria-hidden="true" class="iconExternalLink_nPIU"><use href="#theme-svg-external-link"></use></svg></a></li><li class="footer__item"><a href="https://gardener-cloud.slack.com" target="_blank" rel="noopener noreferrer" class="footer__link-item">Slack<svg width="13.5" height="13.5" aria-hidden="true" class="iconExternalLink_nPIU"><use href="#theme-svg-external-link"></use></svg></a></li></ul></div><div class="theme-layout-footer-column col footer__col"><div class="footer__title">More</div><ul class="footer__items clean-list"><li class="footer__item"><a class="footer__link-item" href="/blog">Blog</a></li><li class="footer__item"><a class="footer__link-item" href="/legals">Legals</a></li><li class="footer__item"><a class="footer__link-item" href="/privacy-policy">Privacy policy</a></li></ul></div></div><div class="footer__bottom text--center"><div class="footer__copyright">Copyright © 2025 23 Technologies GmbH</div></div></div></footer></div>
 </body>
