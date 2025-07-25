@@ -8,4 +8,4 @@ dependencies:
   repository: ""
 description: A helmchart for external-dns-management
 name: external-dns-management
-version: 0.25.3
+version: 0.26.0
