@@ -9,7 +9,7 @@ metadata:
     app.kubernetes.io/instance: {{ .Release.Name }}
     app.kubernetes.io/managed-by: {{ .Release.Service }}
   annotations:
-    controller-gen.kubebuilder.io/version: v0.17.3
+    controller-gen.kubebuilder.io/version: v0.18.0
   name: dnsentries.dns.gardener.cloud
 spec:
   group: dns.gardener.cloud
@@ -114,7 +114,9 @@ spec:
                   removed in a future release.'
                 type: string
               reference:
-                description: reference to base entry used to inherit attributes from
+                description: |-
+                  Deprecated: This field will be removed in a future release.
+                  Until removed, it references a base entry used to inherit attributes from.
                 properties:
                   name:
                     description: name of the referenced DNSEntry object
@@ -249,7 +251,7 @@ metadata:
     app.kubernetes.io/instance: {{ .Release.Name }}
     app.kubernetes.io/managed-by: {{ .Release.Service }}
   annotations:
-    controller-gen.kubebuilder.io/version: v0.17.3
+    controller-gen.kubebuilder.io/version: v0.18.0
   name: dnsannotations.dns.gardener.cloud
 spec:
   group: dns.gardener.cloud
@@ -362,7 +364,7 @@ metadata:
     app.kubernetes.io/instance: {{ .Release.Name }}
     app.kubernetes.io/managed-by: {{ .Release.Service }}
   annotations:
-    controller-gen.kubebuilder.io/version: v0.17.3
+    controller-gen.kubebuilder.io/version: v0.18.0
   name: dnsproviders.dns.gardener.cloud
 spec:
   group: dns.gardener.cloud
@@ -426,6 +428,8 @@ spec:
               defaultTTL:
                 description: default TTL used for DNS entries if not specified explicitly
                 format: int64
+                maximum: 8640000
+                minimum: 1
                 type: integer
               domains:
                 description: |-
@@ -435,12 +439,16 @@ spec:
                   exclude:
                     description: values that should be ignored (domains or zones)
                     items:
+                      minLength: 1
                       type: string
+                    maxItems: 100
                     type: array
                   include:
                     description: values that should be observed (domains or zones)
                     items:
+                      minLength: 1
                       type: string
+                    maxItems: 100
                     type: array
                 type: object
               providerConfig:
@@ -455,10 +463,12 @@ spec:
                     description: |-
                       Burst allows bursts of up to 'burst' to exceed the rate defined by 'RequestsPerDay', while still maintaining a
                       smoothed rate of 'RequestsPerDay'
+                    minimum: 0
                     type: integer
                   requestsPerDay:
                     description: RequestsPerDay is create/update request rate per
                       DNS entry given by requests per day
+                    minimum: 1
                     type: integer
                 required:
                 - burst
@@ -481,6 +491,20 @@ spec:
               type:
                 description: type of the provider (selecting the responsible type
                   of DNS controller)
+                enum:
+                - aws-route53
+                - alicloud-dns
+                - azure-dns
+                - azure-private-dns
+                - cloudflare-dns
+                - google-clouddns
+                - infoblox-dns
+                - mock-inmemory
+                - netlify-dns
+                - openstack-designate
+                - powerdns
+                - remote
+                - rfc2136
                 type: string
               zones:
                 description: |-
@@ -491,12 +515,16 @@ spec:
                   exclude:
                     description: values that should be ignored (domains or zones)
                     items:
+                      minLength: 1
                       type: string
+                    maxItems: 100
                     type: array
                   include:
                     description: values that should be observed (domains or zones)
                     items:
+                      minLength: 1
                       type: string
+                    maxItems: 100
                     type: array
                 type: object
             type: object
@@ -540,10 +568,12 @@ spec:
                     description: |-
                       Burst allows bursts of up to 'burst' to exceed the rate defined by 'RequestsPerDay', while still maintaining a
                       smoothed rate of 'RequestsPerDay'
+                    minimum: 0
                     type: integer
                   requestsPerDay:
                     description: RequestsPerDay is create/update request rate per
                       DNS entry given by requests per day
+                    minimum: 1
                     type: integer
                 required:
                 - burst
@@ -584,7 +614,7 @@ metadata:
     app.kubernetes.io/instance: {{ .Release.Name }}
     app.kubernetes.io/managed-by: {{ .Release.Service }}
   annotations:
-    controller-gen.kubebuilder.io/version: v0.17.3
+    controller-gen.kubebuilder.io/version: v0.18.0
   name: dnshostedzonepolicies.dns.gardener.cloud
 spec:
   group: dns.gardener.cloud
