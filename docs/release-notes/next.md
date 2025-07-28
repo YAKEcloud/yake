@@ -899,3 +899,27 @@ hide_table_of_contents: true
 
 
 </details>
+
+<details>
+<summary><b>Update dashboard to <code>1.81.1</code></b></summary>
+
+# [gardener/dashboard]
+
+## 🐛 Bug Fixes
+
+- `[USER]` Fixed issue where wrong dashboard version (with -dev tag) was displayed in the UI by @gardener-github-actions[bot] [#2527]
+
+
+</details>
+
+<details>
+<summary><b>Update dashboard to <code>1.81.1</code></b></summary>
+
+# [gardener/dashboard]
+
+## 🐛 Bug Fixes
+
+- `[USER]` Fixed issue where wrong dashboard version (with -dev tag) was displayed in the UI by @gardener-github-actions[bot] [#2527]
+
+
+</details>
