@@ -38,6 +38,9 @@ spec:
                 path: /spec/resources/0/globallyEnabled
                 value:
                     true
+              - op: add
+                path: /spec/resources/0/autoEnable
+                value: ["shoot"]
             target:
               kind: ControllerRegistration
               name: .*{{ $k }}.*
