@@ -1,4 +1,4 @@
 ## General Changes
 
-* Fix extension runtime RBAC (#17) @Wieneo
-* include sbom in container image (#16) @mac641
+* improve resource naming of chart by using fullname rather than the static gardener-extension-backup-s3 (#18) @nschad
+* Harden deployment to comply with pod security standard "restricted" (#19) @MichaelEischer

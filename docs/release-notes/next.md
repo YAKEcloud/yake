@@ -20,3 +20,14 @@ hide_table_of_contents: true
 
 
 </details>
+
+<details>
+<summary><b>Update backup-s3 to <code>0.8.0</code></b></summary>
+
+## General Changes
+
+* improve resource naming of chart by using fullname rather than the static gardener-extension-backup-s3 (#18) @nschad
+* Harden deployment to comply with pod security standard "restricted" (#19) @MichaelEischer
+
+
+</details>
