@@ -49,3 +49,21 @@ hide_table_of_contents: true
 
 
 </details>
+
+<details>
+<summary><b>Update networking-calico to <code>1.50.0</code></b></summary>
+
+# [gardener/gardener-extension-networking-calico]
+
+## ⚠️ Breaking Changes
+
+- `[OPERATOR]` `networking-calico` no longer supports Shoots with Кubernetes version <= 1.28. by @RadaBDimitrova [#684]
+## 🏃 Others
+
+- `[OPERATOR]` Fixes a bug in Prometheus ScrapeConfigs that prevented Calico metrics from being collected. by @rickardsjp [#692]
+- `[OPERATOR]` Admission controller and reconciliation now check the content of the networking provider configuration for validity and report problems. by @DockToFuture [#669]
+- `[OPERATOR]` Enable the `usePodCidr` option for `ipam.cidr` during input validation. by @DockToFuture [#690]
+- `[OPERATOR]` export testresults as inlined ocm-resource by @heldkat [#686]
+
+
+</details>
