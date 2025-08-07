@@ -33,7 +33,7 @@ stringData:
         enabled: true
 
     networking-calico:
-      version: 1.49.1
+      version: 1.50.0
 
     shoot-cert-service:
       version: 1.52.0
