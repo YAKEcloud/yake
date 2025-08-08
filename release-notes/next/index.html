@@ -5,7 +5,7 @@
 <meta name="generator" content="Docusaurus v3.8.1">
 <title data-rh="true">Release Notes next | Yet another Kubernetes Engine</title><meta data-rh="true" name="viewport" content="width=device-width,initial-scale=1"><meta data-rh="true" name="twitter:card" content="summary_large_image"><meta data-rh="true" property="og:url" content="https://yake.cloud/release-notes/next"><meta data-rh="true" property="og:locale" content="en"><meta data-rh="true" name="docusaurus_locale" content="en"><meta data-rh="true" name="docsearch:language" content="en"><meta data-rh="true" name="gardener" content="installation, production, operations, maintenance"><meta data-rh="true" name="docusaurus_version" content="current"><meta data-rh="true" name="docusaurus_tag" content="docs-release-notes-current"><meta data-rh="true" name="docsearch:version" content="current"><meta data-rh="true" name="docsearch:docusaurus_tag" content="docs-release-notes-current"><meta data-rh="true" property="og:title" content="Release Notes next | Yet another Kubernetes Engine"><meta data-rh="true" name="description" content="Yake release notes and upgrade guide"><meta data-rh="true" property="og:description" content="Yake release notes and upgrade guide"><link data-rh="true" rel="icon" href="/img/favicon.ico"><link data-rh="true" rel="canonical" href="https://yake.cloud/release-notes/next"><link data-rh="true" rel="alternate" href="https://yake.cloud/release-notes/next" hreflang="en"><link data-rh="true" rel="alternate" href="https://yake.cloud/release-notes/next" hreflang="x-default"><script data-rh="true" type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Release Notes next","item":"https://yake.cloud/release-notes/next"}]}</script><link rel="alternate" type="application/rss+xml" href="/blog/rss.xml" title="Yet another Kubernetes Engine RSS Feed">
 <link rel="alternate" type="application/atom+xml" href="/blog/atom.xml" title="Yet another Kubernetes Engine Atom Feed"><link rel="stylesheet" href="/assets/css/styles.9a630ee0.css">
-<script src="/assets/js/runtime~main.f60250b8.js" defer="defer"></script>
+<script src="/assets/js/runtime~main.d164bc66.js" defer="defer"></script>
 <script src="/assets/js/main.422a0883.js" defer="defer"></script>
 </head>
 <body class="navigation-with-keyboard">
@@ -77,6 +77,246 @@
 <ul>
 <li><code>[USER]</code> Fixes the sync back of changes from the ui to the shoot editor in the worker dialog by @gardener-github-actions[bot] [#2545]</li>
 <li><code>[USER]</code> Improves usability of the select dialog in the worker group for &quot;Additional OCI Runtimes&quot; by @gardener-github-actions[bot] [#2554]</li>
+</ul>
+</div></div></details>
+<details class="details_lb9f alert alert--info details_b_Ee" data-collapsed="true"><summary><b>Update gardener-controlplane to <code>1.125.0</code></b></summary><div><div class="collapsibleContent_i85q">
+<!-- -->
+<h1>[gardener/gardener]</h1>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="️-breaking-changes-2">⚠️ Breaking Changes<a href="#️-breaking-changes-2" class="hash-link" aria-label="Direct link to ⚠️ Breaking Changes" title="Direct link to ⚠️ Breaking Changes">​</a></h2>
+<ul>
+<li><code>[OPERATOR]</code> <code>spec.addons.nginxIngress.loadBalancerSourceRanges</code> are now validated as CIDRs. by @ScheererJ [#12539]</li>
+<li><code>[OPERATOR]</code> <code>spec.addons.nginxIngress.config</code> is now validated as conforming to config map data rules. by @ScheererJ [#12539]</li>
+<li><code>[OPERATOR]</code> <code>spec.systemComponents.coreDNS.rewriting.commonSuffixes</code> are now validated against DNS rules. by @ScheererJ [#12539]</li>
+<li><code>[OPERATOR]</code> The <code>UseNamespacedCloudProfile</code> feature gate has been graduated to GA and is locked to <code>true</code>.  by @LucaBernstein [#12620]</li>
+<li><code>[OPERATOR]</code> <code>spec.networking.type</code> is now validated as being a label name. by @ScheererJ [#12539]</li>
+<li><code>[OPERATOR]</code> All annotations of <code>kube-apiserver</code> service in the shoot control planes will be replaced by the minimum required set of annotations. Manually added annotations will be removed. by @ScheererJ [#12630]</li>
+<li><code>[OPERATOR]</code> The name of <code>ExposureClass</code> resources is now properly checked to be compliant to the DNS label rules. by @ScheererJ [#12539]</li>
+<li><code>[USER]</code> Setting shoot&#x27;s <code>.spec.providers.workers[].{maxSurge, maxUnavailable}</code> will be denied in future versions of Gardener for workers with updateStrategy <code>ManualInPlaceUpdate</code>. Users should unset these values with this version of Gardener. by @acumino [#12607]</li>
+</ul>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="-new-features">✨ New Features<a href="#-new-features" class="hash-link" aria-label="Direct link to ✨ New Features" title="Direct link to ✨ New Features">​</a></h2>
+<ul>
+<li><code>[USER]</code> The Shoot resource does now support configuring the global maximum allowed resources the vpa-recommender can recommend for a container. The corresponding upstream configuration option solves a known limitation of vpa-recommender where it can make a Pod unschedulable by recommending resource requests more than largest Node&#x27;s allocatable. For more details, see <a href="https://github.com/kubernetes/autoscaler/blob/master/vertical-pod-autoscaler/docs/examples.md#specifying-global-maximum-allowed-resources-to-prevent-pods-from-being-unschedulable" target="_blank" rel="noopener noreferrer">Specifying global maximum allowed resources to prevent pods from being unschedulable</a>. by @ialidzhikov [#12481]</li>
+<li><code>[OPERATOR]</code> The Seed and Garden resources do now support configuring the global maximum allowed resources the vpa-recommender can recommend for a container. The corresponding upstream configuration option solves a known limitation of vpa-recommender where it can make a Pod unschedulable by recommending resource requests more than largest Node&#x27;s allocatable. For more details, see <a href="https://github.com/kubernetes/autoscaler/blob/master/vertical-pod-autoscaler/docs/examples.md#specifying-global-maximum-allowed-resources-to-prevent-pods-from-being-unschedulable" target="_blank" rel="noopener noreferrer">Specifying global maximum allowed resources to prevent pods from being unschedulable</a>. by @ialidzhikov [#12481]</li>
+</ul>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="-bug-fixes-3">🐛 Bug Fixes<a href="#-bug-fixes-3" class="hash-link" aria-label="Direct link to 🐛 Bug Fixes" title="Direct link to 🐛 Bug Fixes">​</a></h2>
+<ul>
+<li><code>[OPERATOR]</code> Fixed local <code>gardenadm</code> development setup for non-amd64 systems. by @ScheererJ [#12619]</li>
+<li><code>[OPERATOR]</code> A bug which could cause istio service and workload dashboards to show &quot;many-to-many matching errors&quot; after kube-apiserver pods were rolling has been fixed.  by @oliver-goetz [#12635]</li>
+<li><code>[OPERATOR]</code> Fix cluster-autoscaler specific annotations on machine deployment upon update in worker specific cluster autoscaler options. by @takoverflow [#12548]</li>
+<li><code>[OPERATOR]</code> Seed registration was fixed for <code>ManagedSeed</code>s with seed templates configuring <code>spec.resources</code>. by @timuthy [#12652]</li>
+<li><code>[OPERATOR]</code> Fixed a bug in the cluster overview dashboard that showed <code>cluster-autoscaler</code> as down when not deployed. by @rickardsjp [#12654]</li>
+<li><code>[OPERATOR]</code> A bug which was causing the <code>gardener-node-agent</code> to enter crash-loop when its config was updated with breaking changes was fixed. by @AleksandarSavchev [#12589]</li>
+<li><code>[USER]</code> The Kubernetes feature gate <code>ValidatingAdmissionPolicy</code> is now marked as removed in Kubernetes 1.32. Previously, it was possible to upgrade a Shoot cluster to Kubernetes 1.32 with this feature gate enabled, which resulted in kube-apiserver failing to start due to an unrecognized feature gate. by @marc1404 [#12643]</li>
+</ul>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="-others-2">🏃 Others<a href="#-others-2" class="hash-link" aria-label="Direct link to 🏃 Others" title="Direct link to 🏃 Others">​</a></h2>
+<ul>
+<li><code>[DEPENDENCY]</code> The following dependencies have been updated:
+<ul>
+<li><code>gardener/vpn2</code> from <code>0.40.0</code> to <code>0.41.0</code>. <a href="https://redirect.github.com/gardener/vpn2/releases/tag/0.41.0" target="_blank" rel="noopener noreferrer">Release Notes</a> by @gardener-ci-robot [#12675]</li>
+</ul>
+</li>
+<li><code>[DEPENDENCY]</code> The following dependencies have been updated:
+<ul>
+<li><code>gardener/dashboard</code> from <code>1.81.0</code> to <code>1.81.1</code>. <a href="https://redirect.github.com/gardener/dashboard/releases/tag/1.81.1" target="_blank" rel="noopener noreferrer">Release Notes</a> by @gardener-ci-robot [#12616]</li>
+</ul>
+</li>
+<li><code>[DEPENDENCY]</code> The following dependencies have been updated:
+<ul>
+<li><code>gcr.io/istio-release/pilot</code> from <code>1.25.3</code> to <code>1.25.4</code>.</li>
+<li><code>gcr.io/istio-release/proxyv2</code> from <code>1.25.3</code> to <code>1.25.4</code>.</li>
+<li><code>istio.io/api</code> from <code>v1.25.3</code> to <code>v1.25.4</code>.  by @gardener-ci-robot [#12655]</li>
+</ul>
+</li>
+<li><code>[DEPENDENCY]</code> The following dependencies have been updated:
+<ul>
+<li><code>envoyproxy/envoy</code> from <code>v1.34.3</code> to <code>v1.35.0</code>. <a href="https://redirect.github.com/envoyproxy/envoy/releases/tag/v1.35.0" target="_blank" rel="noopener noreferrer">Release Notes</a> by @gardener-ci-robot [#12598]</li>
+</ul>
+</li>
+<li><code>[USER]</code> Updates to <code>spec.networking.ipFamiles</code> are now validated. by @axel7born [#12523]</li>
+<li><code>[DEVELOPER]</code> migrate CICD-Pipeline to GitHub-Actions by @ccwienk [#12592]</li>
+<li><code>[DEVELOPER]</code> The hostname of provider-local <code>Machines</code>/<code>Nodes</code> can be resolved via DNS, similar to typical cloud infrastructure environments. This allows connecting from a <code>Bastion</code> to a <code>Node</code> via its hostname. by @timebertt [#12657]</li>
+<li><code>[DEVELOPER]</code> <code>DNSRecord</code> may now use non-canonical IPv6 addresses. by @ScheererJ [#12667]</li>
+<li><code>[OPERATOR]</code> Adds machine capability based image defaulting to Shoots created with Cloudprofiles using Capabilities. by @Roncossek [#12529]</li>
+<li><code>[OPERATOR]</code> The Shoot Prometheus RBAC is now restricted to the control-plane and the garden namespace. by @chrkl [#12264]</li>
+<li><code>[OPERATOR]</code> A new validation for the following <code>(Namespaced)CloudProfile</code> fields has been added, ensuring qualified names:
+<ul>
+<li><code>.spec.machineImages[].name</code></li>
+<li><code>.spec.machineImages[].versions[].cri[].containerRuntimes[].type</code></li>
+<li><code>.spec.machineTypes[].name</code></li>
+<li><code>.spec.capabilities.name</code></li>
+<li><code>.spec.capabilities.values</code></li>
+<li><code>.spec.volumeTypes[].class</code></li>
+<li><code>.spec.volumeTypes[].name</code> by @LucaBernstein [#12666]</li>
+</ul>
+</li>
+<li><code>[OPERATOR]</code> The <code>gardener-node-agent</code> now has a <code>--config-dir</code> flag that is used to find the config file instead of a <code>--config</code> flag. by @AleksandarSavchev [#12589]</li>
+<li><code>[OPERATOR]</code> Unique usernames are generated for {Admin,Viewer}KubeconfigRequests by prefixing the original/requesting username with a random string. This approach prevents conflicts with existing RBAC rules in the cluster while still preserving the identity of the requesting user. by @timuthy [#12597]</li>
+<li><code>[OPERATOR]</code> Gardener administrators are now allowed to inspect and manage Services and Endpoints in the garden cluster. by @ialidzhikov [#12211]</li>
+<li><code>[OPERATOR]</code> A bug in <code>gardener-node-agent</code> that prevented the location for the sandbox image to be configurable to a custom value on worker nodes with containerd 2.x was fixed. by @MrBatschner [#12665]</li>
+</ul>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="-documentation">📖 Documentation<a href="#-documentation" class="hash-link" aria-label="Direct link to 📖 Documentation" title="Direct link to 📖 Documentation">​</a></h2>
+<ul>
+<li><code>[OPERATOR]</code> Operations guide was updated to explain how overlapping network ranges between seeds and shoots are implemented. by @domdom82 [#12637]</li>
+</ul>
+</div></div></details>
+<details class="details_lb9f alert alert--info details_b_Ee" data-collapsed="true"><summary><b>Update gardener-controlplane to <code>1.125.0</code></b></summary><div><div class="collapsibleContent_i85q">
+<!-- -->
+<h1>[gardener/gardener]</h1>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="️-breaking-changes-3">⚠️ Breaking Changes<a href="#️-breaking-changes-3" class="hash-link" aria-label="Direct link to ⚠️ Breaking Changes" title="Direct link to ⚠️ Breaking Changes">​</a></h2>
+<ul>
+<li><code>[OPERATOR]</code> <code>spec.addons.nginxIngress.loadBalancerSourceRanges</code> are now validated as CIDRs. by @ScheererJ [#12539]</li>
+<li><code>[OPERATOR]</code> <code>spec.addons.nginxIngress.config</code> is now validated as conforming to config map data rules. by @ScheererJ [#12539]</li>
+<li><code>[OPERATOR]</code> <code>spec.systemComponents.coreDNS.rewriting.commonSuffixes</code> are now validated against DNS rules. by @ScheererJ [#12539]</li>
+<li><code>[OPERATOR]</code> The <code>UseNamespacedCloudProfile</code> feature gate has been graduated to GA and is locked to <code>true</code>.  by @LucaBernstein [#12620]</li>
+<li><code>[OPERATOR]</code> <code>spec.networking.type</code> is now validated as being a label name. by @ScheererJ [#12539]</li>
+<li><code>[OPERATOR]</code> All annotations of <code>kube-apiserver</code> service in the shoot control planes will be replaced by the minimum required set of annotations. Manually added annotations will be removed. by @ScheererJ [#12630]</li>
+<li><code>[OPERATOR]</code> The name of <code>ExposureClass</code> resources is now properly checked to be compliant to the DNS label rules. by @ScheererJ [#12539]</li>
+<li><code>[USER]</code> Setting shoot&#x27;s <code>.spec.providers.workers[].{maxSurge, maxUnavailable}</code> will be denied in future versions of Gardener for workers with updateStrategy <code>ManualInPlaceUpdate</code>. Users should unset these values with this version of Gardener. by @acumino [#12607]</li>
+</ul>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="-new-features-1">✨ New Features<a href="#-new-features-1" class="hash-link" aria-label="Direct link to ✨ New Features" title="Direct link to ✨ New Features">​</a></h2>
+<ul>
+<li><code>[USER]</code> The Shoot resource does now support configuring the global maximum allowed resources the vpa-recommender can recommend for a container. The corresponding upstream configuration option solves a known limitation of vpa-recommender where it can make a Pod unschedulable by recommending resource requests more than largest Node&#x27;s allocatable. For more details, see <a href="https://github.com/kubernetes/autoscaler/blob/master/vertical-pod-autoscaler/docs/examples.md#specifying-global-maximum-allowed-resources-to-prevent-pods-from-being-unschedulable" target="_blank" rel="noopener noreferrer">Specifying global maximum allowed resources to prevent pods from being unschedulable</a>. by @ialidzhikov [#12481]</li>
+<li><code>[OPERATOR]</code> The Seed and Garden resources do now support configuring the global maximum allowed resources the vpa-recommender can recommend for a container. The corresponding upstream configuration option solves a known limitation of vpa-recommender where it can make a Pod unschedulable by recommending resource requests more than largest Node&#x27;s allocatable. For more details, see <a href="https://github.com/kubernetes/autoscaler/blob/master/vertical-pod-autoscaler/docs/examples.md#specifying-global-maximum-allowed-resources-to-prevent-pods-from-being-unschedulable" target="_blank" rel="noopener noreferrer">Specifying global maximum allowed resources to prevent pods from being unschedulable</a>. by @ialidzhikov [#12481]</li>
+</ul>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="-bug-fixes-4">🐛 Bug Fixes<a href="#-bug-fixes-4" class="hash-link" aria-label="Direct link to 🐛 Bug Fixes" title="Direct link to 🐛 Bug Fixes">​</a></h2>
+<ul>
+<li><code>[OPERATOR]</code> Fixed local <code>gardenadm</code> development setup for non-amd64 systems. by @ScheererJ [#12619]</li>
+<li><code>[OPERATOR]</code> A bug which could cause istio service and workload dashboards to show &quot;many-to-many matching errors&quot; after kube-apiserver pods were rolling has been fixed.  by @oliver-goetz [#12635]</li>
+<li><code>[OPERATOR]</code> Fix cluster-autoscaler specific annotations on machine deployment upon update in worker specific cluster autoscaler options. by @takoverflow [#12548]</li>
+<li><code>[OPERATOR]</code> Seed registration was fixed for <code>ManagedSeed</code>s with seed templates configuring <code>spec.resources</code>. by @timuthy [#12652]</li>
+<li><code>[OPERATOR]</code> Fixed a bug in the cluster overview dashboard that showed <code>cluster-autoscaler</code> as down when not deployed. by @rickardsjp [#12654]</li>
+<li><code>[OPERATOR]</code> A bug which was causing the <code>gardener-node-agent</code> to enter crash-loop when its config was updated with breaking changes was fixed. by @AleksandarSavchev [#12589]</li>
+<li><code>[USER]</code> The Kubernetes feature gate <code>ValidatingAdmissionPolicy</code> is now marked as removed in Kubernetes 1.32. Previously, it was possible to upgrade a Shoot cluster to Kubernetes 1.32 with this feature gate enabled, which resulted in kube-apiserver failing to start due to an unrecognized feature gate. by @marc1404 [#12643]</li>
+</ul>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="-others-3">🏃 Others<a href="#-others-3" class="hash-link" aria-label="Direct link to 🏃 Others" title="Direct link to 🏃 Others">​</a></h2>
+<ul>
+<li><code>[DEPENDENCY]</code> The following dependencies have been updated:
+<ul>
+<li><code>gardener/vpn2</code> from <code>0.40.0</code> to <code>0.41.0</code>. <a href="https://redirect.github.com/gardener/vpn2/releases/tag/0.41.0" target="_blank" rel="noopener noreferrer">Release Notes</a> by @gardener-ci-robot [#12675]</li>
+</ul>
+</li>
+<li><code>[DEPENDENCY]</code> The following dependencies have been updated:
+<ul>
+<li><code>gardener/dashboard</code> from <code>1.81.0</code> to <code>1.81.1</code>. <a href="https://redirect.github.com/gardener/dashboard/releases/tag/1.81.1" target="_blank" rel="noopener noreferrer">Release Notes</a> by @gardener-ci-robot [#12616]</li>
+</ul>
+</li>
+<li><code>[DEPENDENCY]</code> The following dependencies have been updated:
+<ul>
+<li><code>gcr.io/istio-release/pilot</code> from <code>1.25.3</code> to <code>1.25.4</code>.</li>
+<li><code>gcr.io/istio-release/proxyv2</code> from <code>1.25.3</code> to <code>1.25.4</code>.</li>
+<li><code>istio.io/api</code> from <code>v1.25.3</code> to <code>v1.25.4</code>.  by @gardener-ci-robot [#12655]</li>
+</ul>
+</li>
+<li><code>[DEPENDENCY]</code> The following dependencies have been updated:
+<ul>
+<li><code>envoyproxy/envoy</code> from <code>v1.34.3</code> to <code>v1.35.0</code>. <a href="https://redirect.github.com/envoyproxy/envoy/releases/tag/v1.35.0" target="_blank" rel="noopener noreferrer">Release Notes</a> by @gardener-ci-robot [#12598]</li>
+</ul>
+</li>
+<li><code>[USER]</code> Updates to <code>spec.networking.ipFamiles</code> are now validated. by @axel7born [#12523]</li>
+<li><code>[DEVELOPER]</code> migrate CICD-Pipeline to GitHub-Actions by @ccwienk [#12592]</li>
+<li><code>[DEVELOPER]</code> The hostname of provider-local <code>Machines</code>/<code>Nodes</code> can be resolved via DNS, similar to typical cloud infrastructure environments. This allows connecting from a <code>Bastion</code> to a <code>Node</code> via its hostname. by @timebertt [#12657]</li>
+<li><code>[DEVELOPER]</code> <code>DNSRecord</code> may now use non-canonical IPv6 addresses. by @ScheererJ [#12667]</li>
+<li><code>[OPERATOR]</code> Adds machine capability based image defaulting to Shoots created with Cloudprofiles using Capabilities. by @Roncossek [#12529]</li>
+<li><code>[OPERATOR]</code> The Shoot Prometheus RBAC is now restricted to the control-plane and the garden namespace. by @chrkl [#12264]</li>
+<li><code>[OPERATOR]</code> A new validation for the following <code>(Namespaced)CloudProfile</code> fields has been added, ensuring qualified names:
+<ul>
+<li><code>.spec.machineImages[].name</code></li>
+<li><code>.spec.machineImages[].versions[].cri[].containerRuntimes[].type</code></li>
+<li><code>.spec.machineTypes[].name</code></li>
+<li><code>.spec.capabilities.name</code></li>
+<li><code>.spec.capabilities.values</code></li>
+<li><code>.spec.volumeTypes[].class</code></li>
+<li><code>.spec.volumeTypes[].name</code> by @LucaBernstein [#12666]</li>
+</ul>
+</li>
+<li><code>[OPERATOR]</code> The <code>gardener-node-agent</code> now has a <code>--config-dir</code> flag that is used to find the config file instead of a <code>--config</code> flag. by @AleksandarSavchev [#12589]</li>
+<li><code>[OPERATOR]</code> Unique usernames are generated for {Admin,Viewer}KubeconfigRequests by prefixing the original/requesting username with a random string. This approach prevents conflicts with existing RBAC rules in the cluster while still preserving the identity of the requesting user. by @timuthy [#12597]</li>
+<li><code>[OPERATOR]</code> Gardener administrators are now allowed to inspect and manage Services and Endpoints in the garden cluster. by @ialidzhikov [#12211]</li>
+<li><code>[OPERATOR]</code> A bug in <code>gardener-node-agent</code> that prevented the location for the sandbox image to be configurable to a custom value on worker nodes with containerd 2.x was fixed. by @MrBatschner [#12665]</li>
+</ul>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="-documentation-1">📖 Documentation<a href="#-documentation-1" class="hash-link" aria-label="Direct link to 📖 Documentation" title="Direct link to 📖 Documentation">​</a></h2>
+<ul>
+<li><code>[OPERATOR]</code> Operations guide was updated to explain how overlapping network ranges between seeds and shoots are implemented. by @domdom82 [#12637]</li>
+</ul>
+</div></div></details>
+<details class="details_lb9f alert alert--info details_b_Ee" data-collapsed="true"><summary><b>Update gardenlet to <code>1.125.0</code></b></summary><div><div class="collapsibleContent_i85q">
+<!-- -->
+<h1>[gardener/gardener]</h1>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="️-breaking-changes-4">⚠️ Breaking Changes<a href="#️-breaking-changes-4" class="hash-link" aria-label="Direct link to ⚠️ Breaking Changes" title="Direct link to ⚠️ Breaking Changes">​</a></h2>
+<ul>
+<li><code>[OPERATOR]</code> <code>spec.addons.nginxIngress.loadBalancerSourceRanges</code> are now validated as CIDRs. by @ScheererJ [#12539]</li>
+<li><code>[OPERATOR]</code> <code>spec.addons.nginxIngress.config</code> is now validated as conforming to config map data rules. by @ScheererJ [#12539]</li>
+<li><code>[OPERATOR]</code> <code>spec.systemComponents.coreDNS.rewriting.commonSuffixes</code> are now validated against DNS rules. by @ScheererJ [#12539]</li>
+<li><code>[OPERATOR]</code> The <code>UseNamespacedCloudProfile</code> feature gate has been graduated to GA and is locked to <code>true</code>.  by @LucaBernstein [#12620]</li>
+<li><code>[OPERATOR]</code> <code>spec.networking.type</code> is now validated as being a label name. by @ScheererJ [#12539]</li>
+<li><code>[OPERATOR]</code> All annotations of <code>kube-apiserver</code> service in the shoot control planes will be replaced by the minimum required set of annotations. Manually added annotations will be removed. by @ScheererJ [#12630]</li>
+<li><code>[OPERATOR]</code> The name of <code>ExposureClass</code> resources is now properly checked to be compliant to the DNS label rules. by @ScheererJ [#12539]</li>
+<li><code>[USER]</code> Setting shoot&#x27;s <code>.spec.providers.workers[].{maxSurge, maxUnavailable}</code> will be denied in future versions of Gardener for workers with updateStrategy <code>ManualInPlaceUpdate</code>. Users should unset these values with this version of Gardener. by @acumino [#12607]</li>
+</ul>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="-new-features-2">✨ New Features<a href="#-new-features-2" class="hash-link" aria-label="Direct link to ✨ New Features" title="Direct link to ✨ New Features">​</a></h2>
+<ul>
+<li><code>[USER]</code> The Shoot resource does now support configuring the global maximum allowed resources the vpa-recommender can recommend for a container. The corresponding upstream configuration option solves a known limitation of vpa-recommender where it can make a Pod unschedulable by recommending resource requests more than largest Node&#x27;s allocatable. For more details, see <a href="https://github.com/kubernetes/autoscaler/blob/master/vertical-pod-autoscaler/docs/examples.md#specifying-global-maximum-allowed-resources-to-prevent-pods-from-being-unschedulable" target="_blank" rel="noopener noreferrer">Specifying global maximum allowed resources to prevent pods from being unschedulable</a>. by @ialidzhikov [#12481]</li>
+<li><code>[OPERATOR]</code> The Seed and Garden resources do now support configuring the global maximum allowed resources the vpa-recommender can recommend for a container. The corresponding upstream configuration option solves a known limitation of vpa-recommender where it can make a Pod unschedulable by recommending resource requests more than largest Node&#x27;s allocatable. For more details, see <a href="https://github.com/kubernetes/autoscaler/blob/master/vertical-pod-autoscaler/docs/examples.md#specifying-global-maximum-allowed-resources-to-prevent-pods-from-being-unschedulable" target="_blank" rel="noopener noreferrer">Specifying global maximum allowed resources to prevent pods from being unschedulable</a>. by @ialidzhikov [#12481]</li>
+</ul>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="-bug-fixes-5">🐛 Bug Fixes<a href="#-bug-fixes-5" class="hash-link" aria-label="Direct link to 🐛 Bug Fixes" title="Direct link to 🐛 Bug Fixes">​</a></h2>
+<ul>
+<li><code>[OPERATOR]</code> Fixed local <code>gardenadm</code> development setup for non-amd64 systems. by @ScheererJ [#12619]</li>
+<li><code>[OPERATOR]</code> A bug which could cause istio service and workload dashboards to show &quot;many-to-many matching errors&quot; after kube-apiserver pods were rolling has been fixed.  by @oliver-goetz [#12635]</li>
+<li><code>[OPERATOR]</code> Fix cluster-autoscaler specific annotations on machine deployment upon update in worker specific cluster autoscaler options. by @takoverflow [#12548]</li>
+<li><code>[OPERATOR]</code> Seed registration was fixed for <code>ManagedSeed</code>s with seed templates configuring <code>spec.resources</code>. by @timuthy [#12652]</li>
+<li><code>[OPERATOR]</code> Fixed a bug in the cluster overview dashboard that showed <code>cluster-autoscaler</code> as down when not deployed. by @rickardsjp [#12654]</li>
+<li><code>[OPERATOR]</code> A bug which was causing the <code>gardener-node-agent</code> to enter crash-loop when its config was updated with breaking changes was fixed. by @AleksandarSavchev [#12589]</li>
+<li><code>[USER]</code> The Kubernetes feature gate <code>ValidatingAdmissionPolicy</code> is now marked as removed in Kubernetes 1.32. Previously, it was possible to upgrade a Shoot cluster to Kubernetes 1.32 with this feature gate enabled, which resulted in kube-apiserver failing to start due to an unrecognized feature gate. by @marc1404 [#12643]</li>
+</ul>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="-others-4">🏃 Others<a href="#-others-4" class="hash-link" aria-label="Direct link to 🏃 Others" title="Direct link to 🏃 Others">​</a></h2>
+<ul>
+<li><code>[DEPENDENCY]</code> The following dependencies have been updated:
+<ul>
+<li><code>gardener/vpn2</code> from <code>0.40.0</code> to <code>0.41.0</code>. <a href="https://redirect.github.com/gardener/vpn2/releases/tag/0.41.0" target="_blank" rel="noopener noreferrer">Release Notes</a> by @gardener-ci-robot [#12675]</li>
+</ul>
+</li>
+<li><code>[DEPENDENCY]</code> The following dependencies have been updated:
+<ul>
+<li><code>gardener/dashboard</code> from <code>1.81.0</code> to <code>1.81.1</code>. <a href="https://redirect.github.com/gardener/dashboard/releases/tag/1.81.1" target="_blank" rel="noopener noreferrer">Release Notes</a> by @gardener-ci-robot [#12616]</li>
+</ul>
+</li>
+<li><code>[DEPENDENCY]</code> The following dependencies have been updated:
+<ul>
+<li><code>gcr.io/istio-release/pilot</code> from <code>1.25.3</code> to <code>1.25.4</code>.</li>
+<li><code>gcr.io/istio-release/proxyv2</code> from <code>1.25.3</code> to <code>1.25.4</code>.</li>
+<li><code>istio.io/api</code> from <code>v1.25.3</code> to <code>v1.25.4</code>.  by @gardener-ci-robot [#12655]</li>
+</ul>
+</li>
+<li><code>[DEPENDENCY]</code> The following dependencies have been updated:
+<ul>
+<li><code>envoyproxy/envoy</code> from <code>v1.34.3</code> to <code>v1.35.0</code>. <a href="https://redirect.github.com/envoyproxy/envoy/releases/tag/v1.35.0" target="_blank" rel="noopener noreferrer">Release Notes</a> by @gardener-ci-robot [#12598]</li>
+</ul>
+</li>
+<li><code>[USER]</code> Updates to <code>spec.networking.ipFamiles</code> are now validated. by @axel7born [#12523]</li>
+<li><code>[DEVELOPER]</code> migrate CICD-Pipeline to GitHub-Actions by @ccwienk [#12592]</li>
+<li><code>[DEVELOPER]</code> The hostname of provider-local <code>Machines</code>/<code>Nodes</code> can be resolved via DNS, similar to typical cloud infrastructure environments. This allows connecting from a <code>Bastion</code> to a <code>Node</code> via its hostname. by @timebertt [#12657]</li>
+<li><code>[DEVELOPER]</code> <code>DNSRecord</code> may now use non-canonical IPv6 addresses. by @ScheererJ [#12667]</li>
+<li><code>[OPERATOR]</code> Adds machine capability based image defaulting to Shoots created with Cloudprofiles using Capabilities. by @Roncossek [#12529]</li>
+<li><code>[OPERATOR]</code> The Shoot Prometheus RBAC is now restricted to the control-plane and the garden namespace. by @chrkl [#12264]</li>
+<li><code>[OPERATOR]</code> A new validation for the following <code>(Namespaced)CloudProfile</code> fields has been added, ensuring qualified names:
+<ul>
+<li><code>.spec.machineImages[].name</code></li>
+<li><code>.spec.machineImages[].versions[].cri[].containerRuntimes[].type</code></li>
+<li><code>.spec.machineTypes[].name</code></li>
+<li><code>.spec.capabilities.name</code></li>
+<li><code>.spec.capabilities.values</code></li>
+<li><code>.spec.volumeTypes[].class</code></li>
+<li><code>.spec.volumeTypes[].name</code> by @LucaBernstein [#12666]</li>
+</ul>
+</li>
+<li><code>[OPERATOR]</code> The <code>gardener-node-agent</code> now has a <code>--config-dir</code> flag that is used to find the config file instead of a <code>--config</code> flag. by @AleksandarSavchev [#12589]</li>
+<li><code>[OPERATOR]</code> Unique usernames are generated for {Admin,Viewer}KubeconfigRequests by prefixing the original/requesting username with a random string. This approach prevents conflicts with existing RBAC rules in the cluster while still preserving the identity of the requesting user. by @timuthy [#12597]</li>
+<li><code>[OPERATOR]</code> Gardener administrators are now allowed to inspect and manage Services and Endpoints in the garden cluster. by @ialidzhikov [#12211]</li>
+<li><code>[OPERATOR]</code> A bug in <code>gardener-node-agent</code> that prevented the location for the sandbox image to be configurable to a custom value on worker nodes with containerd 2.x was fixed. by @MrBatschner [#12665]</li>
+</ul>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="-documentation-2">📖 Documentation<a href="#-documentation-2" class="hash-link" aria-label="Direct link to 📖 Documentation" title="Direct link to 📖 Documentation">​</a></h2>
+<ul>
+<li><code>[OPERATOR]</code> Operations guide was updated to explain how overlapping network ranges between seeds and shoots are implemented. by @domdom82 [#12637]</li>
 </ul>
 </div></div></details></div></article><nav class="docusaurus-mt-lg pagination-nav" aria-label="Docs pages"><a class="pagination-nav__link pagination-nav__link--next" href="/release-notes/v1.124"><div class="pagination-nav__sublabel">Next</div><div class="pagination-nav__label">Release Notes v1.124</div></a></nav></div></div></div></div></main></div></div></div><footer class="theme-layout-footer footer footer--dark"><div class="container container-fluid"><div class="row footer__links"><div class="theme-layout-footer-column col footer__col"><div class="footer__title">Docs</div><ul class="footer__items clean-list"><li class="footer__item"><a class="footer__link-item" href="/docs/overview">Docs</a></li></ul></div><div class="theme-layout-footer-column col footer__col"><div class="footer__title">Community</div><ul class="footer__items clean-list"><li class="footer__item"><a href="https://github.com/yakecloud" target="_blank" rel="noopener noreferrer" class="footer__link-item">GitHub<svg width="13.5" height="13.5" aria-hidden="true" class="iconExternalLink_nPIU"><use href="#theme-svg-external-link"></use></svg></a></li><li class="footer__item"><a href="https://github.com/gardener-community" target="_blank" rel="noopener noreferrer" class="footer__link-item">Gardener Community<svg width="13.5" height="13.5" aria-hidden="true" class="iconExternalLink_nPIU"><use href="#theme-svg-external-link"></use></svg></a></li><li class="footer__item"><a href="https://gardener-cloud.slack.com" target="_blank" rel="noopener noreferrer" class="footer__link-item">Slack<svg width="13.5" height="13.5" aria-hidden="true" class="iconExternalLink_nPIU"><use href="#theme-svg-external-link"></use></svg></a></li></ul></div><div class="theme-layout-footer-column col footer__col"><div class="footer__title">More</div><ul class="footer__items clean-list"><li class="footer__item"><a class="footer__link-item" href="/blog">Blog</a></li><li class="footer__item"><a class="footer__link-item" href="/legals">Legals</a></li><li class="footer__item"><a class="footer__link-item" href="/privacy-policy">Privacy policy</a></li></ul></div></div><div class="footer__bottom text--center"><div class="footer__copyright">Copyright © 2025 23 Technologies GmbH</div></div></div></footer></div>
 </body>
