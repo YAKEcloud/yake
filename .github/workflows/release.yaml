@@ -36,7 +36,7 @@ jobs:
         run: npm i -g yarn
 
       - name: Checkout source
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
         with:
           token: "${{ secrets.GH_TOKEN_23T_MACHINE_USER }}"
           fetch-depth: 0
@@ -75,7 +75,7 @@ jobs:
     needs:
       - prepare
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
         with:
           ref: "v${{ needs.prepare.outputs.version }}"
       - name: Login to GHCR
