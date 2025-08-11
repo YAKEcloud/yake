@@ -1,21 +1,13 @@
 # [gardener/external-dns-management]
 
-## ⚠️ Breaking Changes
+## ✨ New Features
 
-- `[OPERATOR]` Deprecated `DNSEntry.spec.reference`. The field will be removed with a future release. by @marc1404 [#558]
-- `[USER]` The values of provider secrets are now validated restrictedly. Because of this policy change, minor inconsistencies tolerated formerly can now lead to failing validation and therefore for failing provider states. Especially check for leading and trailing whitespaces, empty values or unknown secret keys. by @MartinWeindel [#535]
+- `[USER]` Extended validation of `DNSEntry` data fields. by @marc1404 [#564]
 ## 🐛 Bug Fixes
 
-- `[OPERATOR]` Fix panic on controller startup if a `DNSEntry` is annotated with `dns.gardener.cloud/target-hard-ignore=true` by @MartinWeindel [#554]
-- `[USER]` Ensure ignored entries are not deleted on cleanup in an edge case. by @MartinWeindel [#505]
-- `[USER]` Fix sporadic failing updates on switching entries between simple and weighted routing policy. by @MartinWeindel [#524]
+- `[USER]` Fixed conditionally requiring `AWS_ACCESS_KEY_ID` and `AWS_SECRET_ACCESS_KEY` only when `AWS_USE_CREDENTIALS_CHAIN` is not set (relevant for AWS Route53 `DNSProvider`). by @marc1404 [#578]
+- `[USER]` Increased maximum length of PowerDNS provider `apiKey` to `8192`. by @Lappihuan [#576]
 ## 🏃 Others
 
-- `[OPERATOR]` Bump `openstack-designate` provider library `gophercloud` from version `v0.24.0` to `v2.7.0`. by @MartinWeindel [#481]
-- `[OPERATOR]` export testresults as inlined ocm-resource by @heldkat [#561]
-- `[OPERATOR]` Avoid entry reconciliation starvation on high load by improving timing of zone reconciliations. by @MartinWeindel [#533]
-- `[OPERATOR]` Implement validation of provider secrets. Trailing whitespaces are not ignored anymore. Empty values or unknown secret keys are not allowed anymore for security reasons. by @MartinWeindel [#535]
-- `[OPERATOR]` Fix the `linux/arm64` image build. by @MartinWeindel [#551]
-- `[OPERATOR]` Add validation for `DNSProvider` field `.spec.type` to restrict it to known types. Additional standard validations have been added for fields like `.spec.defaultTTL`, `domains.include`, `domains.exclude`, `zones.include`, `zones.exclude`. by @MartinWeindel [#557]
-- `[DEVELOPER]` migrate CICD-Pipelines to GitHub-Actions by @ccwienk [#531]
-- `[USER]` [provider type openstack-designate] Allow secret key `authURL` as alias of `OS_AUTH_URL` by @MartinWeindel [#504]
+- `[DEVELOPER]` Refactor `DNSHandlerAdapter` implementations to avoid provider specific dependencies on reuse. by @MartinWeindel [#589]
+- `[OPERATOR]` Allow values `local` and `gdch-dns` for provider types by @MartinWeindel [#589]
