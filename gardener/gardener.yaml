@@ -16,7 +16,7 @@ spec:
   chart:
     spec:
       chart: gardener-controlplane
-      version: 1.124.1
+      version: 1.124.2
       sourceRef:
         kind: HelmRepository
         name: gardener-community-charts
@@ -117,7 +117,7 @@ spec:
   chart:
     spec:
       chart: gardener-controlplane
-      version: 1.124.1
+      version: 1.124.2
       sourceRef:
         kind: HelmRepository
         name: gardener-community-charts
