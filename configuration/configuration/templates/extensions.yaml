@@ -58,7 +58,7 @@ stringData:
       version: 0.24.0
 
     shoot-networking-problemdetector:
-      version: 0.27.0
+      version: 0.28.0
 
     shoot-rsyslog-relp:
       version: 0.10.0
