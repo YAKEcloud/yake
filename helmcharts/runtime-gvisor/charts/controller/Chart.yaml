@@ -1,4 +1,4 @@
 apiVersion: v2
 description: Helmchart for controllerregistration of runtime-gvisor
 name: controller
-version: 0.22.0
+version: 0.23.0
