@@ -5,7 +5,7 @@
 <meta name="generator" content="Docusaurus v3.8.1">
 <title data-rh="true">Release Notes next | Yet another Kubernetes Engine</title><meta data-rh="true" name="viewport" content="width=device-width,initial-scale=1"><meta data-rh="true" name="twitter:card" content="summary_large_image"><meta data-rh="true" property="og:url" content="https://yake.cloud/release-notes/next"><meta data-rh="true" property="og:locale" content="en"><meta data-rh="true" name="docusaurus_locale" content="en"><meta data-rh="true" name="docsearch:language" content="en"><meta data-rh="true" name="gardener" content="installation, production, operations, maintenance"><meta data-rh="true" name="docusaurus_version" content="current"><meta data-rh="true" name="docusaurus_tag" content="docs-release-notes-current"><meta data-rh="true" name="docsearch:version" content="current"><meta data-rh="true" name="docsearch:docusaurus_tag" content="docs-release-notes-current"><meta data-rh="true" property="og:title" content="Release Notes next | Yet another Kubernetes Engine"><meta data-rh="true" name="description" content="Yake release notes and upgrade guide"><meta data-rh="true" property="og:description" content="Yake release notes and upgrade guide"><link data-rh="true" rel="icon" href="/img/favicon.ico"><link data-rh="true" rel="canonical" href="https://yake.cloud/release-notes/next"><link data-rh="true" rel="alternate" href="https://yake.cloud/release-notes/next" hreflang="en"><link data-rh="true" rel="alternate" href="https://yake.cloud/release-notes/next" hreflang="x-default"><script data-rh="true" type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Release Notes next","item":"https://yake.cloud/release-notes/next"}]}</script><link rel="alternate" type="application/rss+xml" href="/blog/rss.xml" title="Yet another Kubernetes Engine RSS Feed">
 <link rel="alternate" type="application/atom+xml" href="/blog/atom.xml" title="Yet another Kubernetes Engine Atom Feed"><link rel="stylesheet" href="/assets/css/styles.9a630ee0.css">
-<script src="/assets/js/runtime~main.5372a758.js" defer="defer"></script>
+<script src="/assets/js/runtime~main.033a44f8.js" defer="defer"></script>
 <script src="/assets/js/main.5f8cc9e3.js" defer="defer"></script>
 </head>
 <body class="navigation-with-keyboard">
@@ -144,6 +144,333 @@
 <ul>
 <li><code>[USER]</code> Errors that occur during <code>Worker</code> reconciliation are now also propagated to the <code>Shoot</code> status. by @gardener-ci-robot [<a href="https://github.com/gardener/gardener/pull/12789" target="_blank" rel="noopener noreferrer">#12789</a>]</li>
 <li><code>[OPERATOR]</code> The <code>plutono-datasources</code> <code>ConfigMap</code> is no longer wrongfully garbage collected while it is in use. by @gardener-ci-robot [<a href="https://github.com/gardener/gardener/pull/12765" target="_blank" rel="noopener noreferrer">#12765</a>]</li>
+</ul>
+</div></div></details>
+<details class="details_lb9f alert alert--info details_b_Ee" data-collapsed="true"><summary><b>Update gardener-controlplane to <code>1.126.0</code></b></summary><div><div class="collapsibleContent_i85q">
+<!-- -->
+<h1>[github.com/gardener/gardener:v1.126.0]</h1>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="️-breaking-changes-1">⚠️ Breaking Changes<a href="#️-breaking-changes-1" class="hash-link" aria-label="Direct link to ⚠️ Breaking Changes" title="Direct link to ⚠️ Breaking Changes">​</a></h2>
+<ul>
+<li>
+<p><code>[OPERATOR]</code> A separate <code>node-local-dns</code> <code>DaemonSet</code> is deployed for each worker pool such that each <code>DaemonSet</code> has the name <code>node-local-dns-&lt;worker-pool-name&gt;</code>.<br>
+If you are using <code>gardener-extension-networking-cilium</code> in your landscape, it is required to update it to a version which supports these new names for the <code>DaemonSet</code>s.<br>
+Support is added with <a href="https://github.com/gardener/gardener-extension-networking-cilium/pull/622" target="_blank" rel="noopener noreferrer">https://github.com/gardener/gardener-extension-networking-cilium/pull/622</a> and included in versions starting from: <a href="https://github.com/gardener/gardener-extension-networking-cilium/releases/tag/v1.42.1" target="_blank" rel="noopener noreferrer"><code>v1.42.1</code></a>, <a href="https://github.com/gardener/gardener-extension-networking-cilium/releases/tag/v1.41.3" target="_blank" rel="noopener noreferrer"><code>v1.41.3</code></a> and <a href="https://github.com/gardener/gardener-extension-networking-cilium/releases/tag/v1.40.4" target="_blank" rel="noopener noreferrer"><code>v1.40.4</code></a> by @DockToFuture [<a href="https://github.com/gardener/gardener/pull/12422" target="_blank" rel="noopener noreferrer">#12422</a>]</p>
+</li>
+<li>
+<p><code>[OPERATOR]</code> ⚠️ The <code>NewWorkerPoolHash</code> feature gate has been promoted to beta and is now enabled by default. When the feature gate is enabled, changes to <code>kubeReserved</code>, <code>systemReserved</code>, <code>evictionHard</code> or <code>cpuManagerPolicy</code> in the <code>kubelet</code> of the <code>Shoot</code> will trigger a node-roll. All provider extensions must be upgraded to a version which includes Gardener <code>v1.98.0</code> first to support this feature. by @Duciwuci [<a href="https://github.com/gardener/gardener/pull/12550" target="_blank" rel="noopener noreferrer">#12550</a>]</p>
+</li>
+<li>
+<p><code>[DEVELOPER]</code> The local Gardener development setup has been restructured:</p>
+<ul>
+<li>The location of key config files has changed. In particular, <code>project.yaml</code> now has to be created at <code>example/provider-extensions/garden/project/base/project.yaml</code>.</li>
+<li>The deprecated <code>SecretBinding</code> resource has been removed from the local deployment. Developers should now use <code>CredentialsBinding</code> resources instead.</li>
+<li>The template for credentials bindings is now located at:
+<ul>
+<li>For static credentials: <a href="https://github.com/gardener/gardener/blob/master/example/provider-extensions/garden/project/without-workload-identity/credentials/credentialsbindings.yaml.tmpl" target="_blank" rel="noopener noreferrer"><code>example/provider-extensions/garden/project/without-workload-identity/credentials/credentialsbindings.yaml.tmpl</code></a></li>
+<li>For workload identity: <a href="https://github.com/gardener/gardener/blob/master/example/provider-extensions/garden/project/with-workload-identity/credentials/credentialsbindings.yaml.tmpl" target="_blank" rel="noopener noreferrer"><code>example/provider-extensions/garden/project/with-workload-identity/credentials/credentialsbindings.yaml.tmpl</code></a></li>
+</ul>
+</li>
+<li>When referencing static credentials, update your configuration to use <code>CredentialsBinding</code> referencing <code>Secret</code> objects, as shown in the new template file. The previous <code>secretbindings.yaml</code> file and template have been removed.</li>
+</ul>
+<p><strong>Action required:</strong><br>
+If you use static credentials for your local setup, update your configuration to:</p>
+<ul>
+<li>Use the new location for <code>project.yaml</code>.</li>
+<li>Replace any usage of <code>secretbindings.yaml</code> with <code>credentialsbindings.yaml</code> as per the new template and location.</li>
+<li>In your shoot spec, use <code>spec.credentialsBindingName</code> instead of <code>spec.secretBindingName</code> by @wpross [<a href="https://github.com/gardener/gardener/pull/12748" target="_blank" rel="noopener noreferrer">#12748</a>]</li>
+</ul>
+</li>
+<li>
+<p><code>[DEVELOPER]</code> The constant <code>github.com/gardener/gardener/pkg/apis/core/v1beta1/constants.ShootGroupViewers</code> has been removed, please use <code>github.com/gardener/gardener/pkg/apis/core/v1beta1/constants.ShootSystemViewersGroupName</code> by @vpnachev [<a href="https://github.com/gardener/gardener/pull/12673" target="_blank" rel="noopener noreferrer">#12673</a>]</p>
+</li>
+</ul>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="-noteworthy">📰 Noteworthy<a href="#-noteworthy" class="hash-link" aria-label="Direct link to 📰 Noteworthy" title="Direct link to 📰 Noteworthy">​</a></h2>
+<ul>
+<li><code>[USER]</code> New ClusterRoleBindings are deployed in the shoot clusters, they will grant Admin and Viewer permissions that will be later leveraged by the <code>AdminKubeconfig</code> and <code>ViewerKubeconfig</code> feature of Gardener.
+<ul>
+<li><code>gardener.cloud:system:admins</code> - grants admin access to users that are Gardener System admins</li>
+<li><code>gardener.cloud:system:viewers</code>- grants viewer access to users that are Gardener System viewers</li>
+<li><code>gardener.cloud:project:admins</code> - grants admin access to users that are Gardener Project admins</li>
+<li><code>gardener.cloud:project:viewers</code> - grants viewer access to users that are Gardener Project viewers by @vpnachev [<a href="https://github.com/gardener/gardener/pull/12673" target="_blank" rel="noopener noreferrer">#12673</a>]</li>
+</ul>
+</li>
+</ul>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="-new-features">✨ New Features<a href="#-new-features" class="hash-link" aria-label="Direct link to ✨ New Features" title="Direct link to ✨ New Features">​</a></h2>
+<ul>
+<li><code>[OPERATOR]</code> Add annotation <code>shoot.gardener.cloud/emergency-stop-reconciliations=true</code> to <code>Seed</code> resources to temporarily disable <code>Shoot</code> reconciliations. by @LucaBernstein [<a href="https://github.com/gardener/gardener/pull/12712" target="_blank" rel="noopener noreferrer">#12712</a>]</li>
+</ul>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="-bug-fixes-3">🐛 Bug Fixes<a href="#-bug-fixes-3" class="hash-link" aria-label="Direct link to 🐛 Bug Fixes" title="Direct link to 🐛 Bug Fixes">​</a></h2>
+<ul>
+<li><code>[OPERATOR]</code> An issue causing the <code>plutono-datasources</code> ConfigMap to be reconciled by 2 ManagedResources when Seed is Garden managed by <code>gardener-operator</code> is now fixed. Occasionally, the issue was preventing successful Seed deletion. by @gardener-ci-robot [<a href="https://github.com/gardener/gardener/pull/12798" target="_blank" rel="noopener noreferrer">#12798</a>]</li>
+<li><code>[OPERATOR]</code> Fixed MachineImage and MachineType architecture defaulting for <code>CloudProfile</code>s supporting one architecture only. by @Roncossek [<a href="https://github.com/gardener/gardener/pull/12745" target="_blank" rel="noopener noreferrer">#12745</a>]</li>
+<li><code>[USER]</code> Errors that occur during <code>Worker</code> reconciliation are now also propagated to the <code>Shoot</code> status. by @matthias-horne [<a href="https://github.com/gardener/gardener/pull/12769" target="_blank" rel="noopener noreferrer">#12769</a>]</li>
+<li><code>[USER]</code> The status of constraint  <code>DualStackNodesMigrationReady</code>  is now <code>progressing</code> instead of <code>false</code> at the start of a migration to dual-stack networking. by @axel7born [<a href="https://github.com/gardener/gardener/pull/12685" target="_blank" rel="noopener noreferrer">#12685</a>]</li>
+<li><code>[OPERATOR]</code> The <code>plutono-datasources</code> <code>ConfigMap</code> is no longer wrongfully garbage collected while it is in use. by @timebertt [<a href="https://github.com/gardener/gardener/pull/12762" target="_blank" rel="noopener noreferrer">#12762</a>]</li>
+</ul>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="-others-7">🏃 Others<a href="#-others-7" class="hash-link" aria-label="Direct link to 🏃 Others" title="Direct link to 🏃 Others">​</a></h2>
+<ul>
+<li><code>[DEPENDENCY]</code> The following dependencies have been updated:
+<ul>
+<li><code>gardener/dashboard</code> from <code>1.81.1</code> to <code>1.81.2</code>. <a href="https://redirect.github.com/gardener/dashboard/releases/tag/1.81.2" target="_blank" rel="noopener noreferrer">Release Notes</a> by @gardener-ci-robot [<a href="https://github.com/gardener/gardener/pull/12691" target="_blank" rel="noopener noreferrer">#12691</a>]</li>
+</ul>
+</li>
+<li><code>[OPERATOR]</code> Starting from Kubernetes version 1.34, enabling or disabling node-local-dns will no longer trigger node rolling (except kube-proxy is running in IPVS mode). Instead, a cleanup job will be executed. Additionally, node-local-dns is deployed per WorkerPool and node-local-dns will use UDP as default protocol for DNS queries to the upstream DNS server. by @DockToFuture [<a href="https://github.com/gardener/gardener/pull/12422" target="_blank" rel="noopener noreferrer">#12422</a>]</li>
+<li><code>[DEPENDENCY]</code> The following dependencies have been updated:
+<ul>
+<li><code>registry.k8s.io/ingress-nginx/controller-chroot</code> from <code>v1.13.0</code> to <code>v1.13.1</code>. by @gardener-ci-robot [<a href="https://github.com/gardener/gardener/pull/12710" target="_blank" rel="noopener noreferrer">#12710</a>]</li>
+</ul>
+</li>
+<li><code>[DEPENDENCY]</code> The following dependencies have been updated:
+<ul>
+<li><code>registry.k8s.io/ingress-nginx/controller-chroot</code> from <code>v1.12.4</code> to <code>v1.12.5</code>. by @gardener-ci-robot [<a href="https://github.com/gardener/gardener/pull/12713" target="_blank" rel="noopener noreferrer">#12713</a>]</li>
+</ul>
+</li>
+<li><code>[DEPENDENCY]</code> The following dependencies have been updated:
+<ul>
+<li><code>gardener/vpn2</code> from <code>0.41.0</code> to <code>0.41.1</code>. <a href="https://redirect.github.com/gardener/vpn2/releases/tag/0.41.1" target="_blank" rel="noopener noreferrer">Release Notes</a> by @gardener-ci-robot [<a href="https://github.com/gardener/gardener/pull/12722" target="_blank" rel="noopener noreferrer">#12722</a>]</li>
+</ul>
+</li>
+<li><code>[USER]</code> Collect <code>apiserver_validating_admission_policy_check_total</code> metric by shoot Prometheus. by @chrkl [<a href="https://github.com/gardener/gardener/pull/12716" target="_blank" rel="noopener noreferrer">#12716</a>]</li>
+<li><code>[OPERATOR]</code> The <code>device-taint-eviction-controller</code> is disabled for workerless Shoots with Kubernetes v1.33+. by @RadaBDimitrova [<a href="https://github.com/gardener/gardener/pull/12757" target="_blank" rel="noopener noreferrer">#12757</a>]</li>
+<li><code>[DEPENDENCY]</code> The following dependencies have been updated:
+<ul>
+<li><code>gardener/autoscaler</code> from <code>v1.32.0</code> to <code>v1.32.1</code>. <a href="https://redirect.github.com/gardener/autoscaler/releases/tag/v1.32.1" target="_blank" rel="noopener noreferrer">Release Notes</a> by @gardener-ci-robot [<a href="https://github.com/gardener/gardener/pull/12715" target="_blank" rel="noopener noreferrer">#12715</a>]</li>
+</ul>
+</li>
+<li><code>[OPERATOR]</code> Remove the init container and annotation used for the Prometheus volume cleanup migration from Prometheus resources by @vicwicker [<a href="https://github.com/gardener/gardener/pull/12728" target="_blank" rel="noopener noreferrer">#12728</a>]</li>
+<li><code>[DEPENDENCY]</code> The following dependencies have been updated:
+<ul>
+<li><code>quay.io/kiwigrid/k8s-sidecar</code> from <code>1.30.7</code> to <code>1.30.8</code>. by @gardener-ci-robot [<a href="https://github.com/gardener/gardener/pull/12727" target="_blank" rel="noopener noreferrer">#12727</a>]</li>
+</ul>
+</li>
+<li><code>[OPERATOR]</code> gardenlet now deploys a <code>ServiceMonitor</code> resource for the <code>vpa-updater</code>. With this, the <code>vpa-updater</code> metrics are scraped by prometheus. by @vitanovs [<a href="https://github.com/gardener/gardener/pull/12677" target="_blank" rel="noopener noreferrer">#12677</a>]</li>
+<li><code>[DEVELOPER]</code> <code>golang-test</code> images for Go 1.25 are built now. Those for Go 1.23 are not built anymore because it is out of maintenance. by @marc1404 [<a href="https://github.com/gardener/gardener/pull/12770" target="_blank" rel="noopener noreferrer">#12770</a>]</li>
+<li><code>[OPERATOR]</code> Validations for <code>spec.provider.worker[]</code> and <code>spec.kubernetes.clusterAutoscaler</code> have been improved. by @aaronfern [<a href="https://github.com/gardener/gardener/pull/12567" target="_blank" rel="noopener noreferrer">#12567</a>]</li>
+<li><code>[OPERATOR]</code> The AdmissionConfiguration API resource has been migrated from version v1alpha1 to v1. by @georgibaltiev [<a href="https://github.com/gardener/gardener/pull/12615" target="_blank" rel="noopener noreferrer">#12615</a>]</li>
+<li><code>[OPERATOR]</code> Update Setup Guide to include Cert Management for Garden by @hendrikKahl [<a href="https://github.com/gardener/gardener/pull/12706" target="_blank" rel="noopener noreferrer">#12706</a>]</li>
+<li><code>[DEPENDENCY]</code> The following dependencies have been updated:
+<ul>
+<li><code>quay.io/kiwigrid/k8s-sidecar</code> from <code>1.30.8</code> to <code>1.30.9</code>. by @gardener-ci-robot [<a href="https://github.com/gardener/gardener/pull/12750" target="_blank" rel="noopener noreferrer">#12750</a>]</li>
+</ul>
+</li>
+</ul>
+</div></div></details>
+<details class="details_lb9f alert alert--info details_b_Ee" data-collapsed="true"><summary><b>Update gardener-controlplane to <code>1.126.0</code></b></summary><div><div class="collapsibleContent_i85q">
+<!-- -->
+<h1>[github.com/gardener/gardener:v1.126.0]</h1>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="️-breaking-changes-2">⚠️ Breaking Changes<a href="#️-breaking-changes-2" class="hash-link" aria-label="Direct link to ⚠️ Breaking Changes" title="Direct link to ⚠️ Breaking Changes">​</a></h2>
+<ul>
+<li>
+<p><code>[OPERATOR]</code> A separate <code>node-local-dns</code> <code>DaemonSet</code> is deployed for each worker pool such that each <code>DaemonSet</code> has the name <code>node-local-dns-&lt;worker-pool-name&gt;</code>.<br>
+If you are using <code>gardener-extension-networking-cilium</code> in your landscape, it is required to update it to a version which supports these new names for the <code>DaemonSet</code>s.<br>
+Support is added with <a href="https://github.com/gardener/gardener-extension-networking-cilium/pull/622" target="_blank" rel="noopener noreferrer">https://github.com/gardener/gardener-extension-networking-cilium/pull/622</a> and included in versions starting from: <a href="https://github.com/gardener/gardener-extension-networking-cilium/releases/tag/v1.42.1" target="_blank" rel="noopener noreferrer"><code>v1.42.1</code></a>, <a href="https://github.com/gardener/gardener-extension-networking-cilium/releases/tag/v1.41.3" target="_blank" rel="noopener noreferrer"><code>v1.41.3</code></a> and <a href="https://github.com/gardener/gardener-extension-networking-cilium/releases/tag/v1.40.4" target="_blank" rel="noopener noreferrer"><code>v1.40.4</code></a> by @DockToFuture [<a href="https://github.com/gardener/gardener/pull/12422" target="_blank" rel="noopener noreferrer">#12422</a>]</p>
+</li>
+<li>
+<p><code>[OPERATOR]</code> ⚠️ The <code>NewWorkerPoolHash</code> feature gate has been promoted to beta and is now enabled by default. When the feature gate is enabled, changes to <code>kubeReserved</code>, <code>systemReserved</code>, <code>evictionHard</code> or <code>cpuManagerPolicy</code> in the <code>kubelet</code> of the <code>Shoot</code> will trigger a node-roll. All provider extensions must be upgraded to a version which includes Gardener <code>v1.98.0</code> first to support this feature. by @Duciwuci [<a href="https://github.com/gardener/gardener/pull/12550" target="_blank" rel="noopener noreferrer">#12550</a>]</p>
+</li>
+<li>
+<p><code>[DEVELOPER]</code> The local Gardener development setup has been restructured:</p>
+<ul>
+<li>The location of key config files has changed. In particular, <code>project.yaml</code> now has to be created at <code>example/provider-extensions/garden/project/base/project.yaml</code>.</li>
+<li>The deprecated <code>SecretBinding</code> resource has been removed from the local deployment. Developers should now use <code>CredentialsBinding</code> resources instead.</li>
+<li>The template for credentials bindings is now located at:
+<ul>
+<li>For static credentials: <a href="https://github.com/gardener/gardener/blob/master/example/provider-extensions/garden/project/without-workload-identity/credentials/credentialsbindings.yaml.tmpl" target="_blank" rel="noopener noreferrer"><code>example/provider-extensions/garden/project/without-workload-identity/credentials/credentialsbindings.yaml.tmpl</code></a></li>
+<li>For workload identity: <a href="https://github.com/gardener/gardener/blob/master/example/provider-extensions/garden/project/with-workload-identity/credentials/credentialsbindings.yaml.tmpl" target="_blank" rel="noopener noreferrer"><code>example/provider-extensions/garden/project/with-workload-identity/credentials/credentialsbindings.yaml.tmpl</code></a></li>
+</ul>
+</li>
+<li>When referencing static credentials, update your configuration to use <code>CredentialsBinding</code> referencing <code>Secret</code> objects, as shown in the new template file. The previous <code>secretbindings.yaml</code> file and template have been removed.</li>
+</ul>
+<p><strong>Action required:</strong><br>
+If you use static credentials for your local setup, update your configuration to:</p>
+<ul>
+<li>Use the new location for <code>project.yaml</code>.</li>
+<li>Replace any usage of <code>secretbindings.yaml</code> with <code>credentialsbindings.yaml</code> as per the new template and location.</li>
+<li>In your shoot spec, use <code>spec.credentialsBindingName</code> instead of <code>spec.secretBindingName</code> by @wpross [<a href="https://github.com/gardener/gardener/pull/12748" target="_blank" rel="noopener noreferrer">#12748</a>]</li>
+</ul>
+</li>
+<li>
+<p><code>[DEVELOPER]</code> The constant <code>github.com/gardener/gardener/pkg/apis/core/v1beta1/constants.ShootGroupViewers</code> has been removed, please use <code>github.com/gardener/gardener/pkg/apis/core/v1beta1/constants.ShootSystemViewersGroupName</code> by @vpnachev [<a href="https://github.com/gardener/gardener/pull/12673" target="_blank" rel="noopener noreferrer">#12673</a>]</p>
+</li>
+</ul>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="-noteworthy-1">📰 Noteworthy<a href="#-noteworthy-1" class="hash-link" aria-label="Direct link to 📰 Noteworthy" title="Direct link to 📰 Noteworthy">​</a></h2>
+<ul>
+<li><code>[USER]</code> New ClusterRoleBindings are deployed in the shoot clusters, they will grant Admin and Viewer permissions that will be later leveraged by the <code>AdminKubeconfig</code> and <code>ViewerKubeconfig</code> feature of Gardener.
+<ul>
+<li><code>gardener.cloud:system:admins</code> - grants admin access to users that are Gardener System admins</li>
+<li><code>gardener.cloud:system:viewers</code>- grants viewer access to users that are Gardener System viewers</li>
+<li><code>gardener.cloud:project:admins</code> - grants admin access to users that are Gardener Project admins</li>
+<li><code>gardener.cloud:project:viewers</code> - grants viewer access to users that are Gardener Project viewers by @vpnachev [<a href="https://github.com/gardener/gardener/pull/12673" target="_blank" rel="noopener noreferrer">#12673</a>]</li>
+</ul>
+</li>
+</ul>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="-new-features-1">✨ New Features<a href="#-new-features-1" class="hash-link" aria-label="Direct link to ✨ New Features" title="Direct link to ✨ New Features">​</a></h2>
+<ul>
+<li><code>[OPERATOR]</code> Add annotation <code>shoot.gardener.cloud/emergency-stop-reconciliations=true</code> to <code>Seed</code> resources to temporarily disable <code>Shoot</code> reconciliations. by @LucaBernstein [<a href="https://github.com/gardener/gardener/pull/12712" target="_blank" rel="noopener noreferrer">#12712</a>]</li>
+</ul>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="-bug-fixes-4">🐛 Bug Fixes<a href="#-bug-fixes-4" class="hash-link" aria-label="Direct link to 🐛 Bug Fixes" title="Direct link to 🐛 Bug Fixes">​</a></h2>
+<ul>
+<li><code>[OPERATOR]</code> An issue causing the <code>plutono-datasources</code> ConfigMap to be reconciled by 2 ManagedResources when Seed is Garden managed by <code>gardener-operator</code> is now fixed. Occasionally, the issue was preventing successful Seed deletion. by @gardener-ci-robot [<a href="https://github.com/gardener/gardener/pull/12798" target="_blank" rel="noopener noreferrer">#12798</a>]</li>
+<li><code>[OPERATOR]</code> Fixed MachineImage and MachineType architecture defaulting for <code>CloudProfile</code>s supporting one architecture only. by @Roncossek [<a href="https://github.com/gardener/gardener/pull/12745" target="_blank" rel="noopener noreferrer">#12745</a>]</li>
+<li><code>[USER]</code> Errors that occur during <code>Worker</code> reconciliation are now also propagated to the <code>Shoot</code> status. by @matthias-horne [<a href="https://github.com/gardener/gardener/pull/12769" target="_blank" rel="noopener noreferrer">#12769</a>]</li>
+<li><code>[USER]</code> The status of constraint  <code>DualStackNodesMigrationReady</code>  is now <code>progressing</code> instead of <code>false</code> at the start of a migration to dual-stack networking. by @axel7born [<a href="https://github.com/gardener/gardener/pull/12685" target="_blank" rel="noopener noreferrer">#12685</a>]</li>
+<li><code>[OPERATOR]</code> The <code>plutono-datasources</code> <code>ConfigMap</code> is no longer wrongfully garbage collected while it is in use. by @timebertt [<a href="https://github.com/gardener/gardener/pull/12762" target="_blank" rel="noopener noreferrer">#12762</a>]</li>
+</ul>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="-others-8">🏃 Others<a href="#-others-8" class="hash-link" aria-label="Direct link to 🏃 Others" title="Direct link to 🏃 Others">​</a></h2>
+<ul>
+<li><code>[DEPENDENCY]</code> The following dependencies have been updated:
+<ul>
+<li><code>gardener/dashboard</code> from <code>1.81.1</code> to <code>1.81.2</code>. <a href="https://redirect.github.com/gardener/dashboard/releases/tag/1.81.2" target="_blank" rel="noopener noreferrer">Release Notes</a> by @gardener-ci-robot [<a href="https://github.com/gardener/gardener/pull/12691" target="_blank" rel="noopener noreferrer">#12691</a>]</li>
+</ul>
+</li>
+<li><code>[OPERATOR]</code> Starting from Kubernetes version 1.34, enabling or disabling node-local-dns will no longer trigger node rolling (except kube-proxy is running in IPVS mode). Instead, a cleanup job will be executed. Additionally, node-local-dns is deployed per WorkerPool and node-local-dns will use UDP as default protocol for DNS queries to the upstream DNS server. by @DockToFuture [<a href="https://github.com/gardener/gardener/pull/12422" target="_blank" rel="noopener noreferrer">#12422</a>]</li>
+<li><code>[DEPENDENCY]</code> The following dependencies have been updated:
+<ul>
+<li><code>registry.k8s.io/ingress-nginx/controller-chroot</code> from <code>v1.13.0</code> to <code>v1.13.1</code>. by @gardener-ci-robot [<a href="https://github.com/gardener/gardener/pull/12710" target="_blank" rel="noopener noreferrer">#12710</a>]</li>
+</ul>
+</li>
+<li><code>[DEPENDENCY]</code> The following dependencies have been updated:
+<ul>
+<li><code>registry.k8s.io/ingress-nginx/controller-chroot</code> from <code>v1.12.4</code> to <code>v1.12.5</code>. by @gardener-ci-robot [<a href="https://github.com/gardener/gardener/pull/12713" target="_blank" rel="noopener noreferrer">#12713</a>]</li>
+</ul>
+</li>
+<li><code>[DEPENDENCY]</code> The following dependencies have been updated:
+<ul>
+<li><code>gardener/vpn2</code> from <code>0.41.0</code> to <code>0.41.1</code>. <a href="https://redirect.github.com/gardener/vpn2/releases/tag/0.41.1" target="_blank" rel="noopener noreferrer">Release Notes</a> by @gardener-ci-robot [<a href="https://github.com/gardener/gardener/pull/12722" target="_blank" rel="noopener noreferrer">#12722</a>]</li>
+</ul>
+</li>
+<li><code>[USER]</code> Collect <code>apiserver_validating_admission_policy_check_total</code> metric by shoot Prometheus. by @chrkl [<a href="https://github.com/gardener/gardener/pull/12716" target="_blank" rel="noopener noreferrer">#12716</a>]</li>
+<li><code>[OPERATOR]</code> The <code>device-taint-eviction-controller</code> is disabled for workerless Shoots with Kubernetes v1.33+. by @RadaBDimitrova [<a href="https://github.com/gardener/gardener/pull/12757" target="_blank" rel="noopener noreferrer">#12757</a>]</li>
+<li><code>[DEPENDENCY]</code> The following dependencies have been updated:
+<ul>
+<li><code>gardener/autoscaler</code> from <code>v1.32.0</code> to <code>v1.32.1</code>. <a href="https://redirect.github.com/gardener/autoscaler/releases/tag/v1.32.1" target="_blank" rel="noopener noreferrer">Release Notes</a> by @gardener-ci-robot [<a href="https://github.com/gardener/gardener/pull/12715" target="_blank" rel="noopener noreferrer">#12715</a>]</li>
+</ul>
+</li>
+<li><code>[OPERATOR]</code> Remove the init container and annotation used for the Prometheus volume cleanup migration from Prometheus resources by @vicwicker [<a href="https://github.com/gardener/gardener/pull/12728" target="_blank" rel="noopener noreferrer">#12728</a>]</li>
+<li><code>[DEPENDENCY]</code> The following dependencies have been updated:
+<ul>
+<li><code>quay.io/kiwigrid/k8s-sidecar</code> from <code>1.30.7</code> to <code>1.30.8</code>. by @gardener-ci-robot [<a href="https://github.com/gardener/gardener/pull/12727" target="_blank" rel="noopener noreferrer">#12727</a>]</li>
+</ul>
+</li>
+<li><code>[OPERATOR]</code> gardenlet now deploys a <code>ServiceMonitor</code> resource for the <code>vpa-updater</code>. With this, the <code>vpa-updater</code> metrics are scraped by prometheus. by @vitanovs [<a href="https://github.com/gardener/gardener/pull/12677" target="_blank" rel="noopener noreferrer">#12677</a>]</li>
+<li><code>[DEVELOPER]</code> <code>golang-test</code> images for Go 1.25 are built now. Those for Go 1.23 are not built anymore because it is out of maintenance. by @marc1404 [<a href="https://github.com/gardener/gardener/pull/12770" target="_blank" rel="noopener noreferrer">#12770</a>]</li>
+<li><code>[OPERATOR]</code> Validations for <code>spec.provider.worker[]</code> and <code>spec.kubernetes.clusterAutoscaler</code> have been improved. by @aaronfern [<a href="https://github.com/gardener/gardener/pull/12567" target="_blank" rel="noopener noreferrer">#12567</a>]</li>
+<li><code>[OPERATOR]</code> The AdmissionConfiguration API resource has been migrated from version v1alpha1 to v1. by @georgibaltiev [<a href="https://github.com/gardener/gardener/pull/12615" target="_blank" rel="noopener noreferrer">#12615</a>]</li>
+<li><code>[OPERATOR]</code> Update Setup Guide to include Cert Management for Garden by @hendrikKahl [<a href="https://github.com/gardener/gardener/pull/12706" target="_blank" rel="noopener noreferrer">#12706</a>]</li>
+<li><code>[DEPENDENCY]</code> The following dependencies have been updated:
+<ul>
+<li><code>quay.io/kiwigrid/k8s-sidecar</code> from <code>1.30.8</code> to <code>1.30.9</code>. by @gardener-ci-robot [<a href="https://github.com/gardener/gardener/pull/12750" target="_blank" rel="noopener noreferrer">#12750</a>]</li>
+</ul>
+</li>
+</ul>
+</div></div></details>
+<details class="details_lb9f alert alert--info details_b_Ee" data-collapsed="true"><summary><b>Update gardenlet to <code>1.126.0</code></b></summary><div><div class="collapsibleContent_i85q">
+<!-- -->
+<h1>[github.com/gardener/gardener:v1.126.0]</h1>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="️-breaking-changes-3">⚠️ Breaking Changes<a href="#️-breaking-changes-3" class="hash-link" aria-label="Direct link to ⚠️ Breaking Changes" title="Direct link to ⚠️ Breaking Changes">​</a></h2>
+<ul>
+<li>
+<p><code>[OPERATOR]</code> A separate <code>node-local-dns</code> <code>DaemonSet</code> is deployed for each worker pool such that each <code>DaemonSet</code> has the name <code>node-local-dns-&lt;worker-pool-name&gt;</code>.<br>
+If you are using <code>gardener-extension-networking-cilium</code> in your landscape, it is required to update it to a version which supports these new names for the <code>DaemonSet</code>s.<br>
+Support is added with <a href="https://github.com/gardener/gardener-extension-networking-cilium/pull/622" target="_blank" rel="noopener noreferrer">https://github.com/gardener/gardener-extension-networking-cilium/pull/622</a> and included in versions starting from: <a href="https://github.com/gardener/gardener-extension-networking-cilium/releases/tag/v1.42.1" target="_blank" rel="noopener noreferrer"><code>v1.42.1</code></a>, <a href="https://github.com/gardener/gardener-extension-networking-cilium/releases/tag/v1.41.3" target="_blank" rel="noopener noreferrer"><code>v1.41.3</code></a> and <a href="https://github.com/gardener/gardener-extension-networking-cilium/releases/tag/v1.40.4" target="_blank" rel="noopener noreferrer"><code>v1.40.4</code></a> by @DockToFuture [<a href="https://github.com/gardener/gardener/pull/12422" target="_blank" rel="noopener noreferrer">#12422</a>]</p>
+</li>
+<li>
+<p><code>[OPERATOR]</code> ⚠️ The <code>NewWorkerPoolHash</code> feature gate has been promoted to beta and is now enabled by default. When the feature gate is enabled, changes to <code>kubeReserved</code>, <code>systemReserved</code>, <code>evictionHard</code> or <code>cpuManagerPolicy</code> in the <code>kubelet</code> of the <code>Shoot</code> will trigger a node-roll. All provider extensions must be upgraded to a version which includes Gardener <code>v1.98.0</code> first to support this feature. by @Duciwuci [<a href="https://github.com/gardener/gardener/pull/12550" target="_blank" rel="noopener noreferrer">#12550</a>]</p>
+</li>
+<li>
+<p><code>[DEVELOPER]</code> The local Gardener development setup has been restructured:</p>
+<ul>
+<li>The location of key config files has changed. In particular, <code>project.yaml</code> now has to be created at <code>example/provider-extensions/garden/project/base/project.yaml</code>.</li>
+<li>The deprecated <code>SecretBinding</code> resource has been removed from the local deployment. Developers should now use <code>CredentialsBinding</code> resources instead.</li>
+<li>The template for credentials bindings is now located at:
+<ul>
+<li>For static credentials: <a href="https://github.com/gardener/gardener/blob/master/example/provider-extensions/garden/project/without-workload-identity/credentials/credentialsbindings.yaml.tmpl" target="_blank" rel="noopener noreferrer"><code>example/provider-extensions/garden/project/without-workload-identity/credentials/credentialsbindings.yaml.tmpl</code></a></li>
+<li>For workload identity: <a href="https://github.com/gardener/gardener/blob/master/example/provider-extensions/garden/project/with-workload-identity/credentials/credentialsbindings.yaml.tmpl" target="_blank" rel="noopener noreferrer"><code>example/provider-extensions/garden/project/with-workload-identity/credentials/credentialsbindings.yaml.tmpl</code></a></li>
+</ul>
+</li>
+<li>When referencing static credentials, update your configuration to use <code>CredentialsBinding</code> referencing <code>Secret</code> objects, as shown in the new template file. The previous <code>secretbindings.yaml</code> file and template have been removed.</li>
+</ul>
+<p><strong>Action required:</strong><br>
+If you use static credentials for your local setup, update your configuration to:</p>
+<ul>
+<li>Use the new location for <code>project.yaml</code>.</li>
+<li>Replace any usage of <code>secretbindings.yaml</code> with <code>credentialsbindings.yaml</code> as per the new template and location.</li>
+<li>In your shoot spec, use <code>spec.credentialsBindingName</code> instead of <code>spec.secretBindingName</code> by @wpross [<a href="https://github.com/gardener/gardener/pull/12748" target="_blank" rel="noopener noreferrer">#12748</a>]</li>
+</ul>
+</li>
+<li>
+<p><code>[DEVELOPER]</code> The constant <code>github.com/gardener/gardener/pkg/apis/core/v1beta1/constants.ShootGroupViewers</code> has been removed, please use <code>github.com/gardener/gardener/pkg/apis/core/v1beta1/constants.ShootSystemViewersGroupName</code> by @vpnachev [<a href="https://github.com/gardener/gardener/pull/12673" target="_blank" rel="noopener noreferrer">#12673</a>]</p>
+</li>
+</ul>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="-noteworthy-2">📰 Noteworthy<a href="#-noteworthy-2" class="hash-link" aria-label="Direct link to 📰 Noteworthy" title="Direct link to 📰 Noteworthy">​</a></h2>
+<ul>
+<li><code>[USER]</code> New ClusterRoleBindings are deployed in the shoot clusters, they will grant Admin and Viewer permissions that will be later leveraged by the <code>AdminKubeconfig</code> and <code>ViewerKubeconfig</code> feature of Gardener.
+<ul>
+<li><code>gardener.cloud:system:admins</code> - grants admin access to users that are Gardener System admins</li>
+<li><code>gardener.cloud:system:viewers</code>- grants viewer access to users that are Gardener System viewers</li>
+<li><code>gardener.cloud:project:admins</code> - grants admin access to users that are Gardener Project admins</li>
+<li><code>gardener.cloud:project:viewers</code> - grants viewer access to users that are Gardener Project viewers by @vpnachev [<a href="https://github.com/gardener/gardener/pull/12673" target="_blank" rel="noopener noreferrer">#12673</a>]</li>
+</ul>
+</li>
+</ul>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="-new-features-2">✨ New Features<a href="#-new-features-2" class="hash-link" aria-label="Direct link to ✨ New Features" title="Direct link to ✨ New Features">​</a></h2>
+<ul>
+<li><code>[OPERATOR]</code> Add annotation <code>shoot.gardener.cloud/emergency-stop-reconciliations=true</code> to <code>Seed</code> resources to temporarily disable <code>Shoot</code> reconciliations. by @LucaBernstein [<a href="https://github.com/gardener/gardener/pull/12712" target="_blank" rel="noopener noreferrer">#12712</a>]</li>
+</ul>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="-bug-fixes-5">🐛 Bug Fixes<a href="#-bug-fixes-5" class="hash-link" aria-label="Direct link to 🐛 Bug Fixes" title="Direct link to 🐛 Bug Fixes">​</a></h2>
+<ul>
+<li><code>[OPERATOR]</code> An issue causing the <code>plutono-datasources</code> ConfigMap to be reconciled by 2 ManagedResources when Seed is Garden managed by <code>gardener-operator</code> is now fixed. Occasionally, the issue was preventing successful Seed deletion. by @gardener-ci-robot [<a href="https://github.com/gardener/gardener/pull/12798" target="_blank" rel="noopener noreferrer">#12798</a>]</li>
+<li><code>[OPERATOR]</code> Fixed MachineImage and MachineType architecture defaulting for <code>CloudProfile</code>s supporting one architecture only. by @Roncossek [<a href="https://github.com/gardener/gardener/pull/12745" target="_blank" rel="noopener noreferrer">#12745</a>]</li>
+<li><code>[USER]</code> Errors that occur during <code>Worker</code> reconciliation are now also propagated to the <code>Shoot</code> status. by @matthias-horne [<a href="https://github.com/gardener/gardener/pull/12769" target="_blank" rel="noopener noreferrer">#12769</a>]</li>
+<li><code>[USER]</code> The status of constraint  <code>DualStackNodesMigrationReady</code>  is now <code>progressing</code> instead of <code>false</code> at the start of a migration to dual-stack networking. by @axel7born [<a href="https://github.com/gardener/gardener/pull/12685" target="_blank" rel="noopener noreferrer">#12685</a>]</li>
+<li><code>[OPERATOR]</code> The <code>plutono-datasources</code> <code>ConfigMap</code> is no longer wrongfully garbage collected while it is in use. by @timebertt [<a href="https://github.com/gardener/gardener/pull/12762" target="_blank" rel="noopener noreferrer">#12762</a>]</li>
+</ul>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="-others-9">🏃 Others<a href="#-others-9" class="hash-link" aria-label="Direct link to 🏃 Others" title="Direct link to 🏃 Others">​</a></h2>
+<ul>
+<li><code>[DEPENDENCY]</code> The following dependencies have been updated:
+<ul>
+<li><code>gardener/dashboard</code> from <code>1.81.1</code> to <code>1.81.2</code>. <a href="https://redirect.github.com/gardener/dashboard/releases/tag/1.81.2" target="_blank" rel="noopener noreferrer">Release Notes</a> by @gardener-ci-robot [<a href="https://github.com/gardener/gardener/pull/12691" target="_blank" rel="noopener noreferrer">#12691</a>]</li>
+</ul>
+</li>
+<li><code>[OPERATOR]</code> Starting from Kubernetes version 1.34, enabling or disabling node-local-dns will no longer trigger node rolling (except kube-proxy is running in IPVS mode). Instead, a cleanup job will be executed. Additionally, node-local-dns is deployed per WorkerPool and node-local-dns will use UDP as default protocol for DNS queries to the upstream DNS server. by @DockToFuture [<a href="https://github.com/gardener/gardener/pull/12422" target="_blank" rel="noopener noreferrer">#12422</a>]</li>
+<li><code>[DEPENDENCY]</code> The following dependencies have been updated:
+<ul>
+<li><code>registry.k8s.io/ingress-nginx/controller-chroot</code> from <code>v1.13.0</code> to <code>v1.13.1</code>. by @gardener-ci-robot [<a href="https://github.com/gardener/gardener/pull/12710" target="_blank" rel="noopener noreferrer">#12710</a>]</li>
+</ul>
+</li>
+<li><code>[DEPENDENCY]</code> The following dependencies have been updated:
+<ul>
+<li><code>registry.k8s.io/ingress-nginx/controller-chroot</code> from <code>v1.12.4</code> to <code>v1.12.5</code>. by @gardener-ci-robot [<a href="https://github.com/gardener/gardener/pull/12713" target="_blank" rel="noopener noreferrer">#12713</a>]</li>
+</ul>
+</li>
+<li><code>[DEPENDENCY]</code> The following dependencies have been updated:
+<ul>
+<li><code>gardener/vpn2</code> from <code>0.41.0</code> to <code>0.41.1</code>. <a href="https://redirect.github.com/gardener/vpn2/releases/tag/0.41.1" target="_blank" rel="noopener noreferrer">Release Notes</a> by @gardener-ci-robot [<a href="https://github.com/gardener/gardener/pull/12722" target="_blank" rel="noopener noreferrer">#12722</a>]</li>
+</ul>
+</li>
+<li><code>[USER]</code> Collect <code>apiserver_validating_admission_policy_check_total</code> metric by shoot Prometheus. by @chrkl [<a href="https://github.com/gardener/gardener/pull/12716" target="_blank" rel="noopener noreferrer">#12716</a>]</li>
+<li><code>[OPERATOR]</code> The <code>device-taint-eviction-controller</code> is disabled for workerless Shoots with Kubernetes v1.33+. by @RadaBDimitrova [<a href="https://github.com/gardener/gardener/pull/12757" target="_blank" rel="noopener noreferrer">#12757</a>]</li>
+<li><code>[DEPENDENCY]</code> The following dependencies have been updated:
+<ul>
+<li><code>gardener/autoscaler</code> from <code>v1.32.0</code> to <code>v1.32.1</code>. <a href="https://redirect.github.com/gardener/autoscaler/releases/tag/v1.32.1" target="_blank" rel="noopener noreferrer">Release Notes</a> by @gardener-ci-robot [<a href="https://github.com/gardener/gardener/pull/12715" target="_blank" rel="noopener noreferrer">#12715</a>]</li>
+</ul>
+</li>
+<li><code>[OPERATOR]</code> Remove the init container and annotation used for the Prometheus volume cleanup migration from Prometheus resources by @vicwicker [<a href="https://github.com/gardener/gardener/pull/12728" target="_blank" rel="noopener noreferrer">#12728</a>]</li>
+<li><code>[DEPENDENCY]</code> The following dependencies have been updated:
+<ul>
+<li><code>quay.io/kiwigrid/k8s-sidecar</code> from <code>1.30.7</code> to <code>1.30.8</code>. by @gardener-ci-robot [<a href="https://github.com/gardener/gardener/pull/12727" target="_blank" rel="noopener noreferrer">#12727</a>]</li>
+</ul>
+</li>
+<li><code>[OPERATOR]</code> gardenlet now deploys a <code>ServiceMonitor</code> resource for the <code>vpa-updater</code>. With this, the <code>vpa-updater</code> metrics are scraped by prometheus. by @vitanovs [<a href="https://github.com/gardener/gardener/pull/12677" target="_blank" rel="noopener noreferrer">#12677</a>]</li>
+<li><code>[DEVELOPER]</code> <code>golang-test</code> images for Go 1.25 are built now. Those for Go 1.23 are not built anymore because it is out of maintenance. by @marc1404 [<a href="https://github.com/gardener/gardener/pull/12770" target="_blank" rel="noopener noreferrer">#12770</a>]</li>
+<li><code>[OPERATOR]</code> Validations for <code>spec.provider.worker[]</code> and <code>spec.kubernetes.clusterAutoscaler</code> have been improved. by @aaronfern [<a href="https://github.com/gardener/gardener/pull/12567" target="_blank" rel="noopener noreferrer">#12567</a>]</li>
+<li><code>[OPERATOR]</code> The AdmissionConfiguration API resource has been migrated from version v1alpha1 to v1. by @georgibaltiev [<a href="https://github.com/gardener/gardener/pull/12615" target="_blank" rel="noopener noreferrer">#12615</a>]</li>
+<li><code>[OPERATOR]</code> Update Setup Guide to include Cert Management for Garden by @hendrikKahl [<a href="https://github.com/gardener/gardener/pull/12706" target="_blank" rel="noopener noreferrer">#12706</a>]</li>
+<li><code>[DEPENDENCY]</code> The following dependencies have been updated:
+<ul>
+<li><code>quay.io/kiwigrid/k8s-sidecar</code> from <code>1.30.8</code> to <code>1.30.9</code>. by @gardener-ci-robot [<a href="https://github.com/gardener/gardener/pull/12750" target="_blank" rel="noopener noreferrer">#12750</a>]</li>
+</ul>
+</li>
 </ul>
 </div></div></details></div></article><nav class="docusaurus-mt-lg pagination-nav" aria-label="Docs pages"><a class="pagination-nav__link pagination-nav__link--next" href="/release-notes/v1.125"><div class="pagination-nav__sublabel">Next</div><div class="pagination-nav__label">Release Notes v1.125</div></a></nav></div></div></div></div></main></div></div></div><footer class="theme-layout-footer footer footer--dark"><div class="container container-fluid"><div class="row footer__links"><div class="theme-layout-footer-column col footer__col"><div class="footer__title">Docs</div><ul class="footer__items clean-list"><li class="footer__item"><a class="footer__link-item" href="/docs/overview">Docs</a></li></ul></div><div class="theme-layout-footer-column col footer__col"><div class="footer__title">Community</div><ul class="footer__items clean-list"><li class="footer__item"><a href="https://github.com/yakecloud" target="_blank" rel="noopener noreferrer" class="footer__link-item">GitHub<svg width="13.5" height="13.5" aria-hidden="true" class="iconExternalLink_nPIU"><use href="#theme-svg-external-link"></use></svg></a></li><li class="footer__item"><a href="https://github.com/gardener-community" target="_blank" rel="noopener noreferrer" class="footer__link-item">Gardener Community<svg width="13.5" height="13.5" aria-hidden="true" class="iconExternalLink_nPIU"><use href="#theme-svg-external-link"></use></svg></a></li><li class="footer__item"><a href="https://gardener-cloud.slack.com" target="_blank" rel="noopener noreferrer" class="footer__link-item">Slack<svg width="13.5" height="13.5" aria-hidden="true" class="iconExternalLink_nPIU"><use href="#theme-svg-external-link"></use></svg></a></li></ul></div><div class="theme-layout-footer-column col footer__col"><div class="footer__title">More</div><ul class="footer__items clean-list"><li class="footer__item"><a class="footer__link-item" href="/blog">Blog</a></li><li class="footer__item"><a class="footer__link-item" href="/legals">Legals</a></li><li class="footer__item"><a class="footer__link-item" href="/privacy-policy">Privacy policy</a></li></ul></div></div><div class="footer__bottom text--center"><div class="footer__copyright">Copyright © 2025 23 Technologies GmbH</div></div></div></footer></div>
 </body>
