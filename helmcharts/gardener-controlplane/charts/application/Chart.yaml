@@ -1,4 +1,6 @@
 apiVersion: v2
 description: A Helm chart to deploy the Gardener application related resources
 name: application
-version: 1.125.2
+sources:
+- https://github.com/gardener/gardener
+version: 1.126.0
