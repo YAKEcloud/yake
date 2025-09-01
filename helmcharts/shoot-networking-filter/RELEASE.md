@@ -1,21 +1,15 @@
-# [gardener/gardener-extension-shoot-networking-filter]
+# [github.com/gardener/gardener-extension-shoot-networking-filter:v0.24.1]
 
-## ⚠️ Breaking Changes
-
-- `[OPERATOR]` `shoot-networking-filter` no longer supports Shoots with Кubernetes version <= 1.28. by @RadaBDimitrova [#256]
 ## 🏃 Others
+- `[OPERATOR]` Fix priorityClassName for deployment on Garden runtime cluster. by @MartinWeindel [[#266](https://github.com/gardener/gardener-extension-shoot-networking-filter/pull/266)]
 
-- `[DEVELOPER]` migrade CICD-Pipeline to GitHub-Actions by @ccwienk [#245]
-- `[OPERATOR]` Support deployment on runtime cluster and for seeds. by @MartinWeindel [#233]
-- `[OPERATOR]` export testresults as inlined ocm-resource by @heldkat [#258]
-- `[OPERATOR]` Admission controller and additional input validation have been added. by @axel7born [#248]
 
-[github.com/gardener/egress-filter-refresher:0.18.0]
-# [gardener/egress-filter-refresher]
-
-## ✨ New Features
-
-- `[USER]` export testresults as inlined ocm-resource by @heldkat [#61]
-## 🏃 Others
-
-- `[DEVELOPER]` migrate CICD-Pipelines to GitHub-Actions by @ccwienk [#60]
+## Helm Charts
+- runtime-networking-filter: `europe-docker.pkg.dev/gardener-project/releases/charts/gardener/extensions/runtime-networking-filter:v0.24.1`
+- shoot-networking-filter-admission-application: `europe-docker.pkg.dev/gardener-project/releases/charts/gardener/extensions/shoot-networking-filter-admission-application:v0.24.1`
+- shoot-networking-filter-admission-runtime: `europe-docker.pkg.dev/gardener-project/releases/charts/gardener/extensions/shoot-networking-filter-admission-runtime:v0.24.1`
+- shoot-networking-filter: `europe-docker.pkg.dev/gardener-project/releases/charts/gardener/extensions/shoot-networking-filter:v0.24.1`
+## Container (OCI) Images
+- gardener-extension-shoot-networking-filter-admission: `europe-docker.pkg.dev/gardener-project/releases/gardener/extensions/shoot-networking-filter-admission:v0.24.1`
+- gardener-extension-shoot-networking-filter: `europe-docker.pkg.dev/gardener-project/releases/gardener/extensions/shoot-networking-filter:v0.24.1`
+- gardener-runtime-networking-filter: `europe-docker.pkg.dev/gardener-project/releases/gardener/extensions/runtime-networking-filter:v0.24.1`
