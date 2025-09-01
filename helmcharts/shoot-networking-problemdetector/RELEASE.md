@@ -1,6 +1,10 @@
-# [github.com/gardener/gardener-extension-shoot-networking-problemdetector:v0.28.0]
+# [github.com/gardener/gardener-extension-shoot-networking-problemdetector:v0.29.0]
 
 ## 🏃 Others
-- `[OPERATOR]` `shoot-networking-problemdetector` no longer supports Shoots with Кubernetes version <= 1.28. by @georgibaltiev [[#259](https://github.com/gardener/gardener-extension-shoot-networking-problemdetector/pull/259)]
-- `[OPERATOR]` export testresults as inlined ocm-resource by @heldkat [[#261](https://github.com/gardener/gardener-extension-shoot-networking-problemdetector/pull/261)]
-- `[DEVELOPER]` migrate CICD-Pipeline to GitHub-Actions by @ccwienk [[#252](https://github.com/gardener/gardener-extension-shoot-networking-problemdetector/pull/252)]
+- `[OPERATOR]` An example `Extension` manifest for extension registration has been added. It can be found at [`example/extension.yaml`](https://github.com/gardener/gardener-extension-shoot-networking-problemdetector/blob/master/example/extension.yaml) by @timuthy [[#271](https://github.com/gardener/gardener-extension-shoot-networking-problemdetector/pull/271)]
+
+
+## Helm Charts
+- shoot-networking-problemdetector: `europe-docker.pkg.dev/gardener-project/releases/charts/gardener/extensions/shoot-networking-problemdetector:v0.29.0`
+## Container (OCI) Images
+- gardener-extension-shoot-networking-problemdetector: `europe-docker.pkg.dev/gardener-project/releases/gardener/extensions/shoot-networking-problemdetector:v0.29.0`
