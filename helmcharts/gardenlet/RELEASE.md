@@ -1,64 +1,93 @@
-# [github.com/gardener/gardener:v1.126.0]
+# [github.com/gardener/gardener:v1.127.0]
 
 ## ⚠️ Breaking Changes
-- `[OPERATOR]` A separate `node-local-dns` `DaemonSet` is deployed for each worker pool such that each `DaemonSet` has the name `node-local-dns-<worker-pool-name>`.  
-  If you are using `gardener-extension-networking-cilium` in your landscape, it is required to update it to a version which supports these new names for the `DaemonSet`s.   
-  Support is added with https://github.com/gardener/gardener-extension-networking-cilium/pull/622 and included in versions starting from: [`v1.42.1`](https://github.com/gardener/gardener-extension-networking-cilium/releases/tag/v1.42.1), [`v1.41.3`](https://github.com/gardener/gardener-extension-networking-cilium/releases/tag/v1.41.3) and [`v1.40.4`](https://github.com/gardener/gardener-extension-networking-cilium/releases/tag/v1.40.4) by @DockToFuture [[#12422](https://github.com/gardener/gardener/pull/12422)]
-- `[OPERATOR]` ⚠️ The `NewWorkerPoolHash` feature gate has been promoted to beta and is now enabled by default. When the feature gate is enabled, changes to `kubeReserved`, `systemReserved`, `evictionHard` or `cpuManagerPolicy` in the `kubelet` of the `Shoot` will trigger a node-roll. All provider extensions must be upgraded to a version which includes Gardener `v1.98.0` first to support this feature. by @Duciwuci [[#12550](https://github.com/gardener/gardener/pull/12550)]
-- `[DEVELOPER]` The local Gardener development setup has been restructured:  
+- `[OPERATOR]` The `ProjectValidator` admission plugin is now renamed to `ProjectMutator`. If you have references to the old name of the admission plugin, make sure to adapt them before upgrading to this version of Gardener. by @georgibaltiev [[#12818](https://github.com/gardener/gardener/pull/12818)]
+- `[OPERATOR]` ⚠️ Gardener does no longer support garden, seed, or shoot clusters with Kubernetes versions <= `1.28`. Make sure to upgrade all existing clusters before upgrading to this Gardener version. by @seshachalam-yv [[#12486](https://github.com/gardener/gardener/pull/12486)]
+- `[USER]` It is not allowed anymore to specify a comma ",", as well as duplicate values, within the entries of the`Shoot.spec.kubernetes.kubeAPIServer.apiAudiences[]`. Please update your `Shoot`s accordingly. by @tobschli [[#12788](https://github.com/gardener/gardener/pull/12788)]
+- `[DEVELOPER]` The `Priority` field for the `MachineDeployment` API is now required instead of optional. Provider extensions need to make sure that the `MachineDeployment`s they generate specify this field. by @tobschli [[#12742](https://github.com/gardener/gardener/pull/12742)]
+- `[OPERATOR]` The `CredentialsRotationWithoutWorkersRollout` feature gate has been promoted to GA and is enabled unconditionally. by @rfranzke [[#12857](https://github.com/gardener/gardener/pull/12857)]
+- `[OPERATOR]` The GA-ed and unconditionally enabled `NewVPN` feature gates is removed. If you have references to this feature gate, clean them up before upgrading to this version of Gardener. by @ialidzhikov [[#12807](https://github.com/gardener/gardener/pull/12807)]
+- `[OPERATOR]` A Project resource's `.spec.namespace` field is now validated in the storage layer. It was previously validated in the `ProjectValidator` admission plugin due to backwards-compatibility reasons. With this change, gardener-apiserver unconditionally accepts only `garden` and values with prefix `garden-` as valid Project namespaces. by @georgibaltiev [[#12784](https://github.com/gardener/gardener/pull/12784)]
+- `[USER]` gardener-apiserver no longer serves the `/openapi/v2` endpoint. kubectl < 1.27 relies on this endpoint. Make sure to use kubectl 1.27+ against this version of gardener-apiserver. by @seshachalam-yv [[#12486](https://github.com/gardener/gardener/pull/12486)]
+- `[USER]` The `spec.seedSelector` field in the `Shoot` API is now validated for invalid label values. by @shafeeqes [[#12708](https://github.com/gardener/gardener/pull/12708)]
+- `[OPERATOR]` The following fields of resources in the `core.gardener.cloud` group are now validated for invalid label values:  
+  - `spec.seedSelector` in the `CloudProfile` API  
+  - `spec.deployment.seedSelector` in the `ControllerRegistration` API  
+  - `scheduling.seedSelector` in the `ExposureClass` API  
     
-  - The location of key config files has changed. In particular, `project.yaml` now has to be created at `example/provider-extensions/garden/project/base/project.yaml`.  
-  - The deprecated `SecretBinding` resource has been removed from the local deployment. Developers should now use `CredentialsBinding` resources instead.  
-  - The template for credentials bindings is now located at:  
-    - For static credentials: [`example/provider-extensions/garden/project/without-workload-identity/credentials/credentialsbindings.yaml.tmpl`](https://github.com/gardener/gardener/blob/master/example/provider-extensions/garden/project/without-workload-identity/credentials/credentialsbindings.yaml.tmpl)  
-    - For workload identity: [`example/provider-extensions/garden/project/with-workload-identity/credentials/credentialsbindings.yaml.tmpl`](https://github.com/gardener/gardener/blob/master/example/provider-extensions/garden/project/with-workload-identity/credentials/credentialsbindings.yaml.tmpl)  
-  - When referencing static credentials, update your configuration to use `CredentialsBinding` referencing `Secret` objects, as shown in the new template file. The previous `secretbindings.yaml` file and template have been removed.  
+  The following fields of resources in the `operator.gardener.cloud` group are now validated for invalid label values:  
+  - `spec.virtualCluster.gardener.gardenerControllerManager.defaultProjectQuotas.projectSelector` in the `Garden` API  
     
-  **Action required:**  
-  If you use static credentials for your local setup, update your configuration to:  
-  - Use the new location for `project.yaml`.  
-  - Replace any usage of `secretbindings.yaml` with `credentialsbindings.yaml` as per the new template and location.  
-  - In your shoot spec, use `spec.credentialsBindingName` instead of `spec.secretBindingName` by @wpross [[#12748](https://github.com/gardener/gardener/pull/12748)]
-- `[DEVELOPER]` The constant `github.com/gardener/gardener/pkg/apis/core/v1beta1/constants.ShootGroupViewers` has been removed, please use `github.com/gardener/gardener/pkg/apis/core/v1beta1/constants.ShootSystemViewersGroupName` by @vpnachev [[#12673](https://github.com/gardener/gardener/pull/12673)]
+  The following fields of resources in the `controllermanager.config.gardener.cloud` group are now validated for invalid label values:  
+  - `controllers.project.quotas[].projectSelector`  
+    
+  The following fields of resources in the `seedmanagement.gardener.cloud` group are now validated for invalid label values:  
+  - `spec.selector` in the `ManagedSeedSet` API  
+    
+  The following fields of resources in the `settings.gardener.cloud` group are now validated for invalid label values:  
+  - `spec.projectSelector` in the `ClusterOpenIDConnectPreset` API by @shafeeqes [[#12708](https://github.com/gardener/gardener/pull/12708)]
 
 ## 📰 Noteworthy
-- `[USER]` New ClusterRoleBindings are deployed in the shoot clusters, they will grant Admin and Viewer permissions that will be later leveraged by the `AdminKubeconfig` and `ViewerKubeconfig` feature of Gardener.  
-  - `gardener.cloud:system:admins` - grants admin access to users that are Gardener System admins  
-  - `gardener.cloud:system:viewers`- grants viewer access to users that are Gardener System viewers  
-  - `gardener.cloud:project:admins` - grants admin access to users that are Gardener Project admins  
-  - `gardener.cloud:project:viewers` - grants viewer access to users that are Gardener Project viewers by @vpnachev [[#12673](https://github.com/gardener/gardener/pull/12673)]
+- `[USER]` `shoot.spec.secretBindingName` field is deprecated in favour of `shoot.spec.credentialsBindingName` and will be removed after Kubernetes support for version 1.34 is dropped. Please see https://gardener.cloud/docs/gardener/shoot-operations/secretbinding-to-credentialsbinding-migration. If users do not perform the migration on their own, the migration will be forced and newly created `CredentialsBinding`s will be labeled with `credentialsbinding.gardener.cloud/status=force-migrated`. by @dimityrmirchev [[#12804](https://github.com/gardener/gardener/pull/12804)]
+- `[USER]` It is now forbidden to specify configuration for admission plugins that are not configurable (via `Shoot.spec.kubernetes.kubeAPIServer.admissionPlugins[].config`) by @tobschli [[#12768](https://github.com/gardener/gardener/pull/12768)]
+- `[OPERATOR]` When `gardenlet` starts up, it now checks the version skew with the `gardener-apiserver` (click [here](https://gardener.cloud/docs/gardener/deployment/version_skew_policy/#gardenlet) for the policy document). by @rfranzke [[#12863](https://github.com/gardener/gardener/pull/12863)]
+- `[OPERATOR]` On startup `gardenlet`s will configure `.spec.dns.internal` settings for its respective `Seed`. Operators should adapt their `Seed` manifests to explicitly configure internal DNS as `.spec.dns.internal` will become a mandatory configuration after release v1.129.0. by @dimityrmirchev [[#12663](https://github.com/gardener/gardener/pull/12663)]
+- `[USER]` `SecretBinding` API is deprecated in favour of `CredentialsBinding` and will be removed after Kubernetes support for version 1.34 is dropped. Please see https://gardener.cloud/docs/gardener/shoot-operations/secretbinding-to-credentialsbinding-migration. by @dimityrmirchev [[#12804](https://github.com/gardener/gardener/pull/12804)]
 
 ## ✨ New Features
-- `[OPERATOR]` Add annotation `shoot.gardener.cloud/emergency-stop-reconciliations=true` to `Seed` resources to temporarily disable `Shoot` reconciliations. by @LucaBernstein [[#12712](https://github.com/gardener/gardener/pull/12712)]
+- `[OPERATOR]` Enabling feature gate `OpenTelemetryCollector` will now route logs through the collector in the `Shoot` control-plane before reaching `Vali`. by @rrhubenov [[#12568](https://github.com/gardener/gardener/pull/12568)]
+- `[OPERATOR]` The `Seed` spec was extended to allow explicit configuration for internal DNS settings. Operators can configure these by setting `.spec.dns.internal`. The implicit configuration that involved selecting a DNS secret from the Garden cluster based on labels will be eventually removed. Operators should adapt their `Seed` manifests to explicitly configure internal DNS. by @dimityrmirchev [[#12663](https://github.com/gardener/gardener/pull/12663)]
 
 ## 🐛 Bug Fixes
-- `[OPERATOR]` An issue causing the `plutono-datasources` ConfigMap to be reconciled by 2 ManagedResources when Seed is Garden managed by `gardener-operator` is now fixed. Occasionally, the issue was preventing successful Seed deletion. by @gardener-ci-robot [[#12798](https://github.com/gardener/gardener/pull/12798)]
-- `[OPERATOR]` Fixed MachineImage and MachineType architecture defaulting for `CloudProfile`s supporting one architecture only. by @Roncossek [[#12745](https://github.com/gardener/gardener/pull/12745)]
-- `[USER]` Errors that occur during `Worker` reconciliation are now also propagated to the `Shoot` status. by @matthias-horne [[#12769](https://github.com/gardener/gardener/pull/12769)]
-- `[USER]` The status of constraint  `DualStackNodesMigrationReady`  is now `progressing` instead of `false` at the start of a migration to dual-stack networking. by @axel7born [[#12685](https://github.com/gardener/gardener/pull/12685)]
-- `[OPERATOR]` The `plutono-datasources` `ConfigMap` is no longer wrongfully garbage collected while it is in use. by @timebertt [[#12762](https://github.com/gardener/gardener/pull/12762)]
+- `[DEVELOPER]` Ambiguous `go.mod` dependencies were removed when calling `make import-tools-bin`. by @timuthy [[#12810](https://github.com/gardener/gardener/pull/12810)]
+- `[OPERATOR]` A misconfiguration has been fixed which was preventing `gardener-admission-controller` from being called for `ConfigMap` creations of `gardenlet`. by @rfranzke [[#12858](https://github.com/gardener/gardener/pull/12858)]
+- `[OPERATOR]` Flip the status of a set `EmergencyStopShootReconciliations` `Seed` condition from `False` to `True`. by @LucaBernstein [[#12823](https://github.com/gardener/gardener/pull/12823)]
+- `[OPERATOR]` Fix shoot creation failure for shoots with kubernetes version >=1.32 and openidconnect preset present by @p53 [[#12743](https://github.com/gardener/gardener/pull/12743)]
 
 ## 🏃 Others
+- `[OPERATOR]` `GOMAXPROCS` for the `gardener-controller-manager` is set by the Go runtime instead of the external `go.uber.org/automaxprocs/maxprocs` library. by @timuthy [[#12801](https://github.com/gardener/gardener/pull/12801)]
 - `[DEPENDENCY]` The following dependencies have been updated:  
-  - `gardener/dashboard` from `1.81.1` to `1.81.2`. [Release Notes](https://redirect.github.com/gardener/dashboard/releases/tag/1.81.2) by @gardener-ci-robot [[#12691](https://github.com/gardener/gardener/pull/12691)]
-- `[OPERATOR]` Starting from Kubernetes version 1.34, enabling or disabling node-local-dns will no longer trigger node rolling (except kube-proxy is running in IPVS mode). Instead, a cleanup job will be executed. Additionally, node-local-dns is deployed per WorkerPool and node-local-dns will use UDP as default protocol for DNS queries to the upstream DNS server. by @DockToFuture [[#12422](https://github.com/gardener/gardener/pull/12422)]
+  - `quay.io/kiwigrid/k8s-sidecar` from `1.30.9` to `1.30.10`. by @gardener-ci-robot [[#12827](https://github.com/gardener/gardener/pull/12827)]
+- `[DEPENDENCY]` We now use `envoyproxy/envoy:distroless-v1.35.0` instead of the deprecated repository `envoyproxy/envoy-distroless:v1.35.0` by @oliver-goetz [[#12868](https://github.com/gardener/gardener/pull/12868)]
 - `[DEPENDENCY]` The following dependencies have been updated:  
-  - `registry.k8s.io/ingress-nginx/controller-chroot` from `v1.13.0` to `v1.13.1`. by @gardener-ci-robot [[#12710](https://github.com/gardener/gardener/pull/12710)]
+  - `gardener/alpine-iptables` from `3.21.3` to `3.22.1`. [Release Notes](https://redirect.github.com/gardener/alpine-iptables/releases/tag/3.22.1) by @gardener-ci-robot [[#12792](https://github.com/gardener/gardener/pull/12792)]
 - `[DEPENDENCY]` The following dependencies have been updated:  
-  - `registry.k8s.io/ingress-nginx/controller-chroot` from `v1.12.4` to `v1.12.5`. by @gardener-ci-robot [[#12713](https://github.com/gardener/gardener/pull/12713)]
+  - `registry.k8s.io/dns/k8s-dns-node-cache` from `1.26.4` to `1.26.5`. by @gardener-ci-robot [[#12806](https://github.com/gardener/gardener/pull/12806)]
+- `[DEVELOPER]` The optimistic defaulting of priorities for `MachineDeployment`s was removed. This needs to be done by the provider extension now. by @tobschli [[#12742](https://github.com/gardener/gardener/pull/12742)]
 - `[DEPENDENCY]` The following dependencies have been updated:  
-  - `gardener/vpn2` from `0.41.0` to `0.41.1`. [Release Notes](https://redirect.github.com/gardener/vpn2/releases/tag/0.41.1) by @gardener-ci-robot [[#12722](https://github.com/gardener/gardener/pull/12722)]
-- `[USER]` Collect `apiserver_validating_admission_policy_check_total` metric by shoot Prometheus. by @chrkl [[#12716](https://github.com/gardener/gardener/pull/12716)]
-- `[OPERATOR]` The `device-taint-eviction-controller` is disabled for workerless Shoots with Kubernetes v1.33+. by @RadaBDimitrova [[#12757](https://github.com/gardener/gardener/pull/12757)]
+  - `gardener/machine-controller-manager` from `v0.59.2` to `v0.60.0`. [Release Notes](https://redirect.github.com/gardener/machine-controller-manager/releases/tag/v0.60.0)  
+  - `github.com/gardener/machine-controller-manager` from `v0.59.2` to `v0.60.0`. by @gardener-ci-robot [[#12842](https://github.com/gardener/gardener/pull/12842)]
 - `[DEPENDENCY]` The following dependencies have been updated:  
-  - `gardener/autoscaler` from `v1.32.0` to `v1.32.1`. [Release Notes](https://redirect.github.com/gardener/autoscaler/releases/tag/v1.32.1) by @gardener-ci-robot [[#12715](https://github.com/gardener/gardener/pull/12715)]
-- `[OPERATOR]` Remove the init container and annotation used for the Prometheus volume cleanup migration from Prometheus resources by @vicwicker [[#12728](https://github.com/gardener/gardener/pull/12728)]
+  - `gardener/dashboard` from `1.81.2` to `1.81.3`. [Release Notes](https://redirect.github.com/gardener/dashboard/releases/tag/1.81.3) by @gardener-ci-robot [[#12833](https://github.com/gardener/gardener/pull/12833)]
 - `[DEPENDENCY]` The following dependencies have been updated:  
-  - `quay.io/kiwigrid/k8s-sidecar` from `1.30.7` to `1.30.8`. by @gardener-ci-robot [[#12727](https://github.com/gardener/gardener/pull/12727)]
-- `[OPERATOR]` gardenlet now deploys a `ServiceMonitor` resource for the `vpa-updater`. With this, the `vpa-updater` metrics are scraped by prometheus. by @vitanovs [[#12677](https://github.com/gardener/gardener/pull/12677)]
-- `[DEVELOPER]` `golang-test` images for Go 1.25 are built now. Those for Go 1.23 are not built anymore because it is out of maintenance. by @marc1404 [[#12770](https://github.com/gardener/gardener/pull/12770)]
-- `[OPERATOR]` Validations for `spec.provider.worker[]` and `spec.kubernetes.clusterAutoscaler` have been improved. by @aaronfern [[#12567](https://github.com/gardener/gardener/pull/12567)]
-- `[OPERATOR]` The AdmissionConfiguration API resource has been migrated from version v1alpha1 to v1. by @georgibaltiev [[#12615](https://github.com/gardener/gardener/pull/12615)]
-- `[OPERATOR]` Update Setup Guide to include Cert Management for Garden by @hendrikKahl [[#12706](https://github.com/gardener/gardener/pull/12706)]
+  - `registry.k8s.io/autoscaling/vpa-admission-controller` from `1.4.1` to `1.4.2`.   
+  - `registry.k8s.io/autoscaling/vpa-recommender` from `1.4.1` to `1.4.2`.   
+  - `registry.k8s.io/autoscaling/vpa-updater` from `1.4.1` to `1.4.2`. by @gardener-ci-robot [[#12813](https://github.com/gardener/gardener/pull/12813)]
 - `[DEPENDENCY]` The following dependencies have been updated:  
-  - `quay.io/kiwigrid/k8s-sidecar` from `1.30.8` to `1.30.9`. by @gardener-ci-robot [[#12750](https://github.com/gardener/gardener/pull/12750)]
+  - `credativ/vali` from `v2.2.25` to `v2.2.26`. [Release Notes](https://redirect.github.com/credativ/vali/releases/tag/v2.2.26) by @gardener-ci-robot [[#12840](https://github.com/gardener/gardener/pull/12840)]
+- `[OPERATOR]` Add validation for the name of worker's root volumes. by @kon-angelo [[#12820](https://github.com/gardener/gardener/pull/12820)]
+- `[OPERATOR]` The `gardener/autoscaler` image has been updated to `v1.33.0`. [Release Notes](https://github.com/gardener/autoscaler/releases/tag/v1.33.0) by @aaronfern [[#12800](https://github.com/gardener/gardener/pull/12800)]
+- `[DEPENDENCY]` The following dependencies have been updated:  
+  - `credativ/plutono` from `v7.5.40` to `v7.5.41`. [Release Notes](https://redirect.github.com/credativ/plutono/releases/tag/v7.5.41) by @gardener-ci-robot [[#12841](https://github.com/gardener/gardener/pull/12841)]
+- `[DEPENDENCY]` The following dependencies have been updated:  
+  - `registry.k8s.io/ingress-nginx/controller-chroot` from `v1.13.1` to `v1.13.2`. by @gardener-ci-robot [[#12848](https://github.com/gardener/gardener/pull/12848)]
+- `[OPERATOR]` Improved dual-stack migration by ensuring CoreDNS pods are restarted before configuring the kube-dns service as dual-stack, preventing IPv6 DNS query failures during migration. by @axel7born [[#12816](https://github.com/gardener/gardener/pull/12816)]
+- `[OPERATOR]` gardener-apiserver: The `FinalizerRemoval` admission plugin's type is now changed from mutating to validating. by @georgibaltiev [[#12786](https://github.com/gardener/gardener/pull/12786)]
+- `[DEPENDENCY]` The following dependencies have been updated:  
+  - `registry.k8s.io/kube-state-metrics/kube-state-metrics` from `v2.16.0` to `v2.17.0`. by @gardener-ci-robot [[#12865](https://github.com/gardener/gardener/pull/12865)]
+
+
+## Helm Charts
+- controlplane: `europe-docker.pkg.dev/gardener-project/releases/charts/gardener/controlplane:v1.127.0`
+- gardenlet: `europe-docker.pkg.dev/gardener-project/releases/charts/gardener/gardenlet:v1.127.0`
+- operator: `europe-docker.pkg.dev/gardener-project/releases/charts/gardener/operator:v1.127.0`
+- resource-manager: `europe-docker.pkg.dev/gardener-project/releases/charts/gardener/resource-manager:v1.127.0`
+## Container (OCI) Images
+- admission-controller: `europe-docker.pkg.dev/gardener-project/releases/gardener/admission-controller:v1.127.0`
+- apiserver: `europe-docker.pkg.dev/gardener-project/releases/gardener/apiserver:v1.127.0`
+- controller-manager: `europe-docker.pkg.dev/gardener-project/releases/gardener/controller-manager:v1.127.0`
+- gardenlet: `europe-docker.pkg.dev/gardener-project/releases/gardener/gardenlet:v1.127.0`
+- node-agent: `europe-docker.pkg.dev/gardener-project/releases/gardener/node-agent:v1.127.0`
+- operator: `europe-docker.pkg.dev/gardener-project/releases/gardener/operator:v1.127.0`
+- resource-manager: `europe-docker.pkg.dev/gardener-project/releases/gardener/resource-manager:v1.127.0`
+- scheduler: `europe-docker.pkg.dev/gardener-project/releases/gardener/scheduler:v1.127.0`
