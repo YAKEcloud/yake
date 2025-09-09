@@ -88,7 +88,7 @@ stringData:
       version: 0.8.0
 
     shoot-flux:
-      version: 0.20.1
+      version: 0.21.0
 
     acl:
       version: 1.11.0
