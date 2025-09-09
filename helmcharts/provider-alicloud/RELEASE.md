@@ -1,10 +1,13 @@
-# [gardener/gardener-extension-provider-alicloud]
+# [github.com/gardener/gardener-extension-provider-alicloud:v1.64.1]
 
 ## 🏃 Others
+- `[OPERATOR]` Flow-base now supports zone CIDR named with worker ,  and enable migrate from worker to workers by @kevin-lacoo [[#835](https://github.com/gardener/gardener-extension-provider-alicloud/pull/835)]
 
-- `[OPERATOR]` Upgrade gardener dependency to v1.122.1 by @plkokanov [#817]
-- `[OPERATOR]` Update csi-plugin-alicloud tov1.31.4-75f6f4a-aliyun by @kevin-lacoo [#811]
-- `[OPERATOR]` `provider-alicloud` no longer supports Shoots with Кubernetes version <= 1.28. by @georgibaltiev [#818]
-- `[OPERATOR]` csi framework image version is update, csi-snapshot-validation-webhook is removed and alicloud csi plugin is update to v1.33.1-67e8986-aliyun by @kevin-lacoo [#816]
-- `[OPERATOR]` Update csi-plugin-alicloud to v1.30.3-90b225e-aliyun by @kevin-lacoo [#809]
-- `[DEVELOPER]` migrate CICD-Pipelines to GitHub-Actions by @ccwienk [#814]
+
+## Helm Charts
+- admission-alicloud-application: `europe-docker.pkg.dev/gardener-project/releases/charts/gardener/extensions/admission-alicloud-application:v1.64.1`
+- admission-alicloud-runtime: `europe-docker.pkg.dev/gardener-project/releases/charts/gardener/extensions/admission-alicloud-runtime:v1.64.1`
+- provider-alicloud: `europe-docker.pkg.dev/gardener-project/releases/charts/gardener/extensions/provider-alicloud:v1.64.1`
+## Container (OCI) Images
+- gardener-extension-admission-alicloud: `europe-docker.pkg.dev/gardener-project/releases/gardener/extensions/admission-alicloud:v1.64.1`
+- gardener-extension-provider-alicloud: `europe-docker.pkg.dev/gardener-project/releases/gardener/extensions/provider-alicloud:v1.64.1`
