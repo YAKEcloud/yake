@@ -1,38 +1,41 @@
-# [gardener/gardener-extension-provider-azure]
+# [github.com/gardener/gardener-extension-provider-azure:v1.54.0]
+
+## ⚠️ Breaking Changes
+- `[OPERATOR]` `provider-azure` no longer supports Shoots with Кubernetes version <= 1.28. by @RadaBDimitrova [[#1216](https://github.com/gardener/gardener-extension-provider-azure/pull/1216)]
+- `[OPERATOR]` Remove support for the terraform-based infrastructure reconciler. by @kon-angelo [[#1231](https://github.com/gardener/gardener-extension-provider-azure/pull/1231)]
+
+## 📰 Noteworthy
+- `[OPERATOR]` Enforce NAT-Gateway creation for new shoots if no NAT-Config provided and user doesn't bring his own VNet by @hebelsan [[#1257](https://github.com/gardener/gardener-extension-provider-azure/pull/1257)]
+
+## ✨ New Features
+- `[USER]` This extension now supports in-place node updates. Read more about it [here](https://github.com/gardener/gardener/blob/master/docs/proposals/31-inplace-node-update.md). by @acumino [[#1181](https://github.com/gardener/gardener-extension-provider-azure/pull/1181)]
 
 ## 🐛 Bug Fixes
-
-- `[USER]` Fixed a bug which was causing the `remedy-controller` to not be able to create and patch `events` by @AleksandarSavchev [#1196]
-## 🏃 Others
-
-- `[DEPENDENCY]` Update csi-driver-disk from v1.31.2 to v1.32.4 by @hebelsan [#1158]
-- `[DEPENDENCY]` Patch csi-resizer, csi-snapshot-controller, csi-snapshotter and csi-attacher by @hebelsan [#1158]
-- `[DEPENDENCY]` Patch versions of cloud-controller-manager by @hebelsan [#1158]
-- `[DEPENDENCY]` Patch versions of cloud-node-manager by @hebelsan [#1158]
-- `[DEPENDENCY]` Update csi-driver-file from v1.31.2 to v1.32.1 by @hebelsan [#1158]
-- `[OPERATOR]` Obsolete ClusterRoles and ClusterRoleBindings that were leftovers from the machine-controller-manager component are now cleaned up. by @georgibaltiev [#1176]
-- `[OPERATOR]` The images built by the Azure provider-extension are now multiarch-images, supporting x86_64 and arm64 by @AndreasBurger [#1118]
-- `[OPERATOR]` Update base image from `debian11` to `debian12`. by @MartinWeindel [#1140]
-- `[OPERATOR]` Update gardener/gardener to v1.118.0. by @ScheererJ [#1170]
-- `[OPERATOR]` Remove the `podAntiAffinity` in the deployment in favor of only `TopologySpreadConstraints`. by @LucaBernstein [#1165]
-- `[OPERATOR]` The `csi-snapshot-webhook-vpa` VerticalPodAutoscaler and the `csi-snapshot-validation` PodDisruptionBudget are now also cleaned up during the deletion of the legacy `csi-snapshot-validation` resources. by @ialidzhikov [#1177]
-- `[OPERATOR]` The [`ServiceTrafficDistribution`](https://kubernetes.io/docs/reference/networking/virtual-ips/#traffic-distribution) feature is being used on to make Services topology-aware when the runtime Kubernetes version is 1.31+. by @ialidzhikov [#1070]
-- `[OPERATOR]` `RBAC` resources now explicitly state `resources` and `verbs`, replaced use of wildcards `*`. by @georgibaltiev [#1108]
-- `[OPERATOR]` The legacy method of providing monitoring configuration via `ConfigMap`s labeled with `extensions.gardener.cloud/configuration=monitoring` has been removed. The extension does now only uses the [new contract](https://github.com/gardener/gardener/blob/v1.101.1/docs/extensions/logging-and-monitoring.md#monitoring) for providing monitoring configuration. Before upgrading to this version of the extension, make sure that the deployed Gardener version supports the [new monitoring contract](https://github.com/gardener/gardener/blob/v1.101.1/docs/extensions/logging-and-monitoring.md#monitoring). by @RadaBDimitrova [#1142]
-- `[OPERATOR]` Update `gardener/gardener` to `v1.117.0` [Release Notes](https://github.com/gardener/gardener/releases/tag/v1.117.0). by @acumino [#1150]
-- `[DEVELOPER]` replace/remove github.com/Azure/go-autorest/autorest by @hebelsan [#1160]
-# [gardener/terraformer]
+- `[OPERATOR]` A bug preventing all obsolete machine-controller-manager ClusterRoles and ClusterRoleBindings to be deleted on extension startup has been fixed. by @georgibaltiev [[#1240](https://github.com/gardener/gardener-extension-provider-azure/pull/1240)]
+- `[OPERATOR]` Add missing permission for the CSI disk driver by @hebelsan [[#1218](https://github.com/gardener/gardener-extension-provider-azure/pull/1218)]
 
 ## 🏃 Others
+- `[OPERATOR]` Update GHA pipelines with new release options by @kon-angelo [[#1230](https://github.com/gardener/gardener-extension-provider-azure/pull/1230)]
+- `[OPERATOR]` Enable setting feature gates for the admission controller by @hebelsan [[#1284](https://github.com/gardener/gardener-extension-provider-azure/pull/1284)]
+- `[OPERATOR]` Upgrade gardener dependency to v1.123.1 by @theoddora [[#1232](https://github.com/gardener/gardener-extension-provider-azure/pull/1232)]
+- `[OPERATOR]` Clients created by the Azure extension provider will now identify themselves by adding to the `user-agent` header of their calls. by @AndreasBurger [[#1211](https://github.com/gardener/gardener-extension-provider-azure/pull/1211)]
+- `[OPERATOR]` Separate bastion reconcile and delete options by @hebelsan [[#1233](https://github.com/gardener/gardener-extension-provider-azure/pull/1233)]
+- `[OPERATOR]` Introduce feature gate to forcefully migrate Availability set based shoots to VMSS by @kon-angelo [[#1242](https://github.com/gardener/gardener-extension-provider-azure/pull/1242)]
+- `[DEVELOPER]` migrate CICD-Pipeline to GitHub-Actions by @ccwienk [[#1225](https://github.com/gardener/gardener-extension-provider-azure/pull/1225)]
+- `[OPERATOR]` The provider-azure extension does now support shoot clusters with Kubernetes version 1.33. You should consider the [Kubernetes release notes](https://github.com/kubernetes/kubernetes/blob/master/CHANGELOG/CHANGELOG-1.33.md) before upgrading to 1.33. by @plkokanov [[#1198](https://github.com/gardener/gardener-extension-provider-azure/pull/1198)]
+- `[OPERATOR]` Update none gardener dependencies & gardener/gardener to v1.125.0 by @hebelsan [[#1249](https://github.com/gardener/gardener-extension-provider-azure/pull/1249)]
+- `[OPERATOR]` Upgrade vendored gardener/gardener `v1.118.0` -> `v1.121.1` by @kon-angelo [[#1201](https://github.com/gardener/gardener-extension-provider-azure/pull/1201)]
+- `[OPERATOR]` Remove obsolete terraformer resources by @kon-angelo [[#1239](https://github.com/gardener/gardener-extension-provider-azure/pull/1239)]
+- `[OPERATOR]` Upgrade gardener dependency to v1.122.1 by @RadaBDimitrova [[#1226](https://github.com/gardener/gardener-extension-provider-azure/pull/1226)]
+- `[OPERATOR]` Update the default etcd storage-class to reflect the CSI provisioner and update the default opts by @kon-angelo [[#1223](https://github.com/gardener/gardener-extension-provider-azure/pull/1223)]
+- `[OPERATOR]` Introduce annotation that disables default outbound access on subnet level to be used for testing purposes. by @kon-angelo [[#1241](https://github.com/gardener/gardener-extension-provider-azure/pull/1241)]
+- `[OPERATOR]` An example `Extension` manifest for extension registration has been added. It can be found at [`example/extension.yaml`](https://github.com/gardener/gardener-extension-provider-azure/blob/master/example/extension.yaml) by @timuthy [[#1262](https://github.com/gardener/gardener-extension-provider-azure/pull/1262)]
 
-- `[OPERATOR]` Update gardener to v1.117.0 by @hebelsan [gardener/terraformer#162]
-- `[OPERATOR]` Update aws-sdk-go to v1.55.7 by @hebelsan [gardener/terraformer#162]
-- `[OPERATOR]` Update fsnotify to v1.9.0 by @hebelsan [gardener/terraformer#162]
 
 ## Helm Charts
-- admission-azure-application: `europe-docker.pkg.dev/gardener-project/releases/charts/gardener/extensions/admission-azure-application:v1.53.0`
-- admission-azure-runtime: `europe-docker.pkg.dev/gardener-project/releases/charts/gardener/extensions/admission-azure-runtime:v1.53.0`
-- provider-azure: `europe-docker.pkg.dev/gardener-project/releases/charts/gardener/extensions/provider-azure:v1.53.0`
+- admission-azure-application: `europe-docker.pkg.dev/gardener-project/releases/charts/gardener/extensions/admission-azure-application:v1.54.0`
+- admission-azure-runtime: `europe-docker.pkg.dev/gardener-project/releases/charts/gardener/extensions/admission-azure-runtime:v1.54.0`
+- provider-azure: `europe-docker.pkg.dev/gardener-project/releases/charts/gardener/extensions/provider-azure:v1.54.0`
 ## Container (OCI) Images
-- gardener-extension-admission-azure: `europe-docker.pkg.dev/gardener-project/releases/gardener/extensions/admission-azure:v1.53.0`
-- gardener-extension-provider-azure: `europe-docker.pkg.dev/gardener-project/releases/gardener/extensions/provider-azure:v1.53.0`
+- gardener-extension-admission-azure: `europe-docker.pkg.dev/gardener-project/releases/gardener/extensions/admission-azure:v1.54.0`
+- gardener-extension-provider-azure: `europe-docker.pkg.dev/gardener-project/releases/gardener/extensions/provider-azure:v1.54.0`
