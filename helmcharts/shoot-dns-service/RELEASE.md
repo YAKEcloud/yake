@@ -1,15 +1,13 @@
-# [gardener/gardener-extension-shoot-dns-service]
+# [github.com/gardener/gardener-extension-shoot-dns-service:v1.69.0]
 
-## 📰 Noteworthy
-
-- `[USER]` The provider secret data fields are now validated by the admission controller when configured in the shoot manifest in the provider config of the shoot-dns-service extension (at `spec.extensions.[@.type='shoot-dns-service'].providerConfig`) by @MartinWeindel [#528]
-## 🐛 Bug Fixes
-
-- `[OPERATOR]` Update CRD for `DNSEntry` (missing field `.status.dnsName`) by @MartinWeindel [#517]
 ## 🏃 Others
+- `[DEPENDENCY]` Updated `external-dns-management` to `v0.28.0` [ref](https://github.com/gardener/external-dns-management/releases/tag/v0.28.0). by @marc1404 [[#545](https://github.com/gardener/gardener-extension-shoot-dns-service/pull/545)]
 
-- `[OPERATOR]` Upgrade github.com/gardener/external-dns-management from `v0.26.0` to `v0.27.0` by @MartinWeindel [#530]
-- `[DEVELOPER]` Update the custom resource definitions from the external-dns-management projects in the make target `generate`. by @MartinWeindel [#522]
-## 📖 Documentation
 
-- `[USER]` Documented requesting the creation of `AAAA` DNS records when using dual-stack load balancers on AWS. by @marc1404 [#527]
+## Helm Charts
+- shoot-dns-service-admission-application: `europe-docker.pkg.dev/gardener-project/releases/charts/gardener/extensions/shoot-dns-service-admission-application:v1.69.0`
+- shoot-dns-service-admission-runtime: `europe-docker.pkg.dev/gardener-project/releases/charts/gardener/extensions/shoot-dns-service-admission-runtime:v1.69.0`
+- shoot-dns-service: `europe-docker.pkg.dev/gardener-project/releases/charts/gardener/extensions/shoot-dns-service:v1.69.0`
+## Container (OCI) Images
+- gardener-extension-admission-shoot-dns-service: `europe-docker.pkg.dev/gardener-project/releases/gardener/extensions/admission-shoot-dns-service:v1.69.0`
+- gardener-extension-shoot-dns-service: `europe-docker.pkg.dev/gardener-project/releases/gardener/extensions/shoot-dns-service:v1.69.0`
