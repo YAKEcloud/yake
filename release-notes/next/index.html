@@ -5,7 +5,7 @@
 <meta name="generator" content="Docusaurus v3.8.1">
 <title data-rh="true">Release Notes next | Yet another Kubernetes Engine</title><meta data-rh="true" name="viewport" content="width=device-width,initial-scale=1"><meta data-rh="true" name="twitter:card" content="summary_large_image"><meta data-rh="true" property="og:url" content="https://yake.cloud/release-notes/next"><meta data-rh="true" property="og:locale" content="en"><meta data-rh="true" name="docusaurus_locale" content="en"><meta data-rh="true" name="docsearch:language" content="en"><meta data-rh="true" name="gardener" content="installation, production, operations, maintenance"><meta data-rh="true" name="docusaurus_version" content="current"><meta data-rh="true" name="docusaurus_tag" content="docs-release-notes-current"><meta data-rh="true" name="docsearch:version" content="current"><meta data-rh="true" name="docsearch:docusaurus_tag" content="docs-release-notes-current"><meta data-rh="true" property="og:title" content="Release Notes next | Yet another Kubernetes Engine"><meta data-rh="true" name="description" content="Yake release notes and upgrade guide"><meta data-rh="true" property="og:description" content="Yake release notes and upgrade guide"><link data-rh="true" rel="icon" href="/img/favicon.ico"><link data-rh="true" rel="canonical" href="https://yake.cloud/release-notes/next"><link data-rh="true" rel="alternate" href="https://yake.cloud/release-notes/next" hreflang="en"><link data-rh="true" rel="alternate" href="https://yake.cloud/release-notes/next" hreflang="x-default"><script data-rh="true" type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Release Notes next","item":"https://yake.cloud/release-notes/next"}]}</script><link rel="alternate" type="application/rss+xml" href="/blog/rss.xml" title="Yet another Kubernetes Engine RSS Feed">
 <link rel="alternate" type="application/atom+xml" href="/blog/atom.xml" title="Yet another Kubernetes Engine Atom Feed"><link rel="stylesheet" href="/assets/css/styles.9a630ee0.css">
-<script src="/assets/js/runtime~main.fd37dfff.js" defer="defer"></script>
+<script src="/assets/js/runtime~main.f67bf79a.js" defer="defer"></script>
 <script src="/assets/js/main.7e07acdd.js" defer="defer"></script>
 </head>
 <body class="navigation-with-keyboard">
@@ -94,6 +94,96 @@
 <ul>
 <li>gardener-extension-admission-shoot-dns-service: <code>europe-docker.pkg.dev/gardener-project/releases/gardener/extensions/admission-shoot-dns-service:v1.69.0</code></li>
 <li>gardener-extension-shoot-dns-service: <code>europe-docker.pkg.dev/gardener-project/releases/gardener/extensions/shoot-dns-service:v1.69.0</code></li>
+</ul>
+</div></div></details>
+<details class="details_lb9f alert alert--info details_b_Ee" data-collapsed="true"><summary><b>Update gardener-controlplane to <code>1.127.1</code></b></summary><div><div class="collapsibleContent_i85q">
+<!-- -->
+<h1>[github.com/gardener/gardener:v1.127.1]</h1>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="-bug-fixes-1">🐛 Bug Fixes<a href="#-bug-fixes-1" class="hash-link" aria-label="Direct link to 🐛 Bug Fixes" title="Direct link to 🐛 Bug Fixes">​</a></h2>
+<ul>
+<li><code>[OPERATOR]</code> A bug in the gardenlet start-up migration of the Admin and Viewer Kubeconfig ClusterRoleBindings where a ManagedResource secret could be deleted leading to gardenlet being unable to startup is fixed. by @gardener-ci-robot [<a href="https://github.com/gardener/gardener/pull/12928" target="_blank" rel="noopener noreferrer">#12928</a>]</li>
+</ul>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="-others-2">🏃 Others<a href="#-others-2" class="hash-link" aria-label="Direct link to 🏃 Others" title="Direct link to 🏃 Others">​</a></h2>
+<ul>
+<li><code>[OPERATOR]</code> Monitoring the Istio Ingress Gateways is temporarily disabled to mitigate a metric leak issue. This does not affect the monitoring of the shoot control planes where these metrics are not used. by @gardener-ci-robot [<a href="https://github.com/gardener/gardener/pull/12935" target="_blank" rel="noopener noreferrer">#12935</a>]</li>
+</ul>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="helm-charts-3">Helm Charts<a href="#helm-charts-3" class="hash-link" aria-label="Direct link to Helm Charts" title="Direct link to Helm Charts">​</a></h2>
+<ul>
+<li>controlplane: <code>europe-docker.pkg.dev/gardener-project/releases/charts/gardener/controlplane:v1.127.1</code></li>
+<li>gardenlet: <code>europe-docker.pkg.dev/gardener-project/releases/charts/gardener/gardenlet:v1.127.1</code></li>
+<li>operator: <code>europe-docker.pkg.dev/gardener-project/releases/charts/gardener/operator:v1.127.1</code></li>
+<li>resource-manager: <code>europe-docker.pkg.dev/gardener-project/releases/charts/gardener/resource-manager:v1.127.1</code></li>
+</ul>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="container-oci-images-3">Container (OCI) Images<a href="#container-oci-images-3" class="hash-link" aria-label="Direct link to Container (OCI) Images" title="Direct link to Container (OCI) Images">​</a></h2>
+<ul>
+<li>admission-controller: <code>europe-docker.pkg.dev/gardener-project/releases/gardener/admission-controller:v1.127.1</code></li>
+<li>apiserver: <code>europe-docker.pkg.dev/gardener-project/releases/gardener/apiserver:v1.127.1</code></li>
+<li>controller-manager: <code>europe-docker.pkg.dev/gardener-project/releases/gardener/controller-manager:v1.127.1</code></li>
+<li>gardenlet: <code>europe-docker.pkg.dev/gardener-project/releases/gardener/gardenlet:v1.127.1</code></li>
+<li>node-agent: <code>europe-docker.pkg.dev/gardener-project/releases/gardener/node-agent:v1.127.1</code></li>
+<li>operator: <code>europe-docker.pkg.dev/gardener-project/releases/gardener/operator:v1.127.1</code></li>
+<li>resource-manager: <code>europe-docker.pkg.dev/gardener-project/releases/gardener/resource-manager:v1.127.1</code></li>
+<li>scheduler: <code>europe-docker.pkg.dev/gardener-project/releases/gardener/scheduler:v1.127.1</code></li>
+</ul>
+</div></div></details>
+<details class="details_lb9f alert alert--info details_b_Ee" data-collapsed="true"><summary><b>Update gardener-controlplane to <code>1.127.1</code></b></summary><div><div class="collapsibleContent_i85q">
+<!-- -->
+<h1>[github.com/gardener/gardener:v1.127.1]</h1>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="-bug-fixes-2">🐛 Bug Fixes<a href="#-bug-fixes-2" class="hash-link" aria-label="Direct link to 🐛 Bug Fixes" title="Direct link to 🐛 Bug Fixes">​</a></h2>
+<ul>
+<li><code>[OPERATOR]</code> A bug in the gardenlet start-up migration of the Admin and Viewer Kubeconfig ClusterRoleBindings where a ManagedResource secret could be deleted leading to gardenlet being unable to startup is fixed. by @gardener-ci-robot [<a href="https://github.com/gardener/gardener/pull/12928" target="_blank" rel="noopener noreferrer">#12928</a>]</li>
+</ul>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="-others-3">🏃 Others<a href="#-others-3" class="hash-link" aria-label="Direct link to 🏃 Others" title="Direct link to 🏃 Others">​</a></h2>
+<ul>
+<li><code>[OPERATOR]</code> Monitoring the Istio Ingress Gateways is temporarily disabled to mitigate a metric leak issue. This does not affect the monitoring of the shoot control planes where these metrics are not used. by @gardener-ci-robot [<a href="https://github.com/gardener/gardener/pull/12935" target="_blank" rel="noopener noreferrer">#12935</a>]</li>
+</ul>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="helm-charts-4">Helm Charts<a href="#helm-charts-4" class="hash-link" aria-label="Direct link to Helm Charts" title="Direct link to Helm Charts">​</a></h2>
+<ul>
+<li>controlplane: <code>europe-docker.pkg.dev/gardener-project/releases/charts/gardener/controlplane:v1.127.1</code></li>
+<li>gardenlet: <code>europe-docker.pkg.dev/gardener-project/releases/charts/gardener/gardenlet:v1.127.1</code></li>
+<li>operator: <code>europe-docker.pkg.dev/gardener-project/releases/charts/gardener/operator:v1.127.1</code></li>
+<li>resource-manager: <code>europe-docker.pkg.dev/gardener-project/releases/charts/gardener/resource-manager:v1.127.1</code></li>
+</ul>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="container-oci-images-4">Container (OCI) Images<a href="#container-oci-images-4" class="hash-link" aria-label="Direct link to Container (OCI) Images" title="Direct link to Container (OCI) Images">​</a></h2>
+<ul>
+<li>admission-controller: <code>europe-docker.pkg.dev/gardener-project/releases/gardener/admission-controller:v1.127.1</code></li>
+<li>apiserver: <code>europe-docker.pkg.dev/gardener-project/releases/gardener/apiserver:v1.127.1</code></li>
+<li>controller-manager: <code>europe-docker.pkg.dev/gardener-project/releases/gardener/controller-manager:v1.127.1</code></li>
+<li>gardenlet: <code>europe-docker.pkg.dev/gardener-project/releases/gardener/gardenlet:v1.127.1</code></li>
+<li>node-agent: <code>europe-docker.pkg.dev/gardener-project/releases/gardener/node-agent:v1.127.1</code></li>
+<li>operator: <code>europe-docker.pkg.dev/gardener-project/releases/gardener/operator:v1.127.1</code></li>
+<li>resource-manager: <code>europe-docker.pkg.dev/gardener-project/releases/gardener/resource-manager:v1.127.1</code></li>
+<li>scheduler: <code>europe-docker.pkg.dev/gardener-project/releases/gardener/scheduler:v1.127.1</code></li>
+</ul>
+</div></div></details>
+<details class="details_lb9f alert alert--info details_b_Ee" data-collapsed="true"><summary><b>Update gardenlet to <code>1.127.1</code></b></summary><div><div class="collapsibleContent_i85q">
+<!-- -->
+<h1>[github.com/gardener/gardener:v1.127.1]</h1>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="-bug-fixes-3">🐛 Bug Fixes<a href="#-bug-fixes-3" class="hash-link" aria-label="Direct link to 🐛 Bug Fixes" title="Direct link to 🐛 Bug Fixes">​</a></h2>
+<ul>
+<li><code>[OPERATOR]</code> A bug in the gardenlet start-up migration of the Admin and Viewer Kubeconfig ClusterRoleBindings where a ManagedResource secret could be deleted leading to gardenlet being unable to startup is fixed. by @gardener-ci-robot [<a href="https://github.com/gardener/gardener/pull/12928" target="_blank" rel="noopener noreferrer">#12928</a>]</li>
+</ul>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="-others-4">🏃 Others<a href="#-others-4" class="hash-link" aria-label="Direct link to 🏃 Others" title="Direct link to 🏃 Others">​</a></h2>
+<ul>
+<li><code>[OPERATOR]</code> Monitoring the Istio Ingress Gateways is temporarily disabled to mitigate a metric leak issue. This does not affect the monitoring of the shoot control planes where these metrics are not used. by @gardener-ci-robot [<a href="https://github.com/gardener/gardener/pull/12935" target="_blank" rel="noopener noreferrer">#12935</a>]</li>
+</ul>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="helm-charts-5">Helm Charts<a href="#helm-charts-5" class="hash-link" aria-label="Direct link to Helm Charts" title="Direct link to Helm Charts">​</a></h2>
+<ul>
+<li>controlplane: <code>europe-docker.pkg.dev/gardener-project/releases/charts/gardener/controlplane:v1.127.1</code></li>
+<li>gardenlet: <code>europe-docker.pkg.dev/gardener-project/releases/charts/gardener/gardenlet:v1.127.1</code></li>
+<li>operator: <code>europe-docker.pkg.dev/gardener-project/releases/charts/gardener/operator:v1.127.1</code></li>
+<li>resource-manager: <code>europe-docker.pkg.dev/gardener-project/releases/charts/gardener/resource-manager:v1.127.1</code></li>
+</ul>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="container-oci-images-5">Container (OCI) Images<a href="#container-oci-images-5" class="hash-link" aria-label="Direct link to Container (OCI) Images" title="Direct link to Container (OCI) Images">​</a></h2>
+<ul>
+<li>admission-controller: <code>europe-docker.pkg.dev/gardener-project/releases/gardener/admission-controller:v1.127.1</code></li>
+<li>apiserver: <code>europe-docker.pkg.dev/gardener-project/releases/gardener/apiserver:v1.127.1</code></li>
+<li>controller-manager: <code>europe-docker.pkg.dev/gardener-project/releases/gardener/controller-manager:v1.127.1</code></li>
+<li>gardenlet: <code>europe-docker.pkg.dev/gardener-project/releases/gardener/gardenlet:v1.127.1</code></li>
+<li>node-agent: <code>europe-docker.pkg.dev/gardener-project/releases/gardener/node-agent:v1.127.1</code></li>
+<li>operator: <code>europe-docker.pkg.dev/gardener-project/releases/gardener/operator:v1.127.1</code></li>
+<li>resource-manager: <code>europe-docker.pkg.dev/gardener-project/releases/gardener/resource-manager:v1.127.1</code></li>
+<li>scheduler: <code>europe-docker.pkg.dev/gardener-project/releases/gardener/scheduler:v1.127.1</code></li>
 </ul>
 </div></div></details></div></article><nav class="docusaurus-mt-lg pagination-nav" aria-label="Docs pages"><a class="pagination-nav__link pagination-nav__link--next" href="/release-notes/v1.127"><div class="pagination-nav__sublabel">Next</div><div class="pagination-nav__label">Release Notes v1.127</div></a></nav></div></div></div></div></main></div></div></div><footer class="theme-layout-footer footer footer--dark"><div class="container container-fluid"><div class="row footer__links"><div class="theme-layout-footer-column col footer__col"><div class="footer__title">Docs</div><ul class="footer__items clean-list"><li class="footer__item"><a class="footer__link-item" href="/docs/overview">Docs</a></li></ul></div><div class="theme-layout-footer-column col footer__col"><div class="footer__title">Community</div><ul class="footer__items clean-list"><li class="footer__item"><a href="https://github.com/yakecloud" target="_blank" rel="noopener noreferrer" class="footer__link-item">GitHub<svg width="13.5" height="13.5" aria-hidden="true" class="iconExternalLink_nPIU"><use href="#theme-svg-external-link"></use></svg></a></li><li class="footer__item"><a href="https://github.com/gardener-community" target="_blank" rel="noopener noreferrer" class="footer__link-item">Gardener Community<svg width="13.5" height="13.5" aria-hidden="true" class="iconExternalLink_nPIU"><use href="#theme-svg-external-link"></use></svg></a></li><li class="footer__item"><a href="https://gardener-cloud.slack.com" target="_blank" rel="noopener noreferrer" class="footer__link-item">Slack<svg width="13.5" height="13.5" aria-hidden="true" class="iconExternalLink_nPIU"><use href="#theme-svg-external-link"></use></svg></a></li></ul></div><div class="theme-layout-footer-column col footer__col"><div class="footer__title">More</div><ul class="footer__items clean-list"><li class="footer__item"><a class="footer__link-item" href="/blog">Blog</a></li><li class="footer__item"><a class="footer__link-item" href="/legals">Legals</a></li><li class="footer__item"><a class="footer__link-item" href="/privacy-policy">Privacy policy</a></li></ul></div></div><div class="footer__bottom text--center"><div class="footer__copyright">Copyright © 2025 23 Technologies GmbH</div></div></div></footer></div>
 </body>
