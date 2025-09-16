@@ -199,3 +199,13 @@ hide_table_of_contents: true
 
 
 </details>
+
+<details>
+<summary><b>Update backup-s3 to <code>0.8.1</code></b></summary>
+
+## General Changes
+
+* fix(chart): rbac-runtime has a wrong serviceAccountName (#20) @nschad
+
+
+</details>
