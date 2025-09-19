@@ -5,7 +5,7 @@
 <meta name="generator" content="Docusaurus v3.8.1">
 <title data-rh="true">Release Notes next | Yet another Kubernetes Engine</title><meta data-rh="true" name="viewport" content="width=device-width,initial-scale=1"><meta data-rh="true" name="twitter:card" content="summary_large_image"><meta data-rh="true" property="og:url" content="https://yake.cloud/release-notes/next"><meta data-rh="true" property="og:locale" content="en"><meta data-rh="true" name="docusaurus_locale" content="en"><meta data-rh="true" name="docsearch:language" content="en"><meta data-rh="true" name="gardener" content="installation, production, operations, maintenance"><meta data-rh="true" name="docusaurus_version" content="current"><meta data-rh="true" name="docusaurus_tag" content="docs-release-notes-current"><meta data-rh="true" name="docsearch:version" content="current"><meta data-rh="true" name="docsearch:docusaurus_tag" content="docs-release-notes-current"><meta data-rh="true" property="og:title" content="Release Notes next | Yet another Kubernetes Engine"><meta data-rh="true" name="description" content="Yake release notes and upgrade guide"><meta data-rh="true" property="og:description" content="Yake release notes and upgrade guide"><link data-rh="true" rel="icon" href="/img/favicon.ico"><link data-rh="true" rel="canonical" href="https://yake.cloud/release-notes/next"><link data-rh="true" rel="alternate" href="https://yake.cloud/release-notes/next" hreflang="en"><link data-rh="true" rel="alternate" href="https://yake.cloud/release-notes/next" hreflang="x-default"><script data-rh="true" type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Release Notes next","item":"https://yake.cloud/release-notes/next"}]}</script><link rel="alternate" type="application/rss+xml" href="/blog/rss.xml" title="Yet another Kubernetes Engine RSS Feed">
 <link rel="alternate" type="application/atom+xml" href="/blog/atom.xml" title="Yet another Kubernetes Engine Atom Feed"><link rel="stylesheet" href="/assets/css/styles.9a630ee0.css">
-<script src="/assets/js/runtime~main.1208abcb.js" defer="defer"></script>
+<script src="/assets/js/runtime~main.4a61fe08.js" defer="defer"></script>
 <script src="/assets/js/main.7e07acdd.js" defer="defer"></script>
 </head>
 <body class="navigation-with-keyboard">
@@ -480,6 +480,306 @@
 <ul>
 <li>gardener-extension-admission-cilium: <code>europe-docker.pkg.dev/gardener-project/releases/gardener/extensions/admission-cilium:v1.43.1</code></li>
 <li>gardener-extension-networking-cilium: <code>europe-docker.pkg.dev/gardener-project/releases/gardener/extensions/networking-cilium:v1.43.1</code></li>
+</ul>
+</div></div></details>
+<details class="details_lb9f alert alert--info details_b_Ee" data-collapsed="true"><summary><b>Update gardener-controlplane to <code>1.128.0</code></b></summary><div><div class="collapsibleContent_i85q">
+<!-- -->
+<h1>[github.com/gardener/gardener:v1.128.0]</h1>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="️-breaking-changes-1">⚠️ Breaking Changes<a href="#️-breaking-changes-1" class="hash-link" aria-label="Direct link to ⚠️ Breaking Changes" title="Direct link to ⚠️ Breaking Changes">​</a></h2>
+<ul>
+<li><code>[USER]</code> The validation logic for <code>Project</code> resources has been changed: <code>.spec.description</code> and <code>.spec.purpose</code> fields may only contain letters, numbers and some punctuation characters. Existing projects are not affected by this change unless their description or purpose is updated. by @timuthy [<a href="https://github.com/gardener/gardener/pull/12902" target="_blank" rel="noopener noreferrer">#12902</a>]</li>
+<li><code>[OPERATOR]</code> The long time deprecated legacy <code>ScrapeConfig</code> roles in <code>monitoring.coreos.com</code> have been removed from CRD. by @oliver-goetz [<a href="https://github.com/gardener/gardener/pull/12908" target="_blank" rel="noopener noreferrer">#12908</a>]</li>
+<li><code>[USER]</code> In the Shoot API, the <code>.spec.kubernetes.kubelet.cpuManagerPolicy</code> and <code>.spec.provider.workers[].kubelet.cpuManagerPolicy</code> fields are now validated to ensure they can only be set to static or none. by @shafeeqes [<a href="https://github.com/gardener/gardener/pull/12914" target="_blank" rel="noopener noreferrer">#12914</a>]</li>
+<li><code>[USER]</code> In the Shoot API, the <code>.spec.kubernetes.kubelet.containerLogMaxSize</code> and <code>.spec.provider.workers[].kubelet.containerLogMaxSize</code> fields are now validated to ensure they contain a valid resource quantity. by @shafeeqes [<a href="https://github.com/gardener/gardener/pull/12914" target="_blank" rel="noopener noreferrer">#12914</a>]</li>
+<li><code>[OPERATOR]</code> The <a href="https://github.com/gardener/gardener/blob/v1.127.0/docs/concepts/apiserver-admission-plugins.md#shootvpaenabledbydefault" target="_blank" rel="noopener noreferrer"><code>ShootVPAEnabledByDefault</code></a> admission plugin is now enabled by default for the Gardener API server. Disable this admission plugin explicitly if you don&#x27;t want VPA to be enabled by default for newly created Shoots. If you already have the admission plugin enabled, you can remove the explicit enablement after upgrading to this version of Gardener as the plugin is now enabled by default. by @georgibaltiev [<a href="https://github.com/gardener/gardener/pull/12854" target="_blank" rel="noopener noreferrer">#12854</a>]</li>
+<li><code>[OPERATOR]</code> The following fields in the <code>CloudProfile</code> have been renamed:
+<ul>
+<li><code>spec.capabilities</code> -&gt; <code>spec.machineCapabilities</code></li>
+<li><code>spec.MachineImages[].Versions[].capabilitySets</code> -&gt; <code>spec.MachineImages[].Versions[].capabilityFlavors</code><br>
+Please update your <code>CloudProfile</code>s accordingly if you are using capabilities (currently in alpha state). by @Roncossek [<a href="https://github.com/gardener/gardener/pull/12751" target="_blank" rel="noopener noreferrer">#12751</a>]</li>
+</ul>
+</li>
+</ul>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="-noteworthy-2">📰 Noteworthy<a href="#-noteworthy-2" class="hash-link" aria-label="Direct link to 📰 Noteworthy" title="Direct link to 📰 Noteworthy">​</a></h2>
+<ul>
+<li><code>[USER]</code> The <code>rotate-etcd-encryption-start</code> and <code>rotate-etcd-encryption-complete</code> operation annotations have been deprecated in favour of <code>rotate-etcd-encryption-key</code>. by @AleksandarSavchev [<a href="https://github.com/gardener/gardener/pull/12605" target="_blank" rel="noopener noreferrer">#12605</a>]</li>
+<li><code>[DEVELOPER]</code> Usages of the deprecated <code>gopkg.in/yaml.v{2|3}</code> packages were dropped. Please refrain from using them. Instead, please use the <code>go.yaml.in/yaml/v4</code> package instead. by @tobschli [<a href="https://github.com/gardener/gardener/pull/12895" target="_blank" rel="noopener noreferrer">#12895</a>]</li>
+</ul>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="-new-features-3">✨ New Features<a href="#-new-features-3" class="hash-link" aria-label="Direct link to ✨ New Features" title="Direct link to ✨ New Features">​</a></h2>
+<ul>
+<li><code>[OPERATOR]</code> It is now allowed backups to use <code>WorkloadIdentity</code> as credentials via the <code>seed.spec.backup.credentialsRef</code> and <code>backupBucket.spec.credentialsRef</code> APIs. In order to make use of this feature, the infrastructure and provider extension must support <code>WorkloadIdentity</code> credentials. by @vpnachev [<a href="https://github.com/gardener/gardener/pull/12924" target="_blank" rel="noopener noreferrer">#12924</a>]</li>
+<li><code>[DEVELOPER]</code> A developer guideline on validation in Gardener extensions has been added. Please consult this document as an extension developer or reviewer to ensure consistency in validation code across the Gardener extensions codebase. Check out the <a href="https://github.com/gardener/gardener/blob/v1.127.0/docs/extensions/validation-guidelines-for-extensions.md" target="_blank" rel="noopener noreferrer">Validation Guidelines for Extensions</a> document. by @ialidzhikov [<a href="https://github.com/gardener/gardener/pull/12811" target="_blank" rel="noopener noreferrer">#12811</a>]</li>
+<li><code>[DEVELOPER]</code> A developer guideline on validation in Gardener components has been added. Please consult this document as a developer or reviewer to ensure consistency in validation code across the Gardener codebase. Check out the <a href="https://github.com/gardener/gardener/blob/v1.127.0/docs/development/validation-guidelines.md" target="_blank" rel="noopener noreferrer">Validation Guidelines</a> document. by @ialidzhikov [<a href="https://github.com/gardener/gardener/pull/12811" target="_blank" rel="noopener noreferrer">#12811</a>]</li>
+<li><code>[USER]</code> Added operation annotation <code>rotate-etcd-encryption-key</code> which can be set to the <code>Shoot</code> and <code>Garden</code> resource to perform an etcd encryption key rotation. by @AleksandarSavchev [<a href="https://github.com/gardener/gardener/pull/12605" target="_blank" rel="noopener noreferrer">#12605</a>]</li>
+</ul>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="-bug-fixes-12">🐛 Bug Fixes<a href="#-bug-fixes-12" class="hash-link" aria-label="Direct link to 🐛 Bug Fixes" title="Direct link to 🐛 Bug Fixes">​</a></h2>
+<ul>
+<li><code>[DEPENDENCY]</code> The certificate issuance and renewal flow for webhooks has been improved. Previously, controller restarts during the renewal process could leave the system in an unrecoverable error state, preventing the extension from starting. by @timuthy [<a href="https://github.com/gardener/gardener/pull/12852" target="_blank" rel="noopener noreferrer">#12852</a>]</li>
+<li><code>[OPERATOR]</code> An issue causing the update of existing <code>CustomResourceDefinitions</code> to be no-op is now fixed. by @shafeeqes [<a href="https://github.com/gardener/gardener/pull/12963" target="_blank" rel="noopener noreferrer">#12963</a>]</li>
+<li><code>[OPERATOR]</code> A bug in the gardenlet start-up migration of the Admin and Viewer Kubeconfig ClusterRoleBindings where a ManagedResource secret could be deleted leading to gardenlet being unable to startup is fixed. by @vpnachev [<a href="https://github.com/gardener/gardener/pull/12923" target="_blank" rel="noopener noreferrer">#12923</a>]</li>
+</ul>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="-others-16">🏃 Others<a href="#-others-16" class="hash-link" aria-label="Direct link to 🏃 Others" title="Direct link to 🏃 Others">​</a></h2>
+<ul>
+<li><code>[OPERATOR]</code> gardener-node-agent no longer reboots a node if it flaps too often between ready/non-ready in a short period of time. by @ScheererJ [<a href="https://github.com/gardener/gardener/pull/12930" target="_blank" rel="noopener noreferrer">#12930</a>]</li>
+<li><code>[DEPENDENCY]</code> The following dependencies have been updated:
+<ul>
+<li><code>gardener/dashboard</code> from <code>1.82.0</code> to <code>1.82.1</code>. <a href="https://redirect.github.com/gardener/dashboard/releases/tag/1.82.1" target="_blank" rel="noopener noreferrer">Release Notes</a> by @gardener-ci-robot [<a href="https://github.com/gardener/gardener/pull/12982" target="_blank" rel="noopener noreferrer">#12982</a>]</li>
+</ul>
+</li>
+<li><code>[OPERATOR]</code> Monitoring the Istio Ingress Gateways is temporarily disabled to mitigate a metric leak issue. This does not affect the monitoring of the shoot control planes where these metrics are not used. by @istvanballok [<a href="https://github.com/gardener/gardener/pull/12896" target="_blank" rel="noopener noreferrer">#12896</a>]</li>
+<li><code>[OPERATOR]</code> Reduce the CPU resource requests of istio-ingressgateway to <code>450m</code> for the case with enabled L7 loadbalancing. by @voelzmo [<a href="https://github.com/gardener/gardener/pull/12881" target="_blank" rel="noopener noreferrer">#12881</a>]</li>
+<li><code>[DEPENDENCY]</code> The following dependencies have been updated:
+<ul>
+<li><code>envoyproxy/envoy</code> from <code>distroless-v1.35.0</code> to <code>v1.35.3</code>. <a href="https://redirect.github.com/envoyproxy/envoy/releases/tag/v1.35.3" target="_blank" rel="noopener noreferrer">Release Notes</a> by @gardener-ci-robot [<a href="https://github.com/gardener/gardener/pull/12909" target="_blank" rel="noopener noreferrer">#12909</a>]</li>
+</ul>
+</li>
+<li><code>[DEPENDENCY]</code> The following dependencies have been updated:
+<ul>
+<li><code>gcr.io/istio-release/pilot</code> from <code>1.25.4</code> to <code>1.25.5</code>.</li>
+<li><code>gcr.io/istio-release/proxyv2</code> from <code>1.25.4</code> to <code>1.25.5</code>.</li>
+<li><code>istio.io/api</code> from <code>v1.25.4</code> to <code>v1.25.5</code>. by @gardener-ci-robot [<a href="https://github.com/gardener/gardener/pull/12886" target="_blank" rel="noopener noreferrer">#12886</a>]</li>
+</ul>
+</li>
+<li><code>[DEPENDENCY]</code> The following dependencies have been updated:
+<ul>
+<li><code>perses/perses</code> from <code>v0.51.1</code> to <code>v0.52.0</code>. <a href="https://redirect.github.com/perses/perses/releases/tag/v0.52.0" target="_blank" rel="noopener noreferrer">Release Notes</a> by @gardener-ci-robot [<a href="https://github.com/gardener/gardener/pull/12951" target="_blank" rel="noopener noreferrer">#12951</a>]</li>
+</ul>
+</li>
+<li><code>[DEVELOPER]</code> Add ensure capabilities for HA vpn statefulsets by @RiRa12621 [<a href="https://github.com/gardener/gardener/pull/12949" target="_blank" rel="noopener noreferrer">#12949</a>]</li>
+<li><code>[OPERATOR]</code> Ensure that enabling <code>node-local-dns</code> for all shoot clusters does not alter DNS behaviour. To maintain consistency the custom CoreDNS configmap is mounted into the <code>node-local-dns</code> pods and the custom overwrite rules defined in the custom CoreDNS configuration is applied onto the <code>node-local-dns</code> pods. by @DockToFuture [<a href="https://github.com/gardener/gardener/pull/12893" target="_blank" rel="noopener noreferrer">#12893</a>]</li>
+<li><code>[DEPENDENCY]</code> The following dependencies have been updated:
+<ul>
+<li><code>gardener/dashboard</code> from <code>1.81.3</code> to <code>1.82.0</code>. <a href="https://redirect.github.com/gardener/dashboard/releases/tag/1.82.0" target="_blank" rel="noopener noreferrer">Release Notes</a> by @gardener-ci-robot [<a href="https://github.com/gardener/gardener/pull/12970" target="_blank" rel="noopener noreferrer">#12970</a>]</li>
+</ul>
+</li>
+<li><code>[DEPENDENCY]</code> The following dependencies have been updated:
+<ul>
+<li><code>gardener/ingress-default-backend</code> from <code>0.23.0</code> to <code>0.24.0</code>. <a href="https://redirect.github.com/gardener/ingress-default-backend/releases/tag/0.24.0" target="_blank" rel="noopener noreferrer">Release Notes</a> by @gardener-ci-robot [<a href="https://github.com/gardener/gardener/pull/12945" target="_blank" rel="noopener noreferrer">#12945</a>]</li>
+</ul>
+</li>
+<li><code>[OPERATOR]</code> Adds Machine Capabilities support for provider local. Read more about Machine Capabilities <a href="https://github.com/gardener/gardener/blob/master/docs/proposals/33-machine-image-capabilities.md" target="_blank" rel="noopener noreferrer">here</a> by @Roncossek [<a href="https://github.com/gardener/gardener/pull/12751" target="_blank" rel="noopener noreferrer">#12751</a>]</li>
+<li><code>[OPERATOR]</code> The VPA ManagedResource and the Secret it references are now removed when VPA is disabled in the Shoot, Seed or Garden specification. Previously, when VPA was disabled a ManagedResource with an empty Secret would be created. Now, no ManagedResource is created. by @RadaBDimitrova [<a href="https://github.com/gardener/gardener/pull/12870" target="_blank" rel="noopener noreferrer">#12870</a>]</li>
+<li><code>[OPERATOR]</code> set semver-compliant resource-version for envoy-proxy by @ccwienk [<a href="https://github.com/gardener/gardener/pull/12941" target="_blank" rel="noopener noreferrer">#12941</a>]</li>
+<li><code>[DEVELOPER]</code> The <code>istio-ingressgateway</code> service of the <code>local2</code> seed is now exposed on <code>172.18.255.2:443</code> instead of <code>172.18.255.2:9443</code> on the developer&#x27;s host machine. by @plkokanov [<a href="https://github.com/gardener/gardener/pull/12905" target="_blank" rel="noopener noreferrer">#12905</a>]</li>
+<li><code>[OPERATOR]</code> Allowlist new etcd-druid compaction metric and update network policies to allow full-snapshot API requests from etcd-druid to etcd-main client service. by @anveshreddy18 [<a href="https://github.com/gardener/gardener/pull/12849" target="_blank" rel="noopener noreferrer">#12849</a>]</li>
+</ul>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="helm-charts-15">Helm Charts<a href="#helm-charts-15" class="hash-link" aria-label="Direct link to Helm Charts" title="Direct link to Helm Charts">​</a></h2>
+<ul>
+<li>controlplane: <code>europe-docker.pkg.dev/gardener-project/releases/charts/gardener/controlplane:v1.128.0</code></li>
+<li>gardenlet: <code>europe-docker.pkg.dev/gardener-project/releases/charts/gardener/gardenlet:v1.128.0</code></li>
+<li>operator: <code>europe-docker.pkg.dev/gardener-project/releases/charts/gardener/operator:v1.128.0</code></li>
+<li>resource-manager: <code>europe-docker.pkg.dev/gardener-project/releases/charts/gardener/resource-manager:v1.128.0</code></li>
+</ul>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="container-oci-images-19">Container (OCI) Images<a href="#container-oci-images-19" class="hash-link" aria-label="Direct link to Container (OCI) Images" title="Direct link to Container (OCI) Images">​</a></h2>
+<ul>
+<li>admission-controller: <code>europe-docker.pkg.dev/gardener-project/releases/gardener/admission-controller:v1.128.0</code></li>
+<li>apiserver: <code>europe-docker.pkg.dev/gardener-project/releases/gardener/apiserver:v1.128.0</code></li>
+<li>controller-manager: <code>europe-docker.pkg.dev/gardener-project/releases/gardener/controller-manager:v1.128.0</code></li>
+<li>gardenlet: <code>europe-docker.pkg.dev/gardener-project/releases/gardener/gardenlet:v1.128.0</code></li>
+<li>node-agent: <code>europe-docker.pkg.dev/gardener-project/releases/gardener/node-agent:v1.128.0</code></li>
+<li>operator: <code>europe-docker.pkg.dev/gardener-project/releases/gardener/operator:v1.128.0</code></li>
+<li>resource-manager: <code>europe-docker.pkg.dev/gardener-project/releases/gardener/resource-manager:v1.128.0</code></li>
+<li>scheduler: <code>europe-docker.pkg.dev/gardener-project/releases/gardener/scheduler:v1.128.0</code></li>
+</ul>
+</div></div></details>
+<details class="details_lb9f alert alert--info details_b_Ee" data-collapsed="true"><summary><b>Update gardener-controlplane to <code>1.128.0</code></b></summary><div><div class="collapsibleContent_i85q">
+<!-- -->
+<h1>[github.com/gardener/gardener:v1.128.0]</h1>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="️-breaking-changes-2">⚠️ Breaking Changes<a href="#️-breaking-changes-2" class="hash-link" aria-label="Direct link to ⚠️ Breaking Changes" title="Direct link to ⚠️ Breaking Changes">​</a></h2>
+<ul>
+<li><code>[USER]</code> The validation logic for <code>Project</code> resources has been changed: <code>.spec.description</code> and <code>.spec.purpose</code> fields may only contain letters, numbers and some punctuation characters. Existing projects are not affected by this change unless their description or purpose is updated. by @timuthy [<a href="https://github.com/gardener/gardener/pull/12902" target="_blank" rel="noopener noreferrer">#12902</a>]</li>
+<li><code>[OPERATOR]</code> The long time deprecated legacy <code>ScrapeConfig</code> roles in <code>monitoring.coreos.com</code> have been removed from CRD. by @oliver-goetz [<a href="https://github.com/gardener/gardener/pull/12908" target="_blank" rel="noopener noreferrer">#12908</a>]</li>
+<li><code>[USER]</code> In the Shoot API, the <code>.spec.kubernetes.kubelet.cpuManagerPolicy</code> and <code>.spec.provider.workers[].kubelet.cpuManagerPolicy</code> fields are now validated to ensure they can only be set to static or none. by @shafeeqes [<a href="https://github.com/gardener/gardener/pull/12914" target="_blank" rel="noopener noreferrer">#12914</a>]</li>
+<li><code>[USER]</code> In the Shoot API, the <code>.spec.kubernetes.kubelet.containerLogMaxSize</code> and <code>.spec.provider.workers[].kubelet.containerLogMaxSize</code> fields are now validated to ensure they contain a valid resource quantity. by @shafeeqes [<a href="https://github.com/gardener/gardener/pull/12914" target="_blank" rel="noopener noreferrer">#12914</a>]</li>
+<li><code>[OPERATOR]</code> The <a href="https://github.com/gardener/gardener/blob/v1.127.0/docs/concepts/apiserver-admission-plugins.md#shootvpaenabledbydefault" target="_blank" rel="noopener noreferrer"><code>ShootVPAEnabledByDefault</code></a> admission plugin is now enabled by default for the Gardener API server. Disable this admission plugin explicitly if you don&#x27;t want VPA to be enabled by default for newly created Shoots. If you already have the admission plugin enabled, you can remove the explicit enablement after upgrading to this version of Gardener as the plugin is now enabled by default. by @georgibaltiev [<a href="https://github.com/gardener/gardener/pull/12854" target="_blank" rel="noopener noreferrer">#12854</a>]</li>
+<li><code>[OPERATOR]</code> The following fields in the <code>CloudProfile</code> have been renamed:
+<ul>
+<li><code>spec.capabilities</code> -&gt; <code>spec.machineCapabilities</code></li>
+<li><code>spec.MachineImages[].Versions[].capabilitySets</code> -&gt; <code>spec.MachineImages[].Versions[].capabilityFlavors</code><br>
+Please update your <code>CloudProfile</code>s accordingly if you are using capabilities (currently in alpha state). by @Roncossek [<a href="https://github.com/gardener/gardener/pull/12751" target="_blank" rel="noopener noreferrer">#12751</a>]</li>
+</ul>
+</li>
+</ul>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="-noteworthy-3">📰 Noteworthy<a href="#-noteworthy-3" class="hash-link" aria-label="Direct link to 📰 Noteworthy" title="Direct link to 📰 Noteworthy">​</a></h2>
+<ul>
+<li><code>[USER]</code> The <code>rotate-etcd-encryption-start</code> and <code>rotate-etcd-encryption-complete</code> operation annotations have been deprecated in favour of <code>rotate-etcd-encryption-key</code>. by @AleksandarSavchev [<a href="https://github.com/gardener/gardener/pull/12605" target="_blank" rel="noopener noreferrer">#12605</a>]</li>
+<li><code>[DEVELOPER]</code> Usages of the deprecated <code>gopkg.in/yaml.v{2|3}</code> packages were dropped. Please refrain from using them. Instead, please use the <code>go.yaml.in/yaml/v4</code> package instead. by @tobschli [<a href="https://github.com/gardener/gardener/pull/12895" target="_blank" rel="noopener noreferrer">#12895</a>]</li>
+</ul>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="-new-features-4">✨ New Features<a href="#-new-features-4" class="hash-link" aria-label="Direct link to ✨ New Features" title="Direct link to ✨ New Features">​</a></h2>
+<ul>
+<li><code>[OPERATOR]</code> It is now allowed backups to use <code>WorkloadIdentity</code> as credentials via the <code>seed.spec.backup.credentialsRef</code> and <code>backupBucket.spec.credentialsRef</code> APIs. In order to make use of this feature, the infrastructure and provider extension must support <code>WorkloadIdentity</code> credentials. by @vpnachev [<a href="https://github.com/gardener/gardener/pull/12924" target="_blank" rel="noopener noreferrer">#12924</a>]</li>
+<li><code>[DEVELOPER]</code> A developer guideline on validation in Gardener extensions has been added. Please consult this document as an extension developer or reviewer to ensure consistency in validation code across the Gardener extensions codebase. Check out the <a href="https://github.com/gardener/gardener/blob/v1.127.0/docs/extensions/validation-guidelines-for-extensions.md" target="_blank" rel="noopener noreferrer">Validation Guidelines for Extensions</a> document. by @ialidzhikov [<a href="https://github.com/gardener/gardener/pull/12811" target="_blank" rel="noopener noreferrer">#12811</a>]</li>
+<li><code>[DEVELOPER]</code> A developer guideline on validation in Gardener components has been added. Please consult this document as a developer or reviewer to ensure consistency in validation code across the Gardener codebase. Check out the <a href="https://github.com/gardener/gardener/blob/v1.127.0/docs/development/validation-guidelines.md" target="_blank" rel="noopener noreferrer">Validation Guidelines</a> document. by @ialidzhikov [<a href="https://github.com/gardener/gardener/pull/12811" target="_blank" rel="noopener noreferrer">#12811</a>]</li>
+<li><code>[USER]</code> Added operation annotation <code>rotate-etcd-encryption-key</code> which can be set to the <code>Shoot</code> and <code>Garden</code> resource to perform an etcd encryption key rotation. by @AleksandarSavchev [<a href="https://github.com/gardener/gardener/pull/12605" target="_blank" rel="noopener noreferrer">#12605</a>]</li>
+</ul>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="-bug-fixes-13">🐛 Bug Fixes<a href="#-bug-fixes-13" class="hash-link" aria-label="Direct link to 🐛 Bug Fixes" title="Direct link to 🐛 Bug Fixes">​</a></h2>
+<ul>
+<li><code>[DEPENDENCY]</code> The certificate issuance and renewal flow for webhooks has been improved. Previously, controller restarts during the renewal process could leave the system in an unrecoverable error state, preventing the extension from starting. by @timuthy [<a href="https://github.com/gardener/gardener/pull/12852" target="_blank" rel="noopener noreferrer">#12852</a>]</li>
+<li><code>[OPERATOR]</code> An issue causing the update of existing <code>CustomResourceDefinitions</code> to be no-op is now fixed. by @shafeeqes [<a href="https://github.com/gardener/gardener/pull/12963" target="_blank" rel="noopener noreferrer">#12963</a>]</li>
+<li><code>[OPERATOR]</code> A bug in the gardenlet start-up migration of the Admin and Viewer Kubeconfig ClusterRoleBindings where a ManagedResource secret could be deleted leading to gardenlet being unable to startup is fixed. by @vpnachev [<a href="https://github.com/gardener/gardener/pull/12923" target="_blank" rel="noopener noreferrer">#12923</a>]</li>
+</ul>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="-others-17">🏃 Others<a href="#-others-17" class="hash-link" aria-label="Direct link to 🏃 Others" title="Direct link to 🏃 Others">​</a></h2>
+<ul>
+<li><code>[OPERATOR]</code> gardener-node-agent no longer reboots a node if it flaps too often between ready/non-ready in a short period of time. by @ScheererJ [<a href="https://github.com/gardener/gardener/pull/12930" target="_blank" rel="noopener noreferrer">#12930</a>]</li>
+<li><code>[DEPENDENCY]</code> The following dependencies have been updated:
+<ul>
+<li><code>gardener/dashboard</code> from <code>1.82.0</code> to <code>1.82.1</code>. <a href="https://redirect.github.com/gardener/dashboard/releases/tag/1.82.1" target="_blank" rel="noopener noreferrer">Release Notes</a> by @gardener-ci-robot [<a href="https://github.com/gardener/gardener/pull/12982" target="_blank" rel="noopener noreferrer">#12982</a>]</li>
+</ul>
+</li>
+<li><code>[OPERATOR]</code> Monitoring the Istio Ingress Gateways is temporarily disabled to mitigate a metric leak issue. This does not affect the monitoring of the shoot control planes where these metrics are not used. by @istvanballok [<a href="https://github.com/gardener/gardener/pull/12896" target="_blank" rel="noopener noreferrer">#12896</a>]</li>
+<li><code>[OPERATOR]</code> Reduce the CPU resource requests of istio-ingressgateway to <code>450m</code> for the case with enabled L7 loadbalancing. by @voelzmo [<a href="https://github.com/gardener/gardener/pull/12881" target="_blank" rel="noopener noreferrer">#12881</a>]</li>
+<li><code>[DEPENDENCY]</code> The following dependencies have been updated:
+<ul>
+<li><code>envoyproxy/envoy</code> from <code>distroless-v1.35.0</code> to <code>v1.35.3</code>. <a href="https://redirect.github.com/envoyproxy/envoy/releases/tag/v1.35.3" target="_blank" rel="noopener noreferrer">Release Notes</a> by @gardener-ci-robot [<a href="https://github.com/gardener/gardener/pull/12909" target="_blank" rel="noopener noreferrer">#12909</a>]</li>
+</ul>
+</li>
+<li><code>[DEPENDENCY]</code> The following dependencies have been updated:
+<ul>
+<li><code>gcr.io/istio-release/pilot</code> from <code>1.25.4</code> to <code>1.25.5</code>.</li>
+<li><code>gcr.io/istio-release/proxyv2</code> from <code>1.25.4</code> to <code>1.25.5</code>.</li>
+<li><code>istio.io/api</code> from <code>v1.25.4</code> to <code>v1.25.5</code>. by @gardener-ci-robot [<a href="https://github.com/gardener/gardener/pull/12886" target="_blank" rel="noopener noreferrer">#12886</a>]</li>
+</ul>
+</li>
+<li><code>[DEPENDENCY]</code> The following dependencies have been updated:
+<ul>
+<li><code>perses/perses</code> from <code>v0.51.1</code> to <code>v0.52.0</code>. <a href="https://redirect.github.com/perses/perses/releases/tag/v0.52.0" target="_blank" rel="noopener noreferrer">Release Notes</a> by @gardener-ci-robot [<a href="https://github.com/gardener/gardener/pull/12951" target="_blank" rel="noopener noreferrer">#12951</a>]</li>
+</ul>
+</li>
+<li><code>[DEVELOPER]</code> Add ensure capabilities for HA vpn statefulsets by @RiRa12621 [<a href="https://github.com/gardener/gardener/pull/12949" target="_blank" rel="noopener noreferrer">#12949</a>]</li>
+<li><code>[OPERATOR]</code> Ensure that enabling <code>node-local-dns</code> for all shoot clusters does not alter DNS behaviour. To maintain consistency the custom CoreDNS configmap is mounted into the <code>node-local-dns</code> pods and the custom overwrite rules defined in the custom CoreDNS configuration is applied onto the <code>node-local-dns</code> pods. by @DockToFuture [<a href="https://github.com/gardener/gardener/pull/12893" target="_blank" rel="noopener noreferrer">#12893</a>]</li>
+<li><code>[DEPENDENCY]</code> The following dependencies have been updated:
+<ul>
+<li><code>gardener/dashboard</code> from <code>1.81.3</code> to <code>1.82.0</code>. <a href="https://redirect.github.com/gardener/dashboard/releases/tag/1.82.0" target="_blank" rel="noopener noreferrer">Release Notes</a> by @gardener-ci-robot [<a href="https://github.com/gardener/gardener/pull/12970" target="_blank" rel="noopener noreferrer">#12970</a>]</li>
+</ul>
+</li>
+<li><code>[DEPENDENCY]</code> The following dependencies have been updated:
+<ul>
+<li><code>gardener/ingress-default-backend</code> from <code>0.23.0</code> to <code>0.24.0</code>. <a href="https://redirect.github.com/gardener/ingress-default-backend/releases/tag/0.24.0" target="_blank" rel="noopener noreferrer">Release Notes</a> by @gardener-ci-robot [<a href="https://github.com/gardener/gardener/pull/12945" target="_blank" rel="noopener noreferrer">#12945</a>]</li>
+</ul>
+</li>
+<li><code>[OPERATOR]</code> Adds Machine Capabilities support for provider local. Read more about Machine Capabilities <a href="https://github.com/gardener/gardener/blob/master/docs/proposals/33-machine-image-capabilities.md" target="_blank" rel="noopener noreferrer">here</a> by @Roncossek [<a href="https://github.com/gardener/gardener/pull/12751" target="_blank" rel="noopener noreferrer">#12751</a>]</li>
+<li><code>[OPERATOR]</code> The VPA ManagedResource and the Secret it references are now removed when VPA is disabled in the Shoot, Seed or Garden specification. Previously, when VPA was disabled a ManagedResource with an empty Secret would be created. Now, no ManagedResource is created. by @RadaBDimitrova [<a href="https://github.com/gardener/gardener/pull/12870" target="_blank" rel="noopener noreferrer">#12870</a>]</li>
+<li><code>[OPERATOR]</code> set semver-compliant resource-version for envoy-proxy by @ccwienk [<a href="https://github.com/gardener/gardener/pull/12941" target="_blank" rel="noopener noreferrer">#12941</a>]</li>
+<li><code>[DEVELOPER]</code> The <code>istio-ingressgateway</code> service of the <code>local2</code> seed is now exposed on <code>172.18.255.2:443</code> instead of <code>172.18.255.2:9443</code> on the developer&#x27;s host machine. by @plkokanov [<a href="https://github.com/gardener/gardener/pull/12905" target="_blank" rel="noopener noreferrer">#12905</a>]</li>
+<li><code>[OPERATOR]</code> Allowlist new etcd-druid compaction metric and update network policies to allow full-snapshot API requests from etcd-druid to etcd-main client service. by @anveshreddy18 [<a href="https://github.com/gardener/gardener/pull/12849" target="_blank" rel="noopener noreferrer">#12849</a>]</li>
+</ul>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="helm-charts-16">Helm Charts<a href="#helm-charts-16" class="hash-link" aria-label="Direct link to Helm Charts" title="Direct link to Helm Charts">​</a></h2>
+<ul>
+<li>controlplane: <code>europe-docker.pkg.dev/gardener-project/releases/charts/gardener/controlplane:v1.128.0</code></li>
+<li>gardenlet: <code>europe-docker.pkg.dev/gardener-project/releases/charts/gardener/gardenlet:v1.128.0</code></li>
+<li>operator: <code>europe-docker.pkg.dev/gardener-project/releases/charts/gardener/operator:v1.128.0</code></li>
+<li>resource-manager: <code>europe-docker.pkg.dev/gardener-project/releases/charts/gardener/resource-manager:v1.128.0</code></li>
+</ul>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="container-oci-images-20">Container (OCI) Images<a href="#container-oci-images-20" class="hash-link" aria-label="Direct link to Container (OCI) Images" title="Direct link to Container (OCI) Images">​</a></h2>
+<ul>
+<li>admission-controller: <code>europe-docker.pkg.dev/gardener-project/releases/gardener/admission-controller:v1.128.0</code></li>
+<li>apiserver: <code>europe-docker.pkg.dev/gardener-project/releases/gardener/apiserver:v1.128.0</code></li>
+<li>controller-manager: <code>europe-docker.pkg.dev/gardener-project/releases/gardener/controller-manager:v1.128.0</code></li>
+<li>gardenlet: <code>europe-docker.pkg.dev/gardener-project/releases/gardener/gardenlet:v1.128.0</code></li>
+<li>node-agent: <code>europe-docker.pkg.dev/gardener-project/releases/gardener/node-agent:v1.128.0</code></li>
+<li>operator: <code>europe-docker.pkg.dev/gardener-project/releases/gardener/operator:v1.128.0</code></li>
+<li>resource-manager: <code>europe-docker.pkg.dev/gardener-project/releases/gardener/resource-manager:v1.128.0</code></li>
+<li>scheduler: <code>europe-docker.pkg.dev/gardener-project/releases/gardener/scheduler:v1.128.0</code></li>
+</ul>
+</div></div></details>
+<details class="details_lb9f alert alert--info details_b_Ee" data-collapsed="true"><summary><b>Update gardenlet to <code>1.128.0</code></b></summary><div><div class="collapsibleContent_i85q">
+<!-- -->
+<h1>[github.com/gardener/gardener:v1.128.0]</h1>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="️-breaking-changes-3">⚠️ Breaking Changes<a href="#️-breaking-changes-3" class="hash-link" aria-label="Direct link to ⚠️ Breaking Changes" title="Direct link to ⚠️ Breaking Changes">​</a></h2>
+<ul>
+<li><code>[USER]</code> The validation logic for <code>Project</code> resources has been changed: <code>.spec.description</code> and <code>.spec.purpose</code> fields may only contain letters, numbers and some punctuation characters. Existing projects are not affected by this change unless their description or purpose is updated. by @timuthy [<a href="https://github.com/gardener/gardener/pull/12902" target="_blank" rel="noopener noreferrer">#12902</a>]</li>
+<li><code>[OPERATOR]</code> The long time deprecated legacy <code>ScrapeConfig</code> roles in <code>monitoring.coreos.com</code> have been removed from CRD. by @oliver-goetz [<a href="https://github.com/gardener/gardener/pull/12908" target="_blank" rel="noopener noreferrer">#12908</a>]</li>
+<li><code>[USER]</code> In the Shoot API, the <code>.spec.kubernetes.kubelet.cpuManagerPolicy</code> and <code>.spec.provider.workers[].kubelet.cpuManagerPolicy</code> fields are now validated to ensure they can only be set to static or none. by @shafeeqes [<a href="https://github.com/gardener/gardener/pull/12914" target="_blank" rel="noopener noreferrer">#12914</a>]</li>
+<li><code>[USER]</code> In the Shoot API, the <code>.spec.kubernetes.kubelet.containerLogMaxSize</code> and <code>.spec.provider.workers[].kubelet.containerLogMaxSize</code> fields are now validated to ensure they contain a valid resource quantity. by @shafeeqes [<a href="https://github.com/gardener/gardener/pull/12914" target="_blank" rel="noopener noreferrer">#12914</a>]</li>
+<li><code>[OPERATOR]</code> The <a href="https://github.com/gardener/gardener/blob/v1.127.0/docs/concepts/apiserver-admission-plugins.md#shootvpaenabledbydefault" target="_blank" rel="noopener noreferrer"><code>ShootVPAEnabledByDefault</code></a> admission plugin is now enabled by default for the Gardener API server. Disable this admission plugin explicitly if you don&#x27;t want VPA to be enabled by default for newly created Shoots. If you already have the admission plugin enabled, you can remove the explicit enablement after upgrading to this version of Gardener as the plugin is now enabled by default. by @georgibaltiev [<a href="https://github.com/gardener/gardener/pull/12854" target="_blank" rel="noopener noreferrer">#12854</a>]</li>
+<li><code>[OPERATOR]</code> The following fields in the <code>CloudProfile</code> have been renamed:
+<ul>
+<li><code>spec.capabilities</code> -&gt; <code>spec.machineCapabilities</code></li>
+<li><code>spec.MachineImages[].Versions[].capabilitySets</code> -&gt; <code>spec.MachineImages[].Versions[].capabilityFlavors</code><br>
+Please update your <code>CloudProfile</code>s accordingly if you are using capabilities (currently in alpha state). by @Roncossek [<a href="https://github.com/gardener/gardener/pull/12751" target="_blank" rel="noopener noreferrer">#12751</a>]</li>
+</ul>
+</li>
+</ul>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="-noteworthy-4">📰 Noteworthy<a href="#-noteworthy-4" class="hash-link" aria-label="Direct link to 📰 Noteworthy" title="Direct link to 📰 Noteworthy">​</a></h2>
+<ul>
+<li><code>[USER]</code> The <code>rotate-etcd-encryption-start</code> and <code>rotate-etcd-encryption-complete</code> operation annotations have been deprecated in favour of <code>rotate-etcd-encryption-key</code>. by @AleksandarSavchev [<a href="https://github.com/gardener/gardener/pull/12605" target="_blank" rel="noopener noreferrer">#12605</a>]</li>
+<li><code>[DEVELOPER]</code> Usages of the deprecated <code>gopkg.in/yaml.v{2|3}</code> packages were dropped. Please refrain from using them. Instead, please use the <code>go.yaml.in/yaml/v4</code> package instead. by @tobschli [<a href="https://github.com/gardener/gardener/pull/12895" target="_blank" rel="noopener noreferrer">#12895</a>]</li>
+</ul>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="-new-features-5">✨ New Features<a href="#-new-features-5" class="hash-link" aria-label="Direct link to ✨ New Features" title="Direct link to ✨ New Features">​</a></h2>
+<ul>
+<li><code>[OPERATOR]</code> It is now allowed backups to use <code>WorkloadIdentity</code> as credentials via the <code>seed.spec.backup.credentialsRef</code> and <code>backupBucket.spec.credentialsRef</code> APIs. In order to make use of this feature, the infrastructure and provider extension must support <code>WorkloadIdentity</code> credentials. by @vpnachev [<a href="https://github.com/gardener/gardener/pull/12924" target="_blank" rel="noopener noreferrer">#12924</a>]</li>
+<li><code>[DEVELOPER]</code> A developer guideline on validation in Gardener extensions has been added. Please consult this document as an extension developer or reviewer to ensure consistency in validation code across the Gardener extensions codebase. Check out the <a href="https://github.com/gardener/gardener/blob/v1.127.0/docs/extensions/validation-guidelines-for-extensions.md" target="_blank" rel="noopener noreferrer">Validation Guidelines for Extensions</a> document. by @ialidzhikov [<a href="https://github.com/gardener/gardener/pull/12811" target="_blank" rel="noopener noreferrer">#12811</a>]</li>
+<li><code>[DEVELOPER]</code> A developer guideline on validation in Gardener components has been added. Please consult this document as a developer or reviewer to ensure consistency in validation code across the Gardener codebase. Check out the <a href="https://github.com/gardener/gardener/blob/v1.127.0/docs/development/validation-guidelines.md" target="_blank" rel="noopener noreferrer">Validation Guidelines</a> document. by @ialidzhikov [<a href="https://github.com/gardener/gardener/pull/12811" target="_blank" rel="noopener noreferrer">#12811</a>]</li>
+<li><code>[USER]</code> Added operation annotation <code>rotate-etcd-encryption-key</code> which can be set to the <code>Shoot</code> and <code>Garden</code> resource to perform an etcd encryption key rotation. by @AleksandarSavchev [<a href="https://github.com/gardener/gardener/pull/12605" target="_blank" rel="noopener noreferrer">#12605</a>]</li>
+</ul>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="-bug-fixes-14">🐛 Bug Fixes<a href="#-bug-fixes-14" class="hash-link" aria-label="Direct link to 🐛 Bug Fixes" title="Direct link to 🐛 Bug Fixes">​</a></h2>
+<ul>
+<li><code>[DEPENDENCY]</code> The certificate issuance and renewal flow for webhooks has been improved. Previously, controller restarts during the renewal process could leave the system in an unrecoverable error state, preventing the extension from starting. by @timuthy [<a href="https://github.com/gardener/gardener/pull/12852" target="_blank" rel="noopener noreferrer">#12852</a>]</li>
+<li><code>[OPERATOR]</code> An issue causing the update of existing <code>CustomResourceDefinitions</code> to be no-op is now fixed. by @shafeeqes [<a href="https://github.com/gardener/gardener/pull/12963" target="_blank" rel="noopener noreferrer">#12963</a>]</li>
+<li><code>[OPERATOR]</code> A bug in the gardenlet start-up migration of the Admin and Viewer Kubeconfig ClusterRoleBindings where a ManagedResource secret could be deleted leading to gardenlet being unable to startup is fixed. by @vpnachev [<a href="https://github.com/gardener/gardener/pull/12923" target="_blank" rel="noopener noreferrer">#12923</a>]</li>
+</ul>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="-others-18">🏃 Others<a href="#-others-18" class="hash-link" aria-label="Direct link to 🏃 Others" title="Direct link to 🏃 Others">​</a></h2>
+<ul>
+<li><code>[OPERATOR]</code> gardener-node-agent no longer reboots a node if it flaps too often between ready/non-ready in a short period of time. by @ScheererJ [<a href="https://github.com/gardener/gardener/pull/12930" target="_blank" rel="noopener noreferrer">#12930</a>]</li>
+<li><code>[DEPENDENCY]</code> The following dependencies have been updated:
+<ul>
+<li><code>gardener/dashboard</code> from <code>1.82.0</code> to <code>1.82.1</code>. <a href="https://redirect.github.com/gardener/dashboard/releases/tag/1.82.1" target="_blank" rel="noopener noreferrer">Release Notes</a> by @gardener-ci-robot [<a href="https://github.com/gardener/gardener/pull/12982" target="_blank" rel="noopener noreferrer">#12982</a>]</li>
+</ul>
+</li>
+<li><code>[OPERATOR]</code> Monitoring the Istio Ingress Gateways is temporarily disabled to mitigate a metric leak issue. This does not affect the monitoring of the shoot control planes where these metrics are not used. by @istvanballok [<a href="https://github.com/gardener/gardener/pull/12896" target="_blank" rel="noopener noreferrer">#12896</a>]</li>
+<li><code>[OPERATOR]</code> Reduce the CPU resource requests of istio-ingressgateway to <code>450m</code> for the case with enabled L7 loadbalancing. by @voelzmo [<a href="https://github.com/gardener/gardener/pull/12881" target="_blank" rel="noopener noreferrer">#12881</a>]</li>
+<li><code>[DEPENDENCY]</code> The following dependencies have been updated:
+<ul>
+<li><code>envoyproxy/envoy</code> from <code>distroless-v1.35.0</code> to <code>v1.35.3</code>. <a href="https://redirect.github.com/envoyproxy/envoy/releases/tag/v1.35.3" target="_blank" rel="noopener noreferrer">Release Notes</a> by @gardener-ci-robot [<a href="https://github.com/gardener/gardener/pull/12909" target="_blank" rel="noopener noreferrer">#12909</a>]</li>
+</ul>
+</li>
+<li><code>[DEPENDENCY]</code> The following dependencies have been updated:
+<ul>
+<li><code>gcr.io/istio-release/pilot</code> from <code>1.25.4</code> to <code>1.25.5</code>.</li>
+<li><code>gcr.io/istio-release/proxyv2</code> from <code>1.25.4</code> to <code>1.25.5</code>.</li>
+<li><code>istio.io/api</code> from <code>v1.25.4</code> to <code>v1.25.5</code>. by @gardener-ci-robot [<a href="https://github.com/gardener/gardener/pull/12886" target="_blank" rel="noopener noreferrer">#12886</a>]</li>
+</ul>
+</li>
+<li><code>[DEPENDENCY]</code> The following dependencies have been updated:
+<ul>
+<li><code>perses/perses</code> from <code>v0.51.1</code> to <code>v0.52.0</code>. <a href="https://redirect.github.com/perses/perses/releases/tag/v0.52.0" target="_blank" rel="noopener noreferrer">Release Notes</a> by @gardener-ci-robot [<a href="https://github.com/gardener/gardener/pull/12951" target="_blank" rel="noopener noreferrer">#12951</a>]</li>
+</ul>
+</li>
+<li><code>[DEVELOPER]</code> Add ensure capabilities for HA vpn statefulsets by @RiRa12621 [<a href="https://github.com/gardener/gardener/pull/12949" target="_blank" rel="noopener noreferrer">#12949</a>]</li>
+<li><code>[OPERATOR]</code> Ensure that enabling <code>node-local-dns</code> for all shoot clusters does not alter DNS behaviour. To maintain consistency the custom CoreDNS configmap is mounted into the <code>node-local-dns</code> pods and the custom overwrite rules defined in the custom CoreDNS configuration is applied onto the <code>node-local-dns</code> pods. by @DockToFuture [<a href="https://github.com/gardener/gardener/pull/12893" target="_blank" rel="noopener noreferrer">#12893</a>]</li>
+<li><code>[DEPENDENCY]</code> The following dependencies have been updated:
+<ul>
+<li><code>gardener/dashboard</code> from <code>1.81.3</code> to <code>1.82.0</code>. <a href="https://redirect.github.com/gardener/dashboard/releases/tag/1.82.0" target="_blank" rel="noopener noreferrer">Release Notes</a> by @gardener-ci-robot [<a href="https://github.com/gardener/gardener/pull/12970" target="_blank" rel="noopener noreferrer">#12970</a>]</li>
+</ul>
+</li>
+<li><code>[DEPENDENCY]</code> The following dependencies have been updated:
+<ul>
+<li><code>gardener/ingress-default-backend</code> from <code>0.23.0</code> to <code>0.24.0</code>. <a href="https://redirect.github.com/gardener/ingress-default-backend/releases/tag/0.24.0" target="_blank" rel="noopener noreferrer">Release Notes</a> by @gardener-ci-robot [<a href="https://github.com/gardener/gardener/pull/12945" target="_blank" rel="noopener noreferrer">#12945</a>]</li>
+</ul>
+</li>
+<li><code>[OPERATOR]</code> Adds Machine Capabilities support for provider local. Read more about Machine Capabilities <a href="https://github.com/gardener/gardener/blob/master/docs/proposals/33-machine-image-capabilities.md" target="_blank" rel="noopener noreferrer">here</a> by @Roncossek [<a href="https://github.com/gardener/gardener/pull/12751" target="_blank" rel="noopener noreferrer">#12751</a>]</li>
+<li><code>[OPERATOR]</code> The VPA ManagedResource and the Secret it references are now removed when VPA is disabled in the Shoot, Seed or Garden specification. Previously, when VPA was disabled a ManagedResource with an empty Secret would be created. Now, no ManagedResource is created. by @RadaBDimitrova [<a href="https://github.com/gardener/gardener/pull/12870" target="_blank" rel="noopener noreferrer">#12870</a>]</li>
+<li><code>[OPERATOR]</code> set semver-compliant resource-version for envoy-proxy by @ccwienk [<a href="https://github.com/gardener/gardener/pull/12941" target="_blank" rel="noopener noreferrer">#12941</a>]</li>
+<li><code>[DEVELOPER]</code> The <code>istio-ingressgateway</code> service of the <code>local2</code> seed is now exposed on <code>172.18.255.2:443</code> instead of <code>172.18.255.2:9443</code> on the developer&#x27;s host machine. by @plkokanov [<a href="https://github.com/gardener/gardener/pull/12905" target="_blank" rel="noopener noreferrer">#12905</a>]</li>
+<li><code>[OPERATOR]</code> Allowlist new etcd-druid compaction metric and update network policies to allow full-snapshot API requests from etcd-druid to etcd-main client service. by @anveshreddy18 [<a href="https://github.com/gardener/gardener/pull/12849" target="_blank" rel="noopener noreferrer">#12849</a>]</li>
+</ul>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="helm-charts-17">Helm Charts<a href="#helm-charts-17" class="hash-link" aria-label="Direct link to Helm Charts" title="Direct link to Helm Charts">​</a></h2>
+<ul>
+<li>controlplane: <code>europe-docker.pkg.dev/gardener-project/releases/charts/gardener/controlplane:v1.128.0</code></li>
+<li>gardenlet: <code>europe-docker.pkg.dev/gardener-project/releases/charts/gardener/gardenlet:v1.128.0</code></li>
+<li>operator: <code>europe-docker.pkg.dev/gardener-project/releases/charts/gardener/operator:v1.128.0</code></li>
+<li>resource-manager: <code>europe-docker.pkg.dev/gardener-project/releases/charts/gardener/resource-manager:v1.128.0</code></li>
+</ul>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="container-oci-images-21">Container (OCI) Images<a href="#container-oci-images-21" class="hash-link" aria-label="Direct link to Container (OCI) Images" title="Direct link to Container (OCI) Images">​</a></h2>
+<ul>
+<li>admission-controller: <code>europe-docker.pkg.dev/gardener-project/releases/gardener/admission-controller:v1.128.0</code></li>
+<li>apiserver: <code>europe-docker.pkg.dev/gardener-project/releases/gardener/apiserver:v1.128.0</code></li>
+<li>controller-manager: <code>europe-docker.pkg.dev/gardener-project/releases/gardener/controller-manager:v1.128.0</code></li>
+<li>gardenlet: <code>europe-docker.pkg.dev/gardener-project/releases/gardener/gardenlet:v1.128.0</code></li>
+<li>node-agent: <code>europe-docker.pkg.dev/gardener-project/releases/gardener/node-agent:v1.128.0</code></li>
+<li>operator: <code>europe-docker.pkg.dev/gardener-project/releases/gardener/operator:v1.128.0</code></li>
+<li>resource-manager: <code>europe-docker.pkg.dev/gardener-project/releases/gardener/resource-manager:v1.128.0</code></li>
+<li>scheduler: <code>europe-docker.pkg.dev/gardener-project/releases/gardener/scheduler:v1.128.0</code></li>
 </ul>
 </div></div></details></div></article><nav class="docusaurus-mt-lg pagination-nav" aria-label="Docs pages"><a class="pagination-nav__link pagination-nav__link--next" href="/release-notes/v1.127"><div class="pagination-nav__sublabel">Next</div><div class="pagination-nav__label">Release Notes v1.127</div></a></nav></div></div></div></div></main></div></div></div><footer class="theme-layout-footer footer footer--dark"><div class="container container-fluid"><div class="row footer__links"><div class="theme-layout-footer-column col footer__col"><div class="footer__title">Docs</div><ul class="footer__items clean-list"><li class="footer__item"><a class="footer__link-item" href="/docs/overview">Docs</a></li></ul></div><div class="theme-layout-footer-column col footer__col"><div class="footer__title">Community</div><ul class="footer__items clean-list"><li class="footer__item"><a href="https://github.com/yakecloud" target="_blank" rel="noopener noreferrer" class="footer__link-item">GitHub<svg width="13.5" height="13.5" aria-hidden="true" class="iconExternalLink_nPIU"><use href="#theme-svg-external-link"></use></svg></a></li><li class="footer__item"><a href="https://github.com/gardener-community" target="_blank" rel="noopener noreferrer" class="footer__link-item">Gardener Community<svg width="13.5" height="13.5" aria-hidden="true" class="iconExternalLink_nPIU"><use href="#theme-svg-external-link"></use></svg></a></li><li class="footer__item"><a href="https://gardener-cloud.slack.com" target="_blank" rel="noopener noreferrer" class="footer__link-item">Slack<svg width="13.5" height="13.5" aria-hidden="true" class="iconExternalLink_nPIU"><use href="#theme-svg-external-link"></use></svg></a></li></ul></div><div class="theme-layout-footer-column col footer__col"><div class="footer__title">More</div><ul class="footer__items clean-list"><li class="footer__item"><a class="footer__link-item" href="/blog">Blog</a></li><li class="footer__item"><a class="footer__link-item" href="/legals">Legals</a></li><li class="footer__item"><a class="footer__link-item" href="/privacy-policy">Privacy policy</a></li></ul></div></div><div class="footer__bottom text--center"><div class="footer__copyright">Copyright © 2025 23 Technologies GmbH</div></div></div></footer></div>
 </body>
