@@ -1,16 +1,13 @@
-# [github.com/gardener/gardener-extension-networking-cilium:v1.43.0]
+# [github.com/gardener/gardener-extension-networking-cilium:v1.43.1]
 
-## 🏃 Others
-- `[OPERATOR]` A background script in the cilium agent pod now properly reacts to SIGTERM allowing for faster node reboots. by @ScheererJ [[#629](https://github.com/gardener/gardener-extension-networking-cilium/pull/629)]
-- `[OPERATOR]` Update cilium to v1.17.7 by @gardener-ci-robot [[#621](https://github.com/gardener/gardener-extension-networking-cilium/pull/621)]
-- `[OPERATOR]` An example `Extension` manifest for extension registration has been added. It can be found at [`example/extension.yaml`](https://github.com/gardener/gardener-extension-networking-cilium/blob/master/example/extension.yaml) by @timuthy [[#623](https://github.com/gardener/gardener-extension-networking-cilium/pull/623)]
-- `[OPERATOR]` Cilium extension now works with worker pool specific node-local-dns daemonsets. by @ScheererJ [[#622](https://github.com/gardener/gardener-extension-networking-cilium/pull/622)]
+## 🐛 Bug Fixes
+- `[OPERATOR]` Adapt `ScrapeConfig` to more picky `prometheus-operator` `v0.76.0` to support new gardener releases. by @Johannes Scheerer [[gardener/gardener-extension-networking-cilium@f6da49a531b9ccf1566a52fa6ce75d7a416228b0](https://github.com/gardener/gardener-extension-networking-cilium/commit/f6da49a531b9ccf1566a52fa6ce75d7a416228b0)]
 
 
 ## Helm Charts
-- admission-cilium-application: `europe-docker.pkg.dev/gardener-project/releases/charts/gardener/extensions/admission-cilium-application:v1.43.0`
-- admission-cilium-runtime: `europe-docker.pkg.dev/gardener-project/releases/charts/gardener/extensions/admission-cilium-runtime:v1.43.0`
-- networking-cilium: `europe-docker.pkg.dev/gardener-project/releases/charts/gardener/extensions/networking-cilium:v1.43.0`
+- admission-cilium-application: `europe-docker.pkg.dev/gardener-project/releases/charts/gardener/extensions/admission-cilium-application:v1.43.1`
+- admission-cilium-runtime: `europe-docker.pkg.dev/gardener-project/releases/charts/gardener/extensions/admission-cilium-runtime:v1.43.1`
+- networking-cilium: `europe-docker.pkg.dev/gardener-project/releases/charts/gardener/extensions/networking-cilium:v1.43.1`
 ## Container (OCI) Images
-- gardener-extension-admission-cilium: `europe-docker.pkg.dev/gardener-project/releases/gardener/extensions/admission-cilium:v1.43.0`
-- gardener-extension-networking-cilium: `europe-docker.pkg.dev/gardener-project/releases/gardener/extensions/networking-cilium:v1.43.0`
+- gardener-extension-admission-cilium: `europe-docker.pkg.dev/gardener-project/releases/gardener/extensions/admission-cilium:v1.43.1`
+- gardener-extension-networking-cilium: `europe-docker.pkg.dev/gardener-project/releases/gardener/extensions/networking-cilium:v1.43.1`
