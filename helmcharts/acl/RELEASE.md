@@ -1,20 +1,20 @@
 <!-- Release notes generated using configuration in .github/release.yaml at main -->
 
 ## What's Changed
+### ⚠️ Breaking Changes
+* Drop special handling for provider-openstack by @timebertt in https://github.com/stackitcloud/gardener-extension-acl/pull/173
+  * Operators should ensure that the provider-openstack version is recent enough to publish `Infrastructure.status.egressCIDRs` for all clusters before upgrading to this version of this extension.
 ### 🤖 Dependencies
-* Update k8s packages to v0.32.7 (patch) by @renovate[bot] in https://github.com/stackitcloud/gardener-extension-acl/pull/155
-* Update module github.com/spf13/pflag to v1.0.7 by @renovate[bot] in https://github.com/stackitcloud/gardener-extension-acl/pull/156
-* Update dependency go to v1.24.6 by @renovate[bot] in https://github.com/stackitcloud/gardener-extension-acl/pull/153
-* Update k8s packages to v0.32.8 (patch) by @renovate[bot] in https://github.com/stackitcloud/gardener-extension-acl/pull/160
-* Update k8s.io/utils digest to 0af2bda by @renovate[bot] in https://github.com/stackitcloud/gardener-extension-acl/pull/162
-* Update module github.com/onsi/gomega to v1.38.2 by @renovate[bot] in https://github.com/stackitcloud/gardener-extension-acl/pull/157
-* Update actions/checkout action to v5 by @renovate[bot] in https://github.com/stackitcloud/gardener-extension-acl/pull/158
-* Update dependency go to v1.25.0 by @renovate[bot] in https://github.com/stackitcloud/gardener-extension-acl/pull/159
-* Update module github.com/spf13/cobra to v1.10.1 by @renovate[bot] in https://github.com/stackitcloud/gardener-extension-acl/pull/164
-* Update module github.com/onsi/ginkgo/v2 to v2.25.2 by @renovate[bot] in https://github.com/stackitcloud/gardener-extension-acl/pull/165
-* Update module github.com/spf13/pflag to v1.0.10 by @renovate[bot] in https://github.com/stackitcloud/gardener-extension-acl/pull/163
-### ℹ️ Other Changes
-* fix: add input validation to admission controller by @domdom82 in https://github.com/stackitcloud/gardener-extension-acl/pull/152
+* Update dependency go to v1.25.1 by @renovate[bot] in https://github.com/stackitcloud/gardener-extension-acl/pull/166
+* Update actions/setup-go action to v6 by @renovate[bot] in https://github.com/stackitcloud/gardener-extension-acl/pull/167
+* Update module github.com/onsi/ginkgo/v2 to v2.25.3 by @renovate[bot] in https://github.com/stackitcloud/gardener-extension-acl/pull/168
+* Update k8s packages to v0.32.9 (patch) by @renovate[bot] in https://github.com/stackitcloud/gardener-extension-acl/pull/169
+* Update module golang.org/x/tools to v0.37.0 by @renovate[bot] in https://github.com/stackitcloud/gardener-extension-acl/pull/170
+* Update k8s packages (minor) by @renovate[bot] in https://github.com/stackitcloud/gardener-extension-acl/pull/149
+* Update module github.com/gardener/gardener to v1.127.4 by @renovate[bot] in https://github.com/stackitcloud/gardener-extension-acl/pull/175
+* Update k8s packages (minor) by @renovate[bot] in https://github.com/stackitcloud/gardener-extension-acl/pull/176
 
+## New Contributors
+* @MichaelEischer made their first contribution in https://github.com/stackitcloud/gardener-extension-acl/pull/171
 
-**Full Changelog**: https://github.com/stackitcloud/gardener-extension-acl/compare/v1.10.0...v1.11.0
+**Full Changelog**: https://github.com/stackitcloud/gardener-extension-acl/compare/v1.11.0...v1.12.0
