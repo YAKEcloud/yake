@@ -3,4 +3,4 @@ description: A Helm chart to deploy the Gardener application related resources
 name: application
 sources:
 - https://github.com/gardener/gardener
-version: 1.128.2
+version: 1.128.3
