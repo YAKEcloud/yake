@@ -28,7 +28,7 @@ stringData:
         split: false
 
     provider-openstack:
-      version: 1.49.0
+      version: 1.49.1
       admission:
         enabled: true
 
