@@ -8,7 +8,7 @@ metadata:
   labels:
     app: gardener
     role: gardenlet
-    chart: "{{ .Chart.Name }}-{{ .Chart.Version | replace "+" "_" }}"
+    chart: "{{ .Chart.Name }}-{{ .Chart.Version | replace "+" "_" | trunc 32 }}"
     release: "{{ .Release.Name }}"
     heritage: "{{ .Release.Service }}"
 rules:
@@ -448,8 +448,6 @@ rules:
   - servicemonitors
   - scrapeconfigs
   - prometheusrules
-  # TODO(vicwicker): Remove this after v1.128 has been released.
-  - prometheuses
   verbs:
   - list
   - watch

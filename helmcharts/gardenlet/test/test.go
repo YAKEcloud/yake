@@ -364,7 +364,7 @@ func getGardenletClusterRole(labels map[string]string) *rbacv1.ClusterRole {
 			},
 			{
 				APIGroups: []string{"monitoring.coreos.com"},
-				Resources: []string{"servicemonitors", "scrapeconfigs", "prometheusrules", "prometheuses"},
+				Resources: []string{"servicemonitors", "scrapeconfigs", "prometheusrules"},
 				Verbs:     []string{"list", "watch", "get", "create", "patch", "update", "delete"},
 			},
 		},
@@ -1102,8 +1102,17 @@ func ComputeExpectedGardenletDeploymentSpec(
 			kubernetesutils.MutateMatchLabelKeys(deployment.Template.Spec.TopologySpreadConstraints)
 		}
 
+		deployment.Template.Spec.Containers[0].Env = append(deployment.Template.Spec.Containers[0].Env, corev1.EnvVar{
+			Name: "NAMESPACE",
+			ValueFrom: &corev1.EnvVarSource{
+				FieldRef: &corev1.ObjectFieldSelector{
+					FieldPath: "metadata.namespace",
+				},
+			},
+		})
+
 		if deploymentConfiguration.Env != nil {
-			deployment.Template.Spec.Containers[0].Env = deploymentConfiguration.Env
+			deployment.Template.Spec.Containers[0].Env = append(deployment.Template.Spec.Containers[0].Env, deploymentConfiguration.Env...)
 		}
 
 		if deploymentConfiguration.PodLabels != nil {
