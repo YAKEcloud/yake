@@ -52,7 +52,7 @@ stringData:
             serverPortHttp: 8080
 
     shoot-oidc-service:
-      version: 0.32.0
+      version: 0.33.0
 
     shoot-networking-filter:
       version: 0.25.0
