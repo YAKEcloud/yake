@@ -1,20 +1,21 @@
 <!-- Release notes generated using configuration in .github/release.yaml at main -->
 
 ## What's Changed
-### ⚠️ Breaking Changes
-* Drop special handling for provider-openstack by @timebertt in https://github.com/stackitcloud/gardener-extension-acl/pull/173
-  * Operators should ensure that the provider-openstack version is recent enough to publish `Infrastructure.status.egressCIDRs` for all clusters before upgrading to this version of this extension.
 ### 🤖 Dependencies
-* Update dependency go to v1.25.1 by @renovate[bot] in https://github.com/stackitcloud/gardener-extension-acl/pull/166
-* Update actions/setup-go action to v6 by @renovate[bot] in https://github.com/stackitcloud/gardener-extension-acl/pull/167
-* Update module github.com/onsi/ginkgo/v2 to v2.25.3 by @renovate[bot] in https://github.com/stackitcloud/gardener-extension-acl/pull/168
-* Update k8s packages to v0.32.9 (patch) by @renovate[bot] in https://github.com/stackitcloud/gardener-extension-acl/pull/169
-* Update module golang.org/x/tools to v0.37.0 by @renovate[bot] in https://github.com/stackitcloud/gardener-extension-acl/pull/170
-* Update k8s packages (minor) by @renovate[bot] in https://github.com/stackitcloud/gardener-extension-acl/pull/149
-* Update module github.com/gardener/gardener to v1.127.4 by @renovate[bot] in https://github.com/stackitcloud/gardener-extension-acl/pull/175
-* Update k8s packages (minor) by @renovate[bot] in https://github.com/stackitcloud/gardener-extension-acl/pull/176
+* Update module github.com/gardener/gardener to v1.128.3 by @renovate[bot] in https://github.com/stackitcloud/gardener-extension-acl/pull/177
+* Update k8s.io/utils digest to bc988d5 by @renovate[bot] in https://github.com/stackitcloud/gardener-extension-acl/pull/179
+* Update module github.com/gardener/gardener to v1.128.4 by @renovate[bot] in https://github.com/stackitcloud/gardener-extension-acl/pull/181
+* Update module sigs.k8s.io/controller-runtime to v0.22.2 by @renovate[bot] in https://github.com/stackitcloud/gardener-extension-acl/pull/185
+* Update dependency go to v1.25.2 by @renovate[bot] in https://github.com/stackitcloud/gardener-extension-acl/pull/186
+* Update module github.com/onsi/ginkgo/v2 to v2.26.0 by @renovate[bot] in https://github.com/stackitcloud/gardener-extension-acl/pull/180
+* Update module golang.org/x/tools to v0.38.0 by @renovate[bot] in https://github.com/stackitcloud/gardener-extension-acl/pull/187
+* Update module github.com/gardener/gardener to v1.129.0 by @renovate[bot] in https://github.com/stackitcloud/gardener-extension-acl/pull/182
+### ℹ️ Other Changes
+* chore(vpa): Update the extension `VPA` resources to use update mode `Recreate` by @vitanovs in https://github.com/stackitcloud/gardener-extension-acl/pull/178
+* Add controls for Pod Security Standards `restricted` policy by @relusc in https://github.com/stackitcloud/gardener-extension-acl/pull/184
 
 ## New Contributors
-* @MichaelEischer made their first contribution in https://github.com/stackitcloud/gardener-extension-acl/pull/171
+* @vitanovs made their first contribution in https://github.com/stackitcloud/gardener-extension-acl/pull/178
+* @relusc made their first contribution in https://github.com/stackitcloud/gardener-extension-acl/pull/184
 
-**Full Changelog**: https://github.com/stackitcloud/gardener-extension-acl/compare/v1.11.0...v1.12.0
+**Full Changelog**: https://github.com/stackitcloud/gardener-extension-acl/compare/v1.12.0...v1.13.0
