@@ -1063,3 +1063,25 @@ hide_table_of_contents: true
 
 
 </details>
+
+<details>
+<summary><b>Update dashboard to <code>1.82.4</code></b></summary>
+
+
+
+## Container (OCI) Images
+- gardener-dashboard: `europe-docker.pkg.dev/gardener-project/releases/gardener/dashboard:1.82.4`
+
+
+</details>
+
+<details>
+<summary><b>Update dashboard to <code>1.82.4</code></b></summary>
+
+
+
+## Container (OCI) Images
+- gardener-dashboard: `europe-docker.pkg.dev/gardener-project/releases/gardener/dashboard:1.82.4`
+
+
+</details>
