@@ -19,7 +19,7 @@ gardener:
 image:
     pullPolicy: IfNotPresent
     repository: europe-docker.pkg.dev/gardener-project/public/dns-controller-manager
-    tag: v0.28.0
+    tag: v0.29.0
 nameOverride: ""
 nodeSelector: {}
 remoteaccess:
@@ -42,4 +42,4 @@ vpa:
         cpu: 50m
         memory: 50Mi
     updatePolicy:
-        updateMode: Auto
+        updateMode: Recreate
