@@ -8,7 +8,7 @@ type: Opaque
 stringData:
   values.yaml: |-
     os-ubuntu:
-      version: 1.32.0
+      version: 1.33.0
 
     os-gardenlinux:
       version: 0.34.0
