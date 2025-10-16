@@ -36,7 +36,7 @@ global:
         image:
             pullPolicy: IfNotPresent
             repository: europe-docker.pkg.dev/gardener-project/releases/gardener/admission-controller
-            tag: v1.129.1
+            tag: v1.129.2
         replicaCount: 3
         resources:
             requests:
@@ -134,7 +134,7 @@ global:
         image:
             pullPolicy: IfNotPresent
             repository: europe-docker.pkg.dev/gardener-project/releases/gardener/apiserver
-            tag: v1.129.1
+            tag: v1.129.2
         insecureSkipTLSVerify: false
         livenessProbe:
             enable: true
@@ -263,7 +263,7 @@ global:
         image:
             pullPolicy: IfNotPresent
             repository: europe-docker.pkg.dev/gardener-project/releases/gardener/controller-manager
-            tag: v1.129.1
+            tag: v1.129.2
         replicaCount: 1
         resources:
             requests:
@@ -321,7 +321,7 @@ global:
         image:
             pullPolicy: IfNotPresent
             repository: europe-docker.pkg.dev/gardener-project/releases/gardener/scheduler
-            tag: v1.129.1
+            tag: v1.129.2
         replicaCount: 1
         resources:
             requests:
