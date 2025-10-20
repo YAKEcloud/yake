@@ -2,650 +2,650 @@
 <html lang="en" dir="ltr" class="docs-wrapper plugin-docs plugin-id-release-notes docs-version-current docs-doc-page docs-doc-id-v1.86" data-has-hydrated="false">
 <head>
 <meta charset="UTF-8">
-<meta name="generator" content="Docusaurus v3.9.1">
+<meta name="generator" content="Docusaurus v3.9.2">
 <title data-rh="true">Release Notes v1.86 | Yet another Kubernetes Engine</title><meta data-rh="true" name="viewport" content="width=device-width,initial-scale=1"><meta data-rh="true" name="twitter:card" content="summary_large_image"><meta data-rh="true" property="og:url" content="https://yake.cloud/release-notes/v1.86"><meta data-rh="true" property="og:locale" content="en"><meta data-rh="true" name="docusaurus_locale" content="en"><meta data-rh="true" name="docsearch:language" content="en"><meta data-rh="true" name="gardener" content="installation, production, operations, maintenance"><meta data-rh="true" name="docusaurus_version" content="current"><meta data-rh="true" name="docusaurus_tag" content="docs-release-notes-current"><meta data-rh="true" name="docsearch:version" content="current"><meta data-rh="true" name="docsearch:docusaurus_tag" content="docs-release-notes-current"><meta data-rh="true" property="og:title" content="Release Notes v1.86 | Yet another Kubernetes Engine"><meta data-rh="true" name="description" content="YAKE/23KE release notes and upgrade guide"><meta data-rh="true" property="og:description" content="YAKE/23KE release notes and upgrade guide"><link data-rh="true" rel="icon" href="/img/favicon.ico"><link data-rh="true" rel="canonical" href="https://yake.cloud/release-notes/v1.86"><link data-rh="true" rel="alternate" href="https://yake.cloud/release-notes/v1.86" hreflang="en"><link data-rh="true" rel="alternate" href="https://yake.cloud/release-notes/v1.86" hreflang="x-default"><script data-rh="true" type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Release Notes v1.86","item":"https://yake.cloud/release-notes/v1.86"}]}</script><link rel="alternate" type="application/rss+xml" href="/blog/rss.xml" title="Yet another Kubernetes Engine RSS Feed">
-<link rel="alternate" type="application/atom+xml" href="/blog/atom.xml" title="Yet another Kubernetes Engine Atom Feed"><link rel="stylesheet" href="/assets/css/styles.06de01f6.css">
-<script src="/assets/js/runtime~main.cf0cc359.js" defer="defer"></script>
-<script src="/assets/js/main.1ec92b1e.js" defer="defer"></script>
+<link rel="alternate" type="application/atom+xml" href="/blog/atom.xml" title="Yet another Kubernetes Engine Atom Feed"><link rel="stylesheet" href="/assets/css/styles.cf7d8bb1.css">
+<script src="/assets/js/runtime~main.0ede265f.js" defer="defer"></script>
+<script src="/assets/js/main.50dcf7c4.js" defer="defer"></script>
 </head>
 <body class="navigation-with-keyboard">
 <svg style="display: none;"><defs>
 <symbol id="theme-svg-external-link" viewBox="0 0 24 24"><path fill="currentColor" d="M21 13v10h-21v-19h12v2h-10v15h17v-8h2zm3-12h-10.988l4.035 4-6.977 7.07 2.828 2.828 6.977-7.07 4.125 4.172v-11z"/></symbol>
 </defs></svg>
 <script>!function(){var t=function(){try{return new URLSearchParams(window.location.search).get("docusaurus-theme")}catch(t){}}()||function(){try{return window.localStorage.getItem("theme")}catch(t){}}();document.documentElement.setAttribute("data-theme",t||"light"),document.documentElement.setAttribute("data-theme-choice",t||"light")}(),function(){try{const c=new URLSearchParams(window.location.search).entries();for(var[t,e]of c)if(t.startsWith("docusaurus-data-")){var a=t.replace("docusaurus-data-","data-");document.documentElement.setAttribute(a,e)}}catch(t){}}()</script><div id="__docusaurus"><link rel="preload" as="image" href="/img/logo.svg"><link rel="preload" as="image" href="/img/logo_dark.svg"><div role="region" aria-label="Skip to main content"><a class="skipToContent_fXgn" href="#__docusaurus_skipToContent_fallback">Skip to main content</a></div><nav aria-label="Main" class="theme-layout-navbar navbar navbar--fixed-top"><div class="navbar__inner"><div class="theme-layout-navbar-left navbar__items"><button aria-label="Toggle navigation bar" aria-expanded="false" class="navbar__toggle clean-btn" type="button"><svg width="30" height="30" viewBox="0 0 30 30" aria-hidden="true"><path stroke="currentColor" stroke-linecap="round" stroke-miterlimit="10" stroke-width="2" d="M4 7h22M4 15h22M4 23h22"></path></svg></button><a class="navbar__brand" href="/"><div class="navbar__logo"><img src="/img/logo.svg" alt="YAKE" class="themedComponent_mlkZ themedComponent--light_NVdE"><img src="/img/logo_dark.svg" alt="YAKE" class="themedComponent_mlkZ themedComponent--dark_xIcU"></div><b class="navbar__title text--truncate">YAKE</b></a><a class="navbar__item navbar__link" href="/docs/overview">Docs</a><a aria-current="page" class="navbar__item navbar__link navbar__link--active" href="/release-notes/v1.128">Release Notes</a><a class="navbar__item navbar__link" href="/blog">Blog</a></div><div class="theme-layout-navbar-right navbar__items navbar__items--right"><div class="navbar__item dropdown dropdown--hoverable dropdown--right"><a class="navbar__link" aria-haspopup="true" aria-expanded="false" role="button" href="/docs/overview">1.128.x</a><ul class="dropdown__menu"><li><a class="dropdown__link" href="/docs/next/overview">Next</a></li><li><a class="dropdown__link" href="/docs/overview">1.128.x</a></li><li><a class="dropdown__link" href="/docs/1.127.x/overview">1.127.x</a></li><li><a class="dropdown__link" href="/docs/1.126.x/overview">1.126.x</a></li><li><a class="dropdown__link" href="/docs/1.125.x/overview">1.125.x</a></li><li><a class="dropdown__link" href="/docs/1.124.x/overview">1.124.x</a></li><li><a class="dropdown__link" href="/docs/1.123.x/overview">1.123.x</a></li><li><a class="dropdown__link" href="/docs/1.122.x/overview">1.122.x</a></li><li><a class="dropdown__link" href="/docs/1.121.x/overview">1.121.x</a></li><li><a class="dropdown__link" href="/docs/1.120.x/overview">1.120.x</a></li><li><a class="dropdown__link" href="/docs/1.119.x/overview">1.119.x</a></li><li><a class="dropdown__link" href="/docs/1.118.x/overview">1.118.x</a></li><li><a class="dropdown__link" href="/docs/1.117.x/overview">1.117.x</a></li><li><a class="dropdown__link" href="/docs/1.116.x/overview">1.116.x</a></li><li><a class="dropdown__link" href="/docs/1.115.x/overview">1.115.x</a></li><li><a class="dropdown__link" href="/docs/1.114.x/overview">1.114.x</a></li><li><a class="dropdown__link" href="/docs/1.113.x/overview">1.113.x</a></li><li><a class="dropdown__link" href="/docs/1.112.x/overview">1.112.x</a></li><li><a class="dropdown__link" href="/docs/1.111.x/overview">1.111.x</a></li><li><a class="dropdown__link" href="/docs/1.110.x/overview">1.110.x</a></li><li><a class="dropdown__link" href="/docs/1.109.x/overview">1.109.x</a></li><li><a class="dropdown__link" href="/docs/1.108.x/overview">1.108.x</a></li><li><a class="dropdown__link" href="/docs/1.107.x/overview">1.107.x</a></li><li><a class="dropdown__link" href="/docs/1.106.x/overview">1.106.x</a></li><li><a class="dropdown__link" href="/docs/1.105.x/overview">1.105.x</a></li><li><a class="dropdown__link" href="/docs/1.104.x/overview">1.104.x</a></li><li><a class="dropdown__link" href="/docs/1.103.x/overview">1.103.x</a></li><li><a class="dropdown__link" href="/docs/1.102.x/overview">1.102.x</a></li><li><a class="dropdown__link" href="/docs/1.101.x/overview">1.101.x</a></li><li><a class="dropdown__link" href="/docs/1.100.x/overview">1.100.x</a></li><li><a class="dropdown__link" href="/docs/1.99.x/overview">1.99.x</a></li><li><a class="dropdown__link" href="/docs/1.98.x/overview">1.98.x</a></li><li><a class="dropdown__link" href="/docs/1.97.x/overview">1.97.x</a></li><li><a class="dropdown__link" href="/docs/1.96.x/overview">1.96.x</a></li><li><a class="dropdown__link" href="/docs/1.95.x/overview">1.95.x</a></li><li><a class="dropdown__link" href="/docs/1.94.x/overview">1.94.x</a></li><li><a class="dropdown__link" href="/docs/1.93.x/overview">1.93.x</a></li><li><a class="dropdown__link" href="/docs/1.92.x/overview">1.92.x</a></li><li><a class="dropdown__link" href="/docs/1.91.x/overview">1.91.x</a></li><li><a class="dropdown__link" href="/docs/1.90.x/overview">1.90.x</a></li><li><a class="dropdown__link" href="/docs/1.89.x/overview">1.89.x</a></li><li><a class="dropdown__link" href="/docs/1.88.x/overview">1.88.x</a></li><li><a class="dropdown__link" href="/docs/1.87.x/overview">1.87.x</a></li><li><a class="dropdown__link" href="/docs/1.86.x/overview">1.86.x</a></li><li><a class="dropdown__link" href="/docs/1.85.x/overview">1.85.x</a></li><li><a class="dropdown__link" href="/docs/1.84.x/overview">1.84.x</a></li><li><a class="dropdown__link" href="/docs/1.83.x/overview">1.83.x</a></li><li><a class="dropdown__link" href="/docs/1.82.x/overview">1.82.x</a></li><li><a class="dropdown__link" href="/docs/1.81.x/overview">1.81.x</a></li><li><a class="dropdown__link" href="/docs/1.80.x/overview">1.80.x</a></li><li><a class="dropdown__link" href="/docs/1.79.x/overview">1.79.x</a></li><li><a class="dropdown__link" href="/docs/1.78.x/overview">1.78.x</a></li><li><a class="dropdown__link" href="/docs/1.77.x/overview">1.77.x</a></li><li><a class="dropdown__link" href="/docs/1.76.x/overview">1.76.x</a></li><li><a class="dropdown__link" href="/docs/1.75.x/overview">1.75.x</a></li><li><a class="dropdown__link" href="/docs/1.74.x/overview">1.74.x</a></li><li><a class="dropdown__link" href="/docs/1.73.x/overview">1.73.x</a></li><li><a class="dropdown__link" href="/docs/1.72.x/overview">1.72.x</a></li><li><a class="dropdown__link" href="/docs/1.71.x/overview">1.71.x</a></li><li><a class="dropdown__link" href="/docs/1.70.x/overview">1.70.x</a></li><li><a class="dropdown__link" href="/docs/1.69.x/overview">1.69.x</a></li><li><a class="dropdown__link" href="/docs/1.68.x/overview">1.68.x</a></li><li><a class="dropdown__link" href="/docs/1.67.x/overview">1.67.x</a></li><li><a class="dropdown__link" href="/docs/1.66.x/overview">1.66.x</a></li><li><a class="dropdown__link" href="/docs/1.65.x/overview">1.65.x</a></li><li><a class="dropdown__link" href="/docs/1.64.x/overview">1.64.x</a></li><li><a class="dropdown__link" href="/docs/1.63.x/overview">1.63.x</a></li></ul></div><a href="https://github.com/yakecloud/yake" target="_blank" rel="noopener noreferrer" class="navbar__item navbar__link">GitHub<svg width="13.5" height="13.5" aria-label="(opens in new tab)" class="iconExternalLink_nPIU"><use href="#theme-svg-external-link"></use></svg></a><div class="toggle_vylO colorModeToggle_DEke"><button class="clean-btn toggleButton_gllP toggleButtonDisabled_aARS" type="button" disabled="" title="system mode" aria-label="Switch between dark and light mode (currently system mode)"><svg viewBox="0 0 24 24" width="24" height="24" aria-hidden="true" class="toggleIcon_g3eP lightToggleIcon_pyhR"><path fill="currentColor" d="M12,9c1.65,0,3,1.35,3,3s-1.35,3-3,3s-3-1.35-3-3S10.35,9,12,9 M12,7c-2.76,0-5,2.24-5,5s2.24,5,5,5s5-2.24,5-5 S14.76,7,12,7L12,7z M2,13l2,0c0.55,0,1-0.45,1-1s-0.45-1-1-1l-2,0c-0.55,0-1,0.45-1,1S1.45,13,2,13z M20,13l2,0c0.55,0,1-0.45,1-1 s-0.45-1-1-1l-2,0c-0.55,0-1,0.45-1,1S19.45,13,20,13z M11,2v2c0,0.55,0.45,1,1,1s1-0.45,1-1V2c0-0.55-0.45-1-1-1S11,1.45,11,2z M11,20v2c0,0.55,0.45,1,1,1s1-0.45,1-1v-2c0-0.55-0.45-1-1-1C11.45,19,11,19.45,11,20z M5.99,4.58c-0.39-0.39-1.03-0.39-1.41,0 c-0.39,0.39-0.39,1.03,0,1.41l1.06,1.06c0.39,0.39,1.03,0.39,1.41,0s0.39-1.03,0-1.41L5.99,4.58z M18.36,16.95 c-0.39-0.39-1.03-0.39-1.41,0c-0.39,0.39-0.39,1.03,0,1.41l1.06,1.06c0.39,0.39,1.03,0.39,1.41,0c0.39-0.39,0.39-1.03,0-1.41 L18.36,16.95z M19.42,5.99c0.39-0.39,0.39-1.03,0-1.41c-0.39-0.39-1.03-0.39-1.41,0l-1.06,1.06c-0.39,0.39-0.39,1.03,0,1.41 s1.03,0.39,1.41,0L19.42,5.99z M7.05,18.36c0.39-0.39,0.39-1.03,0-1.41c-0.39-0.39-1.03-0.39-1.41,0l-1.06,1.06 c-0.39,0.39-0.39,1.03,0,1.41s1.03,0.39,1.41,0L7.05,18.36z"></path></svg><svg viewBox="0 0 24 24" width="24" height="24" aria-hidden="true" class="toggleIcon_g3eP darkToggleIcon_wfgR"><path fill="currentColor" d="M9.37,5.51C9.19,6.15,9.1,6.82,9.1,7.5c0,4.08,3.32,7.4,7.4,7.4c0.68,0,1.35-0.09,1.99-0.27C17.45,17.19,14.93,19,12,19 c-3.86,0-7-3.14-7-7C5,9.07,6.81,6.55,9.37,5.51z M12,3c-4.97,0-9,4.03-9,9s4.03,9,9,9s9-4.03,9-9c0-0.46-0.04-0.92-0.1-1.36 c-0.98,1.37-2.58,2.26-4.4,2.26c-2.98,0-5.4-2.42-5.4-5.4c0-1.81,0.89-3.42,2.26-4.4C12.92,3.04,12.46,3,12,3L12,3z"></path></svg><svg viewBox="0 0 24 24" width="24" height="24" aria-hidden="true" class="toggleIcon_g3eP systemToggleIcon_QzmC"><path fill="currentColor" d="m12 21c4.971 0 9-4.029 9-9s-4.029-9-9-9-9 4.029-9 9 4.029 9 9 9zm4.95-13.95c1.313 1.313 2.05 3.093 2.05 4.95s-0.738 3.637-2.05 4.95c-1.313 1.313-3.093 2.05-4.95 2.05v-14c1.857 0 3.637 0.737 4.95 2.05z"></path></svg></button></div><div class="navbarSearchContainer_Bca1"><div class="navbar__search searchBarContainer_NW3z" dir="ltr"><input placeholder="Search" aria-label="Search" class="navbar__search-input searchInput_YFbd" value=""><div class="loadingRing_RJI3 searchBarLoadingRing_YnHq"><div></div><div></div><div></div><div></div></div></div></div></div></div><div role="presentation" class="navbar-sidebar__backdrop"></div></nav><div id="__docusaurus_skipToContent_fallback" class="theme-layout-main main-wrapper mainWrapper_z2l0"><div class="docsWrapper_hBAB"><button aria-label="Scroll back to top" class="clean-btn theme-back-to-top-button backToTopButton_sjWU" type="button"></button><div class="docRoot_UBD9"><aside class="theme-doc-sidebar-container docSidebarContainer_YfHR"><div class="sidebarViewport_aRkj"><div class="sidebar_njMd"><nav aria-label="Docs sidebar" class="menu thin-scrollbar menu_SIkG"><ul class="theme-doc-sidebar-menu menu__list"><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-1 menu__list-item"><a class="menu__link" href="/release-notes/next"><span title="Release Notes next" class="linkLabel_WmDU">Release Notes next</span></a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-1 menu__list-item"><a class="menu__link" href="/release-notes/v1.128"><span title="Release Notes v1.128" class="linkLabel_WmDU">Release Notes v1.128</span></a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-1 menu__list-item"><a class="menu__link" href="/release-notes/v1.127"><span title="Release Notes v1.127" class="linkLabel_WmDU">Release Notes v1.127</span></a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-1 menu__list-item"><a class="menu__link" href="/release-notes/v1.126"><span title="Release Notes v1.126" class="linkLabel_WmDU">Release Notes v1.126</span></a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-1 menu__list-item"><a class="menu__link" href="/release-notes/v1.125"><span title="Release Notes v1.125" class="linkLabel_WmDU">Release Notes v1.125</span></a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-1 menu__list-item"><a class="menu__link" href="/release-notes/v1.124"><span title="Release Notes v1.124" class="linkLabel_WmDU">Release Notes v1.124</span></a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-1 menu__list-item"><a class="menu__link" href="/release-notes/v1.123"><span title="Release Notes v1.123" class="linkLabel_WmDU">Release Notes v1.123</span></a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-1 menu__list-item"><a class="menu__link" href="/release-notes/v1.122"><span title="Release Notes v1.122" class="linkLabel_WmDU">Release Notes v1.122</span></a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-1 menu__list-item"><a class="menu__link" href="/release-notes/v1.121"><span title="Release Notes v1.121" class="linkLabel_WmDU">Release Notes v1.121</span></a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-1 menu__list-item"><a class="menu__link" href="/release-notes/v1.120"><span title="Release Notes v1.120" class="linkLabel_WmDU">Release Notes v1.120</span></a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-1 menu__list-item"><a class="menu__link" href="/release-notes/v1.119"><span title="Release Notes v1.119" class="linkLabel_WmDU">Release Notes v1.119</span></a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-1 menu__list-item"><a class="menu__link" href="/release-notes/v1.118"><span title="Release Notes v1.118" class="linkLabel_WmDU">Release Notes v1.118</span></a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-1 menu__list-item"><a class="menu__link" href="/release-notes/v1.117"><span title="Release Notes v1.117" class="linkLabel_WmDU">Release Notes v1.117</span></a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-1 menu__list-item"><a class="menu__link" href="/release-notes/v1.116"><span title="Release Notes v1.116" class="linkLabel_WmDU">Release Notes v1.116</span></a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-1 menu__list-item"><a class="menu__link" href="/release-notes/v1.115"><span title="Release Notes v1.115" class="linkLabel_WmDU">Release Notes v1.115</span></a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-1 menu__list-item"><a class="menu__link" href="/release-notes/v1.114"><span title="Release Notes v1.114" class="linkLabel_WmDU">Release Notes v1.114</span></a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-1 menu__list-item"><a class="menu__link" href="/release-notes/v1.113"><span title="Release Notes v1.113" class="linkLabel_WmDU">Release Notes v1.113</span></a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-1 menu__list-item"><a class="menu__link" href="/release-notes/v1.112"><span title="Release Notes v1.112" class="linkLabel_WmDU">Release Notes v1.112</span></a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-1 menu__list-item"><a class="menu__link" href="/release-notes/v1.111"><span title="Release Notes v1.111" class="linkLabel_WmDU">Release Notes v1.111</span></a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-1 menu__list-item"><a class="menu__link" href="/release-notes/v1.110"><span title="Release Notes v1.110" class="linkLabel_WmDU">Release Notes v1.110</span></a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-1 menu__list-item"><a class="menu__link" href="/release-notes/v1.109"><span title="Release Notes v1.109" class="linkLabel_WmDU">Release Notes v1.109</span></a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-1 menu__list-item"><a class="menu__link" href="/release-notes/v1.108"><span title="Release Notes v1.108" class="linkLabel_WmDU">Release Notes v1.108</span></a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-1 menu__list-item"><a class="menu__link" href="/release-notes/v1.107"><span title="Release Notes v1.107" class="linkLabel_WmDU">Release Notes v1.107</span></a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-1 menu__list-item"><a class="menu__link" href="/release-notes/v1.106"><span title="Release Notes v1.106" class="linkLabel_WmDU">Release Notes v1.106</span></a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-1 menu__list-item"><a class="menu__link" href="/release-notes/v1.105"><span title="Release Notes v1.105" class="linkLabel_WmDU">Release Notes v1.105</span></a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-1 menu__list-item"><a class="menu__link" href="/release-notes/v1.104"><span title="Release Notes v1.104" class="linkLabel_WmDU">Release Notes v1.104</span></a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-1 menu__list-item"><a class="menu__link" href="/release-notes/v1.103"><span title="Release Notes v1.103" class="linkLabel_WmDU">Release Notes v1.103</span></a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-1 menu__list-item"><a class="menu__link" href="/release-notes/v1.102"><span title="Release Notes v1.102" class="linkLabel_WmDU">Release Notes v1.102</span></a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-1 menu__list-item"><a class="menu__link" href="/release-notes/v1.101"><span title="Release Notes v1.101" class="linkLabel_WmDU">Release Notes v1.101</span></a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-1 menu__list-item"><a class="menu__link" href="/release-notes/v1.100"><span title="Release Notes v1.100" class="linkLabel_WmDU">Release Notes v1.100</span></a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-1 menu__list-item"><a class="menu__link" href="/release-notes/v1.99"><span title="Release Notes v1.99" class="linkLabel_WmDU">Release Notes v1.99</span></a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-1 menu__list-item"><a class="menu__link" href="/release-notes/v1.98"><span title="Release Notes v1.98" class="linkLabel_WmDU">Release Notes v1.98</span></a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-1 menu__list-item"><a class="menu__link" href="/release-notes/v1.97"><span title="Release Notes v1.97" class="linkLabel_WmDU">Release Notes v1.97</span></a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-1 menu__list-item"><a class="menu__link" href="/release-notes/v1.96"><span title="Release Notes v1.96" class="linkLabel_WmDU">Release Notes v1.96</span></a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-1 menu__list-item"><a class="menu__link" href="/release-notes/v1.95"><span title="Release Notes v1.95" class="linkLabel_WmDU">Release Notes v1.95</span></a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-1 menu__list-item"><a class="menu__link" href="/release-notes/v1.94"><span title="Release Notes v1.94" class="linkLabel_WmDU">Release Notes v1.94</span></a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-1 menu__list-item"><a class="menu__link" href="/release-notes/v1.93"><span title="Release Notes v1.93" class="linkLabel_WmDU">Release Notes v1.93</span></a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-1 menu__list-item"><a class="menu__link" href="/release-notes/v1.92"><span title="Release Notes v1.92" class="linkLabel_WmDU">Release Notes v1.92</span></a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-1 menu__list-item"><a class="menu__link" href="/release-notes/v1.91"><span title="Release Notes v1.91" class="linkLabel_WmDU">Release Notes v1.91</span></a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-1 menu__list-item"><a class="menu__link" href="/release-notes/v1.90"><span title="Release Notes v1.90" class="linkLabel_WmDU">Release Notes v1.90</span></a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-1 menu__list-item"><a class="menu__link" href="/release-notes/v1.89"><span title="Release Notes v1.89" class="linkLabel_WmDU">Release Notes v1.89</span></a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-1 menu__list-item"><a class="menu__link" href="/release-notes/v1.88"><span title="Release Notes v1.88" class="linkLabel_WmDU">Release Notes v1.88</span></a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-1 menu__list-item"><a class="menu__link" href="/release-notes/v1.87"><span title="Release Notes v1.87" class="linkLabel_WmDU">Release Notes v1.87</span></a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-1 menu__list-item"><a class="menu__link menu__link--active" aria-current="page" href="/release-notes/v1.86"><span title="Release Notes v1.86" class="linkLabel_WmDU">Release Notes v1.86</span></a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-1 menu__list-item"><a class="menu__link" href="/release-notes/v1.85"><span title="Release Notes v1.85" class="linkLabel_WmDU">Release Notes v1.85</span></a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-1 menu__list-item"><a class="menu__link" href="/release-notes/v1.84"><span title="Release Notes v1.84" class="linkLabel_WmDU">Release Notes v1.84</span></a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-1 menu__list-item"><a class="menu__link" href="/release-notes/v1.83"><span title="Release Notes v1.83" class="linkLabel_WmDU">Release Notes v1.83</span></a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-1 menu__list-item"><a class="menu__link" href="/release-notes/v1.82"><span title="Release Notes v1.82" class="linkLabel_WmDU">Release Notes v1.82</span></a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-1 menu__list-item"><a class="menu__link" href="/release-notes/v1.81"><span title="Release Notes v1.81" class="linkLabel_WmDU">Release Notes v1.81</span></a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-1 menu__list-item"><a class="menu__link" href="/release-notes/v1.80"><span title="Release Notes v1.80" class="linkLabel_WmDU">Release Notes v1.80</span></a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-1 menu__list-item"><a class="menu__link" href="/release-notes/v1.79"><span title="Release Notes v1.79" class="linkLabel_WmDU">Release Notes v1.79</span></a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-1 menu__list-item"><a class="menu__link" href="/release-notes/v1.78"><span title="Release Notes v1.78" class="linkLabel_WmDU">Release Notes v1.78</span></a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-1 menu__list-item"><a class="menu__link" href="/release-notes/v1.77"><span title="Release Notes v1.77" class="linkLabel_WmDU">Release Notes v1.77</span></a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-1 menu__list-item"><a class="menu__link" href="/release-notes/v1.76"><span title="Release Notes v1.76" class="linkLabel_WmDU">Release Notes v1.76</span></a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-1 menu__list-item"><a class="menu__link" href="/release-notes/v1.75"><span title="Release Notes v1.75" class="linkLabel_WmDU">Release Notes v1.75</span></a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-1 menu__list-item"><a class="menu__link" href="/release-notes/v1.74"><span title="Release Notes v1.74" class="linkLabel_WmDU">Release Notes v1.74</span></a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-1 menu__list-item"><a class="menu__link" href="/release-notes/v1.73"><span title="Release Notes v1.73" class="linkLabel_WmDU">Release Notes v1.73</span></a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-1 menu__list-item"><a class="menu__link" href="/release-notes/v1.72"><span title="Release Notes v1.72" class="linkLabel_WmDU">Release Notes v1.72</span></a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-1 menu__list-item"><a class="menu__link" href="/release-notes/v1.71"><span title="Release Notes v1.71" class="linkLabel_WmDU">Release Notes v1.71</span></a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-1 menu__list-item"><a class="menu__link" href="/release-notes/v1.70"><span title="Release Notes v1.70" class="linkLabel_WmDU">Release Notes v1.70</span></a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-1 menu__list-item"><a class="menu__link" href="/release-notes/v1.69"><span title="Release Notes v1.69" class="linkLabel_WmDU">Release Notes v1.69</span></a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-1 menu__list-item"><a class="menu__link" href="/release-notes/v1.68"><span title="Release Notes v1.68" class="linkLabel_WmDU">Release Notes v1.68</span></a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-1 menu__list-item"><a class="menu__link" href="/release-notes/v1.67"><span title="Release Notes v1.67" class="linkLabel_WmDU">Release Notes v1.67</span></a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-1 menu__list-item"><a class="menu__link" href="/release-notes/v1.66"><span title="Release Notes v1.66" class="linkLabel_WmDU">Release Notes v1.66</span></a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-1 menu__list-item"><a class="menu__link" href="/release-notes/v1.65"><span title="Release Notes v1.65" class="linkLabel_WmDU">Release Notes v1.65</span></a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-1 menu__list-item"><a class="menu__link" href="/release-notes/v1.64"><span title="Release Notes v1.64" class="linkLabel_WmDU">Release Notes v1.64</span></a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-1 menu__list-item"><a class="menu__link" href="/release-notes/v1.63"><span title="Release Notes v1.63" class="linkLabel_WmDU">Release Notes v1.63</span></a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-1 menu__list-item"><a class="menu__link" href="/release-notes/v1.62"><span title="Release Notes v1.62" class="linkLabel_WmDU">Release Notes v1.62</span></a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-1 menu__list-item"><a class="menu__link" href="/release-notes/v1.61"><span title="Release Notes v1.61" class="linkLabel_WmDU">Release Notes v1.61</span></a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-1 menu__list-item"><a class="menu__link" href="/release-notes/v1.60"><span title="Release Notes v1.60" class="linkLabel_WmDU">Release Notes v1.60</span></a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-1 menu__list-item"><a class="menu__link" href="/release-notes/v1.59"><span title="Release Notes v1.59" class="linkLabel_WmDU">Release Notes v1.59</span></a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-1 menu__list-item"><a class="menu__link" href="/release-notes/v1.58"><span title="Release Notes v1.58" class="linkLabel_WmDU">Release Notes v1.58</span></a></li></ul></nav></div></div></aside><main class="docMainContainer_TBSr"><div class="container padding-top--md padding-bottom--lg"><div class="row"><div class="col"><div class="docItemContainer_Djhp"><article><nav class="theme-doc-breadcrumbs breadcrumbsContainer_Z_bl" aria-label="Breadcrumbs"><ul class="breadcrumbs"><li class="breadcrumbs__item"><a aria-label="Home page" class="breadcrumbs__link" href="/"><svg viewBox="0 0 24 24" class="breadcrumbHomeIcon_YNFT"><path d="M10 19v-5h4v5c0 .55.45 1 1 1h3c.55 0 1-.45 1-1v-7h1.7c.46 0 .68-.57.33-.87L12.67 3.6c-.38-.34-.96-.34-1.34 0l-8.36 7.53c-.34.3-.13.87.33.87H5v7c0 .55.45 1 1 1h3c.55 0 1-.45 1-1z" fill="currentColor"></path></svg></a></li><li class="breadcrumbs__item breadcrumbs__item--active"><span class="breadcrumbs__link">Release Notes v1.86</span></li></ul></nav><div class="theme-doc-markdown markdown"><header><h1>Release Notes v1.86</h1></header>
-<h2 class="anchor anchorWithStickyNavbar_LWe7" id="yake23ke-release-notes-and-upgrade-guide">YAKE/23KE release notes and upgrade guide<a href="#yake23ke-release-notes-and-upgrade-guide" class="hash-link" aria-label="Direct link to YAKE/23KE release notes and upgrade guide" title="Direct link to YAKE/23KE release notes and upgrade guide" translate="no">​</a></h2>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="yake23ke-release-notes-and-upgrade-guide">YAKE/23KE release notes and upgrade guide<a href="#yake23ke-release-notes-and-upgrade-guide" class="hash-link" aria-label="Direct link to YAKE/23KE release notes and upgrade guide" title="Direct link to YAKE/23KE release notes and upgrade guide" translate="no">​</a></h2>
 <div class="theme-admonition theme-admonition-danger admonition_xJq3 alert alert--danger"><div class="admonitionHeading_Gvgb"><span class="admonitionIcon_Rf37"><svg viewBox="0 0 12 16"><path fill-rule="evenodd" d="M5.05.31c.81 2.17.41 3.38-.52 4.31C3.55 5.67 1.98 6.45.9 7.98c-1.45 2.05-1.7 6.53 3.53 7.7-2.2-1.16-2.67-4.52-.3-6.61-.61 2.03.53 3.33 1.94 2.86 1.39-.47 2.3.53 2.27 1.67-.02.78-.31 1.44-1.13 1.81 3.42-.59 4.78-3.42 4.78-5.56 0-2.84-2.53-3.22-1.25-5.61-1.52.13-2.03 1.13-1.89 2.75.09 1.08-1.02 1.8-1.86 1.33-.67-.41-.66-1.19-.06-1.78C8.18 5.31 8.68 2.45 5.05.32L5.03.3l.02.01z"></path></svg></span>danger</div><div class="admonitionContent_BuS1"><p>This update renames 23ke to YAKE. You need to rename the config secret and GitRepository resource as described.</p></div></div>
 <div class="theme-admonition theme-admonition-danger admonition_xJq3 alert alert--danger"><div class="admonitionHeading_Gvgb"><span class="admonitionIcon_Rf37"><svg viewBox="0 0 12 16"><path fill-rule="evenodd" d="M5.05.31c.81 2.17.41 3.38-.52 4.31C3.55 5.67 1.98 6.45.9 7.98c-1.45 2.05-1.7 6.53 3.53 7.7-2.2-1.16-2.67-4.52-.3-6.61-.61 2.03.53 3.33 1.94 2.86 1.39-.47 2.3.53 2.27 1.67-.02.78-.31 1.44-1.13 1.81 3.42-.59 4.78-3.42 4.78-5.56 0-2.84-2.53-3.22-1.25-5.61-1.52.13-2.03 1.13-1.89 2.75.09 1.08-1.02 1.8-1.86 1.33-.67-.41-.66-1.19-.06-1.78C8.18 5.31 8.68 2.45 5.05.32L5.03.3l.02.01z"></path></svg></span>danger</div><div class="admonitionContent_BuS1"><p>This update definitely needs backups to be configured. If you are running a 23KE instance without backups, enable backups before performing this update.</p></div></div>
-<h2 class="anchor anchorWithStickyNavbar_LWe7" id="prerequisites">Prerequisites<a href="#prerequisites" class="hash-link" aria-label="Direct link to Prerequisites" title="Direct link to Prerequisites" translate="no">​</a></h2>
-<h3 class="anchor anchorWithStickyNavbar_LWe7" id="etcd-downgrade">etcd downgrade<a href="#etcd-downgrade" class="hash-link" aria-label="Direct link to etcd downgrade" title="Direct link to etcd downgrade" translate="no">​</a></h3>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="prerequisites">Prerequisites<a href="#prerequisites" class="hash-link" aria-label="Direct link to Prerequisites" title="Direct link to Prerequisites" translate="no">​</a></h2>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="etcd-downgrade">etcd downgrade<a href="#etcd-downgrade" class="hash-link" aria-label="Direct link to etcd downgrade" title="Direct link to etcd downgrade" translate="no">​</a></h3>
 <p>In order to align the versions of <code>etcd</code> and <code>etcd-backup-restore</code> with gardener/etcd-druid, we perform a downgrade to etcd-3.4.26 and an upgrade to etcd-backup-restore-0.24.7. This is also expected to improve the stability of the backup process. For the upgrade, you need to</p>
 <ul>
-<li>
+<li class="">
 <p>Make sure you have an up-to-date backup of <code>etcd-0</code>. To perform a full backup you can use the following request:</p>
 <div class="language-sh codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-sh codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">kubectl -n garden exec -it etcd-0 curl localhost:8080/snapshot/full</span><br></span></code></pre></div></div>
 </li>
-<li>
+<li class="">
 <p>Delete the statefulset <code>etcd</code> and <code>etcd-events</code> in the <code>garden</code> namespace</p>
 <div class="language-sh codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-sh codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">kubectl delete statefulset -n garden etcd</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">kubectl delete statefulset -n garden etcd-events</span><br></span></code></pre></div></div>
 </li>
 </ul>
 <p>During the upgrade helm will create new <code>persistentVolumes</code> for the virtual garden&#x27;s <code>etcd</code>s. These volumes are prefixed by <code>virtual-garden-</code>.</p>
-<h3 class="anchor anchorWithStickyNavbar_LWe7" id="temporarily-remove-gardener-metrics-exporter">Temporarily remove gardener-metrics-exporter<a href="#temporarily-remove-gardener-metrics-exporter" class="hash-link" aria-label="Direct link to Temporarily remove gardener-metrics-exporter" title="Direct link to Temporarily remove gardener-metrics-exporter" translate="no">​</a></h3>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="temporarily-remove-gardener-metrics-exporter">Temporarily remove gardener-metrics-exporter<a href="#temporarily-remove-gardener-metrics-exporter" class="hash-link" aria-label="Direct link to Temporarily remove gardener-metrics-exporter" title="Direct link to Temporarily remove gardener-metrics-exporter" translate="no">​</a></h3>
 <p>To work around an issue with how YAKE uses gardener-metrics-exporter&#x27;s chart, delete its deployment</p>
 <div class="language-sh codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-sh codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">kubectl delete -n garden deployment gardener-metrics-exporter</span><br></span></code></pre></div></div>
-<h2 class="anchor anchorWithStickyNavbar_LWe7" id="upgrade">Upgrade<a href="#upgrade" class="hash-link" aria-label="Direct link to Upgrade" title="Direct link to Upgrade" translate="no">​</a></h2>
-<h3 class="anchor anchorWithStickyNavbar_LWe7" id="perform-the-migration-from-23ke-to-yake-execute-the-following-steps">Perform the migration from 23ke to YAKE execute the following steps.<a href="#perform-the-migration-from-23ke-to-yake-execute-the-following-steps" class="hash-link" aria-label="Direct link to Perform the migration from 23ke to YAKE execute the following steps." title="Direct link to Perform the migration from 23ke to YAKE execute the following steps." translate="no">​</a></h3>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="upgrade">Upgrade<a href="#upgrade" class="hash-link" aria-label="Direct link to Upgrade" title="Direct link to Upgrade" translate="no">​</a></h2>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="perform-the-migration-from-23ke-to-yake-execute-the-following-steps">Perform the migration from 23ke to YAKE execute the following steps.<a href="#perform-the-migration-from-23ke-to-yake-execute-the-following-steps" class="hash-link" aria-label="Direct link to Perform the migration from 23ke to YAKE execute the following steps." title="Direct link to Perform the migration from 23ke to YAKE execute the following steps." translate="no">​</a></h3>
 <ul>
-<li>
+<li class="">
 <p>Create copy of Secret <code>23ke-config</code> named <code>yake-config</code></p>
 <div class="language-sh codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-sh codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">kubectl get secret -n flux-system 23ke-config -o yaml | kubectl-neat | yq &#x27;.metadata.name=&quot;yake-config&quot;&#x27; | kubectl apply -f -</span><br></span></code></pre></div></div>
 </li>
-<li>
+<li class="">
 <p>Create new GitRepository source named <code>yake</code>.</p>
 <div class="language-sh codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-sh codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">cat &lt;&lt;EOF | kubectl apply -f -</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">apiVersion: source.toolkit.fluxcd.io/v1</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">kind: GitRepository</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">metadata:</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">  name: yake</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">  namespace: flux-system</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">spec:</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">  interval: 1m</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">  ref:</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    tag: v1.86.0-0</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">  timeout: 60s</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">  url: https://github.com/yakecloud/yake</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">EOF</span><br></span></code></pre></div></div>
 </li>
-<li>
+<li class="">
 <p>Suspend 23ke Kustomization. This can be named differently in your setup.</p>
 <div class="language-sh codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-sh codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">flux suspend ks 23ke</span><br></span></code></pre></div></div>
 </li>
-<li>
+<li class="">
 <p>Relabel Kustomizations created by the main 23ke Kustomization</p>
 <div class="language-sh codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-sh codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">kubectl label ks -n flux-system -l kustomize.toolkit.fluxcd.io/name=23ke kustomize.toolkit.fluxcd.io/name=yake --overwrite</span><br></span></code></pre></div></div>
 </li>
-<li>
+<li class="">
 <p>Recreate the main Kustomization with name <code>yake</code></p>
 <div class="language-sh codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-sh codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">kubectl get ks -n flux-system 23ke -o yaml | kubectl-neat | yq &#x27;.metadata.name=&quot;yake&quot; | .spec.sourceRef.name=&quot;yake&quot;&#x27; | .spec.sourceRef.kind=&quot;GitRepository&quot;&#x27; | kubectl apply -f -</span><br></span></code></pre></div></div>
 </li>
-<li>
+<li class="">
 <p>Resume the <code>yake</code> Kustomization</p>
 <div class="language-sh codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-sh codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">flux resume ks yake</span><br></span></code></pre></div></div>
 </li>
 </ul>
-<h3 class="anchor anchorWithStickyNavbar_LWe7" id="cleanup-obsolete-resources">Cleanup obsolete resources<a href="#cleanup-obsolete-resources" class="hash-link" aria-label="Direct link to Cleanup obsolete resources" title="Direct link to Cleanup obsolete resources" translate="no">​</a></h3>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="cleanup-obsolete-resources">Cleanup obsolete resources<a href="#cleanup-obsolete-resources" class="hash-link" aria-label="Direct link to Cleanup obsolete resources" title="Direct link to Cleanup obsolete resources" translate="no">​</a></h3>
 <p>Once you confirmed everything&#x27;s working correctly you can remove obsolete resources.</p>
 <div class="theme-admonition theme-admonition-warning admonition_xJq3 alert alert--warning"><div class="admonitionHeading_Gvgb"><span class="admonitionIcon_Rf37"><svg viewBox="0 0 16 16"><path fill-rule="evenodd" d="M8.893 1.5c-.183-.31-.52-.5-.887-.5s-.703.19-.886.5L.138 13.499a.98.98 0 0 0 0 1.001c.193.31.53.501.886.501h13.964c.367 0 .704-.19.877-.5a1.03 1.03 0 0 0 .01-1.002L8.893 1.5zm.133 11.497H6.987v-2.003h2.039v2.003zm0-3.004H6.987V5.987h2.039v4.006z"></path></svg></span>warning</div><div class="admonitionContent_BuS1"><p>If your base kustomization is itself reconciled by flux, make sure to remove it via git rather than manually.
 Otherwise, it will be restored in an active state and may break your setup!</p></div></div>
 <ul>
-<li>
+<li class="">
 <p>Delete the old 23ke Kustomization</p>
 <div class="language-sh codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-sh codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">kubectl delete ks -n flux-system 23ke</span><br></span></code></pre></div></div>
 </li>
-<li>
+<li class="">
 <p>Delete the old GitRepository resource</p>
 <div class="language-sh codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-sh codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">kubectl delete gitrepo -n flux-system 23ke</span><br></span></code></pre></div></div>
 </li>
-<li>
+<li class="">
 <p>Delete Secret <code>23ke-config</code></p>
 <div class="language-sh codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-sh codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">kubectl delete secret -n flux-system 23ke-config</span><br></span></code></pre></div></div>
 </li>
-<li>
+<li class="">
 <p>(Optional) Delete the old <code>persistentVolumeClaims</code> and their <code>persistentVolumes</code> belonging to the already deleted statefulsets of <code>etcd</code> and <code>etcd-events</code>.</p>
 <div class="language-sh codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-sh codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">kubectl get pvc -n garden | grep &#x27;^etcd&#x27;</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">kubectl get pv | grep garden/etcd</span><br></span></code></pre></div></div>
 </li>
 </ul>
-<h2 class="anchor anchorWithStickyNavbar_LWe7" id="related-upstream-release-notes--changelogs">Related upstream release notes / changelogs<a href="#related-upstream-release-notes--changelogs" class="hash-link" aria-label="Direct link to Related upstream release notes / changelogs" title="Direct link to Related upstream release notes / changelogs" translate="no">​</a></h2>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="related-upstream-release-notes--changelogs">Related upstream release notes / changelogs<a href="#related-upstream-release-notes--changelogs" class="hash-link" aria-label="Direct link to Related upstream release notes / changelogs" title="Direct link to Related upstream release notes / changelogs" translate="no">​</a></h2>
 <details class="details_lb9f alert alert--info details_b_Ee" data-collapsed="true"><summary><b>Update shoot-networking-filter to <code>0.16.0</code></b></summary><div><div class="collapsibleContent_i85q">
 <!-- -->
 <h1>[gardener/gardener-extension-shoot-networking-filter]</h1>
-<h2 class="anchor anchorWithStickyNavbar_LWe7" id="-new-features">✨ New Features<a href="#-new-features" class="hash-link" aria-label="Direct link to ✨ New Features" title="Direct link to ✨ New Features" translate="no">​</a></h2>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="-new-features">✨ New Features<a href="#-new-features" class="hash-link" aria-label="Direct link to ✨ New Features" title="Direct link to ✨ New Features" translate="no">​</a></h2>
 <ul>
-<li><code>[USER]</code> Update image of egress-filter to 0.14.0 by @axel7born [#107]</li>
-<li><code>[USER]</code> Mount <code>/run/xtables.lock</code> to prevent concurrent modifications of iptables rules. by @axel7born [#106]</li>
+<li class=""><code>[USER]</code> Update image of egress-filter to 0.14.0 by @axel7born [#107]</li>
+<li class=""><code>[USER]</code> Mount <code>/run/xtables.lock</code> to prevent concurrent modifications of iptables rules. by @axel7born [#106]</li>
 </ul>
-<h2 class="anchor anchorWithStickyNavbar_LWe7" id="-others">🏃 Others<a href="#-others" class="hash-link" aria-label="Direct link to 🏃 Others" title="Direct link to 🏃 Others" translate="no">​</a></h2>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="-others">🏃 Others<a href="#-others" class="hash-link" aria-label="Direct link to 🏃 Others" title="Direct link to 🏃 Others" translate="no">​</a></h2>
 <ul>
-<li><code>[OPERATOR]</code> Bump github.com/gardener/gardener from 1.84.0 to 1.84.1. by @dependabot[bot] [#102]</li>
-<li><code>[OPERATOR]</code> Bumps golang from 1.21.4 to 1.21.5. by @dependabot[bot] [#105]</li>
-<li><code>[OPERATOR]</code> Bump github.com/gardener/gardener from 1.84.1 to 1.85.0. by @dependabot[bot] [#104]</li>
+<li class=""><code>[OPERATOR]</code> Bump github.com/gardener/gardener from 1.84.0 to 1.84.1. by @dependabot[bot] [#102]</li>
+<li class=""><code>[OPERATOR]</code> Bumps golang from 1.21.4 to 1.21.5. by @dependabot[bot] [#105]</li>
+<li class=""><code>[OPERATOR]</code> Bump github.com/gardener/gardener from 1.84.1 to 1.85.0. by @dependabot[bot] [#104]</li>
 </ul>
-<h2 class="anchor anchorWithStickyNavbar_LWe7" id="docker-images">Docker Images<a href="#docker-images" class="hash-link" aria-label="Direct link to Docker Images" title="Direct link to Docker Images" translate="no">​</a></h2>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="docker-images">Docker Images<a href="#docker-images" class="hash-link" aria-label="Direct link to Docker Images" title="Direct link to Docker Images" translate="no">​</a></h2>
 <ul>
-<li>gardener-extension-shoot-networking-filter: <code>eu.gcr.io/gardener-project/gardener/extensions/shoot-networking-filter:v0.16.0</code></li>
+<li class="">gardener-extension-shoot-networking-filter: <code>eu.gcr.io/gardener-project/gardener/extensions/shoot-networking-filter:v0.16.0</code></li>
 </ul>
 </div></div></details>
 <details class="details_lb9f alert alert--info details_b_Ee" data-collapsed="true"><summary><b>Update provider-aws to <code>1.51.0</code></b></summary><div><div class="collapsibleContent_i85q">
 <!-- -->
 <h1>[gardener/gardener-extension-provider-aws]</h1>
-<h2 class="anchor anchorWithStickyNavbar_LWe7" id="-others-1">🏃 Others<a href="#-others-1" class="hash-link" aria-label="Direct link to 🏃 Others" title="Direct link to 🏃 Others" translate="no">​</a></h2>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="-others-1">🏃 Others<a href="#-others-1" class="hash-link" aria-label="Direct link to 🏃 Others" title="Direct link to 🏃 Others" translate="no">​</a></h2>
 <ul>
-<li><code>[OPERATOR]</code> The following golang dependencies have been upgraded :
+<li class=""><code>[OPERATOR]</code> The following golang dependencies have been upgraded :
 <ul>
-<li><code>gardener/gardener</code>: <code>v1.81.6</code>-&gt;<code>v1.83.2</code> by @shafeeqes [#828]</li>
+<li class=""><code>gardener/gardener</code>: <code>v1.81.6</code>-&gt;<code>v1.83.2</code> by @shafeeqes [#828]</li>
 </ul>
 </li>
-<li><code>[OPERATOR]</code> Add documentation for the &quot;flow&quot; infrastructure reconciler. by @kon-angelo [#827]</li>
-<li><code>[DEVELOPER]</code> Add new unit tests. by @axel7born [#829]</li>
+<li class=""><code>[OPERATOR]</code> Add documentation for the &quot;flow&quot; infrastructure reconciler. by @kon-angelo [#827]</li>
+<li class=""><code>[DEVELOPER]</code> Add new unit tests. by @axel7born [#829]</li>
 </ul>
-<h2 class="anchor anchorWithStickyNavbar_LWe7" id="docker-images-1">Docker Images<a href="#docker-images-1" class="hash-link" aria-label="Direct link to Docker Images" title="Direct link to Docker Images" translate="no">​</a></h2>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="docker-images-1">Docker Images<a href="#docker-images-1" class="hash-link" aria-label="Direct link to Docker Images" title="Direct link to Docker Images" translate="no">​</a></h2>
 <ul>
-<li>gardener-extension-admission-aws: <code>eu.gcr.io/gardener-project/gardener/extensions/admission-aws:v1.51.0</code></li>
-<li>gardener-extension-provider-aws: <code>eu.gcr.io/gardener-project/gardener/extensions/provider-aws:v1.51.0</code></li>
+<li class="">gardener-extension-admission-aws: <code>eu.gcr.io/gardener-project/gardener/extensions/admission-aws:v1.51.0</code></li>
+<li class="">gardener-extension-provider-aws: <code>eu.gcr.io/gardener-project/gardener/extensions/provider-aws:v1.51.0</code></li>
 </ul>
 </div></div></details>
 <details class="details_lb9f alert alert--info details_b_Ee" data-collapsed="true"><summary><b>Update shoot-rsyslog-relp to <code>0.3.0</code></b></summary><div><div class="collapsibleContent_i85q">
 <!-- -->
 <h1>[gardener/gardener-extension-shoot-rsyslog-relp]</h1>
-<h2 class="anchor anchorWithStickyNavbar_LWe7" id="️-breaking-changes">⚠️ Breaking Changes<a href="#️-breaking-changes" class="hash-link" aria-label="Direct link to ⚠️ Breaking Changes" title="Direct link to ⚠️ Breaking Changes" translate="no">​</a></h2>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="️-breaking-changes">⚠️ Breaking Changes<a href="#️-breaking-changes" class="hash-link" aria-label="Direct link to ⚠️ Breaking Changes" title="Direct link to ⚠️ Breaking Changes" translate="no">​</a></h2>
 <ul>
-<li><code>[OPERATOR]</code> The <code>security.gardener.cloud/pod-security-enforce</code> annotation in the ControllerRegistration is set to <code>baseline</code>. With this, the pods running in the extension namespace should comply with <code>baseline</code> pod-security standard. by @AleksandarSavchev [#17]</li>
+<li class=""><code>[OPERATOR]</code> The <code>security.gardener.cloud/pod-security-enforce</code> annotation in the ControllerRegistration is set to <code>baseline</code>. With this, the pods running in the extension namespace should comply with <code>baseline</code> pod-security standard. by @AleksandarSavchev [#17]</li>
 </ul>
-<h2 class="anchor anchorWithStickyNavbar_LWe7" id="-new-features-1">✨ New Features<a href="#-new-features-1" class="hash-link" aria-label="Direct link to ✨ New Features" title="Direct link to ✨ New Features" translate="no">​</a></h2>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="-new-features-1">✨ New Features<a href="#-new-features-1" class="hash-link" aria-label="Direct link to ✨ New Features" title="Direct link to ✨ New Features" translate="no">​</a></h2>
 <ul>
-<li><code>[USER]</code> The <code>shoot-rsyslog-relp</code> configuration now allows users to specify which tls library should be used by <code>librerlp</code> when tls communication is enabled via the <code>tls.tlsLib</code> optional field. The possible options are <code>gnutls</code> and <code>openssl</code>. When the field is omitted, <code>librelp</code> uses its default tls library which in most cases is <code>gnutls</code>. More information can be found here: <a href="https://www.rsyslog.com/doc/v8-stable/configuration/modules/imrelp.html#tls-tlslib" target="_blank" rel="noopener noreferrer">https://www.rsyslog.com/doc/v8-stable/configuration/modules/imrelp.html#tls-tlslib</a> by @plkokanov [#27]</li>
-<li><code>[USER]</code> <code>shoot-rsyslog-relp</code> extension now supports <a href="https://github.com/gardener/gardener/blob/master/docs/usage/shoot_operations.md#force-deletion" target="_blank" rel="noopener noreferrer">Shoot Force Deletion</a>.  by @acumino [#24]</li>
+<li class=""><code>[USER]</code> The <code>shoot-rsyslog-relp</code> configuration now allows users to specify which tls library should be used by <code>librerlp</code> when tls communication is enabled via the <code>tls.tlsLib</code> optional field. The possible options are <code>gnutls</code> and <code>openssl</code>. When the field is omitted, <code>librelp</code> uses its default tls library which in most cases is <code>gnutls</code>. More information can be found here: <a href="https://www.rsyslog.com/doc/v8-stable/configuration/modules/imrelp.html#tls-tlslib" target="_blank" rel="noopener noreferrer" class="">https://www.rsyslog.com/doc/v8-stable/configuration/modules/imrelp.html#tls-tlslib</a> by @plkokanov [#27]</li>
+<li class=""><code>[USER]</code> <code>shoot-rsyslog-relp</code> extension now supports <a href="https://github.com/gardener/gardener/blob/master/docs/usage/shoot_operations.md#force-deletion" target="_blank" rel="noopener noreferrer" class="">Shoot Force Deletion</a>.  by @acumino [#24]</li>
 </ul>
-<h2 class="anchor anchorWithStickyNavbar_LWe7" id="-others-2">🏃 Others<a href="#-others-2" class="hash-link" aria-label="Direct link to 🏃 Others" title="Direct link to 🏃 Others" translate="no">​</a></h2>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="-others-2">🏃 Others<a href="#-others-2" class="hash-link" aria-label="Direct link to 🏃 Others" title="Direct link to 🏃 Others" translate="no">​</a></h2>
 <ul>
-<li><code>[OPERATOR]</code> Metrics for the rsyslog service running on the shoot nodes are now exposed and collected according to the following:
+<li class=""><code>[OPERATOR]</code> Metrics for the rsyslog service running on the shoot nodes are now exposed and collected according to the following:
 <ul>
-<li>The metrics are available on the <code>node-exporter</code>&#x27;s <code>/metrics</code> endpoint.</li>
-<li>The names of the new metrics match the <code>rsyslog_pstat_.+</code> regex.</li>
-<li>The metrics are scraped and collected in the shoot&#x27;s prometheus instance.</li>
-<li>A dedicated plutono dashboard is added which displays the rsyslog metrics. by @plkokanov [#32]</li>
-</ul>
-</li>
-<li><code>[OPERATOR]</code> Fixed an issue where the rsyslog systemd unit could become stuck in a failed state immediately after it is installed on the shoot&#x27;s nodes, if the <code>shoot-rsyslog-relp</code> extension was enabled on the shoot before that. The <code>configure-rsyslog.sh</code> script which is responsible for configuring and restarting the rsyslog systemd unit will now wait for the <code>syslog.service</code> symlink to be created before attempting to configure and restart the rsyslog systemd unit. by @plkokanov [#34]</li>
-<li><code>[OPERATOR]</code> The shoot-rsyslog-relp extension is now aligned with Gardener&#x27;s <a href="https://github.com/gardener/gardener/blob/v1.82.0/docs/development/component-checklist.md" target="_blank" rel="noopener noreferrer">component checklist</a>:
-<ul>
-<li>RBAC for the <code>shoot-rsyslog-relp</code> extension controller have been drastically reduced to only the required ones.</li>
-<li>The deployment for the <code>shoot-rsyslog-relp</code> extension controller now contains the proper label for HA - <code>high-availability-config.resources.gardener.cloud/type: controller</code></li>
-<li>The <code>shoot-rsyslog-relp</code> admission pod no longer has a <code>SecurityContext</code>. This will be automatically added by the <code>seccomp-profile</code> webhook of the <code>gardener-resource-manager</code></li>
-<li>The <code>rsyslog-relp-configurator</code> and <code>rsyslog-relp-configuration-cleaner</code> pods now use the <code>RuntimeDefault</code> seccomp profile.</li>
-<li>The init containers of the <code>rsyslog-relp-configurator</code> and <code>rsyslog-relp-configuration-cleaner</code> pods no longer run in privileged mode.</li>
-<li>The <code>rsyslog-relp-configurator</code> and <code>rsyslog-relp-configuration-cleaner</code> now specify resource requests and limits.</li>
-<li><code>PodSecurityPolicy</code>s for the <code>rsyslog-relp-configurator</code> and <code>rsyslog-relp-configuration-cleaner</code> are now deployed in the shoot cluster, if its kubernetes version is <code>1.24.x</code>. by @plkokanov [#29]</li>
+<li class="">The metrics are available on the <code>node-exporter</code>&#x27;s <code>/metrics</code> endpoint.</li>
+<li class="">The names of the new metrics match the <code>rsyslog_pstat_.+</code> regex.</li>
+<li class="">The metrics are scraped and collected in the shoot&#x27;s prometheus instance.</li>
+<li class="">A dedicated plutono dashboard is added which displays the rsyslog metrics. by @plkokanov [#32]</li>
 </ul>
 </li>
-<li><code>[OPERATOR]</code> The healthcheck controller is now removed. Starting <a href="https://github.com/gardener/gardener/releases/tag/v1.65.0" target="_blank" rel="noopener noreferrer">v1.65.0</a>, gardenlet perform health checks for all ManagedResources in the Shoot control plane in the Seed. There is no longer need of the custom healthcheck controller in the shoot-rsyslog-relp extension as it was doing the same job. It was performing health check for the ManagedResource it deploys. by @plkokanov [#28]</li>
-<li><code>[OPERATOR]</code> The <code>rsyslog-relp-configuration-cleaner</code> is no longer deployed on Shoot deletion with <code>shoot-rsyslog-relp</code> extension enabled. The Extension deletion occurs after the Worker deletion. There are no Nodes, hence there is no need to clean up registry configuration. by @plkokanov [#30]</li>
-</ul>
-<h2 class="anchor anchorWithStickyNavbar_LWe7" id="docker-images-2">Docker Images<a href="#docker-images-2" class="hash-link" aria-label="Direct link to Docker Images" title="Direct link to Docker Images" translate="no">​</a></h2>
+<li class=""><code>[OPERATOR]</code> Fixed an issue where the rsyslog systemd unit could become stuck in a failed state immediately after it is installed on the shoot&#x27;s nodes, if the <code>shoot-rsyslog-relp</code> extension was enabled on the shoot before that. The <code>configure-rsyslog.sh</code> script which is responsible for configuring and restarting the rsyslog systemd unit will now wait for the <code>syslog.service</code> symlink to be created before attempting to configure and restart the rsyslog systemd unit. by @plkokanov [#34]</li>
+<li class=""><code>[OPERATOR]</code> The shoot-rsyslog-relp extension is now aligned with Gardener&#x27;s <a href="https://github.com/gardener/gardener/blob/v1.82.0/docs/development/component-checklist.md" target="_blank" rel="noopener noreferrer" class="">component checklist</a>:
 <ul>
-<li>gardener-extension-shoot-rsyslog-relp-admission: <code>eu.gcr.io/gardener-project/gardener/extensions/shoot-rsyslog-relp-admission:v0.3.0</code></li>
-<li>gardener-extension-shoot-rsyslog-relp: <code>eu.gcr.io/gardener-project/gardener/extensions/shoot-rsyslog-relp:v0.3.0</code></li>
+<li class="">RBAC for the <code>shoot-rsyslog-relp</code> extension controller have been drastically reduced to only the required ones.</li>
+<li class="">The deployment for the <code>shoot-rsyslog-relp</code> extension controller now contains the proper label for HA - <code>high-availability-config.resources.gardener.cloud/type: controller</code></li>
+<li class="">The <code>shoot-rsyslog-relp</code> admission pod no longer has a <code>SecurityContext</code>. This will be automatically added by the <code>seccomp-profile</code> webhook of the <code>gardener-resource-manager</code></li>
+<li class="">The <code>rsyslog-relp-configurator</code> and <code>rsyslog-relp-configuration-cleaner</code> pods now use the <code>RuntimeDefault</code> seccomp profile.</li>
+<li class="">The init containers of the <code>rsyslog-relp-configurator</code> and <code>rsyslog-relp-configuration-cleaner</code> pods no longer run in privileged mode.</li>
+<li class="">The <code>rsyslog-relp-configurator</code> and <code>rsyslog-relp-configuration-cleaner</code> now specify resource requests and limits.</li>
+<li class=""><code>PodSecurityPolicy</code>s for the <code>rsyslog-relp-configurator</code> and <code>rsyslog-relp-configuration-cleaner</code> are now deployed in the shoot cluster, if its kubernetes version is <code>1.24.x</code>. by @plkokanov [#29]</li>
+</ul>
+</li>
+<li class=""><code>[OPERATOR]</code> The healthcheck controller is now removed. Starting <a href="https://github.com/gardener/gardener/releases/tag/v1.65.0" target="_blank" rel="noopener noreferrer" class="">v1.65.0</a>, gardenlet perform health checks for all ManagedResources in the Shoot control plane in the Seed. There is no longer need of the custom healthcheck controller in the shoot-rsyslog-relp extension as it was doing the same job. It was performing health check for the ManagedResource it deploys. by @plkokanov [#28]</li>
+<li class=""><code>[OPERATOR]</code> The <code>rsyslog-relp-configuration-cleaner</code> is no longer deployed on Shoot deletion with <code>shoot-rsyslog-relp</code> extension enabled. The Extension deletion occurs after the Worker deletion. There are no Nodes, hence there is no need to clean up registry configuration. by @plkokanov [#30]</li>
+</ul>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="docker-images-2">Docker Images<a href="#docker-images-2" class="hash-link" aria-label="Direct link to Docker Images" title="Direct link to Docker Images" translate="no">​</a></h2>
+<ul>
+<li class="">gardener-extension-shoot-rsyslog-relp-admission: <code>eu.gcr.io/gardener-project/gardener/extensions/shoot-rsyslog-relp-admission:v0.3.0</code></li>
+<li class="">gardener-extension-shoot-rsyslog-relp: <code>eu.gcr.io/gardener-project/gardener/extensions/shoot-rsyslog-relp:v0.3.0</code></li>
 </ul>
 </div></div></details>
 <details class="details_lb9f alert alert--info details_b_Ee" data-collapsed="true"><summary><b>Update etcd to <code>6.0.0</code></b></summary><div><div class="collapsibleContent_i85q">
 <!-- -->
-<h2 class="anchor anchorWithStickyNavbar_LWe7" id="whats-changed">What&#x27;s Changed<a href="#whats-changed" class="hash-link" aria-label="Direct link to What&#x27;s Changed" title="Direct link to What&#x27;s Changed" translate="no">​</a></h2>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="whats-changed">What&#x27;s Changed<a href="#whats-changed" class="hash-link" aria-label="Direct link to What&#x27;s Changed" title="Direct link to What&#x27;s Changed" translate="no">​</a></h2>
 <ul>
-<li>Downgrade to etcd 3.4.26, Upgrade to etcd-backup-restore 0.24.7 by @JensAc in <a href="https://github.com/gardener-community/etcd/pull/13" target="_blank" rel="noopener noreferrer">https://github.com/gardener-community/etcd/pull/13</a></li>
+<li class="">Downgrade to etcd 3.4.26, Upgrade to etcd-backup-restore 0.24.7 by @JensAc in <a href="https://github.com/gardener-community/etcd/pull/13" target="_blank" rel="noopener noreferrer" class="">https://github.com/gardener-community/etcd/pull/13</a></li>
 </ul>
-<h2 class="anchor anchorWithStickyNavbar_LWe7" id="new-contributors">New Contributors<a href="#new-contributors" class="hash-link" aria-label="Direct link to New Contributors" title="Direct link to New Contributors" translate="no">​</a></h2>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="new-contributors">New Contributors<a href="#new-contributors" class="hash-link" aria-label="Direct link to New Contributors" title="Direct link to New Contributors" translate="no">​</a></h2>
 <ul>
-<li>@JensAc made their first contribution in <a href="https://github.com/gardener-community/etcd/pull/13" target="_blank" rel="noopener noreferrer">https://github.com/gardener-community/etcd/pull/13</a></li>
+<li class="">@JensAc made their first contribution in <a href="https://github.com/gardener-community/etcd/pull/13" target="_blank" rel="noopener noreferrer" class="">https://github.com/gardener-community/etcd/pull/13</a></li>
 </ul>
-<p><strong>Full Changelog</strong>: <a href="https://github.com/gardener-community/etcd/compare/5.3.2...6.0.0" target="_blank" rel="noopener noreferrer">https://github.com/gardener-community/etcd/compare/5.3.2...6.0.0</a></p>
+<p><strong>Full Changelog</strong>: <a href="https://github.com/gardener-community/etcd/compare/5.3.2...6.0.0" target="_blank" rel="noopener noreferrer" class="">https://github.com/gardener-community/etcd/compare/5.3.2...6.0.0</a></p>
 </div></div></details>
 <details class="details_lb9f alert alert--info details_b_Ee" data-collapsed="true"><summary><b>Update etcd to <code>6.0.0</code></b></summary><div><div class="collapsibleContent_i85q">
 <!-- -->
-<h2 class="anchor anchorWithStickyNavbar_LWe7" id="whats-changed-1">What&#x27;s Changed<a href="#whats-changed-1" class="hash-link" aria-label="Direct link to What&#x27;s Changed" title="Direct link to What&#x27;s Changed" translate="no">​</a></h2>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="whats-changed-1">What&#x27;s Changed<a href="#whats-changed-1" class="hash-link" aria-label="Direct link to What&#x27;s Changed" title="Direct link to What&#x27;s Changed" translate="no">​</a></h2>
 <ul>
-<li>Downgrade to etcd 3.4.26, Upgrade to etcd-backup-restore 0.24.7 by @JensAc in <a href="https://github.com/gardener-community/etcd/pull/13" target="_blank" rel="noopener noreferrer">https://github.com/gardener-community/etcd/pull/13</a></li>
+<li class="">Downgrade to etcd 3.4.26, Upgrade to etcd-backup-restore 0.24.7 by @JensAc in <a href="https://github.com/gardener-community/etcd/pull/13" target="_blank" rel="noopener noreferrer" class="">https://github.com/gardener-community/etcd/pull/13</a></li>
 </ul>
-<h2 class="anchor anchorWithStickyNavbar_LWe7" id="new-contributors-1">New Contributors<a href="#new-contributors-1" class="hash-link" aria-label="Direct link to New Contributors" title="Direct link to New Contributors" translate="no">​</a></h2>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="new-contributors-1">New Contributors<a href="#new-contributors-1" class="hash-link" aria-label="Direct link to New Contributors" title="Direct link to New Contributors" translate="no">​</a></h2>
 <ul>
-<li>@JensAc made their first contribution in <a href="https://github.com/gardener-community/etcd/pull/13" target="_blank" rel="noopener noreferrer">https://github.com/gardener-community/etcd/pull/13</a></li>
+<li class="">@JensAc made their first contribution in <a href="https://github.com/gardener-community/etcd/pull/13" target="_blank" rel="noopener noreferrer" class="">https://github.com/gardener-community/etcd/pull/13</a></li>
 </ul>
-<p><strong>Full Changelog</strong>: <a href="https://github.com/gardener-community/etcd/compare/5.3.2...6.0.0" target="_blank" rel="noopener noreferrer">https://github.com/gardener-community/etcd/compare/5.3.2...6.0.0</a></p>
+<p><strong>Full Changelog</strong>: <a href="https://github.com/gardener-community/etcd/compare/5.3.2...6.0.0" target="_blank" rel="noopener noreferrer" class="">https://github.com/gardener-community/etcd/compare/5.3.2...6.0.0</a></p>
 </div></div></details>
 <details class="details_lb9f alert alert--info details_b_Ee" data-collapsed="true"><summary><b>Update gardener-metrics-exporter to <code>0.28.0</code></b></summary><div><div class="collapsibleContent_i85q">
 <!-- -->
 <h1>[gardener/gardener-metrics-exporter]</h1>
-<h2 class="anchor anchorWithStickyNavbar_LWe7" id="-others-3">🏃 Others<a href="#-others-3" class="hash-link" aria-label="Direct link to 🏃 Others" title="Direct link to 🏃 Others" translate="no">​</a></h2>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="-others-3">🏃 Others<a href="#-others-3" class="hash-link" aria-label="Direct link to 🏃 Others" title="Direct link to 🏃 Others" translate="no">​</a></h2>
 <ul>
-<li><code>[OPERATOR]</code> Metrics are exported for pending shoots as well. by @timebertt [#91]</li>
-<li><code>[OPERATOR]</code> Minimum and maximum shoot node counts are no longer reversed. by @Sinscerly [#90]</li>
+<li class=""><code>[OPERATOR]</code> Metrics are exported for pending shoots as well. by @timebertt [#91]</li>
+<li class=""><code>[OPERATOR]</code> Minimum and maximum shoot node counts are no longer reversed. by @Sinscerly [#90]</li>
 </ul>
-<h2 class="anchor anchorWithStickyNavbar_LWe7" id="docker-images-3">Docker Images<a href="#docker-images-3" class="hash-link" aria-label="Direct link to Docker Images" title="Direct link to Docker Images" translate="no">​</a></h2>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="docker-images-3">Docker Images<a href="#docker-images-3" class="hash-link" aria-label="Direct link to Docker Images" title="Direct link to Docker Images" translate="no">​</a></h2>
 <ul>
-<li>metrics-exporter: <code>eu.gcr.io/gardener-project/gardener/metrics-exporter:0.28.0</code></li>
+<li class="">metrics-exporter: <code>eu.gcr.io/gardener-project/gardener/metrics-exporter:0.28.0</code></li>
 </ul>
 </div></div></details>
 <details class="details_lb9f alert alert--info details_b_Ee" data-collapsed="true"><summary><b>Update gardener-metrics-exporter to <code>0.28.0</code></b></summary><div><div class="collapsibleContent_i85q">
 <!-- -->
 <h1>[gardener/gardener-metrics-exporter]</h1>
-<h2 class="anchor anchorWithStickyNavbar_LWe7" id="-others-4">🏃 Others<a href="#-others-4" class="hash-link" aria-label="Direct link to 🏃 Others" title="Direct link to 🏃 Others" translate="no">​</a></h2>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="-others-4">🏃 Others<a href="#-others-4" class="hash-link" aria-label="Direct link to 🏃 Others" title="Direct link to 🏃 Others" translate="no">​</a></h2>
 <ul>
-<li><code>[OPERATOR]</code> Metrics are exported for pending shoots as well. by @timebertt [#91]</li>
-<li><code>[OPERATOR]</code> Minimum and maximum shoot node counts are no longer reversed. by @Sinscerly [#90]</li>
+<li class=""><code>[OPERATOR]</code> Metrics are exported for pending shoots as well. by @timebertt [#91]</li>
+<li class=""><code>[OPERATOR]</code> Minimum and maximum shoot node counts are no longer reversed. by @Sinscerly [#90]</li>
 </ul>
-<h2 class="anchor anchorWithStickyNavbar_LWe7" id="docker-images-4">Docker Images<a href="#docker-images-4" class="hash-link" aria-label="Direct link to Docker Images" title="Direct link to Docker Images" translate="no">​</a></h2>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="docker-images-4">Docker Images<a href="#docker-images-4" class="hash-link" aria-label="Direct link to Docker Images" title="Direct link to Docker Images" translate="no">​</a></h2>
 <ul>
-<li>metrics-exporter: <code>eu.gcr.io/gardener-project/gardener/metrics-exporter:0.28.0</code></li>
+<li class="">metrics-exporter: <code>eu.gcr.io/gardener-project/gardener/metrics-exporter:0.28.0</code></li>
 </ul>
 </div></div></details>
 <details class="details_lb9f alert alert--info details_b_Ee" data-collapsed="true"><summary><b>Update shoot-networking-filter to <code>0.16.1</code></b></summary><div><div class="collapsibleContent_i85q">
 <!-- -->
 <p>no release notes available</p>
-<h2 class="anchor anchorWithStickyNavbar_LWe7" id="docker-images-5">Docker Images<a href="#docker-images-5" class="hash-link" aria-label="Direct link to Docker Images" title="Direct link to Docker Images" translate="no">​</a></h2>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="docker-images-5">Docker Images<a href="#docker-images-5" class="hash-link" aria-label="Direct link to Docker Images" title="Direct link to Docker Images" translate="no">​</a></h2>
 <ul>
-<li>gardener-extension-shoot-networking-filter: <code>eu.gcr.io/gardener-project/gardener/extensions/shoot-networking-filter:v0.16.1</code></li>
+<li class="">gardener-extension-shoot-networking-filter: <code>eu.gcr.io/gardener-project/gardener/extensions/shoot-networking-filter:v0.16.1</code></li>
 </ul>
 </div></div></details>
 <details class="details_lb9f alert alert--info details_b_Ee" data-collapsed="true"><summary><b>Update provider-alicloud to <code>1.50.1</code></b></summary><div><div class="collapsibleContent_i85q">
 <!-- -->
 <p>no release notes available</p>
-<h2 class="anchor anchorWithStickyNavbar_LWe7" id="docker-images-6">Docker Images<a href="#docker-images-6" class="hash-link" aria-label="Direct link to Docker Images" title="Direct link to Docker Images" translate="no">​</a></h2>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="docker-images-6">Docker Images<a href="#docker-images-6" class="hash-link" aria-label="Direct link to Docker Images" title="Direct link to Docker Images" translate="no">​</a></h2>
 <ul>
-<li>gardener-extension-admission-alicloud: <code>eu.gcr.io/gardener-project/gardener/extensions/admission-alicloud:v1.50.1</code></li>
-<li>gardener-extension-provider-alicloud: <code>eu.gcr.io/gardener-project/gardener/extensions/provider-alicloud:v1.50.1</code></li>
+<li class="">gardener-extension-admission-alicloud: <code>eu.gcr.io/gardener-project/gardener/extensions/admission-alicloud:v1.50.1</code></li>
+<li class="">gardener-extension-provider-alicloud: <code>eu.gcr.io/gardener-project/gardener/extensions/provider-alicloud:v1.50.1</code></li>
 </ul>
 </div></div></details>
 <details class="details_lb9f alert alert--info details_b_Ee" data-collapsed="true"><summary><b>Update provider-aws to <code>1.51.1</code></b></summary><div><div class="collapsibleContent_i85q">
 <!-- -->
 <h1>[gardener/gardener-extension-provider-aws]</h1>
-<h2 class="anchor anchorWithStickyNavbar_LWe7" id="-others-5">🏃 Others<a href="#-others-5" class="hash-link" aria-label="Direct link to 🏃 Others" title="Direct link to 🏃 Others" translate="no">​</a></h2>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="-others-5">🏃 Others<a href="#-others-5" class="hash-link" aria-label="Direct link to 🏃 Others" title="Direct link to 🏃 Others" translate="no">​</a></h2>
 <ul>
-<li><code>[OPERATOR]</code> The following dependency is updated to adopt a cherry-pick of <a href="https://github.com/gardener/gardener/pull/8943" target="_blank" rel="noopener noreferrer">https://github.com/gardener/gardener/pull/8943</a>:
+<li class=""><code>[OPERATOR]</code> The following dependency is updated to adopt a cherry-pick of <a href="https://github.com/gardener/gardener/pull/8943" target="_blank" rel="noopener noreferrer" class="">https://github.com/gardener/gardener/pull/8943</a>:
 <ul>
-<li>github.com/gardener/gardener: v1.83.2 -&gt; v1.83.3 by @ialidzhikov [#843]</li>
+<li class="">github.com/gardener/gardener: v1.83.2 -&gt; v1.83.3 by @ialidzhikov [#843]</li>
 </ul>
 </li>
 </ul>
-<h2 class="anchor anchorWithStickyNavbar_LWe7" id="docker-images-7">Docker Images<a href="#docker-images-7" class="hash-link" aria-label="Direct link to Docker Images" title="Direct link to Docker Images" translate="no">​</a></h2>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="docker-images-7">Docker Images<a href="#docker-images-7" class="hash-link" aria-label="Direct link to Docker Images" title="Direct link to Docker Images" translate="no">​</a></h2>
 <ul>
-<li>gardener-extension-admission-aws: <code>eu.gcr.io/gardener-project/gardener/extensions/admission-aws:v1.51.1</code></li>
-<li>gardener-extension-provider-aws: <code>eu.gcr.io/gardener-project/gardener/extensions/provider-aws:v1.51.1</code></li>
+<li class="">gardener-extension-admission-aws: <code>eu.gcr.io/gardener-project/gardener/extensions/admission-aws:v1.51.1</code></li>
+<li class="">gardener-extension-provider-aws: <code>eu.gcr.io/gardener-project/gardener/extensions/provider-aws:v1.51.1</code></li>
 </ul>
 </div></div></details>
 <details class="details_lb9f alert alert--info details_b_Ee" data-collapsed="true"><summary><b>Update shoot-dns-service to <code>1.41.0</code></b></summary><div><div class="collapsibleContent_i85q">
 <!-- -->
 <h1>[gardener/gardener-extension-shoot-dns-service]</h1>
-<h2 class="anchor anchorWithStickyNavbar_LWe7" id="️-breaking-changes-1">⚠️ Breaking Changes<a href="#️-breaking-changes-1" class="hash-link" aria-label="Direct link to ⚠️ Breaking Changes" title="Direct link to ⚠️ Breaking Changes" translate="no">​</a></h2>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="️-breaking-changes-1">⚠️ Breaking Changes<a href="#️-breaking-changes-1" class="hash-link" aria-label="Direct link to ⚠️ Breaking Changes" title="Direct link to ⚠️ Breaking Changes" translate="no">​</a></h2>
 <ul>
-<li><code>[OPERATOR]</code> CA and server certificates for the admission component are managed automatically. Passing custom certificates via Helm values is not supported anymore. by @timuthy [#266]</li>
+<li class=""><code>[OPERATOR]</code> CA and server certificates for the admission component are managed automatically. Passing custom certificates via Helm values is not supported anymore. by @timuthy [#266]</li>
 </ul>
-<h2 class="anchor anchorWithStickyNavbar_LWe7" id="-bug-fixes">🐛 Bug Fixes<a href="#-bug-fixes" class="hash-link" aria-label="Direct link to 🐛 Bug Fixes" title="Direct link to 🐛 Bug Fixes" translate="no">​</a></h2>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="-bug-fixes">🐛 Bug Fixes<a href="#-bug-fixes" class="hash-link" aria-label="Direct link to 🐛 Bug Fixes" title="Direct link to 🐛 Bug Fixes" translate="no">​</a></h2>
 <ul>
-<li><code>[OPERATOR]</code> An issue was fixed that caused shoot clusters with a <code>shoot-dns-service</code> extension configuration not to be validated during creation. Potential validation errors only happened later and remained unnoticed, e.g. when update requests from Gardenlet were denied and shoot reconciliation got stuck. by @timuthy [#270]</li>
+<li class=""><code>[OPERATOR]</code> An issue was fixed that caused shoot clusters with a <code>shoot-dns-service</code> extension configuration not to be validated during creation. Potential validation errors only happened later and remained unnoticed, e.g. when update requests from Gardenlet were denied and shoot reconciliation got stuck. by @timuthy [#270]</li>
 </ul>
-<h2 class="anchor anchorWithStickyNavbar_LWe7" id="-others-6">🏃 Others<a href="#-others-6" class="hash-link" aria-label="Direct link to 🏃 Others" title="Direct link to 🏃 Others" translate="no">​</a></h2>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="-others-6">🏃 Others<a href="#-others-6" class="hash-link" aria-label="Direct link to 🏃 Others" title="Direct link to 🏃 Others" translate="no">​</a></h2>
 <ul>
-<li><code>[OPERATOR]</code> Bumps golang from 1.21.4 to 1.21.5. by @dependabot[bot] [#267]</li>
-<li><code>[OPERATOR]</code> Bump github.com/gardener/gardener from 1.83.0 to 1.84.0. by @dependabot[bot] [#261]</li>
-<li><code>[OPERATOR]</code> Bump github.com/gardener/gardener from 1.84.1 to 1.85.0. by @timuthy [#266]</li>
-<li><code>[OPERATOR]</code> Bump github.com/gardener/gardener from 1.84.0 to 1.84.1. by @dependabot[bot] [#262]</li>
+<li class=""><code>[OPERATOR]</code> Bumps golang from 1.21.4 to 1.21.5. by @dependabot[bot] [#267]</li>
+<li class=""><code>[OPERATOR]</code> Bump github.com/gardener/gardener from 1.83.0 to 1.84.0. by @dependabot[bot] [#261]</li>
+<li class=""><code>[OPERATOR]</code> Bump github.com/gardener/gardener from 1.84.1 to 1.85.0. by @timuthy [#266]</li>
+<li class=""><code>[OPERATOR]</code> Bump github.com/gardener/gardener from 1.84.0 to 1.84.1. by @dependabot[bot] [#262]</li>
 </ul>
 <h1>[gardener/external-dns-management]</h1>
-<h2 class="anchor anchorWithStickyNavbar_LWe7" id="️-breaking-changes-2">⚠️ Breaking Changes<a href="#️-breaking-changes-2" class="hash-link" aria-label="Direct link to ⚠️ Breaking Changes" title="Direct link to ⚠️ Breaking Changes" translate="no">​</a></h2>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="️-breaking-changes-2">⚠️ Breaking Changes<a href="#️-breaking-changes-2" class="hash-link" aria-label="Direct link to ⚠️ Breaking Changes" title="Direct link to ⚠️ Breaking Changes" translate="no">​</a></h2>
 <ul>
-<li><code>[USER]</code> <code>NS</code> records are not retrieved anymore for all accessible hosted zones to avoid reading all DNS record sets of all hosted zones periodically independently if they are used. Only hosted zones with active <code>DNSProviders</code> are synched, but without caring about consequences of <code>NS</code> records for subdomains. If there are many large hosted zones accessible for given credentials and there are only  <code>DNSProviders</code> using a few of these zones (either by domain or zone include), the period synchronisation of the zone state for all other hosted zones is avoided. This can result in a significant reduction of requests to the provider backend. As a downside of this change, applying a <code>DNSEntry</code> for a forwarded subdomain now results in a DNS record set in the parent hosted zone, if the real hosted zone is unknown to the controller. Formerly, applying such a <code>DNSEnty</code> resulted in an error state.
+<li class=""><code>[USER]</code> <code>NS</code> records are not retrieved anymore for all accessible hosted zones to avoid reading all DNS record sets of all hosted zones periodically independently if they are used. Only hosted zones with active <code>DNSProviders</code> are synched, but without caring about consequences of <code>NS</code> records for subdomains. If there are many large hosted zones accessible for given credentials and there are only  <code>DNSProviders</code> using a few of these zones (either by domain or zone include), the period synchronisation of the zone state for all other hosted zones is avoided. This can result in a significant reduction of requests to the provider backend. As a downside of this change, applying a <code>DNSEntry</code> for a forwarded subdomain now results in a DNS record set in the parent hosted zone, if the real hosted zone is unknown to the controller. Formerly, applying such a <code>DNSEnty</code> resulted in an error state.
 No action is necessary from the users, this is only a &quot;heads up&quot; for the changed behaviour if <code>NS</code> records are used for subdomains. by @MartinWeindel [gardener/external-dns-management#336]</li>
 </ul>
-<h2 class="anchor anchorWithStickyNavbar_LWe7" id="-others-7">🏃 Others<a href="#-others-7" class="hash-link" aria-label="Direct link to 🏃 Others" title="Direct link to 🏃 Others" translate="no">​</a></h2>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="-others-7">🏃 Others<a href="#-others-7" class="hash-link" aria-label="Direct link to 🏃 Others" title="Direct link to 🏃 Others" translate="no">​</a></h2>
 <ul>
-<li><code>[USER]</code> Validate provider domain includes and excludes for forbidden wildcard domains. by @MartinWeindel [gardener/external-dns-management#335]</li>
-<li><code>[OPERATOR]</code> Bumps golang from 1.21.3 to 1.21.4. by @dependabot[bot] [gardener/external-dns-management#333]</li>
+<li class=""><code>[USER]</code> Validate provider domain includes and excludes for forbidden wildcard domains. by @MartinWeindel [gardener/external-dns-management#335]</li>
+<li class=""><code>[OPERATOR]</code> Bumps golang from 1.21.3 to 1.21.4. by @dependabot[bot] [gardener/external-dns-management#333]</li>
 </ul>
-<h2 class="anchor anchorWithStickyNavbar_LWe7" id="docker-images-8">Docker Images<a href="#docker-images-8" class="hash-link" aria-label="Direct link to Docker Images" title="Direct link to Docker Images" translate="no">​</a></h2>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="docker-images-8">Docker Images<a href="#docker-images-8" class="hash-link" aria-label="Direct link to Docker Images" title="Direct link to Docker Images" translate="no">​</a></h2>
 <ul>
-<li>gardener-extension-admission-shoot-dns-service: <code>eu.gcr.io/gardener-project/gardener/extensions/admission-shoot-dns-service:v1.41.0</code></li>
-<li>gardener-extension-shoot-dns-service: <code>eu.gcr.io/gardener-project/gardener/extensions/shoot-dns-service:v1.41.0</code></li>
-</ul>
-</div></div></details>
-<details class="details_lb9f alert alert--info details_b_Ee" data-collapsed="true"><summary><b>Update gardener-controlplane to <code>1.86.0</code></b></summary><div><div class="collapsibleContent_i85q">
-<!-- -->
-<h1>[gardener/gardener]</h1>
-<h2 class="anchor anchorWithStickyNavbar_LWe7" id="️-breaking-changes-3">⚠️ Breaking Changes<a href="#️-breaking-changes-3" class="hash-link" aria-label="Direct link to ⚠️ Breaking Changes" title="Direct link to ⚠️ Breaking Changes" translate="no">​</a></h2>
-<ul>
-<li><code>[OPERATOR]</code> All virtual garden access Secrets have to be labeled with with <code>resources.gardener.cloud/class=shoot</code>. Otherwise the virtual-GRM won&#x27;t consider the Secrets and won&#x27;t renew them. by @rfranzke [#8883]</li>
-<li><code>[OPERATOR]</code> The <code>ContainerdRegistryHostsDir</code> feature gate has been promoted to beta and is now turned on by default. by @ialidzhikov [#8873]</li>
-<li><code>[DEVELOPER]</code> Support for the deprecated <code>NetworkPolicy</code> annotations <code>networking.resources.gardener.cloud/from-policy-allowed-ports</code> and <code>networking.resources.gardener.cloud/from-policy-pod-label-selector</code> has been removed. Use <code>networking.resources.gardener.cloud/from-&lt;some-alias&gt;-allowed-ports</code> instead (<a href="https://github.com/gardener/gardener/blob/master/docs/concepts/resource-manager.md#networkpolicy-controller" target="_blank" rel="noopener noreferrer">documentation</a>). by @rfranzke [#8883]</li>
-</ul>
-<h2 class="anchor anchorWithStickyNavbar_LWe7" id="-noteworthy">📰 Noteworthy<a href="#-noteworthy" class="hash-link" aria-label="Direct link to 📰 Noteworthy" title="Direct link to 📰 Noteworthy" translate="no">​</a></h2>
-<ul>
-<li><code>[DEVELOPER]</code> The local Gardener environments for e2e tests running in Prow are now backed by the <a href="https://github.com/gardener/gardener-extension-registry-cache/" target="_blank" rel="noopener noreferrer"><code>registry-cache</code></a> extensions enabled in the Prow cluster. This should have a positive impact on the network I/O for image pulls and resulting costs. by @oliver-goetz [#8880]</li>
-<li><code>[OPERATOR]</code> The <code>WorkerlessShoots</code> has been promoted to GA and is now locked to &quot;enabled by default&quot;. by @acumino [#8906]</li>
-</ul>
-<h2 class="anchor anchorWithStickyNavbar_LWe7" id="-new-features-2">✨ New Features<a href="#-new-features-2" class="hash-link" aria-label="Direct link to ✨ New Features" title="Direct link to ✨ New Features" translate="no">​</a></h2>
-<ul>
-<li><code>[USER]</code> It is now possible to configure the resources encrypted in the ETCD for shoot clusters, see <a href="https://github.com/gardener/gardener/blob/master/docs/usage/etcd_encryption_config.md" target="_blank" rel="noopener noreferrer">this document</a> for more details. by @shafeeqes [#8842]</li>
-<li><code>[USER]</code> The <code>shoots/viewerkubeconfig</code> subresource now also restricts viewer access to resources which are specified in the <code>spec.kubernetes.kubeAPIServer.encryptionConfig</code> in the Shoot in addition to <code>Secrets</code>. by @shafeeqes [#8966]</li>
-<li><code>[USER]</code> It is now possible to request a kubeconfig with read-only access (all APIs except <code>core/v1.Secret</code>) for shoot clusters by using the new <code>shoots/viewerkubeconfig</code> subresource. Read all about it <a href="https://github.com/gardener/gardener/blob/master/docs/usage/shoot_access.md#shootsviewerkubeconfig-subresource" target="_blank" rel="noopener noreferrer">here</a>. by @rfranzke [#8870]</li>
-<li><code>[OPERATOR]</code> The <code>vpn-seed-server</code> component now supports IPv4 seed clusters hosting IPv6 shoot clusters.  by @DockToFuture [#8830]</li>
-<li><code>[OPERATOR]</code> It is now possible to configure the resources encrypted in the ETCD for the virtual garden cluster, see <a href="https://github.com/gardener/gardener/blob/master/docs/concepts/operator.md#etcd-encryption-config" target="_blank" rel="noopener noreferrer">this document</a> for more details. by @shafeeqes [#8842]</li>
-</ul>
-<h2 class="anchor anchorWithStickyNavbar_LWe7" id="-bug-fixes-1">🐛 Bug Fixes<a href="#-bug-fixes-1" class="hash-link" aria-label="Direct link to 🐛 Bug Fixes" title="Direct link to 🐛 Bug Fixes" translate="no">​</a></h2>
-<ul>
-<li><code>[DEPENDENCY]</code> extension library: An issue causing the Worker restore operation to fail for hibernated Shoots is now fixed. by @ialidzhikov [#8943]</li>
-<li><code>[OPERATOR]</code> A bug causing the Shoot to use the wrong istio load balancer if the <code>ExposureClass</code> name and the exposureclass handler name are not the same is now fixed.  by @shafeeqes [#8926]</li>
-<li><code>[OPERATOR]</code> Fixed a bug where a Shoot with an expired machine image or Kubernetes version could be created.
-For machine images: only allow updating to a higher expired machine image version for an existing worker pool
-For Kubernetes versions: do not allow creation of a worker pool with an expired K8s version, but still allow updating an existing worker pool to a higher expired version. by @danielfoehrKn [#8854]</li>
-<li><code>[OPERATOR]</code> <code>gardener-node-agent</code>&#x27;s <code>OperatingSystemConfig</code> controller now respects the reconciliation timeout and aborts the reconciliation if it takes too long. by @rfranzke [#8907]</li>
-<li><code>[OPERATOR]</code> <code>gardener-node-agent</code> now creates temporary directories and files under <code>/var/lib/gardener-node-agent/tmp</code> instead of <code>/tmp</code>. This fixes issues during <code>OperatingSystemConfig</code> reconciliation which occur when <code>/var</code> and <code>/tmp</code> are backed by different file systems or devices. by @rfranzke [#8894]</li>
-<li><code>[OPERATOR]</code> <code>gardener-node-agent</code> now skips disablement and stop attempts of deleted units in case their unit files have already been cleaned up by third parties. by @rfranzke [#8898]</li>
-<li><code>[OPERATOR]</code> <code>gardener-node-agent</code> now converts the hostname to lower case to match <code>kubelet</code> behaviour when it maintains the <code>kubernetes.io/hostname</code> label on <code>Node</code>s. by @rfranzke [#8902]</li>
-</ul>
-<h2 class="anchor anchorWithStickyNavbar_LWe7" id="-others-8">🏃 Others<a href="#-others-8" class="hash-link" aria-label="Direct link to 🏃 Others" title="Direct link to 🏃 Others" translate="no">​</a></h2>
-<ul>
-<li><code>[OPERATOR]</code> <code>gardener-node-agent</code> now stops waiting for <code>systemd</code> command results if they don&#x27;t respond back after <code>10s</code>. by @rfranzke [#8919]</li>
-<li><code>[OPERATOR]</code> Add unhealthy nodes dashboard. by @adenitiu [#8869]</li>
-<li><code>[OPERATOR]</code> Add <code>egressCIDRs</code> field to the infrastructureStatus resource. This allows provider-extensions to specify a list of stable CIDRs used as source IP for traffic generated by the shoot&#x27;s worker nodes. by @kon-angelo [#8888]</li>
-<li><code>[DEVELOPER]</code> Add support for optional <code>SCRIPT_ROOT</code> environment var in <code>vgopath</code> enabled hack scripts by @afritzler [#8935]</li>
-</ul>
-<h1>[gardener/vpn2]</h1>
-<h2 class="anchor anchorWithStickyNavbar_LWe7" id="️-breaking-changes-4">⚠️ Breaking Changes<a href="#️-breaking-changes-4" class="hash-link" aria-label="Direct link to ⚠️ Breaking Changes" title="Direct link to ⚠️ Breaking Changes" translate="no">​</a></h2>
-<ul>
-<li><code>[OPERATOR]</code> Change OCI Image Registry from GCR (<code>eu.gcr.io/gardener-project</code>) to Artifact-Registry (<code>europe-docker.pkg.dev/gardener-project/releases</code>). Users should update their references. by @ccwienk [gardener/vpn2#62]</li>
-</ul>
-<h2 class="anchor anchorWithStickyNavbar_LWe7" id="-noteworthy-1">📰 Noteworthy<a href="#-noteworthy-1" class="hash-link" aria-label="Direct link to 📰 Noteworthy" title="Direct link to 📰 Noteworthy" translate="no">​</a></h2>
-<ul>
-<li><code>[OPERATOR]</code> added ipv6 single-stack support by @nschad [gardener/vpn2#45]</li>
-<li><code>[OPERATOR]</code>  Add iptables backend detection to firewall script. by @axel7born [gardener/vpn2#64]</li>
-</ul>
-<h1>[gardener/apiserver-proxy]</h1>
-<h2 class="anchor anchorWithStickyNavbar_LWe7" id="-noteworthy-2">📰 Noteworthy<a href="#-noteworthy-2" class="hash-link" aria-label="Direct link to 📰 Noteworthy" title="Direct link to 📰 Noteworthy" translate="no">​</a></h2>
-<ul>
-<li><code>[OPERATOR]</code> Remove the optional creation of iptables rules and the flag<code>--setup-iptables</code>. by @axel7born [gardener/apiserver-proxy#70]</li>
-</ul>
-<h1>[gardener/gardener-metrics-exporter]</h1>
-<h2 class="anchor anchorWithStickyNavbar_LWe7" id="-others-9">🏃 Others<a href="#-others-9" class="hash-link" aria-label="Direct link to 🏃 Others" title="Direct link to 🏃 Others" translate="no">​</a></h2>
-<ul>
-<li><code>[OPERATOR]</code> Metrics are exported for pending shoots as well. by @timebertt [gardener/gardener-metrics-exporter#91]</li>
-</ul>
-<h2 class="anchor anchorWithStickyNavbar_LWe7" id="docker-images-9">Docker Images<a href="#docker-images-9" class="hash-link" aria-label="Direct link to Docker Images" title="Direct link to Docker Images" translate="no">​</a></h2>
-<ul>
-<li>admission-controller: <code>eu.gcr.io/gardener-project/gardener/admission-controller:v1.86.0</code></li>
-<li>apiserver: <code>eu.gcr.io/gardener-project/gardener/apiserver:v1.86.0</code></li>
-<li>controller-manager: <code>eu.gcr.io/gardener-project/gardener/controller-manager:v1.86.0</code></li>
-<li>gardenlet: <code>eu.gcr.io/gardener-project/gardener/gardenlet:v1.86.0</code></li>
-<li>node-agent: <code>eu.gcr.io/gardener-project/gardener/node-agent:v1.86.0</code></li>
-<li>operator: <code>eu.gcr.io/gardener-project/gardener/operator:v1.86.0</code></li>
-<li>resource-manager: <code>eu.gcr.io/gardener-project/gardener/resource-manager:v1.86.0</code></li>
-<li>scheduler: <code>eu.gcr.io/gardener-project/gardener/scheduler:v1.86.0</code></li>
+<li class="">gardener-extension-admission-shoot-dns-service: <code>eu.gcr.io/gardener-project/gardener/extensions/admission-shoot-dns-service:v1.41.0</code></li>
+<li class="">gardener-extension-shoot-dns-service: <code>eu.gcr.io/gardener-project/gardener/extensions/shoot-dns-service:v1.41.0</code></li>
 </ul>
 </div></div></details>
 <details class="details_lb9f alert alert--info details_b_Ee" data-collapsed="true"><summary><b>Update gardener-controlplane to <code>1.86.0</code></b></summary><div><div class="collapsibleContent_i85q">
 <!-- -->
 <h1>[gardener/gardener]</h1>
-<h2 class="anchor anchorWithStickyNavbar_LWe7" id="️-breaking-changes-5">⚠️ Breaking Changes<a href="#️-breaking-changes-5" class="hash-link" aria-label="Direct link to ⚠️ Breaking Changes" title="Direct link to ⚠️ Breaking Changes" translate="no">​</a></h2>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="️-breaking-changes-3">⚠️ Breaking Changes<a href="#️-breaking-changes-3" class="hash-link" aria-label="Direct link to ⚠️ Breaking Changes" title="Direct link to ⚠️ Breaking Changes" translate="no">​</a></h2>
 <ul>
-<li><code>[OPERATOR]</code> All virtual garden access Secrets have to be labeled with with <code>resources.gardener.cloud/class=shoot</code>. Otherwise the virtual-GRM won&#x27;t consider the Secrets and won&#x27;t renew them. by @rfranzke [#8883]</li>
-<li><code>[OPERATOR]</code> The <code>ContainerdRegistryHostsDir</code> feature gate has been promoted to beta and is now turned on by default. by @ialidzhikov [#8873]</li>
-<li><code>[DEVELOPER]</code> Support for the deprecated <code>NetworkPolicy</code> annotations <code>networking.resources.gardener.cloud/from-policy-allowed-ports</code> and <code>networking.resources.gardener.cloud/from-policy-pod-label-selector</code> has been removed. Use <code>networking.resources.gardener.cloud/from-&lt;some-alias&gt;-allowed-ports</code> instead (<a href="https://github.com/gardener/gardener/blob/master/docs/concepts/resource-manager.md#networkpolicy-controller" target="_blank" rel="noopener noreferrer">documentation</a>). by @rfranzke [#8883]</li>
+<li class=""><code>[OPERATOR]</code> All virtual garden access Secrets have to be labeled with with <code>resources.gardener.cloud/class=shoot</code>. Otherwise the virtual-GRM won&#x27;t consider the Secrets and won&#x27;t renew them. by @rfranzke [#8883]</li>
+<li class=""><code>[OPERATOR]</code> The <code>ContainerdRegistryHostsDir</code> feature gate has been promoted to beta and is now turned on by default. by @ialidzhikov [#8873]</li>
+<li class=""><code>[DEVELOPER]</code> Support for the deprecated <code>NetworkPolicy</code> annotations <code>networking.resources.gardener.cloud/from-policy-allowed-ports</code> and <code>networking.resources.gardener.cloud/from-policy-pod-label-selector</code> has been removed. Use <code>networking.resources.gardener.cloud/from-&lt;some-alias&gt;-allowed-ports</code> instead (<a href="https://github.com/gardener/gardener/blob/master/docs/concepts/resource-manager.md#networkpolicy-controller" target="_blank" rel="noopener noreferrer" class="">documentation</a>). by @rfranzke [#8883]</li>
 </ul>
-<h2 class="anchor anchorWithStickyNavbar_LWe7" id="-noteworthy-3">📰 Noteworthy<a href="#-noteworthy-3" class="hash-link" aria-label="Direct link to 📰 Noteworthy" title="Direct link to 📰 Noteworthy" translate="no">​</a></h2>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="-noteworthy">📰 Noteworthy<a href="#-noteworthy" class="hash-link" aria-label="Direct link to 📰 Noteworthy" title="Direct link to 📰 Noteworthy" translate="no">​</a></h2>
 <ul>
-<li><code>[DEVELOPER]</code> The local Gardener environments for e2e tests running in Prow are now backed by the <a href="https://github.com/gardener/gardener-extension-registry-cache/" target="_blank" rel="noopener noreferrer"><code>registry-cache</code></a> extensions enabled in the Prow cluster. This should have a positive impact on the network I/O for image pulls and resulting costs. by @oliver-goetz [#8880]</li>
-<li><code>[OPERATOR]</code> The <code>WorkerlessShoots</code> has been promoted to GA and is now locked to &quot;enabled by default&quot;. by @acumino [#8906]</li>
+<li class=""><code>[DEVELOPER]</code> The local Gardener environments for e2e tests running in Prow are now backed by the <a href="https://github.com/gardener/gardener-extension-registry-cache/" target="_blank" rel="noopener noreferrer" class=""><code>registry-cache</code></a> extensions enabled in the Prow cluster. This should have a positive impact on the network I/O for image pulls and resulting costs. by @oliver-goetz [#8880]</li>
+<li class=""><code>[OPERATOR]</code> The <code>WorkerlessShoots</code> has been promoted to GA and is now locked to &quot;enabled by default&quot;. by @acumino [#8906]</li>
 </ul>
-<h2 class="anchor anchorWithStickyNavbar_LWe7" id="-new-features-3">✨ New Features<a href="#-new-features-3" class="hash-link" aria-label="Direct link to ✨ New Features" title="Direct link to ✨ New Features" translate="no">​</a></h2>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="-new-features-2">✨ New Features<a href="#-new-features-2" class="hash-link" aria-label="Direct link to ✨ New Features" title="Direct link to ✨ New Features" translate="no">​</a></h2>
 <ul>
-<li><code>[USER]</code> It is now possible to configure the resources encrypted in the ETCD for shoot clusters, see <a href="https://github.com/gardener/gardener/blob/master/docs/usage/etcd_encryption_config.md" target="_blank" rel="noopener noreferrer">this document</a> for more details. by @shafeeqes [#8842]</li>
-<li><code>[USER]</code> The <code>shoots/viewerkubeconfig</code> subresource now also restricts viewer access to resources which are specified in the <code>spec.kubernetes.kubeAPIServer.encryptionConfig</code> in the Shoot in addition to <code>Secrets</code>. by @shafeeqes [#8966]</li>
-<li><code>[USER]</code> It is now possible to request a kubeconfig with read-only access (all APIs except <code>core/v1.Secret</code>) for shoot clusters by using the new <code>shoots/viewerkubeconfig</code> subresource. Read all about it <a href="https://github.com/gardener/gardener/blob/master/docs/usage/shoot_access.md#shootsviewerkubeconfig-subresource" target="_blank" rel="noopener noreferrer">here</a>. by @rfranzke [#8870]</li>
-<li><code>[OPERATOR]</code> The <code>vpn-seed-server</code> component now supports IPv4 seed clusters hosting IPv6 shoot clusters.  by @DockToFuture [#8830]</li>
-<li><code>[OPERATOR]</code> It is now possible to configure the resources encrypted in the ETCD for the virtual garden cluster, see <a href="https://github.com/gardener/gardener/blob/master/docs/concepts/operator.md#etcd-encryption-config" target="_blank" rel="noopener noreferrer">this document</a> for more details. by @shafeeqes [#8842]</li>
+<li class=""><code>[USER]</code> It is now possible to configure the resources encrypted in the ETCD for shoot clusters, see <a href="https://github.com/gardener/gardener/blob/master/docs/usage/etcd_encryption_config.md" target="_blank" rel="noopener noreferrer" class="">this document</a> for more details. by @shafeeqes [#8842]</li>
+<li class=""><code>[USER]</code> The <code>shoots/viewerkubeconfig</code> subresource now also restricts viewer access to resources which are specified in the <code>spec.kubernetes.kubeAPIServer.encryptionConfig</code> in the Shoot in addition to <code>Secrets</code>. by @shafeeqes [#8966]</li>
+<li class=""><code>[USER]</code> It is now possible to request a kubeconfig with read-only access (all APIs except <code>core/v1.Secret</code>) for shoot clusters by using the new <code>shoots/viewerkubeconfig</code> subresource. Read all about it <a href="https://github.com/gardener/gardener/blob/master/docs/usage/shoot_access.md#shootsviewerkubeconfig-subresource" target="_blank" rel="noopener noreferrer" class="">here</a>. by @rfranzke [#8870]</li>
+<li class=""><code>[OPERATOR]</code> The <code>vpn-seed-server</code> component now supports IPv4 seed clusters hosting IPv6 shoot clusters.  by @DockToFuture [#8830]</li>
+<li class=""><code>[OPERATOR]</code> It is now possible to configure the resources encrypted in the ETCD for the virtual garden cluster, see <a href="https://github.com/gardener/gardener/blob/master/docs/concepts/operator.md#etcd-encryption-config" target="_blank" rel="noopener noreferrer" class="">this document</a> for more details. by @shafeeqes [#8842]</li>
 </ul>
-<h2 class="anchor anchorWithStickyNavbar_LWe7" id="-bug-fixes-2">🐛 Bug Fixes<a href="#-bug-fixes-2" class="hash-link" aria-label="Direct link to 🐛 Bug Fixes" title="Direct link to 🐛 Bug Fixes" translate="no">​</a></h2>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="-bug-fixes-1">🐛 Bug Fixes<a href="#-bug-fixes-1" class="hash-link" aria-label="Direct link to 🐛 Bug Fixes" title="Direct link to 🐛 Bug Fixes" translate="no">​</a></h2>
 <ul>
-<li><code>[DEPENDENCY]</code> extension library: An issue causing the Worker restore operation to fail for hibernated Shoots is now fixed. by @ialidzhikov [#8943]</li>
-<li><code>[OPERATOR]</code> A bug causing the Shoot to use the wrong istio load balancer if the <code>ExposureClass</code> name and the exposureclass handler name are not the same is now fixed.  by @shafeeqes [#8926]</li>
-<li><code>[OPERATOR]</code> Fixed a bug where a Shoot with an expired machine image or Kubernetes version could be created.
+<li class=""><code>[DEPENDENCY]</code> extension library: An issue causing the Worker restore operation to fail for hibernated Shoots is now fixed. by @ialidzhikov [#8943]</li>
+<li class=""><code>[OPERATOR]</code> A bug causing the Shoot to use the wrong istio load balancer if the <code>ExposureClass</code> name and the exposureclass handler name are not the same is now fixed.  by @shafeeqes [#8926]</li>
+<li class=""><code>[OPERATOR]</code> Fixed a bug where a Shoot with an expired machine image or Kubernetes version could be created.
 For machine images: only allow updating to a higher expired machine image version for an existing worker pool
 For Kubernetes versions: do not allow creation of a worker pool with an expired K8s version, but still allow updating an existing worker pool to a higher expired version. by @danielfoehrKn [#8854]</li>
-<li><code>[OPERATOR]</code> <code>gardener-node-agent</code>&#x27;s <code>OperatingSystemConfig</code> controller now respects the reconciliation timeout and aborts the reconciliation if it takes too long. by @rfranzke [#8907]</li>
-<li><code>[OPERATOR]</code> <code>gardener-node-agent</code> now creates temporary directories and files under <code>/var/lib/gardener-node-agent/tmp</code> instead of <code>/tmp</code>. This fixes issues during <code>OperatingSystemConfig</code> reconciliation which occur when <code>/var</code> and <code>/tmp</code> are backed by different file systems or devices. by @rfranzke [#8894]</li>
-<li><code>[OPERATOR]</code> <code>gardener-node-agent</code> now skips disablement and stop attempts of deleted units in case their unit files have already been cleaned up by third parties. by @rfranzke [#8898]</li>
-<li><code>[OPERATOR]</code> <code>gardener-node-agent</code> now converts the hostname to lower case to match <code>kubelet</code> behaviour when it maintains the <code>kubernetes.io/hostname</code> label on <code>Node</code>s. by @rfranzke [#8902]</li>
+<li class=""><code>[OPERATOR]</code> <code>gardener-node-agent</code>&#x27;s <code>OperatingSystemConfig</code> controller now respects the reconciliation timeout and aborts the reconciliation if it takes too long. by @rfranzke [#8907]</li>
+<li class=""><code>[OPERATOR]</code> <code>gardener-node-agent</code> now creates temporary directories and files under <code>/var/lib/gardener-node-agent/tmp</code> instead of <code>/tmp</code>. This fixes issues during <code>OperatingSystemConfig</code> reconciliation which occur when <code>/var</code> and <code>/tmp</code> are backed by different file systems or devices. by @rfranzke [#8894]</li>
+<li class=""><code>[OPERATOR]</code> <code>gardener-node-agent</code> now skips disablement and stop attempts of deleted units in case their unit files have already been cleaned up by third parties. by @rfranzke [#8898]</li>
+<li class=""><code>[OPERATOR]</code> <code>gardener-node-agent</code> now converts the hostname to lower case to match <code>kubelet</code> behaviour when it maintains the <code>kubernetes.io/hostname</code> label on <code>Node</code>s. by @rfranzke [#8902]</li>
 </ul>
-<h2 class="anchor anchorWithStickyNavbar_LWe7" id="-others-10">🏃 Others<a href="#-others-10" class="hash-link" aria-label="Direct link to 🏃 Others" title="Direct link to 🏃 Others" translate="no">​</a></h2>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="-others-8">🏃 Others<a href="#-others-8" class="hash-link" aria-label="Direct link to 🏃 Others" title="Direct link to 🏃 Others" translate="no">​</a></h2>
 <ul>
-<li><code>[OPERATOR]</code> <code>gardener-node-agent</code> now stops waiting for <code>systemd</code> command results if they don&#x27;t respond back after <code>10s</code>. by @rfranzke [#8919]</li>
-<li><code>[OPERATOR]</code> Add unhealthy nodes dashboard. by @adenitiu [#8869]</li>
-<li><code>[OPERATOR]</code> Add <code>egressCIDRs</code> field to the infrastructureStatus resource. This allows provider-extensions to specify a list of stable CIDRs used as source IP for traffic generated by the shoot&#x27;s worker nodes. by @kon-angelo [#8888]</li>
-<li><code>[DEVELOPER]</code> Add support for optional <code>SCRIPT_ROOT</code> environment var in <code>vgopath</code> enabled hack scripts by @afritzler [#8935]</li>
+<li class=""><code>[OPERATOR]</code> <code>gardener-node-agent</code> now stops waiting for <code>systemd</code> command results if they don&#x27;t respond back after <code>10s</code>. by @rfranzke [#8919]</li>
+<li class=""><code>[OPERATOR]</code> Add unhealthy nodes dashboard. by @adenitiu [#8869]</li>
+<li class=""><code>[OPERATOR]</code> Add <code>egressCIDRs</code> field to the infrastructureStatus resource. This allows provider-extensions to specify a list of stable CIDRs used as source IP for traffic generated by the shoot&#x27;s worker nodes. by @kon-angelo [#8888]</li>
+<li class=""><code>[DEVELOPER]</code> Add support for optional <code>SCRIPT_ROOT</code> environment var in <code>vgopath</code> enabled hack scripts by @afritzler [#8935]</li>
 </ul>
 <h1>[gardener/vpn2]</h1>
-<h2 class="anchor anchorWithStickyNavbar_LWe7" id="️-breaking-changes-6">⚠️ Breaking Changes<a href="#️-breaking-changes-6" class="hash-link" aria-label="Direct link to ⚠️ Breaking Changes" title="Direct link to ⚠️ Breaking Changes" translate="no">​</a></h2>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="️-breaking-changes-4">⚠️ Breaking Changes<a href="#️-breaking-changes-4" class="hash-link" aria-label="Direct link to ⚠️ Breaking Changes" title="Direct link to ⚠️ Breaking Changes" translate="no">​</a></h2>
 <ul>
-<li><code>[OPERATOR]</code> Change OCI Image Registry from GCR (<code>eu.gcr.io/gardener-project</code>) to Artifact-Registry (<code>europe-docker.pkg.dev/gardener-project/releases</code>). Users should update their references. by @ccwienk [gardener/vpn2#62]</li>
+<li class=""><code>[OPERATOR]</code> Change OCI Image Registry from GCR (<code>eu.gcr.io/gardener-project</code>) to Artifact-Registry (<code>europe-docker.pkg.dev/gardener-project/releases</code>). Users should update their references. by @ccwienk [gardener/vpn2#62]</li>
 </ul>
-<h2 class="anchor anchorWithStickyNavbar_LWe7" id="-noteworthy-4">📰 Noteworthy<a href="#-noteworthy-4" class="hash-link" aria-label="Direct link to 📰 Noteworthy" title="Direct link to 📰 Noteworthy" translate="no">​</a></h2>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="-noteworthy-1">📰 Noteworthy<a href="#-noteworthy-1" class="hash-link" aria-label="Direct link to 📰 Noteworthy" title="Direct link to 📰 Noteworthy" translate="no">​</a></h2>
 <ul>
-<li><code>[OPERATOR]</code> added ipv6 single-stack support by @nschad [gardener/vpn2#45]</li>
-<li><code>[OPERATOR]</code>  Add iptables backend detection to firewall script. by @axel7born [gardener/vpn2#64]</li>
+<li class=""><code>[OPERATOR]</code> added ipv6 single-stack support by @nschad [gardener/vpn2#45]</li>
+<li class=""><code>[OPERATOR]</code>  Add iptables backend detection to firewall script. by @axel7born [gardener/vpn2#64]</li>
 </ul>
 <h1>[gardener/apiserver-proxy]</h1>
-<h2 class="anchor anchorWithStickyNavbar_LWe7" id="-noteworthy-5">📰 Noteworthy<a href="#-noteworthy-5" class="hash-link" aria-label="Direct link to 📰 Noteworthy" title="Direct link to 📰 Noteworthy" translate="no">​</a></h2>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="-noteworthy-2">📰 Noteworthy<a href="#-noteworthy-2" class="hash-link" aria-label="Direct link to 📰 Noteworthy" title="Direct link to 📰 Noteworthy" translate="no">​</a></h2>
 <ul>
-<li><code>[OPERATOR]</code> Remove the optional creation of iptables rules and the flag<code>--setup-iptables</code>. by @axel7born [gardener/apiserver-proxy#70]</li>
+<li class=""><code>[OPERATOR]</code> Remove the optional creation of iptables rules and the flag<code>--setup-iptables</code>. by @axel7born [gardener/apiserver-proxy#70]</li>
 </ul>
 <h1>[gardener/gardener-metrics-exporter]</h1>
-<h2 class="anchor anchorWithStickyNavbar_LWe7" id="-others-11">🏃 Others<a href="#-others-11" class="hash-link" aria-label="Direct link to 🏃 Others" title="Direct link to 🏃 Others" translate="no">​</a></h2>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="-others-9">🏃 Others<a href="#-others-9" class="hash-link" aria-label="Direct link to 🏃 Others" title="Direct link to 🏃 Others" translate="no">​</a></h2>
 <ul>
-<li><code>[OPERATOR]</code> Metrics are exported for pending shoots as well. by @timebertt [gardener/gardener-metrics-exporter#91]</li>
+<li class=""><code>[OPERATOR]</code> Metrics are exported for pending shoots as well. by @timebertt [gardener/gardener-metrics-exporter#91]</li>
 </ul>
-<h2 class="anchor anchorWithStickyNavbar_LWe7" id="docker-images-10">Docker Images<a href="#docker-images-10" class="hash-link" aria-label="Direct link to Docker Images" title="Direct link to Docker Images" translate="no">​</a></h2>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="docker-images-9">Docker Images<a href="#docker-images-9" class="hash-link" aria-label="Direct link to Docker Images" title="Direct link to Docker Images" translate="no">​</a></h2>
 <ul>
-<li>admission-controller: <code>eu.gcr.io/gardener-project/gardener/admission-controller:v1.86.0</code></li>
-<li>apiserver: <code>eu.gcr.io/gardener-project/gardener/apiserver:v1.86.0</code></li>
-<li>controller-manager: <code>eu.gcr.io/gardener-project/gardener/controller-manager:v1.86.0</code></li>
-<li>gardenlet: <code>eu.gcr.io/gardener-project/gardener/gardenlet:v1.86.0</code></li>
-<li>node-agent: <code>eu.gcr.io/gardener-project/gardener/node-agent:v1.86.0</code></li>
-<li>operator: <code>eu.gcr.io/gardener-project/gardener/operator:v1.86.0</code></li>
-<li>resource-manager: <code>eu.gcr.io/gardener-project/gardener/resource-manager:v1.86.0</code></li>
-<li>scheduler: <code>eu.gcr.io/gardener-project/gardener/scheduler:v1.86.0</code></li>
+<li class="">admission-controller: <code>eu.gcr.io/gardener-project/gardener/admission-controller:v1.86.0</code></li>
+<li class="">apiserver: <code>eu.gcr.io/gardener-project/gardener/apiserver:v1.86.0</code></li>
+<li class="">controller-manager: <code>eu.gcr.io/gardener-project/gardener/controller-manager:v1.86.0</code></li>
+<li class="">gardenlet: <code>eu.gcr.io/gardener-project/gardener/gardenlet:v1.86.0</code></li>
+<li class="">node-agent: <code>eu.gcr.io/gardener-project/gardener/node-agent:v1.86.0</code></li>
+<li class="">operator: <code>eu.gcr.io/gardener-project/gardener/operator:v1.86.0</code></li>
+<li class="">resource-manager: <code>eu.gcr.io/gardener-project/gardener/resource-manager:v1.86.0</code></li>
+<li class="">scheduler: <code>eu.gcr.io/gardener-project/gardener/scheduler:v1.86.0</code></li>
+</ul>
+</div></div></details>
+<details class="details_lb9f alert alert--info details_b_Ee" data-collapsed="true"><summary><b>Update gardener-controlplane to <code>1.86.0</code></b></summary><div><div class="collapsibleContent_i85q">
+<!-- -->
+<h1>[gardener/gardener]</h1>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="️-breaking-changes-5">⚠️ Breaking Changes<a href="#️-breaking-changes-5" class="hash-link" aria-label="Direct link to ⚠️ Breaking Changes" title="Direct link to ⚠️ Breaking Changes" translate="no">​</a></h2>
+<ul>
+<li class=""><code>[OPERATOR]</code> All virtual garden access Secrets have to be labeled with with <code>resources.gardener.cloud/class=shoot</code>. Otherwise the virtual-GRM won&#x27;t consider the Secrets and won&#x27;t renew them. by @rfranzke [#8883]</li>
+<li class=""><code>[OPERATOR]</code> The <code>ContainerdRegistryHostsDir</code> feature gate has been promoted to beta and is now turned on by default. by @ialidzhikov [#8873]</li>
+<li class=""><code>[DEVELOPER]</code> Support for the deprecated <code>NetworkPolicy</code> annotations <code>networking.resources.gardener.cloud/from-policy-allowed-ports</code> and <code>networking.resources.gardener.cloud/from-policy-pod-label-selector</code> has been removed. Use <code>networking.resources.gardener.cloud/from-&lt;some-alias&gt;-allowed-ports</code> instead (<a href="https://github.com/gardener/gardener/blob/master/docs/concepts/resource-manager.md#networkpolicy-controller" target="_blank" rel="noopener noreferrer" class="">documentation</a>). by @rfranzke [#8883]</li>
+</ul>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="-noteworthy-3">📰 Noteworthy<a href="#-noteworthy-3" class="hash-link" aria-label="Direct link to 📰 Noteworthy" title="Direct link to 📰 Noteworthy" translate="no">​</a></h2>
+<ul>
+<li class=""><code>[DEVELOPER]</code> The local Gardener environments for e2e tests running in Prow are now backed by the <a href="https://github.com/gardener/gardener-extension-registry-cache/" target="_blank" rel="noopener noreferrer" class=""><code>registry-cache</code></a> extensions enabled in the Prow cluster. This should have a positive impact on the network I/O for image pulls and resulting costs. by @oliver-goetz [#8880]</li>
+<li class=""><code>[OPERATOR]</code> The <code>WorkerlessShoots</code> has been promoted to GA and is now locked to &quot;enabled by default&quot;. by @acumino [#8906]</li>
+</ul>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="-new-features-3">✨ New Features<a href="#-new-features-3" class="hash-link" aria-label="Direct link to ✨ New Features" title="Direct link to ✨ New Features" translate="no">​</a></h2>
+<ul>
+<li class=""><code>[USER]</code> It is now possible to configure the resources encrypted in the ETCD for shoot clusters, see <a href="https://github.com/gardener/gardener/blob/master/docs/usage/etcd_encryption_config.md" target="_blank" rel="noopener noreferrer" class="">this document</a> for more details. by @shafeeqes [#8842]</li>
+<li class=""><code>[USER]</code> The <code>shoots/viewerkubeconfig</code> subresource now also restricts viewer access to resources which are specified in the <code>spec.kubernetes.kubeAPIServer.encryptionConfig</code> in the Shoot in addition to <code>Secrets</code>. by @shafeeqes [#8966]</li>
+<li class=""><code>[USER]</code> It is now possible to request a kubeconfig with read-only access (all APIs except <code>core/v1.Secret</code>) for shoot clusters by using the new <code>shoots/viewerkubeconfig</code> subresource. Read all about it <a href="https://github.com/gardener/gardener/blob/master/docs/usage/shoot_access.md#shootsviewerkubeconfig-subresource" target="_blank" rel="noopener noreferrer" class="">here</a>. by @rfranzke [#8870]</li>
+<li class=""><code>[OPERATOR]</code> The <code>vpn-seed-server</code> component now supports IPv4 seed clusters hosting IPv6 shoot clusters.  by @DockToFuture [#8830]</li>
+<li class=""><code>[OPERATOR]</code> It is now possible to configure the resources encrypted in the ETCD for the virtual garden cluster, see <a href="https://github.com/gardener/gardener/blob/master/docs/concepts/operator.md#etcd-encryption-config" target="_blank" rel="noopener noreferrer" class="">this document</a> for more details. by @shafeeqes [#8842]</li>
+</ul>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="-bug-fixes-2">🐛 Bug Fixes<a href="#-bug-fixes-2" class="hash-link" aria-label="Direct link to 🐛 Bug Fixes" title="Direct link to 🐛 Bug Fixes" translate="no">​</a></h2>
+<ul>
+<li class=""><code>[DEPENDENCY]</code> extension library: An issue causing the Worker restore operation to fail for hibernated Shoots is now fixed. by @ialidzhikov [#8943]</li>
+<li class=""><code>[OPERATOR]</code> A bug causing the Shoot to use the wrong istio load balancer if the <code>ExposureClass</code> name and the exposureclass handler name are not the same is now fixed.  by @shafeeqes [#8926]</li>
+<li class=""><code>[OPERATOR]</code> Fixed a bug where a Shoot with an expired machine image or Kubernetes version could be created.
+For machine images: only allow updating to a higher expired machine image version for an existing worker pool
+For Kubernetes versions: do not allow creation of a worker pool with an expired K8s version, but still allow updating an existing worker pool to a higher expired version. by @danielfoehrKn [#8854]</li>
+<li class=""><code>[OPERATOR]</code> <code>gardener-node-agent</code>&#x27;s <code>OperatingSystemConfig</code> controller now respects the reconciliation timeout and aborts the reconciliation if it takes too long. by @rfranzke [#8907]</li>
+<li class=""><code>[OPERATOR]</code> <code>gardener-node-agent</code> now creates temporary directories and files under <code>/var/lib/gardener-node-agent/tmp</code> instead of <code>/tmp</code>. This fixes issues during <code>OperatingSystemConfig</code> reconciliation which occur when <code>/var</code> and <code>/tmp</code> are backed by different file systems or devices. by @rfranzke [#8894]</li>
+<li class=""><code>[OPERATOR]</code> <code>gardener-node-agent</code> now skips disablement and stop attempts of deleted units in case their unit files have already been cleaned up by third parties. by @rfranzke [#8898]</li>
+<li class=""><code>[OPERATOR]</code> <code>gardener-node-agent</code> now converts the hostname to lower case to match <code>kubelet</code> behaviour when it maintains the <code>kubernetes.io/hostname</code> label on <code>Node</code>s. by @rfranzke [#8902]</li>
+</ul>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="-others-10">🏃 Others<a href="#-others-10" class="hash-link" aria-label="Direct link to 🏃 Others" title="Direct link to 🏃 Others" translate="no">​</a></h2>
+<ul>
+<li class=""><code>[OPERATOR]</code> <code>gardener-node-agent</code> now stops waiting for <code>systemd</code> command results if they don&#x27;t respond back after <code>10s</code>. by @rfranzke [#8919]</li>
+<li class=""><code>[OPERATOR]</code> Add unhealthy nodes dashboard. by @adenitiu [#8869]</li>
+<li class=""><code>[OPERATOR]</code> Add <code>egressCIDRs</code> field to the infrastructureStatus resource. This allows provider-extensions to specify a list of stable CIDRs used as source IP for traffic generated by the shoot&#x27;s worker nodes. by @kon-angelo [#8888]</li>
+<li class=""><code>[DEVELOPER]</code> Add support for optional <code>SCRIPT_ROOT</code> environment var in <code>vgopath</code> enabled hack scripts by @afritzler [#8935]</li>
+</ul>
+<h1>[gardener/vpn2]</h1>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="️-breaking-changes-6">⚠️ Breaking Changes<a href="#️-breaking-changes-6" class="hash-link" aria-label="Direct link to ⚠️ Breaking Changes" title="Direct link to ⚠️ Breaking Changes" translate="no">​</a></h2>
+<ul>
+<li class=""><code>[OPERATOR]</code> Change OCI Image Registry from GCR (<code>eu.gcr.io/gardener-project</code>) to Artifact-Registry (<code>europe-docker.pkg.dev/gardener-project/releases</code>). Users should update their references. by @ccwienk [gardener/vpn2#62]</li>
+</ul>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="-noteworthy-4">📰 Noteworthy<a href="#-noteworthy-4" class="hash-link" aria-label="Direct link to 📰 Noteworthy" title="Direct link to 📰 Noteworthy" translate="no">​</a></h2>
+<ul>
+<li class=""><code>[OPERATOR]</code> added ipv6 single-stack support by @nschad [gardener/vpn2#45]</li>
+<li class=""><code>[OPERATOR]</code>  Add iptables backend detection to firewall script. by @axel7born [gardener/vpn2#64]</li>
+</ul>
+<h1>[gardener/apiserver-proxy]</h1>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="-noteworthy-5">📰 Noteworthy<a href="#-noteworthy-5" class="hash-link" aria-label="Direct link to 📰 Noteworthy" title="Direct link to 📰 Noteworthy" translate="no">​</a></h2>
+<ul>
+<li class=""><code>[OPERATOR]</code> Remove the optional creation of iptables rules and the flag<code>--setup-iptables</code>. by @axel7born [gardener/apiserver-proxy#70]</li>
+</ul>
+<h1>[gardener/gardener-metrics-exporter]</h1>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="-others-11">🏃 Others<a href="#-others-11" class="hash-link" aria-label="Direct link to 🏃 Others" title="Direct link to 🏃 Others" translate="no">​</a></h2>
+<ul>
+<li class=""><code>[OPERATOR]</code> Metrics are exported for pending shoots as well. by @timebertt [gardener/gardener-metrics-exporter#91]</li>
+</ul>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="docker-images-10">Docker Images<a href="#docker-images-10" class="hash-link" aria-label="Direct link to Docker Images" title="Direct link to Docker Images" translate="no">​</a></h2>
+<ul>
+<li class="">admission-controller: <code>eu.gcr.io/gardener-project/gardener/admission-controller:v1.86.0</code></li>
+<li class="">apiserver: <code>eu.gcr.io/gardener-project/gardener/apiserver:v1.86.0</code></li>
+<li class="">controller-manager: <code>eu.gcr.io/gardener-project/gardener/controller-manager:v1.86.0</code></li>
+<li class="">gardenlet: <code>eu.gcr.io/gardener-project/gardener/gardenlet:v1.86.0</code></li>
+<li class="">node-agent: <code>eu.gcr.io/gardener-project/gardener/node-agent:v1.86.0</code></li>
+<li class="">operator: <code>eu.gcr.io/gardener-project/gardener/operator:v1.86.0</code></li>
+<li class="">resource-manager: <code>eu.gcr.io/gardener-project/gardener/resource-manager:v1.86.0</code></li>
+<li class="">scheduler: <code>eu.gcr.io/gardener-project/gardener/scheduler:v1.86.0</code></li>
 </ul>
 </div></div></details>
 <details class="details_lb9f alert alert--info details_b_Ee" data-collapsed="true"><summary><b>Update gardenlet to <code>1.86.0</code></b></summary><div><div class="collapsibleContent_i85q">
 <!-- -->
 <h1>[gardener/gardener]</h1>
-<h2 class="anchor anchorWithStickyNavbar_LWe7" id="️-breaking-changes-7">⚠️ Breaking Changes<a href="#️-breaking-changes-7" class="hash-link" aria-label="Direct link to ⚠️ Breaking Changes" title="Direct link to ⚠️ Breaking Changes" translate="no">​</a></h2>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="️-breaking-changes-7">⚠️ Breaking Changes<a href="#️-breaking-changes-7" class="hash-link" aria-label="Direct link to ⚠️ Breaking Changes" title="Direct link to ⚠️ Breaking Changes" translate="no">​</a></h2>
 <ul>
-<li><code>[OPERATOR]</code> All virtual garden access Secrets have to be labeled with with <code>resources.gardener.cloud/class=shoot</code>. Otherwise the virtual-GRM won&#x27;t consider the Secrets and won&#x27;t renew them. by @rfranzke [#8883]</li>
-<li><code>[OPERATOR]</code> The <code>ContainerdRegistryHostsDir</code> feature gate has been promoted to beta and is now turned on by default. by @ialidzhikov [#8873]</li>
-<li><code>[DEVELOPER]</code> Support for the deprecated <code>NetworkPolicy</code> annotations <code>networking.resources.gardener.cloud/from-policy-allowed-ports</code> and <code>networking.resources.gardener.cloud/from-policy-pod-label-selector</code> has been removed. Use <code>networking.resources.gardener.cloud/from-&lt;some-alias&gt;-allowed-ports</code> instead (<a href="https://github.com/gardener/gardener/blob/master/docs/concepts/resource-manager.md#networkpolicy-controller" target="_blank" rel="noopener noreferrer">documentation</a>). by @rfranzke [#8883]</li>
+<li class=""><code>[OPERATOR]</code> All virtual garden access Secrets have to be labeled with with <code>resources.gardener.cloud/class=shoot</code>. Otherwise the virtual-GRM won&#x27;t consider the Secrets and won&#x27;t renew them. by @rfranzke [#8883]</li>
+<li class=""><code>[OPERATOR]</code> The <code>ContainerdRegistryHostsDir</code> feature gate has been promoted to beta and is now turned on by default. by @ialidzhikov [#8873]</li>
+<li class=""><code>[DEVELOPER]</code> Support for the deprecated <code>NetworkPolicy</code> annotations <code>networking.resources.gardener.cloud/from-policy-allowed-ports</code> and <code>networking.resources.gardener.cloud/from-policy-pod-label-selector</code> has been removed. Use <code>networking.resources.gardener.cloud/from-&lt;some-alias&gt;-allowed-ports</code> instead (<a href="https://github.com/gardener/gardener/blob/master/docs/concepts/resource-manager.md#networkpolicy-controller" target="_blank" rel="noopener noreferrer" class="">documentation</a>). by @rfranzke [#8883]</li>
 </ul>
-<h2 class="anchor anchorWithStickyNavbar_LWe7" id="-noteworthy-6">📰 Noteworthy<a href="#-noteworthy-6" class="hash-link" aria-label="Direct link to 📰 Noteworthy" title="Direct link to 📰 Noteworthy" translate="no">​</a></h2>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="-noteworthy-6">📰 Noteworthy<a href="#-noteworthy-6" class="hash-link" aria-label="Direct link to 📰 Noteworthy" title="Direct link to 📰 Noteworthy" translate="no">​</a></h2>
 <ul>
-<li><code>[DEVELOPER]</code> The local Gardener environments for e2e tests running in Prow are now backed by the <a href="https://github.com/gardener/gardener-extension-registry-cache/" target="_blank" rel="noopener noreferrer"><code>registry-cache</code></a> extensions enabled in the Prow cluster. This should have a positive impact on the network I/O for image pulls and resulting costs. by @oliver-goetz [#8880]</li>
-<li><code>[OPERATOR]</code> The <code>WorkerlessShoots</code> has been promoted to GA and is now locked to &quot;enabled by default&quot;. by @acumino [#8906]</li>
+<li class=""><code>[DEVELOPER]</code> The local Gardener environments for e2e tests running in Prow are now backed by the <a href="https://github.com/gardener/gardener-extension-registry-cache/" target="_blank" rel="noopener noreferrer" class=""><code>registry-cache</code></a> extensions enabled in the Prow cluster. This should have a positive impact on the network I/O for image pulls and resulting costs. by @oliver-goetz [#8880]</li>
+<li class=""><code>[OPERATOR]</code> The <code>WorkerlessShoots</code> has been promoted to GA and is now locked to &quot;enabled by default&quot;. by @acumino [#8906]</li>
 </ul>
-<h2 class="anchor anchorWithStickyNavbar_LWe7" id="-new-features-4">✨ New Features<a href="#-new-features-4" class="hash-link" aria-label="Direct link to ✨ New Features" title="Direct link to ✨ New Features" translate="no">​</a></h2>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="-new-features-4">✨ New Features<a href="#-new-features-4" class="hash-link" aria-label="Direct link to ✨ New Features" title="Direct link to ✨ New Features" translate="no">​</a></h2>
 <ul>
-<li><code>[USER]</code> It is now possible to configure the resources encrypted in the ETCD for shoot clusters, see <a href="https://github.com/gardener/gardener/blob/master/docs/usage/etcd_encryption_config.md" target="_blank" rel="noopener noreferrer">this document</a> for more details. by @shafeeqes [#8842]</li>
-<li><code>[USER]</code> The <code>shoots/viewerkubeconfig</code> subresource now also restricts viewer access to resources which are specified in the <code>spec.kubernetes.kubeAPIServer.encryptionConfig</code> in the Shoot in addition to <code>Secrets</code>. by @shafeeqes [#8966]</li>
-<li><code>[USER]</code> It is now possible to request a kubeconfig with read-only access (all APIs except <code>core/v1.Secret</code>) for shoot clusters by using the new <code>shoots/viewerkubeconfig</code> subresource. Read all about it <a href="https://github.com/gardener/gardener/blob/master/docs/usage/shoot_access.md#shootsviewerkubeconfig-subresource" target="_blank" rel="noopener noreferrer">here</a>. by @rfranzke [#8870]</li>
-<li><code>[OPERATOR]</code> The <code>vpn-seed-server</code> component now supports IPv4 seed clusters hosting IPv6 shoot clusters.  by @DockToFuture [#8830]</li>
-<li><code>[OPERATOR]</code> It is now possible to configure the resources encrypted in the ETCD for the virtual garden cluster, see <a href="https://github.com/gardener/gardener/blob/master/docs/concepts/operator.md#etcd-encryption-config" target="_blank" rel="noopener noreferrer">this document</a> for more details. by @shafeeqes [#8842]</li>
+<li class=""><code>[USER]</code> It is now possible to configure the resources encrypted in the ETCD for shoot clusters, see <a href="https://github.com/gardener/gardener/blob/master/docs/usage/etcd_encryption_config.md" target="_blank" rel="noopener noreferrer" class="">this document</a> for more details. by @shafeeqes [#8842]</li>
+<li class=""><code>[USER]</code> The <code>shoots/viewerkubeconfig</code> subresource now also restricts viewer access to resources which are specified in the <code>spec.kubernetes.kubeAPIServer.encryptionConfig</code> in the Shoot in addition to <code>Secrets</code>. by @shafeeqes [#8966]</li>
+<li class=""><code>[USER]</code> It is now possible to request a kubeconfig with read-only access (all APIs except <code>core/v1.Secret</code>) for shoot clusters by using the new <code>shoots/viewerkubeconfig</code> subresource. Read all about it <a href="https://github.com/gardener/gardener/blob/master/docs/usage/shoot_access.md#shootsviewerkubeconfig-subresource" target="_blank" rel="noopener noreferrer" class="">here</a>. by @rfranzke [#8870]</li>
+<li class=""><code>[OPERATOR]</code> The <code>vpn-seed-server</code> component now supports IPv4 seed clusters hosting IPv6 shoot clusters.  by @DockToFuture [#8830]</li>
+<li class=""><code>[OPERATOR]</code> It is now possible to configure the resources encrypted in the ETCD for the virtual garden cluster, see <a href="https://github.com/gardener/gardener/blob/master/docs/concepts/operator.md#etcd-encryption-config" target="_blank" rel="noopener noreferrer" class="">this document</a> for more details. by @shafeeqes [#8842]</li>
 </ul>
-<h2 class="anchor anchorWithStickyNavbar_LWe7" id="-bug-fixes-3">🐛 Bug Fixes<a href="#-bug-fixes-3" class="hash-link" aria-label="Direct link to 🐛 Bug Fixes" title="Direct link to 🐛 Bug Fixes" translate="no">​</a></h2>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="-bug-fixes-3">🐛 Bug Fixes<a href="#-bug-fixes-3" class="hash-link" aria-label="Direct link to 🐛 Bug Fixes" title="Direct link to 🐛 Bug Fixes" translate="no">​</a></h2>
 <ul>
-<li><code>[DEPENDENCY]</code> extension library: An issue causing the Worker restore operation to fail for hibernated Shoots is now fixed. by @ialidzhikov [#8943]</li>
-<li><code>[OPERATOR]</code> A bug causing the Shoot to use the wrong istio load balancer if the <code>ExposureClass</code> name and the exposureclass handler name are not the same is now fixed.  by @shafeeqes [#8926]</li>
-<li><code>[OPERATOR]</code> Fixed a bug where a Shoot with an expired machine image or Kubernetes version could be created.
+<li class=""><code>[DEPENDENCY]</code> extension library: An issue causing the Worker restore operation to fail for hibernated Shoots is now fixed. by @ialidzhikov [#8943]</li>
+<li class=""><code>[OPERATOR]</code> A bug causing the Shoot to use the wrong istio load balancer if the <code>ExposureClass</code> name and the exposureclass handler name are not the same is now fixed.  by @shafeeqes [#8926]</li>
+<li class=""><code>[OPERATOR]</code> Fixed a bug where a Shoot with an expired machine image or Kubernetes version could be created.
 For machine images: only allow updating to a higher expired machine image version for an existing worker pool
 For Kubernetes versions: do not allow creation of a worker pool with an expired K8s version, but still allow updating an existing worker pool to a higher expired version. by @danielfoehrKn [#8854]</li>
-<li><code>[OPERATOR]</code> <code>gardener-node-agent</code>&#x27;s <code>OperatingSystemConfig</code> controller now respects the reconciliation timeout and aborts the reconciliation if it takes too long. by @rfranzke [#8907]</li>
-<li><code>[OPERATOR]</code> <code>gardener-node-agent</code> now creates temporary directories and files under <code>/var/lib/gardener-node-agent/tmp</code> instead of <code>/tmp</code>. This fixes issues during <code>OperatingSystemConfig</code> reconciliation which occur when <code>/var</code> and <code>/tmp</code> are backed by different file systems or devices. by @rfranzke [#8894]</li>
-<li><code>[OPERATOR]</code> <code>gardener-node-agent</code> now skips disablement and stop attempts of deleted units in case their unit files have already been cleaned up by third parties. by @rfranzke [#8898]</li>
-<li><code>[OPERATOR]</code> <code>gardener-node-agent</code> now converts the hostname to lower case to match <code>kubelet</code> behaviour when it maintains the <code>kubernetes.io/hostname</code> label on <code>Node</code>s. by @rfranzke [#8902]</li>
+<li class=""><code>[OPERATOR]</code> <code>gardener-node-agent</code>&#x27;s <code>OperatingSystemConfig</code> controller now respects the reconciliation timeout and aborts the reconciliation if it takes too long. by @rfranzke [#8907]</li>
+<li class=""><code>[OPERATOR]</code> <code>gardener-node-agent</code> now creates temporary directories and files under <code>/var/lib/gardener-node-agent/tmp</code> instead of <code>/tmp</code>. This fixes issues during <code>OperatingSystemConfig</code> reconciliation which occur when <code>/var</code> and <code>/tmp</code> are backed by different file systems or devices. by @rfranzke [#8894]</li>
+<li class=""><code>[OPERATOR]</code> <code>gardener-node-agent</code> now skips disablement and stop attempts of deleted units in case their unit files have already been cleaned up by third parties. by @rfranzke [#8898]</li>
+<li class=""><code>[OPERATOR]</code> <code>gardener-node-agent</code> now converts the hostname to lower case to match <code>kubelet</code> behaviour when it maintains the <code>kubernetes.io/hostname</code> label on <code>Node</code>s. by @rfranzke [#8902]</li>
 </ul>
-<h2 class="anchor anchorWithStickyNavbar_LWe7" id="-others-12">🏃 Others<a href="#-others-12" class="hash-link" aria-label="Direct link to 🏃 Others" title="Direct link to 🏃 Others" translate="no">​</a></h2>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="-others-12">🏃 Others<a href="#-others-12" class="hash-link" aria-label="Direct link to 🏃 Others" title="Direct link to 🏃 Others" translate="no">​</a></h2>
 <ul>
-<li><code>[OPERATOR]</code> <code>gardener-node-agent</code> now stops waiting for <code>systemd</code> command results if they don&#x27;t respond back after <code>10s</code>. by @rfranzke [#8919]</li>
-<li><code>[OPERATOR]</code> Add unhealthy nodes dashboard. by @adenitiu [#8869]</li>
-<li><code>[OPERATOR]</code> Add <code>egressCIDRs</code> field to the infrastructureStatus resource. This allows provider-extensions to specify a list of stable CIDRs used as source IP for traffic generated by the shoot&#x27;s worker nodes. by @kon-angelo [#8888]</li>
-<li><code>[DEVELOPER]</code> Add support for optional <code>SCRIPT_ROOT</code> environment var in <code>vgopath</code> enabled hack scripts by @afritzler [#8935]</li>
+<li class=""><code>[OPERATOR]</code> <code>gardener-node-agent</code> now stops waiting for <code>systemd</code> command results if they don&#x27;t respond back after <code>10s</code>. by @rfranzke [#8919]</li>
+<li class=""><code>[OPERATOR]</code> Add unhealthy nodes dashboard. by @adenitiu [#8869]</li>
+<li class=""><code>[OPERATOR]</code> Add <code>egressCIDRs</code> field to the infrastructureStatus resource. This allows provider-extensions to specify a list of stable CIDRs used as source IP for traffic generated by the shoot&#x27;s worker nodes. by @kon-angelo [#8888]</li>
+<li class=""><code>[DEVELOPER]</code> Add support for optional <code>SCRIPT_ROOT</code> environment var in <code>vgopath</code> enabled hack scripts by @afritzler [#8935]</li>
 </ul>
 <h1>[gardener/vpn2]</h1>
-<h2 class="anchor anchorWithStickyNavbar_LWe7" id="️-breaking-changes-8">⚠️ Breaking Changes<a href="#️-breaking-changes-8" class="hash-link" aria-label="Direct link to ⚠️ Breaking Changes" title="Direct link to ⚠️ Breaking Changes" translate="no">​</a></h2>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="️-breaking-changes-8">⚠️ Breaking Changes<a href="#️-breaking-changes-8" class="hash-link" aria-label="Direct link to ⚠️ Breaking Changes" title="Direct link to ⚠️ Breaking Changes" translate="no">​</a></h2>
 <ul>
-<li><code>[OPERATOR]</code> Change OCI Image Registry from GCR (<code>eu.gcr.io/gardener-project</code>) to Artifact-Registry (<code>europe-docker.pkg.dev/gardener-project/releases</code>). Users should update their references. by @ccwienk [gardener/vpn2#62]</li>
+<li class=""><code>[OPERATOR]</code> Change OCI Image Registry from GCR (<code>eu.gcr.io/gardener-project</code>) to Artifact-Registry (<code>europe-docker.pkg.dev/gardener-project/releases</code>). Users should update their references. by @ccwienk [gardener/vpn2#62]</li>
 </ul>
-<h2 class="anchor anchorWithStickyNavbar_LWe7" id="-noteworthy-7">📰 Noteworthy<a href="#-noteworthy-7" class="hash-link" aria-label="Direct link to 📰 Noteworthy" title="Direct link to 📰 Noteworthy" translate="no">​</a></h2>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="-noteworthy-7">📰 Noteworthy<a href="#-noteworthy-7" class="hash-link" aria-label="Direct link to 📰 Noteworthy" title="Direct link to 📰 Noteworthy" translate="no">​</a></h2>
 <ul>
-<li><code>[OPERATOR]</code> added ipv6 single-stack support by @nschad [gardener/vpn2#45]</li>
-<li><code>[OPERATOR]</code>  Add iptables backend detection to firewall script. by @axel7born [gardener/vpn2#64]</li>
+<li class=""><code>[OPERATOR]</code> added ipv6 single-stack support by @nschad [gardener/vpn2#45]</li>
+<li class=""><code>[OPERATOR]</code>  Add iptables backend detection to firewall script. by @axel7born [gardener/vpn2#64]</li>
 </ul>
 <h1>[gardener/apiserver-proxy]</h1>
-<h2 class="anchor anchorWithStickyNavbar_LWe7" id="-noteworthy-8">📰 Noteworthy<a href="#-noteworthy-8" class="hash-link" aria-label="Direct link to 📰 Noteworthy" title="Direct link to 📰 Noteworthy" translate="no">​</a></h2>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="-noteworthy-8">📰 Noteworthy<a href="#-noteworthy-8" class="hash-link" aria-label="Direct link to 📰 Noteworthy" title="Direct link to 📰 Noteworthy" translate="no">​</a></h2>
 <ul>
-<li><code>[OPERATOR]</code> Remove the optional creation of iptables rules and the flag<code>--setup-iptables</code>. by @axel7born [gardener/apiserver-proxy#70]</li>
+<li class=""><code>[OPERATOR]</code> Remove the optional creation of iptables rules and the flag<code>--setup-iptables</code>. by @axel7born [gardener/apiserver-proxy#70]</li>
 </ul>
 <h1>[gardener/gardener-metrics-exporter]</h1>
-<h2 class="anchor anchorWithStickyNavbar_LWe7" id="-others-13">🏃 Others<a href="#-others-13" class="hash-link" aria-label="Direct link to 🏃 Others" title="Direct link to 🏃 Others" translate="no">​</a></h2>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="-others-13">🏃 Others<a href="#-others-13" class="hash-link" aria-label="Direct link to 🏃 Others" title="Direct link to 🏃 Others" translate="no">​</a></h2>
 <ul>
-<li><code>[OPERATOR]</code> Metrics are exported for pending shoots as well. by @timebertt [gardener/gardener-metrics-exporter#91]</li>
+<li class=""><code>[OPERATOR]</code> Metrics are exported for pending shoots as well. by @timebertt [gardener/gardener-metrics-exporter#91]</li>
 </ul>
-<h2 class="anchor anchorWithStickyNavbar_LWe7" id="docker-images-11">Docker Images<a href="#docker-images-11" class="hash-link" aria-label="Direct link to Docker Images" title="Direct link to Docker Images" translate="no">​</a></h2>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="docker-images-11">Docker Images<a href="#docker-images-11" class="hash-link" aria-label="Direct link to Docker Images" title="Direct link to Docker Images" translate="no">​</a></h2>
 <ul>
-<li>admission-controller: <code>eu.gcr.io/gardener-project/gardener/admission-controller:v1.86.0</code></li>
-<li>apiserver: <code>eu.gcr.io/gardener-project/gardener/apiserver:v1.86.0</code></li>
-<li>controller-manager: <code>eu.gcr.io/gardener-project/gardener/controller-manager:v1.86.0</code></li>
-<li>gardenlet: <code>eu.gcr.io/gardener-project/gardener/gardenlet:v1.86.0</code></li>
-<li>node-agent: <code>eu.gcr.io/gardener-project/gardener/node-agent:v1.86.0</code></li>
-<li>operator: <code>eu.gcr.io/gardener-project/gardener/operator:v1.86.0</code></li>
-<li>resource-manager: <code>eu.gcr.io/gardener-project/gardener/resource-manager:v1.86.0</code></li>
-<li>scheduler: <code>eu.gcr.io/gardener-project/gardener/scheduler:v1.86.0</code></li>
+<li class="">admission-controller: <code>eu.gcr.io/gardener-project/gardener/admission-controller:v1.86.0</code></li>
+<li class="">apiserver: <code>eu.gcr.io/gardener-project/gardener/apiserver:v1.86.0</code></li>
+<li class="">controller-manager: <code>eu.gcr.io/gardener-project/gardener/controller-manager:v1.86.0</code></li>
+<li class="">gardenlet: <code>eu.gcr.io/gardener-project/gardener/gardenlet:v1.86.0</code></li>
+<li class="">node-agent: <code>eu.gcr.io/gardener-project/gardener/node-agent:v1.86.0</code></li>
+<li class="">operator: <code>eu.gcr.io/gardener-project/gardener/operator:v1.86.0</code></li>
+<li class="">resource-manager: <code>eu.gcr.io/gardener-project/gardener/resource-manager:v1.86.0</code></li>
+<li class="">scheduler: <code>eu.gcr.io/gardener-project/gardener/scheduler:v1.86.0</code></li>
 </ul>
 </div></div></details>
 <details class="details_lb9f alert alert--info details_b_Ee" data-collapsed="true"><summary><b>Update cert-management to <code>0.11.4</code></b></summary><div><div class="collapsibleContent_i85q">
 <!-- -->
 <h1>[gardener/cert-management]</h1>
-<h2 class="anchor anchorWithStickyNavbar_LWe7" id="️-breaking-changes-9">⚠️ Breaking Changes<a href="#️-breaking-changes-9" class="hash-link" aria-label="Direct link to ⚠️ Breaking Changes" title="Direct link to ⚠️ Breaking Changes" translate="no">​</a></h2>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="️-breaking-changes-9">⚠️ Breaking Changes<a href="#️-breaking-changes-9" class="hash-link" aria-label="Direct link to ⚠️ Breaking Changes" title="Direct link to ⚠️ Breaking Changes" translate="no">​</a></h2>
 <ul>
-<li><code>[OPERATOR]</code> Change OCI Image Registry from GCR (<code>eu.gcr.io/gardener-project</code>) to Artifact-Registry (<code>europe-docker.pkg.dev/gardener-project/releases</code>). Users should update their references.
+<li class=""><code>[OPERATOR]</code> Change OCI Image Registry from GCR (<code>eu.gcr.io/gardener-project</code>) to Artifact-Registry (<code>europe-docker.pkg.dev/gardener-project/releases</code>). Users should update their references.
 by @ccwienk [#156]</li>
 </ul>
-<h2 class="anchor anchorWithStickyNavbar_LWe7" id="-others-14">🏃 Others<a href="#-others-14" class="hash-link" aria-label="Direct link to 🏃 Others" title="Direct link to 🏃 Others" translate="no">​</a></h2>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="-others-14">🏃 Others<a href="#-others-14" class="hash-link" aria-label="Direct link to 🏃 Others" title="Direct link to 🏃 Others" translate="no">​</a></h2>
 <ul>
-<li><code>[OPERATOR]</code> Update expirationDate if secret is shared between certs by @MartinWeindel [#152]</li>
-<li><code>[OPERATOR]</code> Updated dependencies controller-manager-library and kubernetes from <code>v1.28.2</code> to <code>v1.28.3</code> by @MartinWeindel [#149]</li>
-<li><code>[OPERATOR]</code> Bumps golang from 1.21.3 to 1.21.4. by @dependabot[bot] [#148]</li>
-<li><code>[OPERATOR]</code> Bumps golang from 1.21.4 to 1.21.5. by @dependabot[bot] [#154]</li>
-<li><code>[USER]</code> Improve message if DNS entry is not getting ready. by @MartinWeindel [#151]</li>
-<li><code>[DEVELOPER]</code> Remove vendoring by @MartinWeindel [#157]</li>
+<li class=""><code>[OPERATOR]</code> Update expirationDate if secret is shared between certs by @MartinWeindel [#152]</li>
+<li class=""><code>[OPERATOR]</code> Updated dependencies controller-manager-library and kubernetes from <code>v1.28.2</code> to <code>v1.28.3</code> by @MartinWeindel [#149]</li>
+<li class=""><code>[OPERATOR]</code> Bumps golang from 1.21.3 to 1.21.4. by @dependabot[bot] [#148]</li>
+<li class=""><code>[OPERATOR]</code> Bumps golang from 1.21.4 to 1.21.5. by @dependabot[bot] [#154]</li>
+<li class=""><code>[USER]</code> Improve message if DNS entry is not getting ready. by @MartinWeindel [#151]</li>
+<li class=""><code>[DEVELOPER]</code> Remove vendoring by @MartinWeindel [#157]</li>
 </ul>
-<h2 class="anchor anchorWithStickyNavbar_LWe7" id="docker-images-12">Docker Images<a href="#docker-images-12" class="hash-link" aria-label="Direct link to Docker Images" title="Direct link to Docker Images" translate="no">​</a></h2>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="docker-images-12">Docker Images<a href="#docker-images-12" class="hash-link" aria-label="Direct link to Docker Images" title="Direct link to Docker Images" translate="no">​</a></h2>
 <ul>
-<li>cert-management: <code>europe-docker.pkg.dev/gardener-project/releases/cert-controller-manager:v0.11.4</code></li>
-</ul>
-</div></div></details>
-<details class="details_lb9f alert alert--info details_b_Ee" data-collapsed="true"><summary><b>Update dashboard to <code>1.71.0</code></b></summary><div><div class="collapsibleContent_i85q">
-<!-- -->
-<h1>[gardener/dashboard]</h1>
-<h2 class="anchor anchorWithStickyNavbar_LWe7" id="️-breaking-changes-10">⚠️ Breaking Changes<a href="#️-breaking-changes-10" class="hash-link" aria-label="Direct link to ⚠️ Breaking Changes" title="Direct link to ⚠️ Breaking Changes" translate="no">​</a></h2>
-<ul>
-<li><code>[OPERATOR]</code> Change OCI Image Registry from GCR (<code>eu.gcr.io/gardener-project</code>) to Artifact-Registry (<code>europe-docker.pkg.dev/gardener-project/releases</code>) by @ccwienk [#1645]</li>
-</ul>
-<h2 class="anchor anchorWithStickyNavbar_LWe7" id="-new-features-5">✨ New Features<a href="#-new-features-5" class="hash-link" aria-label="Direct link to ✨ New Features" title="Direct link to ✨ New Features" translate="no">​</a></h2>
-<ul>
-<li><code>[USER]</code> Enhanced Client-Side Validation:
-Previously, if there was a validation error, the <code>submit</code> buttons on Dialogs and the Create Cluster page would be greyed out. Now, these buttons remain active even if there is a validation error.
-Clicking on the <code>submit</code> button in the presence of a validation error will not execute the submit logic. Instead, it will trigger the validation process to ensure that all validation error messages are clearly visible at the respective input fields.
-In addition, we&#x27;ve made it easier to view all error messages. They are now collected and displayed in an alert, similar to how server-side error messages are shown. This enhancement ensures that users are fully aware of any errors that prevent to proceed with the action. by @grolu [#1633]</li>
-<li><code>[USER]</code> An improvement in performance and memory usage on the shoot list has been achieved when a large number of clusters are present. In the past, under heavy load, there were repeated instances where the dashboard became unresponsive due to very high memory consumption. This has been achieved by implementing the following two changes:
-<ul>
-<li>Throttling of shoot events in the frontend.
-Now, only the <code>uid</code> of the modified object is sent to the client, coupled with periodic synchronization of associated shoots.</li>
-<li>Removal of the key property in the <code>g-shoot-list-row</code> component</li>
-<li>Improved performance of sorting and filtering implementation</li>
-<li>Faster response times for list shoot request (experimental: must be enabled by an operator)</li>
-<li>Reduced network traffic for invisible browser tabs  by @holgerkoser [#1637]</li>
-</ul>
-</li>
-<li><code>[OPERATOR]</code> Added a configuration parameter <code>Values.global.dashboard.maxRequestBodySize</code> that specifies the maximum size of the request body. It&#x27;s value defaults to <code>100kb</code>. by @holgerkoser [#1656]</li>
-<li><code>[OPERATOR]</code> Experimental Features:
-<ul>
-<li>Enhanced Watch Cache Control for List Shoots Requests.
-We&#x27;ve introduced a new feature to fine-tune caching behavior for list shoots requests. A new configuration option, <code>Values.global.dashboard.experimentalUseWatchCacheForListShoots</code>, has been added to the <code>gardener-dashboard</code> Helm chart. This allows for more precise control over caching with four settings: <code>never</code>, <code>no</code>, <code>yes</code>, and <code>always</code>. By default, this is set to <code>never</code>. As an experimental feature, we welcome feedback and suggest caution in production environments.</li>
-<li>Fine-tune the throttle delay per cluster.
-This option, found under <code>Values.global.dashboard.frontendConfig.experimental.throttleDelayPerCluster</code>, allows administrators to set the base number of milliseconds delay per cluster. This delay dynamically adjusts the synchronization throttle based on the number of active clusters, optimizing performance and resource utilization in environments with a varying number of clusters. by @holgerkoser [#1637]</li>
-</ul>
-</li>
-</ul>
-<h2 class="anchor anchorWithStickyNavbar_LWe7" id="-bug-fixes-4">🐛 Bug Fixes<a href="#-bug-fixes-4" class="hash-link" aria-label="Direct link to 🐛 Bug Fixes" title="Direct link to 🐛 Bug Fixes" translate="no">​</a></h2>
-<ul>
-<li><code>[OPERATOR]</code> Fixed  garden cluster terminals when the host cluster is a managed Seed by @petersutter [#1657]</li>
-<li><code>[OPERATOR]</code> Dashboard pods were not recreated after assets have been changed by @petersutter [#1627]</li>
-<li><code>[USER]</code> Fixed issues with the machine image input field:
-<ul>
-<li>image description was not shown</li>
-<li>certain mache image hints were not shown when editing the worker for an existing shoot by @petersutter [#1635]</li>
-</ul>
-</li>
-<li><code>[USER]</code> Fxed issue where the kubernetes dashboard was not shown on cluster details page in case the addon was enabled. The issue occurs when static token kubeconfig is disabled. by @petersutter [#1658]</li>
-<li><code>[USER]</code> Fixed the owner selection via mouse click on the project administration page. by @holgerkoser [#1632]</li>
-<li><code>[USER]</code> Fixed issue on create cluster page: On error, alert should scroll into view by @petersutter [#1629]</li>
-<li><code>[USER]</code> Users will now be redirected back to the last visited URL after automatic logout due to session timeout or authentication errors. by @holgerkoser [#1624]</li>
-<li><code>[USER]</code> Fixed several bugs on the project filter menu. More details in this PR by @petersutter [#1623]</li>
-<li><code>[USER]</code> Fixed vSphere Load Balancer Class selection by @grolu [#1625]</li>
-</ul>
-<h2 class="anchor anchorWithStickyNavbar_LWe7" id="docker-images-13">Docker Images<a href="#docker-images-13" class="hash-link" aria-label="Direct link to Docker Images" title="Direct link to Docker Images" translate="no">​</a></h2>
-<ul>
-<li>dashboard: <code>europe-docker.pkg.dev/gardener-project/releases/gardener/dashboard:1.71.0</code></li>
+<li class="">cert-management: <code>europe-docker.pkg.dev/gardener-project/releases/cert-controller-manager:v0.11.4</code></li>
 </ul>
 </div></div></details>
 <details class="details_lb9f alert alert--info details_b_Ee" data-collapsed="true"><summary><b>Update dashboard to <code>1.71.0</code></b></summary><div><div class="collapsibleContent_i85q">
 <!-- -->
 <h1>[gardener/dashboard]</h1>
-<h2 class="anchor anchorWithStickyNavbar_LWe7" id="️-breaking-changes-11">⚠️ Breaking Changes<a href="#️-breaking-changes-11" class="hash-link" aria-label="Direct link to ⚠️ Breaking Changes" title="Direct link to ⚠️ Breaking Changes" translate="no">​</a></h2>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="️-breaking-changes-10">⚠️ Breaking Changes<a href="#️-breaking-changes-10" class="hash-link" aria-label="Direct link to ⚠️ Breaking Changes" title="Direct link to ⚠️ Breaking Changes" translate="no">​</a></h2>
 <ul>
-<li><code>[OPERATOR]</code> Change OCI Image Registry from GCR (<code>eu.gcr.io/gardener-project</code>) to Artifact-Registry (<code>europe-docker.pkg.dev/gardener-project/releases</code>) by @ccwienk [#1645]</li>
+<li class=""><code>[OPERATOR]</code> Change OCI Image Registry from GCR (<code>eu.gcr.io/gardener-project</code>) to Artifact-Registry (<code>europe-docker.pkg.dev/gardener-project/releases</code>) by @ccwienk [#1645]</li>
 </ul>
-<h2 class="anchor anchorWithStickyNavbar_LWe7" id="-new-features-6">✨ New Features<a href="#-new-features-6" class="hash-link" aria-label="Direct link to ✨ New Features" title="Direct link to ✨ New Features" translate="no">​</a></h2>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="-new-features-5">✨ New Features<a href="#-new-features-5" class="hash-link" aria-label="Direct link to ✨ New Features" title="Direct link to ✨ New Features" translate="no">​</a></h2>
 <ul>
-<li><code>[USER]</code> Enhanced Client-Side Validation:
+<li class=""><code>[USER]</code> Enhanced Client-Side Validation:
 Previously, if there was a validation error, the <code>submit</code> buttons on Dialogs and the Create Cluster page would be greyed out. Now, these buttons remain active even if there is a validation error.
 Clicking on the <code>submit</code> button in the presence of a validation error will not execute the submit logic. Instead, it will trigger the validation process to ensure that all validation error messages are clearly visible at the respective input fields.
 In addition, we&#x27;ve made it easier to view all error messages. They are now collected and displayed in an alert, similar to how server-side error messages are shown. This enhancement ensures that users are fully aware of any errors that prevent to proceed with the action. by @grolu [#1633]</li>
-<li><code>[USER]</code> An improvement in performance and memory usage on the shoot list has been achieved when a large number of clusters are present. In the past, under heavy load, there were repeated instances where the dashboard became unresponsive due to very high memory consumption. This has been achieved by implementing the following two changes:
+<li class=""><code>[USER]</code> An improvement in performance and memory usage on the shoot list has been achieved when a large number of clusters are present. In the past, under heavy load, there were repeated instances where the dashboard became unresponsive due to very high memory consumption. This has been achieved by implementing the following two changes:
 <ul>
-<li>Throttling of shoot events in the frontend.
+<li class="">Throttling of shoot events in the frontend.
 Now, only the <code>uid</code> of the modified object is sent to the client, coupled with periodic synchronization of associated shoots.</li>
-<li>Removal of the key property in the <code>g-shoot-list-row</code> component</li>
-<li>Improved performance of sorting and filtering implementation</li>
-<li>Faster response times for list shoot request (experimental: must be enabled by an operator)</li>
-<li>Reduced network traffic for invisible browser tabs  by @holgerkoser [#1637]</li>
+<li class="">Removal of the key property in the <code>g-shoot-list-row</code> component</li>
+<li class="">Improved performance of sorting and filtering implementation</li>
+<li class="">Faster response times for list shoot request (experimental: must be enabled by an operator)</li>
+<li class="">Reduced network traffic for invisible browser tabs  by @holgerkoser [#1637]</li>
 </ul>
 </li>
-<li><code>[OPERATOR]</code> Added a configuration parameter <code>Values.global.dashboard.maxRequestBodySize</code> that specifies the maximum size of the request body. It&#x27;s value defaults to <code>100kb</code>. by @holgerkoser [#1656]</li>
-<li><code>[OPERATOR]</code> Experimental Features:
+<li class=""><code>[OPERATOR]</code> Added a configuration parameter <code>Values.global.dashboard.maxRequestBodySize</code> that specifies the maximum size of the request body. It&#x27;s value defaults to <code>100kb</code>. by @holgerkoser [#1656]</li>
+<li class=""><code>[OPERATOR]</code> Experimental Features:
 <ul>
-<li>Enhanced Watch Cache Control for List Shoots Requests.
+<li class="">Enhanced Watch Cache Control for List Shoots Requests.
 We&#x27;ve introduced a new feature to fine-tune caching behavior for list shoots requests. A new configuration option, <code>Values.global.dashboard.experimentalUseWatchCacheForListShoots</code>, has been added to the <code>gardener-dashboard</code> Helm chart. This allows for more precise control over caching with four settings: <code>never</code>, <code>no</code>, <code>yes</code>, and <code>always</code>. By default, this is set to <code>never</code>. As an experimental feature, we welcome feedback and suggest caution in production environments.</li>
-<li>Fine-tune the throttle delay per cluster.
+<li class="">Fine-tune the throttle delay per cluster.
 This option, found under <code>Values.global.dashboard.frontendConfig.experimental.throttleDelayPerCluster</code>, allows administrators to set the base number of milliseconds delay per cluster. This delay dynamically adjusts the synchronization throttle based on the number of active clusters, optimizing performance and resource utilization in environments with a varying number of clusters. by @holgerkoser [#1637]</li>
 </ul>
 </li>
 </ul>
-<h2 class="anchor anchorWithStickyNavbar_LWe7" id="-bug-fixes-5">🐛 Bug Fixes<a href="#-bug-fixes-5" class="hash-link" aria-label="Direct link to 🐛 Bug Fixes" title="Direct link to 🐛 Bug Fixes" translate="no">​</a></h2>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="-bug-fixes-4">🐛 Bug Fixes<a href="#-bug-fixes-4" class="hash-link" aria-label="Direct link to 🐛 Bug Fixes" title="Direct link to 🐛 Bug Fixes" translate="no">​</a></h2>
 <ul>
-<li><code>[OPERATOR]</code> Fixed  garden cluster terminals when the host cluster is a managed Seed by @petersutter [#1657]</li>
-<li><code>[OPERATOR]</code> Dashboard pods were not recreated after assets have been changed by @petersutter [#1627]</li>
-<li><code>[USER]</code> Fixed issues with the machine image input field:
+<li class=""><code>[OPERATOR]</code> Fixed  garden cluster terminals when the host cluster is a managed Seed by @petersutter [#1657]</li>
+<li class=""><code>[OPERATOR]</code> Dashboard pods were not recreated after assets have been changed by @petersutter [#1627]</li>
+<li class=""><code>[USER]</code> Fixed issues with the machine image input field:
 <ul>
-<li>image description was not shown</li>
-<li>certain mache image hints were not shown when editing the worker for an existing shoot by @petersutter [#1635]</li>
+<li class="">image description was not shown</li>
+<li class="">certain mache image hints were not shown when editing the worker for an existing shoot by @petersutter [#1635]</li>
 </ul>
 </li>
-<li><code>[USER]</code> Fxed issue where the kubernetes dashboard was not shown on cluster details page in case the addon was enabled. The issue occurs when static token kubeconfig is disabled. by @petersutter [#1658]</li>
-<li><code>[USER]</code> Fixed the owner selection via mouse click on the project administration page. by @holgerkoser [#1632]</li>
-<li><code>[USER]</code> Fixed issue on create cluster page: On error, alert should scroll into view by @petersutter [#1629]</li>
-<li><code>[USER]</code> Users will now be redirected back to the last visited URL after automatic logout due to session timeout or authentication errors. by @holgerkoser [#1624]</li>
-<li><code>[USER]</code> Fixed several bugs on the project filter menu. More details in this PR by @petersutter [#1623]</li>
-<li><code>[USER]</code> Fixed vSphere Load Balancer Class selection by @grolu [#1625]</li>
+<li class=""><code>[USER]</code> Fxed issue where the kubernetes dashboard was not shown on cluster details page in case the addon was enabled. The issue occurs when static token kubeconfig is disabled. by @petersutter [#1658]</li>
+<li class=""><code>[USER]</code> Fixed the owner selection via mouse click on the project administration page. by @holgerkoser [#1632]</li>
+<li class=""><code>[USER]</code> Fixed issue on create cluster page: On error, alert should scroll into view by @petersutter [#1629]</li>
+<li class=""><code>[USER]</code> Users will now be redirected back to the last visited URL after automatic logout due to session timeout or authentication errors. by @holgerkoser [#1624]</li>
+<li class=""><code>[USER]</code> Fixed several bugs on the project filter menu. More details in this PR by @petersutter [#1623]</li>
+<li class=""><code>[USER]</code> Fixed vSphere Load Balancer Class selection by @grolu [#1625]</li>
 </ul>
-<h2 class="anchor anchorWithStickyNavbar_LWe7" id="docker-images-14">Docker Images<a href="#docker-images-14" class="hash-link" aria-label="Direct link to Docker Images" title="Direct link to Docker Images" translate="no">​</a></h2>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="docker-images-13">Docker Images<a href="#docker-images-13" class="hash-link" aria-label="Direct link to Docker Images" title="Direct link to Docker Images" translate="no">​</a></h2>
 <ul>
-<li>dashboard: <code>europe-docker.pkg.dev/gardener-project/releases/gardener/dashboard:1.71.0</code></li>
+<li class="">dashboard: <code>europe-docker.pkg.dev/gardener-project/releases/gardener/dashboard:1.71.0</code></li>
+</ul>
+</div></div></details>
+<details class="details_lb9f alert alert--info details_b_Ee" data-collapsed="true"><summary><b>Update dashboard to <code>1.71.0</code></b></summary><div><div class="collapsibleContent_i85q">
+<!-- -->
+<h1>[gardener/dashboard]</h1>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="️-breaking-changes-11">⚠️ Breaking Changes<a href="#️-breaking-changes-11" class="hash-link" aria-label="Direct link to ⚠️ Breaking Changes" title="Direct link to ⚠️ Breaking Changes" translate="no">​</a></h2>
+<ul>
+<li class=""><code>[OPERATOR]</code> Change OCI Image Registry from GCR (<code>eu.gcr.io/gardener-project</code>) to Artifact-Registry (<code>europe-docker.pkg.dev/gardener-project/releases</code>) by @ccwienk [#1645]</li>
+</ul>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="-new-features-6">✨ New Features<a href="#-new-features-6" class="hash-link" aria-label="Direct link to ✨ New Features" title="Direct link to ✨ New Features" translate="no">​</a></h2>
+<ul>
+<li class=""><code>[USER]</code> Enhanced Client-Side Validation:
+Previously, if there was a validation error, the <code>submit</code> buttons on Dialogs and the Create Cluster page would be greyed out. Now, these buttons remain active even if there is a validation error.
+Clicking on the <code>submit</code> button in the presence of a validation error will not execute the submit logic. Instead, it will trigger the validation process to ensure that all validation error messages are clearly visible at the respective input fields.
+In addition, we&#x27;ve made it easier to view all error messages. They are now collected and displayed in an alert, similar to how server-side error messages are shown. This enhancement ensures that users are fully aware of any errors that prevent to proceed with the action. by @grolu [#1633]</li>
+<li class=""><code>[USER]</code> An improvement in performance and memory usage on the shoot list has been achieved when a large number of clusters are present. In the past, under heavy load, there were repeated instances where the dashboard became unresponsive due to very high memory consumption. This has been achieved by implementing the following two changes:
+<ul>
+<li class="">Throttling of shoot events in the frontend.
+Now, only the <code>uid</code> of the modified object is sent to the client, coupled with periodic synchronization of associated shoots.</li>
+<li class="">Removal of the key property in the <code>g-shoot-list-row</code> component</li>
+<li class="">Improved performance of sorting and filtering implementation</li>
+<li class="">Faster response times for list shoot request (experimental: must be enabled by an operator)</li>
+<li class="">Reduced network traffic for invisible browser tabs  by @holgerkoser [#1637]</li>
+</ul>
+</li>
+<li class=""><code>[OPERATOR]</code> Added a configuration parameter <code>Values.global.dashboard.maxRequestBodySize</code> that specifies the maximum size of the request body. It&#x27;s value defaults to <code>100kb</code>. by @holgerkoser [#1656]</li>
+<li class=""><code>[OPERATOR]</code> Experimental Features:
+<ul>
+<li class="">Enhanced Watch Cache Control for List Shoots Requests.
+We&#x27;ve introduced a new feature to fine-tune caching behavior for list shoots requests. A new configuration option, <code>Values.global.dashboard.experimentalUseWatchCacheForListShoots</code>, has been added to the <code>gardener-dashboard</code> Helm chart. This allows for more precise control over caching with four settings: <code>never</code>, <code>no</code>, <code>yes</code>, and <code>always</code>. By default, this is set to <code>never</code>. As an experimental feature, we welcome feedback and suggest caution in production environments.</li>
+<li class="">Fine-tune the throttle delay per cluster.
+This option, found under <code>Values.global.dashboard.frontendConfig.experimental.throttleDelayPerCluster</code>, allows administrators to set the base number of milliseconds delay per cluster. This delay dynamically adjusts the synchronization throttle based on the number of active clusters, optimizing performance and resource utilization in environments with a varying number of clusters. by @holgerkoser [#1637]</li>
+</ul>
+</li>
+</ul>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="-bug-fixes-5">🐛 Bug Fixes<a href="#-bug-fixes-5" class="hash-link" aria-label="Direct link to 🐛 Bug Fixes" title="Direct link to 🐛 Bug Fixes" translate="no">​</a></h2>
+<ul>
+<li class=""><code>[OPERATOR]</code> Fixed  garden cluster terminals when the host cluster is a managed Seed by @petersutter [#1657]</li>
+<li class=""><code>[OPERATOR]</code> Dashboard pods were not recreated after assets have been changed by @petersutter [#1627]</li>
+<li class=""><code>[USER]</code> Fixed issues with the machine image input field:
+<ul>
+<li class="">image description was not shown</li>
+<li class="">certain mache image hints were not shown when editing the worker for an existing shoot by @petersutter [#1635]</li>
+</ul>
+</li>
+<li class=""><code>[USER]</code> Fxed issue where the kubernetes dashboard was not shown on cluster details page in case the addon was enabled. The issue occurs when static token kubeconfig is disabled. by @petersutter [#1658]</li>
+<li class=""><code>[USER]</code> Fixed the owner selection via mouse click on the project administration page. by @holgerkoser [#1632]</li>
+<li class=""><code>[USER]</code> Fixed issue on create cluster page: On error, alert should scroll into view by @petersutter [#1629]</li>
+<li class=""><code>[USER]</code> Users will now be redirected back to the last visited URL after automatic logout due to session timeout or authentication errors. by @holgerkoser [#1624]</li>
+<li class=""><code>[USER]</code> Fixed several bugs on the project filter menu. More details in this PR by @petersutter [#1623]</li>
+<li class=""><code>[USER]</code> Fixed vSphere Load Balancer Class selection by @grolu [#1625]</li>
+</ul>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="docker-images-14">Docker Images<a href="#docker-images-14" class="hash-link" aria-label="Direct link to Docker Images" title="Direct link to Docker Images" translate="no">​</a></h2>
+<ul>
+<li class="">dashboard: <code>europe-docker.pkg.dev/gardener-project/releases/gardener/dashboard:1.71.0</code></li>
 </ul>
 </div></div></details>
 <details class="details_lb9f alert alert--info details_b_Ee" data-collapsed="true"><summary><b>Update shoot-rsyslog-relp to <code>0.3.1</code></b></summary><div><div class="collapsibleContent_i85q">
 <!-- -->
 <h1>[gardener/gardener-extension-shoot-rsyslog-relp]</h1>
-<h2 class="anchor anchorWithStickyNavbar_LWe7" id="-others-15">🏃 Others<a href="#-others-15" class="hash-link" aria-label="Direct link to 🏃 Others" title="Direct link to 🏃 Others" translate="no">​</a></h2>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="-others-15">🏃 Others<a href="#-others-15" class="hash-link" aria-label="Direct link to 🏃 Others" title="Direct link to 🏃 Others" translate="no">​</a></h2>
 <ul>
-<li><code>[OPERATOR]</code> Incresed memory limits for the init containers of the <code>rsyslog-relp-configurator</code> and <code>rsyslog-relp-configuration-cleaner</code> daemonsets from <code>16Mi</code> to <code>32Mi</code> by @plkokanov [#51]</li>
+<li class=""><code>[OPERATOR]</code> Incresed memory limits for the init containers of the <code>rsyslog-relp-configurator</code> and <code>rsyslog-relp-configuration-cleaner</code> daemonsets from <code>16Mi</code> to <code>32Mi</code> by @plkokanov [#51]</li>
 </ul>
-<h2 class="anchor anchorWithStickyNavbar_LWe7" id="docker-images-15">Docker Images<a href="#docker-images-15" class="hash-link" aria-label="Direct link to Docker Images" title="Direct link to Docker Images" translate="no">​</a></h2>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="docker-images-15">Docker Images<a href="#docker-images-15" class="hash-link" aria-label="Direct link to Docker Images" title="Direct link to Docker Images" translate="no">​</a></h2>
 <ul>
-<li>gardener-extension-shoot-rsyslog-relp-admission: <code>eu.gcr.io/gardener-project/gardener/extensions/shoot-rsyslog-relp-admission:v0.3.1</code></li>
-<li>gardener-extension-shoot-rsyslog-relp: <code>eu.gcr.io/gardener-project/gardener/extensions/shoot-rsyslog-relp:v0.3.1</code></li>
+<li class="">gardener-extension-shoot-rsyslog-relp-admission: <code>eu.gcr.io/gardener-project/gardener/extensions/shoot-rsyslog-relp-admission:v0.3.1</code></li>
+<li class="">gardener-extension-shoot-rsyslog-relp: <code>eu.gcr.io/gardener-project/gardener/extensions/shoot-rsyslog-relp:v0.3.1</code></li>
 </ul>
 </div></div></details></div></article><nav class="docusaurus-mt-lg pagination-nav" aria-label="Docs pages"><a class="pagination-nav__link pagination-nav__link--prev" href="/release-notes/v1.87"><div class="pagination-nav__sublabel">Previous</div><div class="pagination-nav__label">Release Notes v1.87</div></a><a class="pagination-nav__link pagination-nav__link--next" href="/release-notes/v1.85"><div class="pagination-nav__sublabel">Next</div><div class="pagination-nav__label">Release Notes v1.85</div></a></nav></div></div></div></div></main></div></div></div><footer class="theme-layout-footer footer footer--dark"><div class="container container-fluid"><div class="row footer__links"><div class="theme-layout-footer-column col footer__col"><div class="footer__title">Docs</div><ul class="footer__items clean-list"><li class="footer__item"><a class="footer__link-item" href="/docs/overview">Docs</a></li></ul></div><div class="theme-layout-footer-column col footer__col"><div class="footer__title">Community</div><ul class="footer__items clean-list"><li class="footer__item"><a href="https://github.com/yakecloud" target="_blank" rel="noopener noreferrer" class="footer__link-item">GitHub<svg width="13.5" height="13.5" aria-label="(opens in new tab)" class="iconExternalLink_nPIU"><use href="#theme-svg-external-link"></use></svg></a></li><li class="footer__item"><a href="https://github.com/gardener-community" target="_blank" rel="noopener noreferrer" class="footer__link-item">Gardener Community<svg width="13.5" height="13.5" aria-label="(opens in new tab)" class="iconExternalLink_nPIU"><use href="#theme-svg-external-link"></use></svg></a></li><li class="footer__item"><a href="https://gardener-cloud.slack.com" target="_blank" rel="noopener noreferrer" class="footer__link-item">Slack<svg width="13.5" height="13.5" aria-label="(opens in new tab)" class="iconExternalLink_nPIU"><use href="#theme-svg-external-link"></use></svg></a></li></ul></div><div class="theme-layout-footer-column col footer__col"><div class="footer__title">More</div><ul class="footer__items clean-list"><li class="footer__item"><a class="footer__link-item" href="/blog">Blog</a></li><li class="footer__item"><a class="footer__link-item" href="/legals">Legals</a></li><li class="footer__item"><a class="footer__link-item" href="/privacy-policy">Privacy policy</a></li></ul></div></div><div class="footer__bottom text--center"><div class="footer__copyright">Copyright © 2025 23 Technologies GmbH</div></div></div></footer></div>
 </body>
