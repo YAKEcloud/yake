@@ -47,6 +47,7 @@ config:
             managedResourceProgressingThreshold: 1h
             staleExtensionHealthChecks:
                 enabled: true
+                threshold: 5m
             syncPeriod: 30s
             webhookRemediatorEnabled: false
         shootState:
@@ -95,7 +96,7 @@ env: []
 image:
     pullPolicy: IfNotPresent
     repository: europe-docker.pkg.dev/gardener-project/releases/gardener/gardenlet
-    tag: v1.129.2
+    tag: v1.130.0
 invalidateServiceAccountToken: true
 nodeToleration:
     defaultNotReadyTolerationSeconds: 60
