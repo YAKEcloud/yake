@@ -15,35 +15,11 @@ global:
         upstreamVersions:
             include: true
             versions:
-                1.27.16:
+                1.31.13:
                     classification: supported
-                1.28.15:
+                1.32.9:
                     classification: supported
-                1.29.11:
-                    classification: deprecated
-                1.29.12:
-                    classification: deprecated
-                1.29.13:
-                    classification: deprecated
-                1.29.14:
-                    classification: deprecated
-                1.29.15:
-                    classification: supported
-                1.30.7:
-                    classification: deprecated
-                1.30.8:
-                    classification: deprecated
-                1.30.9:
-                    classification: deprecated
-                1.30.10:
-                    classification: deprecated
-                1.30.11:
-                    classification: deprecated
-                1.30.12:
-                    classification: deprecated
-                1.30.13:
-                    classification: deprecated
-                1.30.14:
+                1.33.5:
                     classification: supported
         versions: {}
     seedSelector:

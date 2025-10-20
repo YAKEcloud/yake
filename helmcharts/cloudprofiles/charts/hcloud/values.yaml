@@ -13,42 +13,46 @@ machineImages:
             - name: containerd
           version: 24.4.20240529
 machineTypes:
-    - cpu: "2"
+    - cpu: "1"
       gpu: "0"
       memory: 2Gi
-      name: cpx11
+      name: cpx12
     - cpu: "2"
       gpu: "0"
       memory: 4Gi
-      name: cx22
-    - cpu: "3"
+      name: cx23
+    - cpu: "2"
       gpu: "0"
       memory: 4Gi
-      name: cpx21
+      name: cpx22
     - cpu: "4"
       gpu: "0"
       memory: 8Gi
-      name: cx32
+      name: cx33
     - cpu: "4"
       gpu: "0"
       memory: 8Gi
-      name: cpx31
+      name: cpx32
     - cpu: "8"
       gpu: "0"
       memory: 16Gi
-      name: cx42
+      name: cx43
     - cpu: "8"
       gpu: "0"
       memory: 16Gi
-      name: cpx41
+      name: cpx42
     - cpu: "16"
       gpu: "0"
       memory: 32Gi
-      name: cx52
+      name: cx53
+    - cpu: "12"
+      gpu: "0"
+      memory: 24Gi
+      name: cpx52
     - cpu: "16"
       gpu: "0"
       memory: 32Gi
-      name: cpx51
+      name: cpx62
     - cpu: "2"
       gpu: "0"
       memory: 8Gi
@@ -101,7 +105,7 @@ providerConfig:
     machineImages:
         - name: ubuntu
           versions:
-            - imageName: ubuntu-20.04
+            - imageName: ubuntu-24.04
               version: 24.4.20240529
     regions:
         - name: hel1
@@ -122,10 +126,10 @@ regions:
       zones:
         - name: ash-dc1
           unavailableMachineTypes:
-            - cx22
-            - cx32
-            - cx42
-            - cx52
+            - cx23
+            - cx33
+            - cx43
+            - cx53
             - cax11
             - cax21
             - cax31
@@ -134,10 +138,10 @@ regions:
       zones:
         - name: hil-dc1
           unavailableMachineTypes:
-            - cx22
-            - cx32
-            - cx42
-            - cx52
+            - cx23
+            - cx33
+            - cx43
+            - cx53
             - cax11
             - cax21
             - cax31
@@ -146,10 +150,10 @@ regions:
       zones:
         - name: sin-dc1
           unavailableMachineTypes:
-            - cx22
-            - cx32
-            - cx42
-            - cx52
+            - cx23
+            - cx33
+            - cx43
+            - cx53
             - cax11
             - cax21
             - cax31
