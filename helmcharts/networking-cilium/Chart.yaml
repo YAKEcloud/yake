@@ -5,4 +5,4 @@ dependencies:
   repository: ""
 description: A helmchart for networking-cilium
 name: networking-cilium
-version: 1.44.0
+version: 1.45.0
