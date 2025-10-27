@@ -73,6 +73,8 @@ config:
         leaseDuration: 15s
         renewDeadline: 10s
         resourceLock: leases
+        resourceName: gardenlet-leader-election
+        resourceNamespace: garden
         retryPeriod: 2s
     logFormat: json
     logLevel: info
@@ -96,7 +98,7 @@ env: []
 image:
     pullPolicy: IfNotPresent
     repository: europe-docker.pkg.dev/gardener-project/releases/gardener/gardenlet
-    tag: v1.130.0
+    tag: v1.130.1
 invalidateServiceAccountToken: true
 nodeToleration:
     defaultNotReadyTolerationSeconds: 60
