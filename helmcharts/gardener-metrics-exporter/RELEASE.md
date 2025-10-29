@@ -1,11 +1,7 @@
-# [gardener/gardener-metrics-exporter]
+# [github.com/gardener/gardener-metrics-exporter:0.41.0]
 
-## 📰 Noteworthy
-
-- `[OPERATOR]` Update Go module dependencies by @chrkl [#128]
 ## 🏃 Others
-
-- `[OPERATOR]` Add support for `CredentialsBinding` to identify shoot cost objects by @vicwicker [#129]
+- `[DEVELOPER]` migrate CICD-Pipeline to GitHub-Actions by @ccwienk [[#130](https://github.com/gardener/gardener-metrics-exporter/pull/130)]
 
 ## Container (OCI) Images
-- metrics-exporter: `europe-docker.pkg.dev/gardener-project/releases/gardener/metrics-exporter:0.40.0`
+- metrics-exporter: `europe-docker.pkg.dev/gardener-project/releases/gardener/metrics-exporter:0.41.0`
