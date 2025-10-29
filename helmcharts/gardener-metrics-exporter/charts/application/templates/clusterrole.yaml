@@ -22,3 +22,11 @@ rules:
   - get
   - watch
   - list
+- apiGroups: 
+  - security.gardener.cloud
+  resources:
+  - credentialsbindings
+  verbs:
+  - get
+  - watch 
+  - list
