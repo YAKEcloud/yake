@@ -2019,3 +2019,10 @@ hide_table_of_contents: true
 
 
 </details>
+
+<details>
+<summary><b>Update provider-hcloud to <code>0.6.42</code></b></summary>
+
+# [gardener-extension-provider-hcloud] v0.6.42
+
+</details>
