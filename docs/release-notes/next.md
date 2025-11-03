@@ -2424,3 +2424,16 @@ hide_table_of_contents: true
 
 
 </details>
+
+<details>
+<summary><b>Update shoot-cert-service to <code>1.55.0</code></b></summary>
+
+
+
+## Helm Charts
+- shoot-cert-service: `europe-docker.pkg.dev/gardener-project/releases/charts/gardener/extensions/shoot-cert-service:v1.55.0`
+## Container (OCI) Images
+- gardener-extension-shoot-cert-service: `europe-docker.pkg.dev/gardener-project/releases/gardener/extensions/shoot-cert-service:v1.55.0`
+
+
+</details>
