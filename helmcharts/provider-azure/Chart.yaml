@@ -5,4 +5,4 @@ dependencies:
   repository: ""
 description: A helmchart for provider-azure
 name: provider-azure
-version: 1.55.2
+version: 1.56.0
