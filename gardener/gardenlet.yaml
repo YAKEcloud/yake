@@ -16,7 +16,7 @@ spec:
   chart:
     spec:
       chart: gardenlet
-      version: 1.131.0
+      version: 1.131.1
       sourceRef:
         kind: HelmRepository
         name: gardener-community-charts
