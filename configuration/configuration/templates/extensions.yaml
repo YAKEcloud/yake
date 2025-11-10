@@ -94,3 +94,6 @@ stringData:
       version: 1.13.0
       admission:
         enabled: true
+
+    image-rewriter:
+      version: 0.6.0
