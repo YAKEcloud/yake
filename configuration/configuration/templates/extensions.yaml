@@ -101,4 +101,4 @@ stringData:
     registry-cache:
       version: 0.18.0
       admission:
-          enabled: true
+        enabled: true
