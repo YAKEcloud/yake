@@ -538,3 +538,25 @@ hide_table_of_contents: true
 
 
 </details>
+
+<details>
+<summary><b>Update gardener-metrics-exporter to <code>0.42.0</code></b></summary>
+
+
+
+## Container (OCI) Images
+- metrics-exporter: `europe-docker.pkg.dev/gardener-project/releases/gardener/metrics-exporter:0.42.0`
+
+
+</details>
+
+<details>
+<summary><b>Update gardener-metrics-exporter to <code>0.42.0</code></b></summary>
+
+
+
+## Container (OCI) Images
+- metrics-exporter: `europe-docker.pkg.dev/gardener-project/releases/gardener/metrics-exporter:0.42.0`
+
+
+</details>
