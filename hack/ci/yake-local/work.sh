@@ -92,9 +92,6 @@ _create_cilium () {
   $HELM repo add cilium https://helm.cilium.io/
   $HELM repo update cilium
 
-  docker pull "quay.io/cilium/cilium:v$VERSION"
-  $KIND load docker-image "quay.io/cilium/cilium:v$VERSION" -n $CLUSTERNAME
-
   $HELM upgrade -i cilium cilium/cilium --version "$VERSION" \
      --namespace kube-system \
      --set image.pullPolicy=IfNotPresent \
