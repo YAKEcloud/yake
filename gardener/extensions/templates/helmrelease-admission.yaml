@@ -62,6 +62,13 @@ spec:
             target:
               kind: Deployment
               name: gardener-extension-admission-{{ $extShortName }}
+          - patch: |
+              - op: replace
+                path: /spec/template/spec/automountServiceAccountToken
+                value: true
+            target:
+              kind: Deployment
+              name: gardener-extension-{{ $extShortName }}-admission
   valuesFrom:
     - kind: Secret
       name: gardener-internal-kubeconfig

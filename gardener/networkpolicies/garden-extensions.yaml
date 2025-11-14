@@ -17,6 +17,7 @@ spec:
           - gardener-extension-admission-alicloud
           - gardener-extension-admission-shoot-dns-service
           - gardener-extension-admission-acl
+          - gardener-extension-registry-cache-admission
   ingress:
     - {}
   egress:
