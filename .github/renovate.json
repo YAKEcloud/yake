@@ -1,12 +1,15 @@
 {
-  "assignees": ["lotharbach"],
+  "assignees": [
+    "lotharbach"
+  ],
   "baseBranches": [
     "main",
     "release-v1.127",
     "release-v1.128",
     "release-v1.129",
     "release-v1.130",
-    "release-v1.131"
+    "release-v1.131",
+    "release-v1.132"
   ],
   "automerge": true,
   "configMigration": true,
@@ -24,15 +27,23 @@
   "packageRules": [
     {
       "groupName": "gardener-controlplane",
-      "matchPackageNames": ["/.*gardener-controlplane.*/", "/gardenlet/"]
+      "matchPackageNames": [
+        "/.*gardener-controlplane.*/",
+        "/gardenlet/"
+      ]
     },
     {
       "groupName": "dashboard-identity",
-      "matchPackageNames": ["/identity/", "/gardener-dashboard/"]
+      "matchPackageNames": [
+        "/identity/",
+        "/gardener-dashboard/"
+      ]
     },
     {
       "groupName": "docusaurus",
-      "matchPackageNames": ["/docusaurus/"]
+      "matchPackageNames": [
+        "/docusaurus/"
+      ]
     },
     {
       "matchBaseBranches": [
@@ -40,13 +51,18 @@
         "release-v1.128",
         "release-v1.129",
         "release-v1.130",
-        "release-v1.131"
+        "release-v1.131",
+        "release-v1.132"
       ],
       "enabled": false,
-      "matchPackageNames": ["/.*/"]
+      "matchPackageNames": [
+        "/.*/"
+      ]
     },
     {
-      "matchBaseBranches": ["release-v1.127"],
+      "matchBaseBranches": [
+        "release-v1.127"
+      ],
       "allowedVersions": "/^1[.]127[.].*$/",
       "enabled": true,
       "matchPackageNames": [
@@ -58,7 +74,9 @@
       ]
     },
     {
-      "matchBaseBranches": ["release-v1.128"],
+      "matchBaseBranches": [
+        "release-v1.128"
+      ],
       "allowedVersions": "/^1[.]128[.].*$/",
       "enabled": true,
       "matchPackageNames": [
@@ -70,7 +88,9 @@
       ]
     },
     {
-      "matchBaseBranches": ["release-v1.129"],
+      "matchBaseBranches": [
+        "release-v1.129"
+      ],
       "allowedVersions": "/^1[.]129[.].*$/",
       "enabled": true,
       "matchPackageNames": [
@@ -82,7 +102,9 @@
       ]
     },
     {
-      "matchBaseBranches": ["release-v1.130"],
+      "matchBaseBranches": [
+        "release-v1.130"
+      ],
       "allowedVersions": "/^1[.]130[.].*$/",
       "enabled": true,
       "matchPackageNames": [
@@ -94,8 +116,24 @@
       ]
     },
     {
-      "matchBaseBranches": ["release-v1.131"],
+      "matchBaseBranches": [
+        "release-v1.131"
+      ],
       "allowedVersions": "/^1[.]131[.].*$/",
+      "enabled": true,
+      "matchPackageNames": [
+        "/gardener-controlplane/",
+        "/gardener-controlplane-application/",
+        "/gardener-controlplane-runtime/",
+        "/gardener-application/",
+        "/gardenlet/"
+      ]
+    },
+    {
+      "matchBaseBranches": [
+        "release-v1.132"
+      ],
+      "allowedVersions": "/^1[.]132[.].*$/",
       "enabled": true,
       "matchPackageNames": [
         "/gardener-controlplane/",
@@ -121,14 +159,18 @@
     },
     {
       "customType": "regex",
-      "managerFilePatterns": ["/[.]ya?ml$/"],
+      "managerFilePatterns": [
+        "/[.]ya?ml$/"
+      ],
       "matchStrings": [
         "(?<currentValue>[^ ]+?) # renovate: datasource=(?<datasource>.+?) depName=(?<depName>.+?)( versioning=(?<versioning>.+?))?\n"
       ]
     },
     {
       "customType": "regex",
-      "managerFilePatterns": ["/^addons/addons/templates/dashboard.yaml$/"],
+      "managerFilePatterns": [
+        "/^addons/addons/templates/dashboard.yaml$/"
+      ],
       "datasourceTemplate": "helm",
       "registryUrlTemplate": "https://gardener-community.github.io/gardener-charts",
       "versioningTemplate": "semver-coerced",
@@ -138,7 +180,9 @@
     },
     {
       "customType": "regex",
-      "managerFilePatterns": ["/^addons/addons/templates/velero.yaml$/"],
+      "managerFilePatterns": [
+        "/^addons/addons/templates/velero.yaml$/"
+      ],
       "datasourceTemplate": "helm",
       "registryUrlTemplate": "https://vmware-tanzu.github.io/helm-charts",
       "versioningTemplate": "semver-coerced",
@@ -148,7 +192,9 @@
     },
     {
       "customType": "regex",
-      "managerFilePatterns": ["/^hack/tools/install.sh$/"],
+      "managerFilePatterns": [
+        "/^hack/tools/install.sh$/"
+      ],
       "matchStrings": [
         "# renovate: datasource=(?<datasource>.+?) depName=(?<depName>.+?)( versioning=(?<versioning>.+?))?\n.+?VERSION=(?<currentValue>.+?)\n"
       ]
@@ -158,10 +204,17 @@
     "enabled": false
   },
   "forkProcessing": "enabled",
-  "enabledManagers": ["flux", "custom.regex", "github-actions", "npm"],
+  "enabledManagers": [
+    "flux",
+    "custom.regex",
+    "github-actions",
+    "npm"
+  ],
   "prCreation": "immediate",
   "semanticCommits": "disabled",
-  "addLabels": ["version-bump"],
+  "addLabels": [
+    "version-bump"
+  ],
   "postUpgradeTasks": {
     "commands": [
       "./hack/pull-helmchart.sh {{{depName}}} {{{newVersion}}}",
