@@ -1,4 +1,4 @@
 apiVersion: v2
 description: Helmchart for controllerregistration of registry-cache
 name: controller
-version: 0.18.0
+version: 0.19.0
