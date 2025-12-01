@@ -1,4 +1,4 @@
 apiVersion: v2
 description: Helmchart for controllerregistration of provider-azure
 name: controller
-version: 1.56.2
+version: 1.57.0
