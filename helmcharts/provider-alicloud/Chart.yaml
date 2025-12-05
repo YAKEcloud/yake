@@ -5,4 +5,4 @@ dependencies:
   repository: ""
 description: A helmchart for provider-alicloud
 name: provider-alicloud
-version: 1.66.1
+version: 1.67.0
