@@ -193,6 +193,7 @@ func getGardenletClusterRole(labels map[string]string) *rbacv1.ClusterRole {
 				ResourceNames: []string{
 					"etcds.druid.gardener.cloud",
 					"etcdcopybackupstasks.druid.gardener.cloud",
+					"etcdopstasks.druid.gardener.cloud",
 					"destinationrules.networking.istio.io",
 					"envoyfilters.networking.istio.io",
 					"gateways.networking.istio.io",
@@ -276,7 +277,7 @@ func getGardenletClusterRole(labels map[string]string) *rbacv1.ClusterRole {
 			},
 			{
 				APIGroups: []string{"druid.gardener.cloud"},
-				Resources: []string{"etcds", "etcdcopybackupstasks"},
+				Resources: []string{"etcds", "etcdcopybackupstasks", "etcdopstasks"},
 				Verbs:     []string{"create", "delete", "get", "list", "watch", "patch", "update"},
 			},
 			{
@@ -293,12 +294,6 @@ func getGardenletClusterRole(labels map[string]string) *rbacv1.ClusterRole {
 				APIGroups: []string{"resources.gardener.cloud"},
 				Resources: []string{"managedresources"},
 				Verbs:     []string{"create", "delete", "deletecollection", "get", "list", "watch", "patch", "update"},
-			},
-			{
-				// TODO(vpnachev): Drop patch managedresources/status permissions after v1.133.0 is released.
-				APIGroups: []string{"resources.gardener.cloud"},
-				Resources: []string{"managedresources/status"},
-				Verbs:     []string{"patch"},
 			},
 			{
 				APIGroups: []string{"networking.k8s.io"},
