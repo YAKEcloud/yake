@@ -3,4 +3,4 @@ description: A Helm chart to deploy the Gardenlet (primary "seed" agent)
 name: gardenlet
 sources:
 - https://github.com/gardener/gardener
-version: 1.131.4
+version: 1.131.5
