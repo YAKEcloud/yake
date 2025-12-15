@@ -1,4 +1,4 @@
 apiVersion: v2
 description: Helmchart for controllerregistration of external-dns-management
 name: controller
-version: 0.33.0
+version: 0.34.0
