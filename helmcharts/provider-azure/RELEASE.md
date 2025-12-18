@@ -1,55 +1,15 @@
-# [github.com/gardener/gardener-extension-provider-azure:v1.57.0]
-
-## ⚠️ Breaking Changes
-- `[OPERATOR]` Following the renaming based on [PR13273](https://github.com/gardener/gardener/pull/13273), **autonomous shoot cluster** was renamed to **self hosted shoot cluster**. This leads to e.g. a change of the `/gardener-extension-provider-azure`'s cli argument `--autonomous-shoot-cluster` to change to `--self-hosted-shoot-cluster` and the respective helm chart's variable `.Values.gardener.autonomousShootCluster` to change to `.Values.gardener.selfHostedShootCluster`. by @wpross [[#1376](https://github.com/gardener/gardener-extension-provider-azure/pull/1376)]
-
-## 📰 Noteworthy
-- `[OPERATOR]` Deprecate resourceGroup field of infrastructureConfig by @hebelsan [[#1356](https://github.com/gardener/gardener-extension-provider-azure/pull/1356)]
-
-## ✨ New Features
-- `[OPERATOR]` The `Worker` controller is prepared to support self-hosted shoot clusters with managed infrastructure (see [GEP-28](https://github.com/gardener/gardener/blob/master/docs/proposals/28-self-hosted-shoot-clusters.md#managed-infrastructure)). by @timebertt [[#1378](https://github.com/gardener/gardener-extension-provider-azure/pull/1378)]
-- `[USER]` VMs can now be deployed into capacity reservations by @AndreasBurger [[#1373](https://github.com/gardener/gardener-extension-provider-azure/pull/1373)]
+# [github.com/gardener/gardener-extension-provider-azure:v1.57.1]
 
 ## 🐛 Bug Fixes
-- `[OPERATOR]` A bug in the cloud controller manager visible in Azure China has been fixed by updating the container images as follows:  
-  - v1.31.9 -> v1.31.10  
-  - v1.32.8 -> v1.32.9  
-  - v1.33.3 -> v1.33.4 by @vpnachev [[#1368](https://github.com/gardener/gardener-extension-provider-azure/pull/1368)]
-- `[OPERATOR]` Fix bug in Azure client failing to make use of Workload Identity in Azure China by downgrading the module `github.com/AzureAD/microsoft-authentication-library-for-go` to version `v1.4.2`. by @vpnachev [[#1357](https://github.com/gardener/gardener-extension-provider-azure/pull/1357)]
+- `[OPERATOR]` Support not only the DNS-specific keys for dns provider secrets, but in addition the infrastructure secret keys. by @wpross [[#1404](https://github.com/gardener/gardener-extension-provider-azure/pull/1404)]
 
 ## 🏃 Others
-- `[OPERATOR]` Add input validation for DNS provider secrets referenced in the shoot spec. by @wpross [[#1337](https://github.com/gardener/gardener-extension-provider-azure/pull/1337)]
-- `[OPERATOR]` Update azure container registry links to v2 for new images by @hebelsan [[#1385](https://github.com/gardener/gardener-extension-provider-azure/pull/1385)]
-- `[OPERATOR]` Improve the implementation of the `DisableRemedyController` featuregate. Now by @kon-angelo [[#1361](https://github.com/gardener/gardener-extension-provider-azure/pull/1361)]
-- `[OPERATOR]` Remove controlplane webhook cleanup by @hebelsan [[#1349](https://github.com/gardener/gardener-extension-provider-azure/pull/1349)]
-- `[OPERATOR]` Remove CPU requests for azure-extension components in Shoot and Seed. by @voelzmo [[#1384](https://github.com/gardener/gardener-extension-provider-azure/pull/1384)]
-- `[OPERATOR]` Annotations added to ensure in-tree PVs can be forced attached to the node in ReadOnly caching mode. by @kon-angelo [[#1382](https://github.com/gardener/gardener-extension-provider-azure/pull/1382)]
-- `[OPERATOR]` Support for K8S version v1.34 has been added. Check the [K8S release notes](https://github.com/kubernetes/kubernetes/blob/master/CHANGELOG/CHANGELOG-1.34.md) before upgrading to v1.34.  
-    
-  Updated  azure-sdk-for-go, microsoft-authentication-library-for-go, gardener/gardener, gardener/machine-controller-manager, gardener/remedy-controller, ginkgo, prometheus-operator, x/crypto, x/tools, k8s.io/api, k8s.io/apiextensions-apiserver, k8s.io/apimachinery, k8s.io/autoscaler/vertical-pod-autoscaler, k8s.io/client-go, k8s.io/code-generator, k8s.io/component-base, k8s.io/kubelet, sigs.k8s.io/controller-runtime, sigs.k8s.io/controller-tools, cloud-controller-manager by @wpross [[#1376](https://github.com/gardener/gardener-extension-provider-azure/pull/1376)]
-- `[DEPENDENCY]` The following container images have been updated:  
-    - cloud-controller-manager: v1.31.10 -> v1.31.11 (patch)  
-    - cloud-controller-manager: v1.32.9 -> v1.32.10 (patch)  
-    - cloud-controller-manager: v1.33.4 -> v1.33.5 (patch)  
-    - cloud-controller-manager: v1.34.2 -> v1.34.3 (patch)  
-    - cloud-node-manager: v1.31.10 -> v1.31.11 (patch)  
-    - cloud-node-manager: v1.32.9 -> v1.32.10 (patch)  
-    - cloud-node-manager: v1.33.4 -> v1.33.5 (patch)  
-    - cloud-node-manager: v1.34.2 -> v1.34.3 (patch)  
-    - csi-provisioner: v6.0.0 -> v6.1.0 (singleton) by @gardener-github-actions[bot] [[#1381](https://github.com/gardener/gardener-extension-provider-azure/pull/1381)]
-- `[DEPENDENCY]` The following container images have been updated:  
-    - cloud-node-manager: v1.31.9 -> v1.31.10 (patch)  
-    - cloud-node-manager: v1.32.8 -> v1.32.9 (patch)  
-    - cloud-node-manager: v1.33.3 -> v1.33.4 (patch)  
-    - csi-provisioner: v5.3.0 -> v6.0.0 (singleton)  
-    - csi-resizer: v1.14.0 -> v2.0.0 (singleton)  
-    - csi-snapshot-controller: v8.3.0 -> v8.4.0 (singleton)  
-    - csi-snapshotter: v8.3.0 -> v8.4.0 (singleton) by @gardener-github-actions[bot] [[#1315](https://github.com/gardener/gardener-extension-provider-azure/pull/1315)]
+- `[OPERATOR]` Fix a bug where the namespace for the discovery of the kubeconfig secret was incorrect during the remedy-controller removal. by @kon-angelo [[#1405](https://github.com/gardener/gardener-extension-provider-azure/pull/1405)]
 
 ## Helm Charts
-- admission-azure-application: `europe-docker.pkg.dev/gardener-project/releases/charts/gardener/extensions/admission-azure-application:v1.57.0`
-- admission-azure-runtime: `europe-docker.pkg.dev/gardener-project/releases/charts/gardener/extensions/admission-azure-runtime:v1.57.0`
-- provider-azure: `europe-docker.pkg.dev/gardener-project/releases/charts/gardener/extensions/provider-azure:v1.57.0`
+- admission-azure-application: `europe-docker.pkg.dev/gardener-project/releases/charts/gardener/extensions/admission-azure-application:v1.57.1`
+- admission-azure-runtime: `europe-docker.pkg.dev/gardener-project/releases/charts/gardener/extensions/admission-azure-runtime:v1.57.1`
+- provider-azure: `europe-docker.pkg.dev/gardener-project/releases/charts/gardener/extensions/provider-azure:v1.57.1`
 ## Container (OCI) Images
-- gardener-extension-admission-azure: `europe-docker.pkg.dev/gardener-project/releases/gardener/extensions/admission-azure:v1.57.0`
-- gardener-extension-provider-azure: `europe-docker.pkg.dev/gardener-project/releases/gardener/extensions/provider-azure:v1.57.0`
+- gardener-extension-admission-azure: `europe-docker.pkg.dev/gardener-project/releases/gardener/extensions/admission-azure:v1.57.1`
+- gardener-extension-provider-azure: `europe-docker.pkg.dev/gardener-project/releases/gardener/extensions/provider-azure:v1.57.1`
