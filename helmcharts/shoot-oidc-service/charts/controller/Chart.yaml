@@ -1,4 +1,4 @@
 apiVersion: v2
 description: Helmchart for controllerregistration of shoot-oidc-service
 name: controller
-version: 0.34.0
+version: 0.35.0
