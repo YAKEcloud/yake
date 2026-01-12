@@ -55,7 +55,7 @@ stringData:
       version: 0.35.0
 
     shoot-networking-filter:
-      version: 0.25.0
+      version: 0.26.0
 
     shoot-networking-problemdetector:
       version: 0.30.0
