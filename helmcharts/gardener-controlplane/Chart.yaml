@@ -12,4 +12,4 @@ description: A Helm chart to deploy the Gardener controlplane (API server, contr
 name: gardener-controlplane
 sources:
 - https://github.com/gardener/gardener
-version: 1.134.0
+version: 1.134.1
