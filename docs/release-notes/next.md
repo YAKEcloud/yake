@@ -251,3 +251,16 @@ hide_table_of_contents: true
 
 
 </details>
+
+<details>
+<summary><b>Update image-rewriter to <code>0.7.0</code></b></summary>
+
+
+
+## Helm Charts
+- image-rewriter: `europe-docker.pkg.dev/gardener-project/releases/charts/gardener/extensions/image-rewriter:v0.7.0`
+## Container (OCI) Images
+- gardener-extension-image-rewriter: `europe-docker.pkg.dev/gardener-project/releases/gardener/extensions/image-rewriter:v0.7.0`
+
+
+</details>

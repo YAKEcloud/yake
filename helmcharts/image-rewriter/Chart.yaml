@@ -5,4 +5,4 @@ dependencies:
   repository: ""
 description: A helmchart for image-rewriter
 name: image-rewriter
-version: 0.6.0
+version: 0.7.0
