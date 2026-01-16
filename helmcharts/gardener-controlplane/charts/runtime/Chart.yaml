@@ -3,4 +3,4 @@ description: A Helm chart to deploy the Gardener runtime related resources
 name: runtime
 sources:
 - https://github.com/gardener/gardener
-version: 1.132.3
+version: 1.132.4
