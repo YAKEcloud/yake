@@ -9,7 +9,7 @@ metadata:
     app.kubernetes.io/instance: {{ .Release.Name }}
     app.kubernetes.io/managed-by: {{ .Release.Service }}
   annotations:
-    controller-gen.kubebuilder.io/version: v0.18.0
+    controller-gen.kubebuilder.io/version: v0.19.0
   name: certificates.cert.gardener.cloud
 spec:
   group: cert.gardener.cloud
@@ -235,6 +235,18 @@ spec:
                     enum:
                     - RSA
                     - ECDSA
+                    type: string
+                  encoding:
+                    description: |-
+                      The private key cryptography standards (PKCS) encoding for this
+                      certificate's private key to be encoded in.
+
+                      If provided, allowed values are `PKCS1` and `PKCS8` standing for PKCS#1
+                      and PKCS#8, respectively.
+                      Defaults to `PKCS1` if not specified.
+                    enum:
+                    - PKCS1
+                    - PKCS8
                     type: string
                   size:
                     description: |-
