@@ -22,7 +22,7 @@ stringData:
         enabled: false
 
     provider-azure:
-      version: 1.57.1
+      version: 1.57.2
       admission:
         enabled: true
         split: false
