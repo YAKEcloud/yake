@@ -1,26 +1,31 @@
-# [github.com/gardener/gardener-extension-provider-openstack:v1.51.0]
+# [github.com/gardener/gardener-extension-provider-openstack:v1.52.0]
 
 ## ⚠️ Breaking Changes
-- `[OPERATOR]` Deprecate usage of terraformer reconciler. Existing infrastructure objects that have yet to be migrated, will be reconciled with the flow reconciler instead. by @kon-angelo [[#1166](https://github.com/gardener/gardener-extension-provider-openstack/pull/1166)]
-- `[OPERATOR]` Remove use-octavia field uses from the cloudprofile and CCM charts. Operators must update their `cloudprofiles` if they still use the field. by @kon-angelo [[#1179](https://github.com/gardener/gardener-extension-provider-openstack/pull/1179)]
+- `[OPERATOR]` ETCD backup config in the provider-chart no longer requires an additional `backup` yaml-level to render as expected by @AndreasBurger [[#1234](https://github.com/gardener/gardener-extension-provider-openstack/pull/1234)]
+- `[OPERATOR]` Following the renaming based on [PR13273](https://github.com/gardener/gardener/pull/13273), **autonomous shoot cluster** was renamed to **self hosted shoot cluster**. This leads to e.g. a change of the `/gardener-extension-provider-azure`'s cli argument `--autonomous-shoot-cluster` to change to `--self-hosted-shoot-cluster` and the respective helm chart's variable `.Values.gardener.autonomousShootCluster` to change to `.Values.gardener.selfHostedShootCluster`. by @tobschli [[#1210](https://github.com/gardener/gardener-extension-provider-openstack/pull/1210)]
+- `[OPERATOR]` `provider-openstack` no longer supports Shoots with Кubernetes version <= 1.29. by @marc1404 [[#1226](https://github.com/gardener/gardener-extension-provider-openstack/pull/1226)]
+
+## ✨ New Features
+- `[OPERATOR]` Implements Machine Image Capabilities support for OpenStack, enabling better compatibility management between MachineTypes and MachineImages through CapabilitySets. by @Vincinator [[#1222](https://github.com/gardener/gardener-extension-provider-openstack/pull/1222)]
+- `[OPERATOR]` The `Worker` controller is prepared to support self-hosted shoot clusters with managed infrastructure (see [GEP-28](https://github.com/gardener/gardener/blob/master/docs/proposals/28-self-hosted-shoot-clusters.md#managed-infrastructure)). by @timebertt [[#1211](https://github.com/gardener/gardener-extension-provider-openstack/pull/1211)]
+- `[USER]` The provider-openstack extension does now support shoot clusters with Kubernetes version 1.34. You should consider the [Kubernetes release notes](https://github.com/kubernetes/kubernetes/blob/master/CHANGELOG/CHANGELOG-1.34.md) before upgrading to 1.34. by @tobschli [[#1210](https://github.com/gardener/gardener-extension-provider-openstack/pull/1210)]
+
+## 🐛 Bug Fixes
+- `[OPERATOR]` Downgrade csi-provisioner and csi-resizer for K8S <= 1.33 to make VolumeAttributesClass available for K8S <= 1.33 (v1beta1 + enabled featureGate) and K8S >= 1.34 (v1). by @wpross [[#1232](https://github.com/gardener/gardener-extension-provider-openstack/pull/1232)]
 
 ## 🏃 Others
-- `[OPERATOR]` Updated gardener/etcd-druid gardener/gardener gardener/machine-controller-manager ginkgo go tools k8s.io/utils by @wpross [[#1198](https://github.com/gardener/gardener-extension-provider-openstack/pull/1198)]
-- `[DEPENDENCY]` The following container images have been updated:  
-    - csi-driver-cinder: v1.33.1 -> v1.34.1 (minor)  
-    - csi-driver-manila: v1.33.1 -> v1.34.1 (minor)  
-    - csi-driver-nfs: v4.12.0 -> v4.12.1 (singleton)  
-    - csi-provisioner: v5.3.0 -> v6.0.0 (singleton)  
-    - csi-resizer: v1.14.0 -> v2.0.0 (singleton)  
-    - csi-snapshot-controller: v8.3.0 -> v8.4.0 (singleton)  
-    - csi-snapshotter: v8.3.0 -> v8.4.0 (singleton) by @gardener-github-actions[bot] [[#1183](https://github.com/gardener/gardener-extension-provider-openstack/pull/1183)]
-- `[OPERATOR]` Update min go version in go.mod to 1.25 by @hebelsan [[#1203](https://github.com/gardener/gardener-extension-provider-openstack/pull/1203)]
-- `[OPERATOR]` Fix an issue preventing OpenStack installations without manila endpoints. Flow reconciler will now do lazy instantiation of the manila client. by @kon-angelo [[#1181](https://github.com/gardener/gardener-extension-provider-openstack/pull/1181)]
+- `[OPERATOR]` Upgrade csi-provisioner for K8S version >= 1.34 to v6.1.0. by @wpross [[#1232](https://github.com/gardener/gardener-extension-provider-openstack/pull/1232)]
+- `[OPERATOR]` Update gardener/gardener to v1.133.0 by @hebelsan [[#1224](https://github.com/gardener/gardener-extension-provider-openstack/pull/1224)]
+- `[OPERATOR]` Adds DNS Record integration tests by @hebelsan [[#1205](https://github.com/gardener/gardener-extension-provider-openstack/pull/1205)]
+- `[OPERATOR]` Set --strict-topology for the external provisioner of the Cinder CSI controller. by @hebelsan [[#1230](https://github.com/gardener/gardener-extension-provider-openstack/pull/1230)]
+- `[OPERATOR]` Remove CPU requests for openstack-extension components in Shoot and Seed. by @voelzmo [[#1215](https://github.com/gardener/gardener-extension-provider-openstack/pull/1215)]
+- `[OPERATOR]` Extension-provider logging config can now be changed via helm-values by @AndreasBurger [[#1234](https://github.com/gardener/gardener-extension-provider-openstack/pull/1234)]
+- `[DEPENDENCY]` Updated dependency `gardener/gardener` to `v1.134.0` ([Release Notes](https://github.com/gardener/gardener/releases/tag/v1.134.0)). by @marc1404 [[#1226](https://github.com/gardener/gardener-extension-provider-openstack/pull/1226)]
 
 ## Helm Charts
-- admission-openstack-application: `europe-docker.pkg.dev/gardener-project/releases/charts/gardener/extensions/admission-openstack-application:v1.51.0`
-- admission-openstack-runtime: `europe-docker.pkg.dev/gardener-project/releases/charts/gardener/extensions/admission-openstack-runtime:v1.51.0`
-- provider-openstack: `europe-docker.pkg.dev/gardener-project/releases/charts/gardener/extensions/provider-openstack:v1.51.0`
+- admission-openstack-application: `europe-docker.pkg.dev/gardener-project/releases/charts/gardener/extensions/admission-openstack-application:v1.52.0`
+- admission-openstack-runtime: `europe-docker.pkg.dev/gardener-project/releases/charts/gardener/extensions/admission-openstack-runtime:v1.52.0`
+- provider-openstack: `europe-docker.pkg.dev/gardener-project/releases/charts/gardener/extensions/provider-openstack:v1.52.0`
 ## Container (OCI) Images
-- gardener-extension-admission-openstack: `europe-docker.pkg.dev/gardener-project/releases/gardener/extensions/admission-openstack:v1.51.0`
-- gardener-extension-provider-openstack: `europe-docker.pkg.dev/gardener-project/releases/gardener/extensions/provider-openstack:v1.51.0`
+- gardener-extension-admission-openstack: `europe-docker.pkg.dev/gardener-project/releases/gardener/extensions/admission-openstack:v1.52.0`
+- gardener-extension-provider-openstack: `europe-docker.pkg.dev/gardener-project/releases/gardener/extensions/provider-openstack:v1.52.0`
