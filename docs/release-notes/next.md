@@ -615,3 +615,31 @@ hide_table_of_contents: true
 
 
 </details>
+
+<details>
+<summary><b>Update dashboard to <code>1.83.1</code></b></summary>
+
+# [github.com/gardener/dashboard:1.83.1]
+
+## 🐛 Bug Fixes
+- `[OPERATOR]` Redacts sensitive authorization headers from Octokit debug logs to avoid token leaks. by @petersutter [[#2720](https://github.com/gardener/dashboard/pull/2720)]
+
+## Container (OCI) Images
+- gardener-dashboard: `europe-docker.pkg.dev/gardener-project/releases/gardener/dashboard:1.83.1`
+
+
+</details>
+
+<details>
+<summary><b>Update dashboard to <code>1.83.1</code></b></summary>
+
+# [github.com/gardener/dashboard:1.83.1]
+
+## 🐛 Bug Fixes
+- `[OPERATOR]` Redacts sensitive authorization headers from Octokit debug logs to avoid token leaks. by @petersutter [[#2720](https://github.com/gardener/dashboard/pull/2720)]
+
+## Container (OCI) Images
+- gardener-dashboard: `europe-docker.pkg.dev/gardener-project/releases/gardener/dashboard:1.83.1`
+
+
+</details>
