@@ -1,7 +1,7 @@
-# [github.com/gardener/dashboard:1.83.1]
+# [github.com/gardener/dashboard:1.83.2]
 
-## 🐛 Bug Fixes
-- `[OPERATOR]` Redacts sensitive authorization headers from Octokit debug logs to avoid token leaks. by @petersutter [[#2720](https://github.com/gardener/dashboard/pull/2720)]
+## 🏃 Others
+- `[OPERATOR]` Updated markdown parsing to `unified / remark / rehype` pipeline, improving security and GitHub-flavored Markdown compatibility by @grolu [[#2728](https://github.com/gardener/dashboard/pull/2728)]
 
 ## Container (OCI) Images
-- gardener-dashboard: `europe-docker.pkg.dev/gardener-project/releases/gardener/dashboard:1.83.1`
+- gardener-dashboard: `europe-docker.pkg.dev/gardener-project/releases/gardener/dashboard:1.83.2`
