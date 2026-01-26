@@ -1,14 +1,14 @@
 apiVersion: v2
 dependencies:
-- condition: terminal-controller-manager-application.enabled
-  name: terminal-controller-manager-application
-  repository: ""
 - condition: terminal-controller-manager-runtime.enabled
   name: terminal-controller-manager-runtime
   repository: ""
 - condition: utils-templates.enabled
   name: utils-templates
   repository: ""
+- condition: terminal-controller-manager-application.enabled
+  name: terminal-controller-manager-application
+  repository: ""
 description: A Helm chart to deploy the terminal-controller-manager
 name: gardener-webterminal
-version: 0.34.0
+version: 0.35.0
