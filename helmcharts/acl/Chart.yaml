@@ -5,4 +5,4 @@ dependencies:
   repository: ""
 description: A helmchart for acl
 name: acl
-version: 1.14.0
+version: 1.15.0
