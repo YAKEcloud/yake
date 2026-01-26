@@ -1,4 +1,4 @@
 apiVersion: v2
 description: Util chart for various templates.
 name: utils-templates
-version: 0.34.0
+version: 0.35.0

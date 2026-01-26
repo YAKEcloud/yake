@@ -1,14 +1,12 @@
-# [gardener/terminal-controller-manager]
+# [github.com/gardener/terminal-controller-manager:v0.35.0]
 
-## ⚠️ Breaking Changes
+## 🐛 Bug Fixes
+- `[OPERATOR]` Handle terminal deletion when namespace (of garden project) is deleted by @petersutter [[#408](https://github.com/gardener/terminal-controller-manager/pull/408)]
 
-- `[OPERATOR]` The `credential.secretRef` property has been removed from the terminal `host` and `target` properties:  
-  - For `Seed` resources, `spec.secretRef` was removed from the API without replacement, eliminating the need for `credential.secretRef`.  
-  - For `Shoot` resources, `credential.shootRef` now replaces the previously used `credential.secretRef` for static token kubeconfigs. by @petersutter [#320]
-## ✨ New Features
+## 🏃 Others
+- `[OPERATOR]` Dropped obsolete permission to read secrets from the (virtual) garden cluster. by @petersutter [[#394](https://github.com/gardener/terminal-controller-manager/pull/394)]
+- `[OPERATOR]` Terminal webhook: stricter validation for namespaces/names, RBAC RoleRefs, apiServer URL/CA data, and pod labels. by @petersutter [[#452](https://github.com/gardener/terminal-controller-manager/pull/452)]
+- `[DEVELOPER]` migrate CICD-Pipeline to GitHub-Actions by @ccwienk [[#404](https://github.com/gardener/terminal-controller-manager/pull/404)]
 
-- `[OPERATOR]` Enhance terminal pods with service account token projection when the terminal host and target are in the same cluster and namespace by @petersutter [#322]
-- `[DEVELOPER]` `gosec` was introduced for Static Application Security Testing (SAST). by @petersutter [#328]
-
-## Docker Images
-- terminal-controller-manager: `europe-docker.pkg.dev/gardener-project/releases/gardener/terminal-controller-manager:v0.34.0`
+## Container (OCI) Images
+- terminal-controller-manager: `europe-docker.pkg.dev/gardener-project/releases/gardener/terminal-controller-manager:v0.35.0`
