@@ -8,6 +8,7 @@ import (
 	"context"
 	"errors"
 	"fmt"
+	"strings"
 	"time"
 
 	"github.com/onsi/ginkgo/v2"
@@ -364,7 +365,7 @@ func getGardenletClusterRole(labels map[string]string) *rbacv1.ClusterRole {
 			},
 			{
 				APIGroups: []string{"monitoring.coreos.com"},
-				Resources: []string{"servicemonitors", "scrapeconfigs", "prometheusrules"},
+				Resources: []string{"servicemonitors", "scrapeconfigs", "prometheusrules", "prometheuses"},
 				Verbs:     []string{"list", "watch", "get", "create", "patch", "update", "delete"},
 			},
 		},
@@ -895,11 +896,11 @@ func VerifyGardenletComponentConfigConfigMap(
 		}
 		list := &corev1.ConfigMapList{}
 		Expect(c.List(ctx, list)).ToNot(HaveOccurred())
-		cmNames := ""
+		var cmNames strings.Builder
 		for _, cm := range list.Items {
-			cmNames += " " + cm.Name
+			cmNames.WriteString(" " + cm.Name)
 		}
-		ginkgo.Fail("Could not find unique gardenlet configmap " + uniqueName + ", possibly the unique name has changed. Found:" + cmNames)
+		ginkgo.Fail("Could not find unique gardenlet configmap " + uniqueName + ", possibly the unique name has changed. Found:" + cmNames.String())
 	}
 
 	Expect(componentConfigCm.Labels).To(DeepEqual(expectedComponentConfigCm.Labels))
