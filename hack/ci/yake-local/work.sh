@@ -11,7 +11,7 @@ source ../../../hack/tools/install.sh
 CLUSTERNAME="yake-local"
 VGARDEN_KUBECONFIG="/tmp/$CLUSTERNAME-apiserver.yaml"
 
-K8S_VERSION="${K8S_VERSION:-v1.32.5}"
+K8S_VERSION="${K8S_VERSION:-v1.33.7}"
 CNI="${CNI:-default}"
 
 if [[ $CNI == "default" ]]; then
@@ -35,11 +35,29 @@ _print_heading() {
   echo -e "\033[34m$1\033[0m"
 }
 
+# Helper function to add Helm repositories safely
+_add_helm_repo_if_not_exists() {
+  local repo_name=$1
+  local repo_url=$2
+
+  if ! $HELM repo list 2>/dev/null | grep -q "^${repo_name}"; then
+    $HELM repo add "$repo_name" "$repo_url"
+  fi
+  $HELM repo update "$repo_name"
+}
+
 # from gardener/gardener hack/kind-up.sh
 # setup_kind_network is similar to kind's network creation logic, ref https://github.com/kubernetes-sigs/kind/blob/23d2ac0e9c41028fa252dd1340411d70d46e2fd4/pkg/cluster/internal/providers/docker/network.go#L50
 # In addition to kind's logic, we ensure stable CIDRs that we can rely on in our local setup manifests and code.
 _setup_kind_network() {
   _print_heading "Setup Kind Network"
+
+  # Check if the Kind cluster already exists
+  if $KIND get clusters 2>/dev/null | grep -q "^${CLUSTERNAME}$"; then
+    echo "Kind cluster '$CLUSTERNAME' already exists, skipping network setup"
+    return 0
+  fi
+
   # check if network already exists
   local existing_network_id
   existing_network_id="$(docker network list --filter=name=^kind$ --format='{{.ID}}')"
@@ -56,8 +74,9 @@ _setup_kind_network() {
       # kind network is already configured correctly, nothing to do
       return 0
     else
-      echo "kind network is not configured correctly for local gardener setup, recreating network with correct configuration..."
-      docker network rm $existing_network_id
+      echo "ERROR: kind network exists but is not configured correctly for local gardener setup."
+      echo "Please delete the kind cluster first with: kind delete cluster --name $CLUSTERNAME"
+      exit 1
     fi
   fi
 
@@ -72,13 +91,17 @@ _setup_kind_network() {
 _create_cluster () {
   _print_heading "Create Cluster"
   # If export kubeconfig fails, the cluster does not yet exist and we need to create it
-  $KIND export kubeconfig -n $CLUSTERNAME > /dev/null 2>&1  || $KIND create cluster --config "$kindConfig" --name $CLUSTERNAME --image="registry.regio.digital/proxy_cache/kindest/node:$K8S_VERSION"
-	$KIND export kubeconfig -n $CLUSTERNAME
-	$KUBECTL config set-context --current --namespace=default
+  if ! $KIND export kubeconfig -n $CLUSTERNAME > /dev/null 2>&1; then
+    $KIND create cluster --config "$kindConfig" --name $CLUSTERNAME --image="registry.regio.digital/proxy_cache/kindest/node:$K8S_VERSION"
+  else
+    echo "Cluster '$CLUSTERNAME' already exists, skipping creation"
+  fi
+  $KIND export kubeconfig -n $CLUSTERNAME
+  $KUBECTL config set-context --current --namespace=default
 }
 
 _create_cni () {
-  _print_heading "Create Cni"
+  _print_heading "Create CNI"
   if [[ $useCilium == "true" ]]; then
       _create_cilium
   elif [[ $useCalico == "true" ]]; then
@@ -88,9 +111,9 @@ _create_cni () {
 
 _create_cilium () {
   _print_heading "Create Cilium"
-  local VERSION="1.15.1"
-  $HELM repo add cilium https://helm.cilium.io/
-  $HELM repo update cilium
+  local VERSION="1.18.6"
+
+  _add_helm_repo_if_not_exists cilium https://helm.cilium.io/
 
   $HELM upgrade -i cilium cilium/cilium --version "$VERSION" \
      --namespace kube-system \
@@ -101,8 +124,8 @@ _create_cilium () {
 
 _create_calico () {
   _print_heading "Create Calico"
-  VERSION="v3.27.2"
-  if ! $KUBECTL get crd/installations.operator.tigera.io; then
+  VERSION="v3.31.3"
+  if ! $KUBECTL get crd/installations.operator.tigera.io 2>/dev/null; then
     $KUBECTL create -f https://raw.githubusercontent.com/projectcalico/calico/$VERSION/manifests/tigera-operator.yaml
   fi
   $KUBECTL wait --for condition=established --timeout=60s crd/installations.operator.tigera.io
@@ -132,14 +155,17 @@ EOF
 
 _wait_for_nodes_ready () {
   _print_heading "Wait For Nodes Ready"
-
   $KUBECTL wait --for=condition=ready nodes --all --timeout=15m
 }
 
 _create_loadbalancer () {
   _print_heading "Create Loadbalancer"
-  local VERSION=v0.13.12
-  $KUBECTL apply -f https://raw.githubusercontent.com/metallb/metallb/$VERSION/config/manifests/metallb-native.yaml
+  local VERSION=v0.15.3
+
+  # Check if MetalLB is already installed
+  if ! $KUBECTL get namespace metallb-system 2>/dev/null; then
+    $KUBECTL apply -f https://raw.githubusercontent.com/metallb/metallb/$VERSION/config/manifests/metallb-native.yaml
+  fi
   $KUBECTL wait --namespace metallb-system --for=condition=ready pod --all --timeout=3m
 
   cat <<EOF | $KUBECTL apply -f -
@@ -167,8 +193,15 @@ _create_local_git () {
   printf ">>> waiting for git server "
   $KUBECTL wait --namespace default --for=condition=ready pod --selector=app=git-server --timeout=3m
   gitUrl="http://$($KUBECTL get svc git-server -o jsonpath="{.status.loadBalancer.ingress[0].ip}")/repository.git"
-  git remote add local "$gitUrl" 2>/dev/null || git remote set-url local "$gitUrl"
-  until git fetch local; do
+
+  # Add or update git remote
+  if git remote get-url local 2>/dev/null; then
+    git remote set-url local "$gitUrl"
+  else
+    git remote add local "$gitUrl"
+  fi
+
+  until git fetch local 2>/dev/null; do
     printf .
     sleep 3
   done
@@ -178,9 +211,10 @@ _create_local_git () {
 }
 
 _create_step_ca () {
-  _print_heading "Create Step Ca"
+  _print_heading "Create Step CA"
   ############# step ca for acme server in kind cluster #################
-  $HELM repo add smallstep https://smallstep.github.io/helm-charts/
+
+  _add_helm_repo_if_not_exists smallstep https://smallstep.github.io/helm-charts/
 
   STEP_CA_VALUES="step-ca-values.yaml"
 
@@ -194,7 +228,7 @@ _create_step_ca () {
 }
 
 _create_local_dns () {
-  _print_heading "Create Local Dns"
+  _print_heading "Create Local DNS"
   ############# knot #################
   $KUBECTL apply -f knot.yaml
 
@@ -279,7 +313,7 @@ EOF
 }
 
 _patch_ccm() {
-  _print_heading "Patch Ccm"
+  _print_heading "Patch CCM"
   printf ">>> waiting for deployment cert-controller-manager "
   until $KUBECTL get deployment cert-controller-manager -n garden >/dev/null 2>&1; do
     printf .
@@ -303,30 +337,30 @@ _ensure_hosts() {
 
   garden_ingress_ip=$($KUBECTL get svc -n garden garden-ingress-nginx-controller -o jsonpath="{.status.loadBalancer.ingress[0].ip}")
 
-	if [[ -v CI ]]; then
-			{
-  				echo "$garden_ingress_ip dashboard.local.gardener.cloud"
-  				echo "$garden_ingress_ip api.local.gardener.cloud"
-  				echo "$garden_ingress_ip identity.local.gardener.cloud"
-			} | sudo tee -a /etc/hosts
-	fi
+  if [[ -v CI ]]; then
+    {
+      echo "$garden_ingress_ip dashboard.local.gardener.cloud"
+      echo "$garden_ingress_ip api.local.gardener.cloud"
+      echo "$garden_ingress_ip identity.local.gardener.cloud"
+    } | sudo tee -a /etc/hosts
+  fi
 
   until
       grep "$garden_ingress_ip\\s*dashboard.local.gardener.cloud" < /etc/hosts > /dev/null &&
       grep "$garden_ingress_ip\\s*api.local.gardener.cloud" < /etc/hosts > /dev/null &&
       grep "$garden_ingress_ip\\s*identity.local.gardener.cloud" < /etc/hosts > /dev/null
   do
-  		echo "-------------------------------------------------"
-  		echo "$garden_ingress_ip dashboard.local.gardener.cloud"
-  		echo "$garden_ingress_ip api.local.gardener.cloud"
-  		echo "$garden_ingress_ip identity.local.gardener.cloud"
-  		echo "-------------------------------------------------"
-  		read -p "Please add these to /etc/hosts and press any key to continue."
+    echo "-------------------------------------------------"
+    echo "$garden_ingress_ip dashboard.local.gardener.cloud"
+    echo "$garden_ingress_ip api.local.gardener.cloud"
+    echo "$garden_ingress_ip identity.local.gardener.cloud"
+    echo "-------------------------------------------------"
+    read -p "Please add these to /etc/hosts and press any key to continue."
   done
 }
 
 _create_rbac () {
-  _print_heading "Create Rbac"
+  _print_heading "Create RBAC"
   $KUBECTL get secrets -n garden garden-kubeconfig-for-admin -o go-template='{{.data.kubeconfig | base64decode }}' > "$VGARDEN_KUBECONFIG"
 
   KUBECONFIG="$VGARDEN_KUBECONFIG" $KUBECTL apply -f garden-content/cloudprofile-local.yaml
@@ -360,14 +394,16 @@ _wait_for_initial_seed_ready () {
   _print_heading "Wait For Initial Seed Ready"
 
   printf ">>> waiting for initial seed to become ready "
-  until providerLocalSAName=$(KUBECONFIG="$VGARDEN_KUBECONFIG" $KUBECTL get seed initial-seed); do
+  until KUBECONFIG="$VGARDEN_KUBECONFIG" $KUBECTL get seed initial-seed >/dev/null 2>&1; do
     printf .
     sleep 3
   done
-	KUBECONFIG="$VGARDEN_KUBECONFIG" $KUBECTL wait --for=jsonpath='{.status.lastOperation.progress}'=100 --timeout=10m seed initial-seed > /dev/null
+  KUBECONFIG="$VGARDEN_KUBECONFIG" $KUBECTL wait --for=jsonpath='{.status.lastOperation.progress}'=100 --timeout=10m seed initial-seed > /dev/null
   echo " ok"
 }
 
+###
+# Main execution flow
 ###
 
 install_helm
@@ -388,3 +424,6 @@ _patch_ccm
 _ensure_hosts
 _create_rbac
 _wait_for_initial_seed_ready
+
+_print_heading "Setup Complete!"
+echo "Cluster '$CLUSTERNAME' is ready for Gardener"

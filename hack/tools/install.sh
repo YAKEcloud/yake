@@ -80,7 +80,7 @@ install_helm() {
 
 install_kind() {
   # not under renovate control
-  VERSION=v0.27.0
+  VERSION=v0.31.0
 
   if _isStale "$KIND" "$VERSION"; then
 		curl -L -o "$KIND" "https://github.com/kubernetes-sigs/kind/releases/download/${VERSION}/kind-${TOOLS_KERNEL}-${TOOLS_ARCH}"
@@ -92,7 +92,7 @@ install_kind() {
 
 install_envsubst() {
 		# not under renovate control
-		VERSION=v1.2.0
+		VERSION=v1.4.3
 
 		if _isStale "$ENVSUBST" "$VERSION"; then
 				curl -L https://github.com/a8m/envsubst/releases/download/${VERSION}/envsubst-`uname -s`-`uname -m` -o $ENVSUBST
