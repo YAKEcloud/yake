@@ -46,41 +46,26 @@ _add_helm_repo_if_not_exists() {
   $HELM repo update "$repo_name"
 }
 
-# from gardener/gardener hack/kind-up.sh
-# setup_kind_network is similar to kind's network creation logic, ref https://github.com/kubernetes-sigs/kind/blob/23d2ac0e9c41028fa252dd1340411d70d46e2fd4/pkg/cluster/internal/providers/docker/network.go#L50
-# In addition to kind's logic, we ensure stable CIDRs that we can rely on in our local setup manifests and code.
 _setup_kind_network() {
   _print_heading "Setup Kind Network"
 
-  # Check if the Kind cluster already exists
+  # Check if the Kind cluster already exists - if so, skip network setup
   if $KIND get clusters 2>/dev/null | grep -q "^${CLUSTERNAME}$"; then
     echo "Kind cluster '$CLUSTERNAME' already exists, skipping network setup"
     return 0
   fi
 
-  # check if network already exists
+  # Check if network already exists
   local existing_network_id
   existing_network_id="$(docker network list --filter=name=^kind$ --format='{{.ID}}')"
 
   if [ -n "$existing_network_id" ] ; then
-    # ensure the network is configured correctly
-    local network network_options network_ipam expected_network_ipam
-    network="$(docker network inspect $existing_network_id | $YQ '.[]')"
-    network_options="$(echo "$network" | $YQ '.EnableIPv6 + "," + .Options["com.docker.network.bridge.enable_ip_masquerade"]')"
-    network_ipam="$(echo "$network" | $YQ '.IPAM.Config' -o=json -I=0)"
-    expected_network_ipam='[{"Subnet":"172.18.0.0/16","Gateway":"172.18.0.1"},{"Subnet":"fd00:10::/64","Gateway":"fd00:10::1"}]'
-
-    if [ "$network_options" = 'true,true' ] && [ "$network_ipam" = "$expected_network_ipam" ] ; then
-      # kind network is already configured correctly, nothing to do
-      return 0
-    else
-      echo "ERROR: kind network exists but is not configured correctly for local gardener setup."
-      echo "Please delete the kind cluster first with: kind delete cluster --name $CLUSTERNAME"
-      exit 1
-    fi
+    echo "Kind network already exists, will be used by cluster"
+    return 0
   fi
 
-  # (re-)create kind network with expected settings
+  # Create kind network with gardener-compatible configuration
+  echo "Creating kind network with gardener-compatible configuration..."
   docker network create kind --driver=bridge \
     --subnet 172.18.0.0/16 --gateway 172.18.0.1 \
     --ipv6 --subnet fd00:10::/64 --gateway fd00:10::1 \
@@ -90,12 +75,14 @@ _setup_kind_network() {
 
 _create_cluster () {
   _print_heading "Create Cluster"
-  # If export kubeconfig fails, the cluster does not yet exist and we need to create it
-  if ! $KIND export kubeconfig -n $CLUSTERNAME > /dev/null 2>&1; then
-    $KIND create cluster --config "$kindConfig" --name $CLUSTERNAME --image="registry.regio.digital/proxy_cache/kindest/node:$K8S_VERSION"
+
+  if $KIND export kubeconfig -n $CLUSTERNAME > /dev/null 2>&1; then
+    echo "Cluster '$CLUSTERNAME' already exists"
   else
-    echo "Cluster '$CLUSTERNAME' already exists, skipping creation"
+    echo "Creating new Kind cluster '$CLUSTERNAME'..."
+    $KIND create cluster --config "$kindConfig" --name $CLUSTERNAME --image="registry.regio.digital/proxy_cache/kindest/node:$K8S_VERSION"
   fi
+
   $KIND export kubeconfig -n $CLUSTERNAME
   $KUBECTL config set-context --current --namespace=default
 }
@@ -125,10 +112,10 @@ _create_cilium () {
 _create_calico () {
   _print_heading "Create Calico"
   VERSION="v3.31.3"
-  if ! $KUBECTL get crd/installations.operator.tigera.io 2>/dev/null; then
-    $KUBECTL create -f https://raw.githubusercontent.com/projectcalico/calico/$VERSION/manifests/tigera-operator.yaml
-  fi
+
+  $KUBECTL create -f https://raw.githubusercontent.com/projectcalico/calico/$VERSION/manifests/tigera-operator.yaml 2>/dev/null || true
   $KUBECTL wait --for condition=established --timeout=60s crd/installations.operator.tigera.io
+
   cat <<EOF | $KUBECTL apply -f -
 apiVersion: operator.tigera.io/v1
 kind: Installation
@@ -162,10 +149,7 @@ _create_loadbalancer () {
   _print_heading "Create Loadbalancer"
   local VERSION=v0.15.3
 
-  # Check if MetalLB is already installed
-  if ! $KUBECTL get namespace metallb-system 2>/dev/null; then
-    $KUBECTL apply -f https://raw.githubusercontent.com/metallb/metallb/$VERSION/config/manifests/metallb-native.yaml
-  fi
+  $KUBECTL apply -f https://raw.githubusercontent.com/metallb/metallb/$VERSION/config/manifests/metallb-native.yaml
   $KUBECTL wait --namespace metallb-system --for=condition=ready pod --all --timeout=3m
 
   cat <<EOF | $KUBECTL apply -f -
@@ -190,29 +174,33 @@ _create_local_git () {
   _print_heading "Create Local Git"
   $KUBECTL apply -f git-server.yaml
 
-  printf ">>> waiting for git server "
+  echo "Waiting for git server to be ready..."
   $KUBECTL wait --namespace default --for=condition=ready pod --selector=app=git-server --timeout=3m
+
   gitUrl="http://$($KUBECTL get svc git-server -o jsonpath="{.status.loadBalancer.ingress[0].ip}")/repository.git"
 
   # Add or update git remote
-  if git remote get-url local 2>/dev/null; then
+  if git remote get-url local >/dev/null 2>&1; then
+    echo "Updating existing 'local' git remote"
     git remote set-url local "$gitUrl"
   else
+    echo "Adding 'local' git remote"
     git remote add local "$gitUrl"
   fi
 
+  echo "Testing connection to git server..."
   until git fetch local 2>/dev/null; do
-    printf .
+    printf "."
     sleep 3
   done
-  echo " ok"
+  echo " connected!"
 
+  echo "Pushing to local git server..."
   git push local
 }
 
 _create_step_ca () {
   _print_heading "Create Step CA"
-  ############# step ca for acme server in kind cluster #################
 
   _add_helm_repo_if_not_exists smallstep https://smallstep.github.io/helm-charts/
 
@@ -229,7 +217,7 @@ _create_step_ca () {
 
 _create_local_dns () {
   _print_heading "Create Local DNS"
-  ############# knot #################
+
   $KUBECTL apply -f knot.yaml
 
   svcIP=$($KUBECTL get svc knot -oyaml | $YQ .spec.clusterIP)
@@ -243,17 +231,16 @@ _create_local_dns () {
 
 _create_flux () {
   _print_heading "Create Flux"
-  ############# flux #################
+
   $KUBECTL apply -f ../../../flux-system/gotk-components.yaml
 
-  ############# yake config #################
   export NODE_CIDR="172.18.0.0/16"
 
   for file in config/*; do
     $ENVSUBST "\$NODE_CIDR" < "$file" | $KUBECTL apply -f -
   done
 
-  ## M1 Mac workaround
+  # M1 Mac workaround
   if [[ "$(uname -s)-$(uname -m)" == "Darwin-arm64" ]]; then
     $KUBECTL apply -f m1-mac-etcd-values.yaml
   fi
@@ -337,26 +324,49 @@ _ensure_hosts() {
 
   garden_ingress_ip=$($KUBECTL get svc -n garden garden-ingress-nginx-controller -o jsonpath="{.status.loadBalancer.ingress[0].ip}")
 
+  # In CI: automatically add to /etc/hosts
   if [[ -v CI ]]; then
+    echo "Running in CI - automatically adding entries to /etc/hosts"
     {
       echo "$garden_ingress_ip dashboard.local.gardener.cloud"
       echo "$garden_ingress_ip api.local.gardener.cloud"
       echo "$garden_ingress_ip identity.local.gardener.cloud"
     } | sudo tee -a /etc/hosts
+    return 0
   fi
 
+  # Local execution: check if entries exist, prompt if not
+  if grep "$garden_ingress_ip\\s*dashboard.local.gardener.cloud" < /etc/hosts > /dev/null &&
+     grep "$garden_ingress_ip\\s*api.local.gardener.cloud" < /etc/hosts > /dev/null &&
+     grep "$garden_ingress_ip\\s*identity.local.gardener.cloud" < /etc/hosts > /dev/null; then
+    echo "/etc/hosts entries already exist"
+    return 0
+  fi
+
+  # Prompt user to add entries
+  echo ""
+  echo "=========================================="
+  echo "Please add the following entries to your /etc/hosts file:"
+  echo ""
+  echo "$garden_ingress_ip dashboard.local.gardener.cloud"
+  echo "$garden_ingress_ip api.local.gardener.cloud"
+  echo "$garden_ingress_ip identity.local.gardener.cloud"
+  echo "=========================================="
+  echo ""
+  read -p "Press Enter after you've added these entries to continue..."
+
+  # Verify entries were added
   until
       grep "$garden_ingress_ip\\s*dashboard.local.gardener.cloud" < /etc/hosts > /dev/null &&
       grep "$garden_ingress_ip\\s*api.local.gardener.cloud" < /etc/hosts > /dev/null &&
       grep "$garden_ingress_ip\\s*identity.local.gardener.cloud" < /etc/hosts > /dev/null
   do
-    echo "-------------------------------------------------"
-    echo "$garden_ingress_ip dashboard.local.gardener.cloud"
-    echo "$garden_ingress_ip api.local.gardener.cloud"
-    echo "$garden_ingress_ip identity.local.gardener.cloud"
-    echo "-------------------------------------------------"
-    read -p "Please add these to /etc/hosts and press any key to continue."
+    echo ""
+    echo "Entries not found in /etc/hosts. Please add them and try again."
+    read -p "Press Enter after you've added the entries..."
   done
+
+  echo "✓ /etc/hosts entries verified"
 }
 
 _create_rbac () {
