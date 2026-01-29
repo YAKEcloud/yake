@@ -11,7 +11,7 @@ source ../../../hack/tools/install.sh
 CLUSTERNAME="yake-local"
 VGARDEN_KUBECONFIG="/tmp/$CLUSTERNAME-apiserver.yaml"
 
-K8S_VERSION="${K8S_VERSION:-v1.32.5}"
+K8S_VERSION="${K8S_VERSION:-v1.33.7}"
 CNI="${CNI:-default}"
 
 if [[ $CNI == "default" ]]; then
@@ -40,6 +40,13 @@ _print_heading() {
 # In addition to kind's logic, we ensure stable CIDRs that we can rely on in our local setup manifests and code.
 _setup_kind_network() {
   _print_heading "Setup Kind Network"
+
+  # Check if the Kind cluster already exists - if so, skip network setup
+  if $KIND get clusters 2>/dev/null | grep -q "^${CLUSTERNAME}$"; then
+    echo "Kind cluster '$CLUSTERNAME' already exists, skipping network setup"
+    return 0
+  fi
+
   # check if network already exists
   local existing_network_id
   existing_network_id="$(docker network list --filter=name=^kind$ --format='{{.ID}}')"
@@ -88,8 +95,8 @@ _create_cni () {
 
 _create_cilium () {
   _print_heading "Create Cilium"
-  local VERSION="1.15.1"
-  $HELM repo add cilium https://helm.cilium.io/
+  local VERSION="1.18.6"
+  $HELM repo add cilium https://helm.cilium.io/ --force-update
   $HELM repo update cilium
 
   $HELM upgrade -i cilium cilium/cilium --version "$VERSION" \
@@ -101,7 +108,7 @@ _create_cilium () {
 
 _create_calico () {
   _print_heading "Create Calico"
-  VERSION="v3.27.2"
+  VERSION="v3.31.3"
   if ! $KUBECTL get crd/installations.operator.tigera.io; then
     $KUBECTL create -f https://raw.githubusercontent.com/projectcalico/calico/$VERSION/manifests/tigera-operator.yaml
   fi
@@ -138,7 +145,7 @@ _wait_for_nodes_ready () {
 
 _create_loadbalancer () {
   _print_heading "Create Loadbalancer"
-  local VERSION=v0.13.12
+  local VERSION=v0.15.3
   $KUBECTL apply -f https://raw.githubusercontent.com/metallb/metallb/$VERSION/config/manifests/metallb-native.yaml
   $KUBECTL wait --namespace metallb-system --for=condition=ready pod --all --timeout=3m
 
@@ -180,12 +187,13 @@ _create_local_git () {
 _create_step_ca () {
   _print_heading "Create Step Ca"
   ############# step ca for acme server in kind cluster #################
-  $HELM repo add smallstep https://smallstep.github.io/helm-charts/
+  $HELM repo add smallstep https://smallstep.github.io/helm-charts/ --force-update
+  $HELM repo update smallstep
 
   STEP_CA_VALUES="step-ca-values.yaml"
 
   if [[ ! -f step-ca-values.yaml ]]; then
-    docker run --rm -it smallstep/step-cli ca init --acme --helm > "$STEP_CA_VALUES"
+    docker run --rm smallstep/step-cli ca init --acme --helm > "$STEP_CA_VALUES"
     $YQ -i '.inject.config.files.["ca.json"].authority.claims.maxTLSCertDuration = "2161h"' "$STEP_CA_VALUES"
     $YQ -i '.inject.config.files.["ca.json"].authority.claims.defaultTLSCertDuration = "2160h"' "$STEP_CA_VALUES"
   fi
