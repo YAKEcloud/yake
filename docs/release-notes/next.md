@@ -354,3 +354,31 @@ hide_table_of_contents: true
 
 
 </details>
+
+<details>
+<summary><b>Update dashboard to <code>1.83.5</code></b></summary>
+
+# [github.com/gardener/dashboard:1.83.5]
+
+## 🐛 Bug Fixes
+- `[USER]` Major performance improvements on pages displaying large numbers of shoots, by updating Vuetify to the latest version by @petersutter [[#2771](https://github.com/gardener/dashboard/pull/2771)]
+
+## Container (OCI) Images
+- gardener-dashboard: `europe-docker.pkg.dev/gardener-project/releases/gardener/dashboard:1.83.5`
+
+
+</details>
+
+<details>
+<summary><b>Update dashboard to <code>1.83.5</code></b></summary>
+
+# [github.com/gardener/dashboard:1.83.5]
+
+## 🐛 Bug Fixes
+- `[USER]` Major performance improvements on pages displaying large numbers of shoots, by updating Vuetify to the latest version by @petersutter [[#2771](https://github.com/gardener/dashboard/pull/2771)]
+
+## Container (OCI) Images
+- gardener-dashboard: `europe-docker.pkg.dev/gardener-project/releases/gardener/dashboard:1.83.5`
+
+
+</details>
