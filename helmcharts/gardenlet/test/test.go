@@ -258,6 +258,7 @@ func getGardenletClusterRole(labels map[string]string) *rbacv1.ClusterRole {
 					"targetallocators.opentelemetry.io",
 					"opampbridges.opentelemetry.io",
 					"instrumentations.opentelemetry.io",
+					"vlsingles.operator.victoriametrics.com",
 				},
 				Verbs: []string{"delete"},
 			},
@@ -1115,6 +1116,10 @@ func ComputeExpectedGardenletDeploymentSpec(
 
 		if deploymentConfiguration.PodAnnotations != nil {
 			deployment.Template.Annotations = utils.MergeStringMaps(deployment.Template.Annotations, deploymentConfiguration.PodAnnotations)
+		}
+
+		if deploymentConfiguration.Tolerations != nil {
+			deployment.Template.Spec.Tolerations = append(deployment.Template.Spec.Tolerations, deploymentConfiguration.Tolerations...)
 		}
 
 		if deploymentConfiguration.Resources != nil {

@@ -98,7 +98,7 @@ env: []
 image:
     pullPolicy: IfNotPresent
     repository: europe-docker.pkg.dev/gardener-project/releases/gardener/gardenlet
-    tag: v1.135.1
+    tag: v1.136.0
 invalidateServiceAccountToken: true
 nodeToleration:
     defaultNotReadyTolerationSeconds: 60
@@ -110,3 +110,4 @@ resources:
         memory: 100Mi
 revisionHistoryLimit: 2
 serviceAccountName: gardenlet
+tolerations: []
