@@ -14,7 +14,7 @@ stringData:
       version: 0.36.0
 
     os-coreos:
-      version: 1.27.0
+      version: 1.28.0
 
     provider-hcloud:
       version: 0.6.42
