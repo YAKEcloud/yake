@@ -91,3 +91,16 @@ hide_table_of_contents: true
 
 
 </details>
+
+<details>
+<summary><b>Update shoot-networking-problemdetector to <code>0.32.0</code></b></summary>
+
+
+
+## Helm Charts
+- shoot-networking-problemdetector: `europe-docker.pkg.dev/gardener-project/releases/charts/gardener/extensions/shoot-networking-problemdetector:v0.32.0`
+## Container (OCI) Images
+- gardener-extension-shoot-networking-problemdetector: `europe-docker.pkg.dev/gardener-project/releases/gardener/extensions/shoot-networking-problemdetector:v0.32.0`
+
+
+</details>
