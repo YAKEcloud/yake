@@ -1,4 +1,4 @@
 apiVersion: v2
 description: Helmchart for controllerregistration of provider-aws
 name: controller
-version: 1.67.3
+version: 1.67.4
