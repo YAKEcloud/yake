@@ -61,7 +61,7 @@ stringData:
       version: 0.32.0
 
     shoot-rsyslog-relp:
-      version: 0.11.0
+      version: 0.12.0
 
     networking-cilium:
       version: 1.46.0
