@@ -36,7 +36,7 @@ stringData:
       version: 1.56.0
 
     shoot-cert-service:
-      version: 1.56.0
+      version: 1.57.0
 
     shoot-dns-service:
       version: 1.77.1
