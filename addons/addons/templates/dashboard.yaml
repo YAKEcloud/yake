@@ -1,5 +1,5 @@
 {{- if .Values.dashboard.enabled }}
-apiVersion: helm.toolkit.fluxcd.io/v2beta2
+apiVersion: helm.toolkit.fluxcd.io/v2
 kind: HelmRelease
 metadata:
   name: dashboard-runtime
@@ -72,7 +72,7 @@ spec:
                 path: /spec/template/spec/priorityClassName
                 value: gardener-dashboard
 ---
-apiVersion: helm.toolkit.fluxcd.io/v2beta2
+apiVersion: helm.toolkit.fluxcd.io/v2
 kind: HelmRelease
 metadata:
   name: dashboard-application
