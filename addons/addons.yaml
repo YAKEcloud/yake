@@ -8,6 +8,14 @@ spec:
     remediation:
       retries: 3
     createNamespace: true
+    disableWait: true
+    disableWaitForJobs: true
+  upgrade:
+    disableWait: true
+    disableWaitForJobs: true
+  rollback:
+    disableWait: true
+    disableWaitForJobs: true
   dependsOn:
     - name: configuration
   interval: 1m
