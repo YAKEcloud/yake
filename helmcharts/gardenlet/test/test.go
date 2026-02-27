@@ -29,11 +29,11 @@ import (
 	"k8s.io/utils/ptr"
 	"sigs.k8s.io/controller-runtime/pkg/client"
 
+	gardenletconfigv1alpha1 "github.com/gardener/gardener/pkg/apis/config/gardenlet/v1alpha1"
 	gardencorev1beta1 "github.com/gardener/gardener/pkg/apis/core/v1beta1"
 	v1beta1constants "github.com/gardener/gardener/pkg/apis/core/v1beta1/constants"
 	resourcesv1alpha1 "github.com/gardener/gardener/pkg/apis/resources/v1alpha1"
 	"github.com/gardener/gardener/pkg/apis/seedmanagement"
-	gardenletconfigv1alpha1 "github.com/gardener/gardener/pkg/gardenlet/apis/config/v1alpha1"
 	"github.com/gardener/gardener/pkg/utils"
 	kubernetesutils "github.com/gardener/gardener/pkg/utils/kubernetes"
 	. "github.com/gardener/gardener/pkg/utils/test/matchers"
@@ -768,7 +768,8 @@ func ComputeExpectedGardenletConfiguration(
 				ConcurrentSyncs: &five,
 			},
 			TokenRequestorWorkloadIdentity: &gardenletconfigv1alpha1.TokenRequestorWorkloadIdentityControllerConfiguration{
-				ConcurrentSyncs: &five,
+				ConcurrentSyncs:         &five,
+				TokenExpirationDuration: ptr.To(6 * time.Hour),
 			},
 			VPAEvictionRequirements: &gardenletconfigv1alpha1.VPAEvictionRequirementsControllerConfiguration{
 				ConcurrentSyncs: &five,
@@ -804,6 +805,12 @@ func ComputeExpectedGardenletConfiguration(
 				Enabled: ptr.To(false),
 				Garden: &gardenletconfigv1alpha1.GardenVali{
 					Storage: &gardenletconfigv1alpha1.DefaultCentralValiStorage,
+				},
+			},
+			VictoriaLogs: &gardenletconfigv1alpha1.VictoriaLogs{
+				Enabled: ptr.To(false),
+				Garden: &gardenletconfigv1alpha1.GardenVictoriaLogs{
+					Storage: &gardenletconfigv1alpha1.DefaultCentralVictoriaLogsStorage,
 				},
 			},
 			ShootEventLogging: &gardenletconfigv1alpha1.ShootEventLogging{
