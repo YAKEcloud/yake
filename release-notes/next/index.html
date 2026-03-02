@@ -5,7 +5,7 @@
 <meta name="generator" content="Docusaurus v3.9.2">
 <title data-rh="true">Release Notes next | Yet another Kubernetes Engine</title><meta data-rh="true" name="viewport" content="width=device-width,initial-scale=1"><meta data-rh="true" name="twitter:card" content="summary_large_image"><meta data-rh="true" property="og:url" content="https://yake.cloud/release-notes/next"><meta data-rh="true" property="og:locale" content="en"><meta data-rh="true" name="docusaurus_locale" content="en"><meta data-rh="true" name="docsearch:language" content="en"><meta data-rh="true" name="gardener" content="installation, production, operations, maintenance"><meta data-rh="true" name="docusaurus_version" content="current"><meta data-rh="true" name="docusaurus_tag" content="docs-release-notes-current"><meta data-rh="true" name="docsearch:version" content="current"><meta data-rh="true" name="docsearch:docusaurus_tag" content="docs-release-notes-current"><meta data-rh="true" property="og:title" content="Release Notes next | Yet another Kubernetes Engine"><meta data-rh="true" name="description" content="Yake release notes and upgrade guide"><meta data-rh="true" property="og:description" content="Yake release notes and upgrade guide"><link data-rh="true" rel="icon" href="/img/favicon.ico"><link data-rh="true" rel="canonical" href="https://yake.cloud/release-notes/next"><link data-rh="true" rel="alternate" href="https://yake.cloud/release-notes/next" hreflang="en"><link data-rh="true" rel="alternate" href="https://yake.cloud/release-notes/next" hreflang="x-default"><script data-rh="true" type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Release Notes next","item":"https://yake.cloud/release-notes/next"}]}</script><link rel="alternate" type="application/rss+xml" href="/blog/rss.xml" title="Yet another Kubernetes Engine RSS Feed">
 <link rel="alternate" type="application/atom+xml" href="/blog/atom.xml" title="Yet another Kubernetes Engine Atom Feed"><link rel="stylesheet" href="/assets/css/styles.2b5fd77d.css">
-<script src="/assets/js/runtime~main.414e27d7.js" defer="defer"></script>
+<script src="/assets/js/runtime~main.a4698331.js" defer="defer"></script>
 <script src="/assets/js/main.0be99075.js" defer="defer"></script>
 </head>
 <body class="navigation-with-keyboard">
@@ -1018,6 +1018,81 @@
 <li class="">cni-plugins: <code>europe-docker.pkg.dev/gardener-project/releases/gardener/extensions/cni-plugins:v1.57.0</code></li>
 <li class="">gardener-extension-admission-calico: <code>europe-docker.pkg.dev/gardener-project/releases/gardener/extensions/admission-calico:v1.57.0</code></li>
 <li class="">gardener-extension-networking-calico: <code>europe-docker.pkg.dev/gardener-project/releases/gardener/extensions/networking-calico:v1.57.0</code></li>
+</ul>
+</div></div></details>
+<details class="details_lb9f alert alert--info details_b_Ee" data-collapsed="true"><summary><b>Update provider-aws to <code>1.68.0</code></b></summary><div><div class="collapsibleContent_i85q">
+<!-- -->
+<h1>[github.com/gardener/gardener-extension-provider-aws:v1.68.0]</h1>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="️-breaking-changes-3">⚠️ Breaking Changes<a href="#️-breaking-changes-3" class="hash-link" aria-label="Direct link to ⚠️ Breaking Changes" title="Direct link to ⚠️ Breaking Changes" translate="no">​</a></h2>
+<ul>
+<li class=""><code>[OPERATOR]</code> Remove terraformer reconciler for infrastructure resources by @kon-angelo [<a href="https://github.com/gardener/gardener-extension-provider-aws/pull/1617" target="_blank" rel="noopener noreferrer" class="">#1617</a>]</li>
+<li class=""><code>[DEVELOPER]</code> The <code>PLATFORM</code> makefile variable has been replaced by <code>TARGET_PLATFORM</code>. by @wpross [<a href="https://github.com/gardener/gardener-extension-provider-aws/pull/1693" target="_blank" rel="noopener noreferrer" class="">#1693</a>]</li>
+</ul>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="-new-features-4">✨ New Features<a href="#-new-features-4" class="hash-link" aria-label="Direct link to ✨ New Features" title="Direct link to ✨ New Features" translate="no">​</a></h2>
+<ul>
+<li class=""><code>[USER]</code> This extension now supports shoot clusters with Kubernetes version 1.35. You should consider the <a href="https://github.com/kubernetes/kubernetes/blob/master/CHANGELOG/CHANGELOG-1.35.md" target="_blank" rel="noopener noreferrer" class="">Kubernetes release notes</a> before upgrading to 1.35. by @rfranzke [<a href="https://github.com/gardener/gardener-extension-provider-aws/pull/1677" target="_blank" rel="noopener noreferrer" class="">#1677</a>]</li>
+<li class=""><code>[DEVELOPER]</code> Gardener extension provider-aws container images now can be built for multiple platforms locally via the variable <code>TARGET_PLATFORMS</code>, e.g. <code>make docker-images TARGET_PLATFORMS=linux/amd64,linux/arm64</code>. If the variable is unset, the container images are built for the platform <code>linux/&lt;host-arch&gt;</code> only. by @wpross [<a href="https://github.com/gardener/gardener-extension-provider-aws/pull/1693" target="_blank" rel="noopener noreferrer" class="">#1693</a>]</li>
+</ul>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="-bug-fixes-10">🐛 Bug Fixes<a href="#-bug-fixes-10" class="hash-link" aria-label="Direct link to 🐛 Bug Fixes" title="Direct link to 🐛 Bug Fixes" translate="no">​</a></h2>
+<ul>
+<li class=""><code>[OPERATOR]</code> The cloud-controller-manager image used for <code>Shoot</code> clusters running on kubernetes <code>1.31</code> was downgraded from <code>v1.31.9</code> to <code>v1.31.8</code>. This was done to resolve an issue that caused reconciliations of <code>Service</code>s of type LoadBalancer to fail because of attempts to add already existing <code>IpPermission</code> rules to the security groups created for the LoadBalancers. by @plkokanov [<a href="https://github.com/gardener/gardener-extension-provider-aws/pull/1671" target="_blank" rel="noopener noreferrer" class="">#1671</a>]</li>
+<li class=""><code>[OPERATOR]</code> Fixed missing create <code>event</code> permissions in runtime cluster when publishing &quot;became leader&quot; event by @axel7born [<a href="https://github.com/gardener/gardener-extension-provider-aws/pull/1695" target="_blank" rel="noopener noreferrer" class="">#1695</a>]</li>
+<li class=""><code>[OPERATOR]</code> Fixed <code>DNSRecords</code> not reconciling in runtime cluster because of missing <code>namespace</code> permissions by @axel7born [<a href="https://github.com/gardener/gardener-extension-provider-aws/pull/1695" target="_blank" rel="noopener noreferrer" class="">#1695</a>]</li>
+<li class=""><code>[OPERATOR]</code> Add check for non-empty IPv6 CIDR block before updating state by @hebelsan [<a href="https://github.com/gardener/gardener-extension-provider-aws/pull/1683" target="_blank" rel="noopener noreferrer" class="">#1683</a>]</li>
+</ul>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="-others-19">🏃 Others<a href="#-others-19" class="hash-link" aria-label="Direct link to 🏃 Others" title="Direct link to 🏃 Others" translate="no">​</a></h2>
+<ul>
+<li class=""><code>[OPERATOR]</code> Allow to use one secret as an infrastructure secret as well as a dns secret. by @wpross [<a href="https://github.com/gardener/gardener-extension-provider-aws/pull/1689" target="_blank" rel="noopener noreferrer" class="">#1689</a>]</li>
+<li class=""><code>[OPERATOR]</code> Disallow deletion of duplicated zones in infraConfig section by @hebelsan [<a href="https://github.com/gardener/gardener-extension-provider-aws/pull/1475" target="_blank" rel="noopener noreferrer" class="">#1475</a>]</li>
+<li class=""><code>[OPERATOR]</code> Update <code>aws-custom-route-controller</code> image to <code>v0.15.0</code>. by @DockToFuture [<a href="https://github.com/gardener/gardener-extension-provider-aws/pull/1669" target="_blank" rel="noopener noreferrer" class="">#1669</a>]</li>
+<li class=""><code>[OPERATOR]</code> Add support for AMD SEV-SNP in CPU options by @hebelsan [<a href="https://github.com/gardener/gardener-extension-provider-aws/pull/1642" target="_blank" rel="noopener noreferrer" class="">#1642</a>]</li>
+<li class=""><code>[OPERATOR]</code> The <code>.spec.trafficDistribution</code> field of the topology-aware Services will be automatically switched from the deprecated <code>PreferClose</code> to the new <code>PreferSameZone</code> option for Kubernetes 1.34+. by @Kostov6 [<a href="https://github.com/gardener/gardener-extension-provider-aws/pull/1690" target="_blank" rel="noopener noreferrer" class="">#1690</a>]</li>
+<li class=""><code>[OPERATOR]</code> Prevent Calico from setting the <code>NetworkUnavailable</code> condition on nodes when overlay networking gets disabled, and ensures cleanup of existing Calico-set conditions. by @DockToFuture [<a href="https://github.com/gardener/gardener-extension-provider-aws/pull/1703" target="_blank" rel="noopener noreferrer" class="">#1703</a>]</li>
+<li class=""><code>[OPERATOR]</code> Fix cleanup logic when shoot is going to hibernation or waking up. by @DockToFuture [<a href="https://github.com/gardener/gardener-extension-provider-aws/pull/1714" target="_blank" rel="noopener noreferrer" class="">#1714</a>]</li>
+<li class=""><code>[OPERATOR]</code> Add permissions to set network unavailable condition. by @DockToFuture [<a href="https://github.com/gardener/gardener-extension-provider-aws/pull/1665" target="_blank" rel="noopener noreferrer" class="">#1665</a>]</li>
+<li class=""><code>[OPERATOR]</code> AWS secret validation now allows mixing standard (e.g., <code>accessKeyID</code>) and DNS-specific keys (e.g., <code>AWS_SECRET_ACCESS_KEY</code>) within the same secret, but prevents duplicate keys for the same field (e.g., both <code>accessKeyID</code> and <code>AWS_ACCESS_KEY_ID</code>). by @wpross [<a href="https://github.com/gardener/gardener-extension-provider-aws/pull/1667" target="_blank" rel="noopener noreferrer" class="">#1667</a>]</li>
+<li class=""><code>[OPERATOR]</code> Allow <code>aws-custom-route-controller</code> to write events of group <code>events.k8s.io</code> by @MartinWeindel [<a href="https://github.com/gardener/gardener-extension-provider-aws/pull/1651" target="_blank" rel="noopener noreferrer" class="">#1651</a>]</li>
+<li class=""><code>[OPERATOR]</code> Add missing s3 policy partition for EUSC region by @kon-angelo [<a href="https://github.com/gardener/gardener-extension-provider-aws/pull/1663" target="_blank" rel="noopener noreferrer" class="">#1663</a>]</li>
+<li class=""><code>[OPERATOR]</code> Update AWS Load Balancer Controller from <code>v2.17.1</code> to <code>v3.0.0</code>. by @wpross [<a href="https://github.com/gardener/gardener-extension-provider-aws/pull/1707" target="_blank" rel="noopener noreferrer" class="">#1707</a>]</li>
+<li class=""><code>[OPERATOR]</code> Fix an issue that would prevent cluster-autoscaler from considering <code>VolumeAttributesClasses</code> for scaling on shoot <code>&lt; v1.34</code> by @matthias-horne [<a href="https://github.com/gardener/gardener-extension-provider-aws/pull/1666" target="_blank" rel="noopener noreferrer" class="">#1666</a>]</li>
+<li class=""><code>[OPERATOR]</code> Enhance VPC validation by checking subnet CIDRs against VPC CIDR by @hebelsan [<a href="https://github.com/gardener/gardener-extension-provider-aws/pull/1662" target="_blank" rel="noopener noreferrer" class="">#1662</a>]</li>
+<li class=""><code>[OPERATOR]</code> Improved opt-in mechanism for dual-stack to avoid automatic load balancer recreation in dual-stack clusters by @axel7born [<a href="https://github.com/gardener/gardener-extension-provider-aws/pull/1696" target="_blank" rel="noopener noreferrer" class="">#1696</a>]</li>
+<li class=""><code>[DEPENDENCY]</code> The following container images have been updated:
+<ul>
+<li class="">cloud-controller-manager: v1.31.8 -&gt; v1.31.9 (patch)</li>
+<li class="">csi-driver: v1.54.0 -&gt; v1.55.0 (singleton)</li>
+<li class="">csi-driver-efs: v2.2.0 -&gt; v2.3.0 (singleton)</li>
+<li class="">csi-volume-modifier: v0.9.1 -&gt; v0.9.2 (singleton) by @gardener-github-actions[bot] [<a href="https://github.com/gardener/gardener-extension-provider-aws/pull/1648" target="_blank" rel="noopener noreferrer" class="">#1648</a>]</li>
+</ul>
+</li>
+<li class=""><code>[DEPENDENCY]</code> The following container images have been updated:
+<ul>
+<li class="">csi-attacher: v4.10.0 -&gt; v4.11.0 (singleton)</li>
+<li class="">csi-driver: v1.55.0 -&gt; v1.56.0 (singleton)</li>
+<li class="">csi-liveness-probe: v2.17.0 -&gt; v2.18.0 (singleton)</li>
+<li class="">csi-node-driver-registrar: v2.15.0 -&gt; v2.16.0 (singleton)</li>
+<li class="">csi-provisioner: v6.1.0 -&gt; v6.1.1 (patch)</li>
+<li class="">csi-resizer: v2.0.0 -&gt; v2.1.0 (minor)</li>
+<li class="">csi-snapshot-controller: v8.4.0 -&gt; v8.5.0 (singleton)</li>
+<li class="">csi-snapshotter: v8.4.0 -&gt; v8.5.0 (singleton) by @gardener-github-actions[bot] [<a href="https://github.com/gardener/gardener-extension-provider-aws/pull/1692" target="_blank" rel="noopener noreferrer" class="">#1692</a>]</li>
+</ul>
+</li>
+<li class=""><code>[DEPENDENCY]</code> The following container images have been updated:
+<ul>
+<li class="">machine-controller-manager-provider-aws: v0.27.1 -&gt; v0.27.2 (singleton) by @takoverflow [<a href="https://github.com/gardener/gardener-extension-provider-aws/pull/1704" target="_blank" rel="noopener noreferrer" class="">#1704</a>]</li>
+</ul>
+</li>
+</ul>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="helm-charts-25">Helm Charts<a href="#helm-charts-25" class="hash-link" aria-label="Direct link to Helm Charts" title="Direct link to Helm Charts" translate="no">​</a></h2>
+<ul>
+<li class="">admission-aws-application: <code>europe-docker.pkg.dev/gardener-project/releases/charts/gardener/extensions/admission-aws-application:v1.68.0</code></li>
+<li class="">admission-aws-runtime: <code>europe-docker.pkg.dev/gardener-project/releases/charts/gardener/extensions/admission-aws-runtime:v1.68.0</code></li>
+<li class="">provider-aws: <code>europe-docker.pkg.dev/gardener-project/releases/charts/gardener/extensions/provider-aws:v1.68.0</code></li>
+</ul>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="container-oci-images-27">Container (OCI) Images<a href="#container-oci-images-27" class="hash-link" aria-label="Direct link to Container (OCI) Images" title="Direct link to Container (OCI) Images" translate="no">​</a></h2>
+<ul>
+<li class="">gardener-extension-admission-aws: <code>europe-docker.pkg.dev/gardener-project/releases/gardener/extensions/admission-aws:v1.68.0</code></li>
+<li class="">gardener-extension-provider-aws: <code>europe-docker.pkg.dev/gardener-project/releases/gardener/extensions/provider-aws:v1.68.0</code></li>
 </ul>
 </div></div></details></div></article><nav class="docusaurus-mt-lg pagination-nav" aria-label="Docs pages"><a class="pagination-nav__link pagination-nav__link--next" href="/release-notes/v1.136"><div class="pagination-nav__sublabel">Next</div><div class="pagination-nav__label">Release Notes v1.136</div></a></nav></div></div></div></div></main></div></div></div><footer class="theme-layout-footer footer footer--dark"><div class="container container-fluid"><div class="row footer__links"><div class="theme-layout-footer-column col footer__col"><div class="footer__title">Docs</div><ul class="footer__items clean-list"><li class="footer__item"><a class="footer__link-item" href="/docs/overview">Docs</a></li></ul></div><div class="theme-layout-footer-column col footer__col"><div class="footer__title">Community</div><ul class="footer__items clean-list"><li class="footer__item"><a href="https://github.com/yakecloud" target="_blank" rel="noopener noreferrer" class="footer__link-item">GitHub<svg width="13.5" height="13.5" aria-label="(opens in new tab)" class="iconExternalLink_nPIU"><use href="#theme-svg-external-link"></use></svg></a></li><li class="footer__item"><a href="https://github.com/gardener-community" target="_blank" rel="noopener noreferrer" class="footer__link-item">Gardener Community<svg width="13.5" height="13.5" aria-label="(opens in new tab)" class="iconExternalLink_nPIU"><use href="#theme-svg-external-link"></use></svg></a></li><li class="footer__item"><a href="https://gardener-cloud.slack.com" target="_blank" rel="noopener noreferrer" class="footer__link-item">Slack<svg width="13.5" height="13.5" aria-label="(opens in new tab)" class="iconExternalLink_nPIU"><use href="#theme-svg-external-link"></use></svg></a></li></ul></div><div class="theme-layout-footer-column col footer__col"><div class="footer__title">More</div><ul class="footer__items clean-list"><li class="footer__item"><a class="footer__link-item" href="/blog">Blog</a></li><li class="footer__item"><a class="footer__link-item" href="/legals">Legals</a></li><li class="footer__item"><a class="footer__link-item" href="/privacy-policy">Privacy policy</a></li></ul></div></div><div class="footer__bottom text--center"><div class="footer__copyright">Copyright © 2026 23 Technologies GmbH</div></div></div></footer></div>
 </body>
