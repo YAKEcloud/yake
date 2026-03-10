@@ -1,3 +1,3 @@
 ## General Changes
 
-* fix(chart): rbac-runtime has a wrong serviceAccountName (#20) @nschad
+* Check if S3 bucket exists before creation (#25) @Gerrit91
