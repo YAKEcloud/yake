@@ -13,7 +13,8 @@
     "release-v1.133",
     "release-v1.134",
     "release-v1.135",
-    "release-v1.136"
+    "release-v1.136",
+    "release-v1.137"
   ],
   "automerge": true,
   "configMigration": true,
@@ -60,7 +61,8 @@
         "release-v1.133",
         "release-v1.134",
         "release-v1.135",
-        "release-v1.136"
+        "release-v1.136",
+        "release-v1.137"
       ],
       "enabled": false,
       "matchPackageNames": [
@@ -198,6 +200,20 @@
         "release-v1.136"
       ],
       "allowedVersions": "/^1[.]136[.].*$/",
+      "enabled": true,
+      "matchPackageNames": [
+        "/gardener-controlplane/",
+        "/gardener-controlplane-application/",
+        "/gardener-controlplane-runtime/",
+        "/gardener-application/",
+        "/gardenlet/"
+      ]
+    },
+    {
+      "matchBaseBranches": [
+        "release-v1.137"
+      ],
+      "allowedVersions": "/^1[.]137[.].*$/",
       "enabled": true,
       "matchPackageNames": [
         "/gardener-controlplane/",
