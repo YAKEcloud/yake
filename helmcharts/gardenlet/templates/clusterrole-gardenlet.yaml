@@ -94,6 +94,7 @@ rules:
   - delete
 - apiGroups:
   - ""
+  - events.k8s.io
   resources:
   - events
   verbs:
@@ -189,11 +190,13 @@ rules:
   - clusters.extensions.gardener.cloud
   - controlplanes.extensions.gardener.cloud
   - networks.extensions.gardener.cloud
+  - selfhostedshootexposures.extensions.gardener.cloud
   - verticalpodautoscalers.autoscaling.k8s.io
   - verticalpodautoscalercheckpoints.autoscaling.k8s.io
   - perses.perses.dev
   - persesdashboards.perses.dev
   - persesdatasources.perses.dev
+  - persesglobaldatasources.perses.dev
   - opentelemetrycollectors.opentelemetry.io
   - targetallocators.opentelemetry.io
   - opampbridges.opentelemetry.io
@@ -270,6 +273,7 @@ rules:
   - infrastructures
   - networks
   - operatingsystemconfigs
+  - selfhostedshootexposures
   - workers
   verbs:
   - create
@@ -291,6 +295,7 @@ rules:
   - infrastructures/status
   - networks/status
   - operatingsystemconfigs/status
+  - selfhostedshootexposures/status
   - workers/status
   verbs:
   - patch

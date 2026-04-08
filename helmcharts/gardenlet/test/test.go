@@ -15,6 +15,7 @@ import (
 	. "github.com/onsi/gomega"
 	appsv1 "k8s.io/api/apps/v1"
 	corev1 "k8s.io/api/core/v1"
+	eventsv1 "k8s.io/api/events/v1"
 	policyv1 "k8s.io/api/policy/v1"
 	rbacv1 "k8s.io/api/rbac/v1"
 	schedulingv1 "k8s.io/api/scheduling/v1"
@@ -174,7 +175,7 @@ func getGardenletClusterRole(labels map[string]string) *rbacv1.ClusterRole {
 				Verbs:         []string{"delete"},
 			},
 			{
-				APIGroups: []string{""},
+				APIGroups: []string{"", eventsv1.GroupName},
 				Resources: []string{"events"},
 				Verbs:     []string{"get", "list", "create", "patch", "update"},
 			},
@@ -249,11 +250,13 @@ func getGardenletClusterRole(labels map[string]string) *rbacv1.ClusterRole {
 					"clusters.extensions.gardener.cloud",
 					"controlplanes.extensions.gardener.cloud",
 					"networks.extensions.gardener.cloud",
+					"selfhostedshootexposures.extensions.gardener.cloud",
 					"verticalpodautoscalers.autoscaling.k8s.io",
 					"verticalpodautoscalercheckpoints.autoscaling.k8s.io",
 					"perses.perses.dev",
 					"persesdashboards.perses.dev",
 					"persesdatasources.perses.dev",
+					"persesglobaldatasources.perses.dev",
 					"opentelemetrycollectors.opentelemetry.io",
 					"targetallocators.opentelemetry.io",
 					"opampbridges.opentelemetry.io",
@@ -284,12 +287,12 @@ func getGardenletClusterRole(labels map[string]string) *rbacv1.ClusterRole {
 			},
 			{
 				APIGroups: []string{"extensions.gardener.cloud"},
-				Resources: []string{"backupbuckets", "backupentries", "bastions", "clusters", "containerruntimes", "controlplanes", "dnsrecords", "extensions", "infrastructures", "networks", "operatingsystemconfigs", "workers"},
+				Resources: []string{"backupbuckets", "backupentries", "bastions", "clusters", "containerruntimes", "controlplanes", "dnsrecords", "extensions", "infrastructures", "networks", "operatingsystemconfigs", "selfhostedshootexposures", "workers"},
 				Verbs:     []string{"create", "delete", "get", "list", "watch", "patch", "update"},
 			},
 			{
 				APIGroups: []string{"extensions.gardener.cloud"},
-				Resources: []string{"backupbuckets/status", "backupentries/status", "containerruntimes/status", "controlplanes/status", "dnsrecords/status", "extensions/status", "infrastructures/status", "networks/status", "operatingsystemconfigs/status", "workers/status"},
+				Resources: []string{"backupbuckets/status", "backupentries/status", "containerruntimes/status", "controlplanes/status", "dnsrecords/status", "extensions/status", "infrastructures/status", "networks/status", "operatingsystemconfigs/status", "selfhostedshootexposures/status", "workers/status"},
 				Verbs:     []string{"patch", "update"},
 			},
 			{
@@ -769,7 +772,7 @@ func ComputeExpectedGardenletConfiguration(
 			},
 			TokenRequestorWorkloadIdentity: &gardenletconfigv1alpha1.TokenRequestorWorkloadIdentityControllerConfiguration{
 				ConcurrentSyncs:         &five,
-				TokenExpirationDuration: ptr.To(6 * time.Hour),
+				TokenExpirationDuration: &metav1.Duration{Duration: 6 * time.Hour},
 			},
 			VPAEvictionRequirements: &gardenletconfigv1alpha1.VPAEvictionRequirementsControllerConfiguration{
 				ConcurrentSyncs: &five,
