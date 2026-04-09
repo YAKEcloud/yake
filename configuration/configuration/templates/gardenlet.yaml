@@ -36,7 +36,9 @@ stringData:
           dns:
             provider:
               type: {{ .Values.domains.global.provider }}
-              secretRef:
+              credentialsRef:
+                apiVersion: v1
+                kind: Secret
                 name: base-dns-provider-secret
                 namespace: garden
             internal:
