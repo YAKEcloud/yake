@@ -7,4 +7,4 @@ type: Opaque
 stringData:
   values.yaml: |
     vpa:
-      enabled: true
+      enabled: false
