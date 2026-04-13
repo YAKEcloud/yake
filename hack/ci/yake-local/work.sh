@@ -206,13 +206,28 @@ _create_local_dns () {
   ############# knot #################
   $KUBECTL apply -f knot.yaml
 
-  svcIP=$($KUBECTL get svc knot -oyaml | $YQ .spec.clusterIP)
+  svcIP=$($KUBECTL get svc knot -o jsonpath="{.status.loadBalancer.ingress[0].ip}")
 
-  $KUBECTL -n kube-system get configmap coredns -ojson |
-    $YQ '.data.Corefile' |
-    sed "\$a local.gardener.cloud:53 {\n  forward . $svcIP\n}" |
-    $KUBECTL -n kube-system create configmap coredns --from-file Corefile=/dev/stdin --dry-run=client -oyaml |
+corefile="$(
+  $KUBECTL -n kube-system get configmap coredns -o json |
+    $YQ -r '.data.Corefile'
+)"
+
+block="local.gardener.cloud:53 {
+  hosts {
+    $svcIP ns.local.gardener.cloud
+    fallthrough
+  }
+  forward . $svcIP
+}"
+
+if ! grep -Fq 'local.gardener.cloud:53 {' <<<"$corefile"; then
+  printf '%s\n%s\n' "$corefile" "$block" |
+    $KUBECTL -n kube-system create configmap coredns \
+      --from-file=Corefile=/dev/stdin \
+      --dry-run=client -o yaml |
     $KUBECTL -n kube-system patch configmap coredns --patch-file /dev/stdin
+fi
 }
 
 _create_flux () {
