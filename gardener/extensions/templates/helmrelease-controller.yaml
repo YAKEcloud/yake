@@ -65,8 +65,6 @@ spec:
               kind: ControllerDeployment
               name: .*{{ $k }}.*
 {{- end }}
-{{- else }}
-  postRenderers: []
 {{- end }}
 {{- end }}
 {{- end }}
