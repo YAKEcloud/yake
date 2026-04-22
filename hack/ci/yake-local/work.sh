@@ -379,6 +379,45 @@ subjects:
 EOF
 }
 
+# This is a workaround for a "hairpin" type of service access, where
+# provider-local needs to access knot to reconcile DNS entries and targeted
+# netpol were not reliable with calico, so we allow all egress
+_netpol_provider_local_all_egress () {
+  selector='controllerregistration.core.gardener.cloud/name=provider-local'
+
+  while true; do
+    mapfile -t namespaces < <(
+      $KUBECTL get ns \
+        -l "$selector" \
+        -o jsonpath='{range .items[*]}{.metadata.name}{"\n"}{end}'
+    )
+
+    if [[ "${#namespaces[@]}" -eq 1 ]]; then
+      ns="${namespaces[0]}"
+      break
+    fi
+
+    echo "Waiting: found ${#namespaces[@]} matching namespaces"
+    sleep 5
+  done
+
+  $KUBECTL apply -f - <<EOF
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: allow-all-egress
+  namespace: ${ns}
+spec:
+  podSelector: {}
+  policyTypes:
+    - Egress
+  egress:
+    - {}
+EOF
+
+  echo "Applied allow-all egress NetworkPolicy to namespace: $ns"
+}
+
 _wait_for_initial_seed_ready () {
   _print_heading "Wait For Initial Seed Ready"
 
@@ -410,4 +449,5 @@ _create_flux
 _patch_ccm
 _ensure_hosts
 _create_rbac
+_netpol_provider_local_all_egress
 _wait_for_initial_seed_ready
