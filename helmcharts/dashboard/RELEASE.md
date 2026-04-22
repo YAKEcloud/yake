@@ -1,7 +1,7 @@
-# [github.com/gardener/dashboard:1.83.8]
+# [github.com/gardener/dashboard:1.83.11]
 
 ## 🐛 Bug Fixes
-- `[OPERATOR]` Bumps the `qs` dependency from `6.14.0` to `6.14.2` to address [CVE-2026-2391](https://nvd.nist.gov/vuln/detail/CVE-2026-2391) / [GHSA-w7fw-mjwx-w883](https://github.com/advisories/GHSA-w7fw-mjwx-w883). by @petersutter [[#2817](https://github.com/gardener/dashboard/pull/2817)]
+- `[OPERATOR]` Updated `undici` to `v7.24.6` to fix CVE-2026-1525 (Critical), CVE-2026-1526, CVE-2026-1528, CVE-2026-2229 (High) by @petersutter [[#2853](https://github.com/gardener/dashboard/pull/2853)]
 
 ## Container (OCI) Images
-- gardener-dashboard: `europe-docker.pkg.dev/gardener-project/releases/gardener/dashboard:1.83.8`
+- gardener-dashboard: `europe-docker.pkg.dev/gardener-project/releases/gardener/dashboard:1.83.11`
