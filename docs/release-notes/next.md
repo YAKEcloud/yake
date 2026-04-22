@@ -732,3 +732,16 @@ This release officially supports fluxcd>2.8
 
 
 </details>
+
+<details>
+<summary><b>Update os-gardenlinux to <code>0.39.0</code></b></summary>
+
+
+
+## Helm Charts
+- os-gardenlinux: `europe-docker.pkg.dev/gardener-project/releases/charts/gardener/extensions/os-gardenlinux:v0.39.0`
+## Container (OCI) Images
+- gardener-extension-os-gardenlinux: `europe-docker.pkg.dev/gardener-project/releases/gardener/extensions/os-gardenlinux:v0.39.0`
+
+
+</details>

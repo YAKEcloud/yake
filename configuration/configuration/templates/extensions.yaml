@@ -11,7 +11,7 @@ stringData:
       version: 1.36.0
 
     os-gardenlinux:
-      version: 0.36.0
+      version: 0.39.0
 
     os-coreos:
       version: 1.29.0
