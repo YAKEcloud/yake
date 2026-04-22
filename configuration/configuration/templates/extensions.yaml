@@ -64,7 +64,7 @@ stringData:
       version: 0.12.0
 
     networking-cilium:
-      version: 1.46.0
+      version: 1.47.0
 
     provider-alicloud:
       version: 1.69.0
