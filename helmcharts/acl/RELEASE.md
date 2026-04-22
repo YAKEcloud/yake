@@ -2,31 +2,31 @@
 
 ## What's Changed
 
-- ✨ The ACL extension now generates the required EnvoyFilters the alpha feature gate `UseUnifiedHTTPProxyPort`. Users should update the extension **BEFORE** enabling the feature gate. https://github.com/stackitcloud/gardener-extension-acl/pull/238
+### New Features
+* Switch `.spec.trafficDistribution` field to `PreferSameZone` for Kubernete 1.34+ by @Kostov6 in https://github.com/stackitcloud/gardener-extension-acl/pull/251
 
 ### 🤖 Dependencies
-* Update module github.com/gardener/gardener to v1.133.1 by @renovate[bot] in https://github.com/stackitcloud/gardener-extension-acl/pull/220
-* Update dependency ko-build/ko to v0.18.1 by @renovate[bot] in https://github.com/stackitcloud/gardener-extension-acl/pull/221
-* Update k8s.io/utils digest to 61b37f7 by @renovate[bot] in https://github.com/stackitcloud/gardener-extension-acl/pull/222
-* Update k8s.io/utils digest to 98d557b by @renovate[bot] in https://github.com/stackitcloud/gardener-extension-acl/pull/223
-* Update k8s.io/utils digest to 9d40a56 by @renovate[bot] in https://github.com/stackitcloud/gardener-extension-acl/pull/224
-* Update k8s.io/utils digest to 718f0e5 by @renovate[bot] in https://github.com/stackitcloud/gardener-extension-acl/pull/225
-* Update k8s.io/utils digest to 0fe9cd7 by @renovate[bot] in https://github.com/stackitcloud/gardener-extension-acl/pull/226
-* Update module github.com/gardener/gardener to v1.133.2 by @renovate[bot] in https://github.com/stackitcloud/gardener-extension-acl/pull/227
-* Update module github.com/onsi/ginkgo/v2 to v2.27.4 by @renovate[bot] in https://github.com/stackitcloud/gardener-extension-acl/pull/228
-* Update k8s.io/utils digest to 914a6e7 by @renovate[bot] in https://github.com/stackitcloud/gardener-extension-acl/pull/230
-* Update module github.com/onsi/ginkgo/v2 to v2.27.5 by @renovate[bot] in https://github.com/stackitcloud/gardener-extension-acl/pull/233
-* Update dependency go to v1.25.6 by @renovate[bot] in https://github.com/stackitcloud/gardener-extension-acl/pull/234
-* Update module github.com/gardener/gardener to v1.133.3 by @renovate[bot] in https://github.com/stackitcloud/gardener-extension-acl/pull/235
-* Update module sigs.k8s.io/controller-runtime to v0.22.5 by @renovate[bot] in https://github.com/stackitcloud/gardener-extension-acl/pull/237
-* Update dependency go to v1.25.6 by @renovate[bot] in https://github.com/stackitcloud/gardener-extension-acl/pull/236
-* Update module golang.org/x/tools to v0.41.0 by @renovate[bot] in https://github.com/stackitcloud/gardener-extension-acl/pull/232
-* Update module github.com/onsi/gomega to v1.39.0 by @renovate[bot] in https://github.com/stackitcloud/gardener-extension-acl/pull/229
+* Update module github.com/gardener/gardener to v1.133.4 by @renovate[bot] in https://github.com/stackitcloud/gardener-extension-acl/pull/241
+* Update module github.com/onsi/gomega to v1.39.1 by @renovate[bot] in https://github.com/stackitcloud/gardener-extension-acl/pull/242
+* Update module github.com/onsi/ginkgo/v2 to v2.28.1 by @renovate[bot] in https://github.com/stackitcloud/gardener-extension-acl/pull/244
+* Update dependency go to v1.25.7 by @renovate[bot] in https://github.com/stackitcloud/gardener-extension-acl/pull/245
+* Update k8s.io/utils digest to b8788ab by @renovate[bot] in https://github.com/stackitcloud/gardener-extension-acl/pull/248
+* Update k8s packages to v0.34.4 (patch) by @renovate[bot] in https://github.com/stackitcloud/gardener-extension-acl/pull/250
+* Update module github.com/gardener/gardener to v1.133.5 by @renovate[bot] in https://github.com/stackitcloud/gardener-extension-acl/pull/252
+* Update module golang.org/x/tools to v0.42.0 by @renovate[bot] in https://github.com/stackitcloud/gardener-extension-acl/pull/247
+* Update dependency go to v1.25.7 by @renovate[bot] in https://github.com/stackitcloud/gardener-extension-acl/pull/246
+* Update k8s packages to v0.34.5 (patch) by @renovate[bot] in https://github.com/stackitcloud/gardener-extension-acl/pull/254
+* Update dependency go to v1.26.0 by @renovate[bot] in https://github.com/stackitcloud/gardener-extension-acl/pull/249
+* Update dependency go to v1.26.1 by @renovate[bot] in https://github.com/stackitcloud/gardener-extension-acl/pull/257
+* Update module golang.org/x/tools to v0.43.0 by @renovate[bot] in https://github.com/stackitcloud/gardener-extension-acl/pull/258
+* Update docker/login-action action to v4 by @renovate[bot] in https://github.com/stackitcloud/gardener-extension-acl/pull/255
+* Update k8s packages (minor) by @renovate[bot] in https://github.com/stackitcloud/gardener-extension-acl/pull/239
+* Update k8s packages to v0.35.3 (patch) by @renovate[bot] in https://github.com/stackitcloud/gardener-extension-acl/pull/259
 ### ℹ️ Other Changes
-* fix spelling of we in ReadMe by @IndritFejza in https://github.com/stackitcloud/gardener-extension-acl/pull/231
-* [GEP-30] Generate envoy filter for new unified http proxy port by @maboehm in https://github.com/stackitcloud/gardener-extension-acl/pull/238
+* Update the admission Service template by @ialidzhikov in https://github.com/stackitcloud/gardener-extension-acl/pull/253
+* Remove dergeberl from CODEOWNERS by @dergeberl in https://github.com/stackitcloud/gardener-extension-acl/pull/256
 
 ## New Contributors
-* @IndritFejza made their first contribution in https://github.com/stackitcloud/gardener-extension-acl/pull/231
+* @Kostov6 made their first contribution in https://github.com/stackitcloud/gardener-extension-acl/pull/251
 
-**Full Changelog**: https://github.com/stackitcloud/gardener-extension-acl/compare/v1.14.0...v1.15.0
+**Full Changelog**: https://github.com/stackitcloud/gardener-extension-acl/compare/v1.15.0...v1.16.0
