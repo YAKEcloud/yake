@@ -572,3 +572,16 @@ This release officially supports fluxcd>2.8
 **Full Changelog**: https://github.com/stackitcloud/gardener-extension-acl/compare/v1.15.0...v1.16.0
 
 </details>
+
+<details>
+<summary><b>Update cert-management to <code>0.22.0</code></b></summary>
+
+
+
+## Helm Charts
+- cert-controller-manager: `europe-docker.pkg.dev/gardener-project/releases/charts/cert-controller-manager:v0.22.0`
+## Container (OCI) Images
+- cert-management: `europe-docker.pkg.dev/gardener-project/releases/cert-controller-manager:v0.22.0`
+
+
+</details>
