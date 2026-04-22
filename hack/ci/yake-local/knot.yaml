@@ -7,6 +7,7 @@ metadata:
   labels:
     app: knot
 spec:
+  type: LoadBalancer
   selector:
     app: knot
   ports:
@@ -90,10 +91,15 @@ data:
         address: [ "0.0.0.0/0" ] # replace with your address filter
         action: transfer
         key: "my-key."
-
+      - id: "update-acl-nokey"
+        address: [ "0.0.0.0/0" ] # replace with your address filter
+        action: update
+      - id: "transfer-acl-nokey"
+        address: [ "0.0.0.0/0" ] # replace with your address filter
+        action: transfer
     zone:
       - domain: local.gardener.cloud
-        acl: [ "update-acl", "transfer-acl" ]
+        acl: [ "update-acl", "transfer-acl", "update-acl-nokey", "transfer-acl-nokey" ]
 
 
     log:
@@ -110,4 +116,5 @@ data:
   local.gardener.cloud.zone: |
     $ORIGIN local.gardener.cloud.
     $TTL 600
-    local.gardener.cloud.  IN  SOA   ns.local.gardener.cloud. root.local.gardener.cloud. ( 2020091025 7200 3600 1209600 3600 )
+    @  IN  SOA   ns.local.gardener.cloud. root.local.gardener.cloud. ( 2020091025 7200 3600 1209600 3600 )
+       IN NS ns.local.gardener.cloud.

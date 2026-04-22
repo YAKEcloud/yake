@@ -29,6 +29,7 @@ spec:
   values:
     controller:
       enabled: true
+{{- if or $v.globallyEnabled $v.values }}
   postRenderers:
 {{- if $v.globallyEnabled }}
     - kustomize:
@@ -63,6 +64,7 @@ spec:
               version: v1beta1
               kind: ControllerDeployment
               name: .*{{ $k }}.*
+{{- end }}
 {{- end }}
 {{- end }}
 {{- end }}

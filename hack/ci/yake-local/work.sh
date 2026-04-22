@@ -206,13 +206,28 @@ _create_local_dns () {
   ############# knot #################
   $KUBECTL apply -f knot.yaml
 
-  svcIP=$($KUBECTL get svc knot -oyaml | $YQ .spec.clusterIP)
+  svcIP=$($KUBECTL get svc knot -o jsonpath="{.status.loadBalancer.ingress[0].ip}")
 
-  $KUBECTL -n kube-system get configmap coredns -ojson |
-    $YQ '.data.Corefile' |
-    sed "\$a local.gardener.cloud:53 {\n  forward . $svcIP\n}" |
-    $KUBECTL -n kube-system create configmap coredns --from-file Corefile=/dev/stdin --dry-run=client -oyaml |
+corefile="$(
+  $KUBECTL -n kube-system get configmap coredns -o json |
+    $YQ -r '.data.Corefile'
+)"
+
+block="local.gardener.cloud:53 {
+  hosts {
+    $svcIP ns.local.gardener.cloud
+    fallthrough
+  }
+  forward . $svcIP
+}"
+
+if ! grep -Fq 'local.gardener.cloud:53 {' <<<"$corefile"; then
+  printf '%s\n%s\n' "$corefile" "$block" |
+    $KUBECTL -n kube-system create configmap coredns \
+      --from-file=Corefile=/dev/stdin \
+      --dry-run=client -o yaml |
     $KUBECTL -n kube-system patch configmap coredns --patch-file /dev/stdin
+fi
 }
 
 _create_flux () {
@@ -364,6 +379,45 @@ subjects:
 EOF
 }
 
+# This is a workaround for a "hairpin" type of service access, where
+# provider-local needs to access knot to reconcile DNS entries and targeted
+# netpol were not reliable with calico, so we allow all egress
+_netpol_provider_local_all_egress () {
+  selector='controllerregistration.core.gardener.cloud/name=provider-local'
+
+  while true; do
+    mapfile -t namespaces < <(
+      $KUBECTL get ns \
+        -l "$selector" \
+        -o jsonpath='{range .items[*]}{.metadata.name}{"\n"}{end}'
+    )
+
+    if [[ "${#namespaces[@]}" -eq 1 ]]; then
+      ns="${namespaces[0]}"
+      break
+    fi
+
+    echo "Waiting: found ${#namespaces[@]} matching namespaces"
+    sleep 5
+  done
+
+  $KUBECTL apply -f - <<EOF
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: allow-all-egress
+  namespace: ${ns}
+spec:
+  podSelector: {}
+  policyTypes:
+    - Egress
+  egress:
+    - {}
+EOF
+
+  echo "Applied allow-all egress NetworkPolicy to namespace: $ns"
+}
+
 _wait_for_initial_seed_ready () {
   _print_heading "Wait For Initial Seed Ready"
 
@@ -395,4 +449,5 @@ _create_flux
 _patch_ccm
 _ensure_hosts
 _create_rbac
+_netpol_provider_local_all_egress
 _wait_for_initial_seed_ready
