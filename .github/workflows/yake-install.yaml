@@ -31,7 +31,7 @@ jobs:
           fetch-depth: 0
           ref: ${{ github.head_ref }}
       - name: install
-        uses: nick-fields/retry@v3
+        uses: nick-fields/retry@v4
         env:
           K8S_VERSION: ${{ matrix.version }}
           CNI: ${{ matrix.cni }}
