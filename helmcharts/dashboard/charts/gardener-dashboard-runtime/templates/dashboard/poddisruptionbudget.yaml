@@ -1,0 +1,26 @@
+{{- if .Values.global.dashboard.enabled }}
+{{- if .Values.global.dashboard.podDisruptionBudget }}
+apiVersion: policy/v1
+kind: PodDisruptionBudget
+metadata:
+  name: gardener-dashboard
+  namespace: {{ .Release.Namespace }}
+  labels:
+    app.kubernetes.io/name: gardener-dashboard
+    app.kubernetes.io/component: dashboard
+{{- if and .Values.global.dashboard.podDisruptionBudget.minAvailable .Values.global.dashboard.podDisruptionBudget.maxUnavailable }}
+{{- fail "podDisruptionBudget: specify either minAvailable or maxUnavailable, not both" }}
+{{- end }}
+spec:
+  {{- if .Values.global.dashboard.podDisruptionBudget.minAvailable }}
+  minAvailable: {{ .Values.global.dashboard.podDisruptionBudget.minAvailable }}
+  {{- end }}
+  {{- if .Values.global.dashboard.podDisruptionBudget.maxUnavailable }}
+  maxUnavailable: {{ .Values.global.dashboard.podDisruptionBudget.maxUnavailable }}
+  {{- end }}
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: gardener-dashboard
+      app.kubernetes.io/component: dashboard
+{{- end }}
+{{- end }}
