@@ -82,7 +82,7 @@ stringData:
         enabled: true
 
     runtime-gvisor:
-      version: 0.33.0
+      version: 0.34.0
 
     backup-s3:
       version: 0.8.2
