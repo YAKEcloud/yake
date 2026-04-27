@@ -1,15 +1,15 @@
-# [github.com/gardener/gardener-extension-runtime-gvisor:v0.34.0]
+# [github.com/gardener/gardener-extension-runtime-gvisor:v0.35.0]
 
 ## 🏃 Others
-- `[OPERATOR]` Updated gVisor binaries to 20260413.0. by @federated-github-access[bot] [[#390](https://github.com/gardener/gardener-extension-runtime-gvisor/pull/390)]
+- `[OPERATOR]` Updated gVisor binaries to 20260420.0. by @federated-github-access[bot] [[#392](https://github.com/gardener/gardener-extension-runtime-gvisor/pull/392)]
 
 ## application/spdx+json
-- gardener-extension-runtime-gvisor-installation-spdx-ref: `europe-docker.pkg.dev/gardener-project/releases/gardener/extensions/runtime-gvisor-installation@sha256:7cb07f94071b0a6560fece328069f95462699222c5070b11134508a0318db8f6`
-- gardener-extension-runtime-gvisor-installation-spdx-ref: `europe-docker.pkg.dev/gardener-project/releases/gardener/extensions/runtime-gvisor-installation@sha256:f76492c1cf38bda134ca23dce62b9a6303661795ec39d4748ec7843b9f2cb194`
-- gardener-extension-runtime-gvisor-spdx-ref: `europe-docker.pkg.dev/gardener-project/releases/gardener/extensions/runtime-gvisor@sha256:206ce9d3d48500a657c7ad97e04cffcda4e2227e7c8ef8ef2a55ecaec4c75946`
-- gardener-extension-runtime-gvisor-spdx-ref: `europe-docker.pkg.dev/gardener-project/releases/gardener/extensions/runtime-gvisor@sha256:c0c08f90708373a1cfaa7be7e58a83d8d47000c0a769c9c589e3368b2cbd4e30`
+- gardener-extension-runtime-gvisor-installation-spdx-ref: `europe-docker.pkg.dev/gardener-project/releases/gardener/extensions/runtime-gvisor-installation@sha256:16c99042ab09b3fe859f5567db176834441148baa3ae93cb3d52050170b5e0d3`
+- gardener-extension-runtime-gvisor-installation-spdx-ref: `europe-docker.pkg.dev/gardener-project/releases/gardener/extensions/runtime-gvisor-installation@sha256:bdeef62b1e7f0d9a477bd163149b0175e7b1763971ce11728f94dd06fe5bfeec`
+- gardener-extension-runtime-gvisor-spdx-ref: `europe-docker.pkg.dev/gardener-project/releases/gardener/extensions/runtime-gvisor@sha256:2bac08137ff89bede7e1bf9557417e6fd9687b74917d1718d8d6ae918c6c1983`
+- gardener-extension-runtime-gvisor-spdx-ref: `europe-docker.pkg.dev/gardener-project/releases/gardener/extensions/runtime-gvisor@sha256:f0f2644c7b13644aa5e53ed6918aa46e457a4bdb811c3d29b8f1b41e34fe5ec0`
 ## Helm Charts
-- runtime-gvisor: `europe-docker.pkg.dev/gardener-project/releases/charts/gardener/extensions/runtime-gvisor:v0.34.0`
+- runtime-gvisor: `europe-docker.pkg.dev/gardener-project/releases/charts/gardener/extensions/runtime-gvisor:v0.35.0`
 ## Container (OCI) Images
-- gardener-extension-runtime-gvisor-installation: `europe-docker.pkg.dev/gardener-project/releases/gardener/extensions/runtime-gvisor-installation:v0.34.0`
-- gardener-extension-runtime-gvisor: `europe-docker.pkg.dev/gardener-project/releases/gardener/extensions/runtime-gvisor:v0.34.0`
+- gardener-extension-runtime-gvisor-installation: `europe-docker.pkg.dev/gardener-project/releases/gardener/extensions/runtime-gvisor-installation:v0.35.0`
+- gardener-extension-runtime-gvisor: `europe-docker.pkg.dev/gardener-project/releases/gardener/extensions/runtime-gvisor:v0.35.0`
