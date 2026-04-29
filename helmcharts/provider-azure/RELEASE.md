@@ -1,53 +1,43 @@
-# [github.com/gardener/gardener-extension-provider-azure:v1.59.0]
+# [github.com/gardener/gardener-extension-provider-azure:v1.60.0]
 
-## ⚠️ Breaking Changes
-- `[DEVELOPER]` The `PLATFORM` makefile variable has been replaced by `TARGET_PLATFORM`. by @wpross [[#1453](https://github.com/gardener/gardener-extension-provider-azure/pull/1453)]
+## 📰 Noteworthy
+- `[USER]` The '--volume-attach-limit' flag of the azuredisk-csi-driver can now be set for a shoot by using the 'azure.provider.extensions.gardener.cloud/volume-attach-limit' annotation.  
+  The '--reserved-data-disk-slot-num' flag of the azuredisk-csi-driver can now be set for a shoot by using the 'azure.provider.extensions.gardener.cloud/reserved-data-disk-slot-num' annotation. by @AndreasBurger [[#1513](https://github.com/gardener/gardener-extension-provider-azure/pull/1513)]
 
 ## ✨ New Features
-- `[USER]` This extension now supports shoot clusters with Kubernetes version 1.35. You should consider the [Kubernetes release notes](https://github.com/kubernetes/kubernetes/blob/master/CHANGELOG/CHANGELOG-1.35.md) before upgrading to 1.35. by @rfranzke [[#1443](https://github.com/gardener/gardener-extension-provider-azure/pull/1443)]
-- `[DEVELOPER]` Gardener extension provider-azure container images now can be built for multiple platforms locally via the variable `TARGET_PLATFORMS`, e.g. `make docker-images TARGET_PLATFORMS=linux/amd64,linux/arm64`. If the variable is unset, the container images are built for the platform `linux/<host-arch>` only. by @wpross [[#1453](https://github.com/gardener/gardener-extension-provider-azure/pull/1453)]
+- `[OPERATOR]` Support mixed format for machine image specifications in CloudProfile and NamespacedCloudProfile, allowing both (legacy) architecture format and new capabilityFlavors format to coexist within the same CloudProfile for smooth migration. by @Roncossek [[#1507](https://github.com/gardener/gardener-extension-provider-azure/pull/1507)]
+- `[OPERATOR]` Add required CSI disk RBAC to monitor premium v2 disk migration by @hebelsan [[#1506](https://github.com/gardener/gardener-extension-provider-azure/pull/1506)]
+- `[OPERATOR]` No rollout hot-update of ProviderConfig.NodeTemplate.VirtualCapacity with/without already existing ProviderConfig.  
+  New hash strategy adopted for ProviderConfig for k8s versions >= 1.35 by @gagan16k [[#1456](https://github.com/gardener/gardener-extension-provider-azure/pull/1456)]
 
 ## 🐛 Bug Fixes
-- `[OPERATOR]` Fixed an issue that prevented featuregates from being rendered correctly by @AndreasBurger [[#1444](https://github.com/gardener/gardener-extension-provider-azure/pull/1444)]
-- `[OPERATOR]` Fixed `DNSRecords` not reconciling in runtime cluster because of missing `namespace` permissions by @matthias-horne [[#1460](https://github.com/gardener/gardener-extension-provider-azure/pull/1460)]
-- `[OPERATOR]` Fixed missing create `event` permissions in runtime cluster when publishing "became leader" event by @matthias-horne [[#1460](https://github.com/gardener/gardener-extension-provider-azure/pull/1460)]
+- `[USER]` It is again allowed shoots to use `WorkloadIdentity` as credentials for DNS management, e.g. via the `shoot.spec.dns.providers[].credentialsRef` field. by @vpnachev [[#1477](https://github.com/gardener/gardener-extension-provider-azure/pull/1477)]
 
 ## 🏃 Others
-- `[OPERATOR]` Fix premature deletion of the remedy-controller deployment on startup. It will be scaled to 0 by @kon-angelo [[#1461](https://github.com/gardener/gardener-extension-provider-azure/pull/1461)]
-- `[OPERATOR]` The `.spec.trafficDistribution` field of the topology-aware Services will be automatically switched from the deprecated `PreferClose` to the new `PreferSameZone` option for Kubernetes 1.34+. by @Kostov6 [[#1452](https://github.com/gardener/gardener-extension-provider-azure/pull/1452)]
-- `[OPERATOR]` Update gardener/gardener v1.137.4 -> v1.137.5 by @wpross [[#1480](https://github.com/gardener/gardener-extension-provider-azure/pull/1480)]
-- `[OPERATOR]` Updated Azure `cloud-controller-manager` and `cloud-node-manager` image repositories to `mcr.microsoft.com/oss/v2/kubernetes` for Kubernetes versions `>= 1.32` to align with upstream Dalec build system changes. by @wpross [[#1474](https://github.com/gardener/gardener-extension-provider-azure/pull/1474)]
-- `[USER]` Classified "CannotDeleteLoadBalancerWithPrivateLinkService" as a dependency error. by @acumino [[#1455](https://github.com/gardener/gardener-extension-provider-azure/pull/1455)]
+- `[OPERATOR]` Update gardener to v1.139.1 by @hebelsan [[#1491](https://github.com/gardener/gardener-extension-provider-azure/pull/1491)]
+- `[OPERATOR]` Add support for `StandardV2` SKU for NAT Gateways and Public IPs by @kon-angelo [[#1469](https://github.com/gardener/gardener-extension-provider-azure/pull/1469)]
+- `[OPERATOR]` Update gardener to v1.140.1 by @AndreasBurger [[#1512](https://github.com/gardener/gardener-extension-provider-azure/pull/1512)]
 - `[DEPENDENCY]` The following container images have been updated:  
-    - cloud-controller-manager: v1.32.11 -> v1.32.14 (patch)  
-    - cloud-controller-manager: v1.33.6 -> v1.33.9 (patch)  
-    - cloud-controller-manager: v1.34.5 -> v1.34.6 (patch)  
-    - cloud-controller-manager: v1.35.0 -> v1.35.1 (patch)  
-    - cloud-node-manager: v1.32.11 -> v1.32.14 (patch)  
-    - cloud-node-manager: v1.33.6 -> v1.33.9 (patch)  
-    - cloud-node-manager: v1.34.5 -> v1.34.6 (patch)  
-    - cloud-node-manager: v1.35.0 -> v1.35.1 (patch)  
-    - csi-driver-disk: v1.34.1 -> v1.34.2 (singleton)  
-    - csi-driver-file: v1.35.0 -> v1.35.1 (singleton)  
-    - csi-provisioner: v6.1.1 -> v6.2.0 (minor) by @federated-github-access[bot] [[#1472](https://github.com/gardener/gardener-extension-provider-azure/pull/1472)]
-- `[DEPENDENCY]` The following container images have been updated:  
-    - cloud-controller-manager: v1.34.3 -> v1.34.5 (patch)  
-    - cloud-controller-manager: v1.34.5 -> v1.35.0 (minor)  
-    - cloud-node-manager: v1.34.3 -> v1.34.5 (patch)  
-    - cloud-node-manager: v1.34.5 -> v1.35.0 (minor)  
-    - csi-attacher: v4.10.0 -> v4.11.0 (singleton)  
-    - csi-driver-file: v1.34.3 -> v1.35.0 (singleton)  
-    - csi-liveness-probe: v2.17.0 -> v2.18.0 (singleton)  
-    - csi-node-driver-registrar: v2.15.0 -> v2.16.0 (singleton)  
-    - csi-provisioner: v6.1.0 -> v6.1.1 (patch)  
-    - csi-resizer: v2.0.0 -> v2.1.0 (minor)  
-    - csi-snapshot-controller: v8.4.0 -> v8.5.0 (singleton)  
-    - csi-snapshotter: v8.4.0 -> v8.5.0 (singleton) by @ghost [[#1437](https://github.com/gardener/gardener-extension-provider-azure/pull/1437)]
+    - cloud-controller-manager: v1.32.14 -> v1.32.16 (patch)  
+    - cloud-controller-manager: v1.33.9 -> v1.33.11 (patch)  
+    - cloud-controller-manager: v1.34.6 -> v1.34.8 (patch)  
+    - cloud-controller-manager: v1.35.1 -> v1.35.3 (patch)  
+    - cloud-node-manager: v1.32.14 -> v1.32.16 (patch)  
+    - cloud-node-manager: v1.33.9 -> v1.33.11 (patch)  
+    - cloud-node-manager: v1.34.6 -> v1.34.8 (patch)  
+    - cloud-node-manager: v1.35.1 -> v1.35.3 (patch)  
+    - csi-driver-disk: v1.34.2 -> v1.34.3 (singleton)  
+    - csi-driver-file: v1.35.1 -> v1.35.2 (singleton) by @federated-github-access[bot] [[#1479](https://github.com/gardener/gardener-extension-provider-azure/pull/1479)]
 
+## application/spdx+json
+- gardener-extension-admission-azure-spdx-ref: `europe-docker.pkg.dev/gardener-project/releases/gardener/extensions/admission-azure@sha256:2b23c2545b37ac93339a409b5369277ef39f88b698a0d1bcbed66a86b0c2ec97`
+- gardener-extension-admission-azure-spdx-ref: `europe-docker.pkg.dev/gardener-project/releases/gardener/extensions/admission-azure@sha256:8e0179874318501d0ba842047cc4553f159487f7689d446464dd715d92b09a5e`
+- gardener-extension-provider-azure-spdx-ref: `europe-docker.pkg.dev/gardener-project/releases/gardener/extensions/provider-azure@sha256:81577c310df75acffb0bc2b92efa05795eba4cca9a89b20e3b53427063689a06`
+- gardener-extension-provider-azure-spdx-ref: `europe-docker.pkg.dev/gardener-project/releases/gardener/extensions/provider-azure@sha256:c6855c4df5e74ed997cfe8e0596fae188047476c88b70c2a68961c46208b2e86`
 ## Helm Charts
-- admission-azure-application: `europe-docker.pkg.dev/gardener-project/releases/charts/gardener/extensions/admission-azure-application:v1.59.0`
-- admission-azure-runtime: `europe-docker.pkg.dev/gardener-project/releases/charts/gardener/extensions/admission-azure-runtime:v1.59.0`
-- provider-azure: `europe-docker.pkg.dev/gardener-project/releases/charts/gardener/extensions/provider-azure:v1.59.0`
+- admission-azure-application: `europe-docker.pkg.dev/gardener-project/releases/charts/gardener/extensions/admission-azure-application:v1.60.0`
+- admission-azure-runtime: `europe-docker.pkg.dev/gardener-project/releases/charts/gardener/extensions/admission-azure-runtime:v1.60.0`
+- provider-azure: `europe-docker.pkg.dev/gardener-project/releases/charts/gardener/extensions/provider-azure:v1.60.0`
 ## Container (OCI) Images
-- gardener-extension-admission-azure: `europe-docker.pkg.dev/gardener-project/releases/gardener/extensions/admission-azure:v1.59.0`
-- gardener-extension-provider-azure: `europe-docker.pkg.dev/gardener-project/releases/gardener/extensions/provider-azure:v1.59.0`
+- gardener-extension-admission-azure: `europe-docker.pkg.dev/gardener-project/releases/gardener/extensions/admission-azure:v1.60.0`
+- gardener-extension-provider-azure: `europe-docker.pkg.dev/gardener-project/releases/gardener/extensions/provider-azure:v1.60.0`
