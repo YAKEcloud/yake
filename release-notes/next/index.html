@@ -5,7 +5,7 @@
 <meta name="generator" content="Docusaurus v3.10.1">
 <title data-rh="true">Release Notes next | Yet another Kubernetes Engine</title><meta data-rh="true" name="viewport" content="width=device-width,initial-scale=1"><meta data-rh="true" name="twitter:card" content="summary_large_image"><meta data-rh="true" property="og:url" content="https://yake.cloud/release-notes/next"><meta data-rh="true" property="og:locale" content="en"><meta data-rh="true" name="docusaurus_locale" content="en"><meta data-rh="true" name="docsearch:language" content="en"><meta data-rh="true" name="gardener" content="installation, production, operations, maintenance"><meta data-rh="true" name="docusaurus_version" content="current"><meta data-rh="true" name="docusaurus_tag" content="docs-release-notes-current"><meta data-rh="true" name="docsearch:version" content="current"><meta data-rh="true" name="docsearch:docusaurus_tag" content="docs-release-notes-current"><meta data-rh="true" property="og:title" content="Release Notes next | Yet another Kubernetes Engine"><meta data-rh="true" name="description" content="Yake release notes and upgrade guide"><meta data-rh="true" property="og:description" content="Yake release notes and upgrade guide"><link data-rh="true" rel="icon" href="/img/favicon.ico"><link data-rh="true" rel="canonical" href="https://yake.cloud/release-notes/next"><link data-rh="true" rel="alternate" href="https://yake.cloud/release-notes/next" hreflang="en"><link data-rh="true" rel="alternate" href="https://yake.cloud/release-notes/next" hreflang="x-default"><script data-rh="true" type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Release Notes next","item":"https://yake.cloud/release-notes/next"}]}</script><link rel="alternate" type="application/rss+xml" href="/blog/rss.xml" title="Yet another Kubernetes Engine RSS Feed">
 <link rel="alternate" type="application/atom+xml" href="/blog/atom.xml" title="Yet another Kubernetes Engine Atom Feed"><link rel="stylesheet" href="/assets/css/styles.953fe0f7.css">
-<script src="/assets/js/runtime~main.c37bc5c1.js" defer="defer"></script>
+<script src="/assets/js/runtime~main.c2a66f03.js" defer="defer"></script>
 <script src="/assets/js/main.c0257662.js" defer="defer"></script>
 </head>
 <body>
@@ -2473,6 +2473,58 @@ New hash strategy adopted for ProviderConfig for k8s versions &gt;= 1.35 by @gag
 <h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="container-oci-images-59">Container (OCI) Images<a href="#container-oci-images-59" class="hash-link" aria-label="Direct link to Container (OCI) Images" title="Direct link to Container (OCI) Images" translate="no">​</a></h2>
 <ul>
 <li class="">gardener-dashboard: <code>europe-docker.pkg.dev/gardener-project/releases/gardener/dashboard:1.84.1</code></li>
+</ul>
+</div></div></details>
+<details class="details_lb9f alert alert--info details_b_Ee" data-collapsed="true"><summary><b>Update shoot-oidc-service to <code>0.39.0</code></b></summary><div><div class="collapsibleContent_i85q">
+<!-- -->
+<h1>[github.com/gardener/gardener-extension-shoot-oidc-service:v0.39.0]</h1>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="-others-46">🏃 Others<a href="#-others-46" class="hash-link" aria-label="Direct link to 🏃 Others" title="Direct link to 🏃 Others" translate="no">​</a></h2>
+<ul>
+<li class=""><code>[DEPENDENCY]</code> The following third party dependencies have been updated:
+<ul>
+<li class="">github.com/gardener/gardener v1.139.1 -&gt; v1.140.1</li>
+<li class="">github.com/gardener/gardener/pkg/apis v1.139.1 -&gt; v1.140.1</li>
+<li class="">github.com/go-jose/go-jose/v4 v4.1.3 -&gt; v4.1.4 by @dependabot[bot] [<a href="https://github.com/gardener/gardener-extension-shoot-oidc-service/pull/453" target="_blank" rel="noopener noreferrer" class="">#453</a>]</li>
+</ul>
+</li>
+</ul>
+<h1>[github.com/gardener/oidc-webhook-authenticator:v0.43.0]</h1>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="-others-47">🏃 Others<a href="#-others-47" class="hash-link" aria-label="Direct link to 🏃 Others" title="Direct link to 🏃 Others" translate="no">​</a></h2>
+<ul>
+<li class=""><code>[OPERATOR]</code> OWA is now built with Go 1.26.2 by @dependabot[bot] [<a href="https://github.com/gardener/oidc-webhook-authenticator/pull/231" target="_blank" rel="noopener noreferrer" class="">#231</a>]</li>
+<li class=""><code>[DEPENDENCY]</code> The following third party dependencies have been updated:
+<ul>
+<li class="">github.com/go-jose/go-jose/v4 v4.1.2 -&gt; v4.1.3</li>
+<li class="">github.com/onsi/ginkgo/v2 v2.27.2 -&gt; v2.27.4</li>
+<li class="">github.com/onsi/gomega v1.38.2 -&gt; v1.39.0</li>
+<li class="">github.com/spf13/cobra v1.10.1 -&gt; v1.10.2</li>
+<li class="">golang.org/x/time v0.13.0 -&gt; v0.14.0</li>
+<li class="">k8s.io/api v0.35.0 -&gt; v0.36.0</li>
+<li class="">k8s.io/apimachinery v0.35.0 -&gt; v0.36.0</li>
+<li class="">k8s.io/apiserver v0.35.0 -&gt; v0.36.0</li>
+<li class="">k8s.io/client-go v0.35.0 -&gt; v0.36.0</li>
+<li class="">k8s.io/component-base v0.35.0 -&gt; v0.36.0</li>
+<li class="">sigs.k8s.io/controller-runtime v0.23.3 -&gt; v0.24.0 by @dimityrmirchev [<a href="https://github.com/gardener/oidc-webhook-authenticator/pull/234" target="_blank" rel="noopener noreferrer" class="">#234</a>]</li>
+</ul>
+</li>
+</ul>
+<h1>[github.com/gardener/garden-shoot-trust-configurator:v0.2.0]</h1>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="-new-features-19">✨ New Features<a href="#-new-features-19" class="hash-link" aria-label="Direct link to ✨ New Features" title="Direct link to ✨ New Features" translate="no">​</a></h2>
+<ul>
+<li class=""><code>[OPERATOR]</code> Introduced a skaffold setup that enables deploying the trust-configurator in a local cluster. by @theoddora [<a href="https://github.com/gardener/garden-shoot-trust-configurator/pull/106" target="_blank" rel="noopener noreferrer" class="">#106</a>]</li>
+</ul>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="applicationspdxjson-25">application/spdx+json<a href="#applicationspdxjson-25" class="hash-link" aria-label="Direct link to application/spdx+json" title="Direct link to application/spdx+json" translate="no">​</a></h2>
+<ul>
+<li class="">gardener-extension-shoot-oidc-service-spdx-ref: <code>europe-docker.pkg.dev/gardener-project/releases/gardener/extensions/shoot-oidc-service@sha256:93b63d8ef134526279212780c0dc3f0f8c255690194c38af3ba72218e8d80ce0</code></li>
+<li class="">gardener-extension-shoot-oidc-service-spdx-ref: <code>europe-docker.pkg.dev/gardener-project/releases/gardener/extensions/shoot-oidc-service@sha256:d251298245f2a1943d8127d57a32bc6df5346db7aa1a4f0431a4792bccaddae1</code></li>
+</ul>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="helm-charts-52">Helm Charts<a href="#helm-charts-52" class="hash-link" aria-label="Direct link to Helm Charts" title="Direct link to Helm Charts" translate="no">​</a></h2>
+<ul>
+<li class="">shoot-oidc-service: <code>europe-docker.pkg.dev/gardener-project/releases/charts/gardener/extensions/shoot-oidc-service:v0.39.0</code></li>
+</ul>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="container-oci-images-60">Container (OCI) Images<a href="#container-oci-images-60" class="hash-link" aria-label="Direct link to Container (OCI) Images" title="Direct link to Container (OCI) Images" translate="no">​</a></h2>
+<ul>
+<li class="">gardener-extension-shoot-oidc-service: <code>europe-docker.pkg.dev/gardener-project/releases/gardener/extensions/shoot-oidc-service:v0.39.0</code></li>
 </ul>
 </div></div></details></div></article><nav class="docusaurus-mt-lg pagination-nav" aria-label="Docs pages"><a class="pagination-nav__link pagination-nav__link--next" href="/release-notes/v1.137"><div class="pagination-nav__sublabel">Next</div><div class="pagination-nav__label">Release Notes v1.137</div></a></nav></div></div></div></div></main></div></div></div><footer class="theme-layout-footer footer footer--dark"><div class="container container-fluid"><div class="row footer__links"><div class="theme-layout-footer-column col footer__col"><div class="footer__title">Docs</div><ul class="footer__items clean-list"><li class="footer__item"><a class="footer__link-item" href="/docs/overview">Docs</a></li></ul></div><div class="theme-layout-footer-column col footer__col"><div class="footer__title">Community</div><ul class="footer__items clean-list"><li class="footer__item"><a href="https://github.com/yakecloud" target="_blank" rel="noopener noreferrer" class="footer__link-item">GitHub<svg width="13.5" height="13.5" aria-label="(opens in new tab)" class="iconExternalLink_nPIU"><use href="#theme-svg-external-link"></use></svg></a></li><li class="footer__item"><a href="https://github.com/gardener-community" target="_blank" rel="noopener noreferrer" class="footer__link-item">Gardener Community<svg width="13.5" height="13.5" aria-label="(opens in new tab)" class="iconExternalLink_nPIU"><use href="#theme-svg-external-link"></use></svg></a></li><li class="footer__item"><a href="https://gardener-cloud.slack.com" target="_blank" rel="noopener noreferrer" class="footer__link-item">Slack<svg width="13.5" height="13.5" aria-label="(opens in new tab)" class="iconExternalLink_nPIU"><use href="#theme-svg-external-link"></use></svg></a></li></ul></div><div class="theme-layout-footer-column col footer__col"><div class="footer__title">More</div><ul class="footer__items clean-list"><li class="footer__item"><a class="footer__link-item" href="/blog">Blog</a></li><li class="footer__item"><a class="footer__link-item" href="/legals">Legals</a></li><li class="footer__item"><a class="footer__link-item" href="/privacy-policy">Privacy policy</a></li></ul></div></div><div class="footer__bottom text--center"><div class="footer__copyright">Copyright © 2026 23 Technologies GmbH</div></div></div></footer></div>
 </body>
