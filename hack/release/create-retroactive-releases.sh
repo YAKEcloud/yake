@@ -111,11 +111,5 @@ _release "1.139.1-0" "13d39d3cd74" "temp-create-1139" ""
 # ─────────────────────────────────────────────────────────────────────────────
 _release "1.140.2-0" "294fca1ecae" "temp-create-1140" ""
 
-# ─────────────────────────────────────────────────────────────────────────────
-# 1.141.1 — current main HEAD
-# ─────────────────────────────────────────────────────────────────────────────
-git checkout main
-_release "1.141.1-0" "" "" ""
-
 echo "All retroactive releases created."
 echo "Check CI for GitHub Release + OCI artifact status."
