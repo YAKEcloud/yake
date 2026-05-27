@@ -38,6 +38,16 @@
       ]
     },
     {
+      "matchBaseBranches": [
+        "main"
+      ],
+      "allowedVersions": "/^1[.]141[.].*$/",
+      "matchPackageNames": [
+        "/.*gardener-controlplane.*/",
+        "/gardenlet/"
+      ]
+    },
+    {
       "groupName": "dashboard-identity",
       "matchPackageNames": [
         "/identity/",
