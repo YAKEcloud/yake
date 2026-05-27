@@ -9,6 +9,7 @@ dependencies:
 - condition: terminal-controller-manager-application.enabled
   name: terminal-controller-manager-application
   repository: ""
+deprecated: true
 description: A Helm chart to deploy the terminal-controller-manager
 name: gardener-webterminal
-version: 0.35.0
+version: 0.36.0
