@@ -2380,3 +2380,14 @@ This release officially supports fluxcd>2.8
 
 
 </details>
+
+<details>
+<summary><b>Update backup-s3 to <code>0.8.3</code></b></summary>
+
+## General Changes
+
+* Go 1.26. (#27) @Gerrit91
+* chore(deps): update to g/g 1.132.5 (#26) @vknabel
+
+
+</details>
