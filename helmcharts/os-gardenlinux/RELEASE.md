@@ -1,9 +1,9 @@
 
 
 ## application/spdx+json
-- gardener-extension-os-gardenlinux-spdx-ref: `europe-docker.pkg.dev/gardener-project/releases/gardener/extensions/os-gardenlinux@sha256:4855604184f72ab47ee75f817d7c77e641dc21049a98f7355531e9bb0d2f7d77`
-- gardener-extension-os-gardenlinux-spdx-ref: `europe-docker.pkg.dev/gardener-project/releases/gardener/extensions/os-gardenlinux@sha256:f1e6d1a2a4dd6470c6388a0896f789cbce9a6ed68c908c871504401ac8a45979`
+- gardener-extension-os-gardenlinux-spdx-ref: `europe-docker.pkg.dev/gardener-project/releases/gardener/extensions/os-gardenlinux@sha256:12514c8931f8edf76b97af3595989ce4fd077a7edf95dcb7f398f8d0f55aea7d`
+- gardener-extension-os-gardenlinux-spdx-ref: `europe-docker.pkg.dev/gardener-project/releases/gardener/extensions/os-gardenlinux@sha256:42949e650a76d6a9939d69f1084b177abd4cd14c207bb724fca21644dac7f251`
 ## Helm Charts
-- os-gardenlinux: `europe-docker.pkg.dev/gardener-project/releases/charts/gardener/extensions/os-gardenlinux:v0.40.0`
+- os-gardenlinux: `europe-docker.pkg.dev/gardener-project/releases/charts/gardener/extensions/os-gardenlinux:v0.42.0`
 ## Container (OCI) Images
-- gardener-extension-os-gardenlinux: `europe-docker.pkg.dev/gardener-project/releases/gardener/extensions/os-gardenlinux:v0.40.0`
+- gardener-extension-os-gardenlinux: `europe-docker.pkg.dev/gardener-project/releases/gardener/extensions/os-gardenlinux:v0.42.0`
