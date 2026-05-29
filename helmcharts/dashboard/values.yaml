@@ -39,7 +39,7 @@ global:
         image:
             pullPolicy: IfNotPresent
             repository: europe-docker.pkg.dev/gardener-project/releases/gardener/dashboard
-            tag: 1.84.1
+            tag: 1.84.2
         ingress:
             annotations:
                 nginx.ingress.kubernetes.io/ssl-redirect: "true"
@@ -47,6 +47,9 @@ global:
             ingressClassName: nginx
             tls:
                 secretName: gardener-dashboard-tls
+        kubeClient:
+            pingTimeout: null
+            readIdleTimeout: null
         livenessProbe:
             enabled: true
             failureThreshold: 6
