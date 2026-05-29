@@ -1,48 +1,31 @@
-# [github.com/gardener/gardener-extension-provider-gcp:v1.50.0]
+# [github.com/gardener/gardener-extension-provider-gcp:v1.52.0]
 
 ## ⚠️ Breaking Changes
-- `[DEVELOPER]` The `PLATFORM` makefile variable has been replaced by `TARGET_PLATFORM`. by @vpnachev [[#1322](https://github.com/gardener/gardener-extension-provider-gcp/pull/1322)]
-
-## 📰 Noteworthy
-- `[OPERATOR]` Ingress-gce no longer requires deployment of `BackendConfig` CRDs. In addition, the deployment of the default-http-backend in the shoot is no longer necessary and hence removed. by @kon-angelo [[#1320](https://github.com/gardener/gardener-extension-provider-gcp/pull/1320)]
+- `[OPERATOR]` ⚠️ This extension no longer support Gardener installation running with `github.com/gardener/gardener < v1.135.0`, kindly update `github.com/gardener/gardener` to version `>= v1.135.0` before updating the extension. by @vpnachev [[#1410](https://github.com/gardener/gardener-extension-provider-gcp/pull/1410)]
 
 ## ✨ New Features
-- `[OPERATOR]` `BackupBucketConfig.Endpoint` is introduced for specifying the regional endpoint at which the backup buckets are hosted, and this is passed to the etcd resource's backup specification. by @renormalize [[#1273](https://github.com/gardener/gardener-extension-provider-gcp/pull/1273)]
-- `[USER]` This extension now supports shoot clusters with Kubernetes version 1.35. You should consider the [Kubernetes release notes](https://github.com/kubernetes/kubernetes/blob/master/CHANGELOG/CHANGELOG-1.35.md) before upgrading to 1.35. by @rfranzke [[#1300](https://github.com/gardener/gardener-extension-provider-gcp/pull/1300)]
-- `[USER]` Update ingress-gce to v1.38.2 by @kon-angelo [[#1320](https://github.com/gardener/gardener-extension-provider-gcp/pull/1320)]
-- `[USER]` No rollout hot-update of ProviderConfig.NodeTemplate.VirtualCapacity with/without already existing ProviderConfig.  
-  New hash strategy adopted for ProviderConfig for k8s versions >= 1.35 by @takoverflow [[#1318](https://github.com/gardener/gardener-extension-provider-gcp/pull/1318)]
-- `[DEVELOPER]` Gardener extension provider-gcp container images now can be built for multiple platforms locally via the variable `TARGET_PLATFORMS`, e.g. `make docker-images TARGET_PLATFORMS=linux/amd64,linux/arm64`. If the variable is unset, the container images are built for the platform `linux/<host-arch>` only. by @vpnachev [[#1322](https://github.com/gardener/gardener-extension-provider-gcp/pull/1322)]
+- `[OPERATOR]` Fix `NamespacedCloudProfile` admission to populate `capabilityFlavors` on spec machine images. by @Roncossek [[#1401](https://github.com/gardener/gardener-extension-provider-gcp/pull/1401)]
+- `[USER]` The `InfrastructureConfig` API now supports an optional `networks.mtu` field (valid range: 1300–8896) to configure the maximum  transmission unit for Gardener-managed VPC networks. by @voelzmo [[#1399](https://github.com/gardener/gardener-extension-provider-gcp/pull/1399)]
 
 ## 🐛 Bug Fixes
-- `[OPERATOR]` Allow private key to end without a newline character. by @wpross [[#1314](https://github.com/gardener/gardener-extension-provider-gcp/pull/1314)]
-- `[OPERATOR]` Loosen secret validation to allow not only for user-generated service accounts in IAM, but also for Google-managed service accounts. by @wpross [[#1310](https://github.com/gardener/gardener-extension-provider-gcp/pull/1310)]
-- `[OPERATOR]` Fixed `DNSRecords` not reconciling in runtime cluster because of missing `namespace` permissions by @matthias-horne [[#1326](https://github.com/gardener/gardener-extension-provider-gcp/pull/1326)]
-- `[OPERATOR]` Fixed missing create `event` permissions in runtime cluster when publishing "became leader" event by @matthias-horne [[#1326](https://github.com/gardener/gardener-extension-provider-gcp/pull/1326)]
-- `[USER]` Set correct `onHostMaintenance: "TERMINATE"` flag for machine types, where live migration is not supported. by @matthias-horne [[#1329](https://github.com/gardener/gardener-extension-provider-gcp/pull/1329)]
-- `[USER]` It is again allowed shoots to use `WorkloadIdentity` as credentials for DNS management, e.g. via the `shoot.spec.dns.providers[].credentialsRef` field. by @vpnachev [[#1346](https://github.com/gardener/gardener-extension-provider-gcp/pull/1346)]
+- `[OPERATOR]` VPA for the extension pod now also controls CPU requests in addition to memory. The VPA container policy also explicitly disables  autoscaling for any non-main containers following Gardener best practices. by @voelzmo [[#1407](https://github.com/gardener/gardener-extension-provider-gcp/pull/1407)]
 
 ## 🏃 Others
-- `[OPERATOR]` Adopts Gardener MachineImage `Capabilities` and introduces `CapabilityFlavors` to `providerConfig`. by @Roncossek [[#1067](https://github.com/gardener/gardener-extension-provider-gcp/pull/1067)]
-- `[OPERATOR]` The following image is updated:  
-  - registry.k8s.io/cloud-provider-gcp/gcp-compute-persistent-disk-csi-driver: v1.22.1 -> v1.23.3 by @ialidzhikov [[#1319](https://github.com/gardener/gardener-extension-provider-gcp/pull/1319)]
-- `[OPERATOR]` The `.spec.trafficDistribution` field of the topology-aware Services will be automatically switched from the deprecated `PreferClose` to the new `PreferSameZone` option for Kubernetes 1.34+. by @Kostov6 [[#1317](https://github.com/gardener/gardener-extension-provider-gcp/pull/1317)]
-- `[OPERATOR]` Prevent Calico from setting the `NetworkUnavailable` condition on nodes when overlay networking gets disabled, and ensures cleanup of existing Calico-set conditions. by @DockToFuture [[#1309](https://github.com/gardener/gardener-extension-provider-gcp/pull/1309)]
+- `[OPERATOR]` Fix controlplane-seed MR failing health checks if filestore is enabled by @hebelsan [[#1398](https://github.com/gardener/gardener-extension-provider-gcp/pull/1398)]
+- `[DEVELOPER]` Enhance Makefile to easily deploy to a remote cluster. by @matthias-horne [[#1402](https://github.com/gardener/gardener-extension-provider-gcp/pull/1402)]
 - `[DEPENDENCY]` The following container images have been updated:  
-    - cloud-controller-manager: v35.0.0 -> v35.0.2 (patch)  
-    - csi-attacher: v4.10.0 -> v4.11.0 (singleton)  
-    - csi-driver-filestore: v1.11.4 -> v1.12.0 (singleton)  
-    - csi-liveness-probe: v2.17.0 -> v2.18.0 (singleton)  
-    - csi-node-driver-registrar: v2.15.0 -> v2.16.0 (singleton)  
-    - csi-provisioner: v6.1.0 -> v6.1.1 (patch)  
-    - csi-resizer: v2.0.0 -> v2.1.0 (minor)  
-    - csi-snapshot-controller: v8.4.0 -> v8.5.0 (singleton)  
-    - csi-snapshotter: v8.4.0 -> v8.5.0 (singleton) by @ghost [[#1297](https://github.com/gardener/gardener-extension-provider-gcp/pull/1297)]
+    - ingress-default-backend: 0.25.0 -> 0.26.0 (singleton)  
+    - machine-controller-manager-provider-gcp: v0.27.0 -> v0.28.0 (singleton) by @federated-github-access[bot] [[#1406](https://github.com/gardener/gardener-extension-provider-gcp/pull/1406)]
 
+## application/spdx+json
+- gardener-extension-admission-gcp-spdx-ref: `europe-docker.pkg.dev/gardener-project/releases/gardener/extensions/admission-gcp@sha256:0d01c653c568dbf025c4ac42309a67bafe2e379c5ad847aa2723cd975a632720`
+- gardener-extension-admission-gcp-spdx-ref: `europe-docker.pkg.dev/gardener-project/releases/gardener/extensions/admission-gcp@sha256:aa6fcb8376920a907a8cd2adaf9ec1d822f3e8fda5dd4e5fd5dda4202f8cf1d9`
+- gardener-extension-provider-gcp-spdx-ref: `europe-docker.pkg.dev/gardener-project/releases/gardener/extensions/provider-gcp@sha256:8efd9c90e30aebda8ec0192feb39812199d8d3a24dca9ed141fa21adb171d8f2`
+- gardener-extension-provider-gcp-spdx-ref: `europe-docker.pkg.dev/gardener-project/releases/gardener/extensions/provider-gcp@sha256:caed58fd68fd5490979ecd01b4d85874e89b45b79c465fb7b633a0b6b669aa0f`
 ## Helm Charts
-- admission-gcp-application: `europe-docker.pkg.dev/gardener-project/releases/charts/gardener/extensions/admission-gcp-application:v1.50.0`
-- admission-gcp-runtime: `europe-docker.pkg.dev/gardener-project/releases/charts/gardener/extensions/admission-gcp-runtime:v1.50.0`
-- provider-gcp: `europe-docker.pkg.dev/gardener-project/releases/charts/gardener/extensions/provider-gcp:v1.50.0`
+- admission-gcp-application: `europe-docker.pkg.dev/gardener-project/releases/charts/gardener/extensions/admission-gcp-application:v1.52.0`
+- admission-gcp-runtime: `europe-docker.pkg.dev/gardener-project/releases/charts/gardener/extensions/admission-gcp-runtime:v1.52.0`
+- provider-gcp: `europe-docker.pkg.dev/gardener-project/releases/charts/gardener/extensions/provider-gcp:v1.52.0`
 ## Container (OCI) Images
-- gardener-extension-admission-gcp: `europe-docker.pkg.dev/gardener-project/releases/gardener/extensions/admission-gcp:v1.50.0`
-- gardener-extension-provider-gcp: `europe-docker.pkg.dev/gardener-project/releases/gardener/extensions/provider-gcp:v1.50.0`
+- gardener-extension-admission-gcp: `europe-docker.pkg.dev/gardener-project/releases/gardener/extensions/admission-gcp:v1.52.0`
+- gardener-extension-provider-gcp: `europe-docker.pkg.dev/gardener-project/releases/gardener/extensions/provider-gcp:v1.52.0`
