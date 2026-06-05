@@ -1,18 +1,16 @@
-# [github.com/gardener/gardener-extension-runtime-gvisor:v0.38.0]
-
-## ✨ New Features
-- `[OPERATOR]` The gVisor runtime installation now supports containerd config file version 4 (containerd 2.3+), ensuring the `runsc` runtime is correctly registered on nodes running containerd 2.3. by @Vincinator [[#399](https://github.com/gardener/gardener-extension-runtime-gvisor/pull/399)]
+# [github.com/gardener/gardener-extension-runtime-gvisor:v0.39.0]
 
 ## 🏃 Others
-- `[OPERATOR]` Updated gVisor binaries to 20260511.0. by @federated-github-access[bot] [[#402](https://github.com/gardener/gardener-extension-runtime-gvisor/pull/402)]
+- `[OPERATOR]` Updated gVisor binaries to 20260525.0. Notable upstream fixes: TCP RFC 5961 RST hardening (off-path blind RST mitigation), EINTR leakage fix to sandboxed processes, overlay copy-up tolerates EOPNOTSUPP from setxattr, auto-enable nvproxy when GPU resources are in the OCI spec, rootfs bind-mount fix for hosts with symlinked paths (e.g. /var/run -> /run), ARM 64k page support, and veth TX checksum offload. by @federated-github-access[bot] [[#406](https://github.com/gardener/gardener-extension-runtime-gvisor/pull/406)]
+- `[OPERATOR]` Updated gVisor binaries to 20260520.0. Notable upstream fixes: TCP DF bit set during handshake (PMTU discovery), systemd compatibility (timerfd, unix sockets), /proc/[pid]/setgroups for buildah/podman, full xattr + overlayfs gofer support, per-mount directfs opt-out, and NVIDIA CDI createContainer hooks. by @federated-github-access[bot] [[#405](https://github.com/gardener/gardener-extension-runtime-gvisor/pull/405)]
 
 ## application/spdx+json
-- gardener-extension-runtime-gvisor-installation-spdx-ref: `europe-docker.pkg.dev/gardener-project/releases/gardener/extensions/runtime-gvisor-installation@sha256:4c2a5eb228390e6f8df3981551d25f3c52331a1bdc9041aecc490cd90fcee49c`
-- gardener-extension-runtime-gvisor-installation-spdx-ref: `europe-docker.pkg.dev/gardener-project/releases/gardener/extensions/runtime-gvisor-installation@sha256:ff57c1f9ad2f04a308fd2783e4dc480a73191da427f19532e279a693e9b5f93d`
-- gardener-extension-runtime-gvisor-spdx-ref: `europe-docker.pkg.dev/gardener-project/releases/gardener/extensions/runtime-gvisor@sha256:2aae1bb32fa51712156277bc5798c2f98a58671459d8baa9fc97cbbba5cf6d77`
-- gardener-extension-runtime-gvisor-spdx-ref: `europe-docker.pkg.dev/gardener-project/releases/gardener/extensions/runtime-gvisor@sha256:570d1f7e5e976a34c579ee01fd286b3b3150d8c6e3a105310533dae1d224b4e9`
+- gardener-extension-runtime-gvisor-installation-spdx-ref: `europe-docker.pkg.dev/gardener-project/releases/gardener/extensions/runtime-gvisor-installation@sha256:876ab6a2bcf1c7c43b9ff24865c5b5715323f6fa68219e25c0081352db16414f`
+- gardener-extension-runtime-gvisor-installation-spdx-ref: `europe-docker.pkg.dev/gardener-project/releases/gardener/extensions/runtime-gvisor-installation@sha256:d35cc2d4433e8e86773599baf9e477dc0c4d1112b1406b7c5dfd92ad9c0f322c`
+- gardener-extension-runtime-gvisor-spdx-ref: `europe-docker.pkg.dev/gardener-project/releases/gardener/extensions/runtime-gvisor@sha256:08d313f71c4e23dc3a8cc5276c90776a8f56f3cef249e69cfd2174bfb9aa7cd3`
+- gardener-extension-runtime-gvisor-spdx-ref: `europe-docker.pkg.dev/gardener-project/releases/gardener/extensions/runtime-gvisor@sha256:56605f691c7c43cbb55c00ed2ed2fc23a612dabc1be3d9c16f301abab9dc2617`
 ## Helm Charts
-- runtime-gvisor: `europe-docker.pkg.dev/gardener-project/releases/charts/gardener/extensions/runtime-gvisor:v0.38.0`
+- runtime-gvisor: `europe-docker.pkg.dev/gardener-project/releases/charts/gardener/extensions/runtime-gvisor:v0.39.0`
 ## Container (OCI) Images
-- gardener-extension-runtime-gvisor-installation: `europe-docker.pkg.dev/gardener-project/releases/gardener/extensions/runtime-gvisor-installation:v0.38.0`
-- gardener-extension-runtime-gvisor: `europe-docker.pkg.dev/gardener-project/releases/gardener/extensions/runtime-gvisor:v0.38.0`
+- gardener-extension-runtime-gvisor-installation: `europe-docker.pkg.dev/gardener-project/releases/gardener/extensions/runtime-gvisor-installation:v0.39.0`
+- gardener-extension-runtime-gvisor: `europe-docker.pkg.dev/gardener-project/releases/gardener/extensions/runtime-gvisor:v0.39.0`
