@@ -5,7 +5,7 @@
 <meta name="generator" content="Docusaurus v3.10.1">
 <title data-rh="true">Release Notes next | Yet another Kubernetes Engine</title><meta data-rh="true" name="viewport" content="width=device-width,initial-scale=1"><meta data-rh="true" name="twitter:card" content="summary_large_image"><meta data-rh="true" property="og:url" content="https://yake.cloud/release-notes/next"><meta data-rh="true" property="og:locale" content="en"><meta data-rh="true" name="docusaurus_locale" content="en"><meta data-rh="true" name="docsearch:language" content="en"><meta data-rh="true" name="gardener" content="installation, production, operations, maintenance"><meta data-rh="true" name="docusaurus_version" content="current"><meta data-rh="true" name="docusaurus_tag" content="docs-release-notes-current"><meta data-rh="true" name="docsearch:version" content="current"><meta data-rh="true" name="docsearch:docusaurus_tag" content="docs-release-notes-current"><meta data-rh="true" property="og:title" content="Release Notes next | Yet another Kubernetes Engine"><meta data-rh="true" name="description" content="Yake release notes and upgrade guide"><meta data-rh="true" property="og:description" content="Yake release notes and upgrade guide"><link data-rh="true" rel="icon" href="/img/favicon.ico"><link data-rh="true" rel="canonical" href="https://yake.cloud/release-notes/next"><link data-rh="true" rel="alternate" href="https://yake.cloud/release-notes/next" hreflang="en"><link data-rh="true" rel="alternate" href="https://yake.cloud/release-notes/next" hreflang="x-default"><script data-rh="true" type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Release Notes next","item":"https://yake.cloud/release-notes/next"}]}</script><link rel="alternate" type="application/rss+xml" href="/blog/rss.xml" title="Yet another Kubernetes Engine RSS Feed">
 <link rel="alternate" type="application/atom+xml" href="/blog/atom.xml" title="Yet another Kubernetes Engine Atom Feed"><link rel="stylesheet" href="/assets/css/styles.953fe0f7.css">
-<script src="/assets/js/runtime~main.e94ecfb4.js" defer="defer"></script>
+<script src="/assets/js/runtime~main.c7defd78.js" defer="defer"></script>
 <script src="/assets/js/main.2f686165.js" defer="defer"></script>
 </head>
 <body>
@@ -3310,6 +3310,150 @@ Additionally, the deployments are done in parallel, which speeds up the whole op
 <ul>
 <li class="">gardener-extension-admission-openstack: <code>europe-docker.pkg.dev/gardener-project/releases/gardener/extensions/admission-openstack:v1.55.1</code></li>
 <li class="">gardener-extension-provider-openstack: <code>europe-docker.pkg.dev/gardener-project/releases/gardener/extensions/provider-openstack:v1.55.1</code></li>
+</ul>
+</div></div></details>
+<details class="details_lb9f alert alert--info details_b_Ee" data-collapsed="true"><summary><b>Update gardener-controlplane to <code>1.141.6</code></b></summary><div><div class="collapsibleContent_i85q">
+<!-- -->
+<h1>[github.com/gardener/gardener:v1.141.6]</h1>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="-bug-fixes-50">🐛 Bug Fixes<a href="#-bug-fixes-50" class="hash-link" aria-label="Direct link to 🐛 Bug Fixes" title="Direct link to 🐛 Bug Fixes" translate="no">​</a></h2>
+<ul>
+<li class=""><code>[OPERATOR]</code> A bug has been fixed where <code>Garden</code> resources would start encryption key rotation on creation. by @RadaBDimitrova [<a href="https://github.com/gardener/gardener/pull/14939" target="_blank" rel="noopener noreferrer" class="">#14939</a>]</li>
+</ul>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="applicationspdxjson-50">application/spdx+json<a href="#applicationspdxjson-50" class="hash-link" aria-label="Direct link to application/spdx+json" title="Direct link to application/spdx+json" translate="no">​</a></h2>
+<ul>
+<li class="">admission-controller-spdx-ref: <code>europe-docker.pkg.dev/gardener-project/releases/gardener/admission-controller@sha256:4a165755e9181efd9627b44fc825847ac9969c820815ca05b13a792ddfc125cf</code></li>
+<li class="">admission-controller-spdx-ref: <code>europe-docker.pkg.dev/gardener-project/releases/gardener/admission-controller@sha256:885b55a0fe7221bab4c6877c4c8c0511f188d41bebe9c7d6e728147ab083ce3b</code></li>
+<li class="">apiserver-spdx-ref: <code>europe-docker.pkg.dev/gardener-project/releases/gardener/apiserver@sha256:b1457fa787ad6d9f71835ff2548443f35cf52b53baa9a4e16b4ad86ed1178d45</code></li>
+<li class="">apiserver-spdx-ref: <code>europe-docker.pkg.dev/gardener-project/releases/gardener/apiserver@sha256:c1e46e690bb90a51655e27f456d7c4409097874fbaa7b801eb24c1afe3d456f6</code></li>
+<li class="">controller-manager-spdx-ref: <code>europe-docker.pkg.dev/gardener-project/releases/gardener/controller-manager@sha256:45eb0ad17f00cd585542f7763f76b86a0a0a9c802ab7dd2f263bf4cbd1979827</code></li>
+<li class="">controller-manager-spdx-ref: <code>europe-docker.pkg.dev/gardener-project/releases/gardener/controller-manager@sha256:a54d1ecffee2380dcdd015739d32347477b2ffa9d3ef6a62f328034793f68812</code></li>
+<li class="">gardenadm-spdx-ref: <code>europe-docker.pkg.dev/gardener-project/releases/gardener/gardenadm@sha256:4f13b25079635f7cde8ada9fdc21b0fe8046541fc16fa25cd86f7dc94b7dbf6f</code></li>
+<li class="">gardenadm-spdx-ref: <code>europe-docker.pkg.dev/gardener-project/releases/gardener/gardenadm@sha256:87da6797bf3085d779cec357f836d9e01c9f5200fd51999669aa53118908d43e</code></li>
+<li class="">gardenlet-spdx-ref: <code>europe-docker.pkg.dev/gardener-project/releases/gardener/gardenlet@sha256:3d25de2f6bb9886cbd74d0b3018383043abaa56d38b14fbe6308be5243068b47</code></li>
+<li class="">gardenlet-spdx-ref: <code>europe-docker.pkg.dev/gardener-project/releases/gardener/gardenlet@sha256:6b65d935c1c7e631a6486a14909f19aa7cf078536ddb56349301d7035a1f4fbf</code></li>
+<li class="">node-agent-spdx-ref: <code>europe-docker.pkg.dev/gardener-project/releases/gardener/node-agent@sha256:7749013c764bec414f2b1321f98401de88456d085097bb606eba69a5c460a9ec</code></li>
+<li class="">node-agent-spdx-ref: <code>europe-docker.pkg.dev/gardener-project/releases/gardener/node-agent@sha256:b92413e40a6fbdc2dd5dc516c2f0844f8282f2a7766f7287f6d78a498b5f7676</code></li>
+<li class="">operator-spdx-ref: <code>europe-docker.pkg.dev/gardener-project/releases/gardener/operator@sha256:54327cb5da9735c1ec663a1997e46e766196815a27342b5ab3627039cda32875</code></li>
+<li class="">operator-spdx-ref: <code>europe-docker.pkg.dev/gardener-project/releases/gardener/operator@sha256:d25a94f50cdbc40d5c26dc03474d2b32113d4d872dacd821892e74e3513fb16d</code></li>
+<li class="">resource-manager-spdx-ref: <code>europe-docker.pkg.dev/gardener-project/releases/gardener/resource-manager@sha256:4d1645d1d5957753ab612bc2e292e6827d3cb1d2b89c6015897105b327f06822</code></li>
+<li class="">resource-manager-spdx-ref: <code>europe-docker.pkg.dev/gardener-project/releases/gardener/resource-manager@sha256:55a6a8e936a037d44991d5d399182a1e61911704363a03268549cd3fe8c25168</code></li>
+<li class="">scheduler-spdx-ref: <code>europe-docker.pkg.dev/gardener-project/releases/gardener/scheduler@sha256:740d9be01ee95152e20c4937625a94455f9d939e00d1d091bd011f9655d5b407</code></li>
+<li class="">scheduler-spdx-ref: <code>europe-docker.pkg.dev/gardener-project/releases/gardener/scheduler@sha256:e3322ff3ef0267e0fc9a12f64d3099e40759e00748c68f27b99a26c4a4cc8ae4</code></li>
+</ul>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="helm-charts-73">Helm Charts<a href="#helm-charts-73" class="hash-link" aria-label="Direct link to Helm Charts" title="Direct link to Helm Charts" translate="no">​</a></h2>
+<ul>
+<li class="">controlplane: <code>europe-docker.pkg.dev/gardener-project/releases/charts/gardener/controlplane:v1.141.6</code></li>
+<li class="">gardenlet: <code>europe-docker.pkg.dev/gardener-project/releases/charts/gardener/gardenlet:v1.141.6</code></li>
+<li class="">operator: <code>europe-docker.pkg.dev/gardener-project/releases/charts/gardener/operator:v1.141.6</code></li>
+<li class="">resource-manager: <code>europe-docker.pkg.dev/gardener-project/releases/charts/gardener/resource-manager:v1.141.6</code></li>
+</ul>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="container-oci-images-85">Container (OCI) Images<a href="#container-oci-images-85" class="hash-link" aria-label="Direct link to Container (OCI) Images" title="Direct link to Container (OCI) Images" translate="no">​</a></h2>
+<ul>
+<li class="">admission-controller: <code>europe-docker.pkg.dev/gardener-project/releases/gardener/admission-controller:v1.141.6</code></li>
+<li class="">apiserver: <code>europe-docker.pkg.dev/gardener-project/releases/gardener/apiserver:v1.141.6</code></li>
+<li class="">controller-manager: <code>europe-docker.pkg.dev/gardener-project/releases/gardener/controller-manager:v1.141.6</code></li>
+<li class="">gardenadm: <code>europe-docker.pkg.dev/gardener-project/releases/gardener/gardenadm:v1.141.6</code></li>
+<li class="">gardenlet: <code>europe-docker.pkg.dev/gardener-project/releases/gardener/gardenlet:v1.141.6</code></li>
+<li class="">node-agent: <code>europe-docker.pkg.dev/gardener-project/releases/gardener/node-agent:v1.141.6</code></li>
+<li class="">operator: <code>europe-docker.pkg.dev/gardener-project/releases/gardener/operator:v1.141.6</code></li>
+<li class="">resource-manager: <code>europe-docker.pkg.dev/gardener-project/releases/gardener/resource-manager:v1.141.6</code></li>
+<li class="">scheduler: <code>europe-docker.pkg.dev/gardener-project/releases/gardener/scheduler:v1.141.6</code></li>
+</ul>
+</div></div></details>
+<details class="details_lb9f alert alert--info details_b_Ee" data-collapsed="true"><summary><b>Update gardener-controlplane to <code>1.141.6</code></b></summary><div><div class="collapsibleContent_i85q">
+<!-- -->
+<h1>[github.com/gardener/gardener:v1.141.6]</h1>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="-bug-fixes-51">🐛 Bug Fixes<a href="#-bug-fixes-51" class="hash-link" aria-label="Direct link to 🐛 Bug Fixes" title="Direct link to 🐛 Bug Fixes" translate="no">​</a></h2>
+<ul>
+<li class=""><code>[OPERATOR]</code> A bug has been fixed where <code>Garden</code> resources would start encryption key rotation on creation. by @RadaBDimitrova [<a href="https://github.com/gardener/gardener/pull/14939" target="_blank" rel="noopener noreferrer" class="">#14939</a>]</li>
+</ul>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="applicationspdxjson-51">application/spdx+json<a href="#applicationspdxjson-51" class="hash-link" aria-label="Direct link to application/spdx+json" title="Direct link to application/spdx+json" translate="no">​</a></h2>
+<ul>
+<li class="">admission-controller-spdx-ref: <code>europe-docker.pkg.dev/gardener-project/releases/gardener/admission-controller@sha256:4a165755e9181efd9627b44fc825847ac9969c820815ca05b13a792ddfc125cf</code></li>
+<li class="">admission-controller-spdx-ref: <code>europe-docker.pkg.dev/gardener-project/releases/gardener/admission-controller@sha256:885b55a0fe7221bab4c6877c4c8c0511f188d41bebe9c7d6e728147ab083ce3b</code></li>
+<li class="">apiserver-spdx-ref: <code>europe-docker.pkg.dev/gardener-project/releases/gardener/apiserver@sha256:b1457fa787ad6d9f71835ff2548443f35cf52b53baa9a4e16b4ad86ed1178d45</code></li>
+<li class="">apiserver-spdx-ref: <code>europe-docker.pkg.dev/gardener-project/releases/gardener/apiserver@sha256:c1e46e690bb90a51655e27f456d7c4409097874fbaa7b801eb24c1afe3d456f6</code></li>
+<li class="">controller-manager-spdx-ref: <code>europe-docker.pkg.dev/gardener-project/releases/gardener/controller-manager@sha256:45eb0ad17f00cd585542f7763f76b86a0a0a9c802ab7dd2f263bf4cbd1979827</code></li>
+<li class="">controller-manager-spdx-ref: <code>europe-docker.pkg.dev/gardener-project/releases/gardener/controller-manager@sha256:a54d1ecffee2380dcdd015739d32347477b2ffa9d3ef6a62f328034793f68812</code></li>
+<li class="">gardenadm-spdx-ref: <code>europe-docker.pkg.dev/gardener-project/releases/gardener/gardenadm@sha256:4f13b25079635f7cde8ada9fdc21b0fe8046541fc16fa25cd86f7dc94b7dbf6f</code></li>
+<li class="">gardenadm-spdx-ref: <code>europe-docker.pkg.dev/gardener-project/releases/gardener/gardenadm@sha256:87da6797bf3085d779cec357f836d9e01c9f5200fd51999669aa53118908d43e</code></li>
+<li class="">gardenlet-spdx-ref: <code>europe-docker.pkg.dev/gardener-project/releases/gardener/gardenlet@sha256:3d25de2f6bb9886cbd74d0b3018383043abaa56d38b14fbe6308be5243068b47</code></li>
+<li class="">gardenlet-spdx-ref: <code>europe-docker.pkg.dev/gardener-project/releases/gardener/gardenlet@sha256:6b65d935c1c7e631a6486a14909f19aa7cf078536ddb56349301d7035a1f4fbf</code></li>
+<li class="">node-agent-spdx-ref: <code>europe-docker.pkg.dev/gardener-project/releases/gardener/node-agent@sha256:7749013c764bec414f2b1321f98401de88456d085097bb606eba69a5c460a9ec</code></li>
+<li class="">node-agent-spdx-ref: <code>europe-docker.pkg.dev/gardener-project/releases/gardener/node-agent@sha256:b92413e40a6fbdc2dd5dc516c2f0844f8282f2a7766f7287f6d78a498b5f7676</code></li>
+<li class="">operator-spdx-ref: <code>europe-docker.pkg.dev/gardener-project/releases/gardener/operator@sha256:54327cb5da9735c1ec663a1997e46e766196815a27342b5ab3627039cda32875</code></li>
+<li class="">operator-spdx-ref: <code>europe-docker.pkg.dev/gardener-project/releases/gardener/operator@sha256:d25a94f50cdbc40d5c26dc03474d2b32113d4d872dacd821892e74e3513fb16d</code></li>
+<li class="">resource-manager-spdx-ref: <code>europe-docker.pkg.dev/gardener-project/releases/gardener/resource-manager@sha256:4d1645d1d5957753ab612bc2e292e6827d3cb1d2b89c6015897105b327f06822</code></li>
+<li class="">resource-manager-spdx-ref: <code>europe-docker.pkg.dev/gardener-project/releases/gardener/resource-manager@sha256:55a6a8e936a037d44991d5d399182a1e61911704363a03268549cd3fe8c25168</code></li>
+<li class="">scheduler-spdx-ref: <code>europe-docker.pkg.dev/gardener-project/releases/gardener/scheduler@sha256:740d9be01ee95152e20c4937625a94455f9d939e00d1d091bd011f9655d5b407</code></li>
+<li class="">scheduler-spdx-ref: <code>europe-docker.pkg.dev/gardener-project/releases/gardener/scheduler@sha256:e3322ff3ef0267e0fc9a12f64d3099e40759e00748c68f27b99a26c4a4cc8ae4</code></li>
+</ul>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="helm-charts-74">Helm Charts<a href="#helm-charts-74" class="hash-link" aria-label="Direct link to Helm Charts" title="Direct link to Helm Charts" translate="no">​</a></h2>
+<ul>
+<li class="">controlplane: <code>europe-docker.pkg.dev/gardener-project/releases/charts/gardener/controlplane:v1.141.6</code></li>
+<li class="">gardenlet: <code>europe-docker.pkg.dev/gardener-project/releases/charts/gardener/gardenlet:v1.141.6</code></li>
+<li class="">operator: <code>europe-docker.pkg.dev/gardener-project/releases/charts/gardener/operator:v1.141.6</code></li>
+<li class="">resource-manager: <code>europe-docker.pkg.dev/gardener-project/releases/charts/gardener/resource-manager:v1.141.6</code></li>
+</ul>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="container-oci-images-86">Container (OCI) Images<a href="#container-oci-images-86" class="hash-link" aria-label="Direct link to Container (OCI) Images" title="Direct link to Container (OCI) Images" translate="no">​</a></h2>
+<ul>
+<li class="">admission-controller: <code>europe-docker.pkg.dev/gardener-project/releases/gardener/admission-controller:v1.141.6</code></li>
+<li class="">apiserver: <code>europe-docker.pkg.dev/gardener-project/releases/gardener/apiserver:v1.141.6</code></li>
+<li class="">controller-manager: <code>europe-docker.pkg.dev/gardener-project/releases/gardener/controller-manager:v1.141.6</code></li>
+<li class="">gardenadm: <code>europe-docker.pkg.dev/gardener-project/releases/gardener/gardenadm:v1.141.6</code></li>
+<li class="">gardenlet: <code>europe-docker.pkg.dev/gardener-project/releases/gardener/gardenlet:v1.141.6</code></li>
+<li class="">node-agent: <code>europe-docker.pkg.dev/gardener-project/releases/gardener/node-agent:v1.141.6</code></li>
+<li class="">operator: <code>europe-docker.pkg.dev/gardener-project/releases/gardener/operator:v1.141.6</code></li>
+<li class="">resource-manager: <code>europe-docker.pkg.dev/gardener-project/releases/gardener/resource-manager:v1.141.6</code></li>
+<li class="">scheduler: <code>europe-docker.pkg.dev/gardener-project/releases/gardener/scheduler:v1.141.6</code></li>
+</ul>
+</div></div></details>
+<details class="details_lb9f alert alert--info details_b_Ee" data-collapsed="true"><summary><b>Update gardenlet to <code>1.141.6</code></b></summary><div><div class="collapsibleContent_i85q">
+<!-- -->
+<h1>[github.com/gardener/gardener:v1.141.6]</h1>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="-bug-fixes-52">🐛 Bug Fixes<a href="#-bug-fixes-52" class="hash-link" aria-label="Direct link to 🐛 Bug Fixes" title="Direct link to 🐛 Bug Fixes" translate="no">​</a></h2>
+<ul>
+<li class=""><code>[OPERATOR]</code> A bug has been fixed where <code>Garden</code> resources would start encryption key rotation on creation. by @RadaBDimitrova [<a href="https://github.com/gardener/gardener/pull/14939" target="_blank" rel="noopener noreferrer" class="">#14939</a>]</li>
+</ul>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="applicationspdxjson-52">application/spdx+json<a href="#applicationspdxjson-52" class="hash-link" aria-label="Direct link to application/spdx+json" title="Direct link to application/spdx+json" translate="no">​</a></h2>
+<ul>
+<li class="">admission-controller-spdx-ref: <code>europe-docker.pkg.dev/gardener-project/releases/gardener/admission-controller@sha256:4a165755e9181efd9627b44fc825847ac9969c820815ca05b13a792ddfc125cf</code></li>
+<li class="">admission-controller-spdx-ref: <code>europe-docker.pkg.dev/gardener-project/releases/gardener/admission-controller@sha256:885b55a0fe7221bab4c6877c4c8c0511f188d41bebe9c7d6e728147ab083ce3b</code></li>
+<li class="">apiserver-spdx-ref: <code>europe-docker.pkg.dev/gardener-project/releases/gardener/apiserver@sha256:b1457fa787ad6d9f71835ff2548443f35cf52b53baa9a4e16b4ad86ed1178d45</code></li>
+<li class="">apiserver-spdx-ref: <code>europe-docker.pkg.dev/gardener-project/releases/gardener/apiserver@sha256:c1e46e690bb90a51655e27f456d7c4409097874fbaa7b801eb24c1afe3d456f6</code></li>
+<li class="">controller-manager-spdx-ref: <code>europe-docker.pkg.dev/gardener-project/releases/gardener/controller-manager@sha256:45eb0ad17f00cd585542f7763f76b86a0a0a9c802ab7dd2f263bf4cbd1979827</code></li>
+<li class="">controller-manager-spdx-ref: <code>europe-docker.pkg.dev/gardener-project/releases/gardener/controller-manager@sha256:a54d1ecffee2380dcdd015739d32347477b2ffa9d3ef6a62f328034793f68812</code></li>
+<li class="">gardenadm-spdx-ref: <code>europe-docker.pkg.dev/gardener-project/releases/gardener/gardenadm@sha256:4f13b25079635f7cde8ada9fdc21b0fe8046541fc16fa25cd86f7dc94b7dbf6f</code></li>
+<li class="">gardenadm-spdx-ref: <code>europe-docker.pkg.dev/gardener-project/releases/gardener/gardenadm@sha256:87da6797bf3085d779cec357f836d9e01c9f5200fd51999669aa53118908d43e</code></li>
+<li class="">gardenlet-spdx-ref: <code>europe-docker.pkg.dev/gardener-project/releases/gardener/gardenlet@sha256:3d25de2f6bb9886cbd74d0b3018383043abaa56d38b14fbe6308be5243068b47</code></li>
+<li class="">gardenlet-spdx-ref: <code>europe-docker.pkg.dev/gardener-project/releases/gardener/gardenlet@sha256:6b65d935c1c7e631a6486a14909f19aa7cf078536ddb56349301d7035a1f4fbf</code></li>
+<li class="">node-agent-spdx-ref: <code>europe-docker.pkg.dev/gardener-project/releases/gardener/node-agent@sha256:7749013c764bec414f2b1321f98401de88456d085097bb606eba69a5c460a9ec</code></li>
+<li class="">node-agent-spdx-ref: <code>europe-docker.pkg.dev/gardener-project/releases/gardener/node-agent@sha256:b92413e40a6fbdc2dd5dc516c2f0844f8282f2a7766f7287f6d78a498b5f7676</code></li>
+<li class="">operator-spdx-ref: <code>europe-docker.pkg.dev/gardener-project/releases/gardener/operator@sha256:54327cb5da9735c1ec663a1997e46e766196815a27342b5ab3627039cda32875</code></li>
+<li class="">operator-spdx-ref: <code>europe-docker.pkg.dev/gardener-project/releases/gardener/operator@sha256:d25a94f50cdbc40d5c26dc03474d2b32113d4d872dacd821892e74e3513fb16d</code></li>
+<li class="">resource-manager-spdx-ref: <code>europe-docker.pkg.dev/gardener-project/releases/gardener/resource-manager@sha256:4d1645d1d5957753ab612bc2e292e6827d3cb1d2b89c6015897105b327f06822</code></li>
+<li class="">resource-manager-spdx-ref: <code>europe-docker.pkg.dev/gardener-project/releases/gardener/resource-manager@sha256:55a6a8e936a037d44991d5d399182a1e61911704363a03268549cd3fe8c25168</code></li>
+<li class="">scheduler-spdx-ref: <code>europe-docker.pkg.dev/gardener-project/releases/gardener/scheduler@sha256:740d9be01ee95152e20c4937625a94455f9d939e00d1d091bd011f9655d5b407</code></li>
+<li class="">scheduler-spdx-ref: <code>europe-docker.pkg.dev/gardener-project/releases/gardener/scheduler@sha256:e3322ff3ef0267e0fc9a12f64d3099e40759e00748c68f27b99a26c4a4cc8ae4</code></li>
+</ul>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="helm-charts-75">Helm Charts<a href="#helm-charts-75" class="hash-link" aria-label="Direct link to Helm Charts" title="Direct link to Helm Charts" translate="no">​</a></h2>
+<ul>
+<li class="">controlplane: <code>europe-docker.pkg.dev/gardener-project/releases/charts/gardener/controlplane:v1.141.6</code></li>
+<li class="">gardenlet: <code>europe-docker.pkg.dev/gardener-project/releases/charts/gardener/gardenlet:v1.141.6</code></li>
+<li class="">operator: <code>europe-docker.pkg.dev/gardener-project/releases/charts/gardener/operator:v1.141.6</code></li>
+<li class="">resource-manager: <code>europe-docker.pkg.dev/gardener-project/releases/charts/gardener/resource-manager:v1.141.6</code></li>
+</ul>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="container-oci-images-87">Container (OCI) Images<a href="#container-oci-images-87" class="hash-link" aria-label="Direct link to Container (OCI) Images" title="Direct link to Container (OCI) Images" translate="no">​</a></h2>
+<ul>
+<li class="">admission-controller: <code>europe-docker.pkg.dev/gardener-project/releases/gardener/admission-controller:v1.141.6</code></li>
+<li class="">apiserver: <code>europe-docker.pkg.dev/gardener-project/releases/gardener/apiserver:v1.141.6</code></li>
+<li class="">controller-manager: <code>europe-docker.pkg.dev/gardener-project/releases/gardener/controller-manager:v1.141.6</code></li>
+<li class="">gardenadm: <code>europe-docker.pkg.dev/gardener-project/releases/gardener/gardenadm:v1.141.6</code></li>
+<li class="">gardenlet: <code>europe-docker.pkg.dev/gardener-project/releases/gardener/gardenlet:v1.141.6</code></li>
+<li class="">node-agent: <code>europe-docker.pkg.dev/gardener-project/releases/gardener/node-agent:v1.141.6</code></li>
+<li class="">operator: <code>europe-docker.pkg.dev/gardener-project/releases/gardener/operator:v1.141.6</code></li>
+<li class="">resource-manager: <code>europe-docker.pkg.dev/gardener-project/releases/gardener/resource-manager:v1.141.6</code></li>
+<li class="">scheduler: <code>europe-docker.pkg.dev/gardener-project/releases/gardener/scheduler:v1.141.6</code></li>
 </ul>
 </div></div></details></div></article><nav class="docusaurus-mt-lg pagination-nav" aria-label="Docs pages"><a class="pagination-nav__link pagination-nav__link--next" href="/release-notes/v1.137"><div class="pagination-nav__sublabel">Next</div><div class="pagination-nav__label">Release Notes v1.137</div></a></nav></div></div></div></div></main></div></div></div><footer class="theme-layout-footer footer footer--dark"><div class="container container-fluid"><div class="row footer__links"><div class="theme-layout-footer-column col footer__col"><div class="footer__title">Docs</div><ul class="footer__items clean-list"><li class="footer__item"><a class="footer__link-item" href="/docs/overview">Docs</a></li></ul></div><div class="theme-layout-footer-column col footer__col"><div class="footer__title">Community</div><ul class="footer__items clean-list"><li class="footer__item"><a href="https://github.com/yakecloud" target="_blank" rel="noopener noreferrer" class="footer__link-item">GitHub<svg width="13.5" height="13.5" aria-label="(opens in new tab)" class="iconExternalLink_nPIU"><use href="#theme-svg-external-link"></use></svg></a></li><li class="footer__item"><a href="https://github.com/gardener-community" target="_blank" rel="noopener noreferrer" class="footer__link-item">Gardener Community<svg width="13.5" height="13.5" aria-label="(opens in new tab)" class="iconExternalLink_nPIU"><use href="#theme-svg-external-link"></use></svg></a></li><li class="footer__item"><a href="https://gardener-cloud.slack.com" target="_blank" rel="noopener noreferrer" class="footer__link-item">Slack<svg width="13.5" height="13.5" aria-label="(opens in new tab)" class="iconExternalLink_nPIU"><use href="#theme-svg-external-link"></use></svg></a></li></ul></div><div class="theme-layout-footer-column col footer__col"><div class="footer__title">More</div><ul class="footer__items clean-list"><li class="footer__item"><a class="footer__link-item" href="/blog">Blog</a></li><li class="footer__item"><a class="footer__link-item" href="/legals">Legals</a></li><li class="footer__item"><a class="footer__link-item" href="/privacy-policy">Privacy policy</a></li></ul></div></div><div class="footer__bottom text--center"><div class="footer__copyright">Copyright © 2026 23 Technologies GmbH</div></div></div></footer></div>
 </body>
