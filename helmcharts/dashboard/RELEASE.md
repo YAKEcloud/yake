@@ -1,11 +1,13 @@
-# [github.com/gardener/dashboard:1.84.2]
+# [github.com/gardener/dashboard:1.84.3]
+
+## ⚠️ Breaking Changes
+- `[OPERATOR]` Machine image vendor matching no longer uses substring/wildcard patterns. Image names must now exactly match an entry in `knownMachineImageVendors` (or the branding config `vendors.machineImage` array). Images without an exact match will display their raw name without vendor icon or grouping by @grolu [[#3001](https://github.com/gardener/dashboard/pull/3001)]
 
 ## 🐛 Bug Fixes
-- `[OPERATOR]` Detect stalled HTTP/2 sessions used by the kube-client via a Go-style read-idle / ping-timeout heartbeat. Previously a half-open session was never torn down, which could leave streams hanging indefinitely. Configurable via `KUBE_CLIENT_READ_IDLE_TIMEOUT` / `KUBE_CLIENT_PING_TIMEOUT` env vars and the matching `global.dashboard.kubeClient.readIdleTimeout` / `pingTimeout` Helm values. by @petersutter [[#2985](https://github.com/gardener/dashboard/pull/2985)]
-- `[USER]` Fixed IOPS input field not visible for aws workers by @grolu [[#2986](https://github.com/gardener/dashboard/pull/2986)]
+- `[USER]` Fix machine image vendor matching to use exact names instead of substring matching, preventing misclassification of images like memorone-gardenlinux or gardenlinux-fips by @grolu [[#3001](https://github.com/gardener/dashboard/pull/3001)]
 
 ## application/spdx+json
-- gardener-dashboard-spdx-ref: `europe-docker.pkg.dev/gardener-project/releases/gardener/dashboard@sha256:284638885fb3e0b6ba4a933044027b0dec1b57339ba630a80b0cb4f61ab3b818`
-- gardener-dashboard-spdx-ref: `europe-docker.pkg.dev/gardener-project/releases/gardener/dashboard@sha256:950872ed3c345556919700d81862d6d69f61098c080b64168b3bb721da34ea38`
+- gardener-dashboard-spdx-ref: `europe-docker.pkg.dev/gardener-project/releases/gardener/dashboard@sha256:00dfdc7a5715840962a45dc6ad8248149eeb82096596487e1fc20d18e222a05b`
+- gardener-dashboard-spdx-ref: `europe-docker.pkg.dev/gardener-project/releases/gardener/dashboard@sha256:71f92cae4a0de4ff4c05a976702f7d4612e5cd5882a51afd2df3e4034c054456`
 ## Container (OCI) Images
-- gardener-dashboard: `europe-docker.pkg.dev/gardener-project/releases/gardener/dashboard:1.84.2`
+- gardener-dashboard: `europe-docker.pkg.dev/gardener-project/releases/gardener/dashboard:1.84.3`
