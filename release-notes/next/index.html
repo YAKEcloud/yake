@@ -5,7 +5,7 @@
 <meta name="generator" content="Docusaurus v3.10.1">
 <title data-rh="true">Release Notes next | Yet another Kubernetes Engine</title><meta data-rh="true" name="viewport" content="width=device-width,initial-scale=1"><meta data-rh="true" name="twitter:card" content="summary_large_image"><meta data-rh="true" property="og:url" content="https://yake.cloud/release-notes/next"><meta data-rh="true" property="og:locale" content="en"><meta data-rh="true" name="docusaurus_locale" content="en"><meta data-rh="true" name="docsearch:language" content="en"><meta data-rh="true" name="gardener" content="installation, production, operations, maintenance"><meta data-rh="true" name="docusaurus_version" content="current"><meta data-rh="true" name="docusaurus_tag" content="docs-release-notes-current"><meta data-rh="true" name="docsearch:version" content="current"><meta data-rh="true" name="docsearch:docusaurus_tag" content="docs-release-notes-current"><meta data-rh="true" property="og:title" content="Release Notes next | Yet another Kubernetes Engine"><meta data-rh="true" name="description" content="Yake release notes and upgrade guide"><meta data-rh="true" property="og:description" content="Yake release notes and upgrade guide"><link data-rh="true" rel="icon" href="/img/favicon.ico"><link data-rh="true" rel="canonical" href="https://yake.cloud/release-notes/next"><link data-rh="true" rel="alternate" href="https://yake.cloud/release-notes/next" hreflang="en"><link data-rh="true" rel="alternate" href="https://yake.cloud/release-notes/next" hreflang="x-default"><script data-rh="true" type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Release Notes next","item":"https://yake.cloud/release-notes/next"}]}</script><link rel="alternate" type="application/rss+xml" href="/blog/rss.xml" title="Yet another Kubernetes Engine RSS Feed">
 <link rel="alternate" type="application/atom+xml" href="/blog/atom.xml" title="Yet another Kubernetes Engine Atom Feed"><link rel="stylesheet" href="/assets/css/styles.953fe0f7.css">
-<script src="/assets/js/runtime~main.b5ca8260.js" defer="defer"></script>
+<script src="/assets/js/runtime~main.7257bcfa.js" defer="defer"></script>
 <script src="/assets/js/main.2f686165.js" defer="defer"></script>
 </head>
 <body>
@@ -3853,6 +3853,182 @@ Additionally, the deployments are done in parallel, which speeds up the whole op
 <ul>
 <li class="">dns-controller-manager-next-generation: <code>europe-docker.pkg.dev/gardener-project/releases/dns-controller-manager-next-generation:v0.44.0</code></li>
 <li class="">dns-controller-manager: <code>europe-docker.pkg.dev/gardener-project/releases/dns-controller-manager:v0.44.0</code></li>
+</ul>
+</div></div></details>
+<details class="details_lb9f alert alert--info details_b_Ee" data-collapsed="true"><summary><b>Update shoot-oidc-service to <code>0.40.0</code></b></summary><div><div class="collapsibleContent_i85q">
+<!-- -->
+<h1>[github.com/gardener/gardener-extension-shoot-oidc-service:v0.40.0]</h1>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="-others-70">🏃 Others<a href="#-others-70" class="hash-link" aria-label="Direct link to 🏃 Others" title="Direct link to 🏃 Others" translate="no">​</a></h2>
+<ul>
+<li class=""><code>[OPERATOR]</code> Component binaries are now built with Go 1.26.4 by @dependabot[bot] [<a href="https://github.com/gardener/gardener-extension-shoot-oidc-service/pull/466" target="_blank" rel="noopener noreferrer" class="">#466</a>]</li>
+<li class=""><code>[OPERATOR]</code> Component binaries are now built with Go 1.26.3 by @dependabot[bot] [<a href="https://github.com/gardener/gardener-extension-shoot-oidc-service/pull/459" target="_blank" rel="noopener noreferrer" class="">#459</a>]</li>
+<li class=""><code>[DEPENDENCY]</code> The following third party dependencies have been updated:
+<ul>
+<li class="">github.com/gardener/gardener v1.143.1 -&gt; v1.144.0</li>
+<li class="">github.com/gardener/gardener/pkg/apis v1.143.1 -&gt; v1.144.0 by @dependabot[bot] [<a href="https://github.com/gardener/gardener-extension-shoot-oidc-service/pull/469" target="_blank" rel="noopener noreferrer" class="">#469</a>]</li>
+</ul>
+</li>
+<li class=""><code>[DEPENDENCY]</code> The following third party dependencies have been updated:
+<ul>
+<li class="">github.com/gardener/gardener v1.140.2 -&gt; v1.142.0</li>
+<li class="">github.com/gardener/gardener/pkg/apis v1.140.2 -&gt; v1.142.0</li>
+<li class="">golang.org/x/tools v0.43.0 -&gt; v0.44.0</li>
+<li class="">k8s.io/api v0.35.3 -&gt; v0.35.4</li>
+<li class="">k8s.io/apimachinery v0.35.3 -&gt; v0.35.4</li>
+<li class="">k8s.io/client-go v0.35.3 -&gt; v0.35.4</li>
+<li class="">k8s.io/code-generator v0.35.3 -&gt; v0.35.4</li>
+<li class="">k8s.io/component-base v0.35.3 -&gt; v0.35.4</li>
+<li class="">github.com/Masterminds/semver/v3 v3.4.0 -&gt; v3.5.0</li>
+<li class="">go.yaml.in/yaml/v2 v2.4.3 -&gt; v2.4.4</li>
+<li class="">golang.org/x/crypto v0.49.0 -&gt; v0.50.0</li>
+<li class="">golang.org/x/mod v0.34.0 -&gt; v0.35.0</li>
+<li class="">golang.org/x/net v0.52.0 -&gt; v0.53.0</li>
+<li class="">golang.org/x/oauth2 v0.35.0 -&gt; v0.36.0</li>
+<li class="">golang.org/x/sys v0.42.0 -&gt; v0.43.0</li>
+<li class="">golang.org/x/term v0.41.0 -&gt; v0.42.0</li>
+<li class="">golang.org/x/text v0.35.0 -&gt; v0.36.0 by @dependabot[bot] [<a href="https://github.com/gardener/gardener-extension-shoot-oidc-service/pull/456" target="_blank" rel="noopener noreferrer" class="">#456</a>]</li>
+</ul>
+</li>
+<li class=""><code>[DEPENDENCY]</code> The following third party dependencies have been updated:
+<ul>
+<li class="">github.com/gardener/gardener v1.142.0 -&gt; v1.142.1 by @dependabot[bot] [<a href="https://github.com/gardener/gardener-extension-shoot-oidc-service/pull/462" target="_blank" rel="noopener noreferrer" class="">#462</a>]</li>
+</ul>
+</li>
+<li class=""><code>[DEPENDENCY]</code> The following third party dependencies have been updated:
+<ul>
+<li class="">github.com/gardener/gardener v1.142.1 -&gt; v1.142.2</li>
+<li class="">github.com/gardener/gardener/pkg/apis v1.142.1 -&gt; v1.142.2 by @dependabot[bot] [<a href="https://github.com/gardener/gardener-extension-shoot-oidc-service/pull/464" target="_blank" rel="noopener noreferrer" class="">#464</a>]</li>
+</ul>
+</li>
+<li class=""><code>[DEPENDENCY]</code> The following third party dependencies have been updated:
+<ul>
+<li class="">github.com/gardener/gardener v1.144.0 -&gt; v1.144.1</li>
+<li class="">github.com/gardener/gardener/pkg/apis v1.144.0 -&gt; v1.144.1 by @dependabot[bot] [<a href="https://github.com/gardener/gardener-extension-shoot-oidc-service/pull/470" target="_blank" rel="noopener noreferrer" class="">#470</a>]</li>
+</ul>
+</li>
+</ul>
+<h1>[github.com/gardener/oidc-webhook-authenticator:v0.44.0]</h1>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="-others-71">🏃 Others<a href="#-others-71" class="hash-link" aria-label="Direct link to 🏃 Others" title="Direct link to 🏃 Others" translate="no">​</a></h2>
+<ul>
+<li class=""><code>[OPERATOR]</code> Component binaries are now built with Go 1.26.3 by @dependabot[bot] [<a href="https://github.com/gardener/oidc-webhook-authenticator/pull/236" target="_blank" rel="noopener noreferrer" class="">#236</a>]</li>
+<li class=""><code>[OPERATOR]</code> Component binaries are now built with Go 1.26.4 by @dependabot[bot] [<a href="https://github.com/gardener/oidc-webhook-authenticator/pull/243" target="_blank" rel="noopener noreferrer" class="">#243</a>]</li>
+<li class=""><code>[DEPENDENCY]</code> The following third party dependencies have been updated:
+<ul>
+<li class="">github.com/coreos/go-oidc/v3 v3.15.0 -&gt; v3.18.0</li>
+<li class="">github.com/go-jose/go-jose/v4 v4.1.3 -&gt; v4.1.4</li>
+<li class="">golang.org/x/oauth2 v0.34.0 -&gt; v0.36.0 by @dependabot[bot] [<a href="https://github.com/gardener/oidc-webhook-authenticator/pull/242" target="_blank" rel="noopener noreferrer" class="">#242</a>]</li>
+</ul>
+</li>
+<li class=""><code>[DEPENDENCY]</code> The following third party dependencies have been updated:
+<ul>
+<li class="">k8s.io/api v0.36.0 -&gt; v0.36.2</li>
+<li class="">k8s.io/apimachinery v0.36.0 -&gt; v0.36.2</li>
+<li class="">k8s.io/apiserver v0.36.0 -&gt; v0.36.2</li>
+<li class="">k8s.io/client-go v0.36.0 -&gt; v0.36.2</li>
+<li class="">k8s.io/component-base v0.36.0 -&gt; v0.36.2</li>
+<li class="">k8s.io/apiextensions-apiserver v0.36.0 -&gt; v0.36.2</li>
+<li class="">k8s.io/streaming v0.36.0 -&gt; v0.36.2</li>
+<li class="">github.com/fsnotify/fsnotify v1.9.0 -&gt; v1.10.1</li>
+<li class="">go.opentelemetry.io/otel v1.41.0 -&gt; v1.44.0</li>
+<li class="">go.opentelemetry.io/otel/sdk v1.40.0 -&gt; v1.44.0</li>
+<li class="">go.yaml.in/yaml/v2 v2.4.3 -&gt; v2.4.4</li>
+<li class="">golang.org/x/time v0.14.0 -&gt; v0.15.0</li>
+<li class="">golang.org/x/crypto v0.47.0 -&gt; v0.53.0</li>
+<li class="">golang.org/x/mod v0.32.0 -&gt; v0.37.0</li>
+<li class="">golang.org/x/net v0.49.0 -&gt; v0.56.0</li>
+<li class="">golang.org/x/sync v0.19.0 -&gt; v0.21.0</li>
+<li class="">golang.org/x/sys v0.40.0 -&gt; v0.46.0</li>
+<li class="">golang.org/x/term v0.39.0 -&gt; v0.44.0</li>
+<li class="">golang.org/x/text v0.33.0 -&gt; v0.38.0</li>
+<li class="">golang.org/x/tools v0.41.0 -&gt; v0.46.0</li>
+<li class="">sigs.k8s.io/apiserver-network-proxy/konnectivity-client v0.34.0 -&gt; v0.36.0</li>
+<li class="">sigs.k8s.io/structured-merge-diff/v6 v6.3.2 -&gt; v6.4.0 by @vpnachev [<a href="https://github.com/gardener/oidc-webhook-authenticator/pull/247" target="_blank" rel="noopener noreferrer" class="">#247</a>]</li>
+</ul>
+</li>
+<li class=""><code>[DEPENDENCY]</code> The following third party dependencies have been updated:
+<ul>
+<li class="">sigs.k8s.io/controller-runtime v0.24.0 -&gt; v0.24.1 by @dependabot[bot] [<a href="https://github.com/gardener/oidc-webhook-authenticator/pull/239" target="_blank" rel="noopener noreferrer" class="">#239</a>]</li>
+</ul>
+</li>
+</ul>
+<h1>[github.com/gardener/garden-shoot-trust-configurator:v0.3.0]</h1>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="-others-72">🏃 Others<a href="#-others-72" class="hash-link" aria-label="Direct link to 🏃 Others" title="Direct link to 🏃 Others" translate="no">​</a></h2>
+<ul>
+<li class=""><code>[OPERATOR]</code> Component binaries are now built with Go 1.26.3 by @dependabot[bot] [<a href="https://github.com/gardener/garden-shoot-trust-configurator/pull/117" target="_blank" rel="noopener noreferrer" class="">#117</a>]</li>
+<li class=""><code>[OPERATOR]</code> Component binaries are now built with Go 1.26.4 by @dependabot[bot] [<a href="https://github.com/gardener/garden-shoot-trust-configurator/pull/124" target="_blank" rel="noopener noreferrer" class="">#124</a>]</li>
+<li class=""><code>[DEPENDENCY]</code> The following third party dependencies have been updated:
+<ul>
+<li class="">github.com/gardener/gardener v1.141.1 -&gt; v1.142.0</li>
+<li class="">github.com/Masterminds/semver/v3 v3.4.0 -&gt; v3.5.0</li>
+<li class="">go.yaml.in/yaml/v2 v2.4.3 -&gt; v2.4.4 by @dependabot[bot] [<a href="https://github.com/gardener/garden-shoot-trust-configurator/pull/118" target="_blank" rel="noopener noreferrer" class="">#118</a>]</li>
+</ul>
+</li>
+<li class=""><code>[DEPENDENCY]</code> The following third party dependencies have been updated:
+<ul>
+<li class="">github.com/gardener/gardener v1.144.0 -&gt; v1.144.1</li>
+<li class="">github.com/gardener/gardener/pkg/apis v1.144.0 -&gt; v1.144.1 by @dependabot[bot] [<a href="https://github.com/gardener/garden-shoot-trust-configurator/pull/127" target="_blank" rel="noopener noreferrer" class="">#127</a>]</li>
+</ul>
+</li>
+<li class=""><code>[DEPENDENCY]</code> The following third party dependencies have been updated:
+<ul>
+<li class="">github.com/aws/aws-sdk-go-v2 v1.41.7 -&gt; v1.42.0</li>
+<li class="">github.com/aws/aws-sdk-go-v2/config v1.32.17 -&gt; v1.32.25</li>
+<li class="">github.com/aws/aws-sdk-go-v2/credentials v1.19.16 -&gt; v1.19.24</li>
+<li class="">github.com/aws/aws-sdk-go-v2/feature/ec2/imds v1.18.23 -&gt; v1.18.29</li>
+<li class="">github.com/aws/aws-sdk-go-v2/internal/configsources v1.4.23 -&gt; v1.4.29</li>
+<li class="">github.com/aws/aws-sdk-go-v2/internal/endpoints/v2 v2.7.23 -&gt; v2.7.29</li>
+<li class="">github.com/aws/aws-sdk-go-v2/internal/v4a v1.4.24 -&gt; v1.4.30</li>
+<li class="">github.com/aws/aws-sdk-go-v2/service/internal/accept-encoding v1.13.9 -&gt; v1.13.12</li>
+<li class="">github.com/aws/aws-sdk-go-v2/service/internal/presigned-url v1.13.23 -&gt; v1.13.29</li>
+<li class="">github.com/aws/aws-sdk-go-v2/service/signin v1.0.11 -&gt; v1.2.0</li>
+<li class="">github.com/aws/aws-sdk-go-v2/service/sso v1.30.17 -&gt; v1.31.3</li>
+<li class="">github.com/aws/aws-sdk-go-v2/service/ssooidc v1.35.21 -&gt; v1.36.6</li>
+<li class="">github.com/aws/aws-sdk-go-v2/service/sts v1.42.1 -&gt; v1.43.3</li>
+<li class="">github.com/aws/smithy-go v1.25.1 -&gt; v1.27.2</li>
+<li class="">github.com/go-openapi/errors v0.22.7 -&gt; v0.22.8</li>
+<li class="">github.com/zitadel/oidc/v3 v3.45.4 -&gt; v3.47.5</li>
+<li class="">go.opentelemetry.io/contrib/otelconf v0.23.0 -&gt; v0.24.0</li>
+<li class="">go.opentelemetry.io/otel/exporters/otlp/otlplog/otlploggrpc v0.19.0 -&gt; v0.20.0</li>
+<li class="">go.opentelemetry.io/otel/exporters/otlp/otlplog/otlploghttp v0.19.0 -&gt; v0.20.0</li>
+<li class="">go.opentelemetry.io/otel/exporters/otlp/otlpmetric/otlpmetricgrpc v1.43.0 -&gt; v1.44.0</li>
+<li class="">go.opentelemetry.io/otel/exporters/otlp/otlpmetric/otlpmetrichttp v1.43.0 -&gt; v1.44.0</li>
+<li class="">go.opentelemetry.io/otel/exporters/otlp/otlptrace/otlptracehttp v1.43.0 -&gt; v1.44.0</li>
+<li class="">go.opentelemetry.io/otel/exporters/prometheus v0.65.0 -&gt; v0.66.0</li>
+<li class="">go.opentelemetry.io/otel/exporters/stdout/stdoutlog v0.19.0 -&gt; v0.20.0</li>
+<li class="">go.opentelemetry.io/otel/exporters/stdout/stdoutmetric v1.43.0 -&gt; v1.44.0</li>
+<li class="">go.opentelemetry.io/otel/exporters/stdout/stdouttrace v1.43.0 -&gt; v1.44.0</li>
+<li class="">go.opentelemetry.io/otel/log v0.19.0 -&gt; v0.20.0</li>
+<li class="">go.opentelemetry.io/otel/sdk/log v0.19.0 -&gt; v0.20.0</li>
+<li class="">k8s.io/autoscaler/vertical-pod-autoscaler v1.6.0 -&gt; v1.7.0</li>
+<li class="">k8s.io/kube-aggregator v0.35.5 -&gt; v0.36.2</li>
+<li class="">k8s.io/metrics v0.35.5 -&gt; v0.36.2</li>
+<li class="">sigs.k8s.io/gateway-api v1.5.0 -&gt; v1.5.1 by @vpnachev [<a href="https://github.com/gardener/garden-shoot-trust-configurator/pull/130" target="_blank" rel="noopener noreferrer" class="">#130</a>]</li>
+</ul>
+</li>
+<li class=""><code>[DEPENDENCY]</code> The following third party dependencies have been updated:
+<ul>
+<li class="">github.com/gardener/gardener v1.142.1 -&gt; v1.142.2</li>
+<li class="">github.com/gardener/gardener/pkg/apis v1.142.1 -&gt; v1.142.2 by @dependabot[bot] [<a href="https://github.com/gardener/garden-shoot-trust-configurator/pull/121" target="_blank" rel="noopener noreferrer" class="">#121</a>]</li>
+</ul>
+</li>
+</ul>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="applicationspdxjson-69">application/spdx+json<a href="#applicationspdxjson-69" class="hash-link" aria-label="Direct link to application/spdx+json" title="Direct link to application/spdx+json" translate="no">​</a></h2>
+<ul>
+<li class="">gardener-extension-shoot-oidc-service-sbom-ref: <code>europe-docker.pkg.dev/gardener-project/releases/gardener/extensions/shoot-oidc-service@sha256:17e31584b0941198826e6819b6c0d51aac02e81196c5cb6869476fd68aa7a39d</code></li>
+<li class="">gardener-extension-shoot-oidc-service-sbom-ref: <code>europe-docker.pkg.dev/gardener-project/releases/gardener/extensions/shoot-oidc-service@sha256:bf12d3f7cef3b58dca843e8805c555f290c71230f142e6237ec4399f055b5037</code></li>
+</ul>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="applicationvndcyclonedxjson-1">application/vnd.cyclonedx+json<a href="#applicationvndcyclonedxjson-1" class="hash-link" aria-label="Direct link to application/vnd.cyclonedx+json" title="Direct link to application/vnd.cyclonedx+json" translate="no">​</a></h2>
+<ul>
+<li class="">gardener-extension-shoot-oidc-service-sbom-ref: <code>europe-docker.pkg.dev/gardener-project/releases/gardener/extensions/shoot-oidc-service@sha256:6e0dff9f58035fece0cc98b1477b4fd22f2eb29bea823e8201af264b5957a6c7</code></li>
+<li class="">gardener-extension-shoot-oidc-service-sbom-ref: <code>europe-docker.pkg.dev/gardener-project/releases/gardener/extensions/shoot-oidc-service@sha256:88f91d7afda3fc5a6624030fd0583f94a12521164940130bb7d1ea7817765ef7</code></li>
+</ul>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="helm-charts-90">Helm Charts<a href="#helm-charts-90" class="hash-link" aria-label="Direct link to Helm Charts" title="Direct link to Helm Charts" translate="no">​</a></h2>
+<ul>
+<li class="">shoot-oidc-service: <code>europe-docker.pkg.dev/gardener-project/releases/charts/gardener/extensions/shoot-oidc-service:v0.40.0</code></li>
+</ul>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="container-oci-images-104">Container (OCI) Images<a href="#container-oci-images-104" class="hash-link" aria-label="Direct link to Container (OCI) Images" title="Direct link to Container (OCI) Images" translate="no">​</a></h2>
+<ul>
+<li class="">gardener-extension-shoot-oidc-service: <code>europe-docker.pkg.dev/gardener-project/releases/gardener/extensions/shoot-oidc-service:v0.40.0</code></li>
 </ul>
 </div></div></details></div></article><nav class="docusaurus-mt-lg pagination-nav" aria-label="Docs pages"><a class="pagination-nav__link pagination-nav__link--next" href="/release-notes/v1.137"><div class="pagination-nav__sublabel">Next</div><div class="pagination-nav__label">Release Notes v1.137</div></a></nav></div></div></div></div></main></div></div></div><footer class="theme-layout-footer footer footer--dark"><div class="container container-fluid"><div class="row footer__links"><div class="theme-layout-footer-column col footer__col"><div class="footer__title">Docs</div><ul class="footer__items clean-list"><li class="footer__item"><a class="footer__link-item" href="/docs/overview">Docs</a></li></ul></div><div class="theme-layout-footer-column col footer__col"><div class="footer__title">Community</div><ul class="footer__items clean-list"><li class="footer__item"><a href="https://github.com/yakecloud" target="_blank" rel="noopener noreferrer" class="footer__link-item">GitHub<svg width="13.5" height="13.5" aria-label="(opens in new tab)" class="iconExternalLink_nPIU"><use href="#theme-svg-external-link"></use></svg></a></li><li class="footer__item"><a href="https://github.com/gardener-community" target="_blank" rel="noopener noreferrer" class="footer__link-item">Gardener Community<svg width="13.5" height="13.5" aria-label="(opens in new tab)" class="iconExternalLink_nPIU"><use href="#theme-svg-external-link"></use></svg></a></li><li class="footer__item"><a href="https://gardener-cloud.slack.com" target="_blank" rel="noopener noreferrer" class="footer__link-item">Slack<svg width="13.5" height="13.5" aria-label="(opens in new tab)" class="iconExternalLink_nPIU"><use href="#theme-svg-external-link"></use></svg></a></li></ul></div><div class="theme-layout-footer-column col footer__col"><div class="footer__title">More</div><ul class="footer__items clean-list"><li class="footer__item"><a class="footer__link-item" href="/blog">Blog</a></li><li class="footer__item"><a class="footer__link-item" href="/legals">Legals</a></li><li class="footer__item"><a class="footer__link-item" href="/privacy-policy">Privacy policy</a></li></ul></div></div><div class="footer__bottom text--center"><div class="footer__copyright">Copyright © 2026 23 Technologies GmbH</div></div></div></footer></div>
 </body>
