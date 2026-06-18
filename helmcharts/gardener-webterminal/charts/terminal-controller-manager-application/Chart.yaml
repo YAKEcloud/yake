@@ -7,4 +7,4 @@ deprecated: true
 description: A Helm chart to deploy the terminal-controller-manager application related
   components
 name: terminal-controller-manager-application
-version: 0.36.0
+version: 0.37.0
