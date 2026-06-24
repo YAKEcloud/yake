@@ -5,7 +5,7 @@
 <meta name="generator" content="Docusaurus v3.10.1">
 <title data-rh="true">Release Notes next | Yet another Kubernetes Engine</title><meta data-rh="true" name="viewport" content="width=device-width,initial-scale=1"><meta data-rh="true" name="twitter:card" content="summary_large_image"><meta data-rh="true" property="og:url" content="https://yake.cloud/release-notes/next"><meta data-rh="true" property="og:locale" content="en"><meta data-rh="true" name="docusaurus_locale" content="en"><meta data-rh="true" name="docsearch:language" content="en"><meta data-rh="true" name="gardener" content="installation, production, operations, maintenance"><meta data-rh="true" name="docusaurus_version" content="current"><meta data-rh="true" name="docusaurus_tag" content="docs-release-notes-current"><meta data-rh="true" name="docsearch:version" content="current"><meta data-rh="true" name="docsearch:docusaurus_tag" content="docs-release-notes-current"><meta data-rh="true" property="og:title" content="Release Notes next | Yet another Kubernetes Engine"><meta data-rh="true" name="description" content="Yake release notes and upgrade guide"><meta data-rh="true" property="og:description" content="Yake release notes and upgrade guide"><link data-rh="true" rel="icon" href="/img/favicon.ico"><link data-rh="true" rel="canonical" href="https://yake.cloud/release-notes/next"><link data-rh="true" rel="alternate" href="https://yake.cloud/release-notes/next" hreflang="en"><link data-rh="true" rel="alternate" href="https://yake.cloud/release-notes/next" hreflang="x-default"><script data-rh="true" type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Release Notes next","item":"https://yake.cloud/release-notes/next"}]}</script><link rel="alternate" type="application/rss+xml" href="/blog/rss.xml" title="Yet another Kubernetes Engine RSS Feed">
 <link rel="alternate" type="application/atom+xml" href="/blog/atom.xml" title="Yet another Kubernetes Engine Atom Feed"><link rel="stylesheet" href="/assets/css/styles.953fe0f7.css">
-<script src="/assets/js/runtime~main.200b83c9.js" defer="defer"></script>
+<script src="/assets/js/runtime~main.ff3f44ea.js" defer="defer"></script>
 <script src="/assets/js/main.2f686165.js" defer="defer"></script>
 </head>
 <body>
@@ -4313,6 +4313,48 @@ Additionally, the deployments are done in parallel, which speeds up the whole op
 <li class="">cni-plugins: <code>europe-docker.pkg.dev/gardener-project/releases/gardener/extensions/cni-plugins:v1.59.0</code></li>
 <li class="">gardener-extension-admission-calico: <code>europe-docker.pkg.dev/gardener-project/releases/gardener/extensions/admission-calico:v1.59.0</code></li>
 <li class="">gardener-extension-networking-calico: <code>europe-docker.pkg.dev/gardener-project/releases/gardener/extensions/networking-calico:v1.59.0</code></li>
+</ul>
+</div></div></details>
+<details class="details_lb9f alert alert--info details_b_Ee" data-collapsed="true"><summary><b>Update networking-cilium to <code>1.48.0</code></b></summary><div><div class="collapsibleContent_i85q">
+<!-- -->
+<h1>[github.com/gardener/gardener-extension-networking-cilium:v1.48.0]</h1>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="️-breaking-changes-20">⚠️ Breaking Changes<a href="#️-breaking-changes-20" class="hash-link" aria-label="Direct link to ⚠️ Breaking Changes" title="Direct link to ⚠️ Breaking Changes" translate="no">​</a></h2>
+<ul>
+<li class=""><code>[OPERATOR]</code> ⚠️ This extension no longer supports Kubernetes versions <code>&lt;= 1.31</code>. Please make sure to upgrade all Garden, Seed and Shoot clusters to at least version 1.32 before deploying this extension version. by @timuthy [<a href="https://github.com/gardener/gardener-extension-networking-cilium/pull/717" target="_blank" rel="noopener noreferrer" class="">#717</a>]</li>
+</ul>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="-bug-fixes-66">🐛 Bug Fixes<a href="#-bug-fixes-66" class="hash-link" aria-label="Direct link to 🐛 Bug Fixes" title="Direct link to 🐛 Bug Fixes" translate="no">​</a></h2>
+<ul>
+<li class=""><code>[USER]</code> Respect NetworkConfig Hubble settings in cilium-config by @hown3d [<a href="https://github.com/gardener/gardener-extension-networking-cilium/pull/741" target="_blank" rel="noopener noreferrer" class="">#741</a>]</li>
+</ul>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="-others-77">🏃 Others<a href="#-others-77" class="hash-link" aria-label="Direct link to 🏃 Others" title="Direct link to 🏃 Others" translate="no">​</a></h2>
+<ul>
+<li class=""><code>[OPERATOR]</code> Updated charts and images to cilium v1.19.4 by @axel7born [<a href="https://github.com/gardener/gardener-extension-networking-cilium/pull/734" target="_blank" rel="noopener noreferrer" class="">#734</a>]</li>
+<li class=""><code>[OPERATOR]</code> Cilium agent and <code>cilium-envoy</code> DaemonSets now set <code>revisionHistoryLimit=2</code> to comply with the gardener component checklist. by @alliasgher [<a href="https://github.com/gardener/gardener-extension-networking-cilium/pull/718" target="_blank" rel="noopener noreferrer" class="">#718</a>]</li>
+</ul>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="applicationspdxjson-77">application/spdx+json<a href="#applicationspdxjson-77" class="hash-link" aria-label="Direct link to application/spdx+json" title="Direct link to application/spdx+json" translate="no">​</a></h2>
+<ul>
+<li class="">gardener-extension-admission-cilium-sbom-ref: <code>europe-docker.pkg.dev/gardener-project/releases/gardener/extensions/admission-cilium@sha256:00c4a2d89a41d2063357062a9ec50c314eae1441834da0357c1139ae9ad58bcd</code></li>
+<li class="">gardener-extension-admission-cilium-sbom-ref: <code>europe-docker.pkg.dev/gardener-project/releases/gardener/extensions/admission-cilium@sha256:e851c60b1c7002355655dbb68a6060a66c93d31bdb5843491ab42651921c8cbb</code></li>
+<li class="">gardener-extension-networking-cilium-sbom-ref: <code>europe-docker.pkg.dev/gardener-project/releases/gardener/extensions/networking-cilium@sha256:42c30fd0ae8b96d2d42a4a7727dfb4c4bd054a6e862a74a8d5dcdbaab6cc0b49</code></li>
+<li class="">gardener-extension-networking-cilium-sbom-ref: <code>europe-docker.pkg.dev/gardener-project/releases/gardener/extensions/networking-cilium@sha256:501966b6f66dab86dd285b1637c7764111c1f803fdea11e8aa6b5d5f16f862ce</code></li>
+</ul>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="applicationvndcyclonedxjson-9">application/vnd.cyclonedx+json<a href="#applicationvndcyclonedxjson-9" class="hash-link" aria-label="Direct link to application/vnd.cyclonedx+json" title="Direct link to application/vnd.cyclonedx+json" translate="no">​</a></h2>
+<ul>
+<li class="">gardener-extension-admission-cilium-sbom-ref: <code>europe-docker.pkg.dev/gardener-project/releases/gardener/extensions/admission-cilium@sha256:42799ddddfa6ff18c805412f01ac343acddddd21b52ac594519fb4255177fff6</code></li>
+<li class="">gardener-extension-admission-cilium-sbom-ref: <code>europe-docker.pkg.dev/gardener-project/releases/gardener/extensions/admission-cilium@sha256:a2cfc08ae6b233fce138bbdda800e0e0b8ee501c0f77fa780def3d7197f54d4f</code></li>
+<li class="">gardener-extension-networking-cilium-sbom-ref: <code>europe-docker.pkg.dev/gardener-project/releases/gardener/extensions/networking-cilium@sha256:9097174a5fa3ffd7183b6855ab98d559fe621eeb6199362c327e5d61ddab945d</code></li>
+<li class="">gardener-extension-networking-cilium-sbom-ref: <code>europe-docker.pkg.dev/gardener-project/releases/gardener/extensions/networking-cilium@sha256:e86512d24c5a0f199f92a16a8eba971b2b5bbd1b383da6d514700813781943f8</code></li>
+</ul>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="helm-charts-94">Helm Charts<a href="#helm-charts-94" class="hash-link" aria-label="Direct link to Helm Charts" title="Direct link to Helm Charts" translate="no">​</a></h2>
+<ul>
+<li class="">admission-cilium-application: <code>europe-docker.pkg.dev/gardener-project/releases/charts/gardener/extensions/admission-cilium-application:v1.48.0</code></li>
+<li class="">admission-cilium-runtime: <code>europe-docker.pkg.dev/gardener-project/releases/charts/gardener/extensions/admission-cilium-runtime:v1.48.0</code></li>
+<li class="">networking-cilium: <code>europe-docker.pkg.dev/gardener-project/releases/charts/gardener/extensions/networking-cilium:v1.48.0</code></li>
+</ul>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="container-oci-images-112">Container (OCI) Images<a href="#container-oci-images-112" class="hash-link" aria-label="Direct link to Container (OCI) Images" title="Direct link to Container (OCI) Images" translate="no">​</a></h2>
+<ul>
+<li class="">gardener-extension-admission-cilium: <code>europe-docker.pkg.dev/gardener-project/releases/gardener/extensions/admission-cilium:v1.48.0</code></li>
+<li class="">gardener-extension-networking-cilium: <code>europe-docker.pkg.dev/gardener-project/releases/gardener/extensions/networking-cilium:v1.48.0</code></li>
 </ul>
 </div></div></details></div></article><nav class="docusaurus-mt-lg pagination-nav" aria-label="Docs pages"><a class="pagination-nav__link pagination-nav__link--next" href="/release-notes/v1.137"><div class="pagination-nav__sublabel">Next</div><div class="pagination-nav__label">Release Notes v1.137</div></a></nav></div></div></div></div></main></div></div></div><footer class="theme-layout-footer footer footer--dark"><div class="container container-fluid"><div class="row footer__links"><div class="theme-layout-footer-column col footer__col"><div class="footer__title">Docs</div><ul class="footer__items clean-list"><li class="footer__item"><a class="footer__link-item" href="/docs/overview">Docs</a></li></ul></div><div class="theme-layout-footer-column col footer__col"><div class="footer__title">Community</div><ul class="footer__items clean-list"><li class="footer__item"><a href="https://github.com/yakecloud" target="_blank" rel="noopener noreferrer" class="footer__link-item">GitHub<svg width="13.5" height="13.5" aria-label="(opens in new tab)" class="iconExternalLink_nPIU"><use href="#theme-svg-external-link"></use></svg></a></li><li class="footer__item"><a href="https://github.com/gardener-community" target="_blank" rel="noopener noreferrer" class="footer__link-item">Gardener Community<svg width="13.5" height="13.5" aria-label="(opens in new tab)" class="iconExternalLink_nPIU"><use href="#theme-svg-external-link"></use></svg></a></li><li class="footer__item"><a href="https://gardener-cloud.slack.com" target="_blank" rel="noopener noreferrer" class="footer__link-item">Slack<svg width="13.5" height="13.5" aria-label="(opens in new tab)" class="iconExternalLink_nPIU"><use href="#theme-svg-external-link"></use></svg></a></li></ul></div><div class="theme-layout-footer-column col footer__col"><div class="footer__title">More</div><ul class="footer__items clean-list"><li class="footer__item"><a class="footer__link-item" href="/blog">Blog</a></li><li class="footer__item"><a class="footer__link-item" href="/legals">Legals</a></li><li class="footer__item"><a class="footer__link-item" href="/privacy-policy">Privacy policy</a></li></ul></div></div><div class="footer__bottom text--center"><div class="footer__copyright">Copyright © 2026 23 Technologies GmbH</div></div></div></footer></div>
 </body>
