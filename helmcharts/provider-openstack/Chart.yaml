@@ -5,4 +5,4 @@ dependencies:
   repository: ""
 description: A helmchart for provider-openstack
 name: provider-openstack
-version: 1.55.3
+version: 1.56.0
