@@ -5,7 +5,7 @@
 <meta name="generator" content="Docusaurus v3.10.1">
 <title data-rh="true">Release Notes next | Yet another Kubernetes Engine</title><meta data-rh="true" name="viewport" content="width=device-width,initial-scale=1"><meta data-rh="true" name="twitter:card" content="summary_large_image"><meta data-rh="true" property="og:url" content="https://yake.cloud/release-notes/next"><meta data-rh="true" property="og:locale" content="en"><meta data-rh="true" name="docusaurus_locale" content="en"><meta data-rh="true" name="docsearch:language" content="en"><meta data-rh="true" name="gardener" content="installation, production, operations, maintenance"><meta data-rh="true" name="docusaurus_version" content="current"><meta data-rh="true" name="docusaurus_tag" content="docs-release-notes-current"><meta data-rh="true" name="docsearch:version" content="current"><meta data-rh="true" name="docsearch:docusaurus_tag" content="docs-release-notes-current"><meta data-rh="true" property="og:title" content="Release Notes next | Yet another Kubernetes Engine"><meta data-rh="true" name="description" content="Yake release notes and upgrade guide"><meta data-rh="true" property="og:description" content="Yake release notes and upgrade guide"><link data-rh="true" rel="icon" href="/img/favicon.ico"><link data-rh="true" rel="canonical" href="https://yake.cloud/release-notes/next"><link data-rh="true" rel="alternate" href="https://yake.cloud/release-notes/next" hreflang="en"><link data-rh="true" rel="alternate" href="https://yake.cloud/release-notes/next" hreflang="x-default"><script data-rh="true" type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Release Notes next","item":"https://yake.cloud/release-notes/next"}]}</script><link rel="alternate" type="application/rss+xml" href="/blog/rss.xml" title="Yet another Kubernetes Engine RSS Feed">
 <link rel="alternate" type="application/atom+xml" href="/blog/atom.xml" title="Yet another Kubernetes Engine Atom Feed"><link rel="stylesheet" href="/assets/css/styles.953fe0f7.css">
-<script src="/assets/js/runtime~main.ff3f44ea.js" defer="defer"></script>
+<script src="/assets/js/runtime~main.1045860f.js" defer="defer"></script>
 <script src="/assets/js/main.2f686165.js" defer="defer"></script>
 </head>
 <body>
@@ -4355,6 +4355,65 @@ Additionally, the deployments are done in parallel, which speeds up the whole op
 <ul>
 <li class="">gardener-extension-admission-cilium: <code>europe-docker.pkg.dev/gardener-project/releases/gardener/extensions/admission-cilium:v1.48.0</code></li>
 <li class="">gardener-extension-networking-cilium: <code>europe-docker.pkg.dev/gardener-project/releases/gardener/extensions/networking-cilium:v1.48.0</code></li>
+</ul>
+</div></div></details>
+<details class="details_lb9f alert alert--info details_b_Ee" data-collapsed="true"><summary><b>Update provider-openstack to <code>1.56.0</code></b></summary><div><div class="collapsibleContent_i85q">
+<!-- -->
+<h1>[github.com/gardener/gardener-extension-provider-openstack:v1.56.0]</h1>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="-bug-fixes-67">🐛 Bug Fixes<a href="#-bug-fixes-67" class="hash-link" aria-label="Direct link to 🐛 Bug Fixes" title="Direct link to 🐛 Bug Fixes" translate="no">​</a></h2>
+<ul>
+<li class=""><code>[OPERATOR]</code> Filter subnet DNS servers from CloudProfile by IP family in reconcile logic by @hebelsan [<a href="https://github.com/gardener/gardener-extension-provider-openstack/pull/1347" target="_blank" rel="noopener noreferrer" class="">#1347</a>]</li>
+<li class=""><code>[OPERATOR]</code> VPA for the extension pod now also controls CPU requests in addition to memory. The VPA container policy also explicitly disables autoscaling for any non-main containers following Gardener best practices. by @voelzmo [<a href="https://github.com/gardener/gardener-extension-provider-openstack/pull/1341" target="_blank" rel="noopener noreferrer" class="">#1341</a>]</li>
+<li class=""><code>[OPERATOR]</code> Add credentials validation to support InternalSecret type by @hebelsan [<a href="https://github.com/gardener/gardener-extension-provider-openstack/pull/1359" target="_blank" rel="noopener noreferrer" class="">#1359</a>]</li>
+<li class=""><code>[OPERATOR]</code> Enables the use of <code>spec.dns.providers[].credentialsRef</code> and thus enables to upgrade to k8s version <code>v1.135</code> where spec.dns.providers[].secretName is not allowed anymore. by @wpross [<a href="https://github.com/gardener/gardener-extension-provider-openstack/pull/1357" target="_blank" rel="noopener noreferrer" class="">#1357</a>]</li>
+<li class=""><code>[OPERATOR]</code> Fix CSI manila share client value race condition in control plane reconciliation by @hebelsan [<a href="https://github.com/gardener/gardener-extension-provider-openstack/pull/1351" target="_blank" rel="noopener noreferrer" class="">#1351</a>]</li>
+<li class=""><code>[OPERATOR]</code> Fix a nil pointer dereference panic in the worker controller that could prevent reconciliation or deletion of workers whose <code>providerStatus.machineImages</code> was empty and whose referenced machine image was missing from the CloudProfile. by @Roncossek [<a href="https://github.com/gardener/gardener-extension-provider-openstack/pull/1352" target="_blank" rel="noopener noreferrer" class="">#1352</a>]</li>
+</ul>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="-others-78">🏃 Others<a href="#-others-78" class="hash-link" aria-label="Direct link to 🏃 Others" title="Direct link to 🏃 Others" translate="no">​</a></h2>
+<ul>
+<li class=""><code>[OPERATOR]</code> Added securityContext attributes to comply with the Pod Security Standards <code>restricted</code> level by @relusc [<a href="https://github.com/gardener/gardener-extension-provider-openstack/pull/1360" target="_blank" rel="noopener noreferrer" class="">#1360</a>]</li>
+<li class=""><code>[DEVELOPER]</code> Migrate test mock clients to fakeclient following <a href="https://github.com/gardener/gardener/pull/14799" target="_blank" rel="noopener noreferrer" class="">https://github.com/gardener/gardener/pull/14799</a> by @wpross [<a href="https://github.com/gardener/gardener-extension-provider-openstack/pull/1367" target="_blank" rel="noopener noreferrer" class="">#1367</a>]</li>
+<li class=""><code>[DEPENDENCY]</code> The following container images have been updated:
+<ul>
+<li class="">csi-provisioner: v6.2.0 -&gt; v6.3.0 (singleton)</li>
+<li class="">csi-resizer: v2.1.0 -&gt; v2.2.0 (singleton)</li>
+<li class="">csi-snapshot-controller: v8.5.0 -&gt; v8.6.0 (singleton)</li>
+<li class="">csi-snapshotter: v8.5.0 -&gt; v8.6.0 (singleton) by @federated-github-access[bot] [<a href="https://github.com/gardener/gardener-extension-provider-openstack/pull/1369" target="_blank" rel="noopener noreferrer" class="">#1369</a>]</li>
+</ul>
+</li>
+<li class=""><code>[DEPENDENCY]</code> The following container images have been updated:
+<ul>
+<li class="">csi-attacher: v4.11.0 -&gt; v4.12.0 (singleton)</li>
+<li class="">csi-liveness-probe: v2.18.0 -&gt; v2.19.0 (singleton)</li>
+<li class="">csi-node-driver-registrar: v2.16.0 -&gt; v2.17.0 (singleton)</li>
+<li class="">machine-controller-manager-provider-openstack: v0.26.0 -&gt; v0.27.0 (singleton) by @federated-github-access[bot] [<a href="https://github.com/gardener/gardener-extension-provider-openstack/pull/1345" target="_blank" rel="noopener noreferrer" class="">#1345</a>]</li>
+</ul>
+</li>
+</ul>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="applicationspdxjson-78">application/spdx+json<a href="#applicationspdxjson-78" class="hash-link" aria-label="Direct link to application/spdx+json" title="Direct link to application/spdx+json" translate="no">​</a></h2>
+<ul>
+<li class="">gardener-extension-admission-openstack-sbom-ref: <code>europe-docker.pkg.dev/gardener-project/releases/gardener/extensions/admission-openstack@sha256:7c8fcd8b41dcfa82eaa3f7abeb809dcb91357ed03c7dbcfe00f3df8f8538e5aa</code></li>
+<li class="">gardener-extension-admission-openstack-sbom-ref: <code>europe-docker.pkg.dev/gardener-project/releases/gardener/extensions/admission-openstack@sha256:811fa1d7fe9707b349a8a821e64167a626002012c8a375de931e17d8b7bd59e6</code></li>
+<li class="">gardener-extension-provider-openstack-sbom-ref: <code>europe-docker.pkg.dev/gardener-project/releases/gardener/extensions/provider-openstack@sha256:324bc3923c88a142cace00f6074269c4ef54d84b698b004e0acf72b47d1dede3</code></li>
+<li class="">gardener-extension-provider-openstack-sbom-ref: <code>europe-docker.pkg.dev/gardener-project/releases/gardener/extensions/provider-openstack@sha256:fdda8c7d3472ce2c6846f9000d98ee77551f32b0ca45933f53de3ea2c853caf6</code></li>
+</ul>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="applicationvndcyclonedxjson-10">application/vnd.cyclonedx+json<a href="#applicationvndcyclonedxjson-10" class="hash-link" aria-label="Direct link to application/vnd.cyclonedx+json" title="Direct link to application/vnd.cyclonedx+json" translate="no">​</a></h2>
+<ul>
+<li class="">gardener-extension-admission-openstack-sbom-ref: <code>europe-docker.pkg.dev/gardener-project/releases/gardener/extensions/admission-openstack@sha256:98ae00aa636257297b16593216a311976edd1239371fb2fa19ca05509cd28682</code></li>
+<li class="">gardener-extension-admission-openstack-sbom-ref: <code>europe-docker.pkg.dev/gardener-project/releases/gardener/extensions/admission-openstack@sha256:a0d845fc9ab2c82f268d4d7243975d8cbbc5653da03b84ad93ef2f41fecd7d61</code></li>
+<li class="">gardener-extension-provider-openstack-sbom-ref: <code>europe-docker.pkg.dev/gardener-project/releases/gardener/extensions/provider-openstack@sha256:a05b9b65d4fa8a1bb4d8ecdc0506e3a92b35052094069409fc5855f454bd38e0</code></li>
+<li class="">gardener-extension-provider-openstack-sbom-ref: <code>europe-docker.pkg.dev/gardener-project/releases/gardener/extensions/provider-openstack@sha256:c0d17beabbc31f79eff6e5924bb32e3f02a8b1c7c178b2069d2afc2b45d3a9cb</code></li>
+</ul>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="helm-charts-95">Helm Charts<a href="#helm-charts-95" class="hash-link" aria-label="Direct link to Helm Charts" title="Direct link to Helm Charts" translate="no">​</a></h2>
+<ul>
+<li class="">admission-openstack-application: <code>europe-docker.pkg.dev/gardener-project/releases/charts/gardener/extensions/admission-openstack-application:v1.56.0</code></li>
+<li class="">admission-openstack-runtime: <code>europe-docker.pkg.dev/gardener-project/releases/charts/gardener/extensions/admission-openstack-runtime:v1.56.0</code></li>
+<li class="">provider-openstack: <code>europe-docker.pkg.dev/gardener-project/releases/charts/gardener/extensions/provider-openstack:v1.56.0</code></li>
+</ul>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="container-oci-images-113">Container (OCI) Images<a href="#container-oci-images-113" class="hash-link" aria-label="Direct link to Container (OCI) Images" title="Direct link to Container (OCI) Images" translate="no">​</a></h2>
+<ul>
+<li class="">gardener-extension-admission-openstack: <code>europe-docker.pkg.dev/gardener-project/releases/gardener/extensions/admission-openstack:v1.56.0</code></li>
+<li class="">gardener-extension-provider-openstack: <code>europe-docker.pkg.dev/gardener-project/releases/gardener/extensions/provider-openstack:v1.56.0</code></li>
 </ul>
 </div></div></details></div></article><nav class="docusaurus-mt-lg pagination-nav" aria-label="Docs pages"><a class="pagination-nav__link pagination-nav__link--next" href="/release-notes/v1.137"><div class="pagination-nav__sublabel">Next</div><div class="pagination-nav__label">Release Notes v1.137</div></a></nav></div></div></div></div></main></div></div></div><footer class="theme-layout-footer footer footer--dark"><div class="container container-fluid"><div class="row footer__links"><div class="theme-layout-footer-column col footer__col"><div class="footer__title">Docs</div><ul class="footer__items clean-list"><li class="footer__item"><a class="footer__link-item" href="/docs/overview">Docs</a></li></ul></div><div class="theme-layout-footer-column col footer__col"><div class="footer__title">Community</div><ul class="footer__items clean-list"><li class="footer__item"><a href="https://github.com/yakecloud" target="_blank" rel="noopener noreferrer" class="footer__link-item">GitHub<svg width="13.5" height="13.5" aria-label="(opens in new tab)" class="iconExternalLink_nPIU"><use href="#theme-svg-external-link"></use></svg></a></li><li class="footer__item"><a href="https://github.com/gardener-community" target="_blank" rel="noopener noreferrer" class="footer__link-item">Gardener Community<svg width="13.5" height="13.5" aria-label="(opens in new tab)" class="iconExternalLink_nPIU"><use href="#theme-svg-external-link"></use></svg></a></li><li class="footer__item"><a href="https://gardener-cloud.slack.com" target="_blank" rel="noopener noreferrer" class="footer__link-item">Slack<svg width="13.5" height="13.5" aria-label="(opens in new tab)" class="iconExternalLink_nPIU"><use href="#theme-svg-external-link"></use></svg></a></li></ul></div><div class="theme-layout-footer-column col footer__col"><div class="footer__title">More</div><ul class="footer__items clean-list"><li class="footer__item"><a class="footer__link-item" href="/blog">Blog</a></li><li class="footer__item"><a class="footer__link-item" href="/legals">Legals</a></li><li class="footer__item"><a class="footer__link-item" href="/privacy-policy">Privacy policy</a></li></ul></div></div><div class="footer__bottom text--center"><div class="footer__copyright">Copyright © 2026 23 Technologies GmbH</div></div></div></footer></div>
 </body>
