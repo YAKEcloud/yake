@@ -1,20 +1,21 @@
-# [github.com/gardener/external-dns-management:v0.46.0]
+# [github.com/gardener/external-dns-management:v0.47.0]
 
-## 🐛 Bug Fixes
-- `[OPERATOR]` [next-generation] Fix DNSEntry cleanup when all targets/text are removed from the spec. by @MartinWeindel [[#934](https://github.com/gardener/external-dns-management/pull/934)]
+## 🏃 Others
+- `[OPERATOR]` [next-generation] Prevent self-retrigger: finalizer robustness and status-patch elision for `DNSEntry` by @MartinWeindel [[#948](https://github.com/gardener/external-dns-management/pull/948)]
+- `[OPERATOR]` [next-generation] Reduce reconciliation load on `DNSEntry` controller by @MartinWeindel [[#943](https://github.com/gardener/external-dns-management/pull/943)]
 
 ## application/spdx+json
-- dns-controller-manager-next-generation-sbom-ref: `europe-docker.pkg.dev/gardener-project/releases/dns-controller-manager-next-generation@sha256:577de089ce7180cb10c265be57f401c212f06e5a93910119ac4f4021b614ce36`
-- dns-controller-manager-next-generation-sbom-ref: `europe-docker.pkg.dev/gardener-project/releases/dns-controller-manager-next-generation@sha256:db560ba94bb370f21a2e30ee00776896d85e5ad97ef1168b92708f0909a84b0c`
-- dns-controller-manager-sbom-ref: `europe-docker.pkg.dev/gardener-project/releases/dns-controller-manager@sha256:fd9e258db8382439d61bec2a591df7d675f8b761154a1701c7b7603955726530`
-- dns-controller-manager-sbom-ref: `europe-docker.pkg.dev/gardener-project/releases/dns-controller-manager@sha256:fe4ccec4af47d1e1ea038a1e1bebc772587b1a587353b1315f9364793edaa70d`
+- dns-controller-manager-next-generation-sbom-ref: `europe-docker.pkg.dev/gardener-project/releases/dns-controller-manager-next-generation@sha256:acc20be166b93f6d35e72974642bf8a6511354fa493a625e16de12f55f4cf9bb`
+- dns-controller-manager-next-generation-sbom-ref: `europe-docker.pkg.dev/gardener-project/releases/dns-controller-manager-next-generation@sha256:d8f842322790d265abf1676dbd350e979b014f781cac2cc621bb45940c561a64`
+- dns-controller-manager-sbom-ref: `europe-docker.pkg.dev/gardener-project/releases/dns-controller-manager@sha256:2126f8415dfabb2bfa56f13b5e91808fa0a9afeab76420ca519a8a2a7f91caa9`
+- dns-controller-manager-sbom-ref: `europe-docker.pkg.dev/gardener-project/releases/dns-controller-manager@sha256:92982026bd55e66821f54c80ea06b2543824190ceb7b125d130e75e279364111`
 ## application/vnd.cyclonedx+json
-- dns-controller-manager-next-generation-sbom-ref: `europe-docker.pkg.dev/gardener-project/releases/dns-controller-manager-next-generation@sha256:43a4c1c978347595423b0f18e5b2605d9f9e4b0945281c40df5e358fb2cec30c`
-- dns-controller-manager-next-generation-sbom-ref: `europe-docker.pkg.dev/gardener-project/releases/dns-controller-manager-next-generation@sha256:659903b2bb21042d3c402b1a09ba6141687f6bdd8622d8b64836f2db49528b5f`
-- dns-controller-manager-sbom-ref: `europe-docker.pkg.dev/gardener-project/releases/dns-controller-manager@sha256:1d26e5d12f47740c6ed14238fa3ea4e4dbdf456644e8730050241b13d1a098b0`
-- dns-controller-manager-sbom-ref: `europe-docker.pkg.dev/gardener-project/releases/dns-controller-manager@sha256:23decb978e0cc072bc059a2b650b6da28f439f401dd8a3e00d84fdad3bacf715`
+- dns-controller-manager-next-generation-sbom-ref: `europe-docker.pkg.dev/gardener-project/releases/dns-controller-manager-next-generation@sha256:6d7a374ba605811ddea7966cc1e733b804aad2ba23d678d34233ff0d5ecb7fd2`
+- dns-controller-manager-next-generation-sbom-ref: `europe-docker.pkg.dev/gardener-project/releases/dns-controller-manager-next-generation@sha256:d5a197993138084e63024c8589fc46bedd4032a44a822db1334e42b71ac5a005`
+- dns-controller-manager-sbom-ref: `europe-docker.pkg.dev/gardener-project/releases/dns-controller-manager@sha256:36c2623b5de10421b8eca6a3a2140bac2cd776863169b99669b3b4bc8b34b5ca`
+- dns-controller-manager-sbom-ref: `europe-docker.pkg.dev/gardener-project/releases/dns-controller-manager@sha256:61592624f577bd8c9a2cf1db2a2716cd9469f696b29965f69a770594d6e8f60e`
 ## Helm Charts
-- dns-controller-manager: `europe-docker.pkg.dev/gardener-project/releases/charts/dns-controller-manager:v0.46.0`
+- dns-controller-manager: `europe-docker.pkg.dev/gardener-project/releases/charts/dns-controller-manager:v0.47.0`
 ## Container (OCI) Images
-- dns-controller-manager-next-generation: `europe-docker.pkg.dev/gardener-project/releases/dns-controller-manager-next-generation:v0.46.0`
-- dns-controller-manager: `europe-docker.pkg.dev/gardener-project/releases/dns-controller-manager:v0.46.0`
+- dns-controller-manager-next-generation: `europe-docker.pkg.dev/gardener-project/releases/dns-controller-manager-next-generation:v0.47.0`
+- dns-controller-manager: `europe-docker.pkg.dev/gardener-project/releases/dns-controller-manager:v0.47.0`
