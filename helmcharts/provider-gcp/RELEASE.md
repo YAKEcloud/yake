@@ -1,31 +1,22 @@
-# [github.com/gardener/gardener-extension-provider-gcp:v1.52.0]
-
-## ⚠️ Breaking Changes
-- `[OPERATOR]` ⚠️ This extension no longer support Gardener installation running with `github.com/gardener/gardener < v1.135.0`, kindly update `github.com/gardener/gardener` to version `>= v1.135.0` before updating the extension. by @vpnachev [[#1410](https://github.com/gardener/gardener-extension-provider-gcp/pull/1410)]
-
-## ✨ New Features
-- `[OPERATOR]` Fix `NamespacedCloudProfile` admission to populate `capabilityFlavors` on spec machine images. by @Roncossek [[#1401](https://github.com/gardener/gardener-extension-provider-gcp/pull/1401)]
-- `[USER]` The `InfrastructureConfig` API now supports an optional `networks.mtu` field (valid range: 1300–8896) to configure the maximum  transmission unit for Gardener-managed VPC networks. by @voelzmo [[#1399](https://github.com/gardener/gardener-extension-provider-gcp/pull/1399)]
+# [github.com/gardener/gardener-extension-provider-gcp:v1.53.3]
 
 ## 🐛 Bug Fixes
-- `[OPERATOR]` VPA for the extension pod now also controls CPU requests in addition to memory. The VPA container policy also explicitly disables  autoscaling for any non-main containers following Gardener best practices. by @voelzmo [[#1407](https://github.com/gardener/gardener-extension-provider-gcp/pull/1407)]
-
-## 🏃 Others
-- `[OPERATOR]` Fix controlplane-seed MR failing health checks if filestore is enabled by @hebelsan [[#1398](https://github.com/gardener/gardener-extension-provider-gcp/pull/1398)]
-- `[DEVELOPER]` Enhance Makefile to easily deploy to a remote cluster. by @matthias-horne [[#1402](https://github.com/gardener/gardener-extension-provider-gcp/pull/1402)]
-- `[DEPENDENCY]` The following container images have been updated:  
-    - ingress-default-backend: 0.25.0 -> 0.26.0 (singleton)  
-    - machine-controller-manager-provider-gcp: v0.27.0 -> v0.28.0 (singleton) by @federated-github-access[bot] [[#1406](https://github.com/gardener/gardener-extension-provider-gcp/pull/1406)]
+- `[USER]` The `ingress-gce` pod is now rolled when the shoot's `cloudprovider` secret changes, so GCP LoadBalancer services no longer fail with `Invalid JWT Signature` after a service account key rotation. by @kon-angelo [[#1454](https://github.com/gardener/gardener-extension-provider-gcp/pull/1454)]
 
 ## application/spdx+json
-- gardener-extension-admission-gcp-spdx-ref: `europe-docker.pkg.dev/gardener-project/releases/gardener/extensions/admission-gcp@sha256:0d01c653c568dbf025c4ac42309a67bafe2e379c5ad847aa2723cd975a632720`
-- gardener-extension-admission-gcp-spdx-ref: `europe-docker.pkg.dev/gardener-project/releases/gardener/extensions/admission-gcp@sha256:aa6fcb8376920a907a8cd2adaf9ec1d822f3e8fda5dd4e5fd5dda4202f8cf1d9`
-- gardener-extension-provider-gcp-spdx-ref: `europe-docker.pkg.dev/gardener-project/releases/gardener/extensions/provider-gcp@sha256:8efd9c90e30aebda8ec0192feb39812199d8d3a24dca9ed141fa21adb171d8f2`
-- gardener-extension-provider-gcp-spdx-ref: `europe-docker.pkg.dev/gardener-project/releases/gardener/extensions/provider-gcp@sha256:caed58fd68fd5490979ecd01b4d85874e89b45b79c465fb7b633a0b6b669aa0f`
+- gardener-extension-admission-gcp-sbom-ref: `europe-docker.pkg.dev/gardener-project/releases/gardener/extensions/admission-gcp@sha256:1bfc6ee8150cb90d606d7bdd6c6e81703d84ebad713290490d348108cd4423ec`
+- gardener-extension-admission-gcp-sbom-ref: `europe-docker.pkg.dev/gardener-project/releases/gardener/extensions/admission-gcp@sha256:9a552248a1d281dee09cfaf75088d947748df0bb2f017220055f777f3e483e6a`
+- gardener-extension-provider-gcp-sbom-ref: `europe-docker.pkg.dev/gardener-project/releases/gardener/extensions/provider-gcp@sha256:01a2b7e0a2eb2a6fdfa26768190f5f1cc0829e99c7bdf919daf3f4f5137392e8`
+- gardener-extension-provider-gcp-sbom-ref: `europe-docker.pkg.dev/gardener-project/releases/gardener/extensions/provider-gcp@sha256:8f97696e9bb742aeef0376fbc766d32634ce7b4f22f17e398ad3b34c9473fab9`
+## application/vnd.cyclonedx+json
+- gardener-extension-admission-gcp-sbom-ref: `europe-docker.pkg.dev/gardener-project/releases/gardener/extensions/admission-gcp@sha256:01efcf648d70cab5c1086aec1f62f843a3241fb3a22cc3672103595e43fd81f6`
+- gardener-extension-admission-gcp-sbom-ref: `europe-docker.pkg.dev/gardener-project/releases/gardener/extensions/admission-gcp@sha256:57b71ca243ce563761fb2ff578279aa2cfbad19a61e50dc6a1ff4aa17ae0d809`
+- gardener-extension-provider-gcp-sbom-ref: `europe-docker.pkg.dev/gardener-project/releases/gardener/extensions/provider-gcp@sha256:0d2711a08de1826e887e129780efd2a925a6f96da63467e01a5ed4798eef303b`
+- gardener-extension-provider-gcp-sbom-ref: `europe-docker.pkg.dev/gardener-project/releases/gardener/extensions/provider-gcp@sha256:e33f85d7d448ad86071d8a07d5cbab0ecfc0c029d7372b0b92f7bd29413ca462`
 ## Helm Charts
-- admission-gcp-application: `europe-docker.pkg.dev/gardener-project/releases/charts/gardener/extensions/admission-gcp-application:v1.52.0`
-- admission-gcp-runtime: `europe-docker.pkg.dev/gardener-project/releases/charts/gardener/extensions/admission-gcp-runtime:v1.52.0`
-- provider-gcp: `europe-docker.pkg.dev/gardener-project/releases/charts/gardener/extensions/provider-gcp:v1.52.0`
+- admission-gcp-application: `europe-docker.pkg.dev/gardener-project/releases/charts/gardener/extensions/admission-gcp-application:v1.53.3`
+- admission-gcp-runtime: `europe-docker.pkg.dev/gardener-project/releases/charts/gardener/extensions/admission-gcp-runtime:v1.53.3`
+- provider-gcp: `europe-docker.pkg.dev/gardener-project/releases/charts/gardener/extensions/provider-gcp:v1.53.3`
 ## Container (OCI) Images
-- gardener-extension-admission-gcp: `europe-docker.pkg.dev/gardener-project/releases/gardener/extensions/admission-gcp:v1.52.0`
-- gardener-extension-provider-gcp: `europe-docker.pkg.dev/gardener-project/releases/gardener/extensions/provider-gcp:v1.52.0`
+- gardener-extension-admission-gcp: `europe-docker.pkg.dev/gardener-project/releases/gardener/extensions/admission-gcp:v1.53.3`
+- gardener-extension-provider-gcp: `europe-docker.pkg.dev/gardener-project/releases/gardener/extensions/provider-gcp:v1.53.3`
