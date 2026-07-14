@@ -1,22 +1,22 @@
-# [github.com/gardener/gardener-extension-provider-gcp:v1.53.3]
+# [github.com/gardener/gardener-extension-provider-gcp:v1.53.4]
 
 ## 🐛 Bug Fixes
-- `[USER]` The `ingress-gce` pod is now rolled when the shoot's `cloudprovider` secret changes, so GCP LoadBalancer services no longer fail with `Invalid JWT Signature` after a service account key rotation. by @kon-angelo [[#1454](https://github.com/gardener/gardener-extension-provider-gcp/pull/1454)]
+- `[OPERATOR]` Added missing extension class filtering to the backupentry controller by @hebelsan [[#1461](https://github.com/gardener/gardener-extension-provider-gcp/pull/1461)]
 
 ## application/spdx+json
-- gardener-extension-admission-gcp-sbom-ref: `europe-docker.pkg.dev/gardener-project/releases/gardener/extensions/admission-gcp@sha256:1bfc6ee8150cb90d606d7bdd6c6e81703d84ebad713290490d348108cd4423ec`
-- gardener-extension-admission-gcp-sbom-ref: `europe-docker.pkg.dev/gardener-project/releases/gardener/extensions/admission-gcp@sha256:9a552248a1d281dee09cfaf75088d947748df0bb2f017220055f777f3e483e6a`
-- gardener-extension-provider-gcp-sbom-ref: `europe-docker.pkg.dev/gardener-project/releases/gardener/extensions/provider-gcp@sha256:01a2b7e0a2eb2a6fdfa26768190f5f1cc0829e99c7bdf919daf3f4f5137392e8`
-- gardener-extension-provider-gcp-sbom-ref: `europe-docker.pkg.dev/gardener-project/releases/gardener/extensions/provider-gcp@sha256:8f97696e9bb742aeef0376fbc766d32634ce7b4f22f17e398ad3b34c9473fab9`
+- gardener-extension-admission-gcp-sbom-ref: `europe-docker.pkg.dev/gardener-project/releases/gardener/extensions/admission-gcp@sha256:1cfe576ce61ad4874f06e6a1e92d1d812528b1477f31577ac01862577db46d1f`
+- gardener-extension-admission-gcp-sbom-ref: `europe-docker.pkg.dev/gardener-project/releases/gardener/extensions/admission-gcp@sha256:8d684c0312c4b11fe494b830d0ce9eddcabd5608048d7f067433b9f770e5e6cb`
+- gardener-extension-provider-gcp-sbom-ref: `europe-docker.pkg.dev/gardener-project/releases/gardener/extensions/provider-gcp@sha256:4a40f920fba15d9bedcc50e1e351a183fbae61c38fc042ed3bcecf2cd719e862`
+- gardener-extension-provider-gcp-sbom-ref: `europe-docker.pkg.dev/gardener-project/releases/gardener/extensions/provider-gcp@sha256:69846bf59188a86e6811cd0c8ac013f532df610b0f3fa95553ed18587ca4e8e8`
 ## application/vnd.cyclonedx+json
-- gardener-extension-admission-gcp-sbom-ref: `europe-docker.pkg.dev/gardener-project/releases/gardener/extensions/admission-gcp@sha256:01efcf648d70cab5c1086aec1f62f843a3241fb3a22cc3672103595e43fd81f6`
-- gardener-extension-admission-gcp-sbom-ref: `europe-docker.pkg.dev/gardener-project/releases/gardener/extensions/admission-gcp@sha256:57b71ca243ce563761fb2ff578279aa2cfbad19a61e50dc6a1ff4aa17ae0d809`
-- gardener-extension-provider-gcp-sbom-ref: `europe-docker.pkg.dev/gardener-project/releases/gardener/extensions/provider-gcp@sha256:0d2711a08de1826e887e129780efd2a925a6f96da63467e01a5ed4798eef303b`
-- gardener-extension-provider-gcp-sbom-ref: `europe-docker.pkg.dev/gardener-project/releases/gardener/extensions/provider-gcp@sha256:e33f85d7d448ad86071d8a07d5cbab0ecfc0c029d7372b0b92f7bd29413ca462`
+- gardener-extension-admission-gcp-sbom-ref: `europe-docker.pkg.dev/gardener-project/releases/gardener/extensions/admission-gcp@sha256:3112b6a91784b0dd13ecf105ed74311f0d3aea1d99b0cdf5c9eaae152c3a421b`
+- gardener-extension-admission-gcp-sbom-ref: `europe-docker.pkg.dev/gardener-project/releases/gardener/extensions/admission-gcp@sha256:e01b103488326d4d6d3cb3f839a1b6c021d2a70a14cafc04e37523f7734f3ee4`
+- gardener-extension-provider-gcp-sbom-ref: `europe-docker.pkg.dev/gardener-project/releases/gardener/extensions/provider-gcp@sha256:776b96cf6726091a85a5b5cbaeeee505fc7612ae33509731423dc7adb23752b3`
+- gardener-extension-provider-gcp-sbom-ref: `europe-docker.pkg.dev/gardener-project/releases/gardener/extensions/provider-gcp@sha256:873ff36f2c9369df785019fa2d7ff7c8727cd0294cbb99f413f29bc1b0c55074`
 ## Helm Charts
-- admission-gcp-application: `europe-docker.pkg.dev/gardener-project/releases/charts/gardener/extensions/admission-gcp-application:v1.53.3`
-- admission-gcp-runtime: `europe-docker.pkg.dev/gardener-project/releases/charts/gardener/extensions/admission-gcp-runtime:v1.53.3`
-- provider-gcp: `europe-docker.pkg.dev/gardener-project/releases/charts/gardener/extensions/provider-gcp:v1.53.3`
+- admission-gcp-application: `europe-docker.pkg.dev/gardener-project/releases/charts/gardener/extensions/admission-gcp-application:v1.53.4`
+- admission-gcp-runtime: `europe-docker.pkg.dev/gardener-project/releases/charts/gardener/extensions/admission-gcp-runtime:v1.53.4`
+- provider-gcp: `europe-docker.pkg.dev/gardener-project/releases/charts/gardener/extensions/provider-gcp:v1.53.4`
 ## Container (OCI) Images
-- gardener-extension-admission-gcp: `europe-docker.pkg.dev/gardener-project/releases/gardener/extensions/admission-gcp:v1.53.3`
-- gardener-extension-provider-gcp: `europe-docker.pkg.dev/gardener-project/releases/gardener/extensions/provider-gcp:v1.53.3`
+- gardener-extension-admission-gcp: `europe-docker.pkg.dev/gardener-project/releases/gardener/extensions/admission-gcp:v1.53.4`
+- gardener-extension-provider-gcp: `europe-docker.pkg.dev/gardener-project/releases/gardener/extensions/provider-gcp:v1.53.4`
