@@ -19,7 +19,10 @@ gardener:
 image:
     pullPolicy: IfNotPresent
     repository: europe-docker.pkg.dev/gardener-project/public/dns-controller-manager
-    tag: v0.47.0
+    tag: v0.48.0
+livenessProbe:
+    initialDelaySeconds: 30
+    timeoutSeconds: 5
 nameOverride: ""
 nextGeneration:
     config:
