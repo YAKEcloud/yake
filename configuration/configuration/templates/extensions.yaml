@@ -99,6 +99,6 @@ stringData:
       version: 0.10.0
 
     registry-cache:
-      version: 0.23.1
+      version: 0.24.0
       admission:
         enabled: true
