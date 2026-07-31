@@ -5,7 +5,7 @@
 <meta name="generator" content="Docusaurus v3.10.2">
 <title data-rh="true">Release Notes next | Yet another Kubernetes Engine</title><meta data-rh="true" name="viewport" content="width=device-width,initial-scale=1"><meta data-rh="true" name="twitter:card" content="summary_large_image"><meta data-rh="true" property="og:url" content="https://yake.cloud/release-notes/next"><meta data-rh="true" property="og:locale" content="en"><meta data-rh="true" name="docusaurus_locale" content="en"><meta data-rh="true" name="docsearch:language" content="en"><meta data-rh="true" name="gardener" content="installation, production, operations, maintenance"><meta data-rh="true" name="docusaurus_version" content="current"><meta data-rh="true" name="docusaurus_tag" content="docs-release-notes-current"><meta data-rh="true" name="docsearch:version" content="current"><meta data-rh="true" name="docsearch:docusaurus_tag" content="docs-release-notes-current"><meta data-rh="true" property="og:title" content="Release Notes next | Yet another Kubernetes Engine"><meta data-rh="true" name="description" content="Yake release notes and upgrade guide"><meta data-rh="true" property="og:description" content="Yake release notes and upgrade guide"><link data-rh="true" rel="icon" href="/img/favicon.ico"><link data-rh="true" rel="canonical" href="https://yake.cloud/release-notes/next"><link data-rh="true" rel="alternate" href="https://yake.cloud/release-notes/next" hreflang="en"><link data-rh="true" rel="alternate" href="https://yake.cloud/release-notes/next" hreflang="x-default"><script data-rh="true" type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Release Notes next","item":"https://yake.cloud/release-notes/next"}]}</script><link rel="alternate" type="application/rss+xml" href="/blog/rss.xml" title="Yet another Kubernetes Engine RSS Feed">
 <link rel="alternate" type="application/atom+xml" href="/blog/atom.xml" title="Yet another Kubernetes Engine Atom Feed"><link rel="stylesheet" href="/assets/css/styles.953fe0f7.css">
-<script src="/assets/js/runtime~main.e16d00cf.js" defer="defer"></script>
+<script src="/assets/js/runtime~main.bbe3def9.js" defer="defer"></script>
 <script src="/assets/js/main.cac7d9db.js" defer="defer"></script>
 </head>
 <body>
@@ -5398,6 +5398,58 @@ Additionally, the deployments are done in parallel, which speeds up the whole op
 <h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="container-oci-images-139">Container (OCI) Images<a href="#container-oci-images-139" class="hash-link" aria-label="Direct link to Container (OCI) Images" title="Direct link to Container (OCI) Images" translate="no">​</a></h2>
 <ul>
 <li class="">gardener-extension-os-coreos: <code>europe-docker.pkg.dev/gardener-project/releases/extensions/os-coreos:v1.33.0</code></li>
+</ul>
+</div></div></details>
+<details class="details_lb9f alert alert--info details_b_Ee" data-collapsed="true"><summary><b>Update dashboard to <code>1.84.5</code></b></summary><div><div class="collapsibleContent_i85q">
+<!-- -->
+<h1>[github.com/gardener/dashboard:1.84.5]</h1>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="️-breaking-changes-24">⚠️ Breaking Changes<a href="#️-breaking-changes-24" class="hash-link" aria-label="Direct link to ⚠️ Breaking Changes" title="Direct link to ⚠️ Breaking Changes" translate="no">​</a></h2>
+<ul>
+<li class=""><code>[OPERATOR]</code> OIDC providers that do not support PKCE must explicitly configure <code>usePKCE: false</code> under <code>global.dashboard.oidc</code> when using the Helm chart. by @petersutter [<a href="https://github.com/gardener/dashboard/pull/3112" target="_blank" rel="noopener noreferrer" class="">#3112</a>]</li>
+</ul>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="-bug-fixes-82">🐛 Bug Fixes<a href="#-bug-fixes-82" class="hash-link" aria-label="Direct link to 🐛 Bug Fixes" title="Direct link to 🐛 Bug Fixes" translate="no">​</a></h2>
+<ul>
+<li class=""><code>[OPERATOR]</code> Hardened OIDC callback validation and enabled PKCE by default. by @petersutter [<a href="https://github.com/gardener/dashboard/pull/3112" target="_blank" rel="noopener noreferrer" class="">#3112</a>]</li>
+</ul>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="applicationspdxjson-105">application/spdx+json<a href="#applicationspdxjson-105" class="hash-link" aria-label="Direct link to application/spdx+json" title="Direct link to application/spdx+json" translate="no">​</a></h2>
+<ul>
+<li class="">gardener-dashboard-sbom-ref: <code>europe-docker.pkg.dev/gardener-project/releases/gardener/dashboard@sha256:73ba9c529f8d032ffa57c9f575e92469b3ea6da6f3cea21e372ed09311ee816f</code></li>
+<li class="">gardener-dashboard-sbom-ref: <code>europe-docker.pkg.dev/gardener-project/releases/gardener/dashboard@sha256:94ef182fdaa3db4b5f87edef28dc34ad24ede2903f55d34505d64ae1650be377</code></li>
+</ul>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="applicationvndcyclonedxjson-37">application/vnd.cyclonedx+json<a href="#applicationvndcyclonedxjson-37" class="hash-link" aria-label="Direct link to application/vnd.cyclonedx+json" title="Direct link to application/vnd.cyclonedx+json" translate="no">​</a></h2>
+<ul>
+<li class="">gardener-dashboard-sbom-ref: <code>europe-docker.pkg.dev/gardener-project/releases/gardener/dashboard@sha256:0ae614a587c98380579e070eddf0b63f3b216a59ae777c649e190b70c72a429f</code></li>
+<li class="">gardener-dashboard-sbom-ref: <code>europe-docker.pkg.dev/gardener-project/releases/gardener/dashboard@sha256:f377d6cedf7fe55e774e20bcee6c80c930d9334b962963001e209c21f4cd9ded</code></li>
+</ul>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="container-oci-images-140">Container (OCI) Images<a href="#container-oci-images-140" class="hash-link" aria-label="Direct link to Container (OCI) Images" title="Direct link to Container (OCI) Images" translate="no">​</a></h2>
+<ul>
+<li class="">gardener-dashboard: <code>europe-docker.pkg.dev/gardener-project/releases/gardener/dashboard:1.84.5</code></li>
+</ul>
+</div></div></details>
+<details class="details_lb9f alert alert--info details_b_Ee" data-collapsed="true"><summary><b>Update dashboard to <code>1.84.5</code></b></summary><div><div class="collapsibleContent_i85q">
+<!-- -->
+<h1>[github.com/gardener/dashboard:1.84.5]</h1>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="️-breaking-changes-25">⚠️ Breaking Changes<a href="#️-breaking-changes-25" class="hash-link" aria-label="Direct link to ⚠️ Breaking Changes" title="Direct link to ⚠️ Breaking Changes" translate="no">​</a></h2>
+<ul>
+<li class=""><code>[OPERATOR]</code> OIDC providers that do not support PKCE must explicitly configure <code>usePKCE: false</code> under <code>global.dashboard.oidc</code> when using the Helm chart. by @petersutter [<a href="https://github.com/gardener/dashboard/pull/3112" target="_blank" rel="noopener noreferrer" class="">#3112</a>]</li>
+</ul>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="-bug-fixes-83">🐛 Bug Fixes<a href="#-bug-fixes-83" class="hash-link" aria-label="Direct link to 🐛 Bug Fixes" title="Direct link to 🐛 Bug Fixes" translate="no">​</a></h2>
+<ul>
+<li class=""><code>[OPERATOR]</code> Hardened OIDC callback validation and enabled PKCE by default. by @petersutter [<a href="https://github.com/gardener/dashboard/pull/3112" target="_blank" rel="noopener noreferrer" class="">#3112</a>]</li>
+</ul>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="applicationspdxjson-106">application/spdx+json<a href="#applicationspdxjson-106" class="hash-link" aria-label="Direct link to application/spdx+json" title="Direct link to application/spdx+json" translate="no">​</a></h2>
+<ul>
+<li class="">gardener-dashboard-sbom-ref: <code>europe-docker.pkg.dev/gardener-project/releases/gardener/dashboard@sha256:73ba9c529f8d032ffa57c9f575e92469b3ea6da6f3cea21e372ed09311ee816f</code></li>
+<li class="">gardener-dashboard-sbom-ref: <code>europe-docker.pkg.dev/gardener-project/releases/gardener/dashboard@sha256:94ef182fdaa3db4b5f87edef28dc34ad24ede2903f55d34505d64ae1650be377</code></li>
+</ul>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="applicationvndcyclonedxjson-38">application/vnd.cyclonedx+json<a href="#applicationvndcyclonedxjson-38" class="hash-link" aria-label="Direct link to application/vnd.cyclonedx+json" title="Direct link to application/vnd.cyclonedx+json" translate="no">​</a></h2>
+<ul>
+<li class="">gardener-dashboard-sbom-ref: <code>europe-docker.pkg.dev/gardener-project/releases/gardener/dashboard@sha256:0ae614a587c98380579e070eddf0b63f3b216a59ae777c649e190b70c72a429f</code></li>
+<li class="">gardener-dashboard-sbom-ref: <code>europe-docker.pkg.dev/gardener-project/releases/gardener/dashboard@sha256:f377d6cedf7fe55e774e20bcee6c80c930d9334b962963001e209c21f4cd9ded</code></li>
+</ul>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="container-oci-images-141">Container (OCI) Images<a href="#container-oci-images-141" class="hash-link" aria-label="Direct link to Container (OCI) Images" title="Direct link to Container (OCI) Images" translate="no">​</a></h2>
+<ul>
+<li class="">gardener-dashboard: <code>europe-docker.pkg.dev/gardener-project/releases/gardener/dashboard:1.84.5</code></li>
 </ul>
 </div></div></details></div></article><nav class="docusaurus-mt-lg pagination-nav" aria-label="Docs pages"><a class="pagination-nav__link pagination-nav__link--next" href="/release-notes/v1.137"><div class="pagination-nav__sublabel">Next</div><div class="pagination-nav__label">Release Notes v1.137</div></a></nav></div></div></div></div></main></div></div></div><footer class="theme-layout-footer footer footer--dark"><div class="container container-fluid"><div class="row footer__links"><div class="theme-layout-footer-column col footer__col"><div class="footer__title">Docs</div><ul class="footer__items clean-list"><li class="footer__item"><a class="footer__link-item" href="/docs/overview">Docs</a></li></ul></div><div class="theme-layout-footer-column col footer__col"><div class="footer__title">Community</div><ul class="footer__items clean-list"><li class="footer__item"><a href="https://github.com/yakecloud" target="_blank" rel="noopener noreferrer" class="footer__link-item">GitHub<svg width="13.5" height="13.5" aria-label="(opens in new tab)" class="iconExternalLink_nPIU"><use href="#theme-svg-external-link"></use></svg></a></li><li class="footer__item"><a href="https://github.com/gardener-community" target="_blank" rel="noopener noreferrer" class="footer__link-item">Gardener Community<svg width="13.5" height="13.5" aria-label="(opens in new tab)" class="iconExternalLink_nPIU"><use href="#theme-svg-external-link"></use></svg></a></li><li class="footer__item"><a href="https://gardener-cloud.slack.com" target="_blank" rel="noopener noreferrer" class="footer__link-item">Slack<svg width="13.5" height="13.5" aria-label="(opens in new tab)" class="iconExternalLink_nPIU"><use href="#theme-svg-external-link"></use></svg></a></li></ul></div><div class="theme-layout-footer-column col footer__col"><div class="footer__title">More</div><ul class="footer__items clean-list"><li class="footer__item"><a class="footer__link-item" href="/blog">Blog</a></li><li class="footer__item"><a class="footer__link-item" href="/legals">Legals</a></li><li class="footer__item"><a class="footer__link-item" href="/privacy-policy">Privacy policy</a></li></ul></div></div><div class="footer__bottom text--center"><div class="footer__copyright">Copyright © 2026 23 Technologies GmbH</div></div></div></footer></div>
 </body>
