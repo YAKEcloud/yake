@@ -5,7 +5,7 @@
 <meta name="generator" content="Docusaurus v3.10.2">
 <title data-rh="true">Release Notes next | Yet another Kubernetes Engine</title><meta data-rh="true" name="viewport" content="width=device-width,initial-scale=1"><meta data-rh="true" name="twitter:card" content="summary_large_image"><meta data-rh="true" property="og:url" content="https://yake.cloud/release-notes/next"><meta data-rh="true" property="og:locale" content="en"><meta data-rh="true" name="docusaurus_locale" content="en"><meta data-rh="true" name="docsearch:language" content="en"><meta data-rh="true" name="gardener" content="installation, production, operations, maintenance"><meta data-rh="true" name="docusaurus_version" content="current"><meta data-rh="true" name="docusaurus_tag" content="docs-release-notes-current"><meta data-rh="true" name="docsearch:version" content="current"><meta data-rh="true" name="docsearch:docusaurus_tag" content="docs-release-notes-current"><meta data-rh="true" property="og:title" content="Release Notes next | Yet another Kubernetes Engine"><meta data-rh="true" name="description" content="Yake release notes and upgrade guide"><meta data-rh="true" property="og:description" content="Yake release notes and upgrade guide"><link data-rh="true" rel="icon" href="/img/favicon.ico"><link data-rh="true" rel="canonical" href="https://yake.cloud/release-notes/next"><link data-rh="true" rel="alternate" href="https://yake.cloud/release-notes/next" hreflang="en"><link data-rh="true" rel="alternate" href="https://yake.cloud/release-notes/next" hreflang="x-default"><script data-rh="true" type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Release Notes next","item":"https://yake.cloud/release-notes/next"}]}</script><link rel="alternate" type="application/rss+xml" href="/blog/rss.xml" title="Yet another Kubernetes Engine RSS Feed">
 <link rel="alternate" type="application/atom+xml" href="/blog/atom.xml" title="Yet another Kubernetes Engine Atom Feed"><link rel="stylesheet" href="/assets/css/styles.3dbc28bd.css">
-<script src="/assets/js/runtime~main.f6bdd35d.js" defer="defer"></script>
+<script src="/assets/js/runtime~main.aafe8d98.js" defer="defer"></script>
 <script src="/assets/js/main.70c575f2.js" defer="defer"></script>
 </head>
 <body>
@@ -5569,6 +5569,50 @@ Additionally, the deployments are done in parallel, which speeds up the whole op
 <h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="container-oci-images-145">Container (OCI) Images<a href="#container-oci-images-145" class="hash-link" aria-label="Direct link to Container (OCI) Images" title="Direct link to Container (OCI) Images" translate="no">​</a></h2>
 <ul>
 <li class="">gardener-extension-shoot-cert-service: <code>europe-docker.pkg.dev/gardener-project/releases/gardener/extensions/shoot-cert-service:v1.65.0</code></li>
+</ul>
+</div></div></details>
+<details class="details_lb9f alert alert--info details_b_Ee" data-collapsed="true"><summary><b>Update gardener-webterminal to <code>0.38.0</code></b></summary><div><div class="collapsibleContent_i85q">
+<!-- -->
+<h1>[github.com/gardener/terminal-controller-manager:v0.38.0]</h1>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="-new-features-27">✨ New Features<a href="#-new-features-27" class="hash-link" aria-label="Direct link to ✨ New Features" title="Direct link to ✨ New Features" translate="no">​</a></h2>
+<ul>
+<li class=""><code>[OPERATOR]</code> Terminal reconciliation is now skipped while a referenced Shoot is hibernated, reducing unnecessary errors and retries. Terminals are automatically re-reconciled when the Shoot wakes up. by @petersutter [<a href="https://github.com/gardener/terminal-controller-manager/pull/512" target="_blank" rel="noopener noreferrer" class="">#512</a>]</li>
+</ul>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="applicationspdxjson-111">application/spdx+json<a href="#applicationspdxjson-111" class="hash-link" aria-label="Direct link to application/spdx+json" title="Direct link to application/spdx+json" translate="no">​</a></h2>
+<ul>
+<li class="">terminal-controller-manager-sbom-ref: <code>europe-docker.pkg.dev/gardener-project/releases/gardener/terminal-controller-manager@sha256:5d7e1a224b469700ff96068518bf64ae1875815fdad593d4ee68eb8fbd7a21ab</code></li>
+<li class="">terminal-controller-manager-sbom-ref: <code>europe-docker.pkg.dev/gardener-project/releases/gardener/terminal-controller-manager@sha256:759d3f502822a1c353899c17061cc2c60157ebde54bed202b1ff9f93e9df60b9</code></li>
+</ul>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="applicationvndcyclonedxjson-43">application/vnd.cyclonedx+json<a href="#applicationvndcyclonedxjson-43" class="hash-link" aria-label="Direct link to application/vnd.cyclonedx+json" title="Direct link to application/vnd.cyclonedx+json" translate="no">​</a></h2>
+<ul>
+<li class="">terminal-controller-manager-sbom-ref: <code>europe-docker.pkg.dev/gardener-project/releases/gardener/terminal-controller-manager@sha256:37cbb2f3912438cbcbe88b5a7dae30935ba71db5bc1fe542701745b51574224a</code></li>
+<li class="">terminal-controller-manager-sbom-ref: <code>europe-docker.pkg.dev/gardener-project/releases/gardener/terminal-controller-manager@sha256:95d03f8f19b8a27842fb5acb6e82417d576933ff20996c7db6816ab7fe9f6fd5</code></li>
+</ul>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="container-oci-images-146">Container (OCI) Images<a href="#container-oci-images-146" class="hash-link" aria-label="Direct link to Container (OCI) Images" title="Direct link to Container (OCI) Images" translate="no">​</a></h2>
+<ul>
+<li class="">terminal-controller-manager: <code>europe-docker.pkg.dev/gardener-project/releases/gardener/terminal-controller-manager:v0.38.0</code></li>
+</ul>
+</div></div></details>
+<details class="details_lb9f alert alert--info details_b_Ee" data-collapsed="true"><summary><b>Update gardener-webterminal to <code>0.38.0</code></b></summary><div><div class="collapsibleContent_i85q">
+<!-- -->
+<h1>[github.com/gardener/terminal-controller-manager:v0.38.0]</h1>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="-new-features-28">✨ New Features<a href="#-new-features-28" class="hash-link" aria-label="Direct link to ✨ New Features" title="Direct link to ✨ New Features" translate="no">​</a></h2>
+<ul>
+<li class=""><code>[OPERATOR]</code> Terminal reconciliation is now skipped while a referenced Shoot is hibernated, reducing unnecessary errors and retries. Terminals are automatically re-reconciled when the Shoot wakes up. by @petersutter [<a href="https://github.com/gardener/terminal-controller-manager/pull/512" target="_blank" rel="noopener noreferrer" class="">#512</a>]</li>
+</ul>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="applicationspdxjson-112">application/spdx+json<a href="#applicationspdxjson-112" class="hash-link" aria-label="Direct link to application/spdx+json" title="Direct link to application/spdx+json" translate="no">​</a></h2>
+<ul>
+<li class="">terminal-controller-manager-sbom-ref: <code>europe-docker.pkg.dev/gardener-project/releases/gardener/terminal-controller-manager@sha256:5d7e1a224b469700ff96068518bf64ae1875815fdad593d4ee68eb8fbd7a21ab</code></li>
+<li class="">terminal-controller-manager-sbom-ref: <code>europe-docker.pkg.dev/gardener-project/releases/gardener/terminal-controller-manager@sha256:759d3f502822a1c353899c17061cc2c60157ebde54bed202b1ff9f93e9df60b9</code></li>
+</ul>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="applicationvndcyclonedxjson-44">application/vnd.cyclonedx+json<a href="#applicationvndcyclonedxjson-44" class="hash-link" aria-label="Direct link to application/vnd.cyclonedx+json" title="Direct link to application/vnd.cyclonedx+json" translate="no">​</a></h2>
+<ul>
+<li class="">terminal-controller-manager-sbom-ref: <code>europe-docker.pkg.dev/gardener-project/releases/gardener/terminal-controller-manager@sha256:37cbb2f3912438cbcbe88b5a7dae30935ba71db5bc1fe542701745b51574224a</code></li>
+<li class="">terminal-controller-manager-sbom-ref: <code>europe-docker.pkg.dev/gardener-project/releases/gardener/terminal-controller-manager@sha256:95d03f8f19b8a27842fb5acb6e82417d576933ff20996c7db6816ab7fe9f6fd5</code></li>
+</ul>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="container-oci-images-147">Container (OCI) Images<a href="#container-oci-images-147" class="hash-link" aria-label="Direct link to Container (OCI) Images" title="Direct link to Container (OCI) Images" translate="no">​</a></h2>
+<ul>
+<li class="">terminal-controller-manager: <code>europe-docker.pkg.dev/gardener-project/releases/gardener/terminal-controller-manager:v0.38.0</code></li>
 </ul>
 </div></div></details></div></article><nav class="docusaurus-mt-lg pagination-nav" aria-label="Docs pages"><a class="pagination-nav__link pagination-nav__link--next" href="/release-notes/v1.137"><div class="pagination-nav__sublabel">Next</div><div class="pagination-nav__label">Release Notes v1.137</div></a></nav></div></div></div></div></main></div></div></div><footer class="theme-layout-footer footer footer--dark"><div class="container container-fluid"><div class="row footer__links"><div class="theme-layout-footer-column col footer__col"><div class="footer__title">Docs</div><ul class="footer__items clean-list"><li class="footer__item"><a class="footer__link-item" href="/docs/overview">Docs</a></li></ul></div><div class="theme-layout-footer-column col footer__col"><div class="footer__title">Community</div><ul class="footer__items clean-list"><li class="footer__item"><a href="https://github.com/yakecloud" target="_blank" rel="noopener noreferrer" class="footer__link-item">GitHub<svg width="13.5" height="13.5" aria-label="(opens in new tab)" class="iconExternalLink_nPIU"><use href="#theme-svg-external-link"></use></svg></a></li><li class="footer__item"><a href="https://github.com/gardener-community" target="_blank" rel="noopener noreferrer" class="footer__link-item">Gardener Community<svg width="13.5" height="13.5" aria-label="(opens in new tab)" class="iconExternalLink_nPIU"><use href="#theme-svg-external-link"></use></svg></a></li><li class="footer__item"><a href="https://gardener-cloud.slack.com" target="_blank" rel="noopener noreferrer" class="footer__link-item">Slack<svg width="13.5" height="13.5" aria-label="(opens in new tab)" class="iconExternalLink_nPIU"><use href="#theme-svg-external-link"></use></svg></a></li></ul></div><div class="theme-layout-footer-column col footer__col"><div class="footer__title">More</div><ul class="footer__items clean-list"><li class="footer__item"><a class="footer__link-item" href="/blog">Blog</a></li><li class="footer__item"><a class="footer__link-item" href="/legals">Legals</a></li><li class="footer__item"><a class="footer__link-item" href="/privacy-policy">Privacy policy</a></li></ul></div></div><div class="footer__bottom text--center"><div class="footer__copyright">Copyright © 2026 23 Technologies GmbH</div></div></div></footer></div>
 </body>
