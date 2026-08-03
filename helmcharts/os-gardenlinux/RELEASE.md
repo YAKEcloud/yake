@@ -1,12 +1,12 @@
 
 
 ## application/spdx+json
-- gardener-extension-os-gardenlinux-sbom-ref: `europe-docker.pkg.dev/gardener-project/releases/gardener/extensions/os-gardenlinux@sha256:44dd9ae30f61ef782f576a033a2d9c675b219222dfb524c22b0fa8f3a118134b`
-- gardener-extension-os-gardenlinux-sbom-ref: `europe-docker.pkg.dev/gardener-project/releases/gardener/extensions/os-gardenlinux@sha256:68cb390e594df008d90824432f7d1c145cc60b9dd49d8ad3ebf04e373b664557`
+- gardener-extension-os-gardenlinux-sbom-ref: `europe-docker.pkg.dev/gardener-project/releases/gardener/extensions/os-gardenlinux@sha256:13ac622a134e5357ee70bd0a89f56fad6063d9b346a94863ad5d7a339ad58f4e`
+- gardener-extension-os-gardenlinux-sbom-ref: `europe-docker.pkg.dev/gardener-project/releases/gardener/extensions/os-gardenlinux@sha256:95344b4e805b668116d09e89717b7d23d00a809be9a2e8938e7592cc66833832`
 ## application/vnd.cyclonedx+json
-- gardener-extension-os-gardenlinux-sbom-ref: `europe-docker.pkg.dev/gardener-project/releases/gardener/extensions/os-gardenlinux@sha256:7a18c77466469d61648bb6f0ccd925156fe68ca54b7423d5886100a3fa1ef69d`
-- gardener-extension-os-gardenlinux-sbom-ref: `europe-docker.pkg.dev/gardener-project/releases/gardener/extensions/os-gardenlinux@sha256:84fed33515e2c1903b92f3b9156d537e23a87898bdce3ccfa543e8305b36e39a`
+- gardener-extension-os-gardenlinux-sbom-ref: `europe-docker.pkg.dev/gardener-project/releases/gardener/extensions/os-gardenlinux@sha256:150dcfc7c79716eff13cd2117afc1f4da7878613571ae0502e40e32839616192`
+- gardener-extension-os-gardenlinux-sbom-ref: `europe-docker.pkg.dev/gardener-project/releases/gardener/extensions/os-gardenlinux@sha256:166db812709d26e7488410574c7d235b17cfa95022a311b89ca28fd6d6161937`
 ## Helm Charts
-- os-gardenlinux: `europe-docker.pkg.dev/gardener-project/releases/charts/gardener/extensions/os-gardenlinux:v0.44.0`
+- os-gardenlinux: `europe-docker.pkg.dev/gardener-project/releases/charts/gardener/extensions/os-gardenlinux:v0.46.0`
 ## Container (OCI) Images
-- gardener-extension-os-gardenlinux: `europe-docker.pkg.dev/gardener-project/releases/gardener/extensions/os-gardenlinux:v0.44.0`
+- gardener-extension-os-gardenlinux: `europe-docker.pkg.dev/gardener-project/releases/gardener/extensions/os-gardenlinux:v0.46.0`
