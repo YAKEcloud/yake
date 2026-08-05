@@ -72,7 +72,7 @@ stringData:
         enabled: true
 
     provider-aws:
-      version: 1.72.1
+      version: 1.73.0
       admission:
         enabled: true
 
