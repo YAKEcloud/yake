@@ -3,6 +3,7 @@ dependencies:
 - condition: utils-templates.enabled
   name: utils-templates
   repository: ""
+deprecated: true
 description: A Helm chart to deploy the Gardener dashboard runtime related components
 name: gardener-dashboard-runtime
-version: 1.84.5
+version: 1.85.0
