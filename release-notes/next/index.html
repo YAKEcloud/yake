@@ -5,7 +5,7 @@
 <meta name="generator" content="Docusaurus v3.10.2">
 <title data-rh="true">Release Notes next | Yet another Kubernetes Engine</title><meta data-rh="true" name="viewport" content="width=device-width,initial-scale=1"><meta data-rh="true" name="twitter:card" content="summary_large_image"><meta data-rh="true" property="og:url" content="https://yake.cloud/release-notes/next"><meta data-rh="true" property="og:locale" content="en"><meta data-rh="true" name="docusaurus_locale" content="en"><meta data-rh="true" name="docsearch:language" content="en"><meta data-rh="true" name="gardener" content="installation, production, operations, maintenance"><meta data-rh="true" name="docusaurus_version" content="current"><meta data-rh="true" name="docusaurus_tag" content="docs-release-notes-current"><meta data-rh="true" name="docsearch:version" content="current"><meta data-rh="true" name="docsearch:docusaurus_tag" content="docs-release-notes-current"><meta data-rh="true" property="og:title" content="Release Notes next | Yet another Kubernetes Engine"><meta data-rh="true" name="description" content="Yake release notes and upgrade guide"><meta data-rh="true" property="og:description" content="Yake release notes and upgrade guide"><link data-rh="true" rel="icon" href="/img/favicon.ico"><link data-rh="true" rel="canonical" href="https://yake.cloud/release-notes/next"><link data-rh="true" rel="alternate" href="https://yake.cloud/release-notes/next" hreflang="en"><link data-rh="true" rel="alternate" href="https://yake.cloud/release-notes/next" hreflang="x-default"><script data-rh="true" type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Release Notes next","item":"https://yake.cloud/release-notes/next"}]}</script><link rel="alternate" type="application/rss+xml" href="/blog/rss.xml" title="Yet another Kubernetes Engine RSS Feed">
 <link rel="alternate" type="application/atom+xml" href="/blog/atom.xml" title="Yet another Kubernetes Engine Atom Feed"><link rel="stylesheet" href="/assets/css/styles.3dbc28bd.css">
-<script src="/assets/js/runtime~main.7994a1d4.js" defer="defer"></script>
+<script src="/assets/js/runtime~main.352bebf7.js" defer="defer"></script>
 <script src="/assets/js/main.70c575f2.js" defer="defer"></script>
 </head>
 <body>
@@ -6097,6 +6097,41 @@ You should consider the Kubernetes release notes before upgrading to 1.36. by @t
 <h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="container-oci-images-154">Container (OCI) Images<a href="#container-oci-images-154" class="hash-link" aria-label="Direct link to Container (OCI) Images" title="Direct link to Container (OCI) Images" translate="no">​</a></h2>
 <ul>
 <li class="">gardener-dashboard: <code>europe-docker.pkg.dev/gardener-project/releases/gardener/dashboard:1.85.0</code></li>
+</ul>
+</div></div></details>
+<details class="details_lb9f alert alert--info details_b_Ee" data-collapsed="true"><summary><b>Update external-dns-management to <code>0.50.0</code></b></summary><div><div class="collapsibleContent_i85q">
+<!-- -->
+<h1>[github.com/gardener/external-dns-management:v0.50.0]</h1>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="-bug-fixes-91">🐛 Bug Fixes<a href="#-bug-fixes-91" class="hash-link" aria-label="Direct link to 🐛 Bug Fixes" title="Direct link to 🐛 Bug Fixes" translate="no">​</a></h2>
+<ul>
+<li class=""><code>[OPERATOR]</code> [dnsman-ng] Fix duplicate <code>CNAME</code> records by filtering answer section to queried name if recursive resolver is queried. by @MartinWeindel [<a href="https://github.com/gardener/external-dns-management/pull/1055" target="_blank" rel="noopener noreferrer" class="">#1055</a>]</li>
+</ul>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="-others-103">🏃 Others<a href="#-others-103" class="hash-link" aria-label="Direct link to 🏃 Others" title="Direct link to 🏃 Others" translate="no">​</a></h2>
+<ul>
+<li class=""><code>[DEPENDENCY]</code> Bumped Go to 1.26.7. by @marc1404 [<a href="https://github.com/gardener/external-dns-management/pull/1035" target="_blank" rel="noopener noreferrer" class="">#1035</a>]</li>
+</ul>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="applicationspdxjson-120">application/spdx+json<a href="#applicationspdxjson-120" class="hash-link" aria-label="Direct link to application/spdx+json" title="Direct link to application/spdx+json" translate="no">​</a></h2>
+<ul>
+<li class="">dns-controller-manager-next-generation-sbom-ref: <code>europe-docker.pkg.dev/gardener-project/releases/dns-controller-manager-next-generation@sha256:6660e4cd1db3a295fed3146ee7cb070ce8db237576875036223791adef799854</code></li>
+<li class="">dns-controller-manager-next-generation-sbom-ref: <code>europe-docker.pkg.dev/gardener-project/releases/dns-controller-manager-next-generation@sha256:c68a9b9bf1e7bb768c285998076956beecbbe16bf8a3a7573eef86b7789d3908</code></li>
+<li class="">dns-controller-manager-sbom-ref: <code>europe-docker.pkg.dev/gardener-project/releases/dns-controller-manager@sha256:34ded5095170b353066a8f1dd84e675b4da52bf36d45914675e67e02585b2388</code></li>
+<li class="">dns-controller-manager-sbom-ref: <code>europe-docker.pkg.dev/gardener-project/releases/dns-controller-manager@sha256:8d95aa953788dce4dbf5c76e4641e6de024be2f73a8bf7efad7bac4483b66546</code></li>
+</ul>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="applicationvndcyclonedxjson-52">application/vnd.cyclonedx+json<a href="#applicationvndcyclonedxjson-52" class="hash-link" aria-label="Direct link to application/vnd.cyclonedx+json" title="Direct link to application/vnd.cyclonedx+json" translate="no">​</a></h2>
+<ul>
+<li class="">dns-controller-manager-next-generation-sbom-ref: <code>europe-docker.pkg.dev/gardener-project/releases/dns-controller-manager-next-generation@sha256:00f0cdde6deacdaaa3ded416805e9e776da37c4d8216e5783a53a563b0b81233</code></li>
+<li class="">dns-controller-manager-next-generation-sbom-ref: <code>europe-docker.pkg.dev/gardener-project/releases/dns-controller-manager-next-generation@sha256:840d61e0d32bbe3184291ee022e33e26ffd8c2a3164db101cc15af7364732f3e</code></li>
+<li class="">dns-controller-manager-sbom-ref: <code>europe-docker.pkg.dev/gardener-project/releases/dns-controller-manager@sha256:d838b8d2d7af274c2ec7b859241ad063fb9cd4b89b3d091cae281650a21af943</code></li>
+<li class="">dns-controller-manager-sbom-ref: <code>europe-docker.pkg.dev/gardener-project/releases/dns-controller-manager@sha256:fa1647b04c3bd89210f8a9425b597f408aec6d92be6c4bc34cc022e7a09c42a2</code></li>
+</ul>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="helm-charts-129">Helm Charts<a href="#helm-charts-129" class="hash-link" aria-label="Direct link to Helm Charts" title="Direct link to Helm Charts" translate="no">​</a></h2>
+<ul>
+<li class="">dns-controller-manager: <code>europe-docker.pkg.dev/gardener-project/releases/charts/dns-controller-manager:v0.50.0</code></li>
+</ul>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="container-oci-images-155">Container (OCI) Images<a href="#container-oci-images-155" class="hash-link" aria-label="Direct link to Container (OCI) Images" title="Direct link to Container (OCI) Images" translate="no">​</a></h2>
+<ul>
+<li class="">dns-controller-manager-next-generation: <code>europe-docker.pkg.dev/gardener-project/releases/dns-controller-manager-next-generation:v0.50.0</code></li>
+<li class="">dns-controller-manager: <code>europe-docker.pkg.dev/gardener-project/releases/dns-controller-manager:v0.50.0</code></li>
 </ul>
 </div></div></details></div></article><nav class="docusaurus-mt-lg pagination-nav" aria-label="Docs pages"><a class="pagination-nav__link pagination-nav__link--next" href="/release-notes/v1.137"><div class="pagination-nav__sublabel">Next</div><div class="pagination-nav__label">Release Notes v1.137</div></a></nav></div></div></div></div></main></div></div></div><footer class="theme-layout-footer footer footer--dark"><div class="container container-fluid"><div class="row footer__links"><div class="theme-layout-footer-column col footer__col"><div class="footer__title">Docs</div><ul class="footer__items clean-list"><li class="footer__item"><a class="footer__link-item" href="/docs/overview">Docs</a></li></ul></div><div class="theme-layout-footer-column col footer__col"><div class="footer__title">Community</div><ul class="footer__items clean-list"><li class="footer__item"><a href="https://github.com/yakecloud" target="_blank" rel="noopener noreferrer" class="footer__link-item">GitHub<svg width="13.5" height="13.5" aria-label="(opens in new tab)" class="iconExternalLink_nPIU"><use href="#theme-svg-external-link"></use></svg></a></li><li class="footer__item"><a href="https://github.com/gardener-community" target="_blank" rel="noopener noreferrer" class="footer__link-item">Gardener Community<svg width="13.5" height="13.5" aria-label="(opens in new tab)" class="iconExternalLink_nPIU"><use href="#theme-svg-external-link"></use></svg></a></li><li class="footer__item"><a href="https://gardener-cloud.slack.com" target="_blank" rel="noopener noreferrer" class="footer__link-item">Slack<svg width="13.5" height="13.5" aria-label="(opens in new tab)" class="iconExternalLink_nPIU"><use href="#theme-svg-external-link"></use></svg></a></li></ul></div><div class="theme-layout-footer-column col footer__col"><div class="footer__title">More</div><ul class="footer__items clean-list"><li class="footer__item"><a class="footer__link-item" href="/blog">Blog</a></li><li class="footer__item"><a class="footer__link-item" href="/legals">Legals</a></li><li class="footer__item"><a class="footer__link-item" href="/privacy-policy">Privacy policy</a></li></ul></div></div><div class="footer__bottom text--center"><div class="footer__copyright">Copyright © 2026 23 Technologies GmbH</div></div></div></footer></div>
 </body>
