@@ -1,4 +1,4 @@
 ## General Changes
 
-* Allow accessing S3 service inside the Garden Cluster. (#31) @Gerrit91
-* Update README and actions. (#32) @Gerrit91
+* Fix RBAC (#35) @simcod
+* add handling of backupentry to fix #29 (#30) @christianhuening
