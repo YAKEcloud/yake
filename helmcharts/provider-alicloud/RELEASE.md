@@ -1,27 +1,26 @@
-# [github.com/gardener/gardener-extension-provider-alicloud:v1.72.0]
-
-## 🐛 Bug Fixes
-- `[OPERATOR]` Bump machine-controller-manager dependency from v0.62.0->v.62.1 and image vector for machine-controller-manager-provider-alicloud from `v0.15.0 → v0.15.1`. by @thiyyakat [[#918](https://github.com/gardener/gardener-extension-provider-alicloud/pull/918)]
+# [github.com/gardener/gardener-extension-provider-alicloud:v1.73.0]
 
 ## 🏃 Others
-- `[OPERATOR]` Fix `NamespacedCloudProfile` admission to populate `capabilityFlavors` on spec machine images and allow expirationDate-only overrides of parent versions without requiring a providerConfig entry. by @kevin-lacoo [[#911](https://github.com/gardener/gardener-extension-provider-alicloud/pull/911)]
-- `[OPERATOR]` When new zones are added to an existing BYO-VPC Shoot, the admission webhook validates CIDR conflicts against existing VSwitches. by @kevin-lacoo [[#913](https://github.com/gardener/gardener-extension-provider-alicloud/pull/913)]
-- `[DEPENDENCY]` Bumped Gardener dependency to v1.143.1, including module split migration. Bumped MCM dependency to v0.62.0 by @thiyyakat [[#907](https://github.com/gardener/gardener-extension-provider-alicloud/pull/907)]
+- `[OPERATOR]` Migrate test mock clients to fakeclient by @kevin-lacoo [[#924](https://github.com/gardener/gardener-extension-provider-alicloud/pull/924)]
+- `[OPERATOR]` set vpc default route table for user provided vpc without custom route table by @kevin-lacoo [[#923](https://github.com/gardener/gardener-extension-provider-alicloud/pull/923)]
+- `[OPERATOR]` Enables the backupentry controller in the runtime cluster by @kevin-lacoo [[#927](https://github.com/gardener/gardener-extension-provider-alicloud/pull/927)]
+- `[OPERATOR]` The update mode of the VerticalPodAutoscaler resource, deployed by the gardener-extension-provider-alicloud, is now explicitly set to `InPlaceOrRecreate`, reflecting the actual runtime behavior after the unconditional enablement of the `VPAInPlaceUpdates` feature gate. by @Velin-Todorov [[#925](https://github.com/gardener/gardener-extension-provider-alicloud/pull/925)]
+- `[OPERATOR]` The dependency `github.com/gardener/gardener` has been updated from `v1.143.1` to `v1.147.2`. by @kevin-lacoo [[#932](https://github.com/gardener/gardener-extension-provider-alicloud/pull/932)]
 
 ## application/spdx+json
-- gardener-extension-admission-alicloud-sbom-ref: `europe-docker.pkg.dev/gardener-project/releases/gardener/extensions/admission-alicloud@sha256:2d1801ed532e18caac303cf2bae0be8a035158e1ffd36e8ed9819f70f7929ce7`
-- gardener-extension-admission-alicloud-sbom-ref: `europe-docker.pkg.dev/gardener-project/releases/gardener/extensions/admission-alicloud@sha256:3b5788a0a752d319d813009c1f4c79ef307352d6f116fdc103d8ad19574575da`
-- gardener-extension-provider-alicloud-sbom-ref: `europe-docker.pkg.dev/gardener-project/releases/gardener/extensions/provider-alicloud@sha256:2aff6e7abf901946ae5190fd00eb77cce4063fc2a28208c3681307d9d35d0ad9`
-- gardener-extension-provider-alicloud-sbom-ref: `europe-docker.pkg.dev/gardener-project/releases/gardener/extensions/provider-alicloud@sha256:f7c81ffd4c6690587f2315ab0595639829dd806a811d871815a5a697177ccc6d`
+- gardener-extension-admission-alicloud-sbom-ref: `europe-docker.pkg.dev/gardener-project/releases/gardener/extensions/admission-alicloud@sha256:bbaa3ca4d38cc7555dd169cf79fcc712a305533a832d8d8115daf63435bcdc87`
+- gardener-extension-admission-alicloud-sbom-ref: `europe-docker.pkg.dev/gardener-project/releases/gardener/extensions/admission-alicloud@sha256:bf22eede2b1d4e6b85b27c0afe0cbcdb23ef9a9cc81383c9d853bbb8ea5c892b`
+- gardener-extension-provider-alicloud-sbom-ref: `europe-docker.pkg.dev/gardener-project/releases/gardener/extensions/provider-alicloud@sha256:3095cf2d37560cda95c75e2d7e74fcfddbc2a91d0e3a08cdc78d680c61b4091b`
+- gardener-extension-provider-alicloud-sbom-ref: `europe-docker.pkg.dev/gardener-project/releases/gardener/extensions/provider-alicloud@sha256:5b70492ca6478c2c47bdd6d2ed7d143e56052293c6aa618e8ad5dd69a85e77df`
 ## application/vnd.cyclonedx+json
-- gardener-extension-admission-alicloud-sbom-ref: `europe-docker.pkg.dev/gardener-project/releases/gardener/extensions/admission-alicloud@sha256:33ed9fff578f6806c423a7bb442f46c4b85d8e252ecb27faeff4bbebb5eea74d`
-- gardener-extension-admission-alicloud-sbom-ref: `europe-docker.pkg.dev/gardener-project/releases/gardener/extensions/admission-alicloud@sha256:bedf429a6981ed3bb5ea07ee9188f6c4e83e95cb0fa2227bf2119af2cc6400e9`
-- gardener-extension-provider-alicloud-sbom-ref: `europe-docker.pkg.dev/gardener-project/releases/gardener/extensions/provider-alicloud@sha256:1dde6e30aef0b9163b14e6307804538389bc9f26549730066e4ced4c1e255d13`
-- gardener-extension-provider-alicloud-sbom-ref: `europe-docker.pkg.dev/gardener-project/releases/gardener/extensions/provider-alicloud@sha256:4c8fb12359da08a01e6c91aaf97fa12b1ee3b2bfbef23fd2209d608fa314f0a4`
+- gardener-extension-admission-alicloud-sbom-ref: `europe-docker.pkg.dev/gardener-project/releases/gardener/extensions/admission-alicloud@sha256:3e2e9cf59e369b86bc26b33ba9f762a38d949f9196c82a11d0e5ff5cd695ee31`
+- gardener-extension-admission-alicloud-sbom-ref: `europe-docker.pkg.dev/gardener-project/releases/gardener/extensions/admission-alicloud@sha256:52252fcf0f49df6131df0fcfaff50152edc5a0bc833c6e989c35eb49ed81a12b`
+- gardener-extension-provider-alicloud-sbom-ref: `europe-docker.pkg.dev/gardener-project/releases/gardener/extensions/provider-alicloud@sha256:0206b29dbaa429d7f1559d5828e9e2969fa4ed2f5da2e7feef7a6d1cfe620f25`
+- gardener-extension-provider-alicloud-sbom-ref: `europe-docker.pkg.dev/gardener-project/releases/gardener/extensions/provider-alicloud@sha256:a8f9fca40094faa62b00ccfd6fdf3327df09e91f13b82b111e505ba45254b52d`
 ## Helm Charts
-- admission-alicloud-application: `europe-docker.pkg.dev/gardener-project/releases/charts/gardener/extensions/admission-alicloud-application:v1.72.0`
-- admission-alicloud-runtime: `europe-docker.pkg.dev/gardener-project/releases/charts/gardener/extensions/admission-alicloud-runtime:v1.72.0`
-- provider-alicloud: `europe-docker.pkg.dev/gardener-project/releases/charts/gardener/extensions/provider-alicloud:v1.72.0`
+- admission-alicloud-application: `europe-docker.pkg.dev/gardener-project/releases/charts/gardener/extensions/admission-alicloud-application:v1.73.0`
+- admission-alicloud-runtime: `europe-docker.pkg.dev/gardener-project/releases/charts/gardener/extensions/admission-alicloud-runtime:v1.73.0`
+- provider-alicloud: `europe-docker.pkg.dev/gardener-project/releases/charts/gardener/extensions/provider-alicloud:v1.73.0`
 ## Container (OCI) Images
-- gardener-extension-admission-alicloud: `europe-docker.pkg.dev/gardener-project/releases/gardener/extensions/admission-alicloud:v1.72.0`
-- gardener-extension-provider-alicloud: `europe-docker.pkg.dev/gardener-project/releases/gardener/extensions/provider-alicloud:v1.72.0`
+- gardener-extension-admission-alicloud: `europe-docker.pkg.dev/gardener-project/releases/gardener/extensions/admission-alicloud:v1.73.0`
+- gardener-extension-provider-alicloud: `europe-docker.pkg.dev/gardener-project/releases/gardener/extensions/provider-alicloud:v1.73.0`
