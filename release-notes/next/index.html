@@ -5,7 +5,7 @@
 <meta name="generator" content="Docusaurus v3.10.2">
 <title data-rh="true">Release Notes next | Yet another Kubernetes Engine</title><meta data-rh="true" name="viewport" content="width=device-width,initial-scale=1"><meta data-rh="true" name="twitter:card" content="summary_large_image"><meta data-rh="true" property="og:url" content="https://yake.cloud/release-notes/next"><meta data-rh="true" property="og:locale" content="en"><meta data-rh="true" name="docusaurus_locale" content="en"><meta data-rh="true" name="docsearch:language" content="en"><meta data-rh="true" name="gardener" content="installation, production, operations, maintenance"><meta data-rh="true" name="docusaurus_version" content="current"><meta data-rh="true" name="docusaurus_tag" content="docs-release-notes-current"><meta data-rh="true" name="docsearch:version" content="current"><meta data-rh="true" name="docsearch:docusaurus_tag" content="docs-release-notes-current"><meta data-rh="true" property="og:title" content="Release Notes next | Yet another Kubernetes Engine"><meta data-rh="true" name="description" content="Yake release notes and upgrade guide"><meta data-rh="true" property="og:description" content="Yake release notes and upgrade guide"><link data-rh="true" rel="icon" href="/img/favicon.ico"><link data-rh="true" rel="canonical" href="https://yake.cloud/release-notes/next"><link data-rh="true" rel="alternate" href="https://yake.cloud/release-notes/next" hreflang="en"><link data-rh="true" rel="alternate" href="https://yake.cloud/release-notes/next" hreflang="x-default"><script data-rh="true" type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Release Notes next","item":"https://yake.cloud/release-notes/next"}]}</script><link rel="alternate" type="application/rss+xml" href="/blog/rss.xml" title="Yet another Kubernetes Engine RSS Feed">
 <link rel="alternate" type="application/atom+xml" href="/blog/atom.xml" title="Yet another Kubernetes Engine Atom Feed"><link rel="stylesheet" href="/assets/css/styles.3dbc28bd.css">
-<script src="/assets/js/runtime~main.0b17abbf.js" defer="defer"></script>
+<script src="/assets/js/runtime~main.7994a1d4.js" defer="defer"></script>
 <script src="/assets/js/main.70c575f2.js" defer="defer"></script>
 </head>
 <body>
@@ -5878,6 +5878,226 @@ You should consider the Kubernetes release notes before upgrading to 1.36. by @t
 <li class="">add gardener crew as reviewer for Gardener updates by @robinschneider in <a href="https://github.com/stackitcloud/gardener-extension-acl/pull/320" target="_blank" rel="noopener noreferrer" class="">https://github.com/stackitcloud/gardener-extension-acl/pull/320</a></li>
 </ul>
 <p><strong>Full Changelog</strong>: <a href="https://github.com/stackitcloud/gardener-extension-acl/compare/v1.19.0...v1.20.0" target="_blank" rel="noopener noreferrer" class="">https://github.com/stackitcloud/gardener-extension-acl/compare/v1.19.0...v1.20.0</a></p>
+</div></div></details>
+<details class="details_lb9f alert alert--info details_b_Ee" data-collapsed="true"><summary><b>Update dashboard to <code>1.85.0</code></b></summary><div><div class="collapsibleContent_i85q">
+<!-- -->
+<h1>[github.com/gardener/dashboard:1.85.0]</h1>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="️-breaking-changes-26">⚠️ Breaking Changes<a href="#️-breaking-changes-26" class="hash-link" aria-label="Direct link to ⚠️ Breaking Changes" title="Direct link to ⚠️ Breaking Changes" translate="no">​</a></h2>
+<ul>
+<li class=""><code>[OPERATOR]</code> Machine image vendor matching no longer uses substring/wildcard patterns. Image names must now exactly match an entry in <code>knownMachineImageVendors</code> (or the branding config <code>vendors.machineImage</code> array). Images without an exact match will display their raw name without vendor icon or grouping by @grolu [<a href="https://github.com/gardener/dashboard/pull/3000" target="_blank" rel="noopener noreferrer" class="">#3000</a>]</li>
+<li class=""><code>[OPERATOR]</code> The condition visibility configuration field <code>showAdminOnly</code> has been replaced by <code>showLandscapeViewerOnly</code>. Landscape operators that define additional conditions or override condition configuration must update their configuration accordingly. Conditions marked with <code>showLandscapeViewerOnly</code> are now visible to users with landscape-viewer access, instead of being restricted to dashboard admins only by @petersutter [<a href="https://github.com/gardener/dashboard/pull/3015" target="_blank" rel="noopener noreferrer" class="">#3015</a>]</li>
+<li class=""><code>[OPERATOR]</code> OIDC providers that do not support PKCE must explicitly configure <code>usePKCE: false</code> under <code>global.dashboard.oidc</code> when using the Helm chart. by @petersutter [<a href="https://github.com/gardener/dashboard/pull/3109" target="_blank" rel="noopener noreferrer" class="">#3109</a>]</li>
+</ul>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="-new-features-32">✨ New Features<a href="#-new-features-32" class="hash-link" aria-label="Direct link to ✨ New Features" title="Direct link to ✨ New Features" translate="no">​</a></h2>
+<ul>
+<li class="">
+<p><code>[OPERATOR]</code> Add support for IronCore Metal as infrastructure provider by @afritzler [<a href="https://github.com/gardener/dashboard/pull/3114" target="_blank" rel="noopener noreferrer" class="">#3114</a>]</p>
+</li>
+<li class="">
+<p><code>[OPERATOR]</code> New <code>shootDefaults</code> Configuration: A new frontend configuration namespace, <code>shootDefaults</code>, has been introduced. It allows predefined default values to be applied when users create new Shoot resources in the Gardener Dashboard.</p>
+<p>The following existing configuration properties have been moved to the new namespace:</p>
+<ul>
+<li class=""><code>controlPlaneHighAvailabilityHelp</code> → <code>shootDefaults.controlPlaneHighAvailabilityHelp</code></li>
+<li class=""><code>defaultHibernationSchedule</code> → <code>shootDefaults.hibernationSchedule</code></li>
+<li class=""><code>defaultNodesCIDR</code> → <code>shootDefaults.nodesCIDR</code></li>
+</ul>
+<p>The previous configuration paths are now deprecated. Please update your deployments to use the corresponding properties under <code>shootDefaults</code>. by @benedikt-haug [<a href="https://github.com/gardener/dashboard/pull/2476" target="_blank" rel="noopener noreferrer" class="">#2476</a>]</p>
+</li>
+<li class="">
+<p><code>[OPERATOR]</code> The Gardener dashboard backend now supports optional TLS termination. Configure <code>tls.certFile</code> and <code>tls.privateKeyFile</code> in the dashboard configuration to enable HTTPS. by @grolu [<a href="https://github.com/gardener/dashboard/pull/3014" target="_blank" rel="noopener noreferrer" class="">#3014</a>]</p>
+</li>
+<li class="">
+<p><code>[OPERATOR]</code> Landscape viewers now see operations-oriented UI elements such as the control plane (CP) chip, seed readiness, seed link on shoots, and a role badge in the main toolbar by @petersutter [<a href="https://github.com/gardener/dashboard/pull/3015" target="_blank" rel="noopener noreferrer" class="">#3015</a>]</p>
+</li>
+<li class="">
+<p><code>[OPERATOR]</code> The All Projects cluster list can now be configured to open in Operations View by default. Exclusion criteria for Operations View (progressing clusters, clusters not requiring operator action, clusters with only ignored tickets) are configurable from the Settings page. by @petersutter [<a href="https://github.com/gardener/dashboard/pull/3135" target="_blank" rel="noopener noreferrer" class="">#3135</a>]</p>
+</li>
+<li class="">
+<p><code>[OPERATOR]</code> Add <code>KUBE_CLIENT_REQUEST_TIMEOUT</code> environment variable to configure a total per-request timeout (in milliseconds) for Kubernetes API requests made by the dashboard backend. Defaults to 300000 (5 minutes); set to 0 to disable. When using the Helm chart, this can be configured via <code>.Values.global.dashboard.kubeClient.requestTimeout</code>. by @petersutter [<a href="https://github.com/gardener/dashboard/pull/2954" target="_blank" rel="noopener noreferrer" class="">#2954</a>]</p>
+</li>
+<li class="">
+<p><code>[USER]</code> Add theming support and support for copy/paste shortcuts in terminal by @julestree [<a href="https://github.com/gardener/dashboard/pull/3110" target="_blank" rel="noopener noreferrer" class="">#3110</a>]</p>
+</li>
+<li class="">
+<p><code>[USER]</code> Seed capacity indicators and health donuts link to the corresponding filtered Shoot list. by @petersutter [<a href="https://github.com/gardener/dashboard/pull/3141" target="_blank" rel="noopener noreferrer" class="">#3141</a>]</p>
+</li>
+<li class="">
+<p><code>[USER]</code> Support field-qualified search terms in shoot and seed list filters (e.g. <code>seed:aws-ha</code>, <code>-region:eu</code>). by @petersutter [<a href="https://github.com/gardener/dashboard/pull/3044" target="_blank" rel="noopener noreferrer" class="">#3044</a>]</p>
+</li>
+<li class="">
+<p><code>[USER]</code> The all projects Shoot list toolbar now shows the active Operations View state and provides controls to restore it or show all clusters. by @petersutter [<a href="https://github.com/gardener/dashboard/pull/3140" target="_blank" rel="noopener noreferrer" class="">#3140</a>]</p>
+</li>
+<li class="">
+<p><code>[USER]</code> The seed list now displays per-seed shoot health statistics as donut charts and shoot capacity indicators, with real-time updates. Health stats respect the active Operations View exclusion criteria. by @petersutter [<a href="https://github.com/gardener/dashboard/pull/2901" target="_blank" rel="noopener noreferrer" class="">#2901</a>]</p>
+</li>
+<li class="">
+<p><code>[DEVELOPER]</code> To restrict local Dashboard services to the loopback interface, developers should add <code>host: 127.0.0.1</code> to <code>${HOME}/.gardener/config.yaml</code>. by @petersutter [<a href="https://github.com/gardener/dashboard/pull/3120" target="_blank" rel="noopener noreferrer" class="">#3120</a>]</p>
+</li>
+</ul>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="-bug-fixes-89">🐛 Bug Fixes<a href="#-bug-fixes-89" class="hash-link" aria-label="Direct link to 🐛 Bug Fixes" title="Direct link to 🐛 Bug Fixes" translate="no">​</a></h2>
+<ul>
+<li class=""><code>[OPERATOR]</code> Hardened OIDC callback validation and enabled PKCE by default. by @petersutter [<a href="https://github.com/gardener/dashboard/pull/3109" target="_blank" rel="noopener noreferrer" class="">#3109</a>]</li>
+<li class=""><code>[OPERATOR]</code> Fixed a bug where clicking the &quot;Terminal Shortcuts&quot; tab in the terminal dialog closes the dialog by @julestree [<a href="https://github.com/gardener/dashboard/pull/3055" target="_blank" rel="noopener noreferrer" class="">#3055</a>]</li>
+<li class=""><code>[OPERATOR]</code> Detect stalled HTTP/2 sessions used by the kube-client via a Go-style read-idle / ping-timeout heartbeat. Previously a half-open session was never torn down, which could leave streams hanging indefinitely. Configurable via <code>KUBE_CLIENT_READ_IDLE_TIMEOUT</code> / <code>KUBE_CLIENT_PING_TIMEOUT</code> env vars and the matching <code>global.dashboard.kubeClient.readIdleTimeout</code> / <code>pingTimeout</code> Helm values. by @petersutter [<a href="https://github.com/gardener/dashboard/pull/2981" target="_blank" rel="noopener noreferrer" class="">#2981</a>]</li>
+<li class=""><code>[USER]</code> Fixed the project selector showing a different project than the URL and cluster list after an interrupted project switch. by @petersutter [<a href="https://github.com/gardener/dashboard/pull/3169" target="_blank" rel="noopener noreferrer" class="">#3169</a>]</li>
+<li class=""><code>[USER]</code> Fixed socket event handler crashing when events arrive before store initialization. by @grolu [<a href="https://github.com/gardener/dashboard/pull/2962" target="_blank" rel="noopener noreferrer" class="">#2962</a>]</li>
+<li class=""><code>[USER]</code> Fix transient &quot;Cluster is gone&quot; error page that briefly appeared when switching between sub-routes of the same cluster (e.g. overview to YAML editor). by @petersutter [<a href="https://github.com/gardener/dashboard/pull/3012" target="_blank" rel="noopener noreferrer" class="">#3012</a>]</li>
+<li class=""><code>[USER]</code> Prevent a TypeError in the HTTP/2 session pool heartbeat when the underlying socket is no longer available. by @petersutter [<a href="https://github.com/gardener/dashboard/pull/3010" target="_blank" rel="noopener noreferrer" class="">#3010</a>]</li>
+<li class=""><code>[USER]</code> Fixed stale selected project in the navigation after store entry changes. by @petersutter [<a href="https://github.com/gardener/dashboard/pull/3079" target="_blank" rel="noopener noreferrer" class="">#3079</a>]</li>
+<li class=""><code>[USER]</code> Project name filter now ignores leading and trailing whitespace, preventing empty search results caused by accidental spaces. by @jguipi [<a href="https://github.com/gardener/dashboard/pull/3126" target="_blank" rel="noopener noreferrer" class="">#3126</a>]</li>
+<li class=""><code>[USER]</code> Fixed the container runtime selector from shrinking in Safari when configuring shoot workers by @petersutter [<a href="https://github.com/gardener/dashboard/pull/3173" target="_blank" rel="noopener noreferrer" class="">#3173</a>]</li>
+<li class=""><code>[USER]</code> DNS Handling Improvements &amp; Fixes
+<ul>
+<li class="">Fixed an issue where clusters without a custom domain could appear incorrectly in the Configure DNS dialog</li>
+<li class="">Disabled Edit and Delete buttons for DNS Workload Identities, as Dashboard support for managing them is not yet available by @grolu [<a href="https://github.com/gardener/dashboard/pull/2939" target="_blank" rel="noopener noreferrer" class="">#2939</a>]</li>
+</ul>
+</li>
+<li class=""><code>[USER]</code> Fix status sort order to include the &#x27;Error&#x27; state by @petersutter [<a href="https://github.com/gardener/dashboard/pull/3057" target="_blank" rel="noopener noreferrer" class="">#3057</a>]</li>
+<li class=""><code>[USER]</code> Fix machine image vendor matching to use exact names instead of substring matching, preventing misclassification of images like memorone-gardenlinux or gardenlinux-fips by @grolu [<a href="https://github.com/gardener/dashboard/pull/3000" target="_blank" rel="noopener noreferrer" class="">#3000</a>]</li>
+<li class=""><code>[USER]</code> The Gardener dashboard now sends ETag headers for SPA fallback responses such as /login. This improves browser cache validation and fixes an issue where rolling back to a previous dashboard version could make browsers reuse stale HTML that referenced assets no longer present on the server, causing 404 errors and failed page loads by @grolu [<a href="https://github.com/gardener/dashboard/pull/3059" target="_blank" rel="noopener noreferrer" class="">#3059</a>]</li>
+<li class=""><code>[USER]</code> Fixed IOPS input field not visible for aws workers by @grolu [<a href="https://github.com/gardener/dashboard/pull/2951" target="_blank" rel="noopener noreferrer" class="">#2951</a>]</li>
+<li class=""><code>[USER]</code> Increased tooltip open-delay on shoot/seed status tags from 200ms to 750ms to reduce accidental tooltip flashes during list scanning. by @petersutter [<a href="https://github.com/gardener/dashboard/pull/3019" target="_blank" rel="noopener noreferrer" class="">#3019</a>]</li>
+<li class=""><code>[DEVELOPER]</code> Frontend development TLS certificates generated by <code>yarn setup</code> are now shared across local Dashboard repositories. by @grolu [<a href="https://github.com/gardener/dashboard/pull/3077" target="_blank" rel="noopener noreferrer" class="">#3077</a>]</li>
+<li class=""><code>[DEVELOPER]</code> Forward caller-provided abort signals through <code>list</code> and <code>get</code> operations in the kube-client so hung requests can be cancelled. by @petersutter [<a href="https://github.com/gardener/dashboard/pull/2954" target="_blank" rel="noopener noreferrer" class="">#2954</a>]</li>
+<li class=""><code>[DEVELOPER]</code> Exclude Vuetify from Vite dependency pre-bundling in development to prevent full-page reloads caused by cold-cache dependency optimization changes. by @petersutter [<a href="https://github.com/gardener/dashboard/pull/3153" target="_blank" rel="noopener noreferrer" class="">#3153</a>]</li>
+</ul>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="-others-101">🏃 Others<a href="#-others-101" class="hash-link" aria-label="Direct link to 🏃 Others" title="Direct link to 🏃 Others" translate="no">​</a></h2>
+<ul>
+<li class=""><code>[OPERATOR]</code> Tickets: Scope ticket access and real-time updates to project members. by @julestree [<a href="https://github.com/gardener/dashboard/pull/3063" target="_blank" rel="noopener noreferrer" class="">#3063</a>]</li>
+<li class=""><code>[OPERATOR]</code> Redesigned tooltips: shoot health donut, seed capacity indicators, and seed condition status now use a unified layout. by @petersutter [<a href="https://github.com/gardener/dashboard/pull/3078" target="_blank" rel="noopener noreferrer" class="">#3078</a>]</li>
+<li class=""><code>[USER]</code> The table column selection and filter selection are now separate toolbar buttons. by @petersutter [<a href="https://github.com/gardener/dashboard/pull/3040" target="_blank" rel="noopener noreferrer" class="">#3040</a>]</li>
+<li class=""><code>[USER]</code> Redesigned tooltips: project details, infrastructure details, shoot health, and status tags now use a unified layout. by @petersutter [<a href="https://github.com/gardener/dashboard/pull/3078" target="_blank" rel="noopener noreferrer" class="">#3078</a>]</li>
+<li class=""><code>[DEVELOPER]</code> Cloud-provider credential forms and details are now driven by the vendor definitions under <code>frontend/src/data/vendors</code>. Prefer extending a vendor&#x27;s <code>secret</code> configuration and the shared generic credential components over adding provider-specific credential dialogs; dedicated UI can still be used where needed by @grolu [<a href="https://github.com/gardener/dashboard/pull/3157" target="_blank" rel="noopener noreferrer" class="">#3157</a>]</li>
+<li class=""><code>[DEVELOPER]</code> Yarn zero-installs are no longer used; run <code>yarn install</code> after pulling the repository. by @petersutter [<a href="https://github.com/gardener/dashboard/pull/2977" target="_blank" rel="noopener noreferrer" class="">#2977</a>]</li>
+</ul>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="-documentation-2">📖 Documentation<a href="#-documentation-2" class="hash-link" aria-label="Direct link to 📖 Documentation" title="Direct link to 📖 Documentation" translate="no">​</a></h2>
+<ul>
+<li class=""><code>[OPERATOR]</code> The <code>gardener-dashboard</code> Helm chart is deprecated in favor of <code>gardener-operator</code> managed deployments. The <code>identity</code> Helm chart is deprecated without replacement. Both will be removed earliest around November 2026. by @petersutter [<a href="https://github.com/gardener/dashboard/pull/2935" target="_blank" rel="noopener noreferrer" class="">#2935</a>]</li>
+</ul>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="applicationspdxjson-118">application/spdx+json<a href="#applicationspdxjson-118" class="hash-link" aria-label="Direct link to application/spdx+json" title="Direct link to application/spdx+json" translate="no">​</a></h2>
+<ul>
+<li class="">gardener-dashboard-sbom-ref: <code>europe-docker.pkg.dev/gardener-project/releases/gardener/dashboard@sha256:6359470acb52b80711beeffa981698cf28332a78d38dab4edd77697e9744de56</code></li>
+<li class="">gardener-dashboard-sbom-ref: <code>europe-docker.pkg.dev/gardener-project/releases/gardener/dashboard@sha256:ef235effe21c651bfae7ec868adee47ab01586539815ed0b2b0e5bc90d30dfcc</code></li>
+</ul>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="applicationvndcyclonedxjson-50">application/vnd.cyclonedx+json<a href="#applicationvndcyclonedxjson-50" class="hash-link" aria-label="Direct link to application/vnd.cyclonedx+json" title="Direct link to application/vnd.cyclonedx+json" translate="no">​</a></h2>
+<ul>
+<li class="">gardener-dashboard-sbom-ref: <code>europe-docker.pkg.dev/gardener-project/releases/gardener/dashboard@sha256:3bf356b8c0fc6ba8f8a72a7f397fc46f1dfc8a8dee0337d29f7f2f1fedb9deab</code></li>
+<li class="">gardener-dashboard-sbom-ref: <code>europe-docker.pkg.dev/gardener-project/releases/gardener/dashboard@sha256:76717286e8aa1594b47e22691f5db78eb0c4cd45b837a6bbefb4be76296f9017</code></li>
+</ul>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="container-oci-images-153">Container (OCI) Images<a href="#container-oci-images-153" class="hash-link" aria-label="Direct link to Container (OCI) Images" title="Direct link to Container (OCI) Images" translate="no">​</a></h2>
+<ul>
+<li class="">gardener-dashboard: <code>europe-docker.pkg.dev/gardener-project/releases/gardener/dashboard:1.85.0</code></li>
+</ul>
+</div></div></details>
+<details class="details_lb9f alert alert--info details_b_Ee" data-collapsed="true"><summary><b>Update dashboard to <code>1.85.0</code></b></summary><div><div class="collapsibleContent_i85q">
+<!-- -->
+<h1>[github.com/gardener/dashboard:1.85.0]</h1>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="️-breaking-changes-27">⚠️ Breaking Changes<a href="#️-breaking-changes-27" class="hash-link" aria-label="Direct link to ⚠️ Breaking Changes" title="Direct link to ⚠️ Breaking Changes" translate="no">​</a></h2>
+<ul>
+<li class=""><code>[OPERATOR]</code> Machine image vendor matching no longer uses substring/wildcard patterns. Image names must now exactly match an entry in <code>knownMachineImageVendors</code> (or the branding config <code>vendors.machineImage</code> array). Images without an exact match will display their raw name without vendor icon or grouping by @grolu [<a href="https://github.com/gardener/dashboard/pull/3000" target="_blank" rel="noopener noreferrer" class="">#3000</a>]</li>
+<li class=""><code>[OPERATOR]</code> The condition visibility configuration field <code>showAdminOnly</code> has been replaced by <code>showLandscapeViewerOnly</code>. Landscape operators that define additional conditions or override condition configuration must update their configuration accordingly. Conditions marked with <code>showLandscapeViewerOnly</code> are now visible to users with landscape-viewer access, instead of being restricted to dashboard admins only by @petersutter [<a href="https://github.com/gardener/dashboard/pull/3015" target="_blank" rel="noopener noreferrer" class="">#3015</a>]</li>
+<li class=""><code>[OPERATOR]</code> OIDC providers that do not support PKCE must explicitly configure <code>usePKCE: false</code> under <code>global.dashboard.oidc</code> when using the Helm chart. by @petersutter [<a href="https://github.com/gardener/dashboard/pull/3109" target="_blank" rel="noopener noreferrer" class="">#3109</a>]</li>
+</ul>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="-new-features-33">✨ New Features<a href="#-new-features-33" class="hash-link" aria-label="Direct link to ✨ New Features" title="Direct link to ✨ New Features" translate="no">​</a></h2>
+<ul>
+<li class="">
+<p><code>[OPERATOR]</code> Add support for IronCore Metal as infrastructure provider by @afritzler [<a href="https://github.com/gardener/dashboard/pull/3114" target="_blank" rel="noopener noreferrer" class="">#3114</a>]</p>
+</li>
+<li class="">
+<p><code>[OPERATOR]</code> New <code>shootDefaults</code> Configuration: A new frontend configuration namespace, <code>shootDefaults</code>, has been introduced. It allows predefined default values to be applied when users create new Shoot resources in the Gardener Dashboard.</p>
+<p>The following existing configuration properties have been moved to the new namespace:</p>
+<ul>
+<li class=""><code>controlPlaneHighAvailabilityHelp</code> → <code>shootDefaults.controlPlaneHighAvailabilityHelp</code></li>
+<li class=""><code>defaultHibernationSchedule</code> → <code>shootDefaults.hibernationSchedule</code></li>
+<li class=""><code>defaultNodesCIDR</code> → <code>shootDefaults.nodesCIDR</code></li>
+</ul>
+<p>The previous configuration paths are now deprecated. Please update your deployments to use the corresponding properties under <code>shootDefaults</code>. by @benedikt-haug [<a href="https://github.com/gardener/dashboard/pull/2476" target="_blank" rel="noopener noreferrer" class="">#2476</a>]</p>
+</li>
+<li class="">
+<p><code>[OPERATOR]</code> The Gardener dashboard backend now supports optional TLS termination. Configure <code>tls.certFile</code> and <code>tls.privateKeyFile</code> in the dashboard configuration to enable HTTPS. by @grolu [<a href="https://github.com/gardener/dashboard/pull/3014" target="_blank" rel="noopener noreferrer" class="">#3014</a>]</p>
+</li>
+<li class="">
+<p><code>[OPERATOR]</code> Landscape viewers now see operations-oriented UI elements such as the control plane (CP) chip, seed readiness, seed link on shoots, and a role badge in the main toolbar by @petersutter [<a href="https://github.com/gardener/dashboard/pull/3015" target="_blank" rel="noopener noreferrer" class="">#3015</a>]</p>
+</li>
+<li class="">
+<p><code>[OPERATOR]</code> The All Projects cluster list can now be configured to open in Operations View by default. Exclusion criteria for Operations View (progressing clusters, clusters not requiring operator action, clusters with only ignored tickets) are configurable from the Settings page. by @petersutter [<a href="https://github.com/gardener/dashboard/pull/3135" target="_blank" rel="noopener noreferrer" class="">#3135</a>]</p>
+</li>
+<li class="">
+<p><code>[OPERATOR]</code> Add <code>KUBE_CLIENT_REQUEST_TIMEOUT</code> environment variable to configure a total per-request timeout (in milliseconds) for Kubernetes API requests made by the dashboard backend. Defaults to 300000 (5 minutes); set to 0 to disable. When using the Helm chart, this can be configured via <code>.Values.global.dashboard.kubeClient.requestTimeout</code>. by @petersutter [<a href="https://github.com/gardener/dashboard/pull/2954" target="_blank" rel="noopener noreferrer" class="">#2954</a>]</p>
+</li>
+<li class="">
+<p><code>[USER]</code> Add theming support and support for copy/paste shortcuts in terminal by @julestree [<a href="https://github.com/gardener/dashboard/pull/3110" target="_blank" rel="noopener noreferrer" class="">#3110</a>]</p>
+</li>
+<li class="">
+<p><code>[USER]</code> Seed capacity indicators and health donuts link to the corresponding filtered Shoot list. by @petersutter [<a href="https://github.com/gardener/dashboard/pull/3141" target="_blank" rel="noopener noreferrer" class="">#3141</a>]</p>
+</li>
+<li class="">
+<p><code>[USER]</code> Support field-qualified search terms in shoot and seed list filters (e.g. <code>seed:aws-ha</code>, <code>-region:eu</code>). by @petersutter [<a href="https://github.com/gardener/dashboard/pull/3044" target="_blank" rel="noopener noreferrer" class="">#3044</a>]</p>
+</li>
+<li class="">
+<p><code>[USER]</code> The all projects Shoot list toolbar now shows the active Operations View state and provides controls to restore it or show all clusters. by @petersutter [<a href="https://github.com/gardener/dashboard/pull/3140" target="_blank" rel="noopener noreferrer" class="">#3140</a>]</p>
+</li>
+<li class="">
+<p><code>[USER]</code> The seed list now displays per-seed shoot health statistics as donut charts and shoot capacity indicators, with real-time updates. Health stats respect the active Operations View exclusion criteria. by @petersutter [<a href="https://github.com/gardener/dashboard/pull/2901" target="_blank" rel="noopener noreferrer" class="">#2901</a>]</p>
+</li>
+<li class="">
+<p><code>[DEVELOPER]</code> To restrict local Dashboard services to the loopback interface, developers should add <code>host: 127.0.0.1</code> to <code>${HOME}/.gardener/config.yaml</code>. by @petersutter [<a href="https://github.com/gardener/dashboard/pull/3120" target="_blank" rel="noopener noreferrer" class="">#3120</a>]</p>
+</li>
+</ul>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="-bug-fixes-90">🐛 Bug Fixes<a href="#-bug-fixes-90" class="hash-link" aria-label="Direct link to 🐛 Bug Fixes" title="Direct link to 🐛 Bug Fixes" translate="no">​</a></h2>
+<ul>
+<li class=""><code>[OPERATOR]</code> Hardened OIDC callback validation and enabled PKCE by default. by @petersutter [<a href="https://github.com/gardener/dashboard/pull/3109" target="_blank" rel="noopener noreferrer" class="">#3109</a>]</li>
+<li class=""><code>[OPERATOR]</code> Fixed a bug where clicking the &quot;Terminal Shortcuts&quot; tab in the terminal dialog closes the dialog by @julestree [<a href="https://github.com/gardener/dashboard/pull/3055" target="_blank" rel="noopener noreferrer" class="">#3055</a>]</li>
+<li class=""><code>[OPERATOR]</code> Detect stalled HTTP/2 sessions used by the kube-client via a Go-style read-idle / ping-timeout heartbeat. Previously a half-open session was never torn down, which could leave streams hanging indefinitely. Configurable via <code>KUBE_CLIENT_READ_IDLE_TIMEOUT</code> / <code>KUBE_CLIENT_PING_TIMEOUT</code> env vars and the matching <code>global.dashboard.kubeClient.readIdleTimeout</code> / <code>pingTimeout</code> Helm values. by @petersutter [<a href="https://github.com/gardener/dashboard/pull/2981" target="_blank" rel="noopener noreferrer" class="">#2981</a>]</li>
+<li class=""><code>[USER]</code> Fixed the project selector showing a different project than the URL and cluster list after an interrupted project switch. by @petersutter [<a href="https://github.com/gardener/dashboard/pull/3169" target="_blank" rel="noopener noreferrer" class="">#3169</a>]</li>
+<li class=""><code>[USER]</code> Fixed socket event handler crashing when events arrive before store initialization. by @grolu [<a href="https://github.com/gardener/dashboard/pull/2962" target="_blank" rel="noopener noreferrer" class="">#2962</a>]</li>
+<li class=""><code>[USER]</code> Fix transient &quot;Cluster is gone&quot; error page that briefly appeared when switching between sub-routes of the same cluster (e.g. overview to YAML editor). by @petersutter [<a href="https://github.com/gardener/dashboard/pull/3012" target="_blank" rel="noopener noreferrer" class="">#3012</a>]</li>
+<li class=""><code>[USER]</code> Prevent a TypeError in the HTTP/2 session pool heartbeat when the underlying socket is no longer available. by @petersutter [<a href="https://github.com/gardener/dashboard/pull/3010" target="_blank" rel="noopener noreferrer" class="">#3010</a>]</li>
+<li class=""><code>[USER]</code> Fixed stale selected project in the navigation after store entry changes. by @petersutter [<a href="https://github.com/gardener/dashboard/pull/3079" target="_blank" rel="noopener noreferrer" class="">#3079</a>]</li>
+<li class=""><code>[USER]</code> Project name filter now ignores leading and trailing whitespace, preventing empty search results caused by accidental spaces. by @jguipi [<a href="https://github.com/gardener/dashboard/pull/3126" target="_blank" rel="noopener noreferrer" class="">#3126</a>]</li>
+<li class=""><code>[USER]</code> Fixed the container runtime selector from shrinking in Safari when configuring shoot workers by @petersutter [<a href="https://github.com/gardener/dashboard/pull/3173" target="_blank" rel="noopener noreferrer" class="">#3173</a>]</li>
+<li class=""><code>[USER]</code> DNS Handling Improvements &amp; Fixes
+<ul>
+<li class="">Fixed an issue where clusters without a custom domain could appear incorrectly in the Configure DNS dialog</li>
+<li class="">Disabled Edit and Delete buttons for DNS Workload Identities, as Dashboard support for managing them is not yet available by @grolu [<a href="https://github.com/gardener/dashboard/pull/2939" target="_blank" rel="noopener noreferrer" class="">#2939</a>]</li>
+</ul>
+</li>
+<li class=""><code>[USER]</code> Fix status sort order to include the &#x27;Error&#x27; state by @petersutter [<a href="https://github.com/gardener/dashboard/pull/3057" target="_blank" rel="noopener noreferrer" class="">#3057</a>]</li>
+<li class=""><code>[USER]</code> Fix machine image vendor matching to use exact names instead of substring matching, preventing misclassification of images like memorone-gardenlinux or gardenlinux-fips by @grolu [<a href="https://github.com/gardener/dashboard/pull/3000" target="_blank" rel="noopener noreferrer" class="">#3000</a>]</li>
+<li class=""><code>[USER]</code> The Gardener dashboard now sends ETag headers for SPA fallback responses such as /login. This improves browser cache validation and fixes an issue where rolling back to a previous dashboard version could make browsers reuse stale HTML that referenced assets no longer present on the server, causing 404 errors and failed page loads by @grolu [<a href="https://github.com/gardener/dashboard/pull/3059" target="_blank" rel="noopener noreferrer" class="">#3059</a>]</li>
+<li class=""><code>[USER]</code> Fixed IOPS input field not visible for aws workers by @grolu [<a href="https://github.com/gardener/dashboard/pull/2951" target="_blank" rel="noopener noreferrer" class="">#2951</a>]</li>
+<li class=""><code>[USER]</code> Increased tooltip open-delay on shoot/seed status tags from 200ms to 750ms to reduce accidental tooltip flashes during list scanning. by @petersutter [<a href="https://github.com/gardener/dashboard/pull/3019" target="_blank" rel="noopener noreferrer" class="">#3019</a>]</li>
+<li class=""><code>[DEVELOPER]</code> Frontend development TLS certificates generated by <code>yarn setup</code> are now shared across local Dashboard repositories. by @grolu [<a href="https://github.com/gardener/dashboard/pull/3077" target="_blank" rel="noopener noreferrer" class="">#3077</a>]</li>
+<li class=""><code>[DEVELOPER]</code> Forward caller-provided abort signals through <code>list</code> and <code>get</code> operations in the kube-client so hung requests can be cancelled. by @petersutter [<a href="https://github.com/gardener/dashboard/pull/2954" target="_blank" rel="noopener noreferrer" class="">#2954</a>]</li>
+<li class=""><code>[DEVELOPER]</code> Exclude Vuetify from Vite dependency pre-bundling in development to prevent full-page reloads caused by cold-cache dependency optimization changes. by @petersutter [<a href="https://github.com/gardener/dashboard/pull/3153" target="_blank" rel="noopener noreferrer" class="">#3153</a>]</li>
+</ul>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="-others-102">🏃 Others<a href="#-others-102" class="hash-link" aria-label="Direct link to 🏃 Others" title="Direct link to 🏃 Others" translate="no">​</a></h2>
+<ul>
+<li class=""><code>[OPERATOR]</code> Tickets: Scope ticket access and real-time updates to project members. by @julestree [<a href="https://github.com/gardener/dashboard/pull/3063" target="_blank" rel="noopener noreferrer" class="">#3063</a>]</li>
+<li class=""><code>[OPERATOR]</code> Redesigned tooltips: shoot health donut, seed capacity indicators, and seed condition status now use a unified layout. by @petersutter [<a href="https://github.com/gardener/dashboard/pull/3078" target="_blank" rel="noopener noreferrer" class="">#3078</a>]</li>
+<li class=""><code>[USER]</code> The table column selection and filter selection are now separate toolbar buttons. by @petersutter [<a href="https://github.com/gardener/dashboard/pull/3040" target="_blank" rel="noopener noreferrer" class="">#3040</a>]</li>
+<li class=""><code>[USER]</code> Redesigned tooltips: project details, infrastructure details, shoot health, and status tags now use a unified layout. by @petersutter [<a href="https://github.com/gardener/dashboard/pull/3078" target="_blank" rel="noopener noreferrer" class="">#3078</a>]</li>
+<li class=""><code>[DEVELOPER]</code> Cloud-provider credential forms and details are now driven by the vendor definitions under <code>frontend/src/data/vendors</code>. Prefer extending a vendor&#x27;s <code>secret</code> configuration and the shared generic credential components over adding provider-specific credential dialogs; dedicated UI can still be used where needed by @grolu [<a href="https://github.com/gardener/dashboard/pull/3157" target="_blank" rel="noopener noreferrer" class="">#3157</a>]</li>
+<li class=""><code>[DEVELOPER]</code> Yarn zero-installs are no longer used; run <code>yarn install</code> after pulling the repository. by @petersutter [<a href="https://github.com/gardener/dashboard/pull/2977" target="_blank" rel="noopener noreferrer" class="">#2977</a>]</li>
+</ul>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="-documentation-3">📖 Documentation<a href="#-documentation-3" class="hash-link" aria-label="Direct link to 📖 Documentation" title="Direct link to 📖 Documentation" translate="no">​</a></h2>
+<ul>
+<li class=""><code>[OPERATOR]</code> The <code>gardener-dashboard</code> Helm chart is deprecated in favor of <code>gardener-operator</code> managed deployments. The <code>identity</code> Helm chart is deprecated without replacement. Both will be removed earliest around November 2026. by @petersutter [<a href="https://github.com/gardener/dashboard/pull/2935" target="_blank" rel="noopener noreferrer" class="">#2935</a>]</li>
+</ul>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="applicationspdxjson-119">application/spdx+json<a href="#applicationspdxjson-119" class="hash-link" aria-label="Direct link to application/spdx+json" title="Direct link to application/spdx+json" translate="no">​</a></h2>
+<ul>
+<li class="">gardener-dashboard-sbom-ref: <code>europe-docker.pkg.dev/gardener-project/releases/gardener/dashboard@sha256:6359470acb52b80711beeffa981698cf28332a78d38dab4edd77697e9744de56</code></li>
+<li class="">gardener-dashboard-sbom-ref: <code>europe-docker.pkg.dev/gardener-project/releases/gardener/dashboard@sha256:ef235effe21c651bfae7ec868adee47ab01586539815ed0b2b0e5bc90d30dfcc</code></li>
+</ul>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="applicationvndcyclonedxjson-51">application/vnd.cyclonedx+json<a href="#applicationvndcyclonedxjson-51" class="hash-link" aria-label="Direct link to application/vnd.cyclonedx+json" title="Direct link to application/vnd.cyclonedx+json" translate="no">​</a></h2>
+<ul>
+<li class="">gardener-dashboard-sbom-ref: <code>europe-docker.pkg.dev/gardener-project/releases/gardener/dashboard@sha256:3bf356b8c0fc6ba8f8a72a7f397fc46f1dfc8a8dee0337d29f7f2f1fedb9deab</code></li>
+<li class="">gardener-dashboard-sbom-ref: <code>europe-docker.pkg.dev/gardener-project/releases/gardener/dashboard@sha256:76717286e8aa1594b47e22691f5db78eb0c4cd45b837a6bbefb4be76296f9017</code></li>
+</ul>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="container-oci-images-154">Container (OCI) Images<a href="#container-oci-images-154" class="hash-link" aria-label="Direct link to Container (OCI) Images" title="Direct link to Container (OCI) Images" translate="no">​</a></h2>
+<ul>
+<li class="">gardener-dashboard: <code>europe-docker.pkg.dev/gardener-project/releases/gardener/dashboard:1.85.0</code></li>
+</ul>
 </div></div></details></div></article><nav class="docusaurus-mt-lg pagination-nav" aria-label="Docs pages"><a class="pagination-nav__link pagination-nav__link--next" href="/release-notes/v1.137"><div class="pagination-nav__sublabel">Next</div><div class="pagination-nav__label">Release Notes v1.137</div></a></nav></div></div></div></div></main></div></div></div><footer class="theme-layout-footer footer footer--dark"><div class="container container-fluid"><div class="row footer__links"><div class="theme-layout-footer-column col footer__col"><div class="footer__title">Docs</div><ul class="footer__items clean-list"><li class="footer__item"><a class="footer__link-item" href="/docs/overview">Docs</a></li></ul></div><div class="theme-layout-footer-column col footer__col"><div class="footer__title">Community</div><ul class="footer__items clean-list"><li class="footer__item"><a href="https://github.com/yakecloud" target="_blank" rel="noopener noreferrer" class="footer__link-item">GitHub<svg width="13.5" height="13.5" aria-label="(opens in new tab)" class="iconExternalLink_nPIU"><use href="#theme-svg-external-link"></use></svg></a></li><li class="footer__item"><a href="https://github.com/gardener-community" target="_blank" rel="noopener noreferrer" class="footer__link-item">Gardener Community<svg width="13.5" height="13.5" aria-label="(opens in new tab)" class="iconExternalLink_nPIU"><use href="#theme-svg-external-link"></use></svg></a></li><li class="footer__item"><a href="https://gardener-cloud.slack.com" target="_blank" rel="noopener noreferrer" class="footer__link-item">Slack<svg width="13.5" height="13.5" aria-label="(opens in new tab)" class="iconExternalLink_nPIU"><use href="#theme-svg-external-link"></use></svg></a></li></ul></div><div class="theme-layout-footer-column col footer__col"><div class="footer__title">More</div><ul class="footer__items clean-list"><li class="footer__item"><a class="footer__link-item" href="/blog">Blog</a></li><li class="footer__item"><a class="footer__link-item" href="/legals">Legals</a></li><li class="footer__item"><a class="footer__link-item" href="/privacy-policy">Privacy policy</a></li></ul></div></div><div class="footer__bottom text--center"><div class="footer__copyright">Copyright © 2026 23 Technologies GmbH</div></div></div></footer></div>
 </body>
 </html>
