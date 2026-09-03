@@ -5153,3 +5153,14 @@ This release officially supports [fluxcd >=2.9](https://fluxcd.io/blog/2026/06/f
 
 
 </details>
+
+<details>
+<summary><b>Update backup-s3 to <code>0.8.5</code></b></summary>
+
+## General Changes
+
+* Fix RBAC (#35) @simcod
+* add handling of backupentry to fix #29 (#30) @christianhuening
+
+
+</details>
