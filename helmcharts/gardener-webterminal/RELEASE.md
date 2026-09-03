@@ -1,13 +1,15 @@
-# [github.com/gardener/terminal-controller-manager:v0.38.0]
+# [github.com/gardener/terminal-controller-manager:v0.39.0]
 
-## ✨ New Features
-- `[OPERATOR]` Terminal reconciliation is now skipped while a referenced Shoot is hibernated, reducing unnecessary errors and retries. Terminals are automatically re-reconciled when the Shoot wakes up. by @petersutter [[#512](https://github.com/gardener/terminal-controller-manager/pull/512)]
+## ⚠️ Breaking Changes
+- `[OPERATOR]` Explicit `spec.target.apiServer.server` values are now restricted by `global.controller.manager.config.allowedAPIServerURLs` and must exactly match an HTTPS URL in the list. When the list is omitted or empty, the controller manager starts but denies all explicit API server URLs. Configure the landscape's Garden API server URL to keep Garden terminals enabled.  
+    
+  API server service references are restricted separately by `allowedAPIServerServiceRefs`. When omitted, dashboard-compatible defaults allow `kubernetes/default` and namespace-less `kube-apiserver` using the terminal host namespace. Set the field to `[]` to deny all service references, or configure a custom list to replace these defaults. by @petersutter [[#533](https://github.com/gardener/terminal-controller-manager/pull/533)]
 
 ## application/spdx+json
-- terminal-controller-manager-sbom-ref: `europe-docker.pkg.dev/gardener-project/releases/gardener/terminal-controller-manager@sha256:5d7e1a224b469700ff96068518bf64ae1875815fdad593d4ee68eb8fbd7a21ab`
-- terminal-controller-manager-sbom-ref: `europe-docker.pkg.dev/gardener-project/releases/gardener/terminal-controller-manager@sha256:759d3f502822a1c353899c17061cc2c60157ebde54bed202b1ff9f93e9df60b9`
+- terminal-controller-manager-sbom-ref: `europe-docker.pkg.dev/gardener-project/releases/gardener/terminal-controller-manager@sha256:2014f7a5638e49ee84ac8a889bd75ef0d0fe54fb3e6a2f2aea752e73a88bb6e0`
+- terminal-controller-manager-sbom-ref: `europe-docker.pkg.dev/gardener-project/releases/gardener/terminal-controller-manager@sha256:6d80b9df68ef52c54bddc7d70070ad864b5f1b1aee54c82a816cd318a1a33447`
 ## application/vnd.cyclonedx+json
-- terminal-controller-manager-sbom-ref: `europe-docker.pkg.dev/gardener-project/releases/gardener/terminal-controller-manager@sha256:37cbb2f3912438cbcbe88b5a7dae30935ba71db5bc1fe542701745b51574224a`
-- terminal-controller-manager-sbom-ref: `europe-docker.pkg.dev/gardener-project/releases/gardener/terminal-controller-manager@sha256:95d03f8f19b8a27842fb5acb6e82417d576933ff20996c7db6816ab7fe9f6fd5`
+- terminal-controller-manager-sbom-ref: `europe-docker.pkg.dev/gardener-project/releases/gardener/terminal-controller-manager@sha256:458114a22ec1de59b3df020732bd3962ff7cc5f44c5c3e21f838987e7876f281`
+- terminal-controller-manager-sbom-ref: `europe-docker.pkg.dev/gardener-project/releases/gardener/terminal-controller-manager@sha256:4dcc4d50576ce64afb1c0b9e57d6676956e105965b6eba03d8cece4d7095e6bd`
 ## Container (OCI) Images
-- terminal-controller-manager: `europe-docker.pkg.dev/gardener-project/releases/gardener/terminal-controller-manager:v0.38.0`
+- terminal-controller-manager: `europe-docker.pkg.dev/gardener-project/releases/gardener/terminal-controller-manager:v0.39.0`
