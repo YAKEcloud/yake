@@ -1,27 +1,34 @@
-# [github.com/gardener/gardener-extension-provider-openstack:v1.57.0]
+# [github.com/gardener/gardener-extension-provider-openstack:v1.58.0]
+
+## ✨ New Features
+- `[OPERATOR]` Enable security group management for OVN load balancers so that Kubernetes loadBalancerSourceRanges are enforced out of the box. by @Lappihuan [[#1398](https://github.com/gardener/gardener-extension-provider-openstack/pull/1398)]
+- `[USER]` This extension now supports shoot clusters with Kubernetes version 1.36.  
+  You should consider the Kubernetes release notes before upgrading to 1.36. by @tobschli [[#1390](https://github.com/gardener/gardener-extension-provider-openstack/pull/1390)]
+- `[USER]` OpenStack Shoot clusters can now configure `cloudControllerManager.internalLoadBalancer` in their `ControlPlaneConfig`. When enabled, all Services of type `LoadBalancer` are provisioned as internal load balancers without floating IPs. by @stblatzheim [[#1417](https://github.com/gardener/gardener-extension-provider-openstack/pull/1417)]
 
 ## 🐛 Bug Fixes
-- `[OPERATOR]` Update image vector for machine-controller-manager-provider-openstack from `v0.27.0 → v0.27.1`. by @aaronfern [[#1384](https://github.com/gardener/gardener-extension-provider-openstack/pull/1384)]
+- `[OPERATOR]` fix gardenctl ssh floating ip attachment by @modzilla99 [[#1411](https://github.com/gardener/gardener-extension-provider-openstack/pull/1411)]
+- `[OPERATOR]` Don't read bastion floating IP from Nova server addresses by @hebelsan [[#1419](https://github.com/gardener/gardener-extension-provider-openstack/pull/1419)]
 
 ## 🏃 Others
-- `[DEPENDENCY]` The following container images have been updated:  
-    - csi-driver-nfs: v4.13.2 -> v4.13.4 (singleton)  
-    - csi-resizer: v2.2.0 -> v2.2.1 (singleton) by @federated-github-access[bot] [[#1373](https://github.com/gardener/gardener-extension-provider-openstack/pull/1373)]
+- `[OPERATOR]` The update mode of the VerticalPodAutoscaler resource, deployed by gardener-extension-provider-openstack,  is now explicitly set to `InPlaceOrRecreate`, reflecting the actual runtime behavior after the unconditional enablement of the `VPAInPlaceUpdates` feature gate. by @Velin-Todorov [[#1397](https://github.com/gardener/gardener-extension-provider-openstack/pull/1397)]
+- `[OPERATOR]` Add support for machine preservation by distributing the value of `worker[].machineControllerManager.autoPreserveFailedMachineMax` across zones. by @thiyyakat [[#1409](https://github.com/gardener/gardener-extension-provider-openstack/pull/1409)]
+- `[OPERATOR]` Controller only registers for the extension classes it actually handles by @hebelsan [[#1424](https://github.com/gardener/gardener-extension-provider-openstack/pull/1424)]
 
 ## application/spdx+json
-- gardener-extension-admission-openstack-sbom-ref: `europe-docker.pkg.dev/gardener-project/releases/gardener/extensions/admission-openstack@sha256:5eb6b601cfe3252f878aeedba107f90414ef8281ca2ce229aea081f7c5ed84e7`
-- gardener-extension-admission-openstack-sbom-ref: `europe-docker.pkg.dev/gardener-project/releases/gardener/extensions/admission-openstack@sha256:75590a6c847ceca746c3b4352bc117b83a14956029965db1ca86f8721d53cb08`
-- gardener-extension-provider-openstack-sbom-ref: `europe-docker.pkg.dev/gardener-project/releases/gardener/extensions/provider-openstack@sha256:40243e84118e198a4ec07563dd3632c939802758242b16f72caa60b10e33f7bd`
-- gardener-extension-provider-openstack-sbom-ref: `europe-docker.pkg.dev/gardener-project/releases/gardener/extensions/provider-openstack@sha256:458edea4ce9ea4e2b4ff9ee946d958d2f534727ea53572d9d5ea056db7beb929`
+- gardener-extension-admission-openstack-sbom-ref: `europe-docker.pkg.dev/gardener-project/releases/gardener/extensions/admission-openstack@sha256:a9f8041567e5af18f1f1888bce0694b3e3ccd26ff14a56d842752a53a3b6eccf`
+- gardener-extension-admission-openstack-sbom-ref: `europe-docker.pkg.dev/gardener-project/releases/gardener/extensions/admission-openstack@sha256:e7deff34119c2da230131aca3c73798f02313e03fdc11545e4cca61940b4afef`
+- gardener-extension-provider-openstack-sbom-ref: `europe-docker.pkg.dev/gardener-project/releases/gardener/extensions/provider-openstack@sha256:9b73aedad0f49f4cba09ca45395614f9437bb20af3579f3a5a40cfc2de434598`
+- gardener-extension-provider-openstack-sbom-ref: `europe-docker.pkg.dev/gardener-project/releases/gardener/extensions/provider-openstack@sha256:f9a6f997717efce3437396454ac160f12ff5e9b8448020b931a4ae19c066abbe`
 ## application/vnd.cyclonedx+json
-- gardener-extension-admission-openstack-sbom-ref: `europe-docker.pkg.dev/gardener-project/releases/gardener/extensions/admission-openstack@sha256:53c0288e9b9a269a1c471811eba410decd3118e9f70a1c4c08c5c96bb551721d`
-- gardener-extension-admission-openstack-sbom-ref: `europe-docker.pkg.dev/gardener-project/releases/gardener/extensions/admission-openstack@sha256:6fd3c8d57ba6fc69dcf6ddf3fbbc64e8cfa72d8ce5375ffc3c559bb224a291bf`
-- gardener-extension-provider-openstack-sbom-ref: `europe-docker.pkg.dev/gardener-project/releases/gardener/extensions/provider-openstack@sha256:2360411d87a33c7e4686e96e955133d90bdfc58743e20558e3353f011fb6a54b`
-- gardener-extension-provider-openstack-sbom-ref: `europe-docker.pkg.dev/gardener-project/releases/gardener/extensions/provider-openstack@sha256:d6e35e557b7e170bab65d62b116aac52bc9298e7d7d2d6935a40cd1d43e00f11`
+- gardener-extension-admission-openstack-sbom-ref: `europe-docker.pkg.dev/gardener-project/releases/gardener/extensions/admission-openstack@sha256:42feb5be4811258a286670c35ee94cbdcc50453f7ffdd7af8a5a6b6197b36f66`
+- gardener-extension-admission-openstack-sbom-ref: `europe-docker.pkg.dev/gardener-project/releases/gardener/extensions/admission-openstack@sha256:9e531c16d0e56167067b4c69f46b17290f4eada8877901c35298519b75b7cf61`
+- gardener-extension-provider-openstack-sbom-ref: `europe-docker.pkg.dev/gardener-project/releases/gardener/extensions/provider-openstack@sha256:6a222fe02cbbab76c384eb53dd3903932f41f52c19d67f1506be06e309471c54`
+- gardener-extension-provider-openstack-sbom-ref: `europe-docker.pkg.dev/gardener-project/releases/gardener/extensions/provider-openstack@sha256:8bceb8a2249ee938f2ac404799bbe3bd0819f5968a380b6ce3561490bf130bc0`
 ## Helm Charts
-- admission-openstack-application: `europe-docker.pkg.dev/gardener-project/releases/charts/gardener/extensions/admission-openstack-application:v1.57.0`
-- admission-openstack-runtime: `europe-docker.pkg.dev/gardener-project/releases/charts/gardener/extensions/admission-openstack-runtime:v1.57.0`
-- provider-openstack: `europe-docker.pkg.dev/gardener-project/releases/charts/gardener/extensions/provider-openstack:v1.57.0`
+- admission-openstack-application: `europe-docker.pkg.dev/gardener-project/releases/charts/gardener/extensions/admission-openstack-application:v1.58.0`
+- admission-openstack-runtime: `europe-docker.pkg.dev/gardener-project/releases/charts/gardener/extensions/admission-openstack-runtime:v1.58.0`
+- provider-openstack: `europe-docker.pkg.dev/gardener-project/releases/charts/gardener/extensions/provider-openstack:v1.58.0`
 ## Container (OCI) Images
-- gardener-extension-admission-openstack: `europe-docker.pkg.dev/gardener-project/releases/gardener/extensions/admission-openstack:v1.57.0`
-- gardener-extension-provider-openstack: `europe-docker.pkg.dev/gardener-project/releases/gardener/extensions/provider-openstack:v1.57.0`
+- gardener-extension-admission-openstack: `europe-docker.pkg.dev/gardener-project/releases/gardener/extensions/admission-openstack:v1.58.0`
+- gardener-extension-provider-openstack: `europe-docker.pkg.dev/gardener-project/releases/gardener/extensions/provider-openstack:v1.58.0`
