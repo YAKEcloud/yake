@@ -5113,3 +5113,14 @@ This release officially supports [fluxcd >=2.9](https://fluxcd.io/blog/2026/06/f
 
 
 </details>
+
+<details>
+<summary><b>Update backup-s3 to <code>0.8.4</code></b></summary>
+
+## General Changes
+
+* Allow accessing S3 service inside the Garden Cluster. (#31) @Gerrit91
+* Update README and actions. (#32) @Gerrit91
+
+
+</details>

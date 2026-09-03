@@ -1,4 +1,4 @@
 ## General Changes
 
-* Go 1.26. (#27) @Gerrit91
-* chore(deps): update to g/g 1.132.5 (#26) @vknabel
+* Allow accessing S3 service inside the Garden Cluster. (#31) @Gerrit91
+* Update README and actions. (#32) @Gerrit91
