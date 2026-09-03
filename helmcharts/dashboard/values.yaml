@@ -9,14 +9,6 @@ global:
         deploymentLabels: {}
         enabled: true
         frontendConfig:
-            defaultHibernationSchedule:
-                development:
-                    - end: 00 08 * * 1,2,3,4,5
-                      start: 00 17 * * 1,2,3,4,5
-                evaluation:
-                    - start: 00 17 * * 1,2,3,4,5
-                production: null
-            defaultNodesCIDR: 10.250.0.0/16
             experimental:
                 throttleDelayPerCluster: 10
             features:
@@ -36,10 +28,18 @@ global:
             shootAdminKubeconfig:
                 enabled: false
                 maxExpirationSeconds: 86400
+            shootDefaults:
+                hibernationSchedule:
+                    development:
+                        - end: 00 08 * * 1,2,3,4,5
+                          start: 00 17 * * 1,2,3,4,5
+                    evaluation:
+                        - start: 00 17 * * 1,2,3,4,5
+                nodesCIDR: 10.250.0.0/16
         image:
             pullPolicy: IfNotPresent
             repository: europe-docker.pkg.dev/gardener-project/releases/gardener/dashboard
-            tag: 1.84.5
+            tag: 1.85.0
         ingress:
             annotations:
                 nginx.ingress.kubernetes.io/ssl-redirect: "true"
@@ -50,6 +50,7 @@ global:
         kubeClient:
             pingTimeout: null
             readIdleTimeout: null
+            requestTimeout: null
         livenessProbe:
             enabled: true
             failureThreshold: 6
