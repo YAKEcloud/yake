@@ -1,24 +1,25 @@
-# [github.com/gardener/external-dns-management:v0.48.0]
+# [github.com/gardener/external-dns-management:v0.50.0]
+
+## 🐛 Bug Fixes
+- `[OPERATOR]` [dnsman-ng] Fix duplicate `CNAME` records by filtering answer section to queried name if recursive resolver is queried. by @MartinWeindel [[#1055](https://github.com/gardener/external-dns-management/pull/1055)]
 
 ## 🏃 Others
-- `[OPERATOR]` Improve container build: cache mounts, multi-arch, digest pinning by @MartinWeindel [[#954](https://github.com/gardener/external-dns-management/pull/954)]
-- `[OPERATOR]` [next-generation] Reduce periodic reconciliation frequency and clean up source controller logging by @MartinWeindel [[#960](https://github.com/gardener/external-dns-management/pull/960)]
-- `[OPERATOR]` Allow to override `livenessProbe.initialDelaySeconds` for dns-controller-manager deployment in Helm charts. by @MartinWeindel [[#967](https://github.com/gardener/external-dns-management/pull/967)]
+- `[DEPENDENCY]` Bumped Go to 1.26.7. by @marc1404 [[#1035](https://github.com/gardener/external-dns-management/pull/1035)]
 
 ## application/spdx+json
-- gardener-extension-admission-shoot-dns-service-sbom-ref: `europe-docker.pkg.dev/gardener-project/releases/gardener/extensions/admission-shoot-dns-service@sha256:0651a9e8ef896fe66bec4376fb3840b708a0c874a15eeb59bf9db3f08a22ba76`
-- gardener-extension-admission-shoot-dns-service-sbom-ref: `europe-docker.pkg.dev/gardener-project/releases/gardener/extensions/admission-shoot-dns-service@sha256:232a22affb222a34cc321d76df2bdba10e08989e252d8a466381a06484ee9d3e`
-- gardener-extension-shoot-dns-service-sbom-ref: `europe-docker.pkg.dev/gardener-project/releases/gardener/extensions/shoot-dns-service@sha256:0865fc30914a573eeef6c1419ac20755778c2be4d72646c581bdc521e0d391cc`
-- gardener-extension-shoot-dns-service-sbom-ref: `europe-docker.pkg.dev/gardener-project/releases/gardener/extensions/shoot-dns-service@sha256:bd9f6e62e1e699152a36a0a461c32f5f0d9316eddf18b27df25ed9e037978402`
+- gardener-extension-admission-shoot-dns-service-sbom-ref: `europe-docker.pkg.dev/gardener-project/releases/gardener/extensions/admission-shoot-dns-service@sha256:3138dcc5fefb3ec8177356832ce6a6f5039f7b4fe5ef4596026cf837f55b071d`
+- gardener-extension-admission-shoot-dns-service-sbom-ref: `europe-docker.pkg.dev/gardener-project/releases/gardener/extensions/admission-shoot-dns-service@sha256:ab4ccd36973e651e312ea65ce92163f98601e82c6a46669762dbb182c8e8e682`
+- gardener-extension-shoot-dns-service-sbom-ref: `europe-docker.pkg.dev/gardener-project/releases/gardener/extensions/shoot-dns-service@sha256:3fc4a05ec33811ffcb9e523bfeebb26bd761f3d2777dd31571cb4907f47071ba`
+- gardener-extension-shoot-dns-service-sbom-ref: `europe-docker.pkg.dev/gardener-project/releases/gardener/extensions/shoot-dns-service@sha256:8f8e99c8e91ef2af3ec7c917d64322ed86fa1cd8b0977dafcb785baa80eff06f`
 ## application/vnd.cyclonedx+json
-- gardener-extension-admission-shoot-dns-service-sbom-ref: `europe-docker.pkg.dev/gardener-project/releases/gardener/extensions/admission-shoot-dns-service@sha256:9899e3ba89665fe8b6386dbe8ecc218e396ae7cd6cb28f159f566ab31e14c50a`
-- gardener-extension-admission-shoot-dns-service-sbom-ref: `europe-docker.pkg.dev/gardener-project/releases/gardener/extensions/admission-shoot-dns-service@sha256:d648d7138fa716468190434360e3e28e9be5f6138b20363a10fe75fca8305987`
-- gardener-extension-shoot-dns-service-sbom-ref: `europe-docker.pkg.dev/gardener-project/releases/gardener/extensions/shoot-dns-service@sha256:4ede6a68a3fae7f9cf9cbc20360f555d3017244395766234dde303dd907dd6ae`
-- gardener-extension-shoot-dns-service-sbom-ref: `europe-docker.pkg.dev/gardener-project/releases/gardener/extensions/shoot-dns-service@sha256:e4de4b379d98718aa1467b5bb54ae7fd66a92730ffa579973631d65ec28498c3`
+- gardener-extension-admission-shoot-dns-service-sbom-ref: `europe-docker.pkg.dev/gardener-project/releases/gardener/extensions/admission-shoot-dns-service@sha256:51e90900909e44d0035475c8956e6215c118637c7f7cdd6bbfe04b8c22a8d5ee`
+- gardener-extension-admission-shoot-dns-service-sbom-ref: `europe-docker.pkg.dev/gardener-project/releases/gardener/extensions/admission-shoot-dns-service@sha256:6018544a24cf64bdb5df68f71b03db0debb735c02bde1d952db6c9d266b298fa`
+- gardener-extension-shoot-dns-service-sbom-ref: `europe-docker.pkg.dev/gardener-project/releases/gardener/extensions/shoot-dns-service@sha256:d9f20bc3b7d66bb8db0a66a7b84b146fdb3f7d50a1a4ce5a45d173566d3d1504`
+- gardener-extension-shoot-dns-service-sbom-ref: `europe-docker.pkg.dev/gardener-project/releases/gardener/extensions/shoot-dns-service@sha256:f0ce23943794c5384a8b9cd765b28fbb8b3c48166ac6b79490710062dad79855`
 ## Helm Charts
-- shoot-dns-service-admission-application: `europe-docker.pkg.dev/gardener-project/releases/charts/gardener/extensions/shoot-dns-service-admission-application:v1.89.0`
-- shoot-dns-service-admission-runtime: `europe-docker.pkg.dev/gardener-project/releases/charts/gardener/extensions/shoot-dns-service-admission-runtime:v1.89.0`
-- shoot-dns-service: `europe-docker.pkg.dev/gardener-project/releases/charts/gardener/extensions/shoot-dns-service:v1.89.0`
+- shoot-dns-service-admission-application: `europe-docker.pkg.dev/gardener-project/releases/charts/gardener/extensions/shoot-dns-service-admission-application:v1.91.0`
+- shoot-dns-service-admission-runtime: `europe-docker.pkg.dev/gardener-project/releases/charts/gardener/extensions/shoot-dns-service-admission-runtime:v1.91.0`
+- shoot-dns-service: `europe-docker.pkg.dev/gardener-project/releases/charts/gardener/extensions/shoot-dns-service:v1.91.0`
 ## Container (OCI) Images
-- gardener-extension-admission-shoot-dns-service: `europe-docker.pkg.dev/gardener-project/releases/gardener/extensions/admission-shoot-dns-service:v1.89.0`
-- gardener-extension-shoot-dns-service: `europe-docker.pkg.dev/gardener-project/releases/gardener/extensions/shoot-dns-service:v1.89.0`
+- gardener-extension-admission-shoot-dns-service: `europe-docker.pkg.dev/gardener-project/releases/gardener/extensions/admission-shoot-dns-service:v1.91.0`
+- gardener-extension-shoot-dns-service: `europe-docker.pkg.dev/gardener-project/releases/gardener/extensions/shoot-dns-service:v1.91.0`
