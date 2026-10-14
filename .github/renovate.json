@@ -2,7 +2,7 @@
   "assignees": [
     "rhizoet"
   ],
-  "baseBranches": [
+  "baseBranchPatterns": [
     "main",
     "release-v1.127",
     "release-v1.128",
