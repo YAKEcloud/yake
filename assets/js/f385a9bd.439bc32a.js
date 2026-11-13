@@ -1,0 +1,1 @@
+"use strict";(globalThis.webpackChunkwebsite||=[]).push([[63195],{88388(a){a.exports=JSON.parse('{"tag":{"label":"caph","permalink":"/yake/blog/tags/caph","allTagsPath":"/yake/blog/tags","count":1,"unlisted":false},"listMetadata":{"permalink":"/yake/blog/tags/caph","page":1,"postsPerPage":10,"totalPages":1,"totalCount":1,"blogDescription":"Blog","blogTitle":"Blog"}}')}}]);

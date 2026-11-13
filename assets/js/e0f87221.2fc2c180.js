@@ -1,0 +1,1 @@
+"use strict";(globalThis.webpackChunkwebsite||=[]).push([[66154],{734(a){a.exports=JSON.parse('{"tag":{"label":"k8s","permalink":"/yake/blog/tags/k-8-s","allTagsPath":"/yake/blog/tags","count":1,"unlisted":false},"listMetadata":{"permalink":"/yake/blog/tags/k-8-s","page":1,"postsPerPage":10,"totalPages":1,"totalCount":1,"blogDescription":"Blog","blogTitle":"Blog"}}')}}]);
