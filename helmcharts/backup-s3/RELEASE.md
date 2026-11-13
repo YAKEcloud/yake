@@ -1,4 +1,3 @@
 ## General Changes
 
-* Fix RBAC (#35) @simcod
-* add handling of backupentry to fix #29 (#30) @christianhuening
+* Update extension to g/g v1.148.5 and hub registration. (#38) @Gerrit91

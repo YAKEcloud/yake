@@ -5745,3 +5745,13 @@ This release officially supports [fluxcd >=2.9](https://fluxcd.io/blog/2026/06/f
 
 
 </details>
+
+<details>
+<summary><b>Update backup-s3 to <code>0.9.0</code></b></summary>
+
+## General Changes
+
+* Update extension to g/g v1.148.5 and hub registration. (#38) @Gerrit91
+
+
+</details>
