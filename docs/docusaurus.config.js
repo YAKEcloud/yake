@@ -49,8 +49,8 @@ function compareVersions(a, b) {
 const config = {
   title: "Yet another Kubernetes Engine",
   tagline: "The Installer & Lifecycle Management Tool for Gardener",
-  url: "https://yake.cloud",
-  baseUrl: "/",
+  url: "https://yakecloud.github.io",
+  baseUrl: "/yake/",
   onBrokenLinks: "ignore",
   onBrokenMarkdownLinks: "warn",
   favicon: "img/favicon.ico",
