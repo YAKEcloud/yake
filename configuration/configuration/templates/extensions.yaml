@@ -85,7 +85,7 @@ stringData:
       version: 0.45.0
 
     backup-s3:
-      version: 0.8.5
+      version: 0.9.0
 
     shoot-flux:
       version: 0.28.0
