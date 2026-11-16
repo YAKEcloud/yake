@@ -2,7 +2,7 @@
   "assignees": [
     "rhizoet"
   ],
-  "baseBranches": [
+  "baseBranchPatterns": [
     "main",
     "release-v1.127",
     "release-v1.128",
@@ -18,7 +18,9 @@
   ],
   "automerge": true,
   "configMigration": true,
-  "dependencyDashboard": true,
+  "dependencyDashboard": {
+    "enabled": true
+  },
   "platformAutomerge": true,
   "prHourlyLimit": 0,
   "prConcurrentLimit": 1,
