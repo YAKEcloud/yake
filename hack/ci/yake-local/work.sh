@@ -11,7 +11,7 @@ source ../../../hack/tools/install.sh
 CLUSTERNAME="yake-local"
 VGARDEN_KUBECONFIG="/tmp/$CLUSTERNAME-apiserver.yaml"
 
-K8S_VERSION="${K8S_VERSION:-v1.33.7}"
+K8S_VERSION="${K8S_VERSION:-v1.35.8}"
 CNI="${CNI:-default}"
 
 if [[ $CNI == "default" ]]; then

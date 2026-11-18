@@ -1,13 +1,10 @@
 ---
 name: Yake install
 
+# Only manual until the repository is converted to the operator layout (docs/docs/guides/migration-to-operator.md).
+# It installs the classic setup, which is replaced by the operator.
 on:
-  pull_request:
-    branches:
-      - main
-    paths-ignore:
-      - docs/**
-      - "**.md"
+  workflow_dispatch:
 jobs:
   install:
     strategy:
@@ -17,8 +14,7 @@ jobs:
           - calico
           - cilium
         version:
-          - v1.33.7
-          - v1.32.11
+          - v1.35.8
     runs-on: arc-runner-set
     timeout-minutes: 60
     name: "Yake install testrun"
