@@ -87,6 +87,17 @@ Gardener 1.154 requires at least Kubernetes 1.33.
   in the namespace `garden`, and a CronJob copies it to `flux-system/gardener-internal-kubeconfig` (the copy is our bridge, not part of Gardener). The role
   is `cluster-admin`, as in Gardener's documentation example.
 
+## Exposing your own services through the garden Istio gateway
+
+Two things are not obvious (both were found in the local test):
+
+* The garden mesh exports Services to nobody by default (`defaultServiceExportTo: ["~"]`). A `VirtualService` on the gateway to a Service without the
+  annotation `networking.istio.io/exportTo: virtual-garden-istio-ingress` answers `503 cluster_not_found`. For a Service you do not own (for example
+  one managed by gardener-resource-manager), use a `ServiceEntry` with `exportTo` instead. The migration sets the annotation for `identity-service`.
+* A `DENY` `AuthorizationPolicy` with only HTTP attributes blocks the TCP ports of the gateway. Add `ports: ["9443"]` (the HTTP port behind the
+  service port 443) and the hosts with and without `:*`. Basic auth can be done by denying every request whose `authorization` header differs from
+  the expected `Basic <base64(user:pass)>`.
+
 ## Not tested
 
 * Certificates and DNS through Gardener (cert-service, DNS extension, `dnsManagedByGardener: true`), Azure DNS, Hetzner load balancers, ManagedSeed, dashboard login via OIDC.
