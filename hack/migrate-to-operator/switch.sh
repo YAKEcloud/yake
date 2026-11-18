@@ -106,6 +106,17 @@ if stage == "core":
               kind: Ingress
               metadata:
                 name: identity-ingress
+          # The garden Istio mesh exports Services to nobody by default (defaultServiceExportTo), so the gateway needs this.
+          - target:
+              kind: Service
+              name: identity-service
+            patch: |
+              apiVersion: v1
+              kind: Service
+              metadata:
+                name: identity-service
+                annotations:
+                  networking.istio.io/exportTo: virtual-garden-istio-ingress
 """)
     wr("gardener/identity.yaml", s)
 

@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 # READ-ONLY verification of a landscape on gardener-operator. Exit != 0 on FAIL, [warn] lines need a look.
-#   verify.sh --runtime-kubeconfig=<p> --garden-kubeconfig=<p> [--expect-version=1.155.1] [--expect-k8s=1.37.2] [--quick] [--dashboard-url=https://...]
+#   verify.sh --runtime-kubeconfig=<p> --garden-kubeconfig=<p> [--expect-version=1.155.1] [--expect-k8s=1.37.2] [--quick] [--dashboard-url=https://...] [--identity-url=https://...]
 # --quick: only Garden, versions, extensions, seeds, shoots (used inside the step scripts). Without it also pods, etcd, Flux, leftovers, certs, events.
 set -euo pipefail
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
@@ -8,11 +8,11 @@ source "$SCRIPT_DIR/lib.sh"
 EXTRA_ARGS=()
 usage() { sed -n '2,5p' "$0"; }
 parse_common_args "$@"
-EXPECT=""; EXPECT_K8S=""; QUICK=false; DASH=""
+EXPECT=""; EXPECT_K8S=""; QUICK=false; DASH=""; IDENT=""
 for a in "${EXTRA_ARGS[@]:-}"; do
   case "$a" in
     --expect-version=*) EXPECT="${a#*=}" ;; --expect-k8s=*) EXPECT_K8S="${a#*=}" ;;
-    --quick) QUICK=true ;; --dashboard-url=*) DASH="${a#*=}" ;;
+    --quick) QUICK=true ;; --dashboard-url=*) DASH="${a#*=}" ;; --identity-url=*) IDENT="${a#*=}" ;;
   esac
 done
 require_runtime; require_garden
@@ -32,6 +32,7 @@ sv="$(kg get seeds -o json | jq -r '[.items[].status.gardener.version] | unique 
 kg get controllerinstallations -o json | all_ready Healthy && ok "ControllerInstallations Healthy" || fail "a ControllerInstallation is not Healthy"
 kg get seeds -o json | jq -e '.items | all(.status.lastOperation.state == "Succeeded" and (.status.conditions | all(.status == "True")))' >/dev/null && ok "seeds Succeeded, conditions True" || fail "a seed is not healthy"
 kg get shoots -A -o json | jq -e '.items | all(.status.lastOperation.state == "Succeeded" and ((.metadata.labels["shoot.gardener.cloud/status"] // "healthy") == "healthy"))' >/dev/null && ok "all shoots Succeeded and healthy" || fail "a shoot is not healthy"
+if [[ -n "$IDENT" ]]; then code="$(curl -s -o /dev/null --max-time 15 -w '%{http_code}' "$IDENT/oidc/.well-known/openid-configuration" || true)"; [[ "$code" == 200 ]] && ok "identity $IDENT answers the OIDC discovery with 200" || fail "identity OIDC discovery answers $code"; fi
 if [[ -n "$DASH" ]]; then code="$(curl -s -o /dev/null --max-time 15 -w '%{http_code}' "$DASH/" || true)"; [[ "$code" == 200 ]] && ok "dashboard $DASH answers 200" || fail "dashboard answers $code"; fi
 
 if ! $QUICK; then
