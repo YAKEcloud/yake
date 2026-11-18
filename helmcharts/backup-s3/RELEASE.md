@@ -1,4 +1,3 @@
 ## General Changes
 
-* Fix RBAC (#35) @simcod
-* add handling of backupentry to fix #29 (#30) @christianhuening
+* Fix extension classes not passed to reconcilers. (#41) @Gerrit91
