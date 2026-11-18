@@ -1,0 +1,9 @@
+apiVersion: source.toolkit.fluxcd.io/v1
+kind: HelmRepository
+metadata:
+  name: gardener-oci
+  namespace: flux-system
+spec:
+  type: oci
+  interval: 10m
+  url: oci://europe-docker.pkg.dev/gardener-project/releases/charts/gardener

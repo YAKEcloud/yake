@@ -1,0 +1,47 @@
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: operator-extensions
+  namespace: flux-system
+spec:
+  interval: 1m
+  releaseName: operator-extensions
+  targetNamespace: garden
+  install:
+    remediation:
+      retries: 0
+  upgrade:
+    remediation:
+      retries: 0
+      remediateLastFailure: false
+  # Never uninstall on failure: removing the Garden (or operator or Extensions) would tear down the virtual garden.
+  uninstall:
+    keepHistory: false
+  dependsOn:
+    - name: garden
+  chart:
+    spec:
+      chart: operator/extensions
+      reconcileStrategy: Revision
+      sourceRef:
+        kind: GitRepository
+        name: yake
+        namespace: flux-system
+      interval: 1m
+  # Same extension values as the classic `extensions` HelmRelease: versions and `enabled` stay the single source of truth.
+  valuesFrom:
+    - kind: Secret
+      name: extensions-base-values
+      optional: false
+    - kind: Secret
+      name: extensions-values-0
+      optional: true
+    - kind: Secret
+      name: extensions-values-1
+      optional: true
+    - kind: Secret
+      name: extensions-values-2
+      optional: true
+    - kind: Secret
+      name: extensions-values
+      optional: true

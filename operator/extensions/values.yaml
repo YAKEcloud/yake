@@ -1,0 +1,15 @@
+# Same value keys as the classic gardener/extensions chart, so the existing yake extension values keep working
+# (`extensions-base-values`, `extensions-values-*`, `extensions-values`):
+#
+#   provider-azure:
+#     enabled: true
+#     version: 1.66.0
+#     admission:
+#       enabled: true
+#     globallyEnabled: false      # autoEnable for shoots (first resource of the extension)
+#     values: {}                  # Helm values of the extension chart (deployment.extension.values)
+#     runtimeValues: {}           # Helm values for the runtime cluster deployment (deployment.extension.runtimeClusterValues)
+#
+# Only the extensions known to _catalog.tpl are rendered. Everything else (third party extensions without an OCI chart,
+# e.g. backup-s3, shoot-flux, acl) stays on its own ControllerRegistration.
+registry: europe-docker.pkg.dev/gardener-project/public/charts/gardener/extensions

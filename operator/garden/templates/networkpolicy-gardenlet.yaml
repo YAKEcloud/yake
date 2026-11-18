@@ -1,0 +1,25 @@
+# The (classic Helm) gardenlet of the runtime cluster (which is a seed at the same time) connects to the virtual
+# kube-apiserver through its in-cluster Service (the gardenlet overwrites the host in that case). The NetworkPolicies of
+# gardener-operator only admit Pods with its own `networking.resources.gardener.cloud/to-virtual-garden-kube-apiserver-tcp-443`
+# label, which the classic gardenlet chart does not set.
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: yake-ingress-to-virtual-garden-kube-apiserver-from-gardenlet
+  namespace: garden
+spec:
+  podSelector:
+    matchLabels:
+      app: kubernetes
+      role: apiserver
+  policyTypes:
+    - Ingress
+  ingress:
+    - from:
+        - podSelector:
+            matchLabels:
+              app: gardener
+              role: gardenlet
+      ports:
+        - port: 443
+          protocol: TCP

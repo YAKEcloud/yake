@@ -1,0 +1,137 @@
+{{- $g := .Values.garden }}
+apiVersion: operator.gardener.cloud/v1alpha1
+kind: Garden
+metadata:
+  name: {{ $g.name }}
+  annotations:
+    # Helm must never delete the Garden (it would tear down the virtual garden).
+    helm.sh/resource-policy: keep
+    {{- with .Values.gardenerVersion }}
+    # Changes with every upgrade step, so the HelmRelease runs a Helm upgrade and waits for the health check of the Garden.
+    yake.cloud/gardener-version: {{ . | quote }}
+    {{- end }}
+spec:
+  {{- if .Values.garden.dnsManagedByGardener }}
+  dns:
+    providers:
+      - name: dns-provider
+        type: {{ required "domains.global.provider is required" .Values.domains.global.provider }}
+        secretRef:
+          name: yake-dns-credentials
+  {{- end }}
+  runtimeCluster:
+    ingress:
+      domains:
+        - name: {{ include "garden.domain" . }}
+          {{- if $g.dnsManagedByGardener }}
+          provider: dns-provider
+          {{- end }}
+      controller:
+        kind: {{ $g.ingressController }}
+    networking:
+      nodes:
+        - {{ required "garden.runtimeCluster.networking.nodes is required" $g.runtimeCluster.networking.nodes }}
+      pods:
+        - {{ required "garden.runtimeCluster.networking.pods is required" $g.runtimeCluster.networking.pods }}
+      services:
+        - {{ required "garden.runtimeCluster.networking.services is required" $g.runtimeCluster.networking.services }}
+    provider:
+      region: {{ required "garden.runtimeCluster.provider.region is required" $g.runtimeCluster.provider.region }}
+      {{- with $g.runtimeCluster.provider.zones }}
+      zones:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+    settings:
+      {{- with $g.runtimeCluster.loadBalancerAnnotations }}
+      loadBalancerServices:
+        annotations:
+          {{- toYaml . | nindent 10 }}
+      {{- end }}
+      verticalPodAutoscaler:
+        enabled: {{ $g.runtimeCluster.vpa }}
+  virtualCluster:
+    dns:
+      domains:
+        # The API server becomes api.<domain> (and gardener.<domain> for the Gardener API), identical to today.
+        - name: {{ include "garden.domain" . }}
+          {{- if $g.dnsManagedByGardener }}
+          provider: dns-provider
+          {{- end }}
+    etcd:
+      main:
+        {{- if .Values.backups.enabled }}
+        backup:
+          provider: {{ .Values.backups.provider }}
+          region: {{ .Values.backups.region }}
+          {{- with $g.etcd.backupBucketName }}
+          bucketName: {{ . }}
+          {{- end }}
+          secretRef:
+            name: yake-etcd-backup
+        {{- end }}
+        storage:
+          capacity: {{ $g.etcd.mainCapacity }}
+          {{- with $g.etcd.storageClassName }}
+          className: {{ . }}
+          {{- end }}
+      events:
+        storage:
+          capacity: {{ $g.etcd.eventsCapacity }}
+          {{- with $g.etcd.storageClassName }}
+          className: {{ . }}
+          {{- end }}
+    gardener:
+      clusterIdentity: {{ required "clusterIdentity is required" .Values.clusterIdentity }}
+      {{- with $g.schedulerStrategy }}
+      gardenerScheduler:
+        strategy: {{ . }}
+      {{- end }}
+      gardenerDashboard:
+        {{- if (.Values.domains.dashboard).domain }}
+        domain:
+          name: {{ .Values.domains.dashboard.domain }}
+          {{- if $g.dnsManagedByGardener }}
+          provider: dns-provider
+          {{- end }}
+        {{- end }}
+        oidcConfig:
+          clientIDPublic: kube-kubectl
+          issuerURL: https://{{ include "garden.identityDomain" . }}/oidc
+          sessionLifetime: {{ $g.dashboard.sessionLifetime }}
+          additionalScopes: [profile, offline_access]
+          secretRef:
+            name: gardener-dashboard-oidc
+          {{- if (.Values.issuer).ca }}
+          certificateAuthoritySecretRef:
+            name: gardener-dashboard-oidc-ca
+          {{- end }}
+        {{- with $g.dashboard.terminal.image }}
+        terminal:
+          container:
+            image: {{ . }}
+          allowedHosts:
+            {{- toYaml $g.dashboard.terminal.allowedHosts | nindent 12 }}
+        {{- end }}
+    kubernetes:
+      version: {{ required "garden.kubernetesVersion is required" $g.kubernetesVersion }}
+      kubeAPIServer:
+        structuredAuthentication:
+          configMapName: gardener-auth-config
+        {{- with $g.apiAudiences }}
+        # Tokens of the classic setup carry the audience https://kubernetes.default.svc (not `kubernetes`).
+        apiAudiences:
+          {{- toYaml . | nindent 10 }}
+        {{- end }}
+        {{- with $g.serviceAccountAcceptedIssuers }}
+        serviceAccountConfig:
+          # The operator issues tokens with https://api.<domain>. Keep accepting the tokens of the old setup.
+          acceptedIssuers:
+            {{- toYaml . | nindent 12 }}
+        {{- end }}
+    maintenance:
+      timeWindow:
+        begin: {{ $g.maintenance.begin }}
+        end: {{ $g.maintenance.end }}
+    networking:
+      services:
+        - {{ $g.virtualCluster.servicesCidr }}

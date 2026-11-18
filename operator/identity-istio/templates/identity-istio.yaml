@@ -1,0 +1,135 @@
+{{- if .Values.garden.identityIstio.enabled }}
+{{- $i := .Values.garden.identityIstio }}
+{{- $host := include "garden.identityDomain" . }}
+# Exposes the existing identity (Dex) Service through the virtual garden Istio ingress gateway.
+# The identity HelmRelease must run with `ingress.enabled: false` (no nginx Ingress).
+apiVersion: cert.gardener.cloud/v1alpha1
+kind: Certificate
+metadata:
+  name: identity-istio
+  namespace: garden
+  annotations:
+    cert.gardener.cloud/class: {{ $i.certClass }}
+spec:
+  commonName: {{ $host }}
+  issuerRef:
+    name: {{ $i.issuerName }}
+    namespace: {{ $i.issuerNamespace }}
+  secretRef:
+    name: identity-istio-cert
+    namespace: virtual-garden-istio-ingress
+---
+apiVersion: networking.istio.io/v1
+kind: Gateway
+metadata:
+  name: identity
+  namespace: garden
+spec:
+  selector:
+    istio: ingressgateway
+    istio-role: garden
+  servers:
+    - hosts:
+        - {{ $host }}
+      port:
+        name: tls
+        number: 443
+        protocol: HTTPS
+      tls:
+        mode: SIMPLE
+        credentialName: identity-istio-cert
+---
+apiVersion: networking.istio.io/v1
+kind: VirtualService
+metadata:
+  name: identity
+  namespace: garden
+spec:
+  exportTo:
+    - virtual-garden-istio-ingress
+  gateways:
+    - identity
+  hosts:
+    - {{ $host }}
+  http:
+    - route:
+        - destination:
+            host: identity-service.garden.svc.cluster.local
+            port:
+              number: 5556
+---
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: ingress-to-identity-tcp-5556-from-virtual-garden-istio-ingress
+  namespace: garden
+spec:
+  podSelector:
+    matchLabels:
+      app: identity
+  policyTypes:
+    - Ingress
+  ingress:
+    - from:
+        - namespaceSelector:
+            matchLabels:
+              kubernetes.io/metadata.name: virtual-garden-istio-ingress
+          podSelector:
+            matchLabels:
+              istio: ingressgateway
+              istio-role: garden
+      ports:
+        - port: 5556
+          protocol: TCP
+---
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: egress-to-identity-tcp-5556-from-virtual-garden-istio-ingress
+  namespace: virtual-garden-istio-ingress
+spec:
+  podSelector:
+    matchLabels:
+      istio: ingressgateway
+      istio-role: garden
+  policyTypes:
+    - Egress
+  egress:
+    - to:
+        - namespaceSelector:
+            matchLabels:
+              kubernetes.io/metadata.name: garden
+          podSelector:
+            matchLabels:
+              app: identity
+      ports:
+        - port: 5556
+          protocol: TCP
+---
+# The virtual kube-apiserver fetches the OIDC discovery document of identity (issuer https://<identity domain>/oidc) through the
+# virtual garden Istio ingress gateway (container port 9443 behind the Service port 443).
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: egress-to-istio-ingressgateway-tcp-9443-from-kube-apiserver
+  namespace: garden
+spec:
+  podSelector:
+    matchLabels:
+      app: kubernetes
+      role: apiserver
+  policyTypes:
+    - Egress
+  egress:
+    - to:
+        - namespaceSelector:
+            matchLabels:
+              kubernetes.io/metadata.name: virtual-garden-istio-ingress
+          podSelector:
+            matchLabels:
+              istio: ingressgateway
+              istio-role: garden
+      ports:
+        - port: 9443
+          protocol: TCP
+{{- end }}

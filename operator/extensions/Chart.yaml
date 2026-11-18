@@ -1,0 +1,5 @@
+apiVersion: v2
+name: extensions
+description: Gardener extensions as operator.gardener.cloud Extension resources, managed by gardener-operator
+type: application
+version: 0.0.1

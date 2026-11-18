@@ -1,0 +1,5 @@
+apiVersion: v2
+name: garden
+description: Garden resource (and its inputs) for gardener-operator, derived from the yake configuration values
+type: application
+version: 0.0.1

@@ -1,0 +1,67 @@
+# Set by operator/garden.yaml (kept in sync by hack/migrate-to-operator/upgrade-step.sh)
+gardenerVersion: ""
+
+# Inputs taken over from the yake configuration (see operator/garden.yaml valuesFrom):
+#   clusterIdentity, domains.global.{domain,provider,credentials}, backups.*, dashboard.clientSecret, issuer.ca
+#
+# Operator specific settings:
+garden:
+  name: yake
+  # Kubernetes version of the virtual garden (must equal the currently running one when migrating, then upgrade by one minor).
+  kubernetesVersion: ""
+  runtimeCluster:
+    networking:
+      nodes: ""
+      pods: ""
+      services: ""
+    # Region (and zones) of the runtime cluster, as in the Seed `.spec.provider` of the runtime cluster.
+    provider:
+      region: ""
+      zones: []
+    # Annotations for LoadBalancer Services created by the operator (e.g. Hetzner location).
+    loadBalancerAnnotations: {}
+    vpa: true
+  # API audiences: the operator default is `kubernetes`, the classic setup issued tokens for https://kubernetes.default.svc.
+  apiAudiences:
+    - kubernetes
+    - https://kubernetes.default.svc
+  # Issuers whose ServiceAccount tokens stay valid (the classic setup used https://kubernetes.default.svc).
+  serviceAccountAcceptedIssuers:
+    - https://kubernetes.default.svc
+  # nginx until the DisableNginxIngressInGarden feature gate is switched on (alpha 1.142, beta/default 1.149, GA 1.155).
+  ingressController: nginx
+  # true: gardener-operator creates the DNS records through the DNS provider extension (an operator `Extension` with a
+  # DNSRecord resource, see operator/extensions). false: DNSEntry objects for the external-dns-management (see `dns.entries`).
+  dnsManagedByGardener: true
+  dns:
+    class: base-dns-class
+    ttl: 600
+    # Filled after the Garden is up (LoadBalancer IPs are only known then), e.g.
+    #   - {name: api.example.org, targets: [1.2.3.4]}      # api, gardener, identity -> virtual-garden-istio-ingress LB
+    #   - {name: dashboard.example.org, targets: [5.6.7.8]} # dashboard -> nginx-ingress LB of the operator
+    entries: []
+  etcd:
+    storageClassName: ""
+    mainCapacity: 10Gi
+    eventsCapacity: 10Gi
+    # Empty: the operator manages a bucket itself (needs bucket privileges). Use a NEW bucket, not the one of the old etcd.
+    backupBucketName: ""
+  virtualCluster:
+    servicesCidr: 100.64.0.0/13
+  maintenance:
+    begin: 220000+0100
+    end: 230000+0100
+  dashboard:
+    sessionLifetime: 12h
+    terminal:
+      image: europe-docker.pkg.dev/gardener-project/releases/gardener/ops-toolbelt:latest   # same as today
+      allowedHosts: []   # set per landscape, e.g. ["*.example.org"]
+  # Only valid from Gardener 1.145 (field does not exist before). Default there is SameRegion.
+  schedulerStrategy: ""
+  # Token requestor based access to the virtual garden (no static token).
+  access:
+    enabled: true
+    # Mirror the token-requestor kubeconfig to flux-system/gardener-internal-kubeconfig (consumers keep their secret name).
+    syncToFlux: true
+    # Needs a shell and kubectl (the flux-cli image has both, registry.k8s.io/kubectl is distroless)
+    syncImage: ghcr.io/fluxcd/flux-cli:v2.9.5

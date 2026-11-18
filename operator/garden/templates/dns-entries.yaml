@@ -1,0 +1,15 @@
+{{- range .Values.garden.dns.entries }}
+---
+apiVersion: dns.gardener.cloud/v1alpha1
+kind: DNSEntry
+metadata:
+  name: {{ .name | replace "." "-" }}
+  namespace: garden
+  annotations:
+    dns.gardener.cloud/class: {{ $.Values.garden.dns.class }}
+spec:
+  dnsName: {{ .name }}
+  ttl: {{ $.Values.garden.dns.ttl }}
+  targets:
+    {{- toYaml .targets | nindent 4 }}
+{{- end }}

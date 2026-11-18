@@ -1,0 +1,7 @@
+# Taken from the yake configuration (see operator/identity-istio.yaml valuesFrom): domains.*
+garden:
+  identityIstio:
+    enabled: true
+    issuerName: default-issuer
+    issuerNamespace: garden
+    certClass: base-cert-class

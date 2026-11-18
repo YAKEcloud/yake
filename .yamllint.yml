@@ -18,6 +18,7 @@ ignore: |
   gardener/certificates/templates/
   gardener/extensions/templates/
   gardener/garden-content/templates/
+  operator/*/templates/
   hack/yake-controlplane-cert-extension/
   helmcharts/
   pre-gardener/dnsprovider/templates/

@@ -1,0 +1,61 @@
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: garden
+  namespace: flux-system
+spec:
+  interval: 1m
+  # The Garden reconcile of an upgrade step can take a while; the health check below waits for it.
+  timeout: 30m
+  releaseName: garden
+  targetNamespace: garden
+  install:
+    remediation:
+      retries: 0
+  upgrade:
+    remediation:
+      retries: 0
+      remediateLastFailure: false
+  # Never uninstall on failure: removing the Garden (or operator or Extensions) would tear down the virtual garden.
+  uninstall:
+    keepHistory: false
+  dependsOn:
+    - name: configuration
+    - name: gardener-operator
+  # Ready only when gardener-operator has reconciled the Garden to the pinned version. The gardenlet HelmRelease depends on this
+  # one, so every upgrade step runs in the supported order: operator, Garden control plane, then gardenlet.
+  # The version below is kept in sync with operator.yaml by hack/migrate-to-operator/upgrade-step.sh.
+  healthCheckExprs:
+    - apiVersion: operator.gardener.cloud/v1alpha1
+      kind: Garden
+      current: "status.gardener.version == 'v1.137.7' && status.lastOperation.state == 'Succeeded'"
+      failed: "status.lastOperation.state == 'Error'"
+  chart:
+    spec:
+      chart: operator/garden
+      reconcileStrategy: Revision
+      sourceRef:
+        kind: GitRepository
+        name: yake
+        namespace: flux-system
+      interval: 1m
+  # Same yake configuration secrets as the `configuration` HelmRelease, so the Garden is derived from existing values
+  # (clusterIdentity, domains, backups, dashboard, issuer). Operator specific settings live under the `garden` key.
+  values:
+    gardenerVersion: "1.137.7"
+  valuesFrom:
+    - kind: Secret
+      name: yake-config-0
+      optional: true
+    - kind: Secret
+      name: yake-config-1
+      optional: true
+    - kind: Secret
+      name: yake-config-2
+      optional: true
+    - kind: Secret
+      name: yake-config
+      optional: true
+    - kind: Secret
+      name: yake-generated-secrets
+      optional: true

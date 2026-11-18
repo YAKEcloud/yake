@@ -1,0 +1,9 @@
+# Inert: not referenced from the root kustomization.yaml.
+# Activated by the migration runbook (docs/migration-to-operator.md) via flux/operator.yaml.
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+resources:
+  - helmrepository.yaml
+  - operator.yaml
+  - garden.yaml
+  - identity-istio.yaml

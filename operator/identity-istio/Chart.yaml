@@ -1,0 +1,5 @@
+apiVersion: v2
+name: identity-istio
+description: Exposes identity (Dex) through the virtual garden Istio ingress gateway
+type: application
+version: 0.0.1

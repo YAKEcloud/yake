@@ -1,0 +1,35 @@
+clusterIdentity: test-cluster-identity
+dashboard:
+  clientSecret: clientSecret
+domains:
+  global:
+    domain: example.org
+    provider: azure-dns
+    credentials:
+      clientID: Zm9v
+backups:
+  enabled: true
+  provider: S3
+  region: eu-central-003
+  credentials:
+    accessKeyID: Zm9v
+    secretAccessKey: YmFy
+issuer:
+  ca: |
+    -----BEGIN CERTIFICATE-----
+    Zm9v
+    -----END CERTIFICATE-----
+garden:
+  kubernetesVersion: 1.32.5
+  runtimeCluster:
+    networking:
+      nodes: 10.0.0.0/24
+      pods: 10.244.0.0/16
+      services: 10.96.0.0/12
+    provider:
+      region: nbg1
+    loadBalancerAnnotations:
+      load-balancer.hetzner.cloud/location: nbg1
+  dns:
+    entries:
+      - {name: api.example.org, targets: [192.0.2.10]}

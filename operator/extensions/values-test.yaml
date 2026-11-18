@@ -1,0 +1,26 @@
+provider-azure:
+  enabled: true
+  version: 1.66.0
+  admission:
+    enabled: true
+networking-calico:
+  enabled: true
+  version: 1.60.3
+  admission:
+    enabled: true
+shoot-cert-service:
+  enabled: true
+  version: 1.66.0
+  globallyEnabled: true
+  values:
+    certificateConfig:
+      defaultIssuer:
+        name: garden
+os-gardenlinux:
+  enabled: true
+  version: 0.51.0
+not-in-catalog:
+  enabled: true
+  version: 1.0.0
+disabled-one:
+  version: 1.0.0

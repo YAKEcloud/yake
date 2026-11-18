@@ -1,0 +1,50 @@
+{{- $catalog := include "extensions.catalog" . | fromYaml }}
+{{- range $key, $v := .Values }}
+{{- $e := get $catalog $key }}
+{{- if and $e (kindIs "map" $v) $v.enabled }}
+---
+apiVersion: operator.gardener.cloud/v1alpha1
+kind: Extension
+metadata:
+  name: {{ $e.name }}
+  annotations:
+    helm.sh/resource-policy: keep
+    security.gardener.cloud/pod-security-enforce: baseline
+spec:
+  deployment:
+    {{- if and $e.admission ($v.admission).enabled }}
+    admission:
+      runtimeCluster:
+        helm:
+          ociRepository:
+            ref: {{ $.Values.registry }}/{{ $e.admission }}-runtime:v{{ required (printf "%s.version is required" $key) $v.version }}
+      virtualCluster:
+        helm:
+          ociRepository:
+            ref: {{ $.Values.registry }}/{{ $e.admission }}-application:v{{ $v.version }}
+    {{- end }}
+    extension:
+      helm:
+        ociRepository:
+          ref: {{ $.Values.registry }}/{{ $e.chart }}:v{{ required (printf "%s.version is required" $key) $v.version }}
+      {{- if $e.inject }}
+      injectGardenKubeconfig: true
+      {{- end }}
+      {{- with $v.values }}
+      values:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with $v.runtimeValues }}
+      runtimeClusterValues:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+  resources:
+    {{- range $i, $r := $e.resources }}
+    - {{- $r = $r | deepCopy }}
+      {{- if and (eq $i 0) $v.globallyEnabled }}
+      {{- $_ := set $r "autoEnable" (list "shoot") }}
+      {{- end }}
+      {{- toYaml $r | nindent 6 }}
+    {{- end }}
+{{- end }}
+{{- end }}

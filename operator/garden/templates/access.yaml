@@ -1,0 +1,188 @@
+{{- if .Values.garden.access.enabled }}
+# Token requestor based access to the virtual garden for automation. The operator creates no static token.
+# `class: shoot` is correct up to Gardener 1.154; from 1.155 use `garden` (`shoot` is deprecated there).
+apiVersion: v1
+kind: Secret
+metadata:
+  name: shoot-access-virtual-garden
+  namespace: garden
+  labels:
+    resources.gardener.cloud/purpose: token-requestor
+    resources.gardener.cloud/class: shoot
+  annotations:
+    serviceaccount.resources.gardener.cloud/name: virtual-garden-user
+    serviceaccount.resources.gardener.cloud/namespace: kube-system
+    serviceaccount.resources.gardener.cloud/token-expiration-duration: 3h
+    serviceaccount.resources.gardener.cloud/inject-ca-bundle: "true"
+type: Opaque
+# The token requestor injects the token (and CA bundle) into this kubeconfig (resource-manager.md, TokenRequestor).
+stringData:
+  kubeconfig: |
+    apiVersion: v1
+    kind: Config
+    clusters:
+      - name: virtual-garden
+        cluster:
+          server: https://virtual-garden-kube-apiserver.garden.svc.cluster.local:443
+    users:
+      - name: virtual-garden-user
+        user:
+          token: ""
+    contexts:
+      - name: virtual-garden
+        context:
+          cluster: virtual-garden
+          user: virtual-garden-user
+    current-context: virtual-garden
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: managedresource-virtual-garden-access
+  namespace: garden
+type: Opaque
+stringData:
+  clusterrolebinding____gardener.cloud.virtual-garden-access.yaml: |
+    apiVersion: rbac.authorization.k8s.io/v1
+    kind: ClusterRoleBinding
+    metadata:
+      name: gardener.cloud.sap:virtual-garden
+    roleRef:
+      apiGroup: rbac.authorization.k8s.io
+      kind: ClusterRole
+      name: cluster-admin
+    subjects:
+      - kind: ServiceAccount
+        name: virtual-garden-user
+        namespace: kube-system
+---
+apiVersion: resources.gardener.cloud/v1alpha1
+kind: ManagedResource
+metadata:
+  name: virtual-garden-access
+  namespace: garden
+spec:
+  secretRefs:
+    - name: managedresource-virtual-garden-access
+{{- end }}
+{{- if .Values.garden.access.syncToFlux }}
+---
+# Flux (helm-controller, kustomize-controller) reaches the virtual kube-apiserver through its in-cluster Service.
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: yake-ingress-to-virtual-garden-kube-apiserver-from-flux
+  namespace: garden
+spec:
+  podSelector:
+    matchLabels:
+      app: kubernetes
+      role: apiserver
+  policyTypes:
+    - Ingress
+  ingress:
+    - from:
+        - namespaceSelector:
+            matchLabels:
+              kubernetes.io/metadata.name: flux-system
+          podSelector:
+            matchExpressions:
+              - key: app.kubernetes.io/component
+                operator: In
+                values: [helm-controller, kustomize-controller]
+      ports:
+        - port: 443
+          protocol: TCP
+---
+# Copies the auto-rotated kubeconfig to flux-system/gardener-internal-kubeconfig (key `value`), the name all Flux consumers
+# (HelmReleases and the 23ke-* Kustomizations) already use. The old Secret is backed up by prepare-secrets.sh first.
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: virtual-garden-access-sync
+  namespace: garden
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: Role
+metadata:
+  name: virtual-garden-access-sync
+  namespace: garden
+rules:
+  - apiGroups: [""]
+    resources: [secrets]
+    resourceNames: [shoot-access-virtual-garden]
+    verbs: [get]
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: virtual-garden-access-sync
+  namespace: garden
+roleRef: {apiGroup: rbac.authorization.k8s.io, kind: Role, name: virtual-garden-access-sync}
+subjects: [{kind: ServiceAccount, name: virtual-garden-access-sync, namespace: garden}]
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: Role
+metadata:
+  name: virtual-garden-access-sync
+  namespace: flux-system
+rules:
+  - apiGroups: [""]
+    resources: [secrets]
+    verbs: [create]
+  - apiGroups: [""]
+    resources: [secrets]
+    resourceNames: [gardener-internal-kubeconfig]
+    verbs: [get, patch, update]
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: virtual-garden-access-sync
+  namespace: flux-system
+roleRef: {apiGroup: rbac.authorization.k8s.io, kind: Role, name: virtual-garden-access-sync}
+subjects: [{kind: ServiceAccount, name: virtual-garden-access-sync, namespace: garden}]
+---
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: virtual-garden-access-sync
+  namespace: garden
+spec:
+  schedule: "*/30 * * * *"
+  concurrencyPolicy: Forbid
+  successfulJobsHistoryLimit: 1
+  failedJobsHistoryLimit: 3
+  jobTemplate:
+    spec:
+      backoffLimit: 2
+      template:
+        spec:
+          serviceAccountName: virtual-garden-access-sync
+          restartPolicy: Never
+          containers:
+            - name: sync
+              image: {{ .Values.garden.access.syncImage }}
+              command: [/bin/sh, -c]
+              args:
+                - |
+                  set -eu
+                  kc="$(kubectl get secret shoot-access-virtual-garden -n garden -o jsonpath='{.data.kubeconfig}')"
+                  [ -n "$kc" ] || { echo "no kubeconfig yet"; exit 1; }
+                  printf '%s' "$kc" | base64 -d | grep -q 'token: .\+' || { echo "token not injected yet"; exit 1; }
+                  kubectl create secret generic gardener-internal-kubeconfig -n flux-system \
+                    --from-literal=value="$(printf '%s' "$kc" | base64 -d)" --dry-run=client -o yaml | kubectl apply -f -
+              env:
+                - {name: HOME, value: /tmp}
+              volumeMounts:
+                - {name: tmp, mountPath: /tmp}
+              securityContext:
+                allowPrivilegeEscalation: false
+                readOnlyRootFilesystem: true
+                runAsNonRoot: true
+                runAsUser: 65532
+                capabilities: {drop: [ALL]}
+                seccompProfile: {type: RuntimeDefault}
+          volumes:
+            - {name: tmp, emptyDir: {}}
+{{- end }}
