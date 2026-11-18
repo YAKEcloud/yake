@@ -1,12 +1,6 @@
-alicloud:
-    enabled: false
 aws:
     enabled: false
 azure:
-    enabled: false
-citycloud:
-    enabled: false
-fugacloud:
     enabled: false
 gcp:
     enabled: false
@@ -25,15 +19,5 @@ global:
     seedSelector:
         enabled: false
         selector: {}
-hcloud:
-    enabled: false
-ovh:
-    enabled: false
-pluscloud-open:
-    enabled: false
 regiocloud:
-    enabled: false
-scs-community-platform:
-    enabled: false
-wavestack:
     enabled: false
