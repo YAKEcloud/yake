@@ -5745,3 +5745,13 @@ This release officially supports [fluxcd >=2.9](https://fluxcd.io/blog/2026/06/f
 
 
 </details>
+
+<details>
+<summary><b>Update backup-s3 to <code>0.9.2</code></b></summary>
+
+## General Changes
+
+* Fix extension classes not passed to reconcilers. (#41) @Gerrit91
+
+
+</details>
