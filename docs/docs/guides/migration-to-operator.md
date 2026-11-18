@@ -12,7 +12,7 @@ The `gardener-controlplane` chart no longer exists as of Gardener 1.142, so the 
 * Only what the migration needs. Secrets, PVCs, PVs, CRDs, namespaces and PriorityClasses are never deleted.
 * Only objects owned by an abandoned YAKE Helm release are deleted (checked via the annotation `meta.helm.sh/release-name`). Everything else stays.
 * Anything the customer deploys on top (for example `extra-resources/`) is maintained by the customer.
-  This includes Ingresses with class `nginx`: `ingress-nginx` is removed by the migration (the operator and the dashboard use Istio), so expose them via Istio or run `ingress-nginx` yourself.
+  This includes Ingresses with class `nginx`: `ingress-nginx` is removed by the migration (the operator and the dashboard use Istio), so expose them through the Istio ingress gateway of the garden or another controller you maintain. `ingress-nginx` itself is not developed anymore.
 * All scripts that change something run as a dry run and execute with `--apply` (one confirmation of the cluster context name).
 
 ## Preparation

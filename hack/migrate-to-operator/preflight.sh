@@ -61,7 +61,7 @@ if kr get secret -n garden -l secrets-manager-use-data-for-name -o name 2>/dev/n
 
 echo "== Name collisions in runtime namespace garden"
 kr get ingressclass nginx >/dev/null 2>&1 && warn "IngressClass nginx exists (Flux ingress-nginx). The operator deploys its own nginx up to the DisableNginxIngressInGarden gate: remove ingress-nginx first"
-kr get ingress -A -o json | jq -r '.items[] | select(.spec.ingressClassName == "nginx" and (.metadata.annotations["meta.helm.sh/release-name"] // "") == "") | "\(.metadata.namespace)/\(.metadata.name)"' | sed 's/^/  /' | { grep . && warn "customer Ingresses above use class nginx, ingress-nginx is removed by the migration: expose them via Istio or run ingress-nginx yourself"; true; }
+kr get ingress -A -o json | jq -r '.items[] | select(.spec.ingressClassName == "nginx" and (.metadata.annotations["meta.helm.sh/release-name"] // "") == "") | "\(.metadata.namespace)/\(.metadata.name)"' | sed 's/^/  /' | { grep . && warn "customer Ingresses above use class nginx, ingress-nginx is removed by the migration: expose them via the Istio ingress gateway or another controller you maintain"; true; }
 kr get deploy -n garden -o name | grep -E 'gardener-resource-manager|etcd-druid|vpa-' | sed 's/^/  existing seed component: /' || true
 echo "  (UNGEPRUEFT how operator and gardenlet seed controller share these, test in the throwaway environment)"
 
