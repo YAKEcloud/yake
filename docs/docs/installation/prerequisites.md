@@ -48,7 +48,7 @@ Moreover, you should consider the following aspects:
 - As Gardener uses the `192.168.123.0/24`internally, your pod network of the base cluster should not interfere with that range. Therefore, it is recommended to use `172.16.0.0/16` as pod network in the base cluster. For the service network no restrictions are known.
 
 :::tip
-There are more provider extensions than the ones hosted in the Gardener organization on GitHub. For instance, there is the [provider-hcloud](https://github.com/23technologies/gardener-extension-provider-hcloud) extension supporting managed Kubernetes on the [Hetzner cloud](https://www.hetzner.com/cloud). If you are interested in a custom extension, you can also contact us, and we can discuss on a development plan for another extension.
+There are more provider extensions than the ones hosted in the Gardener organization on GitHub. YAKE does not ship them. Whoever needs one maintains it in their own Flux repository.
 :::
 
 :::warning

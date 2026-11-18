@@ -8,38 +8,30 @@ type: Opaque
 stringData:
   values.yaml: |-
     os-ubuntu:
-      version: 1.41.0
+      version: 1.43.0
 
     os-gardenlinux:
-      version: 0.48.0
-
-    os-coreos:
-      version: 1.35.0
-
-    provider-hcloud:
-      version: 0.6.42
-      admission:
-        enabled: false
+      version: 0.52.0
 
     provider-azure:
-      version: 1.63.0
+      version: 1.66.0
       admission:
         enabled: true
         split: false
 
     provider-openstack:
-      version: 1.58.0
+      version: 1.59.1
       admission:
         enabled: true
 
     networking-calico:
-      version: 1.59.0
+      version: 1.61.0
 
     shoot-cert-service:
-      version: 1.65.0
+      version: 1.67.0
 
     shoot-dns-service:
-      version: 1.91.0
+      version: 1.96.0
       admission:
         enabled: true
       values:
@@ -52,53 +44,48 @@ stringData:
             serverPortHttp: 8080
 
     shoot-oidc-service:
-      version: 0.40.0
+      version: 0.41.0
 
     shoot-networking-filter:
-      version: 0.29.0
+      version: 0.31.0
 
     shoot-networking-problemdetector:
-      version: 0.33.0
+      version: 0.34.1
 
     shoot-rsyslog-relp:
-      version: 0.14.0
+      version: 0.15.1
 
     networking-cilium:
-      version: 1.48.4
-
-    provider-alicloud:
-      version: 1.73.0
-      admission:
-        enabled: true
+      version: 1.50.0
 
     provider-aws:
-      version: 1.74.0
+      version: 1.76.2
       admission:
         enabled: true
 
     provider-gcp:
-      version: 1.54.1
+      version: 1.58.2
       admission:
         enabled: true
 
     runtime-gvisor:
-      version: 0.45.0
+      version: 0.51.0
 
     backup-s3:
-      version: 0.8.5
+      version: 0.9.1
 
     shoot-flux:
-      version: 0.28.0
+      version: 0.29.0
 
     acl:
-      version: 1.20.0
+      version: 1.21.0
       admission:
         enabled: true
 
     image-rewriter:
-      version: 0.11.0
+      version: 0.12.0
 
     registry-cache:
-      version: 0.24.0
+      version: 0.25.1
       admission:
         enabled: true

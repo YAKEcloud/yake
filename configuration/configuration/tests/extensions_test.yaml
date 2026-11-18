@@ -1,17 +1,6 @@
 templates:
   - extensions.yaml
 tests:
-  - it: should not enable admission for provider-hcloud
-    values:
-      - ../values-test.yaml
-    asserts:
-      - matchRegex:
-          path: stringData['values.yaml']
-          pattern: |
-            provider-hcloud:
-              version: .+
-              admission:
-                enabled: false
   - it: should enable admission for provider-aws
     values:
       - ../values-test.yaml

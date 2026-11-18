@@ -1,4 +1,0 @@
-controller:
-    enabled: false
-gardener-extension-admission-hcloud:
-    enabled: false

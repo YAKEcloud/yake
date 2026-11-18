@@ -16,10 +16,8 @@ spec:
               values:
                 - gardener-extension-admission-azure
                 - gardener-extension-admission-openstack
-                - gardener-extension-admission-hcloud
                 - gardener-extension-admission-gcp
                 - gardener-extension-admission-aws
-                - gardener-extension-admission-alicloud
                 - gardener-extension-admission-shoot-dns-service
                 - gardener-extension-admission-acl
                 - gardener-extension-registry-cache-admission
